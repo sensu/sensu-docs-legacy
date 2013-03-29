@@ -1,0 +1,15 @@
+---
+pygments: true
+searchindex: yes
+permalink: /:year/:month/:title
+url: http://docs.sensuapp.org
+base: http://docs.sensuapp.org
+host: http://docs.sensuapp.org
+server_port: 80
+title: Sensu Docs
+author: Sean Porter
+email: sean.porter@gmail.com
+
+exclude: [ config.ru, sass, config.rb, Rakefile, TODO, README.markdown, tasks, config, Capfile]
+
+markdown: kramdown

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                      "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Microsoft Wireless Guest Internet Access</title>
+
+<link rel="stylesheet" type="text/css" href="/includes/styles.css">
+<!--[if gte IE 6]>
+<link rel="stylesheet" type="text/css" href="/includes/styles-ie.css">
+<![endif]-->
+<script type="text/javascript" src="/includes/login-functions.js"></script>
+</head>
+<body>
+
+<div id="header">
+  <div><img src="/images/microsoft-it-bg.jpg" width="744" height="116"></div>
+</div>
+
+<div id="login-main">
+
+
+<div id="terms-of-use">
+<form id="loginform" name="loginform" method="post" action="/connect">
+
+<input id="acceptterms" name="acceptterms" type="checkbox"> <label for="acceptterms">
+Yes, I have read and accept the <b><a href="terms.html" target="_blank">terms of use.</a></b></label>
+<br><br>
+    <label for="code"><b>Event Code:</b></label> <input id="code" name="code" type="text">
+    <input name="connect" type="submit" value="Connect">
+</form>
+<div id="errormsg"></div>
+
+</div> <!-- #terms-of-use -->
+
+<div id="welcome">
+<p class=MsoNormal><span style='font-size:8.0pt'>Welcome to Microsoft's
+Wireless Guest Access service.<span style='mso-spacerun:yes'>  </span>This
+service is intended for use by authorized guests at Microsoft corporate
+facilities. Authorized guests will be provided an access code which
+will be required to gain access to the Internet.<o:p></o:p></span></p>
+
+<p class=MsoNormal><b><span style='font-size:8.0pt'>If you are not authorized
+to access this network, disconnect at once! Actual or attempted use by an
+unauthorized person will result in criminal and civil prosecution to the
+fullest extent of the law. <o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span style='font-size:8.0pt'>**This is an open/unprotected
+wireless network.<span style='mso-spacerun:yes'>  </span>By using this service,
+guests understand and accept that it is their responsibility to protect their
+own computer while connected to this service, and irrevocably waive any right,
+cause or action, remedy or other claim against Microsoft with respect to any damage
+that may be caused to a computer while it is using this network. <o:p></o:p></span></p>
+</div>
+
+
+</div> <!-- #login-main -->
+
+<div id="login-footer">
+  <div style="text-align:right;margin-right:-25px"><img src="/images/dragnfly-poweredby-logo.png"></div>
+</div>
+
+</body>
+</html>
