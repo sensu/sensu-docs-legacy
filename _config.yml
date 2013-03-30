@@ -1,10 +1,8 @@
 ---
 pygments: true
-searchindex: yes
 permalink: /:year/:month/:title
-url: http://docs.sensuapp.org
 base: http://docs.sensuapp.org
-host: http://docs.sensuapp.org
+current_version: 0.9
 server_port: 80
 title: Sensu Docs
 author: Sean Porter
