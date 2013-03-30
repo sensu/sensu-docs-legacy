@@ -7,7 +7,6 @@ version: 0.9
 
 # Sensu mutators
 
-## What are mutators?
 Mutators are handler-specific data massagers that can alter event data
 before it is passed to a [handler](/{{ page.version }}/handlers.html).
 
@@ -19,9 +18,8 @@ cat event.json | mutator.rb | handler.rb
 
 ## Example
 Here is an example that takes in event data, tags it, and spits out the
-modified data to `STDOUT` for the handler to consume.
-
-### An event mutator (/etc/sensu/mutators/tag.rb)
+modified data to `STDOUT` for the handler to consume. This event mutator
+is stored in `/etc/sensu/mutators/tag.rb`
 
 {% highlight ruby %}
 #!/usr/bin/env ruby
@@ -37,7 +35,7 @@ event.merge!(:mutated => true, :its_a_tumor => true)
 puts event.to_json
 {% endhighlight %}
 
-### Mutator definition (configuration)
+## Mutator definition
 
 {% highlight json %}
 {
@@ -49,7 +47,7 @@ puts event.to_json
 }
 {% endhighlight %}
 
-### Use the mutator for a specific handler
+## Use the mutator for a specific handler
 
 {% highlight json %}
 {
@@ -64,6 +62,7 @@ puts event.to_json
 {% endhighlight %}
 
 ## Built-in mutators
+
 There are a few built-in mutators that do not require definitions.
 
 ### Only check output

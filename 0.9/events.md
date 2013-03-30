@@ -7,12 +7,9 @@ version: 0.9
 
 # Sensu event data
 
-## What does event data look like?
 Event data consists of client and check information, and some metadata.
 
 Event data is JSON encoded, making it  language-independent and fairly human readable.
-
-### Example
 
 {% highlight json %}
     {
