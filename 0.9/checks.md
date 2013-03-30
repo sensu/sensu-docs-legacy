@@ -63,9 +63,7 @@ end
 ### How check results produce events 
 
 By default, only non-zero (exit status > 0) check results produce an
-event, causing the creation of [event data](/{{ page.version
-}}/events.html) which is passed to one or more [handlers](/{{
-page.version }}/handlers.html). Sensu concerns itself with "the bad", as
+event, causing the creation of [event data](/{{ page.version }}/events.html) which is passed to one or more [handlers](/{{ page.version }}/handlers.html). Sensu concerns itself with "the bad", as
 this is what requires action.
 
 ### Handler routing

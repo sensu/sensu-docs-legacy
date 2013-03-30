@@ -187,7 +187,7 @@ Next Steps
 
 Now that Sensu servers and clients are installed, the next steps are to create checks and handlers. Checks run on clients and report on status or metrics (http_alive? mysql_metrics, etc) and handlers run on the server and act on the output from checks (email alert, notify Pagerduty, add metrics to Graphite, etc)
 
-- [HOWTO: Add a check](https://github.com/sensu/sensu/wiki/HOWTO:-Add-a-check)
-- [HOWTO: Add a handler](https://github.com/sensu/sensu/wiki/HOWTO:-Add-a-handler)
+- [Adding a check](/{{ page.version }}/adding_a_check.html)
+- [Adding a handler](/{{ page.version }}/adding_a_handler.html)
 
 If you have further questions please visit #sensu on IRC Freenode.
