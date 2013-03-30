@@ -7,6 +7,11 @@ version: 0.9
 
 # FAQ
 
+<br />
+
+* This will become a table of contents (this text will be scraped).
+{:toc}
+
 ## What's the latest version of Sensu?
 
 The latest version of Sensu is {{ site.current_version }}.

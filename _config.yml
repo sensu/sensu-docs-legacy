@@ -10,4 +10,4 @@ email: sean.porter@gmail.com
 
 exclude: [ config.ru, sass, config.rb, Rakefile, TODO, README.markdown, tasks, config, Capfile]
 
-markdown: kramdown
+markdown: maruku
