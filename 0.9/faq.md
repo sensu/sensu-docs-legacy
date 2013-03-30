@@ -49,9 +49,9 @@ curl -X DELETE http://<sensu-api>/client/<node>
 Toggle debug logging on/off by sending the process a `USR1` signal. Example:
 
 {% highlight bash %}
-shell$ ps aux | grep [s]ensu-server
-sensu     5992  1.7  0.3 177232 24352 ...
-shell$ kill -USR1 5992
+    $ ps aux | grep [s]ensu-server
+    sensu     5992  1.7  0.3 177232 24352 ...
+    $ kill -USR1 5992
 {% endhighlight %}
 
 ## Any suggestions on naming conventions for metrics?
