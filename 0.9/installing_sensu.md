@@ -32,16 +32,56 @@ Install Sensu Server dependencies
 Install and configure RabbitMQ
 -----------------------------
 
-- [Install RabbitMQ on CentOS/RHEL](https://github.com/sensu/sensu/wiki/Install-RabbitMQ-on-CentOS-RHEL)
-- [Install RabbitMQ on Ubuntu/Debian](https://github.com/sensu/sensu/wiki/Install-RabbitMQ-on-Ubuntu-Debian)
+- [Installing RabbitMQ on CentOS or RHEL](/{{ page.version }}/installing_rabbitmq_centos.html)
+- [Installing RabbitMQ on Debian or Ubuntu](/{{ page.version }}/installing_rabbitmq_debian.html)
 
 Install redis
 -------------
 
 Sensu requires Redis 2.0+
 
-- [Install Redis on CentOS/RHEL](https://github.com/sensu/sensu/wiki/Install-Redis-on-CentOS-RHEL)
-- [Install Redis on Ubuntu/Debian](https://github.com/sensu/sensu/wiki/Install-Redis-on-Ubuntu-Debian)
+### Installing Redis on CentOS or RHEL
+
+1. Install the EPEL repos if you haven't already.
+
+Both the EPEL-5 and EPEL-6 repos contain a version of Redis that is new
+enough for Sensu - 2.0 in EPEL-5 and 2.2 in EPEL-6, so no special magic
+is needed here.
+
+{% highlight bash %}
+yum install redis
+/sbin/chkconfig redis on
+/etc/init.d/redis start
+{% endhighlight %}
+
+### Installing Redis on Debian or Ubuntu
+
+#### Ubuntu <= 10.04
+
+You will need to download and install Redis 2.0+ from source on these distribution.
+
+#### Debian 6.x
+
+1. Add Backports to sources
+
+    echo "deb     http://backports.debian.org/debian-backports squeeze-backports main contrib non-free" >> /etc/apt/sources.list
+
+2. Update sources
+
+    apt-get update
+
+3. Install Redis
+
+    apt-get -t squeeze-backports install redis-server
+
+#### Ubuntu > 10.04
+
+The default distro repo ships with a new enough Redis.
+
+{% highlight bash %}
+apt-get install redis-server
+/etc/init.d/redis-server start
+{% endhighlight %}
 
 Install Sensu
 =============
