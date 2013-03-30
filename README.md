@@ -2,6 +2,11 @@
 
 Documentation for the Sensu monitoring framework.
 
+## Requirements
+
+- Pygments must be installed for rendering code-highlighted blocks. http://pygments.org/
+  `sudo pip install pygments`
+
 ## Run
 ```
 bundle install

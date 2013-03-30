@@ -22,7 +22,7 @@ The repositories are browseable: http://repos.sensuapp.org/index.html (index.htm
 
 Tested on:
 
-* Ubuntu 10.04, 11.04, 11.10, 12.04 
+* Ubuntu 10.04, 11.04, 11.10, 12.04
 * Debian 6
 
 ### Install the repo's pubkey:
@@ -43,11 +43,12 @@ Tested on:
     deb     http://repos.sensuapp.org/apt sensu unstable
 {% endhighlight %}
 
-## Yum 
+## Yum
 
 Tested on:
 
 * CentOS (RHEL) 5, 6
+* Fedora 15, 16, 17
 
 ### Main (stable) repo
 
@@ -72,3 +73,8 @@ Tested on:
 Valid values of `$releasever` are `5` and `6`.
 
 If you get a 404 (such as if your `$releasever` expands to `5Server`), hardcode the value to 5 or 6.
+
+Fedora systems will require hardcoding the $releasver variable. Choosing '6' should be fine for
+at least Fedora 16 and 17. Later versions will be tested as necessary. The rpm's have not been
+tested on Fedora versions less than 15 but may work.
+

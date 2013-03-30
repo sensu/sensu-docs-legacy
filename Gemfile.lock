@@ -18,7 +18,7 @@ GEM
       liquid (>= 1.9.0)
       maruku (>= 0.5.9)
     kramdown (1.0.1)
-    liquid (2.5.0)
+    liquid (2.2.0)
     maruku (0.6.1)
       syntax (>= 1.0.0)
     posix-spawn (0.3.6)
@@ -44,6 +44,7 @@ DEPENDENCIES
   RedCloth
   jekyll
   kramdown
+  liquid (= 2.2.0)
   pygments.rb
   rack-jekyll
   rake
