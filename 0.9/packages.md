@@ -16,7 +16,7 @@ interfering with other Ruby applications.
 
 Choose either the main or unstable repos, don't use both at the same time.
 
-The repositories are browseable: http://repos.sensuapp.org/index.html (index.html is important)
+The repositories are browseable: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html)
 
 ## Apt
 
