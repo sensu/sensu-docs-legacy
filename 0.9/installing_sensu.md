@@ -49,26 +49,35 @@ Install Sensu
 Install Sensu "Omnibus" Package
 -------------------------
 
-While Sensu can be install straight from ruby gem, the recommended installation method as of May 2012 is through the Sensu "omnibus" packages. These packages have no external dependencies and install their own isolated Ruby and Gems. This significantly simplifies installation and troubleshooting and also prevents any interference with other Ruby scripts or apps that may be running on your nodes. This is especially helpful in the case of sensu-client which may be installed on every node in your environment.
+While Sensu can be install straight from ruby gem, the recommended
+installation method as of May 2012 is through the Sensu "omnibus"
+packages. These packages have no external dependencies and install their
+own isolated Ruby and Gems. This significantly simplifies installation
+and troubleshooting and also prevents any interference with other Ruby
+scripts or apps that may be running on your nodes. This is especially
+helpful in the case of sensu-client which may be installed on every node
+in your environment.
 
 Sensu Package Repos
 -------------------
 
-Register the relevant Yum or Apt repo for your particular distribution. See the [Packages](Packages) guide for additional info.
+Register the relevant Yum or Apt repo for your particular distribution.
+See the [Packages](/{{ page.version }}/sensu_packages.html) guide for additional info.
 
 Install Sensu "Omnibus" Package
 -------------------
 
 * Debian/Ubuntu:
-```bash
+
+{% highlight bash %}
 apt-get update
 apt-get install sensu
-```
+{% endhighlight %}
 
 * RHEL/CentOS/Fedora
-```bash
+{% highlight bash %}
 yum install sensu
-```
+{% endhighlight %}
 
 Enable Sensu services
 -------------------
@@ -80,20 +89,20 @@ Alternative supervisor scripts (such as upstart) are available in `/usr/share/se
 On your Sensu server you will probably want all 4 services running. The rest of the nodes in your infrastructure only need `sensu-client`.
 
 * CentOS/RHEL
-```bash
+{% highlight bash %}
 chkconfig sensu-server on
 chkconfig sensu-api on
 chkconfig sensu-client on
 chkconfig sensu-dashboard on
-```
+{% endhighlight %}
 
 * Debian/Ubuntu:
-```bash
+{% highlight bash %}
 update-rc.d sensu-server defaults
 update-rc.d sensu-api defaults
 update-rc.d sensu-client defaults
 update-rc.d sensu-dashboard defaults
-```
+{% endhighlight %}
 
 Configure Sensu
 ---------------
@@ -106,7 +115,7 @@ Next we need to configure sensu by editing `/etc/sensu/config.json`. For now we 
 
 Note (for later use) that Sensu will also read json config snippets out of the  `/etc/sensu/conf.d` directory so you can piece together a config easily using your CM tool.
 
-```json
+{% highlight json %}
     {
       "rabbitmq": {
         "ssl": {
@@ -140,11 +149,11 @@ Note (for later use) that Sensu will also read json config snippets out of the  
         }
       }
     }
-```
+{% endhighlight %}
 
 * Configure `/etc/sensu/conf.d/client.json`
 
-```json
+{% highlight json %}
     {
       "client": {
         "name": "sensu-server.dom.tld",
@@ -152,15 +161,17 @@ Note (for later use) that Sensu will also read json config snippets out of the  
         "subscriptions": [ "test" ]
       }
     }
-```
+{% endhighlight %}
 
 
 Now let's try to start the Sensu components:
 
+{% highlight bash %}
     sudo /etc/init.d/sensu-server start
     sudo /etc/init.d/sensu-api start
     sudo /etc/init.d/sensu-client start    
     sudo /etc/init.d/sensu-dashboard start    
+{% endhighlight %}
 
 If all goes well, the 4 processes mentioned above will be running and the dashboard will be accessible on `http://<SENSU SERVER>:8080`. Log files are available in `/var/log/sensu` in case anything is wrong.
 
@@ -171,7 +182,6 @@ Installing and configuring a Sensu client is the same procedure as installing a 
 
 The client will log to `/var/log/sensu/sensu-client.log`.
 
-
 Next Steps
 ==========
 
@@ -179,6 +189,5 @@ Now that Sensu servers and clients are installed, the next steps are to create c
 
 - [HOWTO: Add a check](https://github.com/sensu/sensu/wiki/HOWTO:-Add-a-check)
 - [HOWTO: Add a handler](https://github.com/sensu/sensu/wiki/HOWTO:-Add-a-handler)
-
 
 If you have further questions please visit #sensu on IRC Freenode.

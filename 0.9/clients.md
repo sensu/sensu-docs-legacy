@@ -7,7 +7,14 @@ version: 0.9
 
 # Sensu clients
 
-Each Sensu client requires client info, a definition, describing it. Client info is published when the service starts, this is how the client registers with Sensu. There are a few mandatory key-values, a unique name for the client, an address, and its subscriptions. Subscriptions is a list of the roles or responsibilities the server the Sensu client resides on is responsible for, check requests are issued on these subscriptions. Client info is included in [event data](Event Data).
+Each Sensu client requires client info, a definition, describing it.
+Client info is published when the service starts, this is how the client
+registers with Sensu. There are a few mandatory key-values, a unique
+name for the client, an address, and its subscriptions. Subscriptions is
+a list of the roles or responsibilities the server the Sensu client
+resides on is responsible for, check requests are issued on these
+subscriptions. Client info is included in [event data](/{{ page.version
+}}/events.html).
 
 ### Example
 

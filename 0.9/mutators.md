@@ -8,7 +8,8 @@ version: 0.9
 # Sensu mutators
 
 ## What are mutators?
-Mutators are handler-specific data massagers that can alter event data before it is passed to a [handler](Handlers).
+Mutators are handler-specific data massagers that can alter event data
+before it is passed to a [handler](/{{ page.version }}/handlers.html).
 
 This is in effect what's happening:
 
@@ -17,7 +18,8 @@ cat event.json | mutator.rb | handler.rb
 {% endhighlight %}
 
 ## Example
-Here is an example that takes in event data, tags it, and spits out the modified data to STDOUT for the handler to consume.
+Here is an example that takes in event data, tags it, and spits out the
+modified data to `STDOUT` for the handler to consume.
 
 ### An event mutator (/etc/sensu/mutators/tag.rb)
 
