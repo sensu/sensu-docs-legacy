@@ -7,7 +7,7 @@ version: 0.9
 
 # Sensu Packages
 
-The Sensu project provides "monolithic" packages which require no other
+The Sensu project provides "monolithic" or "omnibus" packages which require no other
 dependencies. They are self-contained and include almost everything
 Sensu needs to function, including its own build of Ruby, all installed
 in `/opt/sensu`. This ensures the simplest installation process,
