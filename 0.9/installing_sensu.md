@@ -5,16 +5,23 @@ description: Sensu installation
 version: 0.9
 ---
 
-Installing Sensu
-----------------
-This article covers a manual installation of Sensu and its dependencies with the goal of outlining the process for you so that you may integrate it into your own tools and workflows. Sensu is typically deployed with a configuration management system such as Puppet or Chef and usable examples for each are available:
+# Installing Sensu
+
+This article covers a manual installation of Sensu and its dependencies
+with the goal of outlining the process for you so that you may integrate
+it into your own tools and workflows. Sensu is typically deployed with a
+configuration management system such as Puppet or Chef and usable
+examples for each are available:
 
 * [Chef](https://github.com/sensu/sensu-chef)
 * [Puppet](https://github.com/sensu/sensu-puppet)
 
-Introduction
-------------
-We will use 2 nodes, one will be our server and the other will be a simple client, with the following components on each. In order to simplify testing you can use one node for both roles since the server also has sensu-client running.
+## Introduction
+
+We will use 2 nodes, one will be our server and the other will be a
+simple client, with the following components on each. In order to
+simplify testing you can use one node for both roles since the server
+also has sensu-client running.
 
 Sensu server node:
 
@@ -26,21 +33,18 @@ Sensu client node:
 
 - sensu-client
 
-Install Sensu Server dependencies
-===========================
+### Install Sensu Server dependencies
 
-Install and configure RabbitMQ
------------------------------
+#### Install and configure RabbitMQ
 
 - [Installing RabbitMQ on CentOS or RHEL](/{{ page.version }}/installing_rabbitmq_centos.html)
 - [Installing RabbitMQ on Debian or Ubuntu](/{{ page.version }}/installing_rabbitmq_debian.html)
 
-Install redis
--------------
+#### Install redis
 
 Sensu requires Redis 2.0+
 
-### Installing Redis on CentOS or RHEL
+##### Installing Redis on CentOS or RHEL
 
 1. Install the EPEL repos if you haven't already.
 
@@ -54,13 +58,13 @@ yum install redis
 /etc/init.d/redis start
 {% endhighlight %}
 
-### Installing Redis on Debian or Ubuntu
+##### Installing Redis on Debian or Ubuntu
 
-#### Ubuntu <= 10.04
+###### Ubuntu <= 10.04
 
 You will need to download and install Redis 2.0+ from source on these distribution.
 
-#### Debian 6.x
+###### Debian 6.x
 
 1. Add Backports to sources
 
@@ -74,7 +78,7 @@ You will need to download and install Redis 2.0+ from source on these distributi
 
     apt-get -t squeeze-backports install redis-server
 
-#### Ubuntu > 10.04
+###### Ubuntu > 10.04
 
 The default distro repo ships with a new enough Redis.
 
@@ -83,11 +87,9 @@ apt-get install redis-server
 /etc/init.d/redis-server start
 {% endhighlight %}
 
-Install Sensu
-=============
+### Install Sensu
 
-Install Sensu "Omnibus" Package
--------------------------
+#### Install Sensu "Omnibus" Package
 
 While Sensu can be install straight from ruby gem, the recommended
 installation method as of May 2012 is through the Sensu "omnibus"
@@ -98,14 +100,12 @@ scripts or apps that may be running on your nodes. This is especially
 helpful in the case of sensu-client which may be installed on every node
 in your environment.
 
-Sensu Package Repos
--------------------
+#### Sensu Package Repos
 
 Register the relevant Yum or Apt repo for your particular distribution.
 See the [Packages](/{{ page.version }}/sensu_packages.html) guide for additional info.
 
-Install Sensu "Omnibus" Package
--------------------
+#### Install Sensu "Omnibus" Package
 
 * Debian/Ubuntu:
 
@@ -119,8 +119,7 @@ apt-get install sensu
 yum install sensu
 {% endhighlight %}
 
-Enable Sensu services
--------------------
+#### Enable Sensu services
 
 The Sensu omnibus package ships with sysvinit (init.d) scripts installed directly to `/etc/init.d/`. All services are disabled by default. It is up to the user to enable the desired services.
 
@@ -144,16 +143,19 @@ update-rc.d sensu-client defaults
 update-rc.d sensu-dashboard defaults
 {% endhighlight %}
 
-Configure Sensu
----------------
+#### Configure Sensu
 
 Copy the SSL client key + cert that we created earlier during the RabbitMQ installation into `/etc/sensu/ssl`
 
     cp client_key.pem client_cert.pem  /etc/sensu/ssl/
 
-Next we need to configure sensu by editing `/etc/sensu/config.json`. For now we will create just enough config to start sensu. Later we will add checks and handlers.
+Next we need to configure sensu by editing `/etc/sensu/config.json`. For
+now we will create just enough config to start sensu. Later we will add
+checks and handlers.
 
-Note (for later use) that Sensu will also read json config snippets out of the  `/etc/sensu/conf.d` directory so you can piece together a config easily using your CM tool.
+Note (for later use) that Sensu will also read json config snippets out
+of the  `/etc/sensu/conf.d` directory so you can piece together a config
+easily using your CM tool.
 
 {% highlight json %}
     {
@@ -215,17 +217,19 @@ Now let's try to start the Sensu components:
 
 If all goes well, the 4 processes mentioned above will be running and the dashboard will be accessible on `http://<SENSU SERVER>:8080`. Log files are available in `/var/log/sensu` in case anything is wrong.
 
-Installing a Sensu client node
-==============================
+### Installing a Sensu client node
 
 Installing and configuring a Sensu client is the same procedure as installing a Sensu server with the difference being that only the `sensu-client` service needs to be enabled and started.
 
 The client will log to `/var/log/sensu/sensu-client.log`.
 
-Next Steps
-==========
+## Next Steps
 
-Now that Sensu servers and clients are installed, the next steps are to create checks and handlers. Checks run on clients and report on status or metrics (http_alive? mysql_metrics, etc) and handlers run on the server and act on the output from checks (email alert, notify Pagerduty, add metrics to Graphite, etc)
+Now that Sensu servers and clients are installed, the next steps are to
+create checks and handlers. Checks run on clients and report on status
+or metrics (http_alive? mysql_metrics, etc) and handlers run on the
+server and act on the output from checks (email alert, notify Pagerduty,
+add metrics to Graphite, etc)
 
 - [Adding a check](/{{ page.version }}/adding_a_check.html)
 - [Adding a handler](/{{ page.version }}/adding_a_handler.html)
