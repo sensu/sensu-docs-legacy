@@ -25,7 +25,7 @@ language.
 Key details:
 
 - Ruby (EventMachine, Sinatra, AMQP), RabbitMQ, Redis
-- Excellent test coverage with continuous integration via [travis-ci](http://travis-ci.org/#!/sonian/sensu)
+- Excellent test coverage with continuous integration via [travis-ci](http://travis-ci.org/#!/sensu/sensu)
 - Messaging oriented architecture. Messages are JSON objects.
 - Ability to re-use existing Nagios plugins
 - Plugins and handlers (think notifications) can be written in any language
@@ -40,7 +40,7 @@ Components
 
 The Sensu platform is made up of a number of components.
 
-The sensu server
+The Sensu server
 ------------
 
 The Sensu server triggers clients to initiate checks, it then receives
