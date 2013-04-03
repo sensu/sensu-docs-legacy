@@ -14,9 +14,15 @@ using the `check-procs.rb` script from the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins)
 repo.
 
-## Install check script
+To add a check we need to take a number of steps:
 
-We need a script for sensu-client to execute in order to check the
+* Install the check script or command on the client.
+* Define the check on the Sensu server.
+* Subscribe the Sensu client to the check.
+
+## Install check script on the client
+
+We need a script for the Sensu client to execute in order to check the
 condition we're interested in. The protocol for check scripts is the
 same as Nagios plugins so you can re-use Nagios plugins as well.
 
@@ -36,11 +42,11 @@ Download and install `check-procs.rb`:
     wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
     chmod 755 /etc/sensu/plugins/check-procs.rb
     
-## Create check definition JSON
+## Create check definition on the Sensu server
 
 Create this file on the Sensu server:
+`/etc/sensu/conf.d/check_cron.json`.
 
-`/etc/sensu/conf.d/check_cron.json`:
 {% highlight json %}
     {
       "checks": {
@@ -54,7 +60,7 @@ Create this file on the Sensu server:
     }
 {% endhighlight %}
 
-## Subscriptions
+## Subscribe the client to the check
 
 We defined the check to run on nodes subscribed to the `webservers`
 channel. Any client subscribed to this channel will execute this check.
@@ -74,7 +80,7 @@ It may be in `/etc/sensu/config.json` or in any snippet file in the
     }
 {% endhighlight %}
 
-## Testing
+## Testing the check
 
 Finally, restart sensu on the client and server nodes.
 
@@ -91,6 +97,7 @@ Next, let's see if we can raise an alert.
 
     /etc/init.d/crond stop
 
-After about a minute we should see an alert on the sensu-dashboard: `http://<SERVER IP>:8080`, and in the sensu-server.log
+After about a minute we should see an alert on the sensu-dashboard:
+`http://<SERVER IP>:8080`, and in the `sensu-server.log`.
 
 Next: [Adding a handler](/{{ page.version }}/adding_a_handler.html)
