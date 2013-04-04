@@ -48,3 +48,10 @@ task :deploy => [ :build ] do
   puts "Site deployed"
   puts ""
 end
+
+namespace :assets do
+  desc 'Precompile assets'
+  task :precompile do
+    system "bundle exec jekyll"
+  end
+end
