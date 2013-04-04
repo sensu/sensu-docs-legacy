@@ -6,7 +6,7 @@ current_version: 0.9
 server_port: 80
 title: Sensu Docs
 author: Sean Porter
-email: sean.porter@gmail.com
+email: portertech@gmail.com
 
 exclude: [ config.ru, sass, config.rb, Rakefile, TODO, README.markdown, tasks, config, Capfile]
 
