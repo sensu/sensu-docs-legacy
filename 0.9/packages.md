@@ -9,48 +9,51 @@ version: 0.9
 
 The Sensu project provides "monolithic" packages which require no other
 dependencies. They are self-contained and include almost everything
-Sensu needs to function, including its own build of Ruby, all installed
-in `/opt/sensu`. This ensures the simplest installation process,
-promotes consistency across installs, and prevents Sensu from
-interfering with other Ruby applications.
+Sensu needs to function, including its own build of Ruby, and on Linux
+platforms all installed in `/opt/sensu`. This ensures the simplest
+installation process, promotes consistency across installs, and prevents
+Sensu from interfering with other Ruby applications.
 
 Choose either the main or unstable repos, don't use both at the same time.
 
 The repositories are browseable: http://repos.sensuapp.org/index.html (index.html is important)
 
-## Apt
+## Installing on Debian and Ubuntu via Apt
 
 Tested on:
 
 * Ubuntu 10.04, 11.04, 11.10, 12.04
 * Debian 6
 
-### Install the repo's pubkey:
+### Install the repository public key
+
+First we need to install the repository public key on our host to use
+the Sensu repositories.
 
 {% highlight bash %}
     wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
 {% endhighlight %}
 
-### Main (stable) repo
+### Stable repository
 
 {% highlight bash %}
     deb     http://repos.sensuapp.org/apt sensu main
 {% endhighlight %}
 
-### Unstable repo (cutting edge, beta, nightlies)
+### Unstable repository
 
 {% highlight bash %}
     deb     http://repos.sensuapp.org/apt sensu unstable
 {% endhighlight %}
 
-## Yum
+## Installing on Red Hat and CentOS via Yum
 
 Tested on:
 
 * CentOS (RHEL) 5, 6
 * Fedora 15, 16, 17
 
-### Main (stable) repo
+### Stable repository
 
 {% highlight bash %}
     [sensu]
@@ -60,7 +63,7 @@ Tested on:
     enabled=1
 {% endhighlight %}
 
-## Unstable repo (cutting edge, beta, nightlies)
+### Unstable repository
 
 {% highlight bash %}
     [sensu-unstable]
@@ -77,4 +80,8 @@ If you get a 404 (such as if your `$releasever` expands to `5Server`), hardcode 
 Fedora systems will require hardcoding the $releasver variable. Choosing '6' should be fine for
 at least Fedora 16 and 17. Later versions will be tested as necessary. The rpm's have not been
 tested on Fedora versions less than 15 but may work.
+
+## Installing on Windows via MSI
+
+*placeholder*
 
