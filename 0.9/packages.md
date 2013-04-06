@@ -7,7 +7,7 @@ version: 0.9
 
 # Sensu Packages
 
-The Sensu project provides "monolithic" packages which require no other
+The Sensu project provides "monolithic" or "omnibus" packages which require no other
 dependencies. They are self-contained and include almost everything
 Sensu needs to function, including its own build of Ruby, and on Linux
 platforms all installed in `/opt/sensu`. This ensures the simplest
@@ -16,7 +16,7 @@ Sensu from interfering with other Ruby applications.
 
 Choose either the main or unstable repos, don't use both at the same time.
 
-The repositories are browseable: http://repos.sensuapp.org/index.html (index.html is important)
+The repositories are browseable: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html)
 
 ## Installing on Debian and Ubuntu via Apt
 
