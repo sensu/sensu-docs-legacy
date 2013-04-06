@@ -8,6 +8,7 @@ version: 0.9
 What is Sensu?
 ==============
 
+<br />
 
 Sensu is often described as the "monitoring router". Most simply put,
 Sensu connects "check" scripts run across many nodes with "handler"
@@ -24,7 +25,7 @@ language.
 Key details:
 
 - Ruby (EventMachine, Sinatra, AMQP), RabbitMQ, Redis
-- Excellent test coverage with continuous integration via [travis-ci](http://travis-ci.org/#!/sonian/sensu)
+- Excellent test coverage with continuous integration via [travis-ci](http://travis-ci.org/#!/sensu/sensu)
 - Messaging oriented architecture. Messages are JSON objects.
 - Ability to re-use existing Nagios plugins
 - Plugins and handlers (think notifications) can be written in any language
@@ -39,36 +40,36 @@ Components
 
 The Sensu platform is made up of a number of components.
 
-sensu-server
+The Sensu server
 ------------
 
-The sensu-server triggers clients to initiate checks, it then receives
+The Sensu server triggers clients to initiate checks, it then receives
 the output of these checks and feeds it to handlers. (As of version
 0.9.2, clients can also execute checks that the server doesn't know
 about and the server will still process their results, more on these
-'standalone checks' in a future article.)
+'standalone checks' elsewhere in the documentation.)
 
-Sensu-server relies on a Redis instance to keep persistent data. It also
-relies heavily (as do most sensu components) on access to rabbitmq for
-passing data between itself and sensu-client nodes.
+The Sensu server relies on a Redis instance to keep persistent data. It also
+relies heavily (as do most Sensu components) on access to RabbitMQ for
+passing data between itself and Sensu client nodes.
 
-sensu-client
+The Sensu client
 ------------
 
-The sensu-client runs on all of your systems that you want to monitor.
-Sensu-client will execute check scripts (think `check_http`,
+The Sensu client runs on all of your systems that you want to monitor.
+The Sensu client will execute check scripts (think `check_http`,
 `check_load`, etc) and return the results from these checks to
-sensu-server via rabbitmq.
+the Sensu server via RabbitMQ.
 
-sensu-api
+The Sensu API
 ------------
 
 A REST API that provides access to various pieces of data maintained on
-the sensu-server (in Redis). You will typically run this on the same
-server as your sensu-server or Redis instance. It is mostly used by
+the Sensu server (stored in Redis). You will typically run this on the same
+host as your Sensu server or Redis instance. It is mostly used by
 internal sensu components at this time.
 
-sensu-dashboard
+The Sensu dashboard
 ---------------
 
 Web dashboard providing an overview of the current state of your Sensu

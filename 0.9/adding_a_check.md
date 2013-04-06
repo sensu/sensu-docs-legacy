@@ -14,9 +14,15 @@ using the `check-procs.rb` script from the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins)
 repo.
 
-## Install check script
+To add a check we need to take a number of steps:
 
-We need a script for sensu-client to execute in order to check the
+* Install the check script on the client
+* Create the check definition on the Sensu server
+* Subscribe the Sensu client to the check.
+
+## Install the check script on the client
+
+We need a script for the Sensu client to execute in order to check the
 condition we're interested in. The protocol for check scripts is the
 same as Nagios plugins so you can re-use Nagios plugins as well.
 
@@ -29,18 +35,22 @@ to installing the `check-procs.rb` plugin. Otherwise we need to install
 the `sensu-plugin` gem which has various helper classes used by many of
 the community plugins:
 
+{% highlight bash %}
     gem install sensu-plugin --no-rdoc --no-ri
+{% endhighlight %}
 
 Download and install `check-procs.rb`:
 
+{% highlight bash %}
     wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
     chmod 755 /etc/sensu/plugins/check-procs.rb
+{% endhighlight %}
     
-## Create check definition JSON
+## Create the check definition on the Sensu server
 
 Create this file on the Sensu server:
+`/etc/sensu/conf.d/check_cron.json`.
 
-`/etc/sensu/conf.d/check_cron.json`:
 {% highlight json %}
     {
       "checks": {
@@ -54,7 +64,7 @@ Create this file on the Sensu server:
     }
 {% endhighlight %}
 
-## Subscriptions
+## Subscribe the client to the check
 
 We defined the check to run on nodes subscribed to the `webservers`
 channel. Any client subscribed to this channel will execute this check.
@@ -74,9 +84,9 @@ It may be in `/etc/sensu/config.json` or in any snippet file in the
     }
 {% endhighlight %}
 
-## Testing
+## Testing the check
 
-Finally, restart sensu on the client and server nodes.
+Finally, restart Sensu on the client and server nodes.
 
 After a few minutes we should see the following in the `/var/log/sensu/sensu-client.log` on the client:
 
@@ -91,6 +101,7 @@ Next, let's see if we can raise an alert.
 
     /etc/init.d/crond stop
 
-After about a minute we should see an alert on the sensu-dashboard: `http://<SERVER IP>:8080`, and in the sensu-server.log
+After about a minute we should see an alert on the sensu-dashboard:
+`http://<SERVER IP>:8080`, and in the `sensu-server.log`.
 
-Next: [Adding a handler](/{{ page.version }}/adding_a_handler.html)
+Next: [Adding a standalone check](/{{ page.version }}/adding_a_standalone_check.html)

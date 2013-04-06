@@ -1,1 +1,2 @@
-web: bundle exec thin start -p $PORT -e $RACK_ENV
+jekyll:  bundle exec jekyll --auto --server --url http://localhost:4000
+web:     bundle exec puma -p $PORT config.ru

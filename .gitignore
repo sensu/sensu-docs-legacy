@@ -4,3 +4,6 @@
 .sass-cache
 _site/
 _cache
+vendor
+.bundle
+.tddium*

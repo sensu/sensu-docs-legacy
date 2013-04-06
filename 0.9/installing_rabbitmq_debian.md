@@ -37,11 +37,9 @@ apt-get -y --allow-unauthenticated --force-yes install rabbitmq-server
 
 ### Configure RabbitMQ SSL
 
-!!!!!!!!!!
-IMPORTANT NOTE: Due to the state of flux in Erlang and the Erlang-SSL
-module, we have been unable to get RabbitMQ and SSL working on Ubuntu
-platforms < 11.10 and Debian 6.x.
-!!!!!!!!!!
+**IMPORTANT NOTE** - Due to the state of flux in Erlang and the
+ Erlang-SSL module, we have been unable to get RabbitMQ and SSL working
+on Ubuntu platforms < 11.10 and Debian 6.x.
 
 We need to make some SSL certs for our rabbitmq server and the sensu
 clients. I put a simple script up on
@@ -51,18 +49,22 @@ to for your organization if you use this in production. The script will
 generate a few files that we'll need throughout the guide, so keep them
 nearby.
 
+{% highlight bash %}
     git clone git://github.com/joemiller/joemiller.me-intro-to-sensu.git
     cd joemiller.me-intro-to-sensu/
     ./ssl_certs.sh clean
     ./ssl_certs.sh generate
+{% endhighlight %}
 
 Configure RabbitMQ to use these SSL certs
 
+{% highlight bash %}
     mkdir /etc/rabbitmq/ssl
     cp server_key.pem /etc/rabbitmq/ssl/
     cp server_cert.pem /etc/rabbitmq/ssl/
     cp testca/cacert.pem /etc/rabbitmq/ssl/
-    
+{% endhighlight %}
+
 Create `/etc/rabbitmq/rabbitmq.config`:
 
 {% highlight erlang %}
@@ -102,7 +104,9 @@ bound to port 5672 and amqp/ssl on port 5671.
 Finally, let's create a `/sensu` vhost and a `sensu` user/password on
 our rabbit:
 
+{% highlight bash %}
     rabbitmqctl add_vhost /sensu
     rabbitmqctl add_user sensu mypass
     rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+{% endhighlight %}
 

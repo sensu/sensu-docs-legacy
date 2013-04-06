@@ -7,11 +7,11 @@ version: 0.9
 
 # Installing Sensu
 
-This article covers a manual installation of Sensu and its dependencies
-with the goal of outlining the process for you so that you may integrate
-it into your own tools and workflows. Sensu is typically deployed with a
-configuration management system such as Puppet or Chef and usable
-examples for each are available:
+This page demonstrates a manual installation of Sensu and its
+dependencies with the goal of outlining the process for you so that you
+may integrate it into your own tools and workflows. Sensu is typically
+(and best!) deployed with a configuration management system such as
+Puppet or Chef and usable examples for each are available:
 
 * [Chef](https://github.com/sensu/sensu-chef)
 * [Puppet](https://github.com/sensu/sensu-puppet)
@@ -21,17 +21,20 @@ examples for each are available:
 We will use 2 nodes, one will be our server and the other will be a
 simple client, with the following components on each. In order to
 simplify testing you can use one node for both roles since the server
-also has sensu-client running.
+also has the Sensu client running.
 
 Sensu server node:
 
-- rabbitmq
-- redis
-- sensu-server / sensu-client / sensu-api / sensu-dashboard
+- RabbitMQ
+- Redis
+- Sensu server
+- Sensu client
+- Sensu API
+- Sensu Dashboard
 
 Sensu client node:
 
-- sensu-client
+- Sensu client
 
 ### Install Sensu Server dependencies
 
@@ -121,7 +124,9 @@ yum install sensu
 
 #### Enable Sensu services
 
-The Sensu omnibus package ships with sysvinit (init.d) scripts installed directly to `/etc/init.d/`. All services are disabled by default. It is up to the user to enable the desired services.
+The Sensu omnibus package ships with sysvinit (init.d) scripts installed
+directly to `/etc/init.d/`. All services are disabled by default. It is
+up to the user to enable the desired services.
 
 Alternative supervisor scripts (such as upstart) are available in `/usr/share/sensu` for those that may want them.
 
@@ -147,14 +152,16 @@ update-rc.d sensu-dashboard defaults
 
 Copy the SSL client key + cert that we created earlier during the RabbitMQ installation into `/etc/sensu/ssl`
 
+{% highlight bash %}
     cp client_key.pem client_cert.pem  /etc/sensu/ssl/
+{% endhighlight %}
 
 Next we need to configure sensu by editing `/etc/sensu/config.json`. For
 now we will create just enough config to start sensu. Later we will add
 checks and handlers.
 
 Note (for later use) that Sensu will also read json config snippets out
-of the  `/etc/sensu/conf.d` directory so you can piece together a config
+of the `/etc/sensu/conf.d` directory so you can piece together a config
 easily using your CM tool.
 
 {% highlight json %}
@@ -215,11 +222,15 @@ Now let's try to start the Sensu components:
     sudo /etc/init.d/sensu-dashboard start    
 {% endhighlight %}
 
-If all goes well, the 4 processes mentioned above will be running and the dashboard will be accessible on `http://<SENSU SERVER>:8080`. Log files are available in `/var/log/sensu` in case anything is wrong.
+If all goes well, the 4 processes mentioned above will be running and
+the dashboard will be accessible on `http://<SENSU SERVER>:8080`. Log
+files are available in `/var/log/sensu` in case anything is wrong.
 
 ### Installing a Sensu client node
 
-Installing and configuring a Sensu client is the same procedure as installing a Sensu server with the difference being that only the `sensu-client` service needs to be enabled and started.
+Installing and configuring a Sensu client is the same procedure as
+installing a Sensu server with the difference being that only the
+`sensu-client` service needs to be enabled and started.
 
 The client will log to `/var/log/sensu/sensu-client.log`.
 
@@ -227,11 +238,13 @@ The client will log to `/var/log/sensu/sensu-client.log`.
 
 Now that Sensu servers and clients are installed, the next steps are to
 create checks and handlers. Checks run on clients and report on status
-or metrics (http_alive? mysql_metrics, etc) and handlers run on the
+or metrics (http_alive, mysql_metrics, etc) and handlers run on the
 server and act on the output from checks (email alert, notify Pagerduty,
 add metrics to Graphite, etc)
 
 - [Adding a check](/{{ page.version }}/adding_a_check.html)
 - [Adding a handler](/{{ page.version }}/adding_a_handler.html)
 
-If you have further questions please visit #sensu on IRC Freenode.
+If you have further questions please visit the `#sensu` IRC channel on
+Freenode or send an email to the `sensu-users` mailing list.
+

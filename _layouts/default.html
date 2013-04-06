@@ -47,8 +47,9 @@
           <div class="nav-collapse">
 
             <ul class="nav pull-right">
-              <li><a href="/">Home</a></li>
-              <li><a href="https://github.com/sensu/sensu">Sensu</a></li>
+              <li><a href="http://sensuapp.org">Home</a></li>
+              <li><a href="http://docs.sensuapp.org">Docs</a></li>
+              <li><a href="http://sensuapp.org/support">Support</a></li>
             </ul>
 
           </div><!--/.nav-collapse -->
@@ -59,7 +60,7 @@
       <hr>
       <div class="container">
         <div class="row">
-          <div class="span8">   
+          <div class="span8">
             <h1>Sensu Documentation</h1>
             <br>
             <p>Documentation for the open source monitoring framework.</p>
@@ -68,6 +69,13 @@
             <div style="padding-top:5px;">
               <p><a href="http://github.com/sensu/sensu-docs" class="large red button radius">Fork the docs!</a></p>
             </div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+          <div class="span4 offset8">
+            {% breadcrumb %}
           </div>
         </div>
       </div>
@@ -80,7 +88,6 @@
 
     </div>
 
-    <br />
     <br />
     </div> <!-- not sure what this closing tag belongs to... -ch -->
 
@@ -105,6 +112,19 @@
       });
     </script/>
 
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '515e4324f5a1f50ee700002b');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
   </body>
 </html>
 

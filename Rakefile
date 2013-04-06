@@ -13,6 +13,19 @@ POSTS_DIR = File.join(ROOT_DIR, '_posts')
 
 task :default => :build
 
+desc "Bump version number"
+task :bump do
+  content = IO.read('_config.yml')
+  content.sub!(/^current_version: (\S+)$/) {|v|
+      ver = $1.next
+      Dir.mkdir(ver) unless File.exists?(ver)
+      "current_version: #{ver}"
+  }
+  File.open('_config.yml','w') do |f|
+    f.write content
+  end
+end
+
 desc "Clear generated site."
 task :clean do
     rm_rf Dir.glob(File.join(SITE_DIR, '*'))
@@ -34,4 +47,11 @@ task :deploy => [ :build ] do
   Rake::Task['sitemap'].invoke
   puts "Site deployed"
   puts ""
+end
+
+namespace :assets do
+  desc 'Precompile assets'
+  task :precompile do
+    system "bundle exec jekyll"
+  end
 end
