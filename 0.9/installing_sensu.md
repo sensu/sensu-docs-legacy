@@ -150,6 +150,8 @@ update-rc.d sensu-dashboard defaults
 
 #### Configure Sensu
 
+Please see this page for additional notes and discussions on SSL certificates in Sensu: [ssl](/{{ page.version }}/ssl.html).
+
 Copy the SSL client key + cert that we created earlier during the RabbitMQ installation into `/etc/sensu/ssl`
 
 {% highlight bash %}

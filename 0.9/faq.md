@@ -153,3 +153,12 @@ Sensu API. Handlers that inherit from the `sensu::plugin::handlers`
 (from the `sensu-plugin` gem) will properly check for stashes and exit
 without processing the event as normal.
 
+## Why do you recommend a single SSL certificate for all Sensu Clients?
+
+Please see this discussion on SSL certs, limitations, and workarounds: [ssl](/{{ page.version }}/ssl.html)
+
+## What do I do if one of my machines is compromised and the Sensu client certificate is stolen?
+
+Re-create your CA and client certificates, re-distribute to your RabbitMQ server, Sensu server, and Sensu clients.
+
+Please see this discussion on SSL certs, limitations, and workarounds: [ssl](/{{ page.version }}/ssl.html)
