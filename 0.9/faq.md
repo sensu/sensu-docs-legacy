@@ -162,3 +162,8 @@ Please see this discussion on SSL certs, limitations, and workarounds: [ssl](/{{
 Re-create your CA and client certificates, re-distribute to your RabbitMQ server, Sensu server, and Sensu clients.
 
 Please see this discussion on SSL certs, limitations, and workarounds: [ssl](/{{ page.version }}/ssl.html)
+
+## What is the Sensu equivalent of Zenoss' Thresholds and Escalate Count
+
+Setting the `occurrences` attribute on a check definition instructs handlers to wait for a number of occurrences before taking action.
+
