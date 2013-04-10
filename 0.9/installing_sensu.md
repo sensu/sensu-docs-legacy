@@ -106,7 +106,7 @@ in your environment.
 #### Sensu Package Repos
 
 Register the relevant Yum or Apt repo for your particular distribution.
-See the [Packages](/{{ page.version }}/sensu_packages.html) guide for additional info.
+See the [Packages](/{{ page.version }}/packages.html) guide for additional info.
 
 #### Install Sensu "Omnibus" Package
 
