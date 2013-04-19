@@ -19,7 +19,8 @@ The latest version of Sensu is {{ site.current_version }}.
 ## Does Sensu run on Windows?
 
 Yes. There are MSI packages for installing Sensu on Windows. You can use
-http://repos.sensuapp.org/index.html to download the latest release.
+the [package respository](http://repos.sensuapp.org/index.html) to
+download the latest release.
 
 ## How do Sensu clients handle network issues or RabbitMQ outages?
 
