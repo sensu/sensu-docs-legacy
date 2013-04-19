@@ -66,54 +66,39 @@ wish to debug a `USR1` signal. For example:
     $ kill -USR1 5992
 {% endhighlight %}
 
-## Any suggestions on naming conventions for metrics?
+## Any suggestions on naming conventions for metric plugins?
 
-The `metrics-*name*` seems to be the de facto convention right now.
+The `*service_name*-metrics` seems to be the de facto convention right now.
 
 ## Does Sensu require that Redis and RabbitMQ run locally?
 
 No. Redis and RabbitMQ can run locally or on any remote host, so long as
-the server(s) and clients can communicate with them.
+the Sensu components can communicate with them.
 
 ## Which components of a Sensu system need access to Redis?
 
-Only the Sensu master server actively communicates with Redis. Any Sensu
-server which may become master will need access the Redis server in
-order to function as the master.
+Only the Sensu server(s) & API communicate with Redis.
 
 ## Which components of a Sensu system need access to the RabbitMQ broker?
 
-As Sensu depends on AMQP as its messaging bus, all server(s) and clients
-in a Sensu system require access to the RabbitMQ broker.
+The core Sensu components (server, client, and API) require access to
+the RabbitMQ broker.
+
+## Can I run multiple Sensu servers?
+
+Yes. You can run as many Sensu servers as you require. Check results are
+distribute to Sensu servers in a round-robin fashion, allowing you to scale
+out. Running more that one Sensu server is recommended.
 
 ## When I have multiple Sensu servers, which one will be the master?
 
-First, it does not matter how many servers are running, and second they
-will automatically elect a master including a failover.
+The Sensu server master is reponsible for check request publishing. Master
+election is automatic, and so is failover, no configuration is required.
 
-## How do I get the Sensu server to create another client without manually doing it?
+## How do I register a Sensu client?
 
-When a new client joins the Sensu server, the server configuration does not have to
-be changed at all. That's one of the cool things about Sensu. The
-Sensu client only needs to know the server and registers with it upon
-startup. In more detail, the server is creating channels in RabbitMQ and
-Sensu clients are connecting to those channels. When a new instance with
-the Sensu client on it is being bootstrapped, and this client has a
-particular configuration which points to the server's RabbitMQ, there is no
-need to do anything manually on the server.
-
-## Can someone show me an example of how they are listing multiple clients on the server?
-
-See the answer in "How do I get the Sensu server to create another
-client without manually doing it?". There is no need to
-manually list clients on the server. Each client has its own
-configuration, that only needs to point to the server. The server
-publishes checks and only learns about the client and only learns about
-clients as they report back with their check and keepalive results.
-
-## How do I register the xmpp handler?
-
-You should call it with the `pipe` type.
+Sensu clients self-register when they start up, you do not have to maintain a list
+of your clients. The Sensu clients must be configured correctly in order to run.
 
 ## Is there a configuration parameter to notify only every hour, even if the check has an interval of one minute?
 
