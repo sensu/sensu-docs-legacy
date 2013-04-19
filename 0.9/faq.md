@@ -16,6 +16,11 @@ version: 0.9
 
 The latest version of Sensu is {{ site.current_version }}.
 
+## Does Sensu run on Windows?
+
+Yes. There are MSI packages for installing Sensu on Windows. You can use
+http://repos.sensuapp.org/index.html to download the latest release.
+
 ## How do Sensu clients handle network issues or RabbitMQ outages?
 
 The Sensu client is able to handle network issues and RabbitMQ outages
@@ -28,7 +33,7 @@ further attempts every 10 seconds, indefinitely.
 Yes. As Sensu components use their local clocks for timestamps, they
 must be synchronized. Not synchronizing your clocks may result in client
 health false positives. Time synchronization can be done with NTP, see
-https://help.ubuntu.com/12.04/serverguide/NTP.html for more details. 
+https://help.ubuntu.com/12.04/serverguide/NTP.html for more details.
 
 ## How do I delete a client?
 
@@ -166,4 +171,3 @@ Please see this discussion on SSL certs, limitations, and workarounds: [ssl](/{{
 ## What is the Sensu equivalent of Zenoss' Thresholds and Escalate Count
 
 Setting the `occurrences` attribute on a check definition instructs handlers to wait for a number of occurrences before taking action.
-
