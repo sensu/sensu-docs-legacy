@@ -128,8 +128,8 @@ Standalone-checks are configured in this example: http://blog.pkhamre.com/2012/0
 
 
 ## How do checks run (Ruby)?
-Checks can be run on the machine with external (machine supplied) and internal (Sensu supplied) Ruby.
-The Sensu wrapper script should set internal/external with `EMBEDDED_RUBY`. See `/etc/default/sensu` on your machine.
+Checks can be run on the machine with system (machine supplied) and embedded (Sensu supplied) Ruby.
+The Sensu wrapper script should set system/embedded with `EMBEDDED_RUBY`. See `/etc/default/sensu` on your machine.
 
 ## My machine can't find Ruby, what to do?
 
