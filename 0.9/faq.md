@@ -126,17 +126,25 @@ both the client and the server.
 
 Standalone-checks are configured in this example: http://blog.pkhamre.com/2012/03/21/sensu-standalone-checks/
 
-
 ## How do checks run (Ruby)?
-Checks can be run on the machine with system (machine supplied) and embedded (Sensu supplied) Ruby.
-The Sensu wrapper script should set system/embedded with `EMBEDDED_RUBY`. See `/etc/default/sensu` on your machine.
 
-## My machine can't find Ruby, what to do?
+Checks can be run on your hosts with the system-supplied Ruby or
+the Sensu-supplied embedded Ruby. You can set the Ruby to be used when
+Sensu is started by specifying the `EMBEDDED_RUBY` variable. This is
+usually set using your operating system's init wrapper, for Sensu see the
+`/etc/default/sensu` file.
 
-* Check that your PATH is set correctly, when the service runs, it should indicate an embedded ruby binpath if you're using an embedded ruby.
-* Try running a check that is entirely this command: `/usr/bin/env ruby -v` and watch the output.
-* Check your scripts line-ending. It may affect the shebang line: within each script you make or use, you should run Unix line encoding on a Unix machine (and proper endings on other OSs).
+## My machine can't find Ruby, what should I do?
 
+* Check that your `PATH` is set correctly. If you're using embedded
+  Ruby, it should indicate an embedded Ruby binary path, for example
+  `/opt/sensu/embedded/bin/ruby`.
+* Try running a check whose content is only this command: `/usr/bin/env ruby -v` 
+  and watch the output.
+* Check your script's line-endings. On Linux/Unix machines you should
+  ensure your line endings are correct using a command like
+  `dos2unix`. This will ensure Microsoft Windows line endings, for
+  example extraneous `^M` endings, are removed. 
 
 ## What is safe mode and how can I determine if it is enabled?
 
