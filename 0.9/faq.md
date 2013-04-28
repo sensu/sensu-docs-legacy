@@ -126,6 +126,18 @@ both the client and the server.
 
 Standalone-checks are configured in this example: http://blog.pkhamre.com/2012/03/21/sensu-standalone-checks/
 
+
+## How do checks run (Ruby)?
+Checks can be run on the machine with external (machine supplied) and internal (Sensu supplied) Ruby.
+The Sensu wrapper script should set internal/external with `EMBEDDED_RUBY`. See `/etc/default/sensu` on your machine.
+
+## My machine can't find Ruby, what to do?
+
+* Check that your PATH is set correctly, when the service runs, it should indicate an embedded ruby binpath if you're using an embedded ruby.
+* Try running a check that is entirely this command: `/usr/bin/env ruby -v` and watch the output.
+* Check your scripts line-ending. It may affect the shebang line: within each script you make or use, you should run Unix line encoding on a Unix machine (and proper endings on other OSs).
+
+
 ## What is safe mode and how can I determine if it is enabled?
 
 ...
