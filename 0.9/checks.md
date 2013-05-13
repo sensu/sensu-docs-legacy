@@ -98,6 +98,32 @@ using `"handler": "foo"` or specify one or more handlers with
 
 Events produce by this check will be handled by the `pagerduty` and `irc` handlers.
 
+### Disabling check handling
+
+Handling can be disabled for specific checks, so that handlers are not triggered. You can configure this be setting `"handle": false` on the check definition.
+
+#### Example
+
+##### Check definition (configuration)
+
+{% highlight json %}
+{
+  "checks": {
+    "chef_client": {
+      "command": "check-chef-client.rb",
+      "subscribers": [
+        "production"
+      ],
+      "interval": 60,
+      "handle": false
+    }
+  }
+}
+{% endhighlight %}
+
+Events produced by this check will never be handled.
+
+
 ### Metric checks
 
 As the Sensu check specification allows for structured data to be
