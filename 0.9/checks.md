@@ -216,6 +216,36 @@ definition to make it standalone, replacing `"subscribers"`.
 }
 {% endhighlight %}
 
+### Manually triggered checks
+
+In addition to server-scheduled and client-scheduled (standalone) checks, checks can be
+defined that are not scheduled for regualar execution.  These pre-defined checks can be
+triggered through the API. Add `"publish": false` to a check definition to disable the
+interval-based scheduling. The `interval` field may still be required to pass validation.
+
+#### Example
+
+##### Check definition (configuration)
+
+{% highlight json %}
+{
+  "checks": {
+    "my_predefined_check": {
+      "type": "metric",
+      "command": "cpu-usage-metrics.sh",
+      "publish": false,
+      "interval": 9999
+    }
+  }
+}
+{% endhighlight %}
+
+##### API Call
+
+{% highlight bash %}
+curl -XPOST http://api.sensu.example.com:4567/check/request -d '{"subscribers": ["appservers"], "check":"my_predefined_check"}'
+{% endhighlight %}
+
 ### Check command token substitution
 
 At check execution time, the Sensu client will inspect the check command
