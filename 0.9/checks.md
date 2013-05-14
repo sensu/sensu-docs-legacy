@@ -60,7 +60,7 @@ end
   [client info](/{{ page.version }}/clients.html))
 * `interval`: How frequently (in seconds) the check will be executed
 
-### How check results produce events 
+### How check results produce events
 
 By default, only non-zero (exit status > 0) check results produce an
 event, causing the creation of [event data](/{{ page.version }}/events.html) which is passed to one or more [handlers](/{{ page.version }}/handlers.html). Sensu concerns itself with "the bad", as
@@ -123,6 +123,39 @@ Handling can be disabled for specific checks, so that handlers are not triggered
 
 Events produced by this check will never be handled.
 
+### Subduing Check Handling
+
+In addition to the ability to fully disable the handling of certain checks, Sensu
+supports 'subduing' checks so that they are not handled during certain hours
+of the day.  This is done by configuring the `"begin"` and `"end"` times
+for the check's `"subdue"` attribute.
+
+The `"begin"` and `"end"` times are parsed with Ruby's generous `Time.parse`,
+which is flexible enough to handle different zones and format.
+
+#### Example
+
+##### Check definition (configuration)
+
+{% highlight json %}
+{
+  "checks": {
+    "noisy_noncritical_check": {
+      "command": "queues_are_hard_to_monitor.rb",
+      "subscribers": [
+        "production"
+      ],
+      "interval": 60,
+      "subdue": {
+        "begin": "5PM PST",
+        "end": "9AM PST",
+      }
+    }
+  }
+}
+{% endhighlight %}
+
+Events produced by this check will not be handled between 5PM and 9AM PST.
 
 ### Metric checks
 
@@ -301,7 +334,7 @@ be substituted by its value. See refer to [client info](/{{ page.version }}/clie
 Custom key-values can be added to a check definition, which will be
 included in [event data](/{{ page.version }}/events.html), enabling
 [handler](/{{ page.version }}/handlers.html)
-creativity. 
+creativity.
 
 ##### Common custom check definitions
 
