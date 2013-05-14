@@ -60,7 +60,7 @@ end
   [client info](/{{ page.version }}/clients.html))
 * `interval`: How frequently (in seconds) the check will be executed
 
-### How check results produce events 
+### How check results produce events
 
 By default, only non-zero (exit status > 0) check results produce an
 event, causing the creation of [event data](/{{ page.version }}/events.html) which is passed to one or more [handlers](/{{ page.version }}/handlers.html). Sensu concerns itself with "the bad", as
@@ -334,7 +334,7 @@ be substituted by its value. See refer to [client info](/{{ page.version }}/clie
 Custom key-values can be added to a check definition, which will be
 included in [event data](/{{ page.version }}/events.html), enabling
 [handler](/{{ page.version }}/handlers.html)
-creativity. 
+creativity.
 
 ##### Common custom check definitions
 
