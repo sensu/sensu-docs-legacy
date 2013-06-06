@@ -148,7 +148,7 @@ which is flexible enough to handle different zones and format.
       "interval": 60,
       "subdue": {
         "begin": "5PM PST",
-        "end": "9AM PST",
+        "end": "9AM PST"
       }
     }
   }
