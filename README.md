@@ -13,6 +13,12 @@ bundle install
 bundle exec rake server
 ```
 
+## View
+
+After doing the previous two steps, and once WEBrick is listening (defaults to
+port 4000), simply point your web browser to localhost:4000 to view the
+documentation.
+
 ## Deploying to Heroku
 
 ```
