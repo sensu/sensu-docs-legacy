@@ -5,7 +5,6 @@ description: Presentations about Sensu
 version: 0.9
 ---
 
-
 ### Presentations
 * [Nick Stielau & Jeremy Carroll talk about Metrics with Sensu @ SF Metrics Meetup January 2013 (video)](http://vimeo.com/59417953)
 * [Making the switch - Nagios to Sensu (by Jeremy Carroll @ San Francisco DevOps Meetup September 2012)](http://www.slideshare.net/jeremy_carroll/sensu-14485155)
