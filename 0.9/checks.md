@@ -309,7 +309,8 @@ curl -XPOST http://api.sensu.example.com:4567/check/request -d '{"subscribers": 
 
 At check execution time, the Sensu client will inspect the check command
 for substitution tokens, a pattern containing a client attribute key, to
-be substituted by its value. See refer to [client info](/{{ page.version }}/clients.html)
+be substituted by its value. Refer to [client info](/{{ page.version }}/clients.html). 
+You can also specify a default value if the key does not exist `:::foo.bar|default:::`
 
 #### Example
 
