@@ -46,25 +46,18 @@ example url - http://localhost:4567/stashes
 
   - error: 500
 
-* `POST`: returns multiple stashes (JSON documents)
+* `POST`: Create a stash (JSON document)
 
   - payload:
 
-             [
-               "foo",
-               "bar"
-             ]
-
-  - success: 200:
-
              {
-               "foo": {
-                 "bar": 42
-               },
-               "bar": {
-                 "foo": 73
+               "path": "random_stash",
+               "content": {
+                 "reason": "things are stashy"
                }
              }
+
+  - success: 201
 
   - error: 500
 

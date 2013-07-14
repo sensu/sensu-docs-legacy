@@ -15,6 +15,21 @@ The API is capable of requesting checks be executed and can resolve events.
 
 When using the Sensu packages, you may start the API on one or more boxes with `/etc/init.d/sensu-api start`.  Logs for the api are located at `/var/log/sensu/sensu-api.log`.
 
+## Configuration
+The sensu-api is generally configured in the `/etc/sensu/config.json`; refer to <a href="/{{ page.version }}/installing_sensu.html">installing sensu</a> for more information.  The available options for the api configuration are as follows:
+
+{% highlight json %}
+{
+  "api": {
+    "host": "localhost",
+    "port": 4567,
+    "user": "admin",
+    "password": "shhh",
+    "bind": "0.0.0.0"
+  }
+}
+{% endhighlight %}
+
 ## Aggregates
 The aggregate endpoints allows you to list and delete aggregate checks.
 
