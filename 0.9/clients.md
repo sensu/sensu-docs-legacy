@@ -31,6 +31,31 @@ subscriptions. Client info is included in [event data](/{{ page.version }}/event
 }
 {% endhighlight %}
 
+## Keepalives
+Sensu clients publish keepalives to the server every 20 seconds.  When a keepalive hasn't been sent from a client in a specified threshold, the server will fire a handler.  The default threshold is to warn at 120 seconds and then goes critical at 180 seconds.  The handler that fires is the "default" handler.  You can specify your own thresholds and handler via the client configuration.
+
+
+{% highlight json %}
+{
+  "client": {
+    "name": "i-424242",
+    "address": "127.0.0.1",
+    "keepalive": {
+      "thresholds": {
+        "warning": 60,
+        "critical": 120
+      },
+      "handler": "keepalive"
+    },
+    "subscriptions": [
+      "production",
+      "webserver",
+      "mysql"
+    ]
+  }
+}
+{% endhighlight %}
+
 ## Custom key-values
 You can add custom client key-values, which will be included in event data, and can be used in check command token substitution.
 
