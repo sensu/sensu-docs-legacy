@@ -21,7 +21,7 @@ wget -O /etc/yum.repos.d/epel-erlang.repo http://repos.fedorapeople.org/repos/pe
 (CentOS 6 only) Install the EPEL-6 yum repo which contains Erlang R14B:
 
 {% highlight bash %}
-rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm
+rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 {% endhighlight %}
 
 ### Install Erlang
