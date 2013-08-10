@@ -31,7 +31,7 @@ Let's download and install `load-metrics.rb`:
 Now let's run the metric from the command line and see the results:
 
 {% highlight bash %}
-    ruby load-metric.rb
+    ruby load-metrics.rb
     absinthe.local.load_avg.one 0.89  1365270842
     absinthe.local.load_avg.five  1.01  1365270842
     absinthe.local.load_avg.fifteen 1.06  1365270842
