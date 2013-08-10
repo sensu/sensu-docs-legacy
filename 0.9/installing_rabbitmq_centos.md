@@ -21,7 +21,7 @@ wget -O /etc/yum.repos.d/epel-erlang.repo http://repos.fedorapeople.org/repos/pe
 (CentOS 6 only) Install the EPEL-6 yum repo which contains Erlang R14B:
 
 {% highlight bash %}
-rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-5.noarch.rpm
+rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 {% endhighlight %}
 
 ### Install Erlang
@@ -38,7 +38,7 @@ Based on the rabbit install guide from here: [http://www.rabbitmq.com/install-rp
 
 {% highlight bash %}
 rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v2.7.1/rabbitmq-server-2.7.1-1.noarch.rpm
+rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.1.4/rabbitmq-server-3.1.4-1.noarch.rpm
 {% endhighlight %}
 
 ### Configure RabbitMQ SSL
