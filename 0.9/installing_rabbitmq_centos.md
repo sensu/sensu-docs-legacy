@@ -38,7 +38,7 @@ Based on the rabbit install guide from here: [http://www.rabbitmq.com/install-rp
 
 {% highlight bash %}
 rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v2.7.1/rabbitmq-server-2.7.1-1.noarch.rpm
+rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.1.4/rabbitmq-server-3.1.4-1.noarch.rpm
 {% endhighlight %}
 
 ### Configure RabbitMQ SSL
