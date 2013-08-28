@@ -112,7 +112,7 @@ Create these with the Command Prompt or Windows Explorer.
 
 ### Copy cert.pem and key.pem to C:\opt\sensu\ssl
 
-These can be obtained from the Sensu server or on another Sensu client node (/etc/sensu/ssl/ by default).
+These can be obtained from the Sensu server or on another Sensu client node (located in /etc/sensu/ssl/ by default).
 
 ### Create C:\opt\sensu\config.json
 
@@ -147,6 +147,24 @@ Be sure to change the port and vhost values if you are not using the defaults.
       }
     }
 {% endhighlight %}
+
+# Edit C:\opt\sensu\bin\sensu-client.xml
+
+We need to add the -c and -d parameters to point to our newly created config files.
+
+{% highlight xml %}
+	<!--
+	  Windows service definition for Sensu
+	-->
+	<service>
+	  <id>sensu-client</id>
+	  <name>Sensu Client</name>
+	  <description>This service runs a Sensu client</description>
+	  <executable>C:\opt\sensu\embedded\bin\ruby</executable>
+	  <arguments>C:\opt\sensu\embedded\bin\sensu-client -c C:\opt\sensu\config.json -d C:\opt\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
+	</service>
+{% endhighlight %}
+
 
 ### Start the sensu-client service
 
