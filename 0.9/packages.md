@@ -94,7 +94,7 @@ Find it in the msi directory: [http://repos.sensuapp.org/index.html](http://repo
 ### Use the Windows SC command to create the service
 
 {% highlight bash %}
-    sc \\HOSTNAME_OR_IP create sensu-client binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"    
+    sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"    
 {% endhighlight %}
 
 The space between the equals(=) and the value is required.
