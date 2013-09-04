@@ -140,7 +140,7 @@ Be sure to change the port and vhost values if you are not using the defaults.
     {
       "client": {
         "name": "CLIENT_NODE_NAME",
-        "address:": "CLIENT_IP_ADDRESS",
+        "address": "CLIENT_IP_ADDRESS",
         "subscriptions": [
           "SUBSCRIPTION_NAME"  
         ]
