@@ -238,17 +238,17 @@ The client will log to `/var/log/sensu/sensu-client.log`.
 
 ### Installing a Windows Sensu client node
 
-Installing and configuring a Sensu client on Windows is very different
-from the steps above.
+Installing and configuring a Sensu client on Windows is very different from the steps above.
 
 #### Install Sensu Client Package
 
-To install the sensu-client package, follow the MSI install instructions on the 
-[Packages](/{{ page.version }}/packages.html) page.
+
+To install the sensu-client package, follow the MSI install instructions on the [Packages](/{{ page.version }}/packages.html) page.
 
 #### Create the Sensu Windows Service
 
-Use the Windows SC command to create the service
+
+Use the Windows SC command to create the service.
 
 {% highlight bash %}
     sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
@@ -258,7 +258,8 @@ The space between the equals(=) and the value is required.
 
 #### Create Directories for conf.d and ssl
 
-It's recommended you use the default install directory C:\opt\sensu.  You can locate them elsewhere if you choose, just remember to modify your config files appropriately.
+
+It is recommended you use the default install directory C:\opt\sensu.  You can locate them elsewhere if you choose, just remember to modify your config files appropriately.
 
 Create these directories with the Command Prompt or Windows Explorer.
 
@@ -269,9 +270,11 @@ Create these directories with the Command Prompt or Windows Explorer.
 
 #### Copy cert.pem and key.pem to C:\opt\sensu\ssl
 
-These can be obtained from the Sensu server or on another Sensu client node (located in /etc/sensu/ssl/ by default).
 
-#### Create C:\opt\sensu\config.json
+These can be obtained from the Sensu server or from another Sensu client node (located in /etc/sensu/ssl/ by default).
+
+#### Create the client config file at C:\opt\sensu\conf.d\config.json
+
 
 {% highlight json %}
     {
@@ -293,6 +296,7 @@ Be sure to change the port and vhost values if you are not using the defaults.
 
 #### Create C:\opt\sensu\conf.d\client.json
 
+
 {% highlight json %}
     {
       "client": {
@@ -306,6 +310,7 @@ Be sure to change the port and vhost values if you are not using the defaults.
 {% endhighlight %}
 
 #### Edit C:\opt\sensu\bin\sensu-client.xml
+
 
 We need to add the -c and -d parameters to point to our newly created config files.
 
@@ -325,7 +330,8 @@ We need to add the -c and -d parameters to point to our newly created config fil
 
 #### Start the sensu-client service
 
-Start from the Services panel or from the Command Prompt.  Review the C:\opt\sensu\sensu-client.log for errors.
+
+Start the Sensu Client service from the Services.msc panel or from the Command Prompt.  Review the C:\opt\sensu\sensu-client.log for errors.
 
 ## Next Steps
 
