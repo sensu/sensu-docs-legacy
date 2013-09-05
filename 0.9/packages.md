@@ -83,5 +83,11 @@ tested on Fedora versions less than 15 but may work.
 
 ## Installing on Windows via MSI
 
-*placeholder*
+Tested on:
+
+* Windows 2008 R2
+
+### Download and install the MSI package
+
+Find it in the msi directory: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html) 
 
