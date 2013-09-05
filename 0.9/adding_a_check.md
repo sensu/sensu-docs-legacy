@@ -115,8 +115,6 @@ using the `check-disk-windows.rb` script from the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins)
 repo.
 
-CAVEAT:  This plugin is still an open pull request.
-
 To add a check we need to take a number of steps:
 
 * Install the check script on the client
@@ -149,7 +147,7 @@ Our check-disk-windows.rb plugin also requires the ActiveSupport 4.0 gem or abov
     C:> \opt\sensu\embedded\bin\gem install activesupport --no-rdoc --no-ri
 {% endhighlight %}
 
-Download `check-disk-windows.rb` from the [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins)
+Download `check-disk-windows.rb` from the [sensu-community-plugins](https://raw.github.com/sensu/sensu-community-plugins/master/plugins/windows/check-disk-windows.rb)
 repo to your Windows client.
 
 Create the plugins directory and copy the downloaded check-disk-windows.rb to the new directory.
