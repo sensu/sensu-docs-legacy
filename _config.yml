@@ -3,7 +3,7 @@ pygments: true
 permalink: /:year/:month/:title
 base: http://docs.sensuapp.org
 current_version: 0.9
-server_port: 80
+port: 80
 title: Sensu Docs
 author: Sean Porter
 email: portertech@gmail.com

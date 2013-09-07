@@ -40,7 +40,7 @@ module Jekyll
         def get_current_page(context)
             purl = context.environments.first["page"]["url"]
             context.registers[:site].pages.each do |p|
-              if "#{p.dir}#{p.url}" == purl
+              if p.url == purl
                 return p
               end
             end
@@ -49,7 +49,7 @@ module Jekyll
 
         def find_match(search,context)
             context.registers[:site].pages.each do |p|
-              if "#{p.dir}#{p.url}".match(search)
+              if p.url.match(search)
                 return p
               end
             end
@@ -60,6 +60,11 @@ module Jekyll
             context.registers[:breadcrumb] ||= Hash.new(0)
 
             page = get_current_page(context)
+            if !page
+              puts "Failed to get current page"
+              return ''
+            end
+
             begin
               title = page.data['title']
             rescue
@@ -108,7 +113,7 @@ module Jekyll
                   link = parent+"/"+part
                 else
                   begin
-                    link = "#{target.dir}#{target.url}"
+                    link = target.url
                   rescue
                   end
                 end
