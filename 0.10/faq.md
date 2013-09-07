@@ -2,7 +2,7 @@
 layout: default
 title: FAQ
 description: Sensu FAQ
-version: 0.9
+version: '0.10'
 ---
 
 # FAQ
