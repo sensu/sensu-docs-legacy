@@ -33,12 +33,12 @@ end
 
 desc "Generate site."
 task :build do
-  sh "jekyll --time \"#{Time.now}\""
+  sh "jekyll build"
 end
 
 desc "Run local jekyll server"
 task :server, [:port] => [ :build ] do |t, args|
-    sh "jekyll --server #{args.port || 4000} --auto --time \"#{Time.now}\""
+    sh "jekyll serve --watch"
 end
 
 desc "Rsync site"
