@@ -16,7 +16,7 @@ version: '0.10'
 
 * [Puppet](https://github.com/sensu/sensu-puppet)
 
-  - The offiical Sensu Puppet module.
+  - The official Sensu Puppet module.
 
 * [SensuCleaner](https://github.com/SimpleFinance/chef-handler-sensu)
 
@@ -32,7 +32,7 @@ version: '0.10'
 
 * [Sensu-cli](https://github.com/agent462/sensu-cli)
 
-  - A sensu-cli for interacting with the sensu api.  Full api coverage which means you can resolve events, silence checks, delete clients and all other api functions.
+  - A sensu-cli for interacting with the sensu API.  Full API coverage which means you can resolve events, silence checks, delete clients and all other api functions.
 
 * [Sensu-Admin](https://github.com/sensu/sensu-admin)
 
