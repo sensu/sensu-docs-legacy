@@ -19,21 +19,21 @@ The latest version of Sensu is {{ site.current_version }}.
 ## Does Sensu run on Windows?
 
 Yes. There are MSI packages for installing Sensu on Windows. You can use
-the [package respository](http://repos.sensuapp.org/index.html) to
+the [package repository](http://repos.sensuapp.org/index.html) to
 download the latest release.
 
 ## How do Sensu clients handle network issues or RabbitMQ outages?
 
 The Sensu client is able to handle network issues and RabbitMQ outages
 by attempting to reconnect to RabbitMQ on connection failure. The Sensu
-client immediately attempts to reconnect, if unsuccessful, it will make
+client immediately attempts to reconnect. If unsuccessful, it will make
 further attempts every 10 seconds, indefinitely.
 
 ## Do I need to synchronize my clocks?
 
 Yes. As Sensu components use their local clocks for timestamps, they
 must be synchronized. Not synchronizing your clocks may result in client
-health false positives. Time synchronization can be done with NTP, see
+health false positives. Time synchronization can be done with NTP. See
 https://help.ubuntu.com/12.04/serverguide/NTP.html for more details.
 
 ## How do I delete a client?
@@ -42,7 +42,7 @@ When you retire a client from your infrastructure it may still show up in
 the Sensu dashboard as a `keepalive: no data from <host> in 300 seconds`
 alert.
 
-There are two methods for deleting clients: API or through the Sensu
+There are two methods for deleting clients: via the API or through the Sensu
 Dashboard.
 
 ### Using the API
@@ -77,7 +77,7 @@ the Sensu components can communicate with them.
 
 ## Which components of a Sensu system need access to Redis?
 
-Only the Sensu server(s) & API communicate with Redis.
+Only the Sensu server(s) and API communicate with Redis.
 
 ## Which components of a Sensu system need access to the RabbitMQ broker?
 
@@ -93,11 +93,11 @@ out. Running more that one Sensu server is recommended.
 ## When I have multiple Sensu servers, which one will be the master?
 
 The Sensu server master is reponsible for check request publishing. Master
-election is automatic, and so is failover, no configuration is required.
+election is automatic, and so is failover. No configuration is required.
 
 ## How do I register a Sensu client?
 
-Sensu clients self-register when they start up, you do not have to maintain a list
+Sensu clients self-register when they start up. You do not have to maintain a list
 of your clients. The Sensu clients must be configured correctly in order to run.
 
 ## Is there a configuration parameter to notify only every hour, even if the check has an interval of one minute?
@@ -115,12 +115,11 @@ add `refresh` to your check definition.
 
 ## Do checks need to exist on the client?
 
-No, the only need to be defined on the servers, but can defined on the
+No. They only need to be defined on the master server, but can defined on the
 client to override the check attributes from those that are being set on
 the server. Another case where a check needs to be present on the client
-is, when it is being defined as a standalone-check, then it does not be
-defined on the server. In `safe mode` the check has to exist on
-both the client and the server.
+is when it is being defined as a standalone check. In `safe mode` the check
+has to exist on both the client and the server.
 
 ## How do I configure a standalone-check?
 
@@ -131,10 +130,10 @@ Standalone-checks are configured in this example: http://blog.pkhamre.com/2012/0
 Checks can be run on your hosts with the system-supplied Ruby or
 the Sensu-supplied embedded Ruby. You can set the Ruby to be used when
 Sensu is started by specifying the `EMBEDDED_RUBY` variable. This is
-usually set using your operating system's init wrapper, for Sensu see the
+usually set using your operating system's init wrapper. For Sensu see the
 `/etc/default/sensu` file.
 
-## My machine can't find Ruby, what should I do?
+## My machine can't find Ruby. What should I do?
 
 * Check that your `PATH` is set correctly. If you're using embedded
   Ruby, it should indicate an embedded Ruby binary path, for example
@@ -148,13 +147,16 @@ usually set using your operating system's init wrapper, for Sensu see the
 
 ## What is safe mode and how can I determine if it is enabled?
 
-...
+In safe mode a client will not run a check published by a server unless that
+check is also defined on the client.
 
 ## According to  http://java.dzone.com/articles/getting-started-sensu, the conf.d/check_cron.json needs to exist on both, the server and the client, why?
 
-It no longer needs to, that information is outdated.
+It no longer needs to. That information is outdated.
 
-## Can someone tell me exactly what silencing an event is supposed to do? Maybe I just incorrectly thought it prevented handlers from processing new occurrences of the event.
+## Can someone tell me exactly what silencing an event is supposed to do? Maybe
+I just incorrectly thought it prevented handlers from processing new
+occurrences of the event.
 
 Handlers are always executed, and the handler is expected to check the
 `/stashes` under the Sensu API for silence entries.
