@@ -24,15 +24,13 @@ Based on the rabbit install guide :
 ### Install RabbitMQ from Deb
 
 {% highlight bash %}
-echo "deb http://www.rabbitmq.com/debian/ testing main"
->/etc/apt/sources.list.d/rabbitmq.list
+    echo "deb http://www.rabbitmq.com/debian/ testing main" >/etc/apt/sources.list.d/rabbitmq.list
 
-curl -L -o ~/rabbitmq-signing-key-public.asc
-http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-apt-key add ~/rabbitmq-signing-key-public.asc
+    curl -L -o ~/rabbitmq-signing-key-public.asc http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    apt-key add ~/rabbitmq-signing-key-public.asc
 
-apt-get update
-apt-get -y --allow-unauthenticated --force-yes install rabbitmq-server
+    apt-get update
+    apt-get -y --allow-unauthenticated --force-yes install rabbitmq-server
 {% endhighlight %}
 
 ### Configure RabbitMQ SSL
