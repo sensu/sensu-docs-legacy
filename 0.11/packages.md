@@ -37,13 +37,13 @@ the Sensu repositories.
 ### Stable repository
 
 {% highlight bash %}
-    deb     http://repos.sensuapp.org/apt sensu main
+    echo "deb     http://repos.sensuapp.org/apt sensu main" >/etc/apt/sources.list.d/sensu.list
 {% endhighlight %}
 
 ### Unstable repository
 
 {% highlight bash %}
-    deb     http://repos.sensuapp.org/apt sensu unstable
+    echo "deb     http://repos.sensuapp.org/apt sensu unstable" >/etc/apt/sources.list.d/sensu.list 
 {% endhighlight %}
 
 ## Installing on Red Hat and CentOS via Yum
@@ -55,6 +55,7 @@ Tested on:
 
 ### Stable repository
 
+Add the following as Yum repository listings in `/etc/yum.repos.d`.
 {% highlight bash %}
     [sensu]
     name=sensu-main
