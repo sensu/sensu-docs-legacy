@@ -236,6 +236,10 @@ installing a Sensu server with the difference being that only the
 
 The client will log to `/var/log/sensu/sensu-client.log`.
 
+#### Firewall rules
+The client will need to access RabbitMQ, so ensure that the firewall on the RabbitMQ server accepts traffic from the client machine (port 5672 if not using SSL; 5671 if using SSL.)
+
+
 ### Installing a Windows Sensu client node
 
 Installing and configuring a Sensu client on Windows is very different from the steps above.
