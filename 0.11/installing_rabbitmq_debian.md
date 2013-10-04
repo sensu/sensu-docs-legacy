@@ -95,7 +95,7 @@ update-rc.d rabbitmq-server defaults
 {% endhighlight %}
 
 Verify operation with the RabbitMQ Web UI: Username is "guest", password
-is "guest" - `http://<SENSU-SERVER>:55672`. Protocol amqp should be
+is "guest" - `http://<RABBITMQ-SERVER>:55672`. Protocol amqp should be
 bound to port 5672 and amqp/ssl on port 5671.
 
 ### Create RabbitMQ vhost and user for Sensu
