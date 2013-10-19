@@ -28,6 +28,11 @@ Mutator, or Check.
 module Sensu::Extension
 
   class Skeleton < Handler # Sub-class the appropriate extension type
+
+    # The post_init hook is called after the main event loop has started
+    # At this time EventMachine is available for interaction.
+    def post_init
+    end
  
     # Must at a minimum define type and name. These are used by
     # Sensu during extension initialization.
@@ -51,9 +56,9 @@ module Sensu::Extension
       'Minimal skeleton extension'
     end
 
-    # run() is passed two hashes: event_data and settings.
+    # run() is passed a copy of the event_data hash
     # for more information, see links below.
-    def run(event_data, settings)
+    def run(event_data)
       # You need to yield to the caller. The first argument should be the
       # data you want to yield (in the case of handlers, nothing or an error
       # string, and the return status of the extension.
@@ -69,10 +74,13 @@ module Sensu::Extension
 end
 {% endhighlight %}
 
-Event data and settings are passed to extensions just like plug-ins. 
+Event data is passed to extensions just like plug-ins. 
 See: 
 
 [Events](events.html)
+
+The settings hash is passed to the extension as instance data (in the @settings 
+instance variable).
 
 [Settings](settings.html)
 
