@@ -7,3 +7,4 @@ _cache
 vendor
 .bundle
 .tddium*
+build/
