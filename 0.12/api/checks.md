@@ -61,9 +61,9 @@ example url - http://localhost:4567/checks/check_chef_client
 
   - error: 500
 
-## `/check/request`
+## `/request`
 
-example url - http://localhost:4567/check/request
+example url - http://localhost:4567/request
 
 * `POST`: issues a check request
 
