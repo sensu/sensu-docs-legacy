@@ -18,7 +18,7 @@ example url - http://localhost:4567/stashes
 * `GET`: returns a list of stash paths
 
   - Parameters
-    
+
     - `limit`
 
       - optional
@@ -27,7 +27,7 @@ example url - http://localhost:4567/stashes
 
       - description: "The number of stashes to return."
 
-    - `offset` 
+    - `offset`
 
       - optional
 
@@ -40,8 +40,20 @@ example url - http://localhost:4567/stashes
   - success: 200:
 
              [
-               "foo",
-               "bar"
+               {
+                 "path": "silence/machine1/service1",
+                 "content": {
+                   "timestamp": 1383441836
+                 },
+                 "expire": 10054
+               },
+               {
+                 "path": "silence/machine2",
+                 "content": {
+                   "timestamp": 1381350802
+                 },
+                 "expire": -1
+               }
              ]
 
   - error: 500
@@ -54,7 +66,8 @@ example url - http://localhost:4567/stashes
                "path": "random_stash",
                "content": {
                  "reason": "things are stashy"
-               }
+               },
+               "expire": 86400
              }
 
   - success: 201
