@@ -29,6 +29,10 @@ event after 180 seconds. Due to the periodic nature of both the
 publishing and verification, there may be a few seconds of additional
 time before the events are created and handled.
 
+`"threshold"` is semantically equivalent to`"occurrences"`. Once an
+event threshold has been reached, notifications will continue
+to be sent every 120 events.
+
 ## Overriding Configuration
 
 The default keepalive configuration is meant to be sufficient, however
@@ -36,11 +40,15 @@ these settings can be overridden on a per-client basic. This may be
 desired to enable custom escalation scenarios, or perhaps account for
 relative client-server network instability (i.e. across datacenters).
 
+The keepalive configuration can be overridden using the same fields as
+[checks](/{{ page.version }}/checks.html))
+
 ## Example Client Keepalive Settings (configuration)
 
 This example will trigger a warning if the client does not check in
 every 10 seconds, and a critical after 300 seconds.  The events will
-be handled with the `screaming_monkey` and `email` handlers.
+be handled with the `screaming_monkey` and `email` handlers. The second
+(and subsequent) notifications will be sent every 1800 seconds.
 
 {% highlight json %}
 {
@@ -52,7 +60,8 @@ be handled with the `screaming_monkey` and `email` handlers.
         "warning": 10
         "critical": 300
       },
-      "handlers": ["screaming_monkey", "email"]
+      "handlers": ["screaming_monkey", "email"],
+      "refresh": 1800
     }
   }
 }
