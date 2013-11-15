@@ -1,6 +1,6 @@
 ![sensu docs](https://raw.github.com/sensu/sensu/master/sensu-logo.png)
 
-# Documentation for the Sensu monitoring framework.
+Documentation for the Sensu monitoring framework.
 
 ## Overview
 
