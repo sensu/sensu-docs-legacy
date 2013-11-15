@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Handlers
-description: Sensu handlers
 version: '0.12'
+category: Configuration
+title: Handlers
 ---
 
 # Sensu handlers
@@ -20,24 +19,24 @@ Pipe handlers are for executing a command (or script), passing it the
 event data via `STDIN`. Here is an example that takes in event data, and
 writes it to a file for inspection.
 
-{% highlight ruby %}
-    #!/usr/bin/env ruby
+``` ruby
+#!/usr/bin/env ruby
 
-    require 'rubygems'
-    require 'json'
+require 'rubygems'
+require 'json'
 
-    # Read event data
-    event = JSON.parse(STDIN.read, :symbolize_names => true)
-    # Write the event data to a file
-    file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}"
-    File.open(file_name, 'w') do |file|
-      file.write(JSON.pretty_generate(event))
-    end
-{% endhighlight %}
+# Read event data
+event = JSON.parse(STDIN.read, :symbolize_names => true)
+# Write the event data to a file
+file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}"
+File.open(file_name, 'w') do |file|
+  file.write(JSON.pretty_generate(event))
+end
+```
 
 #### Handler definition
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "file": {
@@ -46,11 +45,11 @@ writes it to a file for inspection.
     }
   }
 }
-{% endhighlight %}
+```
 
 Here is an example that uses a `mail` to email the event data.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "mail": {
@@ -59,7 +58,7 @@ Here is an example that uses a `mail` to email the event data.
     }
   }
 }
-{% endhighlight %}
+```
 
 #### Handler configuration
 
@@ -83,7 +82,7 @@ although the typical convention is to use a top-level namespace for each
 handler.  Check in the handler itself to see how it is accessing
 configuration values.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "my_handler1": {
@@ -101,14 +100,14 @@ configuration values.
      "another_custom_setting": "some_custom_value"
    }
 }
-{% endhighlight %}
+```
 
 ### TCP
 TCP handlers are for writing event data to a TCP socket.
 
 Here is an example that writes event data to a local TCP socket, port `4242`.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "tcp_socket": {
@@ -120,14 +119,15 @@ Here is an example that writes event data to a local TCP socket, port `4242`.
     }
   }
 }
-{% endhighlight %}
+```
 
 ### UDP
+
 UDP handlers are for writing event data to a UDP socket.
 
 Here is an example that writes event data to a local UDP socket, port `2424`.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "udp_socket": {
@@ -139,14 +139,15 @@ Here is an example that writes event data to a local UDP socket, port `2424`.
     }
   }
 }
-{% endhighlight %}
+```
 
 ### AMQP
+
 AMQP handlers are for publishing event data on an AMQP exchange.
 
 Here is an example that publishes event data on an AMQP exchange (limited to the broker used by Sensu).
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "amqp_exchange": {
@@ -158,7 +159,7 @@ Here is an example that publishes event data on an AMQP exchange (limited to the
     }
   }
 }
-{% endhighlight %}
+```
 
 Refer to the Ruby AMQP library documentation on [working with
 exchanges](http://rubyamqp.info/articles/working_with_exchanges/) for
@@ -169,7 +170,7 @@ exchange options.
 Handler sets are for grouping handlers; a way to send the same event
 data to one or more handlers, or simply create an alias.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "default": {
@@ -181,7 +182,7 @@ data to one or more handlers, or simply create an alias.
     }
   }
 }
-{% endhighlight %}
+```
 
 ## Severity filtering
 
@@ -189,7 +190,7 @@ Handlers have the option to only handle events of a particular severity.
 For example, the PagerDuty handler should only be used when an event has
 a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "pagerduty": {
@@ -202,5 +203,5 @@ a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
     }
   }
 }
-{% endhighlight %}
+```
 

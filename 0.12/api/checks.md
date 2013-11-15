@@ -1,8 +1,7 @@
 ---
-layout: default
-title: checks
-description: The Sensu API
-version: '0.11'
+version: '0.12'
+category: API
+title: Checks
 ---
 
 <div class="page-header">

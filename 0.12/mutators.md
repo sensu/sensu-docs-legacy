@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Mutators
-description: Sensu mutators
 version: '0.12'
+category: Configuration
+title: Mutators
 ---
 
 # Sensu mutators
@@ -12,16 +11,16 @@ before it is passed to a [handler](/{{ page.version }}/handlers.html).
 
 This is in effect what's happening:
 
-{% highlight bash %}
+``` bash
 cat event.json | mutator.rb | handler.rb
-{% endhighlight %}
+```
 
 ## Example
 Here is an example that takes in event data, tags it, and spits out the
 modified data to `STDOUT` for the handler to consume. This event mutator
 is stored in `/etc/sensu/mutators/tag.rb`
 
-{% highlight ruby %}
+``` ruby
 #!/usr/bin/env ruby
 
 require 'rubygems'
@@ -33,11 +32,11 @@ event = JSON.parse(STDIN.read, :symbolize_names => true)
 event.merge!(:mutated => true, :its_a_tumor => true)
 # Output mutated event data to STDOUT
 puts event.to_json
-{% endhighlight %}
+```
 
 ## Mutator definition
 
-{% highlight json %}
+``` json
 {
   "mutators": {
     "tag": {
@@ -45,11 +44,11 @@ puts event.to_json
     }
   }
 }
-{% endhighlight %}
+```
 
 ## Use the mutator for a specific handler
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "file": {
@@ -59,7 +58,7 @@ puts event.to_json
     }
   }
 }
-{% endhighlight %}
+```
 
 ## Built-in mutators
 
@@ -68,7 +67,7 @@ There are a few built-in mutators that do not require definitions.
 ### Only check output
 Only pass check output from event data to a handler.
 
-{% highlight json %}
+``` json
 {
   "handlers": {
     "graphite": {
@@ -81,5 +80,5 @@ Only pass check output from event data to a handler.
     }
   }
 }
-{% endhighlight %}
+```
 

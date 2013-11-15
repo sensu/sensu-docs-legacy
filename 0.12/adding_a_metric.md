@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Adding a metric
-description: Adding a Sensu metric
 version: '0.12'
+category: Getting Started
+title: Adding a metric
 ---
 
 # Adding a Sensu metric
@@ -23,21 +22,21 @@ First we need to add a metrics check script to the client. We're going to use `l
 
 Let's download and install `load-metrics.rb`:
 
-{% highlight bash %}
-    wget -O /etc/sensu/plugins/load-metrics.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/system/load-metrics.rb
-    chmod 755 /etc/sensu/plugins/load-metrics.rb
-{% endhighlight %}
+``` bash
+wget -O /etc/sensu/plugins/load-metrics.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/system/load-metrics.rb
+chmod 755 /etc/sensu/plugins/load-metrics.rb
+```
 
 Now let's run the metric from the command line and see the results:
 
-{% highlight bash %}
-    ruby load-metrics.rb
-    absinthe.local.load_avg.one 0.89  1365270842
-    absinthe.local.load_avg.five  1.01  1365270842
-    absinthe.local.load_avg.fifteen 1.06  1365270842
-    echo $?
-    0
-{% endhighlight %}
+``` bash
+ruby load-metrics.rb
+absinthe.local.load_avg.one 0.89  1365270842
+absinthe.local.load_avg.five  1.01  1365270842
+absinthe.local.load_avg.fifteen 1.06  1365270842
+echo $?
+0
+```
 
 We can see the check has outputted the 1/5/15 load average for our host
 and a timestamp. We can also see that the metric check exited with a
@@ -47,7 +46,7 @@ status of `0`.
 
 Now we need to add a check definition for our metric on the server. A metric check looks like a normal check definition but with `"type":"metric"` added to the definition.
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "load_metrics": {
@@ -60,7 +59,7 @@ Now we need to add a check definition for our metric on the server. A metric che
     }
   }
 }
-{% endhighlight %}
+```
 
 ## Subscribe the client to the check
 
@@ -72,15 +71,15 @@ Edit the `/etc/sensu/conf.d/client.json` file on the client and add the
 be in `/etc/sensu/config.json` or in any snippet file in the
 `/etc/sensu/conf.d/` directory)
 
-{% highlight json %}
-      {
-        "client": {
-          "name": "sensu-client.domain.tld",
-          "address": "127.0.0.1",
-          "subscriptions": [ "test", "production" ]
-        }
-      }
-  {% endhighlight %}
+``` json
+{
+  "client": {
+    "name": "sensu-client.domain.tld",
+    "address": "127.0.0.1",
+    "subscriptions": [ "test", "production" ]
+  }
+}
+```
 
 ## Testing the check
 
@@ -92,4 +91,4 @@ You should shortly see the metric being executed on the client in the
 And on the server we should see the result being returned in the
 `/var/log/sensu/sensu-server.log` log file.
 
-Next: [Adding a handler](/{{ page.version }}/adding_a_handler.html)
+Next: [Adding a handler](adding_a_handler)
