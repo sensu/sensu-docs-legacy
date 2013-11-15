@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Installation
-title: Installing Sensu
+version: "0.12"
+category: "Installation"
+title: "Installing Sensu"
 next:
   url: adding_a_check
   text: "Adding a check"

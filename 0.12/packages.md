@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Installation
-title: Sensu packages
+version: "0.12"
+category: "Installation"
+title: "Sensu packages"
 ---
 
 # Sensu Packages

@@ -1,18 +1,16 @@
 ---
-version: '0.12'
-category: API
-title: clients
+version: "0.12"
+category: "API"
+title: "Clients"
 ---
 
-<div class="page-header">
-  <h1>Client API Endpoints<small></small></h1>
-</div>
+# Client API Endpoints
 
 The client endpoints allows you to list, delete and get the histroy of clients.
 
 ## `/clients`
 
-example url - http://localhost:4567/clients
+example url - `http://localhost:4567/clients`
 
 * `GET`: returns the list of clients
 
@@ -38,27 +36,29 @@ example url - http://localhost:4567/clients
 
   - success: 200:
 
-             [
-               {
-                 "name": "client_1",
-                 "address": "192.168.0.2",
-                 "subscriptions": [
-                   "chef-client",
-                   "sensu-server"
-                 ],
-                 "timestamp": 1324674972
-               },
-               {
-                 "name": "client_2",
-                 "address": "192.168.0.3",
-                 "subscriptions": [
-                   "chef-client",
-                   "webserver",
-                   "memcached"
-                 ],
-                 "timestamp": 1324674956
-               }
-             ]
+      ``` json
+      [
+        {
+          "name": "client_1",
+          "address": "192.168.0.2",
+          "subscriptions": [
+            "chef-client",
+            "sensu-server"
+          ],
+          "timestamp": 1324674972
+        },
+        {
+          "name": "client_2",
+          "address": "192.168.0.3",
+          "subscriptions": [
+            "chef-client",
+            "webserver",
+            "memcached"
+          ],
+          "timestamp": 1324674956
+        }
+      ]
+      ```
 
   - error: 500
 
@@ -70,16 +70,18 @@ example url - http://localhost:4567/clients/client_2
 
   - success: 200:
 
-             {
-               "name": "client_2",
-               "address": "192.168.0.3",
-               "subscriptions": [
-                 "chef-client",
-                 "webserver",
-                 "memcached"
-               ],
-               "timestamp": 1324674956
-             }
+      ``` json
+      {
+        "name": "client_2",
+        "address": "192.168.0.3",
+        "subscriptions": [
+          "chef-client",
+          "webserver",
+          "memcached"
+        ],
+        "timestamp": 1324674956
+      }
+      ```
 
   - missing: 404
 
@@ -101,26 +103,28 @@ example url - http://localhost:4567/clients/client_2/history
 
   - success: 200:
 
-        [
-          { 
-            "check": "redis_process",
-            "history": [127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127],
-            "last_execution": 1370725352,
-            "last_status": 127
-          }, 
-          {
-            "check": "redis_metrics",
-            "history": [127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127],
-            "last_execution": 1370725352,
-            "last_status": 127
-          },
-          { 
-            "check": "keepalive",
-            "history": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            "last_execution": 1370725351,
-            "last_status": 0
-          }
-        ]
+      ``` json
+      [
+        { 
+          "check": "redis_process",
+          "history": [127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127],
+          "last_execution": 1370725352,
+          "last_status": 127
+        }, 
+        {
+          "check": "redis_metrics",
+          "history": [127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127],
+          "last_execution": 1370725352,
+          "last_status": 127
+        },
+        { 
+          "check": "keepalive",
+          "history": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          "last_execution": 1370725351,
+          "last_status": 0
+        }
+      ]
+      ```
 
   - error: 500
 

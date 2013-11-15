@@ -1,13 +1,12 @@
 ---
-version: '0.12'
-category: Installation
-title: Install RabbitMQ on CentOS RHEL
+version: "0.12"
+category: "Installation"
+title: "Install RabbitMQ on CentOS RHEL"
 ---
 
 # Install RabbitMQ on CentOS RHEL
 
-Erlang
-------
+## Erlang
 
 ### Erlang Yum Repos
 (CentOS 5 only) Install both the EPEL-5 and epel-erlang yum repos. The EPEL-5 yum repo contains the older R12B version of Erlang which would work fine with rabbit except we wouldn't have access to SSL nor the web management plugins. Thus, we'll be installing a newer Erlang from the `epel-erlang` repo which provides R14B for cent5.
@@ -29,8 +28,8 @@ rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noar
 yum install erlang
 ```
 
-RabbitMQ
---------
+## RabbitMQ
+
 Based on the rabbit install guide from here: [http://www.rabbitmq.com/install-rpm.html](http://www.rabbitmq.com/install-rpm.html)
 
 ### Install RabbitMQ from RPM

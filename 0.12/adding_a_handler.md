@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Getting Started
-title: Adding a handler
+version: "0.12"
+category: "Getting Started"
+title: "Adding a handler"
 ---
 
 # Adding a Sensu handler

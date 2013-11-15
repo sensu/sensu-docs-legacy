@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Configuration
-title: SSL Certificates
+version: "0.12"
+category: "Configuration"
+title: "SSL Certificates"
 ---
 
 # SSL Certificates

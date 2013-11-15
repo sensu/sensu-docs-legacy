@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Configuration
-title: Clients
+version: "0.12"
+category: "Configuration"
+title: "Clients"
 ---
 
 # Sensu clients

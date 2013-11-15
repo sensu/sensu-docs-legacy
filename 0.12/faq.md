@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Project
-title: FAQ
+version: "0.12"
+category: "Project"
+title: "FAQ"
 ---
 
 # FAQ

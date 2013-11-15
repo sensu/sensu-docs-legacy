@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Settings
-title: Settings
+version: "0.12"
+category: "Settings"
+title: "Settings"
 published: false
 ---
 

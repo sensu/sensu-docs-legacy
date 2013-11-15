@@ -1,10 +1,10 @@
 ---
-version: '0.12'
-category: Overview
-title: Overview of Sensu
+version: "0.12"
+category: "Overview"
+title: "Overview of Sensu"
 next:
   url: installing_sensu
-  text: Installing Sensu
+  text: "Installing Sensu"
 ---
 
 # What is Sensu?

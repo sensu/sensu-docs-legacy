@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Project
-title: Community Projects
+version: "0.12"
+category: "Project"
+title: "Community Projects"
 ---
 
 ## Configuration Management

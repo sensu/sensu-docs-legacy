@@ -1,13 +1,13 @@
 ---
-version: '0.12'
-category: Configuration
-title: Mutators
+version: "0.12"
+category: "Configuration"
+title: "Mutators"
 ---
 
 # Sensu mutators
 
 Mutators are handler-specific data massagers that can alter event data
-before it is passed to a [handler](/{{ page.version }}/handlers.html).
+before it is passed to a [handler](handlers).
 
 This is in effect what's happening:
 
