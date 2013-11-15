@@ -1,19 +1,16 @@
 ---
-layout: default
-title: stashes
-description: The Sensu API
-version: '0.11'
+version: "0.11"
+category: "API"
+title: "Stashes"
 ---
 
-<div class="page-header">
-  <h1>Stashes API Endpoint<small></small></h1>
-</div>
+# Stashes API Endpoint
 
 The stashes endpoints allows you to create, list and delete stashes.
 
 ## `/stashes`
 
-example url - http://localhost:4567/stashes
+example url - `http://localhost:4567/stashes`
 
 * `GET`: returns a list of stash paths
 
@@ -39,10 +36,12 @@ example url - http://localhost:4567/stashes
 
   - success: 200:
 
-             [
-               "foo",
-               "bar"
-             ]
+      ``` json
+      [
+        "foo",
+        "bar"
+      ]
+      ```
 
   - error: 500
 
@@ -50,12 +49,14 @@ example url - http://localhost:4567/stashes
 
   - payload:
 
-             {
-               "path": "random_stash",
-               "content": {
-                 "reason": "things are stashy"
-               }
-             }
+      ``` json
+      {
+        "path": "random_stash",
+        "content": {
+          "reason": "things are stashy"
+        }
+      }
+      ```
 
   - success: 201
 
@@ -63,15 +64,17 @@ example url - http://localhost:4567/stashes
 
 ## `/stashes/:path`
 
-example url - http://localhost:4567/stashes/foo
+example url - `http://localhost:4567/stashes/foo`
 
 * `POST`: create a stash (JSON document)
 
   - payload:
 
-             {
-               "bar": 42
-             }
+      ``` json
+      {
+        "bar": 42
+      }
+      ```
 
   - success: 201
 
@@ -83,9 +86,11 @@ example url - http://localhost:4567/stashes/foo
 
   - success: 200:
 
-             {
-               "bar": 42
-             }
+      ``` json
+      {
+        "bar": 42
+      }
+      ```
 
   - missing: 404
 

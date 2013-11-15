@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Installing Sensu
-description: Sensu installation
-version: '0.11'
+version: "0.11"
+category: "Installation"
+title: "Installing Sensu"
 ---
 
 # Installing Sensu
@@ -40,8 +39,8 @@ Sensu client node:
 
 #### Install and configure RabbitMQ
 
-- [Installing RabbitMQ on CentOS or RHEL](/{{ page.version }}/installing_rabbitmq_centos.html)
-- [Installing RabbitMQ on Debian or Ubuntu](/{{ page.version }}/installing_rabbitmq_debian.html)
+- [Installing RabbitMQ on CentOS or RHEL](installing_rabbitmq_centos)
+- [Installing RabbitMQ on Debian or Ubuntu](installing_rabbitmq_debian)
 
 #### Install redis
 
@@ -55,11 +54,11 @@ Both the EPEL-5 and EPEL-6 repos contain a version of Redis that is new
 enough for Sensu - 2.0 in EPEL-5 and 2.2 in EPEL-6, so no special magic
 is needed here.
 
-{% highlight bash %}
+``` bash
 yum install redis
 /sbin/chkconfig redis on
 /etc/init.d/redis start
-{% endhighlight %}
+```
 
 ##### Installing Redis on Debian or Ubuntu
 
@@ -85,10 +84,10 @@ You will need to download and install Redis 2.0+ from source on these distributi
 
 The default distro repo ships with a new enough Redis.
 
-{% highlight bash %}
+``` bash
 apt-get install redis-server
 /etc/init.d/redis-server start
-{% endhighlight %}
+```
 
 ### Install Sensu
 
@@ -106,21 +105,22 @@ in your environment.
 #### Sensu Package Repos
 
 Register the relevant Yum or Apt repo for your particular distribution.
-See the [Packages](/{{ page.version }}/packages.html) guide for additional info.
+See the [Packages](packages) guide for additional info.
 
 #### Install Sensu "Omnibus" Package
 
 * Debian/Ubuntu:
 
-{% highlight bash %}
+``` bash
 apt-get update
 apt-get install sensu
-{% endhighlight %}
+```
 
 * RHEL/CentOS/Fedora
-{% highlight bash %}
+
+``` bash
 yum install sensu
-{% endhighlight %}
+```
 
 #### Enable Sensu services
 
@@ -133,30 +133,32 @@ Alternative supervisor scripts (such as upstart) are available in `/usr/share/se
 On your Sensu server you will probably want all 4 services running. The rest of the nodes in your infrastructure only need `sensu-client`.
 
 * CentOS/RHEL
-{% highlight bash %}
+
+``` bash
 chkconfig sensu-server on
 chkconfig sensu-api on
 chkconfig sensu-client on
 chkconfig sensu-dashboard on
-{% endhighlight %}
+```
 
-* Debian/Ubuntu:
-{% highlight bash %}
+* Debian/Ubuntu
+
+``` bash
 update-rc.d sensu-server defaults
 update-rc.d sensu-api defaults
 update-rc.d sensu-client defaults
 update-rc.d sensu-dashboard defaults
-{% endhighlight %}
+```
 
 #### Configure Sensu
 
-Please see this page for additional notes and discussions on SSL certificates in Sensu: [ssl](/{{ page.version }}/ssl.html).
+Please see this page for additional notes and discussions on SSL certificates in Sensu: [ssl](ssl).
 
 Copy the SSL client key + cert that we created earlier during the RabbitMQ installation into `/etc/sensu/ssl`
 
-{% highlight bash %}
+``` bash
     cp client_key.pem client_cert.pem  /etc/sensu/ssl/
-{% endhighlight %}
+```
 
 Next we need to configure sensu by editing `/etc/sensu/config.json`. For
 now we will create just enough config to start sensu. Later we will add
@@ -166,45 +168,45 @@ Note (for later use) that Sensu will also read json config snippets out
 of the `/etc/sensu/conf.d` directory so you can piece together a config
 easily using your CM tool.
 
-{% highlight json %}
-    {
-      "rabbitmq": {
-        "ssl": {
-          "private_key_file": "/etc/sensu/ssl/client_key.pem",
-          "cert_chain_file": "/etc/sensu/ssl/client_cert.pem"
-        },
-        "port": 5671,
-        "host": "localhost",
-        "user": "sensu",
-        "password": "mypass",
-        "vhost": "/sensu"
-      },
-      "redis": {
-        "host": "localhost",
-        "port": 6379
-      },
-      "api": {
-        "host": "localhost",
-        "port": 4567
-      },
-      "dashboard": {
-        "host": "localhost",
-        "port": 8080,
-        "user": "admin",
-        "password": "secret"
-      },
-      "handlers": {
-        "default": {
-          "type": "pipe",
-          "command": "true"
-        }
-      }
+``` json
+{
+  "rabbitmq": {
+    "ssl": {
+      "private_key_file": "/etc/sensu/ssl/client_key.pem",
+      "cert_chain_file": "/etc/sensu/ssl/client_cert.pem"
+    },
+    "port": 5671,
+    "host": "localhost",
+    "user": "sensu",
+    "password": "mypass",
+    "vhost": "/sensu"
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6379
+  },
+  "api": {
+    "host": "localhost",
+    "port": 4567
+  },
+  "dashboard": {
+    "host": "localhost",
+    "port": 8080,
+    "user": "admin",
+    "password": "secret"
+  },
+  "handlers": {
+    "default": {
+      "type": "pipe",
+      "command": "true"
     }
-{% endhighlight %}
+  }
+}
+```
 
 * Configure `/etc/sensu/conf.d/client.json`
 
-{% highlight json %}
+``` json
     {
       "client": {
         "name": "sensu-server.dom.tld",
@@ -212,17 +214,17 @@ easily using your CM tool.
         "subscriptions": [ "test" ]
       }
     }
-{% endhighlight %}
+```
 
 
 Now let's try to start the Sensu components:
 
-{% highlight bash %}
-    sudo /etc/init.d/sensu-server start
-    sudo /etc/init.d/sensu-api start
-    sudo /etc/init.d/sensu-client start    
-    sudo /etc/init.d/sensu-dashboard start    
-{% endhighlight %}
+``` bash
+sudo /etc/init.d/sensu-server start
+sudo /etc/init.d/sensu-api start
+sudo /etc/init.d/sensu-client start    
+sudo /etc/init.d/sensu-dashboard start    
+```
 
 If all goes well, the 4 processes mentioned above will be running and
 the dashboard will be accessible on `http://<SENSU SERVER>:8080`. Log
@@ -247,16 +249,16 @@ Installing and configuring a Sensu client on Windows is very different from the 
 #### Install Sensu Client Package
 
 
-To install the sensu-client package, follow the MSI install instructions on the [Packages](/{{ page.version }}/packages.html) page.
+To install the sensu-client package, follow the MSI install instructions on the [Packages](packages) page.
 
 #### Create the Sensu Windows Service
 
 
 Use the Windows SC command to create the service.
 
-{% highlight bash %}
+``` bash
     sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
-{% endhighlight %}
+```
 
 The space between the equals(=) and the value is required.
 
@@ -267,10 +269,10 @@ It is recommended you use the default install directory C:\opt\sensu.  You can l
 
 Create these directories with the Command Prompt or Windows Explorer.
 
-{% highlight bash %}
-    C:\opt\sensu\conf.d
-    C:\opt\sensu\ssl
-{% endhighlight %}
+``` bash
+C:\opt\sensu\conf.d
+C:\opt\sensu\ssl
+```
 
 #### Copy cert.pem and key.pem to C:\opt\sensu\ssl
 
@@ -280,56 +282,56 @@ These can be obtained from the Sensu server or from another Sensu client node (l
 #### Create the client config file at C:\opt\sensu\conf.d\config.json
 
 
-{% highlight json %}
-    {
-      "rabbitmq": {
-        "host": "SENSU_HOSTNAME",
-        "port": 5671,
-        "vhost": "/sensu",
-        "user": "SENSU_USERNAME",
-        "password": "SENSU_PASSWORD",
-        "ssl": {
-          "cert_chain_file": "/opt/sensu/ssl/cert.pem",
-          "private_key_file": "/opt/sensu/ssl/key.pem"
-        }
-      }
-    }    
-{% endhighlight %}
+``` json
+{
+  "rabbitmq": {
+    "host": "SENSU_HOSTNAME",
+    "port": 5671,
+    "vhost": "/sensu",
+    "user": "SENSU_USERNAME",
+    "password": "SENSU_PASSWORD",
+    "ssl": {
+      "cert_chain_file": "/opt/sensu/ssl/cert.pem",
+      "private_key_file": "/opt/sensu/ssl/key.pem"
+    }
+  }
+}    
+```
 
 Be sure to change the port and vhost values if you are not using the defaults.
 
 #### Create C:\opt\sensu\conf.d\client.json
 
 
-{% highlight json %}
-    {
-      "client": {
-        "name": "CLIENT_NODE_NAME",
-        "address": "CLIENT_IP_ADDRESS",
-        "subscriptions": [
-          "SUBSCRIPTION_NAME"  
-        ]
-      }
-    }
-{% endhighlight %}
+``` json
+{
+  "client": {
+    "name": "CLIENT_NODE_NAME",
+    "address": "CLIENT_IP_ADDRESS",
+    "subscriptions": [
+      "SUBSCRIPTION_NAME"  
+    ]
+  }
+}
+```
 
 #### Edit C:\opt\sensu\bin\sensu-client.xml
 
 
 We need to add the -c and -d parameters to point to our newly created config files.
 
-{% highlight xml %}
-  <!--
-    Windows service definition for Sensu
-  -->
-  <service>
-    <id>sensu-client</id>
-    <name>Sensu Client</name>
-    <description>This service runs a Sensu client</description>
-    <executable>C:\opt\sensu\embedded\bin\ruby</executable>
-    <arguments>C:\opt\sensu\embedded\bin\sensu-client -c C:\opt\sensu\config.json -d C:\opt\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
-  </service>
-{% endhighlight %}
+``` xml
+<!--
+  Windows service definition for Sensu
+-->
+<service>
+  <id>sensu-client</id>
+  <name>Sensu Client</name>
+  <description>This service runs a Sensu client</description>
+  <executable>C:\opt\sensu\embedded\bin\ruby</executable>
+  <arguments>C:\opt\sensu\embedded\bin\sensu-client -c C:\opt\sensu\config.json -d C:\opt\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
+</service>
+```
 
 
 #### Start the sensu-client service
@@ -345,8 +347,8 @@ or metrics (http_alive, mysql_metrics, etc) and handlers run on the
 server and act on the output from checks (email alert, notify Pagerduty,
 add metrics to Graphite, etc)
 
-- [Adding a check](/{{ page.version }}/adding_a_check.html)
-- [Adding a handler](/{{ page.version }}/adding_a_handler.html)
+- [Adding a check](adding_a_check)
+- [Adding a handler](adding_a_handler)
 
 If you have further questions please visit the `#sensu` IRC channel on
 Freenode or send an email to the `sensu-users` mailing list.

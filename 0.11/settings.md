@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Settings
-description: Sensu settings
-version: '0.11'
+version: "0.11"
+category: "Settings"
+title: "Settings"
 ---
 
 # Sensu settings
