@@ -1,8 +1,7 @@
 ---
-layout: default
-title: SSL Certificates
-description: Discussion on SSL certificates and Sensu
-version: '0.11'
+version: "0.11"
+category: "Configuration"
+title: "SSL Certificates"
 ---
 
 # SSL Certificates

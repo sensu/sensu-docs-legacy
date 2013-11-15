@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Sensu packages
-description: Sensu packages
-version: '0.11'
+version: "0.11"
+category: "Installation"
+title: "Sensu packages"
 ---
 
 # Sensu Packages
@@ -30,21 +29,21 @@ Tested on:
 First we need to install the repository public key on our host to use
 the Sensu repositories.
 
-{% highlight bash %}
-    wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
-{% endhighlight %}
+``` bash
+wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
+```
 
 ### Stable repository
 
-{% highlight bash %}
-    echo "deb     http://repos.sensuapp.org/apt sensu main" >/etc/apt/sources.list.d/sensu.list
-{% endhighlight %}
+``` bash
+echo "deb     http://repos.sensuapp.org/apt sensu main" >/etc/apt/sources.list.d/sensu.list
+```
 
 ### Unstable repository
 
-{% highlight bash %}
-    echo "deb     http://repos.sensuapp.org/apt sensu unstable" >/etc/apt/sources.list.d/sensu.list 
-{% endhighlight %}
+``` bash
+echo "deb     http://repos.sensuapp.org/apt sensu unstable" >/etc/apt/sources.list.d/sensu.list 
+```
 
 ## Installing on Red Hat and CentOS via Yum
 
@@ -56,23 +55,24 @@ Tested on:
 ### Stable repository
 
 Add the following as Yum repository listings in `/etc/yum.repos.d`.
-{% highlight bash %}
-    [sensu]
-    name=sensu-main
-    baseurl=http://repos.sensuapp.org/yum/el/$releasever/$basearch/
-    gpgcheck=0
-    enabled=1
-{% endhighlight %}
+
+``` bash
+[sensu]
+name=sensu-main
+baseurl=http://repos.sensuapp.org/yum/el/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+```
 
 ### Unstable repository
 
-{% highlight bash %}
-    [sensu-unstable]
-    name=sensu-unstable
-    baseurl=http://repos.sensuapp.org/yum-unstable/el/$releasever/$basearch/
-    gpgcheck=0
-    enabled=1
-{% endhighlight %}
+``` bash
+[sensu-unstable]
+name=sensu-unstable
+baseurl=http://repos.sensuapp.org/yum-unstable/el/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+```
 
 Valid values of `$releasever` are `5` and `6`.
 
