@@ -41,10 +41,13 @@ hide_toc: true
   * [Info](api-info)
   * [Stashes](api-stashes)
 
-* **Project**
+* **Project and FAQ**
   * [FAQ](faq)
-  * [Community Projects](community)
   * [Presentations about Sensu](presentations)
+
+* **Community and Support**
+  * [Community Projects](community)
+  * [Community and Commercial Support](/support/)
 
 * **Settings**
   * [Settings](settings)
