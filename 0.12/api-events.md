@@ -1,82 +1,85 @@
 ---
-layout: default
-title: events
-description: The Sensu API
-version: '0.11'
+version: "0.12"
+category: "API"
+title: "Events"
 ---
 
-<div class="page-header">
-  <h1>Events API Endpoints<small></small></h1>
-</div>
+# Events API Endpoints
 
 The event endpoints allows you to list and resolve events.
 
 ## `/events`
 
-example url - http://localhost:4567/events
+example url - `http://localhost:4567/events`
 
 * `GET`: returns the list of current events
 
   - success: 200:
 
-             [
-               {
-                 "client": "client_1",
-                 "check": "check_chef_client",
-                 "occurrences": 1,
-                 "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-                 "status": 1,
-                 "flapping": false
-               },
-               {
-                 "client": "client_2",
-                 "check": "check_web_stack",
-                 "occurrences": 1,
-                 "output": "WEB STACK CRITICAL - Apache is NOT responding\n",
-                 "status": 2,
-                 "flapping": false
-               }
-             ]
+      ``` json
+      [
+        {
+          "client": "client_1",
+          "check": "check_chef_client",
+          "occurrences": 1,
+          "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
+          "status": 1,
+          "flapping": false
+        },
+        {
+          "client": "client_2",
+          "check": "check_web_stack",
+          "occurrences": 1,
+          "output": "WEB STACK CRITICAL - Apache is NOT responding\n",
+          "status": 2,
+          "flapping": false
+        }
+      ]
+      ```
 
   - error: 500
 
 ## `/events/:client`
 
-example url - http://localhost:4567/events/client_1
+example url - `http://localhost:4567/events/client_1`
 
 * `GET`: returns the list of current events for a client
 
   - success: 200:
 
-             [
-               {
-                 "client": "client_1",
-                 "check": "check_chef_client",
-                 "occurrences": 1,
-                 "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-                 "flapping": false,
-                 "status": 1
-               }
-             ]
+      ``` json
+      [
+        {
+          "client": "client_1",
+          "check": "check_chef_client",
+          "occurrences": 1,
+          "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
+          "flapping": false,
+          "status": 1
+        }
+      ]
+      ```
 
   - error: 500
 
 ## `/events/:client/:check`
 
-example url - http://localhost:4567/events/client_1/check_chef_client
+example url - `http://localhost:4567/events/client_1/check_chef_client`
 
 * `GET`: returns an event
 
   - success: 200:
 
-             {
-               "client": "client_1",
-               "check": "check_chef_client",
-               "occurrences": 1,
-               "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-               "flapping": false,
-               "status": 1
-             }
+      ``` json
+      {
+        "client": "client_1",
+        "check": "check_chef_client",
+        "occurrences": 1,
+        "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
+        "flapping": false,
+        "status": 1
+      }
+      ```
 
   - missing: 404
 
@@ -90,18 +93,20 @@ example url - http://localhost:4567/events/client_1/check_chef_client
 
   - error: 500
 
-## `/resolve`
+## `/event/resolve`
 
-example url - http://localhost:4567/resolve
+example url - `http://localhost:4567/event/resolve`
 
 * `POST`: resolves an event (delayed action)
 
   - payload:
 
-             {
-               "client": "client_1",
-               "check": "check_chef_client"
-             }
+      ``` json
+      {
+        "client": "client_1",
+        "check": "check_chef_client"
+      }
+      ```
 
   - success: 202
 

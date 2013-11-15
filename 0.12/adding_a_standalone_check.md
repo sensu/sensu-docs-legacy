@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Getting Started
-title: Adding a standalone check
+version: "0.12"
+category: "Getting Started"
+title: "Adding a standalone check"
 ---
 
 # Adding a Sensu standalone check

@@ -1,14 +1,15 @@
 ---
-version: '0.12'
-category: Configuration
-title: Handlers
+version: "0.12"
+category: "Configuration"
+title: "Handlers"
 ---
 
 # Sensu handlers
 
 ## What are handlers?
 
-Handlers are for taking action on [event data](/{{ page.version }}/events.html), such as sending an email alert, creating a PagerDuty incident, or storing metrics in Graphite.
+Handlers are for taking action on [event data](events), such as sending an 
+email alert, creating a PagerDuty incident, or storing metrics in Graphite.
 
 ## Types
 There are several types of handlers.
@@ -161,9 +162,9 @@ Here is an example that publishes event data on an AMQP exchange (limited to the
 }
 ```
 
-Refer to the Ruby AMQP library documentation on [working with
-exchanges](http://rubyamqp.info/articles/working_with_exchanges/) for
-exchange options.
+Refer to the Ruby AMQP library documentation on 
+[working with exchanges](http://rubyamqp.info/articles/working_with_exchanges/) 
+for exchange options.
 
 ### Set
 

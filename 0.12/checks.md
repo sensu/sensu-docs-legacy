@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Configuration
-title: Checks
+version: "0.12"
+category: "Configuration"
+title: "Checks"
 ---
 
 # Sensu checks

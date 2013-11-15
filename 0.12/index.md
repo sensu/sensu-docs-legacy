@@ -1,7 +1,7 @@
 ---
-version: 0.12
+version: "0.12"
 category: 
-title: Table of contents
+title: "Table of contents"
 hide_toc: true
 ---
 
@@ -11,7 +11,7 @@ hide_toc: true
 * **Installation**
   * [Installing Sensu](installing_sensu)
   * [Sensu packages](packages)
-  * [Install RabbitMQ on CentOS RHEL](installing_rabbitmq_centos)
+  * [Install RabbitMQ on CentOS and RHEL](installing_rabbitmq_centos)
   * [Install RabbitMQ on Debian and Ubuntu](installing_rabbitmq_debian)
 
 * **Getting Started**
@@ -33,13 +33,13 @@ hide_toc: true
   * [Event Data](events)
 
 * **[API](api)**
-  * [Aggregates](api/aggregates)
-  * [Checks](api/checks)
-  * [Clients](api/checks)
-  * [Events](api/events)
-  * [Health](api/health)
-  * [Info](api/info)
-  * [Stashes](api/stashes)
+  * [Aggregates](api-aggregates)
+  * [Checks](api-checks)
+  * [Clients](api-checks)
+  * [Events](api-events)
+  * [Health](api-health)
+  * [Info](api-info)
+  * [Stashes](api-stashes)
 
 * **Project**
   * [FAQ](faq)
@@ -48,3 +48,4 @@ hide_toc: true
 
 * **Settings**
   * [Settings](settings)
+  

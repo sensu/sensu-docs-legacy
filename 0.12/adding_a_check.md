@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Getting Started
-title: Adding a check
+version: "0.12"
+category: "Getting Started"
+title: "Adding a check"
 next:
   url: adding_a_handler
   text: "Adding a handler"

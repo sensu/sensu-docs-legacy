@@ -1,13 +1,12 @@
 ---
-version: '0.12'
-category: Configuration
-title: Keepalives
+version: "0.12"
+category: "Configuration"
+title: "Keepalives"
 ---
 
 # Keepalive Checks
 
 ## What are keepalive checks?
-
 
 Keepalive checks are integrated checks that monitor the communication
 between Sensu clients and the Sensu server.

@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Getting Started
-title: Adding a metric
+version: "0.12"
+category: "Getting Started"
+title: "Adding a metric"
 ---
 
 # Adding a Sensu metric

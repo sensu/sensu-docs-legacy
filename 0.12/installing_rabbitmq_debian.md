@@ -1,13 +1,13 @@
 ---
-version: '0.12'
-category: Installation
-title: Install RabbitMQ on Debian and Ubuntu
+version: "0.12"
+category: "Installation"
+title: "Install RabbitMQ on Debian and Ubuntu"
+warning: "<strong>IMPORTANT NOTE:</strong> Due to the state of flux in Erlang and the Erlang-SSL module, we have been unable to get RabbitMQ and SSL working on Ubuntu platforms < 11.10 and Debian 6.x."
 ---
 
 # Install RabbitMQ on Debian and Ubuntu
 
-Erlang
-------
+## Erlang
 
 ### Install Erlang
 
@@ -15,8 +15,8 @@ Erlang
 apt-get -y install erlang-nox
 ```
 
-RabbitMQ
---------
+## RabbitMQ
+
 Based on the rabbit install guide :
 [http://www.rabbitmq.com/install-debian.html](http://www.rabbitmq.com/install-debian.html)
 

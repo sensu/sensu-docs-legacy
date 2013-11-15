@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: Configuration
-title: Extensions
+version: "0.12"
+category: "Configuration"
+title: "Extensions"
 ---
 
 # Sensu extensions
@@ -89,8 +89,8 @@ Handler extensions are useful in firehose situations. Let's assume that you have
 some portion of your traffic that you wish to relay to another location. You 
 could easily write a handler plug-in to do this, but an extension would be
 significantly less resource intensive. Were a simple firehose implemented in
-a plug-in, every event would cause a fork of the parent ruby process and writing 
-data over a TCP (more likely) or UDP connection.
+a plug-in, every event would cause a fork of the parent ruby process and 
+writing data over a TCP (more likely) or UDP connection.
 
 An extension, on the other hand, could maintain persistent TCP connections
 to the firehose destination and simply write serialized event data over that
@@ -104,17 +104,18 @@ in Graphite and wanted to move all metrics to OpenTSDB without re-writing all
 of your metrics-gathering code first, you could write a mutator extension to
 transform your metrics inline and submit them to OpenTSDB via a handler.
 
-This particular example ties together another bit of information about extensions.
-Handler extensions can be tied together with mutator extensions by specifying the
-mutator you want to use in tandem with your handler. In the skeleton framework
-above we created a handler extension and tied it to the 'amutator' extensions.
+This particular example ties together another bit of information about 
+extensions. Handler extensions can be tied together with mutator extensions by
+specifying the mutator you want to use in tandem with your handler. In the 
+skeleton framework above we created a handler extension and tied it to the 
+'amutator' extensions.
 
 In this case, you have a great deal more flexibility with what happens to the
 event_data. For example, you could yield a wholly different data structure
-to your handler to facilitate the implementation of some more complex functionatliy.
-If, on the other hand, you want to be a passive mutator and simply modify some
-class of events, you want to ensure that event_data leaves your mutator
-in a similar composition.
+to your handler to facilitate the implementation of some more complex 
+functionatliy. If, on the other hand, you want to be a passive mutator and 
+simply modify some class of events, you want to ensure that event_data leaves 
+your mutator in a similar composition.
 
 As with all mutators, your mutator extension cannot be chained to existing
 mutators.

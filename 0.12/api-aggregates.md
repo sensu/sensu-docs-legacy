@@ -1,7 +1,7 @@
 ---
-version: '0.12'
-category: api
-title: Aggregates
+version: "0.12"
+category: "API"
+title: "Aggregates"
 ---
 
 # Aggregates API Endpoints
@@ -62,7 +62,7 @@ example url - http://localhost:4567/aggregates/check_something
 
   - success: 200:
 
-      ``` json
+      ``` json 
       [
         1370738973,1370738943,1370738913,1370738883,1370738853,1370738823,1370738793,1370738763,1370738733
       ]
@@ -97,7 +97,7 @@ example url - http://localhost:4567/aggregates/client_1/check_1
 
       - description: "Summarizes the output field in the event data. (summarize=ouput)"
 
-      - example:  http://localhost:4567/aggregates/client_1/check_1?summarize=output
+      - example:  `http://localhost:4567/aggregates/client_1/check_1?summarize=output`
     
     - `results`
 
@@ -107,7 +107,7 @@ example url - http://localhost:4567/aggregates/client_1/check_1
 
       - description: "Adds the event results data to the output"
 
-      - example:  http://localhost:4567/aggregates/client_1/check_1?results=true
+      - example:  `http://localhost:4567/aggregates/client_1/check_1?results=true`
 
   - success: 200:
 

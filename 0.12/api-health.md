@@ -1,19 +1,13 @@
 ---
-layout: default
-title: health
-description: The Sensu API
-version: '0.11'
+version: "0.12"
+category: "API"
+title: "Health"
+alert: "Added in Sensu version 0.9.13+"
 ---
 
-<div class="page-header">
-  <h1>Health API Endpoint<small></small></h1>
-</div>
+# Health API Endpoint
 
 The health endpoint checks to see if the api can connect to redis and rabbitmq.  It takes parameters for minimum consumers and maximum messages and checks rabbitmq.
-
-<div class="alert alert-info">
-   Added in Sensu Version: 0.9.13+
-</div>
 
 ## `/health`
 
