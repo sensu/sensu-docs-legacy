@@ -1,8 +1,7 @@
 ---
-layout: default
+version: '0.12'
+category: API
 title: clients
-description: The Sensu API
-version: '0.11'
 ---
 
 <div class="page-header">

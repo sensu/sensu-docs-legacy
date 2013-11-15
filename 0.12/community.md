@@ -1,11 +1,11 @@
 ---
-layout: default
-title: Community
-description: Sensu community projects
 version: '0.12'
+category: Project
+title: Community Projects
 ---
 
 ## Configuration Management
+
 * [Chef Cookbook](https://github.com/sensu/sensu-chef)
 
   - The official Sensu Cookbook.  It is meant to be used with a [wrapper cookbook](https://github.com/portertech/chef-monitor).
@@ -22,11 +22,13 @@ version: '0.12'
 
   - A Chef handler to cleanup stale Sensu checks by cross-checking the files in your checks directory with the resources from the Chef run.
 
+
 ## Plugins, Handlers and extensions
 
 * [Community plugins](https://github.com/sensu/sensu-community-plugins)
 
   - The official community plugins bundle. This gem contains some example plugins and handlers for Sensu. Most of them are implemented in Ruby and use the sensu-plugin framework (a small gem); some also depend on additional gems (e.g. mysql). Some are shell scripts! All languages are welcome.
+
 
 ## Other Projects
 

@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Events
-description: Sensu events
 version: '0.12'
+category: Configuration
+title: Event Data
 ---
 
 # Sensu event data
@@ -11,7 +10,7 @@ Event data consists of client and check information, and some metadata.
 
 Event data is JSON encoded, making it  language-independent and fairly human readable.
 
-{% highlight json %}
+``` json
     {
       "client":{
         "name": "host01",
@@ -43,4 +42,4 @@ Event data is JSON encoded, making it  language-independent and fairly human rea
       "occurrences": 1,
       "action": "create"
     }
-{% endhighlight %}
+```

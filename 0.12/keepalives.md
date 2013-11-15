@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Keepalives
-description: Sensu keepalive checks
 version: '0.12'
+category: Configuration
+title: Keepalives
 ---
 
 # Keepalive Checks
@@ -42,18 +41,18 @@ This example will trigger a warning if the client does not check in
 every 10 seconds, and a critical after 300 seconds.  The events will
 be handled with the `screaming_monkey` and `email` handlers.
 
-{% highlight json %}
+``` json
 {
   "client": {
     "name": "i-424242",
     "address": "127.0.0.1",
     "keepalive": {
       "thresholds": {
-        "warning": 10
+        "warning": 10,
         "critical": 300
       },
       "handlers": ["screaming_monkey", "email"]
     }
   }
 }
-{% endhighlight %}
+```

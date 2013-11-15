@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Presentations
-description: Presentations about Sensu
 version: '0.12'
+category: Project
+title: Presentations about Sensu
 ---
 
 ### Presentations
