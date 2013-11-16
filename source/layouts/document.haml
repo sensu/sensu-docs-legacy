@@ -1,0 +1,66 @@
+%html{ lang: 'en' }
+  %head
+    %meta{ charset: "utf-8" }
+    %meta{ "http-equiv" => "X-UA-Compatible", charset: "IE=edge,chrome=1" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
+    %title= "Sensu Documentation"
+
+    = stylesheet_link_tag "sensuapp"
+    = favicon_tag "/img/ico/favicon.png"
+
+    %link{ href: 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,300,400,600,700', rel: "stylesheet", type: "text/css" }
+
+  %body
+
+    %div
+      // Breadcrumbs
+      %div.container
+        %hr
+        %ul.breadcrumb
+          %li
+            %a{ href: "/docs" }= "Documentation"
+            %span.divider= "/"
+
+          - if current_resource.parent.data.version
+            %li
+              %a{ href: current_resource.parent.url }= current_resource.parent.data.version
+              %span.divider= "/"
+
+          %li.active
+            #{current_resource.data.title}
+            %span.divider= "/"
+
+      // Content
+      %div.container
+        %div.row-fluid
+          - if current_resource.data.version?
+            - unless current_resource.data.hide_toc
+              %div.span3.well#toc
+                = partial "/docs/#{current_resource.data.version}/index"
+
+          %div.span9#documentation
+
+            - if current_resource.data.danger
+              %div.alert.alert-error= current_resource.data.danger
+
+            - if current_resource.data.warning
+              %div.alert.alert= current_resource.data.warning
+
+            - if current_resource.data.alert
+              %div.alert.alert-info= current_resource.data.alert
+
+            :preserve
+              #{yield}
+
+      // Suggestions
+      %div.container#suggestions{ style: "margin-top: 30px;" }
+        %div.row-fluid
+          %div.span4{ style: "float: right;" }
+            - if current_resource.data.next
+              %a.button.btn.btn-large.btn-success.pull-right{ href: current_resource.data.next.url }= "Next: #{current_resource.data.next.text}"
+
+      %div.container
+        %hr
+
+  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+  = javascript_include_tag "bootstrap.js"
