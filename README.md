@@ -11,7 +11,7 @@ bundle install
 bundle exec middleman
 ``` 
 
-Then go view the docs at http://localhost:4567 (which redirects to http://localhost:4567/docs/). Edits to the documentation source files should cause the `middleman` server to reload so you can see your changes update live.
+Then go view the docs at [http://localhost:4567](http://localhost:4567) (which redirects to [http://localhost:4567/docs/](http://localhost:4567/docs/)). Edits to the documentation source files should cause the `middleman` server to reload so you can see your changes update live.
 
 *NOTE:* _the middleman stuff was yanked from the http://sensuapp.org middleman project. An attempt was made to strip any/all styling and theme sources, as well as removal of any references to commercial support offerings. If any of that was left over and it offends you, please feel free to remove it and submit a pull request._
 
