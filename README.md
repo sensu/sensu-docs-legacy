@@ -30,7 +30,7 @@ title: "Sensu Overview"
 
 In addition to these required properties, there are also some optional metadata properties which can be employed:
 
-**Next**
+**User Guide / Next Steps**
 
 Some portions of the documentation should be read like a guide, prompting you on to the next step in the process. So, when present the "next" property will cause a prompt to appear at the bottom of the documentation page on http://sensuapp.org to guide the reader to the next relevant topic. If this property is missing (or if the corresponding "url" + "text" properties are omitted), no such prompt will appear.
 
