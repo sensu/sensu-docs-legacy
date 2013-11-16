@@ -1,2 +1,0 @@
-Sitemap: http://docs.sensuapp.org/sitemap.xml
-User-agent: *
