@@ -20,7 +20,7 @@ To add a check we need to take a number of steps:
 
 * Install the check script on the client
 * Create the check definition on the Sensu server
-* Subbscribe the Sensu client to the check.
+* Subscribe the Sensu client to the check.
 
 ## Install the check script on the client
 
