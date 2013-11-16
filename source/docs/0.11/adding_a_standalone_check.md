@@ -56,7 +56,7 @@ definition to make it standalone, replacing `"subscribers"`.
           "handlers": ["default"],
           "command": "/etc/sensu/plugins/check-procs.rb -p crond -C 1 ",
           "interval": 60,
-          "standalone": true,
+          "standalone": true
         }
       }
     }
