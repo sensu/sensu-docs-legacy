@@ -1,11 +1,11 @@
 ---
-layout: default
-title: Community
-description: Sensu community projects
-version: '0.11'
+version: "0.11"
+category: "Community and Support"
+title: "Community"
 ---
 
 ## Configuration Management
+
 * [Chef Cookbook](https://github.com/sensu/sensu-chef)
 
   - The official Sensu Cookbook.  It is meant to be used with a [wrapper cookbook](https://github.com/portertech/chef-monitor).

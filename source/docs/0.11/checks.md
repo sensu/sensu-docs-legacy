@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Checks
-description: Sensu checks
-version: '0.11'
+version: "0.11"
+category: "Configuration"
+title: "Checks"
 ---
 
 # Sensu checks
@@ -22,7 +21,7 @@ you can use Nagios plugins with Sensu.
 
 ##### Check plugin (/etc/sensu/plugins/check-chef-client.rb)
 
-{% highlight ruby %}
+``` ruby
 procs = `ps aux`
 running = false
 procs.each_line do |proc|
@@ -35,11 +34,11 @@ else
   puts 'WARNING - Chef client daemon is NOT running'
   exit 1
 end
-{% endhighlight %}
+```
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "chef_client": {
@@ -51,25 +50,24 @@ end
     }
   }
 }
-{% endhighlight %}
+```
 
 ##### Explanation of definition
 * `chef_client`: A unique check name
 * `command`: The command that will be executed
 * `subscribers`: Which subscriptions must execute this check (see
-  [client info](/{{ page.version }}/clients.html))
+  [client info](clients))
 * `interval`: How frequently (in seconds) the check will be executed
 
 ### How check results produce events
 
 By default, only non-zero (exit status > 0) check results produce an
-event, causing the creation of [event data](/{{ page.version }}/events.html) which is passed to one or more [handlers](/{{ page.version }}/handlers.html). Sensu concerns itself with "the bad", as
+event, causing the creation of [event data](events) which is passed to one or more [handlers](handlers). Sensu concerns itself with "the bad", as
 this is what requires action.
 
 ### Handler routing
 
-By default, events will be passed to the `default` [handler](/
-{{page.version }}/handlers.html), unless the check definition says
+By default, events will be passed to the `default` [handler](handlers), unless the check definition says
 otherwise. You can specify a specific handler in the check definition by
 using `"handler": "foo"` or specify one or more handlers with
 `"handlers": ["foo", "bar"]`.
@@ -78,7 +76,7 @@ using `"handler": "foo"` or specify one or more handlers with
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "chef_client": {
@@ -94,7 +92,7 @@ using `"handler": "foo"` or specify one or more handlers with
     }
   }
 }
-{% endhighlight %}
+```
 
 Events produce by this check will be handled by the `pagerduty` and `irc` handlers.
 
@@ -106,7 +104,7 @@ Handling can be disabled for specific checks, so that handlers are not triggered
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "chef_client": {
@@ -119,7 +117,7 @@ Handling can be disabled for specific checks, so that handlers are not triggered
     }
   }
 }
-{% endhighlight %}
+```
 
 Events produced by this check will never be handled.
 
@@ -137,7 +135,7 @@ which is flexible enough to handle different zones and format.
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "noisy_noncritical_check": {
@@ -153,7 +151,7 @@ which is flexible enough to handle different zones and format.
     }
   }
 }
-{% endhighlight %}
+```
 
 Events produced by this check will not be handled between 5PM and 9AM PST.
 
@@ -168,7 +166,7 @@ To allow check results with a exit status of 0 to produce an event, add
 
 ##### Check plugin (/etc/sensu/plugins/cpu-usage-metrics.sh)
 
-{% highlight bash %}
+``` bash
 #!/bin/bash
 
 SCHEME=`hostname`
@@ -227,7 +225,7 @@ let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
 let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
 
 echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
-{% endhighlight %}
+```
 
 ##### Check plugin produces
 
@@ -235,7 +233,7 @@ echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "cpu_usage_metrics": {
@@ -248,7 +246,7 @@ echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
     }
   }
 }
-{% endhighlight %}
+```
 
 ### Standalone checks
 
@@ -262,7 +260,7 @@ definition to make it standalone, replacing `"subscribers"`.
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "cpu_usage_metrics": {
@@ -273,7 +271,7 @@ definition to make it standalone, replacing `"subscribers"`.
     }
   }
 }
-{% endhighlight %}
+```
 
 ### Manually triggered checks
 
@@ -286,7 +284,7 @@ interval-based scheduling. The `interval` field may still be required to pass va
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "my_predefined_check": {
@@ -297,26 +295,26 @@ interval-based scheduling. The `interval` field may still be required to pass va
     }
   }
 }
-{% endhighlight %}
+```
 
 ##### API Call
 
-{% highlight bash %}
+``` bash
 curl -XPOST http://api.sensu.example.com:4567/check/request -d '{"subscribers": ["appservers"], "check":"my_predefined_check"}'
-{% endhighlight %}
+```
 
 ### Check command token substitution
 
 At check execution time, the Sensu client will inspect the check command
 for substitution tokens, a pattern containing a client attribute key, to
-be substituted by its value. Refer to [client info](/{{ page.version }}/clients.html). 
+be substituted by its value. Refer to [client info](clients). 
 You can also specify a default value if the key does not exist `:::foo.bar|default:::`
 
 #### Example
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "chef_client": {
@@ -328,13 +326,13 @@ You can also specify a default value if the key does not exist `:::foo.bar|defau
     }
   }
 }
-{% endhighlight %}
+```
 
 ### Custom check definition key-values
 
 Custom key-values can be added to a check definition, which will be
-included in [event data](/{{ page.version }}/events.html), enabling
-[handler](/{{ page.version }}/handlers.html)
+included in [event data](events), enabling
+[handler](handlers)
 creativity.
 
 ##### Common custom check definitions
@@ -346,7 +344,7 @@ creativity.
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "chef_client": {
@@ -360,7 +358,7 @@ creativity.
     }
   }
 }
-{% endhighlight %}
+```
 
 ### Flap detection
 
@@ -374,7 +372,7 @@ until it is no longer flapping. The implementation is very similar to
 
 ##### Check definition (configuration)
 
-{% highlight json %}
+``` json
 {
   "checks": {
     "chef_client": {
@@ -388,5 +386,5 @@ until it is no longer flapping. The implementation is very similar to
     }
   }
 }
-{% endhighlight %}
+```
 
