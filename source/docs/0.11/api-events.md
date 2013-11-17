@@ -93,9 +93,9 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
 
   - error: 500
 
-## `/resolve`
+## `/event/resolve`
 
-example url - `http://localhost:4567/resolve`
+example url - `http://localhost:4567/event/resolve`
 
 * `POST`: resolves an event (delayed action)
 

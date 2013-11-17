@@ -24,7 +24,7 @@ example url - `http://localhost:4567/stashes`
 
       - description: "The number of stashes to return."
 
-    - `offset` 
+    - `offset`
 
       - optional
 
@@ -37,10 +37,22 @@ example url - `http://localhost:4567/stashes`
   - success: 200:
 
       ``` json
-      [
-        "foo",
-        "bar"
-      ]
+        [
+          {
+            "path": "silence/machine1/service1",
+            "content": {
+              "timestamp": 1383441836
+            },
+            "expire": 10054
+          },
+          {
+            "path": "silence/machine2",
+            "content": {
+             "timestamp": 1381350802
+            },
+            "expire": -1
+          }      
+        ]
       ```
 
   - error: 500
@@ -50,12 +62,12 @@ example url - `http://localhost:4567/stashes`
   - payload:
 
       ``` json
-      {
-        "path": "random_stash",
-        "content": {
-          "reason": "things are stashy"
+        {
+          "path": "random_stash",
+          "content": {
+            "reason": "things are stashy"
+          }
         }
-      }
       ```
 
   - success: 201
@@ -71,9 +83,9 @@ example url - `http://localhost:4567/stashes/foo`
   - payload:
 
       ``` json
-      {
-        "bar": 42
-      }
+        {
+          "bar": 42
+        }
       ```
 
   - success: 201
@@ -87,9 +99,9 @@ example url - `http://localhost:4567/stashes/foo`
   - success: 200:
 
       ``` json
-      {
-        "bar": 42
-      }
+        {
+          "bar": 42
+        }
       ```
 
   - missing: 404
