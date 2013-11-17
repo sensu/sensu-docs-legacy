@@ -1,8 +1,7 @@
 ---
-layout: default
-title: Sensu extensions
-description: Sensu extensions
-version: '0.11'
+version: "0.11"
+category: "Configuration"
+title: "Sensu extensions"
 ---
 
 # Sensu extensions
@@ -23,8 +22,7 @@ Mutator, or Check.
 
 ### Skeleton Extension
 
-{% highlight ruby %}
-
+``` ruby
 module Sensu::Extension
 
   class Skeleton < Handler # Sub-class the appropriate extension type
@@ -72,17 +70,17 @@ module Sensu::Extension
 
   end
 end
-{% endhighlight %}
+```
 
 Event data is passed to extensions just like plug-ins. 
 See: 
 
-[Events](events.html)
+[Events](events)
 
 The settings hash is passed to the extension as instance data (in the @settings 
 instance variable).
 
-[Settings](settings.html)
+[Settings](settings)
 
 ## Handler Extensions
 

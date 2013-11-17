@@ -1,8 +1,10 @@
 ---
-layout: default
-title: Adding a standalone check
-description: Adding a Sensu standalone check
-version: '0.11'
+version: "0.11"
+category: "Getting Started"
+title: "Adding a standalone check"
+next:
+  url: adding_a_metric
+  text: "Adding a metric"
 ---
 
 # Adding a Sensu standalone check
@@ -30,16 +32,16 @@ to installing the `check-procs.rb` plugin. Otherwise we need to install
 the `sensu-plugin` gem which has various helper classes used by many of
 the community plugins:
 
-{% highlight bash %}
-    gem install sensu-plugin --no-rdoc --no-ri
-{% endhighlight %}
+``` bash
+gem install sensu-plugin --no-rdoc --no-ri
+```
 
 Download and install `check-procs.rb`:
 
-{% highlight bash %}
-    wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
-    chmod 755 /etc/sensu/plugins/check-procs.rb
-{% endhighlight %}
+``` bash
+wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
+chmod 755 /etc/sensu/plugins/check-procs.rb
+```
 
 ## Adding a check definition on the client
 
@@ -49,18 +51,18 @@ subscriptions. Standalone checks are scheduled and executed on a any
 client they are defined on. Add `"standalone": true` to a check
 definition to make it standalone, replacing `"subscribers"`.
 
-{% highlight json %}
-    {
-      "checks": {
-        "cron_check": {
-          "handlers": ["default"],
-          "command": "/etc/sensu/plugins/check-procs.rb -p crond -C 1 ",
-          "interval": 60,
-          "standalone": true
-        }
-      }
+``` json
+{
+  "checks": {
+    "cron_check": {
+      "handlers": ["default"],
+      "command": "/etc/sensu/plugins/check-procs.rb -p crond -C 1 ",
+      "interval": 60,
+      "standalone": true
     }
-{% endhighlight %}
+  }
+}
+```
 
 ## Testing the check
 
@@ -69,4 +71,4 @@ Finally, restart Sensu on the client.
 After a few minutes we should see the check executed in the
 `/var/log/sensu/sensu-client.log` log file on the client.
 
-Next: [Adding a metric](/{{ page.version }}/adding_a_metric.html)
+Next: [Adding a metric](adding_a_metric)
