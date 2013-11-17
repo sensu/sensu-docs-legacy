@@ -8,6 +8,7 @@ title: "Keepalives"
 
 ## What are keepalive checks?
 
+
 Keepalive checks are integrated checks that monitor the communication
 between Sensu clients and the Sensu server.
 
@@ -27,9 +28,7 @@ event after 180 seconds. Due to the periodic nature of both the
 publishing and verification, there may be a few seconds of additional
 time before the events are created and handled.
 
-`"threshold"` is semantically equivalent to`"occurrences"`. Once an
-event threshold has been reached, notifications will continue
-to be sent every 120 events.
+`"threshold"` is semantically equivalent to`"occurrences"`. Once an event threshold has been reached, notifications will continue to be sent every 120 events.
 
 ## Overriding Configuration
 
@@ -39,7 +38,7 @@ desired to enable custom escalation scenarios, or perhaps account for
 relative client-server network instability (i.e. across datacenters).
 
 The keepalive configuration can be overridden using the same fields as
-[checks](/{{ page.version }}/checks.html))
+[checks](checks)
 
 ## Example Client Keepalive Settings (configuration)
 
@@ -55,7 +54,7 @@ be handled with the `screaming_monkey` and `email` handlers. The second
     "address": "127.0.0.1",
     "keepalive": {
       "thresholds": {
-        "warning": 10,
+        "warning": 10
         "critical": 300
       },
       "handlers": ["screaming_monkey", "email"],
