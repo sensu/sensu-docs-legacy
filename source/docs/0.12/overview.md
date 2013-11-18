@@ -70,6 +70,6 @@ internal sensu components at this time.
 
 ## The Sensu dashboard
 
-Web dashboard providing an overview of the current state of your Sensu
+A Web based dashboard providing an overview of the current state of your Sensu
 infrastructure and the ability to perform actions, such as temporarily
 silencing alerts.
