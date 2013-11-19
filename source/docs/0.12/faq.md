@@ -127,6 +127,12 @@ Sensu is started by specifying the `EMBEDDED_RUBY` variable. This is
 usually set using your operating system's init wrapper. For Sensu see the
 `/etc/default/sensu` file.
 
+### I use RVM, how can I get Sensu to find its dependencies in order to run?
+
+You must use the Sensu embedded Ruby, by setting `EMBEDDED_RUBY=true`
+in `/etc/default/sensu`. The Sensu init scripts will set GEM_PATH appropriately,
+overriding RVM.
+
 ### My machine can't find Ruby. What should I do?
 
 * Check that your `PATH` is set correctly. If you're using embedded
