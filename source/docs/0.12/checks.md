@@ -155,6 +155,46 @@ which is flexible enough to handle different zones and format.
 
 Events produced by this check will not be handled between 5PM and 9AM PST.
 
+### Check Dependencies
+
+Dependencies can be added to checks which will stop event handling if the
+other check is also reporting an error.  This is useful for situations where
+the loss of one service will impact another, either on the same client, or
+between different clients.
+
+Note that dependencies will not stop checks from reporting events - they only
+stop the handling of events.  All check events will still show in the API
+and dashboard.
+
+Add a `"dependencies"` list to a check definition to specify its dependencies.
+Dependencies can refer to checks on the same client, or a different client
+ using the syntax `client/check`.
+
+#### Example
+
+##### Check definition (configuration)
+
+``` json
+{
+  "checks": {
+    "login_check": {
+      "command": "can_users_login.rb",
+      "subscribers": [
+        "login-servers"
+      ],
+      "interval": 60,
+      "dependencies": [
+         "ldap.example.com/ldap",
+         "ssh-service"
+      ]
+    }
+  }
+}
+```
+
+Events produced by this check will only be handled if the `ldap` check on
+client `ldap.example.com` and the local `ssh-service` check are both `OK`.
+
 ### Metric checks
 
 As the Sensu check specification allows for structured data to be
