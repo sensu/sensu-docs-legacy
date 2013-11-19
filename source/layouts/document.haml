@@ -21,9 +21,9 @@
             %a{ href: "/docs" }= "Documentation"
             %span.divider= "/"
 
-          - if current_resource.parent.data.version
+          - if current_resource.data.version
             %li
-              %a{ href: current_resource.parent.url }= current_resource.parent.data.version
+              %a{ href: current_resource.parent.url }= current_resource.data.version
               %span.divider= "/"
 
           %li.active
