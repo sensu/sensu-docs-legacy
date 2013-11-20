@@ -347,6 +347,22 @@ We need to add the -c and -d parameters to point to our newly created config fil
 
 Start the Sensu Client service from the Services.msc panel or from the Command Prompt.  Review the C:\opt\sensu\sensu-client.log for errors.
 
+
+## Upgrading Sensu
+
+If you are upgrading to the latest version of Sensu from version 0.10.x
+or earlier you will need to stop both the Sensu server and API processes
+and delete the result and keepalive queues from RabbitMQ before the
+upgrade. You will need to have rabbitmqadmin installed to do this.
+
+``` shell
+sudo /etc/init.d/sensu-server stop
+sudo /etc/init.d/sensu-api stop
+rabbitmqadmin delete queue name='results'
+rabbitmqadmin delete queue name='keepalives'
+```
+
+
 ## Next Steps
 
 Now that Sensu servers and clients are installed, the next steps are to
