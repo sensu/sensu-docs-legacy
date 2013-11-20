@@ -3,6 +3,7 @@ version: "0.10"
 title: "Table of contents"
 hide_toc: true
 warning: "<strong>IMPORTANT NOTE: </strong> it is strongly recommended that you upgrade to the latest version of Sensu. For help with version 0.10, please refer to <a href='/docs/0.11/'>Sensu version 0.11 documenatation</a> (there were no documentation updates between 0.10 and 0.11)."
+alert: "For instructions on how to upgrade to the latest version of Sensu, <a href='/docs/0.12/installing_sensu'>click here</a> (see <strong>Upgrading Sensu</strong>)."
 ---
 
 * Overview
