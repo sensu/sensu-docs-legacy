@@ -35,7 +35,7 @@ hide_toc: true
 * **[API](api)**
   * [Aggregates](api-aggregates)
   * [Checks](api-checks)
-  * [Clients](api-checks)
+  * [Clients](api-clients)
   * [Events](api-events)
   * [Health](api-health)
   * [Info](api-info)
