@@ -10,7 +10,7 @@ next:
 # What is Sensu?
 
 Sensu is often described as the "monitoring router". Essentially,
-Sensu takes the results of "check" scripts run across many machines,
+Sensu takes the results of "check" scripts run across many systems,
 and if certain conditions are met; passes their information to one or
 more "handlers". [Checks](checks) are used, for example, to determine
 if a service like Apache is up or down. [Checks](checks) can also be
@@ -32,7 +32,7 @@ Fun Sensu facts:
 CI](http://travis-ci.org/#!/sensu/sensu).
 - Can use existing Nagios plugins.
 - Configuration is all in JSON.
-- Uses a message-oriented architecture, using RabbitMQ and JSON
+- Has a message-oriented architecture, using RabbitMQ and JSON
 payloads.
 - Packages are "Omnibus", for consistency, isolation, and low-friction
 deployment.
@@ -40,39 +40,65 @@ deployment.
 Sensu is designed for modern infrastructures and to be driven by
 configuration management tools, designed for the "cloud".
 
-## Components
+
+# Components
 
 The Sensu framework is made up of a number of components.
 
-## The Sensu server
+The following is a diagram of the core components and how they
+interact with one another.
 
-The Sensu server triggers clients to initiate checks, it then receives
-the output of these checks and feeds it to [handlers](handlers). (As of version
-0.9.2, clients can also execute checks that the server doesn't know about and
-the server will still process their results, more on these 'standalone checks'
-elsewhere in the documentation. See
-[standalone checks](adding_a_standalone_check)).
+![Sensu Diagram](img/sensu-diagram.png)
 
-The Sensu server relies on a Redis instance to keep persistent data. It also
-relies heavily (as do most Sensu components) on access to RabbitMQ for
-passing data between itself and Sensu client nodes.
+## Dependencies
 
-## The Sensu client
+All of the Sensu components require access to an instance of RabbitMQ,
+in order to communicate with each-other.
+
+A few components require access to an instance of Redis, for storing
+persistent data.
+
+## Server
+
+Depends on: RabbitMQ, Redis
+
+The Sensu server is responsible for orchestrating check executions,
+the processing of check results, and event handling. You may run one
+or more Sensu servers, tasks are distributed amongst them, and they
+can be ephemeral. Servers will inspect every check result, saving some
+of their information for a period of time. Check results that indicate
+a service failure or contain data such as metrics, will have
+additional context added to them, creating an [event](events). The
+Sensu Server passes [events](events) to [handlers](handlers).
+
+## Client
+
+Depends on: RabbitMQ
 
 The Sensu client runs on all of your systems that you want to monitor.
-The Sensu client will execute check scripts (think `check_http`,
-`check_load`, etc) and return the results from these checks to
-the Sensu server via RabbitMQ.
+The client receives check execution requests, executes the checks, and
+publishes their results. Clients can also schedule their own check
+executions, these are called "standalone" [checks](checks). The client
+provides a local TCP and UDP socket to for external check result
+input, allowing applications to easily integrate with Sensu.
 
-## The Sensu API
+## API
 
-A REST API that provides access to various pieces of data maintained on
-the Sensu server (stored in Redis). You will typically run this on the same
-host as your Sensu server or Redis instance. It is mostly used by
-internal sensu components at this time.
+Depends on: RabbitMQ, Redis
 
-## The Sensu dashboard
+The Sensu API provides a REST-like interface to the Sensu's data, such
+as registered clients and current events. You may run one or more
+Sensu APIs. The API is capable of many actions, such as issuing check
+execution requests, resolving events, and removing a registered
+clients.
 
-A Web based dashboard providing an overview of the current state of your Sensu
-infrastructure and the ability to perform actions, such as temporarily
-silencing alerts.
+## Dashboard
+
+Depends on: API
+
+The Sensu dashboard is a web based dashboard, providing an overview of
+the health of your monitored infrastructure. The dashboard only
+communicates with the Sensu API, exposing its features/abilities, with
+a human friendly interface. The Sensu dashboard is not part of the
+Sensu "core", as it's common to create custom dashboards, however, it
+is included in the Sensu package.
