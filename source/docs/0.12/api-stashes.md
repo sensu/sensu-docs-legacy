@@ -54,7 +54,6 @@ example url - `http://localhost:4567/stashes`
           }      
         ]
       ```
-
   - error: 500
 
 * `POST`: Create a stash (JSON document)
@@ -69,6 +68,19 @@ example url - `http://localhost:4567/stashes`
           }
         }
       ```
+  - expiration:
+  Stashes have an expiration duration (in seconds), default is never. The following payload will create a stash that expires after a minute.
+  
+  ``` json
+        {
+          "path": "random_stash",
+          "expire": 60,
+          "content": {
+            "reason": "things are stashy"
+          }
+        }
+  ```
+
 
   - success: 201
 
