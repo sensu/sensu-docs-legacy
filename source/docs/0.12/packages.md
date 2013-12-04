@@ -1,7 +1,10 @@
 ---
 version: "0.12"
 category: "Installation"
-title: "Sensu Packages"
+title: "Sensu packages"
+next:
+  url: certificates
+  text: "SSL certificates"
 ---
 
 # Sensu Packages

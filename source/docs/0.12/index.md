@@ -10,6 +10,7 @@ hide_toc: true
 
 * **Installation**
   * [Sensu packages](packages)
+  * [SSL certificates](certificates)
   * [Installing Sensu](installing_sensu)
   * [Install RabbitMQ on CentOS and RHEL](installing_rabbitmq_centos)
   * [Install RabbitMQ on Debian and Ubuntu](installing_rabbitmq_debian)
@@ -27,7 +28,6 @@ hide_toc: true
   * [Handlers](handlers)
   * [Mutators](mutators)
   * [Extensions](extensions)
-  * [SSL Certificates](ssl)
 
 * **Message Data** (?)
   * [Event Data](events)
