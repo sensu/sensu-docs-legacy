@@ -1,30 +1,39 @@
 ---
 version: "0.12"
 category: "Installation"
-title: "Sensu packages"
+title: "Sensu Packages"
 ---
 
 # Sensu Packages
 
-The Sensu project provides "monolithic" or "omnibus" packages which require no other
-dependencies. They are self-contained and include almost everything
-Sensu needs to function, including its own build of Ruby, and on Linux
-platforms all installed in `/opt/sensu`. This ensures the simplest
-installation process, promotes consistency across installs, and prevents
-Sensu from interfering with other Ruby applications.
+The Sensu project provides "omnibus" packages, which contain all of
+the Sensu components, and have no dependencies. The packages are
+self-contained, having everything Sensu needs to run, with the
+exception of RabbitMQ and Redis. This ensures the simplest
+installation process, promotes consistency across installs, and
+prevents Sensu from interfering with other applications. On Linux
+platforms, the packages install to `/opt/sensu`, and place sysvinit
+scripts in `/etc/init.d`.
 
-Choose either the main or unstable repos, don't use both at the same time.
+Package formats:
 
-The repositories are browseable: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html)
+* deb
+* rpm
+* msi
 
-## Installing on Debian and Ubuntu via Apt
+Each package format has its own main and unstable repository. The
+unstable repositories are for experimental builds.
+
+Choose either main or unstable, do not use both.
+
+## Installing Sensu on Debian and Ubuntu using APT
 
 Tested on:
 
-* Ubuntu 10.04, 11.04, 11.10, 12.04
+* Ubuntu 10.04, 11.04, 11.10, 12.04, 13.04, 13.10
 * Debian 6
 
-### Install the repository public key
+### Step #1 - Install the repository public key
 
 First we need to install the repository public key on our host to use
 the Sensu repositories.
@@ -33,28 +42,39 @@ the Sensu repositories.
 wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
 ```
 
-### Stable repository
+### Step #2 - Add the repository
+
+Main repository (stable).
 
 ``` shell
-echo "deb     http://repos.sensuapp.org/apt sensu main" >/etc/apt/sources.list.d/sensu.list
+echo "deb     http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.d/sensu.list
 ```
 
-### Unstable repository
+**Or** the **unstable** repository.
 
 ``` shell
-echo "deb     http://repos.sensuapp.org/apt sensu unstable" >/etc/apt/sources.list.d/sensu.list 
+echo "deb     http://repos.sensuapp.org/apt sensu unstable" > /etc/apt/sources.list.d/sensu.list
 ```
 
-## Installing on Red Hat and CentOS via Yum
+### Step #3 - Install Sensu
+
+```shell
+apt-get update
+apt-get install sensu
+```
+
+## Installing Sensu on Red Hat and CentOS via Yum
 
 Tested on:
 
 * CentOS (RHEL) 5, 6
 * Fedora 15, 16, 17
 
-### Stable repository
+### Step #1 - Add the repository
 
-Add the following as Yum repository listings in `/etc/yum.repos.d`.
+Write the following content to `/etc/yum.repos.d/sensu.repo`.
+
+Main repository (stable).
 
 ``` shell
 [sensu]
@@ -64,7 +84,7 @@ gpgcheck=0
 enabled=1
 ```
 
-### Unstable repository
+**Or** the **unstable** repository.
 
 ``` shell
 [sensu-unstable]
@@ -74,21 +94,27 @@ gpgcheck=0
 enabled=1
 ```
 
-Valid values of `$releasever` are `5` and `6`.
+Valid values for `$releasever` are `5` and `6`.
 
-If you get a 404 (such as if your `$releasever` expands to `5Server`), hardcode the value to 5 or 6.
+If you get a 404 (such as if your `$releasever` expands to `5Server`),
+hard-code the value to `5` or `6`.
 
-Fedora systems will require hardcoding the $releasver variable. Choosing '6' should be fine for
-at least Fedora 16 and 17. Later versions will be tested as necessary. The rpm's have not been
-tested on Fedora versions less than 15 but may work.
+**IMPORTANT NOTE** - Fedora systems will require hard-coding the
+  $releasver variable. Choosing `6` should be fine for at least Fedora
+  16 and 17. Later versions will be tested as necessary.
 
-## Installing on Windows via MSI
+### Step #2 - Install Sensu
+
+```shell
+yum install sensu
+```
+
+## Installing Sensu on Windows via MSI
 
 Tested on:
 
 * Windows 2008 R2
 
-### Download and install the MSI package
+### Step #1 - Download and install the MSI package
 
-Find it in the msi directory: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html) 
-
+Find it in the msi directory: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html)

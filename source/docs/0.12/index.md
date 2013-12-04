@@ -6,11 +6,11 @@ hide_toc: true
 ---
 
 * **Overview**
-  * [Overview of Sensu](overview)
+  * [What is Sensu?](overview)
 
 * **Installation**
-  * [Installing Sensu](installing_sensu)
   * [Sensu packages](packages)
+  * [Installing Sensu](installing_sensu)
   * [Install RabbitMQ on CentOS and RHEL](installing_rabbitmq_centos)
   * [Install RabbitMQ on Debian and Ubuntu](installing_rabbitmq_debian)
 

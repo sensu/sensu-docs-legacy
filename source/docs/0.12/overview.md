@@ -3,8 +3,8 @@ version: "0.12"
 category: "Overview"
 title: "Overview of Sensu"
 next:
-  url: installing_sensu
-  text: "Installing Sensu"
+  url: packages
+  text: "Sensu packages"
 ---
 
 # What is Sensu?
@@ -34,7 +34,7 @@ CI](http://travis-ci.org/#!/sensu/sensu).
 - Configuration is all in JSON.
 - Has a message-oriented architecture, using RabbitMQ and JSON
 payloads.
-- Packages are "Omnibus", for consistency, isolation, and low-friction
+- Packages are "omnibus", for consistency, isolation, and low-friction
 deployment.
 
 Sensu is designed for modern infrastructures and to be driven by
@@ -69,7 +69,7 @@ can be ephemeral. Servers will inspect every check result, saving some
 of their information for a period of time. Check results that indicate
 a service failure or contain data such as metrics, will have
 additional context added to them, creating an [event](events). The
-Sensu Server passes [events](events) to [handlers](handlers).
+Sensu server passes [events](events) to [handlers](handlers).
 
 ## Client
 
@@ -79,16 +79,16 @@ The Sensu client runs on all of your systems that you want to monitor.
 The client receives check execution requests, executes the checks, and
 publishes their results. Clients can also schedule their own check
 executions, these are called "standalone" [checks](checks). The client
-provides a local TCP and UDP socket to for external check result
-input, allowing applications to easily integrate with Sensu.
+provides a local TCP and UDP socket for external check result input,
+allowing applications to easily integrate with Sensu.
 
 ## API
 
 Depends on: RabbitMQ, Redis
 
-The Sensu API provides a REST-like interface to the Sensu's data, such
-as registered clients and current events. You may run one or more
-Sensu APIs. The API is capable of many actions, such as issuing check
+The Sensu API provides a REST-like interface to Sensu's data, such as
+registered clients and current events. You may run one or more Sensu
+APIs. The API is capable of many actions, such as issuing check
 execution requests, resolving events, and removing a registered
 clients.
 
