@@ -1,7 +1,10 @@
 ---
 version: "0.12"
 category: "Installation"
-title: "Sensu Packages"
+title: "Sensu packages"
+next:
+  url: certificates
+  text: "SSL certificates"
 ---
 
 # Sensu Packages
@@ -63,7 +66,7 @@ apt-get update
 apt-get install sensu
 ```
 
-## Installing Sensu on Red Hat and CentOS via Yum
+## Installing Sensu on CentOS (RHEL) via Yum
 
 Tested on:
 
