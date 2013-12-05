@@ -11,9 +11,8 @@ hide_toc: true
 * **Installation**
   * [Sensu packages](packages)
   * [SSL certificates](certificates)
+  * [RabbitMQ](rabbitmq)
   * [Installing Sensu](installing_sensu)
-  * [Install RabbitMQ on CentOS and RHEL](installing_rabbitmq_centos)
-  * [Install RabbitMQ on Debian and Ubuntu](installing_rabbitmq_debian)
 
 * **Getting Started**
   * [Adding a check](adding_a_check)
