@@ -5,6 +5,9 @@ title: "RabbitMQ"
 warning: "<strong>IMPORTANT NOTE:</strong> Due to the state of flux in
 Erlang and the Erlang-SSL module, we have been unable to get RabbitMQ
 and SSL working on Ubuntu platforms < 11.10 and Debian 6.x."
+next:
+  url: redis
+  text: "Redis"
 ---
 
 # RabbitMQ

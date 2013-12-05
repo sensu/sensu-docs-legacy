@@ -12,6 +12,7 @@ hide_toc: true
   * [Sensu packages](packages)
   * [SSL certificates](certificates)
   * [RabbitMQ](rabbitmq)
+  * [Redis](redis)
   * [Installing Sensu](installing_sensu)
 
 * **Getting Started**
