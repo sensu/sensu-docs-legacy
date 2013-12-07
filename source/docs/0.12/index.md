@@ -1,6 +1,6 @@
 ---
 version: "0.12"
-category: 
+category:
 title: "Table of contents"
 hide_toc: true
 ---
@@ -9,11 +9,11 @@ hide_toc: true
   * [What is Sensu?](overview)
 
 * **Installation**
-  * [Sensu packages](packages)
+  * [Guide](guide)
   * [SSL certificates](certificates)
   * [RabbitMQ](rabbitmq)
   * [Redis](redis)
-  * [Installing Sensu](installing_sensu)
+  * [Sensu packages](packages)
 
 * **Getting Started**
   * [Adding a check](adding_a_check)
@@ -51,4 +51,3 @@ hide_toc: true
 
 * **Settings**
   * [Settings](settings)
-  
