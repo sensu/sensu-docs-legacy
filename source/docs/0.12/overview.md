@@ -3,8 +3,8 @@ version: "0.12"
 category: "Overview"
 title: "Overview of Sensu"
 next:
-  url: packages
-  text: "Sensu packages"
+  url: guide
+  text: "Installation guide"
 ---
 
 # What is Sensu?

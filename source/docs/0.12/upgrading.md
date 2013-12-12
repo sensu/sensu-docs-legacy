@@ -4,7 +4,7 @@ category: "Installation"
 title: "Upgrading"
 ---
 
-## Upgrading
+# Upgrading
 
 If you are upgrading Sensu from version 0.11.x or newer, just upgrade
 the Sensu package and restart the services, no additional steps are
