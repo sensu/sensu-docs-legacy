@@ -14,6 +14,7 @@ hide_toc: true
   * [RabbitMQ](rabbitmq)
   * [Redis](redis)
   * [Sensu packages](packages)
+  * [Windows](windows)
 
 * **Getting Started**
   * [Adding a check](adding_a_check)

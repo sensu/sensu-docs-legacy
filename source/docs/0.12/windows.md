@@ -4,81 +4,34 @@ category: "Installation"
 title: "Windows"
 ---
 
-### Installing a Windows Sensu client node
+# Windows
 
-Installing and configuring a Sensu client on Windows is very different from the steps above.
+You can use Sensu to monitor Windows infrastructure.
 
-#### Install Sensu Client Package
+Installation differs from Linux, however, much of the Sensu
+[guide](guide) is still valid, with a few adjustments detailed on this
+page.
 
-To install the sensu-client package, follow the MSI install instructions on the [Packages](packages) page.
+## MSI package
 
-#### Create the Sensu Windows Service
+The Sensu project builds an omnibus [MSI package](packages) for
+Windows users. By default, the package will install Sensu to
+`C:\opt\sensu`, using this path is recommended, as it is consistent
+with Linux systems.
 
-Use the Windows SC command to create the service.
+## Configuration
 
-``` shell
-sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
-```
+You may follow the Sensu configuration steps for the "agent" system in
+the [guide](guide), substituting the use of `/etc/sensu` with
+`C:\etc\sensu`.
 
-The space between the equals(=) and the value is required.
+## Create the Windows service
 
-#### Create Directories for conf.d and ssl
+Edit the Windows service definition for the Sensu client at
+`C:\opt\sensu\bin\sensu-client.xml`.
 
-
-It is recommended you use the default install directory C:\opt\sensu.  You can locate them elsewhere if you choose, just remember to modify your config files appropriately.
-
-Create these directories with the Command Prompt or Windows Explorer.
-
-``` cmd
-C:\opt\sensu\conf.d
-C:\opt\sensu\ssl
-```
-
-#### Copy cert.pem and key.pem to C:\opt\sensu\ssl
-
-
-These can be obtained from the Sensu server or from another Sensu client node (located in /etc/sensu/ssl/ by default).
-
-#### Create the client config file at C:\opt\sensu\conf.d\config.json
-
-
-``` json
-    {
-      "rabbitmq": {
-        "host": "SENSU_HOSTNAME",
-        "port": 5671,
-        "vhost": "/sensu",
-        "user": "SENSU_USERNAME",
-        "password": "SENSU_PASSWORD",
-        "ssl": {
-          "cert_chain_file": "/opt/sensu/ssl/cert.pem",
-          "private_key_file": "/opt/sensu/ssl/key.pem"
-        }
-      }
-    }
-```
-
-Be sure to change the port and vhost values if you are not using the defaults.
-
-#### Create C:\opt\sensu\conf.d\client.json
-
-
-``` json
-    {
-      "client": {
-        "name": "CLIENT_NODE_NAME",
-        "address": "CLIENT_IP_ADDRESS",
-        "subscriptions": [
-          "SUBSCRIPTION_NAME"
-        ]
-      }
-    }
-```
-
-#### Edit C:\opt\sensu\bin\sensu-client.xml
-
-
-We need to add the -c and -d parameters to point to our newly created config files.
+Adding the configuration directory argument `-d`, setting it to
+`C:\etc\sensu\conf.d`.
 
 ``` xml
   <!--
@@ -89,12 +42,21 @@ We need to add the -c and -d parameters to point to our newly created config fil
     <name>Sensu Client</name>
     <description>This service runs a Sensu client</description>
     <executable>C:\opt\sensu\embedded\bin\ruby</executable>
-    <arguments>C:\opt\sensu\embedded\bin\sensu-client -c C:\opt\sensu\config.json -d C:\opt\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
+    <arguments>C:\opt\sensu\embedded\bin\sensu-client -d C:\etc\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
   </service>
 ```
 
+Use the Windows SC command to create the service.
 
-#### Start the sensu-client service
+The space between the equals(=) and the values is required.
 
+``` shell
+sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
+```
 
-Start the Sensu Client service from the Services.msc panel or from the Command Prompt.  Review the C:\opt\sensu\sensu-client.log for errors.
+#### Start the service
+
+Start the Sensu Client service from the Services.msc panel or the
+Command Prompt.
+
+Review the C:\opt\sensu\sensu-client.log for errors.
