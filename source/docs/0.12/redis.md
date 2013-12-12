@@ -2,6 +2,9 @@
 version: "0.12"
 category: "Installation"
 title: "Redis"
+next:
+  url: packages
+  text: "Sensu packages"
 ---
 
 # Redis
