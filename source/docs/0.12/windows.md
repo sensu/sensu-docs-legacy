@@ -23,7 +23,8 @@ with Linux systems.
 
 You may follow the Sensu configuration steps for the "agent" system in
 the [guide](guide), substituting the use of `/etc/sensu` with
-`C:\etc\sensu`.
+`C:\etc\sensu`. Some directories may not exist, create these
+directories with the Command Prompt or Windows Explorer.
 
 ## Create the Windows service
 
