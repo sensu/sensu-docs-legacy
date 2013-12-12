@@ -15,6 +15,7 @@ hide_toc: true
   * [Redis](redis)
   * [Sensu packages](packages)
   * [Windows](windows)
+  * [Upgrading](upgrading)
 
 * **Getting Started**
   * [Adding a check](adding_a_check)
