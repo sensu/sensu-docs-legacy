@@ -105,7 +105,17 @@ add `refresh` to your check definition.
 
 ### Is there another way than the `remove` button in the web interface to remove clients and events from the dashboard?
 
-...
+You can delete clients via the [API](api) as well.
+
+``` bash
+curl -X DELETE http://<sensu-api>/client/<node>
+```
+
+Additionally, you can use the [sensu-cli](https://rubygems.org/gems/sensu-cli) to delete clients.
+
+``` bash
+sensu-client delete NODE
+```
 
 ### Do checks need to exist on the client?
 
