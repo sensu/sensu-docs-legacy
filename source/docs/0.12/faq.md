@@ -154,12 +154,11 @@ check is also defined on the client.
 
 It no longer needs to. That information is outdated.
 
-### Can someone tell me exactly what silencing an event is supposed to do? Maybe
-I just incorrectly thought it prevented handlers from processing new
-occurrences of the event.
+### Can someone tell me exactly what silencing an event is supposed to do?
 
-Handlers are always executed, and the handler is expected to check the
-`/stashes` under the Sensu API for silence entries.
+Maybe I just incorrectly thought it prevented handlers from processing new occurrences of the event.
+
+Handlers are always executed, and the handler is expected to check the `/stashes` under the Sensu API for silence entries.
 
 Silencing an event involves creating an entry under `/stashes` in the
 Sensu API. Handlers that inherit from the `sensu::plugin::handlers`
@@ -179,3 +178,11 @@ Please see this discussion on SSL certs, limitations, and workarounds: [ssl](ssl
 ### What is the Sensu equivalent of Zenoss' Thresholds and Escalate Count
 
 Setting the `occurrences` attribute on a check definition instructs handlers to wait for a number of occurrences before taking action.
+
+### What is a stash?
+
+[Stashes](api-stashes) allow you to save blobs of JSON data to the [API](api). Checks, handlers, etc. can then utilize these JSON blobs as needed. For instance, this would allow you to store Campfire credentials in a stash on the API and then have a handler fetch the stash. They are roughly analogous to data bags in Chef.
+
+### What data formats can I stash?
+
+Currently you can only store JSON blobs as a [stash](api-stashes).
