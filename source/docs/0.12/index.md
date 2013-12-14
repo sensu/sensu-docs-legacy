@@ -14,6 +14,7 @@ hide_toc: true
   * [RabbitMQ](rabbitmq)
   * [Redis](redis)
   * [Sensu packages](packages)
+  * [Security](security)
   * [Windows](windows)
   * [Upgrading](upgrading)
 
