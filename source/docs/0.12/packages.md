@@ -2,9 +2,12 @@
 version: "0.12"
 category: "Installation"
 title: "Sensu packages"
+next:
+  url: security
+  text: "Security"
 ---
 
-# Sensu Packages
+# Sensu packages
 
 The Sensu project provides "omnibus" packages, which contain all of
 the Sensu components, and have no dependencies. The packages are
