@@ -54,7 +54,7 @@ be handled with the `screaming_monkey` and `email` handlers. The second
     "address": "127.0.0.1",
     "keepalive": {
       "thresholds": {
-        "warning": 10
+        "warning": 10,
         "critical": 300
       },
       "handlers": ["screaming_monkey", "email"],
