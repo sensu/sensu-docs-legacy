@@ -22,7 +22,7 @@ failure, excessive load, client misconfiguration, and network issues.
 
 ## Keepalive default configuration
 
-Keepalive checks escalate via the 'default' handler set, and issue a
+Clients publish data with a current timestamp every 20 seconds to the sensu-server. Keepalive checks escalate via the 'default' handler set, and issue a
 warning after 120 seconds without communication, and issue a critical
 event after 180 seconds. Due to the periodic nature of both the
 publishing and verification, there may be a few seconds of additional
@@ -43,7 +43,7 @@ The keepalive configuration can be overridden using the same fields as
 ## Example Client Keepalive Settings (configuration)
 
 This example will trigger a warning if the client does not check in
-every 10 seconds, and a critical after 300 seconds.  The events will
+every 60 seconds, and a critical after 300 seconds.  The events will
 be handled with the `screaming_monkey` and `email` handlers. The second
 (and subsequent) notifications will be sent every 1800 seconds.
 
@@ -54,7 +54,7 @@ be handled with the `screaming_monkey` and `email` handlers. The second
     "address": "127.0.0.1",
     "keepalive": {
       "thresholds": {
-        "warning": 10,
+        "warning": 60,
         "critical": 300
       },
       "handlers": ["screaming_monkey", "email"],
