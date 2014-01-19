@@ -78,7 +78,9 @@ rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.2.1/rabbitmq-server-3.2.1-1.noarch.rpm
 ```
 
-Set RabbitMQ to start on boot and start it up:
+## Start the RabbitMQ server
+
+For Ubuntu:
 
 ``` shell
 update-rc.d rabbitmq-server defaults
