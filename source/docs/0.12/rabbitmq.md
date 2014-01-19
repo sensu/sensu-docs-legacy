@@ -85,6 +85,13 @@ update-rc.d rabbitmq-server defaults
 /etc/init.d/rabbitmq-server start
 ```
 
+For CentOS:
+
+``` shell
+chkconfig rabbitmq-server on
+/etc/init.d/rabbitmq-server start
+```
+
 ## Configure SSL
 
 **IMPORTANT NOTE** - Due to the state of flux in Erlang and the
