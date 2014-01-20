@@ -54,7 +54,7 @@ Here is an example that uses a `mail` to email the event data.
   "handlers": {
     "mail": {
       "type": "pipe",
-      "command": "echo $(cat) > /tmp/mail.txt; mail -s 'sensu event' email@address.com < /tmp/mail.txt" 
+      "command": "mail -s 'sensu event' email@address.com"
     }
   }
 }
