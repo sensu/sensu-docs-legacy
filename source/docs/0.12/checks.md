@@ -428,3 +428,30 @@ until it is no longer flapping. The implementation is very similar to
 }
 ```
 
+### Aggregate checks
+
+Checks can be aggregated and accessed through the [/aggregates API](http://sensuapp.org/docs/0.12/api-aggregates). Add 
+`"aggregate": true` to make the aggregate results available from the API. 
+Also, consider adding `"handler": false` to prevent the server from sending
+the results to the handler.
+
+#### Example
+
+##### Check definition (configuration)
+
+``` json
+{
+  "checks": {
+    "chef_client": {
+      "command": "check-chef-client.rb",
+      "subscribers": [
+        "production"
+      ],
+      "interval": 60,
+      "aggregate": true,
+      "handler": false
+    }
+  }
+}
+```
+
