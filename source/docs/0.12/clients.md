@@ -82,3 +82,10 @@ You can add custom client key-values, which will be included in event data, and 
 }
 ```
 
+Now you can use in sensu server json command:
+
+```json
+"command": "/etc/sensu/plugins/mysql/mysql-disk.rb -w 70 -c 80 -u :::mysql.user::: -p :::mysql.password:::"
+```
+
+where `:::mysql.user:::` and `:::mysql.password:::` is substitued by the json value
