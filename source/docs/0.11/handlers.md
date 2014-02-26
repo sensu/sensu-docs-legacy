@@ -74,7 +74,7 @@ from within the handler definition (probably with
 `setttings['handlers']['my_handler1]['custom_setting']`).  The
 handler `my_handler2` gets its configuration settings from a
 top-level namespace (probably with
-`setttings['my_handler2]['another_custom_setting']`).  
+`setttings['my_handler2']['another_custom_setting']`).  
 
 Both of these configuration methods work fine.  Configuring within the
 handler definition in the `handlers` keeps things organized,
