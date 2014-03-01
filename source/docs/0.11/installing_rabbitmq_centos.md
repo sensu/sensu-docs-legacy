@@ -92,7 +92,7 @@ Set RabbitMQ to start on boot and start it up immediately:
 /etc/init.d/rabbitmq-server start
 ```
 
-Verify operation with the RabbitMQ Web UI: Username is "guest", password is "guest" - `http://<RABBITMQ-SERVER>:55672`. Protocol amqp should be bound to port 5672 and amqp/ssl on port 5671.
+Verify operation with the RabbitMQ Web UI: Username is "guest", password is "guest" - `http://<RABBITMQ-SERVER>:5672`. Protocol amqp should be bound to port 5672 and amqp/ssl on port 5671.
 
 ### Create RabbitMQ vhost and user for Sensu
 
