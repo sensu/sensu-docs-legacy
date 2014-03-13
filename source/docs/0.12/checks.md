@@ -98,7 +98,7 @@ Events produce by this check will be handled by the `pagerduty` and `irc` handle
 
 ### Disabling check handling
 
-Handling can be disabled for specific checks, so that handlers are not triggered. You can configure this be setting `"handle": false` on the check definition.
+Handling can be disabled for specific checks, so that handlers are not triggered. You can configure this by setting `"handle": false` on the check definition.
 
 #### Example
 
