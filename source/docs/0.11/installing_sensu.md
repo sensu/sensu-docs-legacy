@@ -241,6 +241,7 @@ The client will log to `/var/log/sensu/sensu-client.log`.
 #### Firewall rules
 The client will need to access RabbitMQ, so ensure that the firewall on the RabbitMQ server accepts traffic from the client machine (port 5672 if not using SSL; 5671 if using SSL.)
 
+The Dashboard service will need to access the API service (default 4567).
 
 ### Installing a Windows Sensu client node
 
