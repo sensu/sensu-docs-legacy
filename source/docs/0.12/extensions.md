@@ -111,10 +111,10 @@ skeleton framework above we created a handler extension and tied it to the
 'amutator' extensions.
 
 In this case, you have a great deal more flexibility with what happens to the
-event_data. For example, you could yield a wholly different data structure
+event\_data. For example, you could yield a wholly different data structure
 to your handler to facilitate the implementation of some more complex 
 functionatliy. If, on the other hand, you want to be a passive mutator and 
-simply modify some class of events, you want to ensure that event_data leaves 
+simply modify some class of events, you want to ensure that event\_data leaves 
 your mutator in a similar composition.
 
 As with all mutators, your mutator extension cannot be chained to existing
