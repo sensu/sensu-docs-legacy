@@ -44,7 +44,7 @@ gem install sensu-plugin --no-rdoc --no-ri
 Download and install `check-procs.rb`:
 
 ``` bash
-wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
+wget -O /etc/sensu/plugins/check-procs.rb https://github.com/sensu/sensu-community-plugins/tree/master/plugins/processes/check-procs.rb
 chmod 755 /etc/sensu/plugins/check-procs.rb
 ```
     
