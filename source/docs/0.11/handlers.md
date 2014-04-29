@@ -13,7 +13,7 @@ Handlers are for taking action on [event data](events), such as sending an email
 ## Types
 There are several types of handlers.
 
-### Pipe 
+### Pipe
 
 Pipe handlers are for executing a command (or script), passing it the
 event data via `STDIN`. Here is an example that takes in event data, and
@@ -71,10 +71,10 @@ organically.
 Here is a hypothetical JSON snippet that is defining and configuring two
 custom handlers.  The handler `my_handler1` pulls configuration settings
 from within the handler definition (probably with
-`setttings['handlers']['my_handler1']['custom_setting']`).  The
+`settings['handlers']['my_handler1']['custom_setting']`). The
 handler `my_handler2` gets its configuration settings from a
 top-level namespace (probably with
-`setttings['my_handler2']['another_custom_setting']`).  
+`settings['my_handler2']['another_custom_setting']`).
 
 Both of these configuration methods work fine.  Configuring within the
 handler definition in the `handlers` keeps things organized,
@@ -205,4 +205,3 @@ a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
   }
 }
 ```
-
