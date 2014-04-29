@@ -48,14 +48,14 @@ end
 }
 ```
 
-Here is an example that uses a `mail` to email the event data.
+Here is an example that uses `mailx` to email the event data.
 
 ``` json
 {
   "handlers": {
     "mail": {
       "type": "pipe",
-      "command": "mail -s 'sensu event' email@address.com"
+      "command": "mailx -s 'sensu event' email@address.com"
     }
   }
 }
