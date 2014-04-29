@@ -48,13 +48,13 @@ apt-get install redis-server
 #### CentOS 5
 
 ``` shell
-rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 ```
 
 #### CentOS 6
 
 ``` shell
-rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 ```
 
 ### Step #2 - Install Redis
