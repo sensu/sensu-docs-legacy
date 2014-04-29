@@ -59,7 +59,12 @@ Here is an example that uses a `mail` to email the event data.
   }
 }
 ```
+Note: If you are using a GNU flavour of Linux (e.g. Ubuntu) the default mail command may not send the event data in the e-mail body. To e-mail out the json event data using shell commands it may be necessary to install bsd-mailx overwriting the default GNU mail command:
+``` shell
+sudo apt-get install bsd-mailx
+```
 
+ 
 #### Handler configuration
 
 Handlers using the `sensu-plugin` Rubygem have access to Sensu configs
