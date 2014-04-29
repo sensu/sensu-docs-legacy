@@ -50,7 +50,7 @@ apt-get install rabbitmq-server
   which provides R14B for CentOS 5.
 
 ``` shell
-rpm -Uvh http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 wget -O /etc/yum.repos.d/epel-erlang.repo http://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo
 ```
 
@@ -59,7 +59,7 @@ wget -O /etc/yum.repos.d/epel-erlang.repo http://repos.fedorapeople.org/repos/pe
 Install the EPEL-6 yum repository which contains Erlang R14B.
 
 ``` shell
-rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 ```
 
 Install erlang.
