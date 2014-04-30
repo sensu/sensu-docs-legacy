@@ -46,7 +46,7 @@ See [Checks Endpoint Documentation](api-checks) for more information.
 
 ## Clients
 
-The client endpoints allows you to list, delete and get the histroy of clients.
+The client endpoints allows you to list, delete and get the history of clients.
 
 base-url `http://localhost:4567/clients`
 
