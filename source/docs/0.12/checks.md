@@ -21,7 +21,7 @@ you can use Nagios plugins with Sensu.
 
 #### Check plugin `/etc/sensu/plugins/check-chef-client.rb`
 
-``` ruby
+~~~ ruby
 procs = `ps aux`
 running = false
 procs.each_line do |proc|
@@ -34,11 +34,11 @@ else
   puts 'WARNING - Chef client daemon is NOT running'
   exit 1
 end
-```
+~~~
 
 #### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -50,7 +50,7 @@ end
     }
   }
 }
-```
+~~~
 
 #### Explanation of definition
 * `chef_client`: A unique check name
@@ -76,7 +76,7 @@ using `"handler": "foo"` or specify one or more handlers with
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -92,7 +92,7 @@ using `"handler": "foo"` or specify one or more handlers with
     }
   }
 }
-```
+~~~
 
 Events produce by this check will be handled by the `pagerduty` and `irc` handlers.
 
@@ -104,7 +104,7 @@ Handling can be disabled for specific checks, so that handlers are not triggered
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -117,7 +117,7 @@ Handling can be disabled for specific checks, so that handlers are not triggered
     }
   }
 }
-```
+~~~
 
 Events produced by this check will never be handled.
 
@@ -135,7 +135,7 @@ which is flexible enough to handle different zones and format.
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "noisy_noncritical_check": {
@@ -151,7 +151,7 @@ which is flexible enough to handle different zones and format.
     }
   }
 }
-```
+~~~
 
 Events produced by this check will not be handled between 5PM and 9AM PST.
 
@@ -174,7 +174,7 @@ Dependencies can refer to checks on the same client, or a different client
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "login_check": {
@@ -190,7 +190,7 @@ Dependencies can refer to checks on the same client, or a different client
     }
   }
 }
-```
+~~~
 
 Events produced by this check will only be handled if the `ldap` check on
 client `ldap.example.com` and the local `ssh-service` check are both `OK`.
@@ -206,7 +206,7 @@ To allow check results with a exit status of 0 to produce an event, add
 
 ##### Check plugin (/etc/sensu/plugins/cpu-usage-metrics.sh)
 
-``` bash
+~~~ bash
 #!/bin/bash
 
 SCHEME=`hostname`
@@ -265,7 +265,7 @@ let "DIFF_TOTAL=$TOTAL-$PREV_TOTAL"
 let "DIFF_USAGE=(1000*($DIFF_TOTAL-$DIFF_IDLE)/$DIFF_TOTAL+5)/10"
 
 echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
-```
+~~~
 
 ##### Check plugin produces
 
@@ -273,7 +273,7 @@ echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "cpu_usage_metrics": {
@@ -286,7 +286,7 @@ echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
     }
   }
 }
-```
+~~~
 
 ### Standalone checks
 
@@ -300,7 +300,7 @@ definition to make it standalone, replacing `"subscribers"`.
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "cpu_usage_metrics": {
@@ -311,7 +311,7 @@ definition to make it standalone, replacing `"subscribers"`.
     }
   }
 }
-```
+~~~
 
 ### Manually triggered checks
 
@@ -324,7 +324,7 @@ interval-based scheduling. The `interval` field may still be required to pass va
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "my_predefined_check": {
@@ -335,13 +335,13 @@ interval-based scheduling. The `interval` field may still be required to pass va
     }
   }
 }
-```
+~~~
 
 ##### API Call
 
-``` bash
+~~~ bash
 curl -XPOST http://api.sensu.example.com:4567/check/request -d '{"subscribers": ["appservers"], "check":"my_predefined_check"}'
-```
+~~~
 
 ### Check command token substitution
 
@@ -354,7 +354,7 @@ You can also specify a default value if the key does not exist `:::foo.bar|defau
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -366,7 +366,7 @@ You can also specify a default value if the key does not exist `:::foo.bar|defau
     }
   }
 }
-```
+~~~
 
 ### Custom check definition key-values
 
@@ -384,7 +384,7 @@ creativity.
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -398,7 +398,7 @@ creativity.
     }
   }
 }
-```
+~~~
 
 ### Flap detection
 
@@ -412,7 +412,7 @@ until it is no longer flapping. The implementation is very similar to
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -426,7 +426,7 @@ until it is no longer flapping. The implementation is very similar to
     }
   }
 }
-```
+~~~
 
 ### Aggregate checks
 
@@ -439,7 +439,7 @@ the results to the handler.
 
 ##### Check definition (configuration)
 
-``` json
+~~~ json
 {
   "checks": {
     "chef_client": {
@@ -453,5 +453,5 @@ the results to the handler.
     }
   }
 }
-```
+~~~
 

@@ -16,7 +16,7 @@ subscriptions. Client info is included in [event data](events).
 
 ### Example
 
-``` json
+~~~ json
 {
   "client": {
     "name": "i-424242",
@@ -28,14 +28,14 @@ subscriptions. Client info is included in [event data](events).
     ]
   }
 }
-```
+~~~
 
 ## Keepalives
 
 Sensu clients publish keepalives to the server every 20 seconds.  When a keepalive hasn't been sent from a client in a specified threshold, the server will fire a handler.  The default threshold is to warn at 120 seconds and then goes critical at 180 seconds.  The handler that fires is the "default" handler.  You can specify your own thresholds and handler via the client configuration.
 
 
-``` json
+~~~ json
 {
   "client": {
     "name": "i-424242",
@@ -54,7 +54,7 @@ Sensu clients publish keepalives to the server every 20 seconds.  When a keepali
     ]
   }
 }
-```
+~~~
 
 ## Custom key-values
 
@@ -62,7 +62,7 @@ You can add custom client key-values, which will be included in event data, and 
 
 ### Example
 
-``` json
+~~~ json
 {
   "client": {
     "name": "i-424242",
@@ -80,5 +80,5 @@ You can add custom client key-values, which will be included in event data, and 
     }
   }
 }
-```
+~~~
 

@@ -34,7 +34,7 @@ Edit the Windows service definition for the Sensu client at
 Adding the configuration directory argument `-d`, setting it to
 `C:\etc\sensu\conf.d`.
 
-``` xml
+~~~ xml
   <!--
     Windows service definition for Sensu
   -->
@@ -45,15 +45,15 @@ Adding the configuration directory argument `-d`, setting it to
     <executable>C:\opt\sensu\embedded\bin\ruby</executable>
     <arguments>C:\opt\sensu\embedded\bin\sensu-client -d C:\etc\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
   </service>
-```
+~~~
 
 Use the Windows SC command to create the service.
 
 The space between the equals(=) and the values is required.
 
-``` shell
+~~~ shell
 sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
-```
+~~~
 
 #### Start the service
 

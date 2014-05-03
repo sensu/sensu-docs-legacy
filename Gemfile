@@ -15,7 +15,6 @@ gem "builder"
 
 gem "susy"
 gem "kramdown"
-gem "redcarpet"
 
 # gem "coffee-filter"
 

@@ -41,9 +41,9 @@ Dashboard.
 
 #### Using the API
 
-``` bash
+~~~ bash
 curl -X DELETE http://<sensu-api>/client/<node>
-```
+~~~
 
 #### Using the Sensu Dashboard
 
@@ -54,11 +54,11 @@ curl -X DELETE http://<sensu-api>/client/<node>
 You can toggle debug logging on and off by sending the Sensu process you
 wish to debug a `USR1` signal. For example:
 
-``` bash
+~~~ bash
 $ ps aux | grep [s]ensu-server
 sensu     5992  1.7  0.3 177232 24352 ...
 $ kill -USR1 5992
-```
+~~~
 
 ### Any suggestions on naming conventions for metric plugins?
 

@@ -33,7 +33,7 @@ and run the specified command. We'll cover more handler types in the
 future. On the server nodes, we will define our 'email' handler in
 `/etc/sensu/conf.d/handler_email.json`.
 
-``` json
+~~~ json
 {
   "handlers": {
     "email": {
@@ -42,7 +42,7 @@ future. On the server nodes, we will define our 'email' handler in
     }
   }
 }
-```
+~~~
 
 ## Adding the handler to a check
 
@@ -50,13 +50,13 @@ We will also need to update our check definition and connect it to the
 new handler. Edit the `/etc/sensu/conf.d/check_cron.json` file on the
 sensu-server and modify the "handlers" attribute:
 
-``` json
+~~~ json
 {
   "checks": {
     "cron_check": {
       "handlers": ["default", "email"],
  ...
-```
+~~~
 
 ## Restarting Sensu
 
@@ -85,7 +85,7 @@ Adjust `/etc/sensu/conf.d/mailer.json` to fit your environment.
 
 Define a new pipe handler, in `/etc/sensu/conf.d/handler_mailer.json`:
 
-``` json
+~~~ json
 {
   "handlers": {
     "mailer": {
@@ -94,18 +94,18 @@ Define a new pipe handler, in `/etc/sensu/conf.d/handler_mailer.json`:
     }
   }
 }
-```
+~~~
 
 And finally connect some check to the new handler, just like we did in
 the first example. This time, the handler is named `mailer`.
 
-``` json
+~~~ json
 {
   "checks": {
     "cron_check": {
       "handlers": ["default", "mailer"],
 ...
-```
+~~~
 
 Restart sensu-server and trigger the check again. You should get an
 email from the `mailer` handler.

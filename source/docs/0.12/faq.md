@@ -42,9 +42,9 @@ through the Sensu Dashboard.
 
 #### Using the API
 
-``` bash
+~~~ bash
 curl -X DELETE http://<sensu-api>/client/<node>
-```
+~~~
 
 #### Using the Sensu Dashboard
 
@@ -53,9 +53,9 @@ Click **Clients** > (click on a client) > **Remove**
 Additionally, you can use the
 [sensu-cli](https://rubygems.org/gems/sensu-cli) to delete clients.
 
-``` bash
+~~~ bash
 sensu-client delete NODE
-```
+~~~
 
 ### How do I increase log verbosity?
 
@@ -64,11 +64,11 @@ You can toggle debug logging on and off by sending the Sensu process a
 
 For example:
 
-``` bash
+~~~ bash
 $ ps aux | grep [s]ensu-server
 sensu     5992  1.7  0.3 177232 24352 ...
 $ kill -USR1 5992
-```
+~~~
 
 You can adjust the process log level by setting `LOG_LEVEL` in
 `/etc/default/sensu` to either `debug`, `info`, `warn` or `error`. You

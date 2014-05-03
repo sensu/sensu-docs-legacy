@@ -16,7 +16,7 @@ example url - http://localhost:4567/checks
 
   - success: 200:
 
-    ``` json
+    ~~~ json
     [
       {
         "name": "check_chef_client",
@@ -35,7 +35,7 @@ example url - http://localhost:4567/checks
         "interval": 30
       }
     ]
-    ```
+    ~~~
 
   - error: 500
 
@@ -47,7 +47,7 @@ example url - `http://localhost:4567/checks/check_chef_client`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       {
         "name": "check_chef_client",
         "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
@@ -56,7 +56,7 @@ example url - `http://localhost:4567/checks/check_chef_client`
         ],
         "interval": 60
       }
-      ```
+      ~~~
 
   - missing: 404
 
@@ -70,14 +70,14 @@ example url - `http://localhost:4567/request`
 
   - payload:
 
-      ``` json
+      ~~~ json
       {
         "check": "check_chef_client",
         "subscribers": [
           "chef-client"
         ]
       }
-      ```
+      ~~~
 
   - success: 202
 

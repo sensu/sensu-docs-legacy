@@ -16,7 +16,7 @@ example url: `http://localhost:4567/info`
 
     - success: 200:
 
-        ``` json
+        ~~~ json
         {
             "sensu": {
                 "version": "0.9.12"
@@ -36,6 +36,6 @@ example url: `http://localhost:4567/info`
                 "connected": true
             }
         }
-        ```
+        ~~~
 
 - error: 500

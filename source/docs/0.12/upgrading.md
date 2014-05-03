@@ -17,15 +17,15 @@ need to have `rabbitmqadmin` installed to do this.
 
 ### Step #1 - Stop the Sensu servers
 
-``` shell
+~~~ shell
 sudo /etc/init.d/sensu-server stop
-```
+~~~
 
 ### Step #2 - Stop the Sensu APIs
 
-``` shell
+~~~ shell
 sudo /etc/init.d/sensu-api stop
-```
+~~~
 
 ### Step #3 - Delete the RabbitMQ queues
 
@@ -36,10 +36,10 @@ You may need to specify the Sensu RabbitMQ vhost (`--vhost=`), user
 
 For help, run `rabbitmqadmin --help`.
 
-``` shell
+~~~ shell
 rabbitmqadmin delete queue name='results'
 rabbitmqadmin delete queue name='keepalives'
-```
+~~~
 
 ### Step #4 - Upgrade the package
 

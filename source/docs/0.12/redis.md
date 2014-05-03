@@ -18,16 +18,16 @@ storing persistent data.
 
 Add Debian backports to APT sources.
 
-``` shell
+~~~ shell
 echo "deb http://backports.debian.org/debian-backports squeeze-backports main contrib non-free" >> /etc/apt/sources.list
-```
+~~~
 
 Install Redis from Debian backports.
 
-``` shell
+~~~ shell
 apt-get update
 apt-get -t squeeze-backports install redis-server
-```
+~~~
 
 #### Ubuntu <= 10.04
 
@@ -36,10 +36,10 @@ releases.
 
 #### Ubuntu > 10.04
 
-``` shell
+~~~ shell
 apt-get update
 apt-get install redis-server
-```
+~~~
 
 ## Install Redis on CentOS (RHEL)
 
@@ -47,25 +47,25 @@ apt-get install redis-server
 
 #### CentOS 5
 
-``` shell
+~~~ shell
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
-```
+~~~
 
 #### CentOS 6
 
-``` shell
+~~~ shell
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-```
+~~~
 
 ### Step #2 - Install Redis
 
-``` shell
+~~~ shell
 yum install redis
-```
+~~~
 
 Set Redis to start on boot and start it up:
 
-```
+~~~
 /sbin/chkconfig redis on
 /etc/init.d/redis start
-```
+~~~

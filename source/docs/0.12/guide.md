@@ -69,9 +69,9 @@ client certificate that was generated.
 
 On both systems, create an SSL directory for the Sensu components.
 
-``` shell
+~~~ shell
 mkdir -p /etc/sensu/ssl
-```
+~~~
 
 Copy the following generated SSL files to the newly created SSL
 directories.
@@ -82,7 +82,7 @@ directories.
 On both systems, create/edit `/etc/sensu/conf.d/rabbitmq.json`, you
 will need to substitute a few values.
 
-``` json
+~~~ json
 {
   "rabbitmq": {
     "ssl": {
@@ -96,21 +96,21 @@ will need to substitute a few values.
     "password": "SUBSTITUTE_ME"
   }
 }
-```
+~~~
 
 The "monitor" system runs the Sensu server and API, which need to talk
 to Redis, so we'll provide Sensu with connection information.
 
 On the "monitor" system, create/edit `/etc/sensu/conf.d/redis.json`.
 
-``` json
+~~~ json
 {
   "redis": {
     "host": "localhost",
     "port": 6379
   }
 }
-```
+~~~
 
 ### Configure the Sensu API and dashboard
 
@@ -119,7 +119,7 @@ to configure them.
 
 On the "monitor" system, create/edit `/etc/sensu/conf.d/api.json`.
 
-``` json
+~~~ json
 {
   "api": {
     "host": "localhost",
@@ -128,11 +128,11 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/api.json`.
     "password": "secret"
   }
 }
-```
+~~~
 
 On the "monitor" system, create/edit `/etc/sensu/conf.d/dashboard.json`.
 
-``` json
+~~~ json
 {
   "dashboard": {
     "port": 8080,
@@ -140,7 +140,7 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/dashboard.json`.
     "password": "secret"
   }
 }
-```
+~~~
 
 ### Configure the Sensu clients
 
@@ -152,7 +152,7 @@ unique identifier (such as a VM ID).
 
 On both systems, create/edit `/etc/sensu/conf.d/client.json`.
 
-``` json
+~~~ json
 {
   "client": {
     "name": "SUBSTITUTE_ME",
@@ -160,7 +160,7 @@ On both systems, create/edit `/etc/sensu/conf.d/client.json`.
     "subscriptions": [ "all" ]
   }
 }
-```
+~~~
 
 ### Enable Sensu services
 
@@ -174,52 +174,52 @@ On the "monitor" system, enable all of the Sensu components.
 
 #### Debian and Ubuntu
 
-``` shell
+~~~ shell
 update-rc.d sensu-server defaults
 update-rc.d sensu-client defaults
 update-rc.d sensu-api defaults
 update-rc.d sensu-dashboard defaults
-```
+~~~
 
 #### CentOS (RHEL)
 
-``` shell
+~~~ shell
 chkconfig sensu-server on
 chkconfig sensu-client on
 chkconfig sensu-api on
 chkconfig sensu-dashboard on
-```
+~~~
 
 On the "agent" system, enable the Sensu client.
 
 #### Debian and Ubuntu
 
-``` shell
+~~~ shell
 update-rc.d sensu-client defaults
-```
+~~~
 
 #### CentOS (RHEL)
 
-``` shell
+~~~ shell
 chkconfig sensu-client on
-```
+~~~
 
 ### Start Sensu services
 
 On the "monitor" system, start all of the Sensu components.
 
-``` shell
+~~~ shell
 /etc/init.d/sensu-server start
 /etc/init.d/sensu-client start
 /etc/init.d/sensu-api start
 /etc/init.d/sensu-dashboard start
-```
+~~~
 
 On the "agent" system, start the Sensu client.
 
-``` shell
+~~~ shell
 /etc/init.d/sensu-client start
-```
+~~~
 
 The Sensu dashboard should now be accessible on the "monitor" system,
 `http://admin:secret@SUBSTITUTE_ME:8080`.

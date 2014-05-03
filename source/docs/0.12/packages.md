@@ -41,30 +41,30 @@ Tested on:
 First we need to install the repository public key on our host to use
 the Sensu repositories.
 
-``` shell
+~~~ shell
 wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
-```
+~~~
 
 ### Step #2 - Add the repository
 
 Main repository (stable).
 
-``` shell
+~~~ shell
 echo "deb     http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.d/sensu.list
-```
+~~~
 
 **Or** the **unstable** repository.
 
-``` shell
+~~~ shell
 echo "deb     http://repos.sensuapp.org/apt sensu unstable" > /etc/apt/sources.list.d/sensu.list
-```
+~~~
 
 ### Step #3 - Install Sensu
 
-```shell
+~~~shell
 apt-get update
 apt-get install sensu
-```
+~~~
 
 ## Installing Sensu on CentOS (RHEL) via Yum
 
@@ -79,23 +79,23 @@ Write the following content to `/etc/yum.repos.d/sensu.repo`.
 
 Main repository (stable).
 
-``` shell
+~~~ shell
 [sensu]
 name=sensu-main
 baseurl=http://repos.sensuapp.org/yum/el/$releasever/$basearch/
 gpgcheck=0
 enabled=1
-```
+~~~
 
 **Or** the **unstable** repository.
 
-``` shell
+~~~ shell
 [sensu-unstable]
 name=sensu-unstable
 baseurl=http://repos.sensuapp.org/yum-unstable/el/$releasever/$basearch/
 gpgcheck=0
 enabled=1
-```
+~~~
 
 Valid values for `$releasever` are `5` and `6`.
 
@@ -108,9 +108,9 @@ hard-code the value to `5` or `6`.
 
 ### Step #2 - Install Sensu
 
-```shell
+~~~shell
 yum install sensu
-```
+~~~
 
 ## Installing Sensu on Windows via MSI
 

@@ -29,16 +29,16 @@ to installing the `check-procs.rb` plugin. Otherwise we need to install
 the `sensu-plugin` gem which has various helper classes used by many of
 the community plugins:
 
-``` bash
+~~~ bash
 gem install sensu-plugin --no-rdoc --no-ri
-```
+~~~
 
 Download and install `check-procs.rb`:
 
-``` bash
+~~~ bash
 wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
 chmod 755 /etc/sensu/plugins/check-procs.rb
-```
+~~~
 
 ## Adding a check definition on the client
 
@@ -48,7 +48,7 @@ subscriptions. Standalone checks are scheduled and executed on a any
 client they are defined on. Add `"standalone": true` to a check
 definition to make it standalone, replacing `"subscribers"`.
 
-``` json
+~~~ json
 {
   "checks": {
     "cron_check": {
@@ -59,7 +59,7 @@ definition to make it standalone, replacing `"subscribers"`.
     }
   }
 }
-```
+~~~
 
 ## Testing the check
 

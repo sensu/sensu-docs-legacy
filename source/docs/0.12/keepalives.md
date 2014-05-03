@@ -47,7 +47,7 @@ every 60 seconds, and a critical after 300 seconds.  The events will
 be handled with the `screaming_monkey` and `email` handlers. The second
 (and subsequent) notifications will be sent every 1800 seconds.
 
-``` json
+~~~ json
 {
   "client": {
     "name": "i-424242",
@@ -62,4 +62,4 @@ be handled with the `screaming_monkey` and `email` handlers. The second
     }
   }
 }
-```
+~~~

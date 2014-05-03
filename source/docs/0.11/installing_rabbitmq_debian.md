@@ -11,9 +11,9 @@ warning: "<strong>IMPORTANT NOTE:</strong> Due to the state of flux in Erlang an
 
 ### Install Erlang
 
-``` bash
+~~~ bash
 apt-get -y install erlang-nox
-```
+~~~
 
 ## RabbitMQ
 
@@ -22,7 +22,7 @@ Based on the rabbit install guide :
 
 ### Install RabbitMQ from Deb
 
-``` bash
+~~~ bash
 echo "deb http://www.rabbitmq.com/debian/ testing main" >/etc/apt/sources.list.d/rabbitmq.list
 
 curl -L -o ~/rabbitmq-signing-key-public.asc http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -30,7 +30,7 @@ apt-key add ~/rabbitmq-signing-key-public.asc
 
 apt-get update
 apt-get -y --allow-unauthenticated --force-yes install rabbitmq-server
-```
+~~~
 
 ### Configure RabbitMQ SSL
 
@@ -46,25 +46,25 @@ to for your organization if you use this in production. The script will
 generate a few files that we'll need throughout the guide, so keep them
 nearby.
 
-``` bash
+~~~ bash
 git clone git://github.com/joemiller/joemiller.me-intro-to-sensu.git
 cd joemiller.me-intro-to-sensu/
 ./ssl_certs.sh clean
 ./ssl_certs.sh generate
-```
+~~~
 
 Configure RabbitMQ to use these SSL certs
 
-``` bash
+~~~ bash
 mkdir /etc/rabbitmq/ssl
 cp server_key.pem /etc/rabbitmq/ssl/
 cp server_cert.pem /etc/rabbitmq/ssl/
 cp testca/cacert.pem /etc/rabbitmq/ssl/
-```
+~~~
 
 Create `/etc/rabbitmq/rabbitmq.config`:
 
-``` erlang
+~~~ erlang
 [
     {rabbit, [
     {ssl_listeners, [5671]},
@@ -75,24 +75,24 @@ Create `/etc/rabbitmq/rabbitmq.config`:
                    {fail_if_no_peer_cert,true}]}
   ]}
 ].
-```
+~~~
 
 ### Install RabbitMQ management console
 
 Optional, but potentially very useful.
 
-``` bash
+~~~ bash
 rabbitmq-plugins enable rabbitmq_management
-```
+~~~
 
 ### Start and verify RabbitMQ
 
 Set RabbitMQ to start on boot and start it up immediately:
 
-``` bash
+~~~ bash
 update-rc.d rabbitmq-server defaults
 /etc/init.d/rabbitmq-server start
-```
+~~~
 
 Verify operation with the RabbitMQ Web UI: Username is "guest", password
 is "guest" - `http://<RABBITMQ-SERVER>:55672`. Protocol amqp should be
@@ -103,9 +103,9 @@ bound to port 5672 and amqp/ssl on port 5671.
 Finally, let's create a `/sensu` vhost and a `sensu` user/password on
 our rabbit:
 
-``` bash
+~~~ bash
 rabbitmqctl add_vhost /sensu
 rabbitmqctl add_user sensu mypass
 rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
-```
+~~~
 

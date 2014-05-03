@@ -22,7 +22,7 @@ Mutator, or Check.
 
 ### Skeleton Extension
 
-``` ruby
+~~~ ruby
 module Sensu::Extension
 
   class Skeleton < Handler # Sub-class the appropriate extension type
@@ -70,7 +70,7 @@ module Sensu::Extension
 
   end
 end
-```
+~~~
 
 Event data is passed to extensions just like plug-ins. 
 See: 

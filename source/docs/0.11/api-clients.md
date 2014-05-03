@@ -36,7 +36,7 @@ example url - `http://localhost:4567/clients`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       [
         {
           "name": "client_1",
@@ -58,7 +58,7 @@ example url - `http://localhost:4567/clients`
           "timestamp": 1324674956
         }
       ]
-      ```
+      ~~~
 
   - error: 500
 
@@ -70,7 +70,7 @@ example url - http://localhost:4567/clients/client_2
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       {
         "name": "client_2",
         "address": "192.168.0.3",
@@ -81,7 +81,7 @@ example url - http://localhost:4567/clients/client_2
         ],
         "timestamp": 1324674956
       }
-      ```
+      ~~~
 
   - missing: 404
 
@@ -103,7 +103,7 @@ example url - http://localhost:4567/clients/client_2/history
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       [
         { 
           "check": "redis_process",
@@ -124,7 +124,7 @@ example url - http://localhost:4567/clients/client_2/history
           "last_status": 0
         }
       ]
-      ```
+      ~~~
 
   - error: 500
 

@@ -36,12 +36,12 @@ example url - `http://localhost:4567/stashes`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       [
         "foo",
         "bar"
       ]
-      ```
+      ~~~
 
   - error: 500
 
@@ -49,14 +49,14 @@ example url - `http://localhost:4567/stashes`
 
   - payload:
 
-      ``` json
+      ~~~ json
       {
         "path": "random_stash",
         "content": {
           "reason": "things are stashy"
         }
       }
-      ```
+      ~~~
 
   - success: 201
 
@@ -70,11 +70,11 @@ example url - `http://localhost:4567/stashes/foo`
 
   - payload:
 
-      ``` json
+      ~~~ json
       {
         "bar": 42
       }
-      ```
+      ~~~
 
   - success: 201
 
@@ -86,11 +86,11 @@ example url - `http://localhost:4567/stashes/foo`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       {
         "bar": 42
       }
-      ```
+      ~~~
 
   - missing: 404
 

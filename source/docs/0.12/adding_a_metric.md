@@ -22,21 +22,21 @@ First we need to add a metrics check script to the client. We're going to use `l
 
 Let's download and install `load-metrics.rb`:
 
-``` bash
+~~~ bash
 wget -O /etc/sensu/plugins/load-metrics.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/system/load-metrics.rb
 chmod 755 /etc/sensu/plugins/load-metrics.rb
-```
+~~~
 
 Now let's run the metric from the command line and see the results:
 
-``` bash
+~~~ bash
 ruby load-metrics.rb
 absinthe.local.load_avg.one 0.89  1365270842
 absinthe.local.load_avg.five  1.01  1365270842
 absinthe.local.load_avg.fifteen 1.06  1365270842
 echo $?
 0
-```
+~~~
 
 We can see the check has outputted the 1/5/15 load average for our host
 and a timestamp. We can also see that the metric check exited with a
@@ -46,7 +46,7 @@ status of `0`.
 
 Now we need to add a check definition for our metric on the server. A metric check looks like a normal check definition but with `"type":"metric"` added to the definition.
 
-``` json
+~~~ json
 {
   "checks": {
     "load_metrics": {
@@ -59,7 +59,7 @@ Now we need to add a check definition for our metric on the server. A metric che
     }
   }
 }
-```
+~~~
 
 ## Subscribe the client to the check
 
@@ -71,7 +71,7 @@ Edit the `/etc/sensu/conf.d/client.json` file on the client and add the
 be in `/etc/sensu/config.json` or in any snippet file in the
 `/etc/sensu/conf.d/` directory)
 
-``` json
+~~~ json
 {
   "client": {
     "name": "sensu-client.domain.tld",
@@ -79,7 +79,7 @@ be in `/etc/sensu/config.json` or in any snippet file in the
     "subscriptions": [ "test", "production" ]
   }
 }
-```
+~~~
 
 ## Testing the check
 

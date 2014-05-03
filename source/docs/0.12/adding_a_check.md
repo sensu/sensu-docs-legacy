@@ -37,23 +37,23 @@ to installing the `check-procs.rb` plugin. Otherwise we need to install
 the `sensu-plugin` gem which has various helper classes used by many of
 the community plugins:
 
-``` bash
+~~~ bash
 gem install sensu-plugin --no-rdoc --no-ri
-```
+~~~
 
 Download and install `check-procs.rb`:
 
-``` bash
+~~~ bash
 wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
 chmod 755 /etc/sensu/plugins/check-procs.rb
-```
+~~~
     
 ## Create the check definition on the Sensu server
 
 Create this file on the Sensu server:
 `/etc/sensu/conf.d/check_cron.json`.
 
-``` json
+~~~ json
 {
   "checks": {
     "cron_check": {
@@ -64,7 +64,7 @@ Create this file on the Sensu server:
     }
   }
 }
-```
+~~~
 
 ## Subscribe the client to the check
 
@@ -76,7 +76,7 @@ Edit the `/etc/sensu/conf.d/client.json` file on the client and add the
 It may be in `/etc/sensu/config.json` or in any snippet file in the
 `/etc/sensu/conf.d/` directory)
 
-``` json
+~~~ json
 {
   "client": {
     "name": "sensu-client.domain.tld",
@@ -84,7 +84,7 @@ It may be in `/etc/sensu/config.json` or in any snippet file in the
     "subscriptions": [ "test", "webservers" ]
   }
 }
-```
+~~~
 
 ## Testing the check
 
@@ -156,7 +156,7 @@ Create the plugins directory and copy the downloaded check-disk-windows.rb to th
 Create this file on the Sensu server:
 `/etc/sensu/conf.d/check_disk-windows.json`.
 
-``` json
+~~~ json
 {
   "checks": {
     "check-disk-windows": {
@@ -167,7 +167,7 @@ Create this file on the Sensu server:
     }
   }
 }
-```
+~~~
 
 ## Subscribe the client to the check
 
@@ -179,7 +179,7 @@ Edit the `/opt/sensu/conf.d/client.json` file on the Windows client and add the
 install directions on the [Installing Sensu](installing_sensu) page.
 Simply add the 'windows' subscription as noted below.
 
-``` json
+~~~ json
 {
   "client": {
     "name": "CLIENT_NODE_NAME",
@@ -189,7 +189,7 @@ Simply add the 'windows' subscription as noted below.
     ]
   }
 }
-```
+~~~
 
 ## Testing the check
 
@@ -197,15 +197,15 @@ Finally, restart Sensu on the Windows client and Sensu server nodes.
 
 After a few minutes we should see the following in the `/opt/sensu/sensu-client.log` on the client:
 
-``` json
+~~~ json
 {"timestamp":"2013-09-04T15:34:13.180419-0500","level":"info","message":"received check request","check":{"name":"check-disk-windows","issued":1378326853,"command":"/opt/sensu/plugins/check-disk-windows.rb"}}
-```
+~~~
 
 And on the server we should see the following in `/var/log/sensu/sensu-server.log`:
 
-``` json
+~~~ json
 {"timestamp":"2013-09-04T11:39:12.442472-0500","level":"info","message":"publishing check request","payload":{"name":"check-disk-windows","issued":1378312752,"command":"/opt/sensu/plugins/check-disk-windows.rb"},"subscribers":["windows"]}
-```
+~~~
     
 Next, let's see if we can raise an alert by lowering the default WARNING
 threshhold to 10% (or to a level less than the free space available on
@@ -214,7 +214,7 @@ your volumes)
 Edit this file on the Sensu server again and add the -w parameter to the command:
 `/etc/sensu/conf.d/check_disk-windows.json`.
 
-``` json
+~~~ json
 {
   "checks": {
     "check-disk-windows": {
@@ -225,7 +225,7 @@ Edit this file on the Sensu server again and add the -w parameter to the command
     }
   }
 }
-```
+~~~
 
 Restart the sensu-server service.
 

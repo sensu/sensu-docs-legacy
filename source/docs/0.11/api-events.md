@@ -16,7 +16,7 @@ example url - `http://localhost:4567/events`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       [
         {
           "client": "client_1",
@@ -35,7 +35,7 @@ example url - `http://localhost:4567/events`
           "flapping": false
         }
       ]
-      ```
+      ~~~
 
   - error: 500
 
@@ -47,7 +47,7 @@ example url - `http://localhost:4567/events/client_1`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       [
         {
           "client": "client_1",
@@ -58,7 +58,7 @@ example url - `http://localhost:4567/events/client_1`
           "status": 1
         }
       ]
-      ```
+      ~~~
 
   - error: 500
 
@@ -70,7 +70,7 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
 
   - success: 200:
 
-      ``` json
+      ~~~ json
       {
         "client": "client_1",
         "check": "check_chef_client",
@@ -79,7 +79,7 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
         "flapping": false,
         "status": 1
       }
-      ```
+      ~~~
 
   - missing: 404
 
@@ -101,12 +101,12 @@ example url - `http://localhost:4567/event/resolve`
 
   - payload:
 
-      ``` json
+      ~~~ json
       {
         "client": "client_1",
         "check": "check_chef_client"
       }
-      ```
+      ~~~
 
   - success: 202
 

@@ -26,21 +26,21 @@ other installation and configuration instructions.
 
 Be sure that OpenSSL is installed.
 
-``` shell
+~~~ shell
 which openssl
 openssl version
-```
+~~~
 
 The following will create a certificate authority, and generate
 certificates that will be valid for `1825` days, or `5` years.
 
-``` shell
+~~~ shell
 cd /tmp
 wget http://sensuapp.org/docs/0.12/tools/ssl_certs.tar
 tar -xvf ssl_certs.tar
 cd ssl_certs
 ./ssl_certs.sh generate
-```
+~~~
 
 ## Limitations
 
