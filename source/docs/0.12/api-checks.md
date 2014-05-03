@@ -47,16 +47,16 @@ example url - `http://localhost:4567/checks/check_chef_client`
 
   - success: 200:
 
-      ~~~ json
-      {
-        "name": "check_chef_client",
-        "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
-        "subscribers": [
-          "chef-client"
-        ],
-        "interval": 60
-      }
-      ~~~
+    ~~~ json
+    {
+      "name": "check_chef_client",
+      "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
+      "subscribers": [
+        "chef-client"
+      ],
+      "interval": 60
+    }
+    ~~~
 
   - missing: 404
 
@@ -70,14 +70,14 @@ example url - `http://localhost:4567/request`
 
   - payload:
 
-      ~~~ json
-      {
-        "check": "check_chef_client",
-        "subscribers": [
-          "chef-client"
-        ]
-      }
-      ~~~
+    ~~~ json
+    {
+      "check": "check_chef_client",
+      "subscribers": [
+        "chef-client"
+      ]
+    }
+    ~~~
 
   - success: 202
 
