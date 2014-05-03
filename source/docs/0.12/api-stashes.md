@@ -15,7 +15,7 @@ example url - `http://localhost:4567/stashes`
 * `GET`: returns a list of stash paths
 
   - Parameters
-    
+
     - `limit`
 
       - optional
@@ -36,50 +36,49 @@ example url - `http://localhost:4567/stashes`
 
   - success: 200:
 
-      ~~~ json
-        [
-          {
-            "path": "silence/machine1/service1",
-            "content": {
-              "timestamp": 1383441836
-            },
-            "expire": 10054
-          },
-          {
-            "path": "silence/machine2",
-            "content": {
-             "timestamp": 1381350802
-            },
-            "expire": -1
-          }      
-        ]
-      ~~~
+    ~~~ json
+    [
+      {
+        "path": "silence/machine1/service1",
+        "content": {
+          "timestamp": 1383441836
+        },
+        "expire": 10054
+      },
+      {
+        "path": "silence/machine2",
+        "content": {
+         "timestamp": 1381350802
+        },
+        "expire": -1
+      }
+    ]
+    ~~~
   - error: 500
 
 * `POST`: Create a stash (JSON document)
 
   - payload:
 
-      ~~~ json
-        {
-          "path": "random_stash",
-          "content": {
-            "reason": "things are stashy"
-          }
-        }
-      ~~~
-  - expiration:
-  Stashes have an expiration duration (in seconds), default is never. The following payload will create a stash that expires after a minute.
-  
-  ~~~ json
-        {
-          "path": "random_stash",
-          "expire": 60,
-          "content": {
-            "reason": "things are stashy"
-          }
-        }
-  ~~~
+    ~~~ json
+    {
+      "path": "random_stash",
+      "content": {
+        "reason": "things are stashy"
+      }
+    }
+    ~~~
+  - expiration: Stashes have an expiration duration (in seconds), default is never. The following payload will create a stash that expires after a minute.
+
+    ~~~ json
+    {
+      "path": "random_stash",
+      "expire": 60,
+      "content": {
+        "reason": "things are stashy"
+      }
+    }
+    ~~~
 
 
   - success: 201
@@ -94,11 +93,11 @@ example url - `http://localhost:4567/stashes/foo`
 
   - payload:
 
-      ~~~ json
-        {
-          "bar": 42
-        }
-      ~~~
+    ~~~ json
+    {
+      "bar": 42
+    }
+    ~~~
 
   - success: 201
 
@@ -110,11 +109,11 @@ example url - `http://localhost:4567/stashes/foo`
 
   - success: 200:
 
-      ~~~ json
-        {
-          "bar": 42
-        }
-      ~~~
+    ~~~ json
+    {
+      "bar": 42
+    }
+    ~~~
 
   - missing: 404
 
