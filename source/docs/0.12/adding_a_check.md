@@ -50,6 +50,7 @@ chmod 755 /etc/sensu/plugins/check-procs.rb
     
 ## Create the check definition on the Sensu server
 
+
 Create this file on the Sensu server:
 `/etc/sensu/conf.d/check_cron.json`.
 
