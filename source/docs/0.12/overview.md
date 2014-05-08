@@ -48,7 +48,7 @@ The Sensu framework is made up of a number of components.
 The following is a diagram of the core components and how they
 interact with one another.
 
-![Sensu Diagram](img/sensu-diagram.png)
+![Sensu Diagram](img/sensu-diagram.gif)
 
 ## Dependencies
 
