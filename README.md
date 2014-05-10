@@ -21,7 +21,7 @@ All documentation is hosted on the official Sensu website (http://sensuapp.org),
 
 The important parts to familiarize yourself with for contributing to the Sensu documentation are the markdown renderer and syntax highlighting engines used to power http://sensuapp.org. 
 
-Markdown rendering is handled by [Redcarpet][redcarpet]. 
+Markdown rendering is handled by [Kramdown][kramdown]. 
 
 Syntax Highlighting is handled by [middleman-syntax][syntax], which uses [Rouge][rouge], which is a ruby-based syntax highlighting engine that is compatible with [Pygments][pygments] templates and supports things like "fenced code blocks" and language-specific syntax highlighting from Markdown. 
 
@@ -76,7 +76,7 @@ The Sensu Documentation is released under the
 [sensuapp]: http://sensuapp.org
 [middleman]: http://middlemanapp.com
 [pages]: http://pages.github.com/
-[redcarpet]: https://github.com/vmg/redcarpet
+[kramdown]: http://kramdown.gettalong.org/
 [syntax]: https://github.com/middleman/middleman-syntax
 [rouge]: https://github.com/jayferd/rouge
 [pygments]: http://pygments.org/
