@@ -4,7 +4,7 @@ category: "Configuration"
 title: "Clients"
 ---
 
-# Sensu clients
+# Sensu clients {#sensu-clients}
 
 Each Sensu client requires client info, a definition, describing it.
 Client info is published when the service starts, this is how the client
@@ -14,7 +14,7 @@ a list of the roles or responsibilities the server the Sensu client
 resides on is responsible for, check requests are issued on these
 subscriptions. Client info is included in [event data](events).
 
-### Example
+### Example {#example-sensu-client-data}
 
 ~~~ json
 {
@@ -30,7 +30,7 @@ subscriptions. Client info is included in [event data](events).
 }
 ~~~
 
-## Keepalives
+## Keepalives {#keepalives}
 
 Sensu clients publish keepalives to the server every 20 seconds.  When a keepalive hasn't been sent from a client in a specified threshold, the server will fire a handler.  The default threshold is to warn at 120 seconds and then goes critical at 180 seconds.  The handler that fires is the "default" handler.  You can specify your own thresholds and handler via the client configuration.
 
@@ -56,11 +56,11 @@ Sensu clients publish keepalives to the server every 20 seconds.  When a keepali
 }
 ~~~
 
-## Custom key-values
+## Custom key-values {#custom-key-values}
 
 You can add custom client key-values, which will be included in event data, and can be used in check command token substitution.
 
-### Example
+### Example {#example-custom-key-value}
 
 ~~~ json
 {
@@ -81,4 +81,3 @@ You can add custom client key-values, which will be included in event data, and 
   }
 }
 ~~~
-

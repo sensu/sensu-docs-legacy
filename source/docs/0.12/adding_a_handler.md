@@ -4,7 +4,7 @@ category: "Getting Started"
 title: "Adding a handler"
 ---
 
-# Adding a Sensu handler
+# Adding a Sensu handler {#adding-a-sensu-handler}
 
 Handlers run on the Sensu server and receive the output generated from
 checks executing on Sensu clients. They decide what to do with the data,
@@ -24,8 +24,8 @@ There is a growing list of handlers available in the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins/tree/master/handlers)
 repo, including Pagerduty, IRC, Campfire, etc.
 
-## Creating a handler
-    
+## Creating a handler {#creating-a-handler}
+
 Let's create a simple handler that simply sends the raw check output to ourselves via email.
 
 The most common handler type is "pipe" which tells Sensu to shell out
@@ -44,7 +44,7 @@ future. On the server nodes, we will define our 'email' handler in
 }
 ~~~
 
-## Adding the handler to a check
+## Adding the handler to a check {#adding-the-handler-to-a-check}
 
 We will also need to update our check definition and connect it to the
 new handler. Edit the `/etc/sensu/conf.d/check_cron.json` file on the
@@ -58,7 +58,7 @@ sensu-server and modify the "handlers" attribute:
  ...
 ~~~
 
-## Restarting Sensu
+## Restarting Sensu {#restarting-sensu}
 
 Restart sensu-client and sensu-server on the nodes and then stop the
 crond daemon again. In a few minutes we should get an email from sensu
@@ -69,7 +69,7 @@ checks and handlers and how they work together. At this point we now
 have a working sensu-client and sensu-server to start experimenting
 further.
 
-## A real world example
+## A real world example {#a-real-world-example}
 
 Now let's experiment with a more complex handler.
 

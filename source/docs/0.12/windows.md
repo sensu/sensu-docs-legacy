@@ -4,7 +4,7 @@ category: "Installation"
 title: "Windows"
 ---
 
-# Windows
+# Windows {#windows}
 
 You can use Sensu to monitor Windows infrastructure.
 
@@ -12,21 +12,21 @@ Installation differs from Linux, however, much of the Sensu
 [guide](guide) is still valid, with a few adjustments detailed on this
 page.
 
-## MSI package
+## MSI package {#msi-package}
 
 The Sensu project builds an omnibus [MSI package](packages) for
 Windows users. By default, the package will install Sensu to
 `C:\opt\sensu`, using this path is recommended, as it is consistent
 with Linux systems.
 
-## Configuration
+## Configuration {#configuration}
 
 You may follow the Sensu configuration steps for the "agent" system in
 the [guide](guide), substituting the use of `/etc/sensu` with
 `C:\etc\sensu`. Some directories may not exist, create these
 directories with the Command Prompt or Windows Explorer.
 
-## Create the Windows service
+## Create the Windows service {#create-the-windows-service}
 
 Edit the Windows service definition for the Sensu client at
 `C:\opt\sensu\bin\sensu-client.xml`.
@@ -55,7 +55,7 @@ The space between the equals(=) and the values is required.
 sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
 ~~~
 
-#### Start the service
+#### Start the service {#start-the-service}
 
 Start the Sensu Client service from the Services.msc panel or the
 Command Prompt.

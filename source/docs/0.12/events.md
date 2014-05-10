@@ -4,7 +4,7 @@ category: "Configuration"
 title: "Event Data"
 ---
 
-# Sensu event data
+# Sensu event data {#sensu-event-data}
 
 Event data consists of client and check information, and some metadata.
 

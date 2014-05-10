@@ -4,11 +4,11 @@ category: "API"
 title: "Clients"
 ---
 
-# Client API Endpoints
+# Client API Endpoints {#client-api-endpoints}
 
 The client endpoints allows you to list, delete and get the histroy of clients.
 
-## `/clients`
+## `/clients` {#clients}
 
 example url - `http://localhost:4567/clients`
 
@@ -62,7 +62,7 @@ example url - `http://localhost:4567/clients`
 
   - error: 500
 
-## `/clients/:name`
+## `/clients/:name` {#clients-name}
 
 example url - http://localhost:4567/clients/client_2
 
@@ -95,7 +95,7 @@ example url - http://localhost:4567/clients/client_2
 
   - error: 500
 
-## `/clients/:name/history`
+## `/clients/:name/history` {#clients-name-history}
 
 example url - http://localhost:4567/clients/client_2/history
 

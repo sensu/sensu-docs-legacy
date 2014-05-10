@@ -7,7 +7,7 @@ next:
   text: "Installation guide"
 ---
 
-# What is Sensu?
+# What is Sensu? {#what-is-sensu}
 
 Sensu is often described as the "monitoring router". Essentially,
 Sensu takes the results of "check" scripts run across many systems,
@@ -41,7 +41,7 @@ Sensu is designed for modern infrastructures and to be driven by
 configuration management tools, designed for the "cloud".
 
 
-# Components
+# Components {#sensu-components}
 
 The Sensu framework is made up of a number of components.
 
@@ -50,7 +50,7 @@ interact with one another.
 
 ![Sensu Diagram](img/sensu-diagram.png)
 
-## Dependencies
+## Dependencies {#sensu-dependencies}
 
 All of the Sensu components require access to an instance of RabbitMQ,
 in order to communicate with each-other.
@@ -58,7 +58,7 @@ in order to communicate with each-other.
 A few components require access to an instance of Redis, for storing
 persistent data.
 
-## Server
+## Server {#sensu-server}
 
 Depends on: RabbitMQ, Redis
 
@@ -71,7 +71,7 @@ a service failure or contain data such as metrics, will have
 additional context added to them, creating an [event](events). The
 Sensu server passes [events](events) to [handlers](handlers).
 
-## Client
+## Client {#sensu-client}
 
 Depends on: RabbitMQ
 
@@ -82,7 +82,7 @@ executions, these are called "standalone" [checks](checks). The client
 provides a local TCP and UDP socket for external check result input,
 allowing applications to easily integrate with Sensu.
 
-## API
+## API {#sensu-api}
 
 Depends on: RabbitMQ, Redis
 
@@ -92,7 +92,7 @@ APIs. The API is capable of many actions, such as issuing check
 execution requests, resolving events, and removing a registered
 clients.
 
-## Dashboard
+## Dashboard {#sensu-dashboard}
 
 Depends on: API
 

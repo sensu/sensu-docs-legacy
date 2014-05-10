@@ -4,11 +4,11 @@ category: "API"
 title: "Info"
 ---
 
-# Info API Endpoint
+# Info API Endpoint {#info-api-endpoint}
 
 The info endpoint will return the Sensu version along with rabbitmq and redis information.
 
-## /info
+## /info {#info}
 
 example url: `http://localhost:4567/info`
 

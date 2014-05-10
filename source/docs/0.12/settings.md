@@ -5,6 +5,6 @@ title: "Settings"
 published: false
 ---
 
-# Sensu settings
+# Sensu settings {#sensu-settings}
 
 ... @TODO

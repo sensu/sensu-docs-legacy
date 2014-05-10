@@ -7,7 +7,7 @@ next:
   text: "Adding a check"
 ---
 
-# Guide
+# Guide {#guide}
 
 This guide provides instructions on how to manually install and
 configure Sensu and its dependencies on Linux.
@@ -18,14 +18,14 @@ tool, such as Chef and Puppet.
 * [Chef cookbook](https://github.com/sensu/sensu-chef)
 * [Puppet module](https://github.com/sensu/sensu-puppet)
 
-## Introduction
+## Introduction {#introduction}
 
 We will use two systems, one will run all of the Sensu components, and
 the other will only run the Sensu client. You may choose to only
 configure the system running all of the components, since it does run
 a Sensu client. We'll name our systems "monitor" and "agent".
 
-#### Monitor
+#### Monitor {#monitor}
 
 - RabbitMQ
 - Redis
@@ -34,11 +34,11 @@ a Sensu client. We'll name our systems "monitor" and "agent".
 - Sensu API
 - Sensu Dashboard
 
-#### Agent
+#### Agent {#agent}
 
 - Sensu client
 
-### Install Sensu server dependencies
+### Install Sensu server dependencies {#install-sensu-server-dependencies}
 
 On the "monitor" system, generate SSL certificates for Sensu, using
 the following instructions.
@@ -51,14 +51,14 @@ following instructions.
 - [Installing RabbitMQ](rabbitmq)
 - [Installing Redis](redis)
 
-### Install Sensu
+### Install Sensu {#install-sensu}
 
 On both systems, install Sensu using the following instructions.
 
 - [Installing Sensu](packages)
 
 
-### Configure Sensu connections
+### Configure Sensu connections {#configure-sensu-connections}
 
 Both systems run Sensu components that need to talk to RabbitMQ, so
 we'll provide Sensu with connection information.
@@ -112,7 +112,7 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/redis.json`.
 }
 ~~~
 
-### Configure the Sensu API and dashboard
+### Configure the Sensu API and dashboard {#configure-the-sensu-api-and-dashboard}
 
 The "monitor" system runs the Sensu API and dashboard, so we'll need
 to configure them.
@@ -142,7 +142,7 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/dashboard.json`.
 }
 ~~~
 
-### Configure the Sensu clients
+### Configure the Sensu clients {#configure-the-sensu-clients}
 
 On both systems, configure the Sensu client, providing them with
 information about themselves.
@@ -162,7 +162,7 @@ On both systems, create/edit `/etc/sensu/conf.d/client.json`.
 }
 ~~~
 
-### Enable Sensu services
+### Enable Sensu services {#enable-sensu-services}
 
 The Sensu packages install sysvinit (init.d) scripts directly to
 `/etc/init.d/`. All services are disabled by default.
@@ -170,9 +170,11 @@ The Sensu packages install sysvinit (init.d) scripts directly to
 Alternative supervisor scripts (such as upstart) are available in
 `/usr/share/sensu` for those that may want them.
 
+#### "Monitor" system {#enable-monitor-system-services}
+
 On the "monitor" system, enable all of the Sensu components.
 
-#### Debian and Ubuntu
+##### Debian and Ubuntu {#monitor-system-services-debian-and-ubuntu}
 
 ~~~ shell
 update-rc.d sensu-server defaults
@@ -181,7 +183,7 @@ update-rc.d sensu-api defaults
 update-rc.d sensu-dashboard defaults
 ~~~
 
-#### CentOS (RHEL)
+##### CentOS (RHEL) {#monitor-system-services-centos-and-rhel}
 
 ~~~ shell
 chkconfig sensu-server on
@@ -190,21 +192,25 @@ chkconfig sensu-api on
 chkconfig sensu-dashboard on
 ~~~
 
+#### "Agent" system {#enable-agent-system-services}
+
 On the "agent" system, enable the Sensu client.
 
-#### Debian and Ubuntu
+##### Debian and Ubuntu {#agent-system-services-debian-and-ubuntu}
 
 ~~~ shell
 update-rc.d sensu-client defaults
 ~~~
 
-#### CentOS (RHEL)
+##### CentOS (RHEL) {#agent-system-services-debian-and-ubuntu}
 
 ~~~ shell
 chkconfig sensu-client on
 ~~~
 
-### Start Sensu services
+### Start Sensu services {#start-sensu-services}
+
+#### "Monitor" system {#start-monitor-system-services}
 
 On the "monitor" system, start all of the Sensu components.
 
@@ -215,18 +221,22 @@ On the "monitor" system, start all of the Sensu components.
 /etc/init.d/sensu-dashboard start
 ~~~
 
+#### "Agent" system {#start-agent-system-services}
+
 On the "agent" system, start the Sensu client.
 
 ~~~ shell
 /etc/init.d/sensu-client start
 ~~~
 
+### Dashboard {#dashboard}
+
 The Sensu dashboard should now be accessible on the "monitor" system,
 `http://admin:secret@SUBSTITUTE_ME:8080`.
 
 Log files for Sensu components are available in `/var/log/sensu`.
 
-## Next Steps
+## Next Steps {#next-steps}
 
 Now that you have a running Sensu installation, the next steps are to
 add monitoring checks and event handlers.

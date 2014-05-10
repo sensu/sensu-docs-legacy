@@ -4,11 +4,11 @@ category: "API"
 title: "Checks"
 ---
 
-# Check API Endpoints
+# Check API Endpoints {#check-api-endpoints}
 
 The check endpoints allow you to list and issue checks.
 
-## `/checks`
+## `/checks` {#checks}
 
 example url - http://localhost:4567/checks
 
@@ -39,7 +39,7 @@ example url - http://localhost:4567/checks
 
   - error: 500
 
-## `/checks/:name`
+## `/checks/:name` {#checks-name}
 
 example url - `http://localhost:4567/checks/check_chef_client`
 
@@ -62,7 +62,7 @@ example url - `http://localhost:4567/checks/check_chef_client`
 
   - error: 500
 
-## `/request`
+## `/request` {#request}
 
 example url - `http://localhost:4567/request`
 

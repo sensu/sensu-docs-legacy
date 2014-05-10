@@ -4,7 +4,7 @@ category: "API"
 title: "Events"
 ---
 
-# Events API Endpoints
+# Events API Endpoints {#events-api-endpoints}
 
 The event endpoints allows you to list and resolve events.
 
@@ -62,7 +62,7 @@ example url - `http://localhost:4567/events/client_1`
 
   - error: 500
 
-## `/events/:client/:check`
+## `/events/:client/:check` {#events-client-check}
 
 example url - `http://localhost:4567/events/client_1/check_chef_client`
 
@@ -93,7 +93,7 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
 
   - error: 500
 
-## `/resolve`
+## `/resolve` {#resolve}
 
 example url - `http://localhost:4567/resolve`
 

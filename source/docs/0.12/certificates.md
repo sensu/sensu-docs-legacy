@@ -7,7 +7,7 @@ next:
   text: "RabbitMQ"
 ---
 
-# SSL certificates
+# SSL certificates {#ssl-certificates}
 
 Sensu uses SSL for secure communication between components and
 RabbitMQ. It is possible to use Sensu without SSL, however, it is
@@ -16,7 +16,7 @@ self-signed OpenSSL certificates, but you can also use the
 instructions available on the RabbitMQ SSL
 [page](http://www.rabbitmq.com/ssl.html).
 
-## Create an authority and certificates
+## Create an authority and certificates {#create-an-authority-and-certificates}
 
 You may run the following on any system that has the OpenSSL tools
 installed.
@@ -42,7 +42,7 @@ cd ssl_certs
 ./ssl_certs.sh generate
 ~~~
 
-## Limitations
+## Limitations {#limitations}
 
 Below is a summary of the discussion captured in this thread: [Issue
 \#434](https://github.com/sensu/sensu/issues/434)

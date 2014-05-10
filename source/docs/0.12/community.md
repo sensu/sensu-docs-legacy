@@ -4,7 +4,7 @@ category: "Project"
 title: "Community Projects"
 ---
 
-## Configuration Management
+## Configuration Management {#configuration-management}
 
 * [Chef Cookbook](https://github.com/sensu/sensu-chef)
 
@@ -23,14 +23,14 @@ title: "Community Projects"
   - A Chef handler to cleanup stale Sensu checks by cross-checking the files in your checks directory with the resources from the Chef run.
 
 
-## Plugins, Handlers and extensions
+## Plugins, Handlers and extensions {#plugins-handler-and-extensions}
 
 * [Community plugins](https://github.com/sensu/sensu-community-plugins)
 
   - The official community plugins bundle. This gem contains some example plugins and handlers for Sensu. Most of them are implemented in Ruby and use the sensu-plugin framework (a small gem); some also depend on additional gems (e.g. mysql). Some are shell scripts! All languages are welcome.
 
 
-## Other Projects
+## Other Projects {#other-projects}
 
 * [Sensu-cli](https://github.com/agent462/sensu-cli)
 

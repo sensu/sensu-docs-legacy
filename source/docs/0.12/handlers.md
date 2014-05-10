@@ -4,17 +4,18 @@ category: "Configuration"
 title: "Handlers"
 ---
 
-# Sensu handlers
+# Sensu handlers {#sensu-handlers}
 
-## What are handlers?
+## What are handlers? {#what-are-handlers}
 
 Handlers are for taking action on [event data](events), such as sending an
 email alert, creating a PagerDuty incident, or storing metrics in Graphite.
 
-## Types
+## Types {#handler-types}
+
 There are several types of handlers.
 
-### Pipe
+### Pipe {#pipe-handler}
 
 Pipe handlers are for executing a command (or script), passing it the
 event data via `STDIN`. Here is an example that takes in event data, and
@@ -35,7 +36,7 @@ File.open(file_name, 'w') do |file|
 end
 ~~~
 
-#### Handler definition
+#### Handler definition {#pipe-handler-definition}
 
 ~~~ json
 {
@@ -61,7 +62,7 @@ Here is an example that uses `mailx` to email the event data.
 }
 ~~~
 
-#### Handler configuration
+#### Handler configuration {#pipe-handler-configuration}
 
 Handlers using the `sensu-plugin` Rubygem have access to Sensu configs
 that can be used to configure specific settings for the handlers.  The
@@ -103,7 +104,8 @@ configuration values.
 }
 ~~~
 
-### TCP
+### TCP {#tcp-handler}
+
 TCP handlers are for writing event data to a TCP socket.
 
 Here is an example that writes event data to a local TCP socket, port `4242`.
@@ -122,7 +124,7 @@ Here is an example that writes event data to a local TCP socket, port `4242`.
 }
 ~~~
 
-### UDP
+### UDP {#udp-handler}
 
 UDP handlers are for writing event data to a UDP socket.
 
@@ -142,7 +144,7 @@ Here is an example that writes event data to a local UDP socket, port `2424`.
 }
 ~~~
 
-### AMQP
+### AMQP {#amqp-handler}
 
 AMQP handlers are for publishing event data on an AMQP exchange.
 
@@ -166,7 +168,7 @@ Refer to the Ruby AMQP library documentation on
 [working with exchanges](http://rubyamqp.info/articles/working_with_exchanges/)
 for exchange options.
 
-### Set
+### Sets {#handler-sets}
 
 Handler sets are for grouping handlers; a way to send the same event
 data to one or more handlers, or simply create an alias.
@@ -185,7 +187,7 @@ data to one or more handlers, or simply create an alias.
 }
 ~~~
 
-## Severity filtering
+## Severity filtering {#severity-filtering}
 
 Handlers have the option to only handle events of a particular severity.
 For example, the PagerDuty handler should only be used when an event has

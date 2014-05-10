@@ -4,18 +4,18 @@ category: "API"
 title: "Aggregates"
 ---
 
-# Aggregates API Endpoints
+# Aggregates API Endpoints {#aggregates-api-endpoints}
 
 The aggregate endpoints allows you to list and delete aggregate checks.
 
-## `/aggregates`
+## `/aggregates` {#aggregates}
 
   example url - http://localhost:4567/aggregates
 
 * `GET`: returns the list of aggregates
 
   - Parameters
-    
+
     - `limit`
 
       - optional
@@ -24,7 +24,7 @@ The aggregate endpoints allows you to list and delete aggregate checks.
 
       - description: "The number of aggregates to return."
 
-    - `offset` 
+    - `offset`
 
       - optional
 
@@ -51,7 +51,7 @@ The aggregate endpoints allows you to list and delete aggregate checks.
 
   - error: 500
 
-## `/aggregates/:check_name`
+## `/aggregates/:check_name` {#aggregates-check_name}
 
 example url - http://localhost:4567/aggregates/check_something
 
@@ -62,7 +62,7 @@ example url - http://localhost:4567/aggregates/check_something
 
   - success: 200:
 
-    ~~~ json 
+    ~~~ json
     [
       1370738973,1370738943,1370738913,1370738883,1370738853,1370738823,1370738793,1370738763,1370738733
     ]
@@ -81,24 +81,24 @@ example url - http://localhost:4567/aggregates/check_something
 
   - error: 500
 
-## `/aggregates/:check_name/:check_issued`
+## `/aggregates/:check_name/:check_issued` {#aggregates-check_name-check_issued}
 
 example url - http://localhost:4567/aggregates/client_1/check_1
 
 * `GET`: returns the list of aggregates
 
   - Parameters
-    
+
     - `summarize`
-    
+
       - value: `output`
-    
+
       - optional
 
       - description: "Summarizes the output field in the event data. (summarize=ouput)"
 
       - example:  `http://localhost:4567/aggregates/client_1/check_1?summarize=output`
-    
+
     - `results`
 
       - value: boolean

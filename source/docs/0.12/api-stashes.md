@@ -4,11 +4,11 @@ category: "API"
 title: "Stashes"
 ---
 
-# Stashes API Endpoint
+# Stashes API Endpoint {#stashes-api-endpoint}
 
 The stashes endpoints allows you to create, list and delete stashes.
 
-## `/stashes`
+## `/stashes` {#stashes}
 
 example url - `http://localhost:4567/stashes`
 
@@ -85,7 +85,7 @@ example url - `http://localhost:4567/stashes`
 
   - error: 500
 
-## `/stashes/:path`
+## `/stashes/:path` {#stashes-path}
 
 example url - `http://localhost:4567/stashes/foo`
 
