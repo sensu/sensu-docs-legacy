@@ -27,7 +27,7 @@ same as Nagios plugins so you can re-use Nagios plugins as well.
 
 We're going to use `check-procs.rb` from the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins)
-repo. 
+repo.
 
 If you have installed Sensu from the omnibus packages you can continue
 to installing the `check-procs.rb` plugin. Otherwise we need to install
@@ -44,7 +44,7 @@ Download and install `check-procs.rb`:
 wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
 chmod 755 /etc/sensu/plugins/check-procs.rb
 ~~~
-    
+
 ## Create the check definition on the Sensu server
 
 Create this file on the Sensu server:
@@ -95,7 +95,7 @@ And on the server we should see the following in `/var/log/sensu/sensu-server.lo
 
     I, [2012-01-18T21:18:07.559666 #30970]  INFO -- : [publisher] -- publishing check request -- cron_check -- webservers {"message":"[publisher] -- publishing check request -- cron_check -- webservers","level":"info","timestamp":"2012-01-18T21:18:07.   %6N-0700"}
     I, [2012-01-18T21:25:07.745012 #30970]  INFO -- : [result] -- received result -- sensu-client.domain.tld -- cron_check -- 0 -- CheckProcs OK: Found 1 matching processes; cmd /crond/
-    
+
 Next, let's see if we can raise an alert.
 
     /etc/init.d/crond stop
@@ -128,22 +128,22 @@ same as Nagios plugins so you can re-use Nagios plugins as well.
 
 We're going to use `check-disk-windows.rb` from the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins)
-repo. 
+repo.
 
-You must have installed Sensu from the MSI package before continuing 
+You must have installed Sensu from the MSI package before continuing
 to the install of the `check-disk-windows.rb` plugin.
 
 We need to install the `sensu-plugin` gem which has various helper classes used by many of
 the community plugins:
 
 ~~~ bash
-    C:> \opt\sensu\embedded\bin\gem install sensu-plugin --no-rdoc --no-ri
+C:> \opt\sensu\embedded\bin\gem install sensu-plugin --no-rdoc --no-ri
 ~~~
 
 Our check-disk-windows.rb plugin also requires the ActiveSupport 4.0 gem or above.
 
 ~~~ bash
-    C:> \opt\sensu\embedded\bin\gem install activesupport --no-rdoc --no-ri
+C:> \opt\sensu\embedded\bin\gem install activesupport --no-rdoc --no-ri
 ~~~
 
 Download `check-disk-windows.rb` from the [sensu-community-plugins](https://raw.github.com/sensu/sensu-community-plugins/master/plugins/windows/check-disk-windows.rb)
@@ -152,7 +152,7 @@ repo to your Windows client.
 Create the plugins directory and copy the downloaded check-disk-windows.rb to the new directory.
 
 ~~~ bash
-    C:\opt\sensu\plugins\check-disk-windows.rb
+C:\opt\sensu\plugins\check-disk-windows.rb
 ~~~
 
 ## Create the check definition on the Sensu server
@@ -210,7 +210,7 @@ And on the server we should see the following in `/var/log/sensu/sensu-server.lo
 ~~~ json
 {"timestamp":"2013-09-04T11:39:12.442472-0500","level":"info","message":"publishing check request","payload":{"name":"check-disk-windows","issued":1378312752,"command":"/opt/sensu/plugins/check-disk-windows.rb"},"subscribers":["windows"]}
 ~~~
-    
+
 Next, let's see if we can raise an alert by lowering the default WARNING
 threshhold to 10% (or to a level less than the free space available on
 your volumes)
@@ -235,4 +235,3 @@ Restart the sensu-server service.
 
 After about a minute we should see an alert on the sensu-dashboard:
 `http://<SERVER IP>:8080`, and in the `sensu-server.log`.
-

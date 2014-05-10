@@ -207,13 +207,13 @@ easily using your CM tool.
 * Configure `/etc/sensu/conf.d/client.json`
 
 ~~~ json
-    {
-      "client": {
-        "name": "sensu-server.dom.tld",
-        "address": "10.0.0.1",
-        "subscriptions": [ "test" ]
-      }
-    }
+{
+  "client": {
+    "name": "sensu-server.dom.tld",
+    "address": "10.0.0.1",
+    "subscriptions": [ "test" ]
+  }
+}
 ~~~
 
 
@@ -222,8 +222,8 @@ Now let's try to start the Sensu components:
 ~~~ bash
 sudo /etc/init.d/sensu-server start
 sudo /etc/init.d/sensu-api start
-sudo /etc/init.d/sensu-client start    
-sudo /etc/init.d/sensu-dashboard start    
+sudo /etc/init.d/sensu-client start
+sudo /etc/init.d/sensu-dashboard start
 ~~~
 
 If all goes well, the 4 processes mentioned above will be running and
@@ -296,7 +296,7 @@ These can be obtained from the Sensu server or from another Sensu client node (l
       "private_key_file": "/opt/sensu/ssl/key.pem"
     }
   }
-}    
+}
 ~~~
 
 Be sure to change the port and vhost values if you are not using the defaults.
@@ -353,4 +353,3 @@ add metrics to Graphite, etc)
 
 If you have further questions please visit the `#sensu` IRC channel on
 Freenode or send an email to the `sensu-users` mailing list.
-
