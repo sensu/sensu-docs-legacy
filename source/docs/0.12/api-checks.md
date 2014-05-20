@@ -4,11 +4,11 @@ category: "API"
 title: "Checks"
 ---
 
-# Check API Endpoints
+# Check API Endpoints {#check-api-endpoints}
 
 The check endpoints allow you to list and issue checks.
 
-## `/checks`
+## `/checks` {#checks}
 
 example url - http://localhost:4567/checks
 
@@ -16,7 +16,7 @@ example url - http://localhost:4567/checks
 
   - success: 200:
 
-    ``` json
+    ~~~ json
     [
       {
         "name": "check_chef_client",
@@ -35,11 +35,11 @@ example url - http://localhost:4567/checks
         "interval": 30
       }
     ]
-    ```
+    ~~~
 
   - error: 500
 
-## `/checks/:name`
+## `/checks/:name` {#checks-name}
 
 example url - `http://localhost:4567/checks/check_chef_client`
 
@@ -47,22 +47,22 @@ example url - `http://localhost:4567/checks/check_chef_client`
 
   - success: 200:
 
-      ``` json
-      {
-        "name": "check_chef_client",
-        "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
-        "subscribers": [
-          "chef-client"
-        ],
-        "interval": 60
-      }
-      ```
+    ~~~ json
+    {
+      "name": "check_chef_client",
+      "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
+      "subscribers": [
+        "chef-client"
+      ],
+      "interval": 60
+    }
+    ~~~
 
   - missing: 404
 
   - error: 500
 
-## `/request`
+## `/request` {#request}
 
 example url - `http://localhost:4567/request`
 
@@ -70,14 +70,14 @@ example url - `http://localhost:4567/request`
 
   - payload:
 
-      ``` json
-      {
-        "check": "check_chef_client",
-        "subscribers": [
-          "chef-client"
-        ]
-      }
-      ```
+    ~~~ json
+    {
+      "check": "check_chef_client",
+      "subscribers": [
+        "chef-client"
+      ]
+    }
+    ~~~
 
   - success: 202
 

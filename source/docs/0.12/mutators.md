@@ -4,23 +4,24 @@ category: "Configuration"
 title: "Mutators"
 ---
 
-# Sensu mutators
+# Sensu mutators {#sensu-mutators}
 
 Mutators are handler-specific data massagers that can alter event data
 before it is passed to a [handler](handlers).
 
 This is in effect what's happening:
 
-``` bash
+~~~ bash
 cat event.json | mutator.rb | handler.rb
-```
+~~~
 
-## Example
+## Example {#example-mutator}
+
 Here is an example that takes in event data, tags it, and spits out the
 modified data to `STDOUT` for the handler to consume. This event mutator
 is stored in `/etc/sensu/mutators/tag.rb`
 
-``` ruby
+~~~ ruby
 #!/usr/bin/env ruby
 
 require 'rubygems'
@@ -32,11 +33,11 @@ event = JSON.parse(STDIN.read, :symbolize_names => true)
 event.merge!(:mutated => true, :its_a_tumor => true)
 # Output mutated event data to STDOUT
 puts event.to_json
-```
+~~~
 
-## Mutator definition
+## Mutator definition {#mutator-definition}
 
-``` json
+~~~ json
 {
   "mutators": {
     "tag": {
@@ -44,11 +45,11 @@ puts event.to_json
     }
   }
 }
-```
+~~~
 
-## Use the mutator for a specific handler
+## Use the mutator for a specific handler {#use-the-mutator-for-a-specific-handler}
 
-``` json
+~~~ json
 {
   "handlers": {
     "file": {
@@ -58,16 +59,17 @@ puts event.to_json
     }
   }
 }
-```
+~~~
 
-## Built-in mutators
+## Built-in mutators {#built-in-mutator}
 
 There are a few built-in mutators that do not require definitions.
 
-### Only check output
+### Only check output {#only-check-output}
+
 Only pass check output from event data to a handler.
 
-``` json
+~~~ json
 {
   "handlers": {
     "graphite": {
@@ -80,5 +82,4 @@ Only pass check output from event data to a handler.
     }
   }
 }
-```
-
+~~~

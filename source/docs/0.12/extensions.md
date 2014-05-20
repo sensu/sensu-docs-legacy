@@ -4,7 +4,7 @@ category: "Configuration"
 title: "Extensions"
 ---
 
-# Sensu extensions
+# Sensu extensions {#sensu-extensions}
 
 Extending Sensu is particularly useful in high-volume installations where you
 are running checks, mutating, or handling a large amount of your traffic in a
@@ -15,14 +15,14 @@ which can cause instability and performance degradation.
 
 Sensu currently supports extensions for checks, mutators, and handlers. Mutator
 and handler extensions, like standard mutator and handler plug-ins, run inside
-the sensu-server process. Check extensions run on client machines within the 
+the sensu-server process. Check extensions run on client machines within the
 sensu-client process. Your extensions will live within the Sensu::Extension
 module and will sub-class one of the support extension classes: Handler,
 Mutator, or Check.
 
-### Skeleton Extension
+## Skeleton Extension {#skeleton-extension}
 
-``` ruby
+~~~ ruby
 
 module Sensu::Extension
 
@@ -32,7 +32,7 @@ module Sensu::Extension
     # At this time EventMachine is available for interaction.
     def post_init
     end
- 
+
     # Must at a minimum define type and name. These are used by
     # Sensu during extension initialization.
     def definition
@@ -44,7 +44,7 @@ module Sensu::Extension
     end
 
     # Simple accessor for the extension's name. You could put a different
-    # value here that is slightly more descriptive, or you could simply 
+    # value here that is slightly more descriptive, or you could simply
     # refer to the definition name.
     def name
       definition[:name]
@@ -71,55 +71,55 @@ module Sensu::Extension
 
   end
 end
-```
+~~~
 
-Event data is passed to extensions just like plug-ins. 
-See: 
+Event data is passed to extensions just like plug-ins.
+See:
 
 [Events](events)
 
-The settings hash is passed to the extension as instance data (in the @settings 
+The settings hash is passed to the extension as instance data (in the @settings
 instance variable).
 
 [Settings](settings)
 
-## Handler Extensions
+## Handler Extensions {#handler-extensions}
 
 Handler extensions are useful in firehose situations. Let's assume that you have
-some portion of your traffic that you wish to relay to another location. You 
+some portion of your traffic that you wish to relay to another location. You
 could easily write a handler plug-in to do this, but an extension would be
 significantly less resource intensive. Were a simple firehose implemented in
-a plug-in, every event would cause a fork of the parent ruby process and 
+a plug-in, every event would cause a fork of the parent ruby process and
 writing data over a TCP (more likely) or UDP connection.
 
 An extension, on the other hand, could maintain persistent TCP connections
 to the firehose destination and simply write serialized event data over that
 connection.
 
-## Mutator Extensions
+## Mutator Extensions {#mutator-extensions}
 
-Mutator extensions are particularly helpful if you need to mutate a large number 
+Mutator extensions are particularly helpful if you need to mutate a large number
 of events. For example, if your organization was previously storing metrics
 in Graphite and wanted to move all metrics to OpenTSDB without re-writing all
 of your metrics-gathering code first, you could write a mutator extension to
 transform your metrics inline and submit them to OpenTSDB via a handler.
 
-This particular example ties together another bit of information about 
+This particular example ties together another bit of information about
 extensions. Handler extensions can be tied together with mutator extensions by
-specifying the mutator you want to use in tandem with your handler. In the 
-skeleton framework above we created a handler extension and tied it to the 
+specifying the mutator you want to use in tandem with your handler. In the
+skeleton framework above we created a handler extension and tied it to the
 'amutator' extensions.
 
 In this case, you have a great deal more flexibility with what happens to the
 event\_data. For example, you could yield a wholly different data structure
-to your handler to facilitate the implementation of some more complex 
-functionatliy. If, on the other hand, you want to be a passive mutator and 
-simply modify some class of events, you want to ensure that event\_data leaves 
+to your handler to facilitate the implementation of some more complex
+functionatliy. If, on the other hand, you want to be a passive mutator and
+simply modify some class of events, you want to ensure that event\_data leaves
 your mutator in a similar composition.
 
 As with all mutators, your mutator extension cannot be chained to existing
 mutators.
 
-## Check Extensions
+## Check Extensions {#check-extensions}
 
 ... @TODO

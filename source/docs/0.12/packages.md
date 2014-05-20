@@ -7,7 +7,7 @@ next:
   text: "Security"
 ---
 
-# Sensu packages
+# Sensu packages {#sensu-packages}
 
 The Sensu project provides "omnibus" packages, which contain all of
 the Sensu components, and have no dependencies. The packages are
@@ -29,73 +29,73 @@ unstable repositories are for experimental builds.
 
 Choose either main or unstable, do not use both.
 
-## Installing Sensu on Debian and Ubuntu using APT
+## Installing Sensu on Debian and Ubuntu using APT {#installing-sensu-on-debian-and-ubuntu-using-apt}
 
 Tested on:
 
 * Ubuntu 10.04, 11.04, 11.10, 12.04, 13.04, 13.10
 * Debian 6
 
-### Step #1 - Install the repository public key
+### Step #1 - Install the repository public key {#apt-install-the-respository-key}
 
 First we need to install the repository public key on our host to use
 the Sensu repositories.
 
-``` shell
+~~~ shell
 wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
-```
+~~~
 
-### Step #2 - Add the repository
+### Step #2 - Add the repository {#apt-add-the-repository}
 
 Main repository (stable).
 
-``` shell
+~~~ shell
 echo "deb     http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.d/sensu.list
-```
+~~~
 
 **Or** the **unstable** repository.
 
-``` shell
+~~~ shell
 echo "deb     http://repos.sensuapp.org/apt sensu unstable" > /etc/apt/sources.list.d/sensu.list
-```
+~~~
 
-### Step #3 - Install Sensu
+### Step #3 - Install Sensu {#apt-install-sensu}
 
-```shell
+~~~shell
 apt-get update
 apt-get install sensu
-```
+~~~
 
-## Installing Sensu on CentOS (RHEL) via Yum
+## Installing Sensu on CentOS (RHEL) using Yum {#installing-sensu-on-centos-and-rhel-using-yum}
 
 Tested on:
 
 * CentOS (RHEL) 5, 6
 * Fedora 15, 16, 17
 
-### Step #1 - Add the repository
+### Step #1 - Add the repository {#yum-add-the-repository}
 
 Write the following content to `/etc/yum.repos.d/sensu.repo`.
 
 Main repository (stable).
 
-``` shell
+~~~ shell
 [sensu]
 name=sensu-main
 baseurl=http://repos.sensuapp.org/yum/el/$releasever/$basearch/
 gpgcheck=0
 enabled=1
-```
+~~~
 
 **Or** the **unstable** repository.
 
-``` shell
+~~~ shell
 [sensu-unstable]
 name=sensu-unstable
 baseurl=http://repos.sensuapp.org/yum-unstable/el/$releasever/$basearch/
 gpgcheck=0
 enabled=1
-```
+~~~
 
 Valid values for `$releasever` are `5` and `6`.
 
@@ -106,18 +106,18 @@ hard-code the value to `5` or `6`.
   $releasver variable. Choosing `6` should be fine for at least Fedora
   16 and 17. Later versions will be tested as necessary.
 
-### Step #2 - Install Sensu
+### Step #2 - Install Sensu {#yum-install-sensu}
 
-```shell
+~~~shell
 yum install sensu
-```
+~~~
 
-## Installing Sensu on Windows via MSI
+## Installing Sensu on Windows via MSI {#installing-sensu-on-windows-via-msi}
 
 Tested on:
 
 * Windows 2008 R2
 
-### Step #1 - Download and install the MSI package
+### Step #1 - Download and install the MSI package {#windows-download-and-install-the-msi-package}
 
 Find it in the msi directory: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html)

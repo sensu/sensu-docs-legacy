@@ -15,7 +15,7 @@ example url - `http://localhost:4567/stashes`
 * `GET`: returns a list of stash paths
 
   - Parameters
-    
+
     - `limit`
 
       - optional
@@ -24,7 +24,7 @@ example url - `http://localhost:4567/stashes`
 
       - description: "The number of stashes to return."
 
-    - `offset` 
+    - `offset`
 
       - optional
 
@@ -36,12 +36,12 @@ example url - `http://localhost:4567/stashes`
 
   - success: 200:
 
-      ``` json
-      [
-        "foo",
-        "bar"
-      ]
-      ```
+    ~~~ json
+    [
+      "foo",
+      "bar"
+    ]
+    ~~~
 
   - error: 500
 
@@ -49,14 +49,14 @@ example url - `http://localhost:4567/stashes`
 
   - payload:
 
-      ``` json
-      {
-        "path": "random_stash",
-        "content": {
-          "reason": "things are stashy"
-        }
+    ~~~ json
+    {
+      "path": "random_stash",
+      "content": {
+        "reason": "things are stashy"
       }
-      ```
+    }
+    ~~~
 
   - success: 201
 
@@ -70,11 +70,11 @@ example url - `http://localhost:4567/stashes/foo`
 
   - payload:
 
-      ``` json
-      {
-        "bar": 42
-      }
-      ```
+    ~~~ json
+    {
+      "bar": 42
+    }
+    ~~~
 
   - success: 201
 
@@ -86,11 +86,11 @@ example url - `http://localhost:4567/stashes/foo`
 
   - success: 200:
 
-      ``` json
-      {
-        "bar": 42
-      }
-      ```
+    ~~~ json
+    {
+      "bar": 42
+    }
+    ~~~
 
   - missing: 404
 

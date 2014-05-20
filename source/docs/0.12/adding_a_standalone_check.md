@@ -4,17 +4,17 @@ category: "Getting Started"
 title: "Adding a standalone check"
 ---
 
-# Adding a Sensu standalone check
+# Adding a Sensu standalone check {#adding-a-sensu-standalone-check}
 
 Standalone checks are defined and executed on the client and require no
-server configuration. 
+server configuration.
 
 To add a standalone check we need to take a number of steps:
 
 * Install the check script or command on the client.
 * Define the check on the Sensu client.
 
-## Install check script on the client
+## Install check script on the client {#install-check-script-on-the-client}
 
 We need a script for the Sensu client to execute in order to check the
 condition we're interested in. The protocol for check scripts is the
@@ -29,18 +29,18 @@ to installing the `check-procs.rb` plugin. Otherwise we need to install
 the `sensu-plugin` gem which has various helper classes used by many of
 the community plugins:
 
-``` bash
+~~~ bash
 gem install sensu-plugin --no-rdoc --no-ri
-```
+~~~
 
 Download and install `check-procs.rb`:
 
-``` bash
+~~~ bash
 wget -O /etc/sensu/plugins/check-procs.rb https://raw.github.com/sensu/sensu-community-plugins/master/plugins/processes/check-procs.rb
 chmod 755 /etc/sensu/plugins/check-procs.rb
-```
+~~~
 
-## Adding a check definition on the client
+## Adding a check definition on the client {#adding-a-check-definition-on-the-client}
 
 Standalone checks are scheduled by the Sensu clients themselves, instead
 of having a Sensu server publish a check request to specific
@@ -48,7 +48,7 @@ subscriptions. Standalone checks are scheduled and executed on a any
 client they are defined on. Add `"standalone": true` to a check
 definition to make it standalone, replacing `"subscribers"`.
 
-``` json
+~~~ json
 {
   "checks": {
     "cron_check": {
@@ -59,9 +59,9 @@ definition to make it standalone, replacing `"subscribers"`.
     }
   }
 }
-```
+~~~
 
-## Testing the check
+## Testing the check {#testing-the-check}
 
 Finally, restart Sensu on the client.
 

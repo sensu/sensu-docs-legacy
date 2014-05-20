@@ -19,7 +19,7 @@ Pipe handlers are for executing a command (or script), passing it the
 event data via `STDIN`. Here is an example that takes in event data, and
 writes it to a file for inspection.
 
-``` ruby
+~~~ ruby
 #!/usr/bin/env ruby
 
 require 'rubygems'
@@ -32,11 +32,11 @@ file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}"
 File.open(file_name, 'w') do |file|
   file.write(JSON.pretty_generate(event))
 end
-```
+~~~
 
 #### Handler definition
 
-``` json
+~~~ json
 {
   "handlers": {
     "file": {
@@ -45,11 +45,11 @@ end
     }
   }
 }
-```
+~~~
 
 Here is an example that uses a `mail` to email the event data.
 
-``` json
+~~~ json
 {
   "handlers": {
     "mail": {
@@ -58,7 +58,7 @@ Here is an example that uses a `mail` to email the event data.
     }
   }
 }
-```
+~~~
 
 #### Handler configuration
 
@@ -82,7 +82,7 @@ although the typical convention is to use a top-level namespace for each
 handler.  Check in the handler itself to see how it is accessing
 configuration values.
 
-``` json
+~~~ json
 {
   "handlers": {
     "my_handler1": {
@@ -100,7 +100,7 @@ configuration values.
      "another_custom_setting": "some_custom_value"
    }
 }
-```
+~~~
 
 ### TCP
 
@@ -108,7 +108,7 @@ TCP handlers are for writing event data to a TCP socket.
 
 Here is an example that writes event data to a local TCP socket, port `4242`.
 
-``` json
+~~~ json
 {
   "handlers": {
     "tcp_socket": {
@@ -120,7 +120,7 @@ Here is an example that writes event data to a local TCP socket, port `4242`.
     }
   }
 }
-```
+~~~
 
 ### UDP
 
@@ -128,7 +128,7 @@ UDP handlers are for writing event data to a UDP socket.
 
 Here is an example that writes event data to a local UDP socket, port `2424`.
 
-``` json
+~~~ json
 {
   "handlers": {
     "udp_socket": {
@@ -140,7 +140,7 @@ Here is an example that writes event data to a local UDP socket, port `2424`.
     }
   }
 }
-```
+~~~
 
 ### AMQP
 
@@ -148,7 +148,7 @@ AMQP handlers are for publishing event data on an AMQP exchange.
 
 Here is an example that publishes event data on an AMQP exchange (limited to the broker used by Sensu).
 
-``` json
+~~~ json
 {
   "handlers": {
     "amqp_exchange": {
@@ -160,7 +160,7 @@ Here is an example that publishes event data on an AMQP exchange (limited to the
     }
   }
 }
-```
+~~~
 
 Refer to the Ruby AMQP library documentation on [working with
 exchanges](http://rubyamqp.info/articles/working_with_exchanges/) for
@@ -171,7 +171,7 @@ exchange options.
 Handler sets are for grouping handlers; a way to send the same event
 data to one or more handlers, or simply create an alias.
 
-``` json
+~~~ json
 {
   "handlers": {
     "default": {
@@ -183,7 +183,7 @@ data to one or more handlers, or simply create an alias.
     }
   }
 }
-```
+~~~
 
 ## Severity filtering
 
@@ -191,7 +191,7 @@ Handlers have the option to only handle events of a particular severity.
 For example, the PagerDuty handler should only be used when an event has
 a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
 
-``` json
+~~~ json
 {
   "handlers": {
     "pagerduty": {
@@ -204,4 +204,4 @@ a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
     }
   }
 }
-```
+~~~

@@ -4,11 +4,11 @@ category: "API"
 title: "Events"
 ---
 
-# Events API Endpoints
+# Events API Endpoints {#events-api-endpoints}
 
 The event endpoints allows you to list and resolve events.
 
-## `/events`
+## `/events` {#api-events}
 
 example url - `http://localhost:4567/events`
 
@@ -16,7 +16,7 @@ example url - `http://localhost:4567/events`
 
   - success: 200:
 
-      ``` json
+    ~~~ json
       [
         {
           "client": "client_1",
@@ -35,11 +35,11 @@ example url - `http://localhost:4567/events`
           "flapping": false
         }
       ]
-      ```
+    ~~~
 
   - error: 500
 
-## `/events/:client`
+## `/events/:client` {#api-client}
 
 example url - `http://localhost:4567/events/client_1`
 
@@ -47,30 +47,8 @@ example url - `http://localhost:4567/events/client_1`
 
   - success: 200:
 
-      ``` json
-      [
-        {
-          "client": "client_1",
-          "check": "check_chef_client",
-          "occurrences": 1,
-          "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-          "flapping": false,
-          "status": 1
-        }
-      ]
-      ```
-
-  - error: 500
-
-## `/events/:client/:check`
-
-example url - `http://localhost:4567/events/client_1/check_chef_client`
-
-* `GET`: returns an event
-
-  - success: 200:
-
-      ``` json
+    ~~~ json
+    [
       {
         "client": "client_1",
         "check": "check_chef_client",
@@ -79,7 +57,29 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
         "flapping": false,
         "status": 1
       }
-      ```
+    ]
+    ~~~
+
+  - error: 500
+
+## `/events/:client/:check` {#events-client-check}
+
+example url - `http://localhost:4567/events/client_1/check_chef_client`
+
+* `GET`: returns an event
+
+  - success: 200:
+
+    ~~~ json
+    {
+      "client": "client_1",
+      "check": "check_chef_client",
+      "occurrences": 1,
+      "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
+      "flapping": false,
+      "status": 1
+    }
+    ~~~
 
   - missing: 404
 
@@ -93,7 +93,7 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
 
   - error: 500
 
-## `/resolve`
+## `/resolve` {#resolve}
 
 example url - `http://localhost:4567/resolve`
 
@@ -101,12 +101,12 @@ example url - `http://localhost:4567/resolve`
 
   - payload:
 
-      ``` json
-      {
-        "client": "client_1",
-        "check": "check_chef_client"
-      }
-      ```
+    ~~~ json
+    {
+      "client": "client_1",
+      "check": "check_chef_client"
+    }
+    ~~~
 
   - success: 202
 

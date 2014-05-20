@@ -4,7 +4,7 @@ category: "Installation"
 title: "Security"
 ---
 
-# Security
+# Security {#security}
 
 Sensu leverages a set of services that need to be secured, each with
 their own limitations and exposure.
@@ -12,7 +12,7 @@ their own limitations and exposure.
 This page provides information to help you secure your Sensu
 installation.
 
-## RabbitMQ
+## RabbitMQ {#rabbitmq}
 
 Sensu leverages RabbitMQ authentication and SSL to secure
 communication. You can learn about SSL certificate generation and
@@ -23,7 +23,7 @@ port (`5671`) without any restrictions, if peer verification is
 enabled. Removing the default `guest` user and using randomly
 generated user names and passwords is highly recommended.
 
-## Redis
+## Redis {#redis}
 
 Sensu uses Redis for storing data, a fantastic, simple data store,
 that unfortunately doesn't provide proper authentication or SSL.
@@ -34,7 +34,7 @@ to the port to certain hosts is recommended.
 [Stunnel](http://www.stunnel.org) may be used to encrypt (SSL) Redis
 traffic.
 
-## Sensu API
+## Sensu API {#sensu-api}
 
 The Sensu API provides basic HTTP authentication, but doesn't support
 HTTPS (SSL). You may use a reverse proxy, such as

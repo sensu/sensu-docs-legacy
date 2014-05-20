@@ -4,13 +4,13 @@ category: "Configuration"
 title: "Event Data"
 ---
 
-# Sensu event data
+# Sensu event data {#sensu-event-data}
 
 Event data consists of client and check information, and some metadata.
 
 Event data is JSON encoded, making it  language-independent and fairly human readable.
 
-``` json
+~~~ json
 {
   "client":{
     "name": "host01",
@@ -42,4 +42,4 @@ Event data is JSON encoded, making it  language-independent and fairly human rea
   "occurrences": 1,
   "action": "create"
 }
-```
+~~~
