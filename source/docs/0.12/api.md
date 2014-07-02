@@ -14,7 +14,7 @@ When using the Sensu packages, you may start the API on one or more boxes with `
 
 ## Configuration {#configuration}
 
-The sensu-api is generally configured in the `/etc/sensu/config.json`; refer to [installing sensu](installing_sensu) for more information.  The available options for the api configuration are as follows:
+The sensu-api is generally configured in the `/etc/sensu/config.json`; refer to [installing sensu](guide) for more information.  The available options for the api configuration are as follows:
 
 ~~~ json
 {
