@@ -5,31 +5,31 @@ title: "Table of contents"
 hide_toc: true
 ---
 
-* **Overview**
-  * [Overview of Sensu](overview)
+* **概要**
+  * [Sensu 概要](overview)
 
-* **Installation**
-  * [Installing Sensu](installing_sensu)
-  * [Sensu packages](packages)
-  * [Install RabbitMQ on CentOS and RHEL](installing_rabbitmq_centos)
-  * [Install RabbitMQ on Debian and Ubuntu](installing_rabbitmq_debian)
+* **インストール**
+  * [Sensu のインストール](installing_sensu)
+  * [Sensu パッケージ](packages)
+  * [RabbitMQ のインストール on CentOS and RHEL](installing_rabbitmq_centos)
+  * [RabbitMQ のインストール on Debian and Ubuntu](installing_rabbitmq_debian)
 
-* **Getting Started**
-  * [Adding a check](adding_a_check)
-  * [Adding a standalone check](adding_a_standalone_check)
-  * [Adding a metric](adding_a_metric)
-  * [Adding a handler](adding_a_handler)
+* **はじめましょう**
+  * [チェックを追加](adding_a_check)
+  * [スタンドアローン・チェックの追加](adding_a_standalone_check)
+  * [メトリックの追加](adding_a_metric)
+  * [ハンドラの追加](adding_a_handler)
 
-* **Configuration**
-  * [Clients](clients)
-  * [Checks](checks)
-  * [Keepalives](keepalives)
-  * [Handlers](handlers)
-  * [Mutators](mutators)
-  * [Extensions](extensions)
-  * [SSL Certificates](ssl)
+* **構成管理**
+  * [クライアント](clients)
+  * [チェック](checks)
+  * [キープアライブ](keepalives)
+  * [ハンドラ](handlers)
+  * [ミューテータ](mutators)
+  * [拡張](extensions)
+  * [SSL 証明書](ssl)
 
-* **Message Data** (?)
+* **メッセージ・データ** (?)
   * [Event Data](events)
 
 * **[API](api)**
@@ -41,14 +41,14 @@ hide_toc: true
   * [Info](api-info)
   * [Stashes](api-stashes)
 
-* **Project and FAQ**
+* **プロジェクトと FAQ**
   * [FAQ](faq)
-  * [Presentations about Sensu](presentations)
+  * [Sensu 関連のプレゼンテーション](presentations)
 
-* **Community and Support**
-  * [Community Projects](community)
-  * [Community and Commercial Support](/support/)
+* **コミュニティとサポート**
+  * [コミュニティ・プロジェクト](community)
+  * [コミュニティと商用サポート](/support/)
 
-* **Settings**
-  * [Settings](settings)
+* **設定**
+  * [設定](settings)
   
