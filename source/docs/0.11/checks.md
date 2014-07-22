@@ -276,7 +276,7 @@ definition to make it standalone, replacing `"subscribers"`.
 ### Manually triggered checks
 
 In addition to server-scheduled and client-scheduled (standalone) checks, checks can be
-defined that are not scheduled for regualar execution.  These pre-defined checks can be
+defined that are not scheduled for regular execution.  These pre-defined checks can be
 triggered through the API. Add `"publish": false` to a check definition to disable the
 interval-based scheduling. The `interval` field may still be required to pass validation.
 
