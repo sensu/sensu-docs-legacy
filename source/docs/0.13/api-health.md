@@ -1,5 +1,5 @@
 ---
-version: "0.12"
+version: "0.13"
 category: "API"
 title: "Health"
 alert: "Added in Sensu version 0.9.13+"

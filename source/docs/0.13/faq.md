@@ -1,5 +1,5 @@
 ---
-version: "0.12"
+version: "0.13"
 category: "Project"
 title: "FAQ"
 ---
@@ -8,7 +8,7 @@ title: "FAQ"
 
 ### What's the latest version of Sensu? {#whats-the-latest-version-of-sensu}
 
-The latest version of Sensu is 0.12.
+The latest version of Sensu is 0.13.
 
 ### Does Sensu run on Windows? {#does-sensu-run-on-windows}
 

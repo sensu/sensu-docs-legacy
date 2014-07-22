@@ -1,5 +1,5 @@
 ---
-version: "0.12"
+version: "0.13"
 category: "Installation"
 title: "SSL certificates"
 next:
@@ -36,7 +36,7 @@ certificates that will be valid for `1825` days, or `5` years.
 
 ~~~ shell
 cd /tmp
-wget http://sensuapp.org/docs/0.12/tools/ssl_certs.tar
+wget http://sensuapp.org/docs/0.13/tools/ssl_certs.tar
 tar -xvf ssl_certs.tar
 cd ssl_certs
 ./ssl_certs.sh generate

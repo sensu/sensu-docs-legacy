@@ -1,5 +1,5 @@
 ---
-version: "0.12"
+version: "0.13"
 category: "Configuration"
 title: "Checks"
 ---
@@ -431,7 +431,7 @@ until it is no longer flapping. The implementation is very similar to
 
 ### Aggregate checks {#aggregate-checks}
 
-Checks can be aggregated and accessed through the [/aggregates API](http://sensuapp.org/docs/0.12/api-aggregates). Add
+Checks can be aggregated and accessed through the [/aggregates API](http://sensuapp.org/docs/0.13/api-aggregates). Add
 `"aggregate": true` to make the aggregate results available from the API.
 Also, consider adding `"handler": false` to prevent the server from sending
 the results to the handler.
