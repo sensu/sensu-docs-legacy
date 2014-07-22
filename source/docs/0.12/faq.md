@@ -123,11 +123,21 @@ unless that check is also defined on the client.
 
 ### Do checks need to exist on the client? {#do-checks-need-to-exist-on-the-client}
 
-No. They only need to be defined on the Sensu server(s), but can be
+The actual check scripts or binaries are executed on the client, they must 
+exist on the filesystem for the Sensu client to execute.
+
+They only need to be **defined** on the Sensu server(s), but can be
 defined on the client to override certain check definition attributes.
-Another case where a check needs to be present on the client is when
-it is being defined as a standalone check. In `safe mode` the check
-has to exist on both the client and the server.
+Another case where a check needs to be defined on the client is when
+it is being defined as a standalone check. 
+
+If a client has `safe_mode` enabled, a check must be defined on both the 
+client and the server.
+
+In summary:
+* Normal subscription based checks: Defined on the server only.
+* Subscription checks with `safe_mode` enabled on the client: Defined on the server and client.
+* Standlone checks: Defined on the client.
 
 ### How do I configure a standalone-check? {#how-do-I-configure-a-standalone-check}
 
