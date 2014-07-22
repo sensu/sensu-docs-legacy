@@ -90,7 +90,7 @@ The Sensu API provides a REST-like interface to Sensu's data, such as
 registered clients and current events. You may run one or more Sensu
 APIs. The API is capable of many actions, such as issuing check
 execution requests, resolving events, and removing a registered
-clients.
+client.
 
 ## Dashboard {#sensu-dashboard}
 
