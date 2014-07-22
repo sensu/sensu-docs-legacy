@@ -293,7 +293,7 @@ echo "$SCHEME.cpu.usage $DIFF_USAGE `date +%s`"
 
 Standalone checks are scheduled by the Sensu clients themselves, instead
 of having a Sensu server publish a check request to specific
-subscriptions. Standalone checks are scheduled and executed on a any
+subscriptions. Standalone checks are scheduled and executed on any
 client they are defined on. Add `"standalone": true` to a check
 definition to make it standalone, replacing `"subscribers"`.
 
