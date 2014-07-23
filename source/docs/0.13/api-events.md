@@ -4,44 +4,58 @@ category: "API"
 title: "Events"
 ---
 
-# Events API Endpoints {#events-api-endpoints}
+# API Events Endpoints {#api-events-endpoints}
 
-The event endpoints allows you to list and resolve events.
+## `/events` {#events}
 
-## `/events` {#api-events}
-
-example url - `http://localhost:4567/events`
+List and resolve current events. Every event occurrence has a unique ID (random UUID).
 
 * `GET`: returns the list of current events
 
   - success: 200:
 
     ~~~ json
-      [
+    [
         {
-          "client": "client_1",
-          "check": "check_chef_client",
-          "occurrences": 1,
-          "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-          "status": 1,
-          "flapping": false
-        },
-        {
-          "client": "client_2",
-          "check": "check_web_stack",
-          "occurrences": 1,
-          "output": "WEB STACK CRITICAL - Apache is NOT responding\n",
-          "status": 2,
-          "flapping": false
+            "id": "1ccfdf59-d9ab-447c-ac11-fd84072b905a",
+            "client": {
+                "name": "i-424242",
+                "address": "127.0.0.1",
+                "subscriptions": [
+                    "webserver",
+                    "production"
+                ],
+                "timestamp": 1389374650
+            },
+            "check": {
+                "name": "chef-client-process",
+                "command": "check-procs -p chef-client -W 1",
+                "subscribers": [
+                    "production"
+                ],
+                "interval": 60,
+                "issued": 1389374667,
+                "executed": 1389374667,
+                "output": "WARNING Found 0 matching processes\n",
+                "status": 1,
+                "duration": 0.005,
+                "history": [
+                    "0",
+                    "1",
+                    "1"
+                ]
+            },
+            "occurrences": 2,
+            "action": "create"
         }
-      ]
+    ]
     ~~~
 
   - error: 500
 
-## `/events/:client` {#api-client}
+## `/events/:client` {#events-client}
 
-example url - `http://localhost:4567/events/client_1`
+Example URL: `http://hostname:4567/events/i-424242`
 
 * `GET`: returns the list of current events for a client
 
@@ -49,14 +63,38 @@ example url - `http://localhost:4567/events/client_1`
 
     ~~~ json
     [
-      {
-        "client": "client_1",
-        "check": "check_chef_client",
-        "occurrences": 1,
-        "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-        "flapping": false,
-        "status": 1
-      }
+        {
+            "id": "1ccfdf59-d9ab-447c-ac11-fd84072b905a",
+            "client": {
+                "name": "i-424242",
+                "address": "127.0.0.1",
+                "subscriptions": [
+                    "webserver",
+                    "production"
+                ],
+                "timestamp": 1389374650
+            },
+            "check": {
+                "name": "chef-client-process",
+                "command": "check-procs -p chef-client -W 1",
+                "subscribers": [
+                    "production"
+                ],
+                "interval": 60,
+                "issued": 1389374667,
+                "executed": 1389374667,
+                "output": "WARNING Found 0 matching processes\n",
+                "status": 1,
+                "duration": 0.005,
+                "history": [
+                    "0",
+                    "1",
+                    "1"
+                ]
+            },
+            "occurrences": 2,
+            "action": "create"
+        }
     ]
     ~~~
 
@@ -64,7 +102,7 @@ example url - `http://localhost:4567/events/client_1`
 
 ## `/events/:client/:check` {#events-client-check}
 
-example url - `http://localhost:4567/events/client_1/check_chef_client`
+Example URL: `http://hostname:4567/events/i-424242/chef-client-process`
 
 * `GET`: returns an event
 
@@ -72,12 +110,36 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
 
     ~~~ json
     {
-      "client": "client_1",
-      "check": "check_chef_client",
-      "occurrences": 1,
-      "output": "CHEF CLIENT WARNING - Daemon is NOT running\n",
-      "flapping": false,
-      "status": 1
+        "id": "1ccfdf59-d9ab-447c-ac11-fd84072b905a",
+        "client": {
+            "name": "i-424242",
+            "address": "127.0.0.1",
+            "subscriptions": [
+                "webserver",
+                "production"
+            ],
+            "timestamp": 1389374650
+        },
+        "check": {
+            "name": "chef-client-process",
+            "command": "check-procs -p chef-client -W 1",
+            "subscribers": [
+                "production"
+            ],
+            "interval": 60,
+            "issued": 1389374667,
+            "executed": 1389374667,
+            "output": "WARNING Found 0 matching processes\n",
+            "status": 1,
+            "duration": 0.005,
+            "history": [
+                "0",
+                "1",
+                "1"
+            ]
+        },
+        "occurrences": 2,
+        "action": "create"
     }
     ~~~
 
@@ -95,7 +157,7 @@ example url - `http://localhost:4567/events/client_1/check_chef_client`
 
 ## `/resolve` {#resolve}
 
-example url - `http://localhost:4567/resolve`
+Example URL: `http://hostname:4567/resolve`
 
 * `POST`: resolves an event (delayed action)
 
@@ -103,8 +165,8 @@ example url - `http://localhost:4567/resolve`
 
     ~~~ json
     {
-      "client": "client_1",
-      "check": "check_chef_client"
+        "client": "i-424242",
+        "check": "chef-client-process"
     }
     ~~~
 

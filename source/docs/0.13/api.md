@@ -82,7 +82,7 @@ system health).
 
 See [API info documentation](api-info) for more information.
 
-## Stashes {#stashes}
+### /stashes {#stashes}
 
 Create, list, and delete stashes (JSON documents). Stashes are an HTTP
 key/value data store.
