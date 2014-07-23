@@ -35,7 +35,8 @@ hide_toc: true
 * **Message Data** (?)
   * [Event Data](events)
 
-* **[API](api)**
+* **API**
+  * [Overview](api-overview)
   * [Aggregates](api-aggregates)
   * [Checks](api-checks)
   * [Clients](api-clients)
