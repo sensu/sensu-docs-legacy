@@ -84,7 +84,7 @@ See [API info documentation](api-info) for more information.
 
 ### /stashes {#stashes}
 
-Create, list, and delete stashes (JSON documents). Stashes are an HTTP
-key/value data store.
+Create, list, and delete stashes (JSON documents). The stashes
+endpoint is an HTTP key/value data store.
 
 See [API stashes documentation](api-stashes) for more information.

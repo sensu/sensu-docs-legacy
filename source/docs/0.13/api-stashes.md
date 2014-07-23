@@ -4,15 +4,14 @@ category: "API"
 title: "Stashes"
 ---
 
-# Stashes API Endpoint {#stashes-api-endpoint}
+# API Stashes
 
-The stashes endpoints allows you to create, list and delete stashes.
+Create, list, and delete stashes (JSON documents). The stashes
+endpoint is an HTTP key/value data store.
 
 ## `/stashes` {#stashes}
 
-example url - `http://localhost:4567/stashes`
-
-* `GET`: returns a list of stash paths
+* `GET`: returns a list of stashes
 
   - Parameters
 
@@ -38,56 +37,26 @@ example url - `http://localhost:4567/stashes`
 
     ~~~ json
     [
-      {
-        "path": "silence/machine1/service1",
-        "content": {
-          "timestamp": 1383441836
+        {
+            "path": "silence/i-424242/chef_client_process",
+            "content": {
+                "timestamp": 1383441836
+            },
+            "expire": 3600
         },
-        "expire": 10054
-      },
-      {
-        "path": "silence/machine2",
-        "content": {
-         "timestamp": 1381350802
-        },
-        "expire": -1
-      }
+        {
+            "path": "application/storefront",
+            "content": {
+                "timestamp": 1381350802,
+                "endpoints": [
+                    "https://hostname/store"
+                ]
+            },
+            "expire": -1
+        }
     ]
     ~~~
   - error: 500
-
-* `POST`: Create a stash (JSON document)
-
-  - payload:
-
-    ~~~ json
-    {
-      "path": "random_stash",
-      "content": {
-        "reason": "things are stashy"
-      }
-    }
-    ~~~
-  - expiration: Stashes have an expiration duration (in seconds), default is never. The following payload will create a stash that expires after a minute.
-
-    ~~~ json
-    {
-      "path": "random_stash",
-      "expire": 60,
-      "content": {
-        "reason": "things are stashy"
-      }
-    }
-    ~~~
-
-
-  - success: 201
-
-  - error: 500
-
-## `/stashes/:path` {#stashes-path}
-
-example url - `http://localhost:4567/stashes/foo`
 
 * `POST`: create a stash (JSON document)
 
@@ -95,7 +64,41 @@ example url - `http://localhost:4567/stashes/foo`
 
     ~~~ json
     {
-      "bar": 42
+        "path": "example/stash",
+        "content": {
+            "message": "example"
+        }
+    }
+    ~~~
+
+  - expiration: stashes can have an expiration, in seconds, the
+    default is never.
+
+    ~~~ json
+    {
+        "path": "example/stash",
+        "content": {
+            "message": "example"
+        },
+        "expire": 60
+    }
+    ~~~
+
+  - success: 201
+
+  - error: 500
+
+## `/stashes/:path` {#stashes-path}
+
+Example URL: `http://hostname:4567/stashes/example/stash`
+
+* `POST`: create a stash (JSON document)
+
+  - payload:
+
+    ~~~ json
+    {
+        "message": "example"
     }
     ~~~
 
@@ -111,7 +114,7 @@ example url - `http://localhost:4567/stashes/foo`
 
     ~~~ json
     {
-      "bar": 42
+        "message": "example"
     }
     ~~~
 
@@ -119,7 +122,7 @@ example url - `http://localhost:4567/stashes/foo`
 
   - error: 500
 
-* `DELETE`: delete a stash (JSON document)
+* `DELETE`: delete a stash
 
   - success: 204
 
