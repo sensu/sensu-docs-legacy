@@ -4,13 +4,14 @@ category: "API"
 title: "Aggregates"
 ---
 
-# Aggregates API Endpoints {#aggregates-api-endpoints}
+# API Aggregates
 
-The aggregate endpoints allows you to list and delete aggregate checks.
+List and delete check aggregates.
+
+This endpoint provides the information needed to monitor a collection
+of machines running a service.
 
 ## `/aggregates` {#aggregates}
-
-  example url - http://localhost:4567/aggregates
 
 * `GET`: returns the list of aggregates
 
@@ -38,33 +39,40 @@ The aggregate endpoints allows you to list and delete aggregate checks.
 
     ~~~ json
     [
-      {
-        "check": "sshd_process",
-        "issued": [1370738883,1370738853,1370738823,1370738793,1370738763,1370738733,1370738703,1370738673]
-      },
-      {
-        "check": "ntp_process",
-        "issued": [1370738883,1370738853,1370738823,1370738793,1370738763,1370738733,1370738703,1370738673]
-      }
+        {
+            "check": "sshd_process",
+            "issued": [
+                1370738883,
+                1370738853
+            ]
+        },
+        {
+            "check": "ntp_process",
+            "issued": [
+                1370738884,
+                1370738854
+            ]
+        }
     ]
     ~~~
 
   - error: 500
 
-## `/aggregates/:check_name` {#aggregates-check_name}
+## `/aggregates/:check` {#aggregates-check_name}
 
-example url - http://localhost:4567/aggregates/check_something
+Example URL: `http://hostname:4567/aggregates/ntp_process`
 
-* `GET`: returns the list of aggregates
+* `GET`: returns the list of aggregates for a check
 
   - Parameters
-    - `age`: optional, "The number of seconds from now to get aggregates."
+    - `age`: optional, "The number of seconds old an aggregate must be to be listed."
 
   - success: 200:
 
     ~~~ json
     [
-      1370738973,1370738943,1370738913,1370738883,1370738853,1370738823,1370738793,1370738763,1370738733
+        1370738884,
+        1370738854
     ]
     ~~~
 
@@ -72,7 +80,7 @@ example url - http://localhost:4567/aggregates/check_something
 
   - error: 500
 
-* `DELETE`: returns the list of aggregates
+* `DELETE`: deletes all aggregates for a check
 
   - success: 204
     - No Content
@@ -81,11 +89,11 @@ example url - http://localhost:4567/aggregates/check_something
 
   - error: 500
 
-## `/aggregates/:check_name/:check_issued` {#aggregates-check_name-check_issued}
+## `/aggregates/:check/:issued` {#aggregates-check-issued}
 
-example url - http://localhost:4567/aggregates/client_1/check_1
+Example URL: `http://hostname:4567/aggregates/ntp_process/1370738854`
 
-* `GET`: returns the list of aggregates
+* `GET`: returns an aggregate
 
   - Parameters
 
@@ -97,7 +105,7 @@ example url - http://localhost:4567/aggregates/client_1/check_1
 
       - description: "Summarizes the output field in the event data. (summarize=ouput)"
 
-      - example:  `http://localhost:4567/aggregates/client_1/check_1?summarize=output`
+      - example: `http://hostname:4567/aggregates/ntp_process/1370738854?summarize=output`
 
     - `results`
 
@@ -105,19 +113,19 @@ example url - http://localhost:4567/aggregates/client_1/check_1
 
       - optional
 
-      - description: "Adds the event results data to the output"
+      - description: "Return the raw result data"
 
-      - example:  `http://localhost:4567/aggregates/client_1/check_1?results=true`
+      - example: `http://hostname:4567/aggregates/ntp_process/1370738854?results=true`
 
   - success: 200:
 
     ~~~ json
     {
-      "ok": 0,
-      "warning": 0,
-      "critical": 0,
-      "unknown": 1,
-      "total": 1
+        "ok": 2,
+        "warning": 1,
+        "critical": 0,
+        "unknown": 1,
+        "total": 4
     }
     ~~~
 

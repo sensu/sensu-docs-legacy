@@ -4,7 +4,7 @@ category: "API"
 title: "Events"
 ---
 
-# API Events Endpoints {#api-events-endpoints}
+# API Events
 
 ## `/events` {#events}
 
@@ -28,7 +28,7 @@ List and resolve current events. Every event occurrence has a unique ID (random 
                 "timestamp": 1389374650
             },
             "check": {
-                "name": "chef-client-process",
+                "name": "chef_client_process",
                 "command": "check-procs -p chef-client -W 1",
                 "subscribers": [
                     "production"
@@ -75,7 +75,7 @@ Example URL: `http://hostname:4567/events/i-424242`
                 "timestamp": 1389374650
             },
             "check": {
-                "name": "chef-client-process",
+                "name": "chef_client_process",
                 "command": "check-procs -p chef-client -W 1",
                 "subscribers": [
                     "production"
@@ -102,7 +102,7 @@ Example URL: `http://hostname:4567/events/i-424242`
 
 ## `/events/:client/:check` {#events-client-check}
 
-Example URL: `http://hostname:4567/events/i-424242/chef-client-process`
+Example URL: `http://hostname:4567/events/i-424242/chef_client_process`
 
 * `GET`: returns an event
 
@@ -121,7 +121,7 @@ Example URL: `http://hostname:4567/events/i-424242/chef-client-process`
             "timestamp": 1389374650
         },
         "check": {
-            "name": "chef-client-process",
+            "name": "chef_client_process",
             "command": "check-procs -p chef-client -W 1",
             "subscribers": [
                 "production"
@@ -166,7 +166,7 @@ Example URL: `http://hostname:4567/resolve`
     ~~~ json
     {
         "client": "i-424242",
-        "check": "chef-client-process"
+        "check": "chef_client_process"
     }
     ~~~
 
