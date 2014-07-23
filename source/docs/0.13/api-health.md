@@ -2,16 +2,16 @@
 version: "0.13"
 category: "API"
 title: "Health"
-alert: "Added in Sensu version 0.9.13+"
 ---
 
-# Health API Endpoint {#health-api-endpoint}
+# API Health
 
-The health endpoint checks to see if the api can connect to redis and rabbitmq.  It takes parameters for minimum consumers and maximum messages and checks rabbitmq.
+Check the status of the API's RabbitMQ & Redis connections, and query
+RabbitMQ's status (consumer and message counts).
 
 ## `/health` {#health}
 
-example url: `http://localhost:4567/health?consumers=2&messages=4`
+Example URL: `http://hostname:4567/health?consumers=2&messages=100`
 
 * `GET`, returns the API info
 
@@ -23,7 +23,7 @@ example url: `http://localhost:4567/health?consumers=2&messages=4`
 
       - value: integer
 
-      - description:  "The minimum number of consumers to be considered healthy."
+      - description:  "The minimum number of RabbitMQ queue consumers to be considered healthy."
 
     - `messages`
 
@@ -31,7 +31,7 @@ example url: `http://localhost:4567/health?consumers=2&messages=4`
 
       - value: integer
 
-      - description: "The maximum number of messages to be considered healthy."
+      - description: "The maximum number of RabbitMQ queue messages to be considered healthy."
 
   - success: 204
       - No Content
