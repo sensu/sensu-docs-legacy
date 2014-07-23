@@ -4,13 +4,11 @@ category: "API"
 title: "Clients"
 ---
 
-# Client API Endpoints {#client-api-endpoints}
+# API Clients
 
-The client endpoints allows you to list, delete and get the histroy of clients.
+List and delete client(s) information.
 
 ## `/clients` {#clients}
-
-example url - `http://localhost:4567/clients`
 
 * `GET`: returns the list of clients
 
@@ -38,33 +36,33 @@ example url - `http://localhost:4567/clients`
 
     ~~~ json
     [
-      {
-        "name": "client_1",
-        "address": "192.168.0.2",
-        "subscriptions": [
-          "chef-client",
-          "sensu-server"
-        ],
-        "timestamp": 1324674972
-      },
-      {
-        "name": "client_2",
-        "address": "192.168.0.3",
-        "subscriptions": [
-          "chef-client",
-          "webserver",
-          "memcached"
-        ],
-        "timestamp": 1324674956
-      }
+        {
+            "name": "i-334455",
+            "address": "192.168.0.2",
+            "subscriptions": [
+                "chef-client",
+                "sensu-server"
+            ],
+            "timestamp": 1324674972
+        },
+        {
+            "name": "i-424242",
+            "address": "192.168.0.3",
+            "subscriptions": [
+                "chef-client",
+                "webserver",
+                "memcached"
+            ],
+            "timestamp": 1324674956
+        }
     ]
     ~~~
 
   - error: 500
 
-## `/clients/:name` {#clients-name}
+## `/clients/:client` {#clients-client}
 
-example url - http://localhost:4567/clients/client_2
+Example URL: `http://hostname:4567/clients/i-424242`
 
 * `GET`: returns a client
 
@@ -72,14 +70,14 @@ example url - http://localhost:4567/clients/client_2
 
     ~~~ json
     {
-      "name": "client_2",
-      "address": "192.168.0.3",
-      "subscriptions": [
-        "chef-client",
-        "webserver",
-        "memcached"
-      ],
-      "timestamp": 1324674956
+        "name": "i-424242",
+        "address": "192.168.0.3",
+        "subscriptions": [
+            "chef-client",
+            "webserver",
+            "memcached"
+        ],
+        "timestamp": 1324674956
     }
     ~~~
 
@@ -95,9 +93,9 @@ example url - http://localhost:4567/clients/client_2
 
   - error: 500
 
-## `/clients/:name/history` {#clients-name-history}
+## `/clients/:client/history` {#clients-client-history}
 
-example url - http://localhost:4567/clients/client_2/history
+Example URL: `http://hostname:4567/clients/i-424242/history`
 
 * `GET`: returns the client history
 
@@ -105,24 +103,25 @@ example url - http://localhost:4567/clients/client_2/history
 
     ~~~ json
     [
-      {
-        "check": "redis_process",
-        "history": [127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127],
-        "last_execution": 1370725352,
-        "last_status": 127
-      },
-      {
-        "check": "redis_metrics",
-        "history": [127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127,127],
-        "last_execution": 1370725352,
-        "last_status": 127
-      },
-      {
-        "check": "keepalive",
-        "history": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        "last_execution": 1370725351,
-        "last_status": 0
-      }
+        {
+            "check": "chef_client_process",
+            "history": [
+                0,
+                1
+            ],
+            "last_execution": 1370725352,
+            "last_status": 1
+        },
+        {
+            "check": "keepalive",
+            "history": [
+              0,
+              0,
+              0
+            ],
+            "last_execution": 1370725351,
+            "last_status": 0
+        }
     ]
     ~~~
 
