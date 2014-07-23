@@ -91,14 +91,3 @@ registered clients and current events. You may run one or more Sensu
 APIs. The API is capable of many actions, such as issuing check
 execution requests, resolving events, and removing a registered
 client.
-
-## Dashboard {#sensu-dashboard}
-
-Depends on: API
-
-The Sensu dashboard is a web based dashboard, providing an overview of
-the health of your monitored infrastructure. The dashboard only
-communicates with the Sensu API, exposing its features/abilities, with
-a human friendly interface. The Sensu dashboard is not part of the
-Sensu "core", as it's common to create custom dashboards, however, it
-is included in the Sensu package.

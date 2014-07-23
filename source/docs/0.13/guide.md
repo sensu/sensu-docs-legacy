@@ -32,7 +32,6 @@ a Sensu client. We'll name our systems "monitor" and "agent".
 - Sensu server
 - Sensu client
 - Sensu API
-- Sensu Dashboard
 
 #### Agent {#agent}
 
@@ -112,10 +111,10 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/redis.json`.
 }
 ~~~
 
-### Configure the Sensu API and dashboard {#configure-the-sensu-api-and-dashboard}
+### Configure the Sensu API {#configure-the-sensu-api}
 
-The "monitor" system runs the Sensu API and dashboard, so we'll need
-to configure them.
+The "monitor" system runs the Sensu API, so we'll need to configure
+them.
 
 On the "monitor" system, create/edit `/etc/sensu/conf.d/api.json`.
 
@@ -124,18 +123,6 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/api.json`.
   "api": {
     "host": "localhost",
     "port": 4567,
-    "user": "admin",
-    "password": "secret"
-  }
-}
-~~~
-
-On the "monitor" system, create/edit `/etc/sensu/conf.d/dashboard.json`.
-
-~~~ json
-{
-  "dashboard": {
-    "port": 8080,
     "user": "admin",
     "password": "secret"
   }
@@ -180,7 +167,6 @@ On the "monitor" system, enable all of the Sensu components.
 update-rc.d sensu-server defaults
 update-rc.d sensu-client defaults
 update-rc.d sensu-api defaults
-update-rc.d sensu-dashboard defaults
 ~~~
 
 ##### CentOS (RHEL) {#monitor-system-services-centos-and-rhel}
@@ -189,7 +175,6 @@ update-rc.d sensu-dashboard defaults
 chkconfig sensu-server on
 chkconfig sensu-client on
 chkconfig sensu-api on
-chkconfig sensu-dashboard on
 ~~~
 
 #### "Agent" system {#enable-agent-system-services}
@@ -218,7 +203,6 @@ On the "monitor" system, start all of the Sensu components.
 /etc/init.d/sensu-server start
 /etc/init.d/sensu-client start
 /etc/init.d/sensu-api start
-/etc/init.d/sensu-dashboard start
 ~~~
 
 #### "Agent" system {#start-agent-system-services}
@@ -228,13 +212,6 @@ On the "agent" system, start the Sensu client.
 ~~~ shell
 /etc/init.d/sensu-client start
 ~~~
-
-### Dashboard {#dashboard}
-
-The Sensu dashboard should now be accessible on the "monitor" system,
-`http://admin:secret@SUBSTITUTE_ME:8080`.
-
-Log files for Sensu components are available in `/var/log/sensu`.
 
 ## Next Steps {#next-steps}
 
