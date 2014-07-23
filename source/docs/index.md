@@ -4,7 +4,7 @@ title: Sensu versions
 hide_toc: true
 ---
 
-### [Latest](/docs/latest/)
+## [Latest](/docs/latest/)
 
 ### [Version 0.13](/docs/0.13/)
 

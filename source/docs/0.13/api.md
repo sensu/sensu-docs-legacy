@@ -27,13 +27,13 @@ password.
 
 ~~~ json
 {
-  "api": {
-    "host": "localhost",
-    "port": 4567,
-    "user": "admin",
-    "password": "secret",
-    "bind": "0.0.0.0"
-  }
+    "api": {
+        "host": "localhost",
+        "port": 4567,
+        "user": "admin",
+        "password": "secret",
+        "bind": "0.0.0.0"
+    }
 }
 ~~~
 
