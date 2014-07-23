@@ -1,20 +1,29 @@
 ---
 version: "0.13"
 category: "API"
-title: "The Sensu API"
+title: "Sensu API"
 ---
 
-# The Sensu API {#the-sensu-api}
+# Sensu API {#api}
 
-The Sensu API provides access to the data Sensu servers collect, such as clients & events.
+The Sensu API provides access to the data that Sensu servers collect,
+such as client information & current events. The API can also resolve
+events and request check executions.
 
-The API is capable of requesting checks be executed and can resolve events.
+When using the Sensu [packages](packages), you can start the API on one or more
+machines using the init script, eg. `/etc/init.d/sensu-api start`.
 
-When using the Sensu packages, you may start the API on one or more boxes with `/etc/init.d/sensu-api start`.  Logs for the api are located at `/var/log/sensu/sensu-api.log`.
+The API log can be found at `/var/log/sensu/sensu-api.log`.
 
 ## Configuration {#configuration}
 
-The sensu-api is generally configured in the `/etc/sensu/config.json`; refer to [installing sensu](guide) for more information.  The available options for the api configuration are as follows:
+The Sensu API requires some configuration, that can be in included in
+`/etc/sensu/config.json`, or in its own configuration snippet, eg.
+`/etc/sensu/conf.d/api.json`.
+
+You must specify a port, all other configuration is optional. If you
+wish to configure basic authentication, you must provide a user and a
+password.
 
 ~~~ json
 {
@@ -22,64 +31,60 @@ The sensu-api is generally configured in the `/etc/sensu/config.json`; refer to 
     "host": "localhost",
     "port": 4567,
     "user": "admin",
-    "password": "shhh",
+    "password": "secret",
     "bind": "0.0.0.0"
   }
 }
 ~~~
 
-## Aggregates {#aggregates}
+## Endpoints {#endpoints}
 
-The aggregate endpoints allows you to list and delete aggregate checks.
+### /aggregates {#aggregates}
 
-base-url `http://localhost:4567/aggregates`
+List and delete check aggregates.
 
-See [Aggregates Endpoint Documentation](api-aggregates) for more information.
+This endpoint provides the information needed to monitor a collection
+of machines running a service.
 
-## Checks {#checks}
+See the [API aggregates documentation](api-aggregates) for more
+information.
 
-The check endpoints allow you to list and issue checks.
+### /checks {#checks}
 
-base-url `http://localhost:4567/checks`
+List locally defined checks and request executions.
 
-See [Checks Endpoint Documentation](api-checks) for more information.
+See [API checks documentation](api-checks) for more information.
 
-## Clients {#clients}
+### /clients {#clients}
 
-The client endpoints allows you to list, delete and get the history of clients.
+List and delete client(s) information.
 
-base-url `http://localhost:4567/clients`
+See [API clients documentation](api-clients) for more information.
 
-See [Clients Endpoint Documentation](api-clients) for more information.
+### /events {#events}
 
-## Events {#events}
+List and resolve current events.
 
-The event endpoints allows you to list and resolve events.
+See [API events documentation](api-events) for more information.
 
-base-url `http://localhost:4567/events`
+### /health {#health}
 
-See [Events Endpoint Documentation](api-events) for more information.
+Check the status of the API's RabbitMQ & Redis connections, and query
+RabbitMQ's status (consumer and message counts).
 
-## Health (0.9.13) {#health}
+See [API health documentation](api-health) for more information.
 
-The health endpoint checks to see if the api can connect to redis and rabbitmq.  It takes parameters for minimum consumers and maximum messages and checks rabbitmq.
+### /info {#info}
 
-base-url `http://localhost:4567/health`
+List the Sensu version and the RabbitMQ and Redis connection
+information (the same information that /health uses to determine
+system health).
 
-See [Health Endpoint Documentation](api-health) for more information.
-
-## Info {#infor}
-
-The info endpoint will return the Sensu version along with rabbitmq and redis information.
-
-base-url `http://localhost:4567/info`
-
-See [Info Endpoint Documentation](api-info) for more information.
+See [API info documentation](api-info) for more information.
 
 ## Stashes {#stashes}
 
-The stashes endpoints allows you to create, list and delete stashes.
+Create, list, and delete stashes (JSON documents). Stashes are an HTTP
+key/value data store.
 
-base-url `http://localhost:4567/stashes`
-
-See [Stashes Endpoint Documentation](api-stashes) for more information.
+See [API stashes documentation](api-stashes) for more information.
