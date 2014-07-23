@@ -216,7 +216,7 @@ On the "agent" system, start the Sensu client.
 ## Next Steps {#next-steps}
 
 Now that you have a running Sensu installation, the next steps are to
-add monitoring checks and event handlers.
+install a dashboard, add monitoring checks, and event handlers.
 
 If you have further questions please visit the `#sensu` IRC channel on
 Freenode or send an email to the `sensu-users` mailing list.

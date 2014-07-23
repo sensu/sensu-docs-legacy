@@ -19,6 +19,7 @@ hide_toc: true
   * [Upgrading](upgrading)
 
 * **Getting Started**
+  * [Install a dashboard](install_a_dashboard)
   * [Adding a check](adding_a_check)
   * [Adding a standalone check](adding_a_standalone_check)
   * [Adding a metric](adding_a_metric)
@@ -32,8 +33,8 @@ hide_toc: true
   * [Mutators](mutators)
   * [Extensions](extensions)
 
-* **Message Data** (?)
-  * [Event Data](events)
+* **Formats**
+  * [Event Data](event_data)
 
 * **API**
   * [Overview](api-overview)
@@ -44,6 +45,10 @@ hide_toc: true
   * [Health](api-health)
   * [Info](api-info)
   * [Stashes](api-stashes)
+
+* **Dashboards**
+  * [Overview](dashboards-overview)
+  * [Uchiwa](dashboards-uchiwa)
 
 * **Project and FAQ**
   * [FAQ](faq)
