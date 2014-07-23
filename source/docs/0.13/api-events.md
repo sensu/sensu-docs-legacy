@@ -76,7 +76,7 @@ Example URL: `http://hostname:4567/events/i-424242`
             },
             "check": {
                 "name": "chef_client_process",
-                "command": "check-procs -p chef-client -W 1",
+                "command": "check-procs.rb -p chef-client -W 1",
                 "subscribers": [
                     "production"
                 ],
@@ -122,7 +122,7 @@ Example URL: `http://hostname:4567/events/i-424242/chef_client_process`
         },
         "check": {
             "name": "chef_client_process",
-            "command": "check-procs -p chef-client -W 1",
+            "command": "check-procs.rb -p chef-client -W 1",
             "subscribers": [
                 "production"
             ],
@@ -156,8 +156,6 @@ Example URL: `http://hostname:4567/events/i-424242/chef_client_process`
   - error: 500
 
 ## `/resolve` {#resolve}
-
-Example URL: `http://hostname:4567/resolve`
 
 * `POST`: resolves an event (delayed action)
 

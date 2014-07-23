@@ -4,13 +4,11 @@ category: "API"
 title: "Checks"
 ---
 
-# Check API Endpoints {#check-api-endpoints}
+# API Checks
 
-The check endpoints allow you to list and issue checks.
+List locally defined checks and request executions.
 
 ## `/checks` {#checks}
-
-example url - http://localhost:4567/checks
 
 * `GET`: returns the list of checks
 
@@ -18,30 +16,30 @@ example url - http://localhost:4567/checks
 
     ~~~ json
     [
-      {
-        "name": "check_chef_client",
-        "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
-        "subscribers": [
-          "chef-client"
-        ],
-        "interval": 60
-      },
-      {
-        "name": "check_web_stack",
-        "command": "check-http.rb -h localhost -p /health -P 80 -q Passed -t 30",
-        "subscribers": [
-          "webserver"
-        ],
-        "interval": 30
-      }
+        {
+            "name": "chef_client_process",
+            "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
+            "subscribers": [
+                "production"
+            ],
+            "interval": 60
+        },
+        {
+            "name": "website",
+            "command": "check-http.rb -h localhost -p /health -P 80 -q Passed -t 30",
+            "subscribers": [
+                "webserver"
+            ],
+            "interval": 30
+        }
     ]
     ~~~
 
   - error: 500
 
-## `/checks/:name` {#checks-name}
+## `/checks/:check` {#checks-check}
 
-example url - `http://localhost:4567/checks/check_chef_client`
+Example URL: `http://hostname:4567/checks/chef_client_process`
 
 * `GET`: returns a check
 
@@ -49,12 +47,12 @@ example url - `http://localhost:4567/checks/check_chef_client`
 
     ~~~ json
     {
-      "name": "check_chef_client",
-      "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
-      "subscribers": [
-        "chef-client"
-      ],
-      "interval": 60
+        "name": "chef_client_process",
+        "command": "check-procs.rb -p /usr/bin/chef-client -W 1 -w 2 -c 3",
+        "subscribers": [
+            "production"
+        ],
+        "interval": 60
     }
     ~~~
 
@@ -64,18 +62,16 @@ example url - `http://localhost:4567/checks/check_chef_client`
 
 ## `/request` {#request}
 
-example url - `http://localhost:4567/request`
-
-* `POST`: issues a check request
+* `POST`: issues a check execution request
 
   - payload:
 
     ~~~ json
     {
-      "check": "check_chef_client",
-      "subscribers": [
-        "chef-client"
-      ]
+        "check": "chef_client_process",
+        "subscribers": [
+            "production"
+        ]
     }
     ~~~
 

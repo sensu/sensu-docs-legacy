@@ -52,6 +52,3 @@ hide_toc: true
 * **Community and Support**
   * [Community Projects](community)
   * [Community and Commercial Support](/support/)
-
-* **Settings**
-  * [Settings](settings)
