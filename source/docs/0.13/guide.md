@@ -3,8 +3,8 @@ version: "0.13"
 category: "Installation"
 title: "Guide"
 next:
-  url: adding_a_check
-  text: "Adding a check"
+  url: install_a_dashboard
+  text: "Install a dashboard"
 ---
 
 # Guide {#guide}

@@ -1,7 +1,7 @@
 ---
 version: "0.13"
 category: "Overview"
-title: "Overview of Sensu"
+title: "What is Sensu?"
 next:
   url: guide
   text: "Installation guide"

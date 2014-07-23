@@ -33,22 +33,22 @@ hide_toc: true
   * [Mutators](mutators)
   * [Extensions](extensions)
 
-* **Formats**
-  * [Event Data](event_data)
-
 * **API**
-  * [Overview](api-overview)
-  * [Aggregates](api-aggregates)
-  * [Checks](api-checks)
-  * [Clients](api-clients)
-  * [Events](api-events)
-  * [Health](api-health)
-  * [Info](api-info)
-  * [Stashes](api-stashes)
+  * [Overview](api_overview)
+  * [Aggregates](api_aggregates)
+  * [Checks](api_checks)
+  * [Clients](api_clients)
+  * [Events](api_events)
+  * [Health](api_health)
+  * [Info](api_info)
+  * [Stashes](api_stashes)
 
 * **Dashboards**
-  * [Overview](dashboards-overview)
-  * [Uchiwa](dashboards-uchiwa)
+  * [Overview](dashboards_overview)
+  * [Uchiwa](dashboards_uchiwa)
+
+* **Formats**
+  * [Event Data](event_data)
 
 * **Project and FAQ**
   * [FAQ](faq)
