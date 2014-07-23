@@ -4,13 +4,15 @@ category: "API"
 title: "Info"
 ---
 
-# Info API Endpoint {#info-api-endpoint}
+# API Info
 
-The info endpoint will return the Sensu version along with rabbitmq and redis information.
+List the Sensu version and the transport and Redis connection
+information (the same information that [/health](api-health) uses to
+determine system health).
 
 ## /info {#info}
 
-example url: `http://localhost:4567/info`
+Example URL: `http://hostname:4567/info`
 
 * `GET`: returns the API info
 
@@ -19,9 +21,9 @@ example url: `http://localhost:4567/info`
       ~~~ json
       {
           "sensu": {
-              "version": "0.9.12"
-              },
-          "rabbitmq": {
+              "version": "0.13.0"
+          },
+          "transport": {
               "keepalives": {
                   "messages": 0,
                   "consumers": 1

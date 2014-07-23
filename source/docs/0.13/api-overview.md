@@ -69,14 +69,14 @@ See [API events documentation](api-events) for more information.
 
 ### /health {#health}
 
-Check the status of the API's RabbitMQ & Redis connections, and query
-RabbitMQ's status (consumer and message counts).
+Check the status of the API's transport & Redis connections, and query
+the transport's status (consumer and message counts).
 
 See [API health documentation](api-health) for more information.
 
 ### /info {#info}
 
-List the Sensu version and the RabbitMQ and Redis connection
+List the Sensu version and the transport and Redis connection
 information (the same information that /health uses to determine
 system health).
 

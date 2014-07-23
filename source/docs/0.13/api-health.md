@@ -6,8 +6,8 @@ title: "Health"
 
 # API Health
 
-Check the status of the API's RabbitMQ & Redis connections, and query
-RabbitMQ's status (consumer and message counts).
+Check the status of the API's transport & Redis connections, and query
+the transport's status (consumer and message counts).
 
 ## `/health` {#health}
 
@@ -23,7 +23,7 @@ Example URL: `http://hostname:4567/health?consumers=2&messages=100`
 
       - value: integer
 
-      - description:  "The minimum number of RabbitMQ queue consumers to be considered healthy."
+      - description:  "The minimum number of transport consumers to be considered healthy."
 
     - `messages`
 
@@ -31,7 +31,7 @@ Example URL: `http://hostname:4567/health?consumers=2&messages=100`
 
       - value: integer
 
-      - description: "The maximum number of RabbitMQ queue messages to be considered healthy."
+      - description: "The maximum number of transport queued messages to be considered healthy."
 
   - success: 204
       - No Content
