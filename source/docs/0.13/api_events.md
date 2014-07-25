@@ -1,7 +1,7 @@
 ---
 version: "0.13"
 category: "API"
-title: "Events"
+title: "API events"
 ---
 
 # API Events

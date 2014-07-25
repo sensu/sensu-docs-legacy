@@ -19,11 +19,11 @@ hide_toc: true
   * [Upgrading](upgrading)
 
 * **Getting Started**
-  * [Install a dashboard](install_a_dashboard)
   * [Adding a check](adding_a_check)
   * [Adding a standalone check](adding_a_standalone_check)
   * [Adding a metric](adding_a_metric)
   * [Adding a handler](adding_a_handler)
+  * [Install a dashboard](install_a_dashboard)
 
 * **Configuration**
   * [Clients](clients)

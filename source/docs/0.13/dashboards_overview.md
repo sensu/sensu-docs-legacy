@@ -1,12 +1,12 @@
 ---
 version: "0.13"
 category: "Dashboards"
-title: "Sensu Dashboards"
+title: "Dashboards"
 ---
 
-# Sensu Dashboards
+# Dashboards
 
-Sensu has several community maintained web interfaces.
+Sensu has several community maintained web dashboards.
 
 ## Uchiwa
 
@@ -22,5 +22,5 @@ Features:
 - Stash management
 - Easy installation
 
-See the [Uchiwa dashboard documentation](dashboards-uchiwa) for more
+See the [Uchiwa dashboard documentation](dashboards_uchiwa) for more
 information.

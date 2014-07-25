@@ -166,7 +166,7 @@ Note: Using the embedded Ruby fixes conflicts with RVM.
 
 ### What is an API stash? {#what-is-an-api-stash}
 
-[Stashes](api-stashes) allow you to store and retrieve JSON with the
+[Stashes](api_stashes) allow you to store and retrieve JSON with the
 [API](api). Sensu checks, handlers, etc. can utilize stashes as
 needed. For instance, this would allow you to store Campfire
 credentials in a stash on the API and then have a handler fetch the

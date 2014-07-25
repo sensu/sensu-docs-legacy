@@ -1,7 +1,7 @@
 ---
 version: "0.13"
 category: "API"
-title: "Clients"
+title: "API clients"
 ---
 
 # API Clients

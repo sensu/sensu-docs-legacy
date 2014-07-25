@@ -2,6 +2,8 @@
 version: "0.13"
 category: "Installation"
 title: "Sensu packages"
+warning: "<strong>IMPORTANT NOTE:</strong> Sensu-Dashboard is no
+longer included in the Sensu packages."
 next:
   url: security
   text: "Security"

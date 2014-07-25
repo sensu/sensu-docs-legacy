@@ -1,13 +1,13 @@
 ---
 version: "0.13"
 category: "API"
-title: "Info"
+title: "API info"
 ---
 
 # API Info
 
 List the Sensu version and the transport and Redis connection
-information (the same information that [/health](api-health) uses to
+information (the same information that [/health](api_health) uses to
 determine system health).
 
 ## /info {#info}

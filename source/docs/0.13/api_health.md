@@ -1,7 +1,7 @@
 ---
 version: "0.13"
 category: "API"
-title: "Health"
+title: "API health"
 ---
 
 # API Health

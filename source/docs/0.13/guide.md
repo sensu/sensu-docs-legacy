@@ -3,8 +3,8 @@ version: "0.13"
 category: "Installation"
 title: "Guide"
 next:
-  url: install_a_dashboard
-  text: "Install a dashboard"
+  url: adding_a_check
+  text: "Adding a check"
 ---
 
 # Guide {#guide}
@@ -187,7 +187,7 @@ On the "agent" system, enable the Sensu client.
 update-rc.d sensu-client defaults
 ~~~
 
-##### CentOS (RHEL) {#agent-system-services-debian-and-ubuntu}
+##### CentOS (RHEL) {#agent-system-services-centos-and-rhel}
 
 ~~~ shell
 chkconfig sensu-client on
@@ -216,7 +216,9 @@ On the "agent" system, start the Sensu client.
 ## Next Steps {#next-steps}
 
 Now that you have a running Sensu installation, the next steps are to
-install a dashboard, add monitoring checks, and event handlers.
+add monitoring checks and event handlers.
+
+You may also want to [install a Sensu dashboard](install_a_dashboard)!
 
 If you have further questions please visit the `#sensu` IRC channel on
 Freenode or send an email to the `sensu-users` mailing list.

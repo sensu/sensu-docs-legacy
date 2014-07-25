@@ -1,10 +1,10 @@
 ---
 version: "0.13"
 category: "API"
-title: "Sensu API"
+title: "API"
 ---
 
-# Sensu API {#api}
+# API {#api}
 
 The Sensu API provides access to the data that Sensu servers collect,
 such as client information & current events. The API can also resolve
@@ -46,33 +46,33 @@ List and delete check aggregates.
 This endpoint provides the information needed to monitor a collection
 of machines running a service.
 
-See the [API aggregates documentation](api-aggregates) for more
+See the [API aggregates documentation](api_aggregates) for more
 information.
 
 ### /checks {#checks}
 
 List locally defined checks and request executions.
 
-See [API checks documentation](api-checks) for more information.
+See [API checks documentation](api_checks) for more information.
 
 ### /clients {#clients}
 
 List and delete client(s) information.
 
-See [API clients documentation](api-clients) for more information.
+See [API clients documentation](api_clients) for more information.
 
 ### /events {#events}
 
 List and resolve current events.
 
-See [API events documentation](api-events) for more information.
+See [API events documentation](api_events) for more information.
 
 ### /health {#health}
 
 Check the status of the API's transport & Redis connections, and query
 the transport's status (consumer and message counts).
 
-See [API health documentation](api-health) for more information.
+See [API health documentation](api_health) for more information.
 
 ### /info {#info}
 
@@ -80,11 +80,11 @@ List the Sensu version and the transport and Redis connection
 information (the same information that /health uses to determine
 system health).
 
-See [API info documentation](api-info) for more information.
+See [API info documentation](api_info) for more information.
 
 ### /stashes {#stashes}
 
 Create, list, and delete stashes (JSON documents). The stashes
 endpoint is an HTTP key/value data store.
 
-See [API stashes documentation](api-stashes) for more information.
+See [API stashes documentation](api_stashes) for more information.
