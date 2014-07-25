@@ -144,18 +144,20 @@ Here is an example that writes event data to a local UDP socket, port `2424`.
 }
 ~~~
 
-### AMQP {#amqp-handler}
+### Transport {#transport-handler}
 
-AMQP handlers are for publishing event data on an AMQP exchange.
+Transport handlers are for publishing event data to a Sensu transport,
+such as RabbitMQ (default).
 
-Here is an example that publishes event data on an AMQP exchange (limited to the broker used by Sensu).
+Here is an example that publishes event data on an AMQP topic exchange
+"events", as Sensu is using the RabbitMQ transport.
 
 ~~~ json
 {
   "handlers": {
     "amqp_exchange": {
-      "type": "amqp",
-      "exchange": {
+      "type": "transport",
+      "pipe": {
         "type": "topic",
         "name": "events"
       }
@@ -164,9 +166,10 @@ Here is an example that publishes event data on an AMQP exchange (limited to the
 }
 ~~~
 
-Refer to the Ruby AMQP library documentation on
-[working with exchanges](http://rubyamqp.info/articles/working_with_exchanges/)
-for exchange options.
+When using the RabbitMQ transport, you can refer to the Ruby AMQP
+library documentation on [working with
+exchanges](http://rubyamqp.info/articles/working_with_exchanges/) for
+pipe options.
 
 ### Sets {#handler-sets}
 
