@@ -358,7 +358,7 @@ You can also specify a default value if the key does not exist `:::foo.bar|defau
 ~~~ json
 {
   "checks": {
-    "chef_client": {
+    "mysql-replication": {
       "command": "check-mysql-replication.rb --user :::mysql.user::: --password :::mysql.password:::",
       "subscribers": [
         "mysql"
