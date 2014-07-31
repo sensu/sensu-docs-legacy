@@ -65,7 +65,7 @@ yum install uchiwa
 
 ## Configuration
 
-Uchiwa's configuration file can be found at `/etc/sensu/uchiwa.js`.
+Uchiwa's configuration file can be found at `/etc/sensu/uchiwa.json`.
 The file must be readable by the `uchiwa` user, and the parent
 directory must have the `sensu` group.
 
@@ -75,25 +75,25 @@ support querying multiple.
 You can configure the Uchiwa dashboard itself, using `uchiwa`.
 
 ~~~ javascript
-  module.exports = {
-      sensu: [
+{
+      "sensu": [
           {
-              name: 'Sensu',
-              host: '127.0.0.1',
-              ssl: false,
-              port: 4567,
-              user: '',
-              pass: '',
-              path: '',
-              timeout: 5000
+              "name": "Sensu",
+              "host": "127.0.0.1",
+              "ssl": false,
+              "port": 4567,
+              "user": "",
+              "pass": "",
+              "path": "",
+              "timeout": 5000
           }
       ],
-      uchiwa: {
-          user: '',
-          pass: '',
-          port: 3000,
-          stats: 10,
-          refresh: 10000
+      "uchiwa": {
+          "user": "",
+          "pass": "",
+          "port": 3000,
+          "stats": 10,
+          "refresh": 10000
       }
   }
 ~~~
