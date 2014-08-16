@@ -17,7 +17,7 @@ sensu の latest バージョンは 0.12 です。
 Yes. There is an MSI package for installing Sensu on Windows. You can
 learn more about it [here](packages).
 
-動くよ。Windows での sensu インストールは MSI パッケージが提供されている。詳細は[こちら](packages) を御覧ください。
+動きます。Windows での sensu インストールは MSI パッケージが提供されている。詳細は[こちら](packages) を御覧ください。
 
 ### How do Sensu clients handle network issues or RabbitMQ outages?（sensu クライアントは RabbitMQ の停止やネットワークの問題をハンドリング出来るの？）
 
@@ -38,7 +38,7 @@ done with NTP. See
 details.
 
 必要です。
-sensu の各コンポーネントはタイムスタンプの為にローカルホストの時刻を利用するのでそれらは同期しなければいけない。同期されない場合にクライアントの keepalive イベントに失敗する可能性があります。時刻の同期は NTP で行うことが出来ます。詳しくは [こっち](https://help.ubuntu.com/12.04/serverguide/NTP.html) を見て下さい。
+sensu の各コンポーネントはタイムスタンプの為にローカルホストの時刻を利用するのでそれらは同期しなければいけない。同期されない場合にクライアントの keepalive イベントに失敗する可能性があります。時刻の同期は NTP で行うことが出来ます。詳しくは [こちら](https://help.ubuntu.com/12.04/serverguide/NTP.html) を見て下さい。
 
 ### How do I delete a client?（クライアントを削除するにはどうするの？）
 
@@ -47,7 +47,7 @@ Sensu client, a keepalive event will be created for it until it has
 been removed from the registry.
 
 
-君のインフラからシステムを退役させる際、 登録を削除するまで sensu クライアントは keepalive イベントを作成し続けます。
+インフラからシステムを退役させる際、 登録を削除するまで sensu クライアントは keepalive イベントを作成し続けます。
 
 There are two methods for deleting clients: via the Sensu API or
 through the Sensu Dashboard.
@@ -96,7 +96,7 @@ You can adjust the process log level by setting `LOG_LEVEL` in
 `/etc/default/sensu` to either `debug`, `info`, `warn` or `error`. You
 will need to restart the Sensu process(s) after making the adjustment.
 
-`/etc/default/sensu` 内の `LOG_LEVEL` で `debug` や `warn` 又は `error` を設定することでログの出力を調整することが出来ます。設定したら Sensu のプロセスを再起動する必要があるから注意が必要です。
+`/etc/default/sensu` 内の `LOG_LEVEL` で `debug` や `warn` 又は `error` を設定することでログの出力を調整することが出来ます。設定したら Sensu のプロセスを再起動する必要があるので注意が必要です。
 
 ### Any suggestions on naming conventions for metric plugins?（メトリクスプラグインの命名規則について提案はあるの？）
 
@@ -130,7 +130,7 @@ Yes. You can run as many Sensu servers as you require. Check results
 are distributed to Sensu servers in a round-robin fashion, allowing
 you to scale out. Running more that one Sensu server is recommended.
 
-出来ます。君の要求する限りの Sensu server を実行することが出来ます。チェック結果はラウンドロビンされているスケールアウトされた Sensu server に配布されます。一台の Sensu server でより多くの仕事をさせることを推奨しています。
+出来ます。要求する限りの Sensu server を実行することが出来ます。チェック結果はラウンドロビンされているスケールアウトされた Sensu server に配布されます。一台の Sensu server でより多くの仕事をさせることを推奨しています。
 
 ### When I have multiple Sensu servers, which one will be the master?（複数の Sensu server がある場合にどちらが master になるの？）
 
