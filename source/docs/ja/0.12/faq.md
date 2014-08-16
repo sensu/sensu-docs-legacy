@@ -1,7 +1,7 @@
 ---
 version: "0.12"
 category: "Project"
-title: "FAQ Japanese Edition"
+title: "FAQ (日本語訳)"
 ---
 
 # FAQ
