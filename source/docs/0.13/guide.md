@@ -124,7 +124,8 @@ On the "monitor" system, create/edit `/etc/sensu/conf.d/api.json`.
     "host": "localhost",
     "port": 4567,
     "user": "admin",
-    "password": "secret"
+    "password": "secret",
+    "bind": "0.0.0.0"
   }
 }
 ~~~
