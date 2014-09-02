@@ -21,6 +21,17 @@ Features:
 See the Uchiwa
 [README](https://github.com/sensu/uchiwa/blob/master/README.md) for information.
 
+
+## Upgrading from older Sensu
+You need to clear the redis cache for the new dashboard to work.
+
+Before starting uchiwa, issue this command to clear redis:
+
+~~~ shell
+redis-cli FLUSHALL
+~~~
+
+
 ## Packages
 
 The Sensu project provides "omnibus" Uchiwa packages, which contain
