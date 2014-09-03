@@ -6,11 +6,61 @@ warning: "<strong>IMPORTANT NOTE:</strong> Sensu-Dashboard is no
 longer included in the Sensu packages."
 ---
 
-# Upgrading {#upgrading}
+# Upgrading From 0.11-0.12 to 0.13 {#upgrading-from-0.11}
 
-If you are upgrading Sensu from version 0.11.x or newer, just upgrade
-the Sensu package and restart the services, no additional steps are
-required.
+## Flush Redis {#flush-redis}
+
+If you are upgrading Sensu from version 0.11.x or newer to 0.13,
+you must flush the redis cache as the persistent data structures
+have changed.
+
+~~~ shell
+redis-cli FLUSHALL
+~~~
+
+Do this *after* all of the clients have been upgraded.
+
+## Update AMPQ Handler definitions
+
+The configation for "exchange" type handlers have changed:
+
+### Old
+
+~~~ json
+{
+  "handlers": {
+    "graphite": {
+      "type": "amqp",
+      "exchange": {
+        "type": "topic",
+        "name": "metrics",
+        "durable": "true"
+      },
+      "mutator": "only_check_output"
+    }
+  }
+}
+~~~
+
+### New
+
+~~~ json
+{
+  "handlers": {
+    "graphite": {
+      "type": "transport",
+      "pipe": {
+        "type": "topic",
+        "name": "metrics",
+        "durable": "true"
+      },
+      "mutator": "only_check_output"
+    }
+  }
+}
+~~~
+
+# Upgrading From 0.10.x {#upgrading-from-0.10}
 
 If you are upgrading Sensu from version 0.10.x or earlier, you will
 need to stop the Sensu server and API services, and then delete the
