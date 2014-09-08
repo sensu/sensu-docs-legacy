@@ -31,7 +31,7 @@ there is no way to tell the RabbitMQ server to ignore that certficiate. Instead,
 need to create a new CA and sign new certificates for every client.
 
 It is far easier to create a single certificate used by all Sensu clients at this time.
-In the even the certificate is compromised, you would recreate the CA certificate and the client
+In the event the certificate is compromised, you would recreate the CA certificate and the client
 certificate and distribute to your RabbitMQ brokers, Sensu servers, and Sensu clients.
 
 Because Sensu is designed to pair well with modern configuration management tools such as
