@@ -120,4 +120,4 @@ Tested on:
 
 ### Step #1 - Download and install the MSI package {#windows-download-and-install-the-msi-package}
 
-Find it in the msi directory: [http://repos.sensuapp.org/index.html](http://repos.sensuapp.org/index.html)
+Find it in the msi directory: <a href="http://repos.sensuapp.org/index.html">http://repos.sensuapp.org/index.html</a>
