@@ -43,6 +43,12 @@ rabbitmqadmin delete queue name='results'
 rabbitmqadmin delete queue name='keepalives'
 ~~~
 
-### Step #4 - Upgrade the package(s) {#upgrade-the-sensu-packages}
+### Step #4 - Clear redis of old data:
+
+~~~ shell
+redis-cli FLUSHALL
+~~~
+
+### Step #5 - Upgrade the package(s) {#upgrade-the-sensu-packages}
 
 Upgrade the Sensu package and restart the Sensu services.
