@@ -6,6 +6,8 @@ title: "Presentations about Sensu"
 
 ### Presentations {#presentations}
 
+* [Sense and Sensu-bility tutorial (by Bethany Erskine @ nycdevops, December 2013)](http://www.hakkalabs.com/articles/introduction-to-sensu)
+
 * [Practical examples with Sensu (by Joe Miller @ CentOS Dojo Phoenix, May 2013)](https://speakerdeck.com/joemiller/practical-examples-with-sensu-monitoring-framework)
 
 * [Nick Stielau & Jeremy Carroll talk about Metrics with Sensu @ SF Metrics Meetup January 2013 (video)](http://vimeo.com/59417953)
