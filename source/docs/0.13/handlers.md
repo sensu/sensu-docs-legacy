@@ -159,7 +159,11 @@ Here is an example that publishes event data on an AMQP topic exchange
       "type": "transport",
       "pipe": {
         "type": "topic",
-        "name": "events"
+        "name": "events",
+        "options": {
+          "durable": "true",
+          "passive": "true"
+        }
       }
     }
   }
