@@ -1,5 +1,5 @@
 ---
-version: "0.13"
+version: "0.14"
 category: "Advanced Topics"
 title: "Scaling Strategies"
 ---
@@ -85,7 +85,7 @@ with RabbitMQ.
 ### Cons
 
 * WAN instability can result in floods of client keepalive alerts. 
-([Check Dependencies](http://sensuapp.org/docs/0.13/checks#check-dependencies) 
+([Check Dependencies](http://sensuapp.org/docs/0.14/checks#check-dependencies) 
 can help with this)
 * Increased RabbitMQ configuration complexity.
 * All clients "appear" to be in the same datacenter in Uchiwa

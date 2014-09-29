@@ -1,5 +1,5 @@
 ---
-version: "0.13"
+version: "0.14"
 category: "API"
 title: "API info"
 ---
@@ -21,7 +21,7 @@ Example URL: `http://hostname:4567/info`
       ~~~ json
       {
           "sensu": {
-              "version": "0.13.0"
+              "version": "0.14.0"
           },
           "transport": {
               "keepalives": {

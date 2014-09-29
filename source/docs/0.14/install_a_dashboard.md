@@ -1,5 +1,5 @@
 ---
-version: "0.13"
+version: "0.14"
 category: "Getting Started"
 title: "Install a dashboard"
 warning: "The Uchiwa dashboard is recommended, it works with the latest API."

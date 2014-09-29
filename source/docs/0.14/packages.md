@@ -1,5 +1,5 @@
 ---
-version: "0.13"
+version: "0.14"
 category: "Installation"
 title: "Sensu packages"
 warning: "<strong>IMPORTANT NOTE:</strong> Sensu-Dashboard is no

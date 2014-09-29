@@ -1,16 +1,16 @@
 ---
-version: "0.13"
+version: "0.14"
 category: "Installation"
 title: "Upgrading"
 warning: "<strong>IMPORTANT NOTE:</strong> Sensu-Dashboard is no
 longer included in the Sensu packages."
 ---
 
-# Upgrading From 0.11-0.12 to 0.13 {#upgrading-from-0.11}
+# Upgrading From 0.11-0.12 to 0.14 {#upgrading-from-0.11}
 
 ## Flush Redis {#flush-redis}
 
-If you are upgrading Sensu from version 0.11.x or newer to 0.13,
+If you are upgrading Sensu from version 0.11.x or newer to 0.14,
 you must flush the redis cache as the persistent data structures
 have changed.
 

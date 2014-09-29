@@ -1,5 +1,5 @@
 ---
-version: "0.13"
+version: "0.14"
 category: "Installation"
 title: "RabbitMQ"
 warning: "<strong>IMPORTANT NOTE:</strong> Due to the state of flux in
