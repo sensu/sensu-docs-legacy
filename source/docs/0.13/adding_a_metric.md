@@ -17,7 +17,7 @@ To add a metric we need to take a number of steps:
 
 ## Adding a metrics check script to the client {#adding-a-metrics-check-script-to-the-client}
 
-First we need to add a metrics check script to the client. We're going to use `load-metrics.rb` from the
+First we need to add a metrics check script to the client. We're going to use `plugins/system/load-metrics.rb` from the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins) repo. A metrics check script is like a normal check script but returns a structured metric to `STDOUT` and always exits with an exit code of `0`.
 
 Let's download and install `load-metrics.rb`:
