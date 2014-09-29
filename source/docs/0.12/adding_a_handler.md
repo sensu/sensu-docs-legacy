@@ -81,6 +81,10 @@ repo :
     wget -O /etc/sensu/handlers/mailer.rb https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb
     wget -O /etc/sensu/conf.d/mailer.json https://raw.github.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.json
 
+You will need to install the mail gem if you want to use the mailer handler. If you've installed sensu from the packages, execute this command:
+
+    /opt/sensu/embedded/bin/gem install mail --no-ri --no-rdoc -v 2.5.4 
+
 Adjust `/etc/sensu/conf.d/mailer.json` to fit your environment.
 
 Define a new pipe handler, in `/etc/sensu/conf.d/handler_mailer.json`:
