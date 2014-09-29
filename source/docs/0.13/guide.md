@@ -89,7 +89,7 @@ will need to substitute a few values.
       "private_key_file": "/etc/sensu/ssl/key.pem"
     },
     "host": "SUBSTITUTE_ME",
-    "port": 5671,
+    "port": 5672,
     "vhost": "/sensu",
     "user": "sensu",
     "password": "SUBSTITUTE_ME"
