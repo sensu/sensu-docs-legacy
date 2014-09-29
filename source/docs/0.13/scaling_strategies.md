@@ -43,7 +43,7 @@ the networking (WAN) will be unreliable.
 For the purpose of this documentation each site will be referred to as a 
 "Datacenter".
 
-## Strategy 1: Isolated Clusters Aggregated by Uchwa
+## Strategy 1: Isolated Clusters Aggregated by Uchiwa
 
 This strategy involves building isolated, independent Sensu server/clusters
 at each datacenter, and then using Uchiwa\'s multi-datacenter configuration
