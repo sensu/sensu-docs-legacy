@@ -47,6 +47,9 @@ hide_toc: true
   * [Overview](dashboards_overview)
   * [Uchiwa](dashboards_uchiwa)
 
+* **Advanced Topics**
+  * [Scaling Strategies](scaling_strategies)
+
 * **Formats**
   * [Event Data](event_data)
 
