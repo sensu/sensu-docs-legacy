@@ -319,7 +319,8 @@ definition to make it standalone, replacing `"subscribers"`.
 In addition to server-scheduled and client-scheduled (standalone) checks, checks can be
 defined that are not scheduled for regular execution.  These pre-defined checks can be
 triggered through the API. Add `"publish": false` to a check definition to disable the
-interval-based scheduling. The `interval` field may still be required to pass validation.
+interval-based scheduling. The `interval` and `subscribers` field may still be required
+to pass validation.
 
 #### Example {#example-manually-triggered-check}
 
@@ -332,7 +333,8 @@ interval-based scheduling. The `interval` field may still be required to pass va
       "type": "metric",
       "command": "cpu-usage-metrics.sh",
       "publish": false,
-      "interval": 9999
+      "interval": 9999,
+      "subscribers": []
     }
   }
 }
@@ -341,7 +343,7 @@ interval-based scheduling. The `interval` field may still be required to pass va
 ##### API Call {#example-manually-triggered-check-api-call}
 
 ~~~ bash
-curl -XPOST http://api.sensu.example.com:4567/check/request -d '{"subscribers": ["appservers"], "check":"my_predefined_check"}'
+curl -XPOST http://api.sensu.example.com:4567/request -d '{"subscribers": ["appservers"], "check":"my_predefined_check"}'
 ~~~
 
 ### Check command token substitution {#check-command-token-substitution}
