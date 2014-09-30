@@ -6,7 +6,7 @@ warning: "<strong>IMPORTANT NOTE:</strong> Sensu-Dashboard is no
 longer included in the Sensu packages."
 ---
 
-# Upgrading From 0.11-0.12 to 0.14 {#upgrading-from-0.11}
+# Upgrading From 0.11-0.12 to 0.14 {#upgrading-from-0-11}
 
 ## Flush Redis {#flush-redis}
 
@@ -60,7 +60,7 @@ The configation for "exchange" type handlers have changed:
 }
 ~~~
 
-# Upgrading From 0.10.x {#upgrading-from-0.10}
+# Upgrading From 0.10.x {#upgrading-from-0-10}
 
 If you are upgrading Sensu from version 0.10.x or earlier, you will
 need to stop the Sensu server and API services, and then delete the
