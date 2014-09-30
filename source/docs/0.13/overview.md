@@ -68,8 +68,8 @@ or more Sensu servers, tasks are distributed amongst them, and they
 can be ephemeral. Servers will inspect every check result, saving some
 of their information for a period of time. Check results that indicate
 a service failure or contain data such as metrics, will have
-additional context added to them, creating an [event](api_events). The
-Sensu server passes [events](api_events) to [handlers](handlers).
+additional context added to them, creating an [event](event_data). The
+Sensu server passes [events](event_data) to [handlers](handlers).
 
 ## Client {#sensu-client}
 
