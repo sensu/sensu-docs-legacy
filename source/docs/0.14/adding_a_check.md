@@ -33,9 +33,13 @@ We're going to use `check-procs.rb` from the
 repo.
 
 If you have installed Sensu from the omnibus packages you can continue
-to installing the `check-procs.rb` plugin. Otherwise we need to install
-the `sensu-plugin` gem which has various helper classes used by many of
-the community plugins:
+to installing the `check-procs.rb` plugin. You will have to configure
+the Sensu client to use the embedded ruby from the omnibus package by
+setting `EMBEDDED_RUBY=true` in `/etc/default/sensu` and restarting
+the client.
+
+Otherwise we need to install the `sensu-plugin` gem which has various
+helper classes used by many of the community plugins:
 
 ~~~ bash
 gem install sensu-plugin --no-rdoc --no-ri
