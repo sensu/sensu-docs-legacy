@@ -10,15 +10,12 @@ longer included in the Sensu packages."
 
 ## Flush Redis {#flush-redis}
 
-If you are upgrading Sensu from version 0.11.x or newer to 0.14,
-you must flush the redis cache as the persistent data structures
-have changed.
+If you are upgrading Sensu from version < 0.13 to 0.14, you must flush
+the redis cache as the persistent data structures have changed.
 
 ~~~ shell
 redis-cli FLUSHALL
 ~~~
-
-Do this *after* all of the clients have been upgraded.
 
 ## Update AMPQ Handler definitions
 
