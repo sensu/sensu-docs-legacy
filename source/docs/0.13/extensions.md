@@ -76,7 +76,7 @@ end
 Event data is passed to extensions just like plug-ins.
 See:
 
-[Events](events)
+[Event Data](event_data)
 
 The settings hash is passed to the extension as instance data (in the @settings
 instance variable).
