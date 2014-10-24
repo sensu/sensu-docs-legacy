@@ -41,7 +41,7 @@ apt-get update
 apt-get install redis-server
 ~~~
 
-## Install Redis on CentOS (RHEL) {install-redis-on-centos-and-rhel}
+## Install Redis on CentOS (RHEL) {#install-redis-on-centos-and-rhel}
 
 ### Step #1 - Install EPEL
 

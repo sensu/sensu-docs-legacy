@@ -18,8 +18,6 @@ have changed.
 redis-cli FLUSHALL
 ~~~
 
-Do this *after* all of the clients have been upgraded.
-
 ## Update AMPQ Handler definitions
 
 The configation for "exchange" type handlers have changed:
