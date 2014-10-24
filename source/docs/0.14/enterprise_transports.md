@@ -4,7 +4,7 @@ category: "Enterprise"
 title: "Transports"
 ---
 
-# Enterprise Transports
+# Enterprise transports
 
 Sensu relies on a message bus for communication. Until recently Sensu
 has been bound to RabbitMQ as the default and only message bus, but as
@@ -14,7 +14,7 @@ RabbitMQ. Sensu Enterprise ships with support for RabbitMQ (default),
 and any broker that supports the [STOMP protocol][stomp], eg.
 [ActiveMQ][activemq].
 
-## STOMP Transport
+## STOMP transport
 
 ~~~ json
 {

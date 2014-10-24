@@ -7,7 +7,7 @@ next:
   text: "Enterprise transports"
 ---
 
-# Contact Routing
+# Contact routing
 
 Contact routing makes it possible to assign service and/or metrics
 checks to an individual or group contact. Individual and group

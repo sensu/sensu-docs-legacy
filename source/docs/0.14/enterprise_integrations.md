@@ -7,7 +7,7 @@ next:
   text: "Configure contact routing"
 ---
 
-# Enterprise Integrations {#integrations}
+# Enterprise integrations {#integrations}
 
 ## Email
 
