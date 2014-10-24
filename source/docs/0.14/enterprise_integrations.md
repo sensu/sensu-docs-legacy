@@ -107,6 +107,23 @@ connection timeout, it defaults to 10 seconds.
 }
 ~~~
 
+## Flapjack
+
+Relay Sensu results to Flapjack, a monitoring notification routing and
+event processing system.
+
+~~~ json
+{
+    "flapjack": {
+        "host": "redis.example.com",
+        "port": 6379,
+        "channel": "events",
+        "db": 0,
+        "filter_metrics": false
+    }
+}
+~~~
+
 ## EC2
 
 Deregister Sensu clients from the registry, if they no longer have an
