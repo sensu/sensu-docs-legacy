@@ -16,7 +16,7 @@ and any broker that supports the [STOMP protocol][stomp], eg.
 
 ## STOMP Transport
 
-``` json
+~~~ json
 {
     "stomp": {
         "host": "activemq.example.com",
@@ -27,7 +27,7 @@ and any broker that supports the [STOMP protocol][stomp], eg.
         }
     }
 }
-```
+~~~
 
 [stomp]: http://stomp.github.io
 [activemq]: http://activemq.apache.org
