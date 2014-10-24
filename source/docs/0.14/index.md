@@ -55,6 +55,7 @@ hide_toc: true
 
 * **Advanced Topics**
   * [Scaling Strategies](scaling_strategies)
+  * [External results input](external_result_input)
 
 * **Formats**
   * [Event Data](event_data)

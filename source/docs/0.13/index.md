@@ -49,7 +49,7 @@ hide_toc: true
 
 * **Advanced Topics**
   * [Scaling Strategies](scaling_strategies)
-  * [Inputting External Results to the Local Socket](external_result_input)
+  * [External results input](external_result_input)
 
 * **Formats**
   * [Event Data](event_data)
