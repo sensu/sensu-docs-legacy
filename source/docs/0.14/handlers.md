@@ -62,6 +62,16 @@ Here is an example that uses `mailx` to email the event data.
 }
 ~~~
 
+*Warning*: These trivial handlers will not respect the popular `refresh` 
+and `occurences` settings in the 
+[check definition]([Checks](checks#common-custom-check-definitions).
+
+If you need occurence filtering, advanced handler that takes advantage
+of the `sensu-plugin` gem that can filter. See the available handlers
+in the 
+[sensu-community-plugins](https://github.com/sensu/sensu-community-plugins/tree/master/handlers)
+repo for more non-trivial examples.
+
 #### Handler configuration {#pipe-handler-configuration}
 
 Handlers using the `sensu-plugin` Rubygem have access to Sensu configs

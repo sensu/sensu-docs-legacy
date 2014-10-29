@@ -196,3 +196,19 @@ If your event handler uses the `sensu-plugin` library,
 `Sensu::Handler`, you can add `occurrences` to your check definitions,
 instructing handlers to wait for a number of occurrences before taking
 action.
+
+### I keep hearing about `occurences` and `refresh`, what are they? {#occurences-refresh}
+
+`Occurences` and `refresh` are two particular pieces of [event data](event_data)
+that the [Sensu::Handler](https://github.com/sensu/sensu-plugin/blob/master/lib/sensu-handler.rb)
+class can interpret and filter against. If you use handlers that use the
+`Sensu::Handler` class, they will see these values and act accordingly.
+
+See the information in the [Checks](checks#common-custom-check-definitions)
+section for more details on how checks can be configured to use them, and what
+they do.
+
+*Warning*: These `occurences` and `refresh` are simply arbirary key-values that
+are available to handlers to use. If you are *not* using a handler that respects
+them (for example, the trivial mail binary), no filtering will occur.
+
