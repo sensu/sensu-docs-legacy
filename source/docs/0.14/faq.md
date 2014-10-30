@@ -196,3 +196,7 @@ If your event handler uses the `sensu-plugin` library,
 `Sensu::Handler`, you can add `occurrences` to your check definitions,
 instructing handlers to wait for a number of occurrences before taking
 action.
+
+### Are the checks run by the client or by the server ?
+
+The tests always run on the client itself.
