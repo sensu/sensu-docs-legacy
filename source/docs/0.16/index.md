@@ -1,5 +1,5 @@
 ---
-version: "0.14"
+version: "0.16"
 category:
 title: "Table of contents"
 hide_toc: true
@@ -42,6 +42,12 @@ hide_toc: true
   * [Health](api_health)
   * [Info](api_info)
   * [Stashes](api_stashes)
+
+* **Enterprise**
+  * [Installation](enterprise_installation)
+  * [Integrations](enterprise_integrations)
+  * [Contact routing](enterprise_contact_routing)
+  * [Transports](enterprise_transports)
 
 * **Dashboards**
   * [Overview](dashboards_overview)
