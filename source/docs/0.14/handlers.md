@@ -200,6 +200,10 @@ Handlers have the option to only handle events of a particular severity.
 For example, the PagerDuty handler should only be used when an event has
 a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
 
+*Note*: Sensu-server will always send events with the severity of OK to 
+handlers, regardless of the severity filtering. If your handler must not
+recieve OK events, it must filter in handler code.
+
 ~~~ json
 {
   "handlers": {
