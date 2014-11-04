@@ -43,12 +43,6 @@ hide_toc: true
   * [Info](api_info)
   * [Stashes](api_stashes)
 
-* **Enterprise**
-  * [Installation](enterprise_installation)
-  * [Integrations](enterprise_integrations)
-  * [Contact routing](enterprise_contact_routing)
-  * [Transports](enterprise_transports)
-
 * **Dashboards**
   * [Overview](dashboards_overview)
   * [Uchiwa](dashboards_uchiwa)
