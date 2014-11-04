@@ -21,23 +21,17 @@ in order to communicate with each-other.
 
 ~~~ shell
 apt-get -y install erlang-nox
-
-"The installed version of Erlang (R14B04) contains the bug OTP-10905,
-which makes it impossible to disable SSLv3. This makes the system
-vulnerable to the POODLE attack. SSL listeners for AMQP have therefore
-been disabled.
-
-You are advised to upgrade to a recent Erlang version; R16B01 is the
-first version in which this bug is fixed, but later is usually
-better.
-
-If you cannot upgrade now and want to re-enable SSL listeners, you can
-set the config item 'ssl_allow_poodle_attack' to 'true' in the
-'rabbit' section of your configuration file."
-
-Erlang installation herefrom https://www.erlang-solutions.com/downloads/download-erlang-otp fixes the issue (tested on Ubuntu 12.04)
-
 ~~~
+
+**IMPORTANT NOTE** - The installed version of Erlang (R14B04) contains
+  the bug OTP-10905, which makes it impossible to disable SSLv3. This
+  makes the system vulnerable to the POODLE attack. SSL listeners for
+  AMQP have therefore been disabled. You are advised to upgrade to a
+  recent Erlang version; R16B01 is the first version in which this bug
+  is fixed, but later is usually better. If you cannot upgrade now and
+  want to re-enable SSL listeners, you can set the config item
+  `ssl_allow_poodle_attack` to `true` in the "rabbit" section of your
+  configuration file.
 
 ### Step #2 - Install RabbitMQ {#debian-ubuntu-install-rabbitmq}
 
