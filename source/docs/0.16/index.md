@@ -61,6 +61,7 @@ hide_toc: true
   * [Event Data](event_data)
 
 * **Project and FAQ**
+  * [Development](development)
   * [FAQ](faq)
   * [Presentations about Sensu](presentations)
 
