@@ -27,7 +27,7 @@ configuration.
     "email": {
         "smtp": {
             "address": "smtp.example.com",
-            "port": 587,
+            "port": 587
         },
         "to": "support@example.com",
         "from": "noreply@example.com"
