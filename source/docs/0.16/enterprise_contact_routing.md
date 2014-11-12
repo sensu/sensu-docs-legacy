@@ -61,7 +61,7 @@ contact's integration configuration will be used.
 }
 ~~~
 
-You may also configured multiple contacts for a check, using the
+You may also configure multiple contacts for a check, using the
 configuration key `contacts`, providing an array of contacts.
 
 ~~~ json
