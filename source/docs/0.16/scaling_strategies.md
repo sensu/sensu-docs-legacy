@@ -80,7 +80,7 @@ with RabbitMQ.
 ### Pros
 
 * Decreased infrastructure necessary at remote Datacenters
-* All Senus server alerts originate from a single source
+* All Sensu server alerts originate from a single source
 
 ### Cons
 
