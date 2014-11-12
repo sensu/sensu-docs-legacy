@@ -31,7 +31,7 @@ configuration.
         },
         "to": "support@example.com",
         "from": "noreply@example.com"
-    }
+    },
     "contacts": {
         "ops": {
             "email": {
