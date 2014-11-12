@@ -2,6 +2,9 @@
 version: "0.16"
 category: "Installation"
 title: "Security"
+next:
+  url: windows
+  text: "Windows"
 ---
 
 # Security {#security}
