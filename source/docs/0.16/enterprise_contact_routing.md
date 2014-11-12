@@ -1,27 +1,37 @@
 ---
 version: "0.16"
 category: "Enterprise"
-title: "Contact routing"
+title: "Enterprise contact routing"
 next:
   url: enterprise_transports
   text: "Enterprise transports"
 ---
 
-# Contact routing
+# Enterprise contact routing
 
-Contact routing makes it possible to assign service and/or metrics
-checks to an individual or group contact. Individual and group
-contacts can have a series of contact details, leveraging any number
-of the third-party integrations.
+Every incident or outage has an ideal first responder, a team or
+individual with the knowledge to triage and address the issue. Sensu
+Enterprise contact routing makes it possible to assign checks to
+specific teams and/or individuals, reducing mean time to response and
+recovery, MTTR. Contact routing works with all of the Sensu Enterprise
+third-party integrations.
 
 A contact is composed of a name and configuration for one or more
 integrations. Contact integration configuration is merged upon the
-global configuration. The contact example below specifies an email
-address which override the address specified in the global integration
+top-level configuration. The contact example below specifies an email
+address which override the address specified in the top-level integration
 configuration.
 
 ~~~ json
 {
+    "email": {
+        "smtp": {
+            "address": "smtp.example.com",
+            "port": 587,
+        },
+        "to": "support@example.com",
+        "from": "noreply@example.com"
+    },
     "contacts": {
         "ops": {
             "email": {
@@ -46,6 +56,27 @@ contact's integration configuration will be used.
             ],
             "interval": 10,
             "contact": "ops"
+        }
+    }
+}
+~~~
+
+You may also configure multiple contacts for a check, using the
+configuration key `contacts`, providing an array of contacts.
+
+~~~ json
+{
+    "checks": {
+        "test": {
+            "command": "true",
+            "subscribers": [
+                "test"
+            ],
+            "interval": 10,
+            "contacts": [
+                "ops",
+                "search"
+            ]
         }
     }
 }
