@@ -1,7 +1,7 @@
 ---
 version: "0.16"
 category: "Enterprise"
-title: "Transports"
+title: "Enterprise transports"
 ---
 
 # Enterprise transports
