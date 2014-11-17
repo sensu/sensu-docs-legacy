@@ -12,11 +12,13 @@ The `handle_when` enterprise filter is used to reduce notification
 "noise". Users can define a minimum number of event `occurrences`
 before notifications will be sent. Users can also specify a `reset`
 time, in seconds, to reset where recurrences are counted from, to
-control when reminder/update notifications are sent. The `handle_when`
-filter is used by all of the enterprise third-party integrations.
+control when reminder/update notifications are sent. By default,
+`occurrences` is set to `1`, and reset is `1800` (30 minutes). The
+`handle_when` filter is used by all of the enterprise third-party
+integrations.
 
 The following is an example of how to configure a check to only notify
-after 2 occurrences and send reminder/update notifications every 30
+after 2 occurrences and send reminder/update notifications every 20
 minutes.
 
 ~~~ json
@@ -30,7 +32,7 @@ minutes.
             "interval": 20,
             "handle_when": {
                 "occurrences": 2,
-                "reset": 1800
+                "reset": 1200
             }
         }
     }
