@@ -96,7 +96,7 @@ the RabbitMQ broker.
 
 Yes. You can run as many Sensu servers as you require. Check results
 are distributed to Sensu servers in a round-robin fashion, allowing
-you to scale out. Running more that one Sensu server is recommended.
+you to scale out. Running more than one Sensu server is recommended.
 
 ### When I have multiple Sensu servers, which one will be the master? {#when-i-have-multiple-sensu-servers-which-one-will-be-the-master}
 
