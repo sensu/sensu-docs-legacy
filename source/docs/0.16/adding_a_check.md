@@ -230,5 +230,5 @@ Edit this file on the Sensu server again and add the -w parameter to the command
 
 Restart the sensu-server service.
 
-After about a minute we should see an alert on the sensu-dashboard:
-`http://<SERVER IP>:8080`, and in the `sensu-server.log`.
+After about a minute we should see an alert on the uchiwa dashboard (if installed):
+`http://<SERVER IP>:3000`, and in the `sensu-server.log`.
