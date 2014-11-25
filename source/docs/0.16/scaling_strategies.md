@@ -36,7 +36,7 @@ a Redis with automatic promotion of slaves.
 
 # Scaling Sensu Across Multiple Sites {#scaling-sensu-across-multiple-sites}
 
-Every distributed system, Sensu included, but take into account special
+Every distributed system, Sensu included, must take into account special
 considerations when scaling across multiple sites (datacenters) where
 the networking (WAN) will be unreliable.
 
