@@ -48,6 +48,7 @@ hide_toc: true
   * [Integrations](enterprise_integrations)
   * [Contact routing](enterprise_contact_routing)
   * [Filters](enterprise_filters)
+  * [Mutators](enterprise_mutators)
   * [Transports](enterprise_transports)
 
 * **Dashboards**
