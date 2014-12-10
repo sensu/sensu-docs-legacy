@@ -64,7 +64,7 @@ Here is an example that uses `mailx` to email the event data.
 
 *Warning*: These trivial handlers will not respect the popular `refresh` 
 and `occurences` settings in the 
-[check definition]([Checks](checks#common-custom-check-definitions).
+[check definition](checks#common-custom-check-definitions).
 
 If you need occurence filtering, advanced handler that takes advantage
 of the `sensu-plugin` gem that can filter. See the available handlers
