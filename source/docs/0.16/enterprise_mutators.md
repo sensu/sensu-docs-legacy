@@ -27,13 +27,13 @@ sources. The `output_format` mutator currently supports several
 mainstream specifications: [Nagios PerfData][nagios_perfdata],
 [Graphite Plaintext][graphite_plaintext], [OpenTSDB][opentsdb], and
 [Metrics 2.0 as a wire format][metrics20_wire]. An output format must
-be specified in metric check definitions in order to use enterprise third-party
-integrations for metrics. You may also leverage the `output_format`
-mutator when writing your own Sensu event handlers.
+be specified in metric check definitions in order to use enterprise
+third-party integrations for metrics. You may also leverage the
+`output_format` mutator when writing your own Sensu event handlers.
 
 The valid values for `output_format` are:
 
-- `nagios_perf_data`
+- `nagios_perfdata`
 - `graphite_plaintext`
 - `opentsdb`
 - `metrics20_wire`
@@ -50,7 +50,7 @@ metric check, one that is making use of a Nagios plugin.
                 "all"
             ],
             "interval": 20,
-            "output_format": "nagios_perf_data",
+            "output_format": "nagios_perfdata",
             "handlers": [
                 "default",
                 "graphite"
