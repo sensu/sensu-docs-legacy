@@ -8,7 +8,7 @@ title: "Handlers"
 
 ## What are handlers? {#what-are-handlers}
 
-Handlers are for taking action on [event data](events), such as sending an
+Handlers are for taking action on [event data](event_data), such as sending an
 email alert, creating a PagerDuty incident, or storing metrics in Graphite.
 
 ## Types {#handler-types}
