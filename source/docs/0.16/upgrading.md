@@ -49,7 +49,9 @@ The configation for "exchange" type handlers have changed:
       "pipe": {
         "type": "topic",
         "name": "metrics",
-        "durable": "true"
+        "options": {
+          "durable": "true"
+        }
       },
       "mutator": "only_check_output"
     }
