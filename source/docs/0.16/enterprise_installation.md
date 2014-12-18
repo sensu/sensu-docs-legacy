@@ -80,7 +80,7 @@ _NOTE: replace `USER` and `PASSWORD` with your access credentials
 provided with your Sensu Enterprise subscription._
 
 ~~~ shell
-[sensu]
+[sensu-enterprise]
 name=sensu-enterprise
 baseurl=http://USER:PASSWORD@enterprise.sensuapp.com/yum/noarch/
 gpgcheck=0
