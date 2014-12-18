@@ -81,16 +81,11 @@ provided with your Sensu Enterprise subscription._
 
 ~~~ shell
 [sensu]
-name=sensu-enterprise-main
-baseurl=http://USER:PASSWORD@enterprise.sensuapp.com/yum/el/$releasever/$basearch/
+name=sensu-enterprise
+baseurl=http://USER:PASSWORD@enterprise.sensuapp.com/yum/noarch/
 gpgcheck=0
 enabled=1
 ~~~
-
-Valid values for `$releasever` are `5` and `6`.
-
-If you get a 404 (such as if your `$releasever` expands to `5Server`),
-hard-code the value to `5` or `6`.
 
 #### Step #2 - Install Sensu Enterprise {#yum-install-enterprise}
 
