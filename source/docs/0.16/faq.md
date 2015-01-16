@@ -144,6 +144,10 @@ In summary:
 Standalone-checks are configured in this example:
 http://blog.pkhamre.com/2012/03/21/sensu-standalone-checks/
 
+### Why does my client's standalone check definition differ from what I see in the API and on Uchiwa?
+
+Though your standalone checks will execute as you configured them, if your Sensu server and clients have the same check name, the configuration setup shown will be the one as defined on your Sensu server(s).
+
 ### How can I use the Sensu embedded Ruby for checks and handlers? {#how-can-I-use-the-sensu-embedded-ruby-for-checks-and-handlers}
 
 You can use the embedded Ruby by setting `EMBEDDED_RUBY=true` in
