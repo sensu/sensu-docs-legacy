@@ -21,14 +21,12 @@ plugins.
 
 We expect to have a set of tools written in Ruby which will allow us to:
 
-* Improve existing set of tools [GIR][3] Make use of [sensu base plugin][1] and [plugin test scaffold][2]
+* Improve existing set of tools [GIR][1]
   to setup toolkit which will allow to generate a new check which will be ready to be tested and proposed to community
 * Create a testing framework which will allow to run a set of tests within virtual machines and report back the status
   of that process
 
-[1]: https://github.com/sensu/sensu-plugin
-[2]: https://github.com/sensu/sensu-plugin-spec
-[3]: https://github.com/sensu-plugins/GIR
+[1]: https://github.com/sensu-plugins/GIR
 
 ### 2 General refactoring of community plugins code base
 **Brief explanation:**
