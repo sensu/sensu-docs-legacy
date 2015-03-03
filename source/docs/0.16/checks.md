@@ -422,8 +422,8 @@ until it is no longer flapping. The implementation is very similar to
         "production"
       ],
       "interval": 60,
-      "low_flap_threshold": "5",
-      "high_flap_threshold": "25"
+      "low_flap_threshold": 5,
+      "high_flap_threshold": 25
     }
   }
 }
