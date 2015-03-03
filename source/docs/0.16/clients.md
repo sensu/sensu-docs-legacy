@@ -12,7 +12,7 @@ registers with Sensu. There are a few mandatory key-values, a unique
 name for the client, an address, and its subscriptions. Subscriptions is
 a list of the roles or responsibilities the server the Sensu client
 resides on is responsible for, check requests are issued on these
-subscriptions. Client info is included in [event data](events).
+subscriptions. Client info is included in [event data](event_data).
 
 ### Example {#example-sensu-client-data}
 

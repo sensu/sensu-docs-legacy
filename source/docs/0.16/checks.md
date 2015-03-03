@@ -372,7 +372,7 @@ You can also specify a default value if the key does not exist `:::foo.bar|defau
 ### Custom check definition key-values {#custom-check-definition-key-values}
 
 Custom key-values can be added to a check definition, which will be
-included in [event data](events), enabling
+included in [event data](event_data), enabling
 [handler](handlers)
 creativity.
 
