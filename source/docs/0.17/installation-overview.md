@@ -1,10 +1,10 @@
 ---
 version: 0.17
-category:
-title: 
+category: "Installation Guide"
+title: "Installing Sensu: Overview"
 next:
-  url:
-  text:
+  url: "/install-rabbitmq"
+  text: "Install RabbitMQ"
 info:
 warning:
 danger:

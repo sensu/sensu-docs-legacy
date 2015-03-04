@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Getting Started Guide"
+title: "Getting Started with Handlers"
 next:
-  url: 
-  text: 
+  url: "/getting-started-with-filters"
+  text: "Getting Started w/ Filters"
 info:
-warning: 
+warning:
 danger:
 ---

@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Install Repositories"
 next:
-  url: 
-  text: 
+  url: "/install-sensu"
+  text: "Install Sensu"
 info:
-warning: 
+warning:
 danger:
 ---

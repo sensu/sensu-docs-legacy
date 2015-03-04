@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Install Sensu"
 next:
-  url: 
-  text: 
+  url: "/install-sensu-client"
+  text: "Install Sensu Client"
 info:
-warning: 
+warning:
 danger:
 ---

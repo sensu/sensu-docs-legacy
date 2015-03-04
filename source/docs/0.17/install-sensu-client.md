@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Install Sensu Client"
 next:
-  url: 
-  text: 
+  url: "/install-a-dashboard"
+  text: "Install a Dashboard"
 info:
-warning: 
+warning:
 danger:
 ---

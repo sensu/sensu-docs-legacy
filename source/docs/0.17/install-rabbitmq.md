@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Install RabbitMQ"
 next:
-  url: 
-  text: 
+  url: "/install-redis"
+  text: "Install Redis"
 info:
-warning: 
+warning:
 danger:
 ---

@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Install Redis"
 next:
-  url: 
-  text: 
+  url: "/install-repositories"
+  text: "Install Repositories"
 info:
-warning: 
+warning:
 danger:
 ---

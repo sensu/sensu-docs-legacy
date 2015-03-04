@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Getting Started Guide"
+title: "Getting Started with Filters"
 next:
-  url: 
-  text: 
+  url: "/getting-started-with-mutators"
+  text: "Getting Started w/ Mutators"
 info:
-warning: 
+warning:
 danger:
 ---

@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Getting Started Guide"
+title: "Getting Started with Sensu"
 next:
-  url: 
-  text: 
+  url: "/getting-started-with-checks"
+  text: "Getting Started w/ Checks"
 info:
-warning: 
+warning:
 danger:
 ---

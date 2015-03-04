@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Install a Dashboard"
 next:
-  url: 
-  text: 
+  url: "/installation-summary"
+  text: "Installation Summary"
 info:
-warning: 
+warning:
 danger:
 ---

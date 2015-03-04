@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Installation Guide"
+title: "Installation Summary"
 next:
-  url: 
-  text: 
+  url: "/getting-started"
+  text: "Getting Started Guide"
 info:
-warning: 
+warning:
 danger:
 ---

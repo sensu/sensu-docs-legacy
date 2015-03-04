@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Getting Started Guide"
+title: "Getting Started with Checks"
 next:
-  url: 
-  text: 
+  url: "/getting-started-with-handlers"
+  text: "Getting Started w/ Handlers"
 info:
-warning: 
+warning:
 danger:
 ---

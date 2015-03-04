@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Getting Started Guide"
+title: "Getting Started with Sensu Enterprise"
 next:
-  url: 
-  text: 
+  url: "/getting-started-summary"
+  text: "Getting Started Summary"
 info:
-warning: 
+warning:
 danger:
 ---
