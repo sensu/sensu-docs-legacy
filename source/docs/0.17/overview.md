@@ -3,7 +3,7 @@ version: 0.17
 category: "Overview"
 title: "What is Sensu?"
 next:
-  url: "/installation-overview"
+  url: "installation-overview"
   text: "Installation Guide"
 info:
 warning:

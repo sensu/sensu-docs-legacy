@@ -1,11 +1,11 @@
 ---
 version: 0.17
-category: 
-title: 
+category:
+title:
 next:
-  url: 
-  text: 
+  url:
+  text:
 info:
-warning: 
+warning:
 danger:
 ---
