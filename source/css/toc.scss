@@ -1,0 +1,14 @@
+@import "bootstrap";
+
+.toc > ul {
+  @extend .list-unstyled;
+  padding-left: 0px;
+}
+
+.toc li {
+  margin-bottom: 3px;
+}
+
+.toc ul > li > ul {
+  padding-left: 25px;
+}

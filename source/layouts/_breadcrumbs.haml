@@ -1,0 +1,18 @@
+%div.breadcrumbs
+  = stylesheet_link_tag "breadcrumbs"
+  %div.container
+    %div.row
+      %div.col-sm-12
+        %ul.breadcrumb.well
+          %li
+            %a{ href: "/docs" }= "Documentation"
+
+          - if current_resource.data.version
+            %li
+              - if current_resource.parent
+                %a{ href: current_resource.parent.url }= current_resource.data.version
+              - else
+                %a{ href: "#{}" }= current_resource.data.version
+
+          %li.active
+            #{current_resource.data.title}

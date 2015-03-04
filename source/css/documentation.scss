@@ -1,0 +1,18 @@
+@import "highlighting";
+
+.documentation h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+}
+
+.documentation li {
+  line-height: 20px;
+}
+
+.documentation ul p {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.documentation img {
+  width: 100%;
+}
