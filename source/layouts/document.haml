@@ -23,8 +23,12 @@
 
           - if current_resource.data.version
             %li
-              %a{ href: current_resource.parent.url }= current_resource.data.version
-              %span.divider= "/"
+              - if current_resource.parent
+                %a{ href: current_resource.parent.url }= current_resource.data.version
+                %span.divider= "/"
+              - else
+                %a{ href: "#{}" }= current_resource.data.version
+                %span.divider= "/"
 
           %li.active
             #{current_resource.data.title}
