@@ -1,3 +1,5 @@
+- @source = current_resource.path.sub(current_resource.ext(), '')
+
 - wrap_layout :layout do
 
   = partial "layouts/breadcrumbs"
@@ -6,15 +8,15 @@
     = stylesheet_link_tag "documentation"
     %div.container
       %div.row
-        %div.col-md-3.col-sm-4
-          = partial "layouts/toc"
-
+        - if current_resource.data.version?
+          - unless current_resource.data.hide_toc
+            %div.col-md-3.col-sm-4
+              = partial "layouts/toc"
         %div.col-md-9.col-sm-8{ id: "documentation" }
 
           = partial "layouts/alerts"
 
-          :preserve
-            #{yield}
+          = partial "#{@source}"
 
   = partial "layouts/suggestions"
 

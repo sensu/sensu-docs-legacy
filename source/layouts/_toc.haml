@@ -1,6 +1,4 @@
 %div.tableofcontents
   = stylesheet_link_tag "toc"
-  - if current_resource.data.version?
-    - unless current_resource.data.hide_toc
-      %div.toc.well
-        = partial "/docs/#{current_resource.data.version}/index"
+  %div.toc.well
+    = partial "/docs/#{current_resource.data.version}/index"
