@@ -4,7 +4,11 @@ title: Sensu versions
 hide_toc: true
 ---
 
-### **[Version 0.16 (Latest)](/docs/0.16/overview)**
+### **[Latest Version](/docs/latest/overview)**
+
+# Older Version
+
+### [Version 0.16](/docs/0.16/overview)
 
 ### [Version 0.15](/docs/0.15/overview)
 
