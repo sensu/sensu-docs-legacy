@@ -79,4 +79,6 @@ Example URL: `http://hostname:4567/checks/chef_client_process`
 
   - malformed: 400
 
+  - missing: 404
+
   - error: 500
