@@ -56,4 +56,9 @@ hide_toc: true
   * [Built-in Mutators](enterprise-built-in-mutators)
   * [Contact Routing](enterprise-contact-routing)
   * [Transports](enterprise-transports)
-  * [Dashboard](enterprise-dashboard)
+
+* **Enterprise Dashboard Docs**
+  * [Overview](enterprise-dashboard-overview)
+  * [Configuration](enterprise-dashboard-configuration)
+  * [Role-based Access Control](enterprise-dashboard-rbac)
+  * [Collections](enterprise-dashboard-collections)
