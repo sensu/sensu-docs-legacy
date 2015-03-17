@@ -80,8 +80,7 @@ connection timeout, it defaults to 10 seconds.
 ~~~ json
 {
     "slack": {
-        "team": "example",
-        "api_token": "API_TOKEN",
+        "webhook_url": "WEBHOOK_URL",
         "username": "sensu",
         "channel": "#ops",
         "timeout": 10
