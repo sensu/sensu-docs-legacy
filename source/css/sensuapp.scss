@@ -1,3 +1,19 @@
 // Twitter Bootstrap
 @import "bootstrap";
 @import "index";
+
+.ubuntu {
+  color: #DD4814;
+}
+
+.ubuntu > i {
+  padding-right: 7px;
+}
+
+.centos {
+  color: #204C8D;
+}
+
+.centos > i {
+  padding-right: 7px;
+}
