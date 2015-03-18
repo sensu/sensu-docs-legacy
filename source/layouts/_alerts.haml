@@ -1,8 +1,8 @@
 - if current_resource.data.danger
-  %div.alert.alert-error= current_resource.data.danger
+  %div.alert.alert-error{ role: "alert" }= current_resource.data.danger
 
 - if current_resource.data.warning
-  %div.alert.alert= current_resource.data.warning
+  %div.alert.alert-warning{ role: "alert" }= current_resource.data.warning
 
 - if current_resource.data.info
-  %div.alert.alert-info= current_resource.data.alert
+  %div.alert.alert-info{ role: "alert" }= current_resource.data.info
