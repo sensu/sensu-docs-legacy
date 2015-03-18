@@ -1,5 +1,3 @@
-- @source = current_resource.path.sub(current_resource.ext(), '')
-
 - wrap_layout :layout do
 
   = partial "layouts/breadcrumbs"
@@ -16,7 +14,7 @@
 
           = partial "layouts/alerts"
 
-          = partial "#{@source}"
+          :preserve
+            #{yield}
 
   = partial "layouts/suggestions"
-
