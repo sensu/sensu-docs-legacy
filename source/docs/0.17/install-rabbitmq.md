@@ -20,7 +20,7 @@ The following instructions will help you to:
 
 # Install RabbitMQ
 
-## Ubuntu (Debian) {#install-rabbitmq-on-ubuntu}
+## Ubuntu/Debian {#install-rabbitmq-on-ubuntu}
 
 ### Step #1: Install Erlang {#install-rabbitmq-on-ubuntu-step-1}
 
@@ -38,16 +38,16 @@ Install RabbitMQ from the official RabbitMQ repositories, as suggested in the of
 ~~~ shell
 wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 apt-key add rabbitmq-signing-key-public.asc
-echo "deb     http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
+echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee --append > /etc/apt/sources.list.d/rabbitmq.list
 apt-get update
 apt-get install rabbitmq-server
 ~~~
 
-## CentOS (RHEL) {#install-rabbitmq-on-centos}
+## CentOS/RHEL {#install-rabbitmq-on-centos}
 
 ### Step #1: Install Erlang {#install-rabbitmq-on-centos-step-1}
 
-Install the [EPEL](https://fedoraproject.org/wiki/EPEL) repository [for your CentOS (RHEL) release](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse):
+Install the [EPEL](https://fedoraproject.org/wiki/EPEL) repository [for your CentOS/RHEL release](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse):
 
 The following command will install the EPEL repository for CentOS/RHEL 6; for other CentOS/RHEL releases, please refer to [http://fedoraproject.org/wiki/EPEL/FAQ#howtouse](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse).
 
@@ -74,14 +74,14 @@ rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server
 
 Enable the RabbitMQ service on boot and start it:
 
-## Ubuntu (Debian) {#running-rabbitmq-on-ubuntu}
+## Ubuntu/Debian {#running-rabbitmq-on-ubuntu}
 
 ~~~ shell
 update-rc.d rabbitmq-server defaults
 /etc/init.d/rabbitmq-server start
 ~~~
 
-## CentOS (RHEL) {#running-rabbitmq-on-centos}
+## CentOS/RHEL {#running-rabbitmq-on-centos}
 
 ~~~ shell
 chkconfig rabbitmq-server on

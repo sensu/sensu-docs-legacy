@@ -17,7 +17,7 @@ The following instructions will help you to:
 
 # Install Redis
 
-## Ubuntu (Debian) {#install-redis-on-ubuntu}
+## Ubuntu/Debian {#install-redis-on-ubuntu}
 
 Install Redis (>= 1.3.14) from the distribution repository:
 
@@ -26,7 +26,7 @@ apt-get update
 apt-get install redis-server
 ~~~
 
-## CentOS (RHEL) {#install-redis-on-centos}
+## CentOS/RHEL {#install-redis-on-centos}
 
 Install Redis (>= 1.3.14) from the EPEL repository:
 
@@ -40,13 +40,13 @@ yum install redis
 
 Enable the RabbitMQ service on boot and start it:
 
-## Ubuntu (Debian) {#running-redis-on-ubuntu}
+## Ubuntu/Debian {#running-redis-on-ubuntu}
 
 ~~~ shell
 /etc/init.d/redis-server start
 ~~~
 
-## CentOS (RHEL) {#running-redis-on-centos}
+## CentOS/RHEL {#running-redis-on-centos}
 
 ~~~ shell
 /sbin/chkconfig redis on

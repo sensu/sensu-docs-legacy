@@ -16,7 +16,7 @@ The purpose of this guide is to help new Sensu users get up and running with a b
 What will be covered in this guide:
 
 - Installation and configuration of Sensu's dependencies (RabbitMQ & Redis)
-- Installation and configuration of the Sensu services
+- Installation and configuration of the Sensu Core or Sensu Enterprise services
 - Installation and configuration of Sensu client(s)
 - Installation and configuration of a Sensu dashboard
 - Next steps; e.g. production deployment strategies
