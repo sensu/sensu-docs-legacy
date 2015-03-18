@@ -46,6 +46,12 @@ to for your organization if you use this in production. The script will
 generate a few files that we'll need throughout the guide, so keep them
 nearby.
 
+If git not aldready installed
+
+~~~ bash
+apt-get install git
+~~~
+
 ~~~ bash
 git clone git://github.com/joemiller/joemiller.me-intro-to-sensu.git
 cd joemiller.me-intro-to-sensu/
@@ -95,7 +101,7 @@ update-rc.d rabbitmq-server defaults
 ~~~
 
 Verify operation with the RabbitMQ Web UI: Username is "guest", password
-is "guest" - `http://<RABBITMQ-SERVER>:55672`. Protocol amqp should be
+is "guest" - `http://<RABBITMQ-SERVER>:15672`. Protocol amqp should be
 bound to port 5672 and amqp/ssl on port 5671.
 
 ### Create RabbitMQ vhost and user for Sensu
