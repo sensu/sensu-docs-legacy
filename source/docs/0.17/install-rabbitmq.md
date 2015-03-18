@@ -49,7 +49,7 @@ apt-get install rabbitmq-server
 
 Install the [EPEL](https://fedoraproject.org/wiki/EPEL) repository [for your CentOS (RHEL) release](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse):
 
-The following command will install the EPEL repository for CentOS/RHEL 6; for other CentOS/RHEL releases, please refer to http://fedoraproject.org/wiki/EPEL/FAQ#howtouse.
+The following command will install the EPEL repository for CentOS/RHEL 6; for other CentOS/RHEL releases, please refer to [http://fedoraproject.org/wiki/EPEL/FAQ#howtouse](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse).
 
 ~~~ shell
 rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
@@ -104,4 +104,3 @@ rabbitmqctl add_vhost /sensu
 rabbitmqctl add_user sensu secret
 rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
 ~~~
-
