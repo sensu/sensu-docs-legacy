@@ -38,7 +38,7 @@ Install RabbitMQ from the official RabbitMQ repositories, as suggested in the of
 ~~~ shell
 wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 apt-key add rabbitmq-signing-key-public.asc
-echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee --append > /etc/apt/sources.list.d/rabbitmq.list
+echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee > /etc/apt/sources.list.d/rabbitmq.list
 apt-get update
 apt-get install rabbitmq-server
 ~~~
