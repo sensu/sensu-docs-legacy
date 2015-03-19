@@ -12,7 +12,7 @@ $(function() {
     var $el, icon, id;
     $el = $(el);
     id = $el.attr('id');
-    icon = '<i class="fa fa-link"></i>';
+    icon = '<span class="mega-octicon octicon-link"></span>';
     if (id) {
       return $el.append($("<a />").addClass("header-link").attr("href", "#" + id).html(icon));
     }
