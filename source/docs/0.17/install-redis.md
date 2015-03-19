@@ -22,8 +22,8 @@ The following instructions will help you to:
 Install Redis (>= 1.3.14) from the distribution repository:
 
 ~~~ shell
-apt-get update
-apt-get install redis-server
+sudo apt-get update
+sudo apt-get install redis-server
 ~~~
 
 ## CentOS/RHEL {#install-redis-on-centos}
@@ -33,7 +33,7 @@ Install Redis (>= 1.3.14) from the EPEL repository:
 _NOTE: installation of Redis from EPEL repositories depends on having already installed the EPEL repositories for your CentOS/RHEL release, as described during [RabbitMQ installation](install-rabbitmq#install-rabbitmq-on-centos-step-1)._
 
 ~~~ shell
-yum install redis
+sudo yum install redis
 ~~~
 
 # Running Redis
@@ -43,12 +43,12 @@ Enable the RabbitMQ service on boot and start it:
 ## Ubuntu/Debian {#running-redis-on-ubuntu}
 
 ~~~ shell
-/etc/init.d/redis-server start
+sudo /etc/init.d/redis-server start
 ~~~
 
 ## CentOS/RHEL {#running-redis-on-centos}
 
 ~~~ shell
-/sbin/chkconfig redis on
-/etc/init.d/redis start
+sudo /sbin/chkconfig redis on
+sudo /etc/init.d/redis start
 ~~~

@@ -15,24 +15,24 @@ _NOTE: Sensu Core and Sensu Enterprise may be installed alongside one another, h
 
 # Install Sensu
 
-## Sensu Core 
+## Sensu Core {#install-sensu-core}
 
 Install Sensu Core from the Sensu repository:
 
 ### Ubuntu/Debian
 
 ~~~ shell
-apt-get update
-apt-get install sensu
+sudo apt-get update
+sudo apt-get install sensu
 ~~~
 
 ### CentOS/RHEL
 
 ~~~ shell
-yum install sensu
+sudo yum install sensu
 ~~~
 
-## Sensu Enterprise
+## Sensu Enterprise {#install-sensu-enterprise}
 
 Install Sensu Enterprise from the Sensu Enterprise repository:
 
@@ -41,14 +41,14 @@ _NOTE: access to the Sensu Enterprise repositories requires an active [Sensu Ent
 ### Ubuntu/Debian
 
 ~~~ shell
-apt-get update
-apt-get install sensu-enterprise
+sudo apt-get update
+sudo apt-get install sensu-enterprise
 ~~~
 
 ### CentOS/RHEL
 
 ~~~ shell
-yum install sensu-enterprise
+sudo yum install sensu-enterprise
 ~~~
 
 # Configure Sensu
@@ -58,7 +58,7 @@ yum install sensu-enterprise
 The primary configuration for Sensu is stored in JSON format at `/etc/sensu/config.json`. To configure the Sensu services, copy the following example configuration to `/etc/sensu/config.json` manually, or via:
 
 ~~~ shell
-wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.17/files/config.json
+sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.17/files/config.json
 ~~~
 
 _NOTE: this example file configures the RabbitMQ and Redis connection options._
@@ -84,7 +84,7 @@ Sensu Checks & Event Handlers will be covered in detail later in this guide, how
 Create a check definition by copying the following example configuration to `/etc/sensu/conf.d/check_memory.json` manually, or via:
 
 ~~~ shell
-wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.17/files/check_memory.json
+sudo wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.17/files/check_memory.json
 ~~~
 
 _NOTE: this example config creates a [Sensu Check]() that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available)._
@@ -106,7 +106,7 @@ _NOTE: this example config creates a [Sensu Check]() that will alert based on me
 Create a default handler definition by copying the following example configuration to `/etc/sensu/conf.d/default_handler.json` manually, or via:
 
 ~~~ shell
-wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.17/files/default_handler.json
+sudo wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.17/files/default_handler.json
 ~~~
 
 _NOTE: this example config creates a [Sensu Event Handler]() that will be used by default for Sensu events that do not specify a handler._
@@ -122,6 +122,12 @@ _NOTE: this example config creates a [Sensu Event Handler]() that will be used b
 }
 ~~~
 
+Ensure the Sensu configuration files are owned by the Sensu user and group `sensu`:
+
+~~~ shell
+sudo chown -R sensu:sensu /etc/sensu
+~~~
+
 # Running Sensu
 
 Only one flavor of Sensu should be used at any given time: Sensu Core (sensu-server + sensu-api), or Sensu Enterprise. If you have previously run Sensu Core or Sensu Enterprise and are switching flavors, simply stop one and start the other. 
@@ -129,14 +135,14 @@ Only one flavor of Sensu should be used at any given time: Sensu Core (sensu-ser
 ## Sensu Core
 
 ~~~ shell
-/etc/init.d/sensu-server start
-/etc/init.d/sensu-api start
+sudo /etc/init.d/sensu-server start
+sudo /etc/init.d/sensu-api start
 ~~~
 
 ## Sensu Enterprise
 
 ~~~ shell
-/etc/init.d/sensu-enterprise start
+sudo /etc/init.d/sensu-enterprise start
 ~~~
 
 # Observe Sensu

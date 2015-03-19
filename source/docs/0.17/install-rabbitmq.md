@@ -27,8 +27,8 @@ The following instructions will help you to:
 Install Erlang from the distribution repository:
 
 ~~~ shell
-apt-get update
-apt-get -y install erlang-nox
+sudo apt-get update
+sudo apt-get -y install erlang-nox
 ~~~
 
 ### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
@@ -36,11 +36,11 @@ apt-get -y install erlang-nox
 Install RabbitMQ from the official RabbitMQ repositories, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-debian.html):
 
 ~~~ shell
-wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-apt-key add rabbitmq-signing-key-public.asc
+sudo wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+sudo apt-key add rabbitmq-signing-key-public.asc
 echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee > /etc/apt/sources.list.d/rabbitmq.list
-apt-get update
-apt-get install rabbitmq-server
+sudo apt-get update
+sudo apt-get install rabbitmq-server
 ~~~
 
 ## CentOS/RHEL {#install-rabbitmq-on-centos}
@@ -52,13 +52,13 @@ Install the [EPEL](https://fedoraproject.org/wiki/EPEL) repository [for your Cen
 The following command will install the EPEL repository for CentOS/RHEL 6; for other CentOS/RHEL releases, please refer to [http://fedoraproject.org/wiki/EPEL/FAQ#howtouse](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse).
 
 ~~~ shell
-rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 ~~~
 
 Install Erlang from the EPEL repository:
 
 ~~~ shell
-yum install erlang
+sudo yum install erlang
 ~~~
 
 ### Step #2: Install RabbitMQ {#install-rabbitmq-on-centos-step-2}
@@ -66,8 +66,8 @@ yum install erlang
 Install RabbitMQ using the official RabbitMQ RPM, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-rpm.html):
 
 ~~~ shell
-rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3.5.0-1.noarch.rpm
+sudo rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3.5.0-1.noarch.rpm
 ~~~
 
 # Running RabbitMQ
@@ -77,15 +77,15 @@ Enable the RabbitMQ service on boot and start it:
 ## Ubuntu/Debian {#running-rabbitmq-on-ubuntu}
 
 ~~~ shell
-update-rc.d rabbitmq-server defaults
-/etc/init.d/rabbitmq-server start
+sudo update-rc.d rabbitmq-server defaults
+sudo /etc/init.d/rabbitmq-server start
 ~~~
 
 ## CentOS/RHEL {#running-rabbitmq-on-centos}
 
 ~~~ shell
-chkconfig rabbitmq-server on
-/etc/init.d/rabbitmq-server start
+sudo chkconfig rabbitmq-server on
+sudo /etc/init.d/rabbitmq-server start
 ~~~
 
 # Configure RabbitMQ
@@ -95,12 +95,12 @@ Access to RabbitMQ is restricted by [access controls](https://www.rabbitmq.com/a
 ## Create vhost
 
 ~~~ shell
-rabbitmqctl add_vhost /sensu
+sudo rabbitmqctl add_vhost /sensu
 ~~~
 
 ## Create user
 
 ~~~ shell
-rabbitmqctl add_user sensu secret
-rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+sudo rabbitmqctl add_user sensu secret
+sudo rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
 ~~~
