@@ -4,6 +4,26 @@
 @import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
 @import "index";
 
+h2 {
+  color: #555 !important;
+}
+
+h3 {
+  color: #777 !important;
+}
+
+h4 {
+  color: #888 !important;
+}
+
+h5 {
+  color: #999 !important;
+}
+
+h6 {
+  color: #aaa !important;
+}
+
 pre {
   border: none !important;
 }
@@ -17,7 +37,7 @@ pre {
 }
 
 .ubuntu {
-  color: #DD4814;
+  color: #DD4814 !important;
 }
 
 .ubuntu > i {
@@ -25,7 +45,7 @@ pre {
 }
 
 .centos {
-  color: #204C8D;
+  color: #204C8D !important;
 }
 
 .centos > i {
