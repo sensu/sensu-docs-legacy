@@ -4,6 +4,14 @@
 @import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
 @import "index";
 
+.note {
+  display: block;
+  background-color: #d5e9f6;
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 4px;
+}
+
 .ubuntu {
   color: #DD4814;
 }
