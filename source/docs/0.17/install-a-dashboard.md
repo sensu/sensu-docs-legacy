@@ -63,3 +63,29 @@ sudo yum install sensu-enterprise-dashboard
   }
 }
 ~~~
+
+### Running Sensu Enterprise Dashboard
+
+~~~ shell
+sudo /etc/init.d/sensu-enterprise-dashboard start
+~~~
+
+### Observing the Sensu Enterprise Dashboard logs
+
+Congratulations! By now you should have successfully installed and configured Sensu Enterprise Dashboard! Now let's observe it in operation.
+
+Tail the Sensu Enterprise Dashboard log file to observe its operation:
+
+~~~ shell
+sudo tail -f /var/log/sensu/sensu-enterprise-dashboard.log
+~~~
+
+If Sensu Enterprise Dashboard started successfully you should notice a line containing:
+
+~~~
+now listening on 0.0.0.0:3000
+~~~
+
+### Viewing Sensu Enterprise Dashboard
+
+Now that Sensu Enterprise Dashboard is up and running, you can view the dashboard at `http://<DASHBOARD_IP_ADDRESS>:3000`.
