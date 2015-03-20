@@ -6,6 +6,10 @@
     = stylesheet_link_tag "documentation"
     %div.container
       %div.row
+        - if current_resource.data.version?
+          - unless current_resource.data.hide_toc
+            %div.col-md-3.col-sm-4
+              = partial "layouts/toc"
         %div.col-md-9.col-sm-8{ id: "documentation" }
 
           = partial "layouts/alerts"
@@ -14,8 +18,3 @@
             #{yield}
 
           = partial "layouts/suggestions"
-
-        - if current_resource.data.version?
-          - unless current_resource.data.hide_toc
-            %div.col-md-3.col-sm-4
-              = partial "layouts/toc"
