@@ -49,8 +49,9 @@ _NOTE: this example file configures the Sensu client with client metadata, inclu
 }
 ~~~
 
+# Install Check Dependencies
 
-Download an example Sensu check plugin:
+Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts).  
 
 ~~~ shell
 sudo wget -O /etc/sensu/plugins/check-mem.sh http://sensuapp.org/docs/0.17/files/check-mem.sh
