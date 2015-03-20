@@ -9,7 +9,7 @@ next:
 
 # Introduction
 
-The purpose of this guide is to help new Sensu users get up and running with a basic Sensu installation. This guide is not intended to provide instruciton for deploying Sensu into "production" environments. Production deployment strategies will be provided at the conclusion of the guide.
+The purpose of this guide is to help new Sensu users get up and running with a basic Sensu installation. At the conclusion of this guide, you - the user - should have a single server running all of the Sensu services, their dependencies, and a running Sensu client; optionally, this guide also provides instructions for getting Sensu client installed and running on one or more remote machines. This guide is not intended to provide instruction for deploying Sensu into "production" environments. Production deployment strategies will be provided at the conclusion of the guide.
 
 ## Objectives
 
