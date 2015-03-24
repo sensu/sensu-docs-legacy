@@ -3,6 +3,11 @@
 @import "octicons/octicons";
 @import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
 @import "index";
+@import "tables";
+
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #999 !important;
+}
 
 #documentation h1:not(h1:first-child) {
   padding-top: 14px;
