@@ -85,31 +85,286 @@ Each check definition has a unique check name, used for the definition key.
 
 ### Definition attributes
 
-Attribute | Description
----------:|:-----------
-*type* **Optional** **String** | The check type. Use either **standard** or **metric**. Setting **type** to **metric** will cause OK (exit 0) check results to create events. `"type": "metric"`
-*command* **REQUIRED** **String** | Not required if **extension** is configured. The check command to be executed. `"command": "/etc/sensu/plugins/check-chef-client.rb"`
-*extension* **REQUIRED** **String** | Not required if **command** is configured. This is an _advanced feature_ and is not commonly used. The name of a Sensu check extension to run instead of a command. `"extension": "system_profile"`
-*standalone* **OPTIONAL** **Boolean** | If the check is scheduled by the local Sensu client instead of the Sensu server.
-*subscribers* **REQUIRED** **Array** | Not required if **standalone** is set to **true**. An array of Sensu client subscriptions that check requests will be sent to. The array cannot be empty. Each array item must be a string. `"subscribers": ["production"]`
-*publish* **OPTIONAL** **Boolean** | If check requests are published for the check. `"publish": false`
-*interval* **REQUIRED** **Integer** | Not required if **publish** is set to **false**. The frequency in seconds to execute the check. `"interval": 60`
-*timeout* **OPTIONAL** **Integer** | The check execution duration timeout in seconds (hard stop). `"timeout": 30`
-*handle* **OPTIONAL** **Boolean** | If events created by the check should be handled. `"handle": "false"`
-*handler* **OPTIONAL** **String** | The Sensu event handler to use for events created by the check. `"handler": "pagerduty"`
-*handlers* **OPTIONAL** **Array** | An array of Sensu event handlers (names) to use for events created by the check. Each array item must be a string. `"handlers": ["pagerduty", "email"]`
-*low_flap_threshold* **OPTIONAL** **Integer** | The flap detection low threshold (% state change). Sensu uses the same [flap detection algorithm as Nagios](http://nagios.sourceforge.net/docs/3_0/flapping.html). `"low_flap_threshold": 20`
-*high_flap_threshold* **OPTIONAL** **Integer** | The flap detection high threshold (% state change). Sensu uses the same [flap detection algorithm as Nagios](http://nagios.sourceforge.net/docs/3_0/flapping.html). **low_flap_threshold** must be configured for this attribute to have any effect. `"high_flap_threshold": 60`
-*source* **OPTIONAL** **String** | A string to add context to the check result. `"source": "switch-dc-01"`
-*subdue* **OPTIONAL** **Hash** | A set of attributes that define when a check is subdued. See [Subdue attributes](#check-subdue-attributes) for more information. `"subdue": {}`
+type
+: description
+  : The check type, either `standard` or `metric`. Setting type to `metric` will cause OK (exit 0) check results to create events.
+: required
+  : false
+: type
+  : String
+: default
+  : `standard`
+: example
+  : ~~~ shell
+    "type": "metric"
+    ~~~
 
-#### Subdue attributes {#check-subdue-attributes}
+command
+: description
+  : The check command to be executed.
+: required
+  : true (unless `extension` is configured)
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "command": "/etc/sensu/plugins/check-chef-client.rb"
+    ~~~
 
-Attribute | Description
----------:|:-----------
-*at* **OPTIONAL** **String** | Where the check is subdued. Use either **handler** or **publisher**. `"at": "handler"`
-*days* **OPTIONAL** **Array** | Which days of the week the check is subdued. An array of days of the week. Each array item must be a string and a valid day of the week. `"days": ["monday", "wednesday"]`
-*begin* **REQUIRED** **String** | Beginning of the time window when the check is subdued. Parsed by Ruby's **Time.parse()** method. May include a time zone. `"begin": "5PM PST"`
-*end* **REQUIRED** **String** | End of the time window when the check is subdued. Parsed by Ruby's **Time.parse()** method. May include a time zone. `"end": "9AM PST"`
-*exceptions* **OPTIONAL** **Array** | Subdue time window (begin, end) exceptions. Takes an array of hashes, containing valid **begin** and **end** times. `"exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]`
+extension
+: description
+  : The name of a Sensu check extension to run instead of a command. This is an _advanced feature_ and is not commonly used.
+: required
+  : true (unless `command` is configured)
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "extension": "system_profile"
+    ~~~
 
+standalone
+: description
+  : If the check is scheduled by the local Sensu client instead of the Sensu server (standalone mode).
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "standalone": true
+    ~~~
+
+subscribers
+: description
+  : An array of Sensu client subscriptions that check requests will be sent to. The array cannot be empty and its items must each be a string.
+: required
+  : true (unless `standalone` is `true`)
+: type
+  : Array
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "subscribers": ["production"]
+    ~~~
+
+publish
+: description
+  : If check requests are published for the check.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : true
+: example
+  : ~~~ shell
+    "publish": false
+    ~~~
+
+interval
+: description
+  : The frequency in seconds the check is executed.
+: required
+  : true (unless `publish` is `false`)
+: type
+  : Integer
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "interval": 60
+    ~~~
+
+timeout
+: description
+  : The check execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+handle
+: description
+  : If events created by the check should be handled.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : true
+: example
+  : ~~~ shell
+    "handle": "false"
+    ~~~
+
+handler
+: description
+  : The Sensu event handler (name) to use for events created by the check.
+: required
+  : false
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "handler": "pagerduty"
+    ~~~
+
+handlers
+: description
+  : An array of Sensu event handlers (names) to use for events created by the check. Each array item must be a string.
+: required
+  : false
+: type
+  : Array
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "handlers": ["pagerduty", "email"]
+    ~~~
+
+low_flap_threshold
+: description
+  : The flap detection low threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](http://nagios.sourceforge.net/docs/3_0/flapping.html).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "low_flap_threshold": 20
+    ~~~
+
+high_flap_threshold
+: description
+  : The flap detection high threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](http://nagios.sourceforge.net/docs/3_0/flapping.html).
+: required
+  : true (if `low_flap_threshold` is configured)
+: type
+  : Integer
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "high_flap_threshold": 60
+    ~~~
+
+source
+: description
+  : A string to add context to the check result. Commonly used when the check is querying an external resource for data (e.g. a network switch).
+: required
+  : false
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "source": "switch-dc-01"
+    ~~~
+
+subdue
+: description
+  : A set of attributes that determine when a check is subdued.
+: required
+  : false
+: type
+  : Hash
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "subdue": {}
+    ~~~
+
+#### Subdue attributes
+
+The following attributes are configured within the `subdue` attribute hash context.
+
+at
+: description
+  : Where the check is subdued, either `publisher` or `handler`, at the check request publisher or event handler.
+: required
+  : false
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "at": "handler"
+    ~~~
+
+days
+: description
+  : An array of days of the week the check is subdued. Each array item must be a string and a valid day of the week.
+: required
+  : false
+: type
+  : Array
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "days": ["monday", "wednesday"]
+    ~~~
+
+begin
+: description
+  : Beginning of the time window when the check is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+: required
+  : true
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "begin": "5PM PST"
+    ~~~
+
+end
+: description
+  : End of the time window when the check is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+: required
+  : true
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "end": "9AM PST"
+    ~~~
+
+exceptions
+: description
+  : Subdue time window (`begin`, `end`) exceptions. An array of time window exceptions. Each array item must be a hash containing valid `begin` and `end` times.
+: required
+  : false
+: type
+  : Array
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
+    ~~~

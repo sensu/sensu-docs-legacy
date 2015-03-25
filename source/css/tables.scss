@@ -1,3 +1,31 @@
+dl {
+
+}
+
+dl > dt {
+  text-align: left !important;
+}
+
+dl > dt {
+  text-align: left !important;
+}
+
+dl:first-child > dd {
+
+}
+
+dl > dd > dl {
+
+}
+
+dl > dd > dl > dt {
+  text-align: right !important;
+}
+
+dl > dd > dl > dd {
+
+}
+
 table {
   width: 100%;
 }
