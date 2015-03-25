@@ -107,8 +107,8 @@ Attribute | Description
 
 Attribute | Description
 ---------:|:-----------
-*at* **REQUIRED** **String** | Where the check is subdued. Use either **handler** or **publisher**. `"at": "handler"`
-*days* **REQUIRED** **Array** | Which days of the week the check is subdued. An array of days of the week. Each array item must be a string and a valid day of the week. `"days": ["monday", "wednesday"]`
+*at* **OPTIONAL** **String** | Where the check is subdued. Use either **handler** or **publisher**. `"at": "handler"`
+*days* **OPTIONAL** **Array** | Which days of the week the check is subdued. An array of days of the week. Each array item must be a string and a valid day of the week. `"days": ["monday", "wednesday"]`
 *begin* **REQUIRED** **String** | Beginning of the time window when the check is subdued. Parsed by Ruby's **Time.parse()** method. May include a time zone. `"begin": "5PM PST"`
 *end* **REQUIRED** **String** | End of the time window when the check is subdued. Parsed by Ruby's **Time.parse()** method. May include a time zone. `"end": "9AM PST"`
 *exceptions* **OPTIONAL** **Array** | Subdue time window (begin, end) exceptions. Takes an array of hashes, containing valid **begin** and **end** times. `"exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]`
