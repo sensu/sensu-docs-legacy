@@ -104,8 +104,6 @@ command
   : true (unless `extension` is configured)
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "command": "/etc/sensu/plugins/check-chef-client.rb"
@@ -118,8 +116,6 @@ extension
   : true (unless `command` is configured)
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "extension": "system_profile"
@@ -146,8 +142,6 @@ subscribers
   : true (unless `standalone` is `true`)
 : type
   : Array
-: default
-  : `nil`
 : example
   : ~~~ shell
     "subscribers": ["production"]
@@ -174,8 +168,6 @@ interval
   : true (unless `publish` is `false`)
 : type
   : Integer
-: default
-  : `nil`
 : example
   : ~~~ shell
     "interval": 60
@@ -188,8 +180,6 @@ timeout
   : false
 : type
   : Integer
-: default
-  : `nil`
 : example
   : ~~~ shell
     "timeout": 30
@@ -216,8 +206,6 @@ handler
   : false
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "handler": "pagerduty"
@@ -230,8 +218,6 @@ handlers
   : false
 : type
   : Array
-: default
-  : `nil`
 : example
   : ~~~ shell
     "handlers": ["pagerduty", "email"]
@@ -244,8 +230,6 @@ low_flap_threshold
   : false
 : type
   : Integer
-: default
-  : `nil`
 : example
   : ~~~ shell
     "low_flap_threshold": 20
@@ -258,8 +242,6 @@ high_flap_threshold
   : true (if `low_flap_threshold` is configured)
 : type
   : Integer
-: default
-  : `nil`
 : example
   : ~~~ shell
     "high_flap_threshold": 60
@@ -272,8 +254,6 @@ source
   : false
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "source": "switch-dc-01"
@@ -286,8 +266,6 @@ subdue
   : false
 : type
   : Hash
-: default
-  : `nil`
 : example
   : ~~~ shell
     "subdue": {}
@@ -304,8 +282,6 @@ at
   : false
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "at": "handler"
@@ -318,8 +294,6 @@ days
   : false
 : type
   : Array
-: default
-  : `nil`
 : example
   : ~~~ shell
     "days": ["monday", "wednesday"]
@@ -332,8 +306,6 @@ begin
   : true
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "begin": "5PM PST"
@@ -346,8 +318,6 @@ end
   : true
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
     "end": "9AM PST"
@@ -360,8 +330,6 @@ exceptions
   : false
 : type
   : Array
-: default
-  : `nil`
 : example
   : ~~~ shell
     "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
