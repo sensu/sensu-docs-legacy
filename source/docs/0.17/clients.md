@@ -240,3 +240,163 @@ critical
   : ~~~ shell
     "critical": 90
     ~~~
+
+# Manage the client process
+
+The Sensu client process `sensu-client` is managed with an init script included in the Sensu Core package. The Sensu client init script is able to start/stop/restart the local process.
+
+~~~ shell
+sudo /etc/init.d/sensu-client start
+sudo /etc/init.d/sensu-client stop
+sudo /etc/init.d/sensu-client restart
+~~~
+
+## Init script configuration
+
+The init script loads/sources several platform specific configuration files before managing the process.
+
+### Ubuntu/Debian
+
+`/etc/default/sensu` and `/etc/default/sensu-client`
+
+### CentOS/RHEL
+
+`/etc/default/sensu` and `/etc/sysconfig/sensu-client`
+
+### Configuration variables
+
+The following configuration options (variables) can be set in the init configuration files for the platform.
+
+EMBEDDED_RUBY
+: description
+  : If the Sensu embedded Ruby runtime is used for check executions, adding Ruby to Sensu's `$PATH`.
+: required
+  : false
+: default
+  : `false`
+: example
+  : ~~~ shell
+    EMBEDDED_RUBY=true
+    ~~~
+
+CONFIG_FILE
+: description
+  : The primary configuration file path.
+: required
+  : false
+: default
+  : `/etc/sensu/config.json`
+: example
+  : ~~~ shell
+    CONFIG_FILE=/etc/sensu/config.json
+    ~~~
+
+CONFIG_DIR
+: description
+  : The configuration snippet directory path.
+: required
+  : false
+: default
+  : `/etc/sensu/conf.d`
+: example
+  : ~~~ shell
+    CONFIG_DIR=/etc/sensu/conf.d
+    ~~~
+
+EXTENSION_DIR
+: description
+  : The Sensu extension directory path.
+: required
+  : false
+: default
+  : `/etc/sensu/extensions`
+: example
+  : ~~~ shell
+    EXTENSION_DIR=/etc/sensu/extensions
+    ~~~
+
+PLUGINS_DIR
+: description
+  : The Sensu plugins directory path, to add to the Sensu's `$PATH`.
+: required
+  : false
+: default
+  : `/etc/sensu/plugins`
+: example
+  : ~~~ shell
+    PLUGINS_DIR=/etc/sensu/plugins
+    ~~~
+
+HANDLERS_DIR
+: description
+  : The Sensu handlers directory path, to add to Sensu's `$PATH`. This is only used by the Sensu server.
+: required
+  : false
+: default
+  : `/etc/sensu/handlers`
+: example
+  : ~~~ shell
+    HANDLERS_DIR=/etc/sensu/handlers
+    ~~~
+
+LOG_DIR
+: description
+  : The log file directory path.
+: required
+  : false
+: default
+  : `/var/log/sensu`
+: example
+  : ~~~ shell
+    LOG_DIR=/var/log/sensu
+    ~~~
+
+LOG_LEVEL
+: description
+  : The log level to default the logger to.
+: required
+  : false
+: default
+  : `info`
+: valid values
+  : `debug`, `info`, `warn`, `error`, `fatal`
+: example
+  : ~~~ shell
+    LOG_LEVEL=info
+    ~~~
+
+PID_DIR
+: description
+  : The PID directory path.
+: required
+  : false
+: default
+  : `/var/run/sensu`
+: example
+  : ~~~ shell
+    PID_DIR=/var/run/sensu
+    ~~~
+
+USER
+: description
+  : The Sensu user to run the process as.
+: required
+  : false
+: default
+  : `sensu`
+: example
+  : ~~~ shell
+    USER=sensu
+    ~~~
+
+SERVICE_MAX_WAIT
+: description
+  : The max wait time for process start/stop.
+: required
+  : false
+: default
+  : `10`
+: example
+  : ~~~ shell
+    SERVICE_MAX_WAIT=10
+    ~~~
