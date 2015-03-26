@@ -74,7 +74,7 @@ The following is an example Sensu check definition, a JSON configuration file lo
 
 ### Name
 
-Each check definition has a unique check name, used for the definition key.
+Each check definition has a unique check name, used for the definition key. Every check definition is within the `"checks": {}` definition scope.
 
 - A unique string used to name/identify the check
 - Cannot contain special characters or spaces
