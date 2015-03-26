@@ -14,7 +14,8 @@ This reference document provides information to help you:
 - Understand what a Sensu client is
 - What a Sensu client does
 - Write a Sensu client definition
-- Manage the Sensu client process
+- Manage the Sensu client process on Linux
+- Manage the Sensu client process on Windows
 
 # What are Sensu clients? {#what-are-sensu-clients}
 
@@ -241,7 +242,7 @@ critical
     "critical": 90
     ~~~
 
-# Manage the client process
+# Manage the client process on Linux
 
 The Sensu client process `sensu-client` is managed with an init script included in the Sensu Core package. The Sensu client init script is able to start/stop/restart the local process.
 
@@ -400,3 +401,42 @@ SERVICE_MAX_WAIT
   : ~~~ shell
     SERVICE_MAX_WAIT=10
     ~~~
+
+# Manage the client process on Windows
+
+The Sensu Core MSI package includes a Sensu client service wrapper, allowing Sensu to be registered as a Windows service. The Sensu client service wrapper uses an XML configuration file, to configure the `sensu-client` run arguments, e.g. `--log C:\opt\sensu\sensu-client.log`.
+
+## Configure the client Windows service
+
+Edit the Windows service definition for the Sensu client at `C:\opt\sensu\bin\sensu-client.xml`.
+
+~~~ xml
+  <!--
+    Windows service definition for Sensu
+  -->
+  <service>
+    <id>sensu-client</id>
+    <name>Sensu Client</name>
+    <description>This service runs a Sensu client</description>
+    <executable>C:\opt\sensu\embedded\bin\ruby</executable>
+    <arguments>C:\opt\sensu\embedded\bin\sensu-client -d C:\etc\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
+  </service>
+~~~
+
+For a full list of Sensu client command line arguments and their descriptions, run the following.
+
+~~~ powershell
+C:\opt\sensu\embedded\bin\sensu-client -h
+~~~
+
+## Create the client Windows service
+
+Use the Windows SC command to create the service. The space between the equals(=) and the values is required.
+
+~~~ powershell
+sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
+~~~
+
+## Start the service {#start-the-service}
+
+Start the Sensu Client service from the Services.msc panel or the Command Prompt. Review the C:\opt\sensu\sensu-client.log for errors.
