@@ -7,8 +7,6 @@ next:
   text: "Handlers"
 ---
 
-# Checks
-
 # Overview
 
 This reference document provides information to help you:
