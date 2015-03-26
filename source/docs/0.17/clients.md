@@ -16,7 +16,33 @@ This reference document provides information to help you:
 - Write a Sensu client definition
 - Manage the Sensu client process
 
+# What are Sensu clients? {#what-are-sensu-clients}
+
+Sensu clients are monitoring agents, running on every machine that needs to be monitored. The client is responsible for registering the machine with Sensu and executing monitoring checks. Each client has a set of subscriptions, a list of roles/responsibilities the machine has (e.g. webserver), these subscriptions determine which monitoring checks are executed. The Sensu client publishes every check execution result to the message bus to be processed elsewhere. Sensu clients publish keepalives every 20 seconds, to help detect machines in an unhealthy state. Client keepalives contain the local client definition, to update the client registry, and provide additional context in event data.
+
+# Client definition
+
+The following is an example Sensu client definition, a JSON configuration file located at `/etc/sensu/conf.d/client.json`. This client definition provides Sensu with information about the machine on which it resides. This is a production machine, running a web server and a database.
+
+## Example client definition
+
+~~~ json
+{
+  "client": {
+    "name": "i-424242",
+    "address": "8.8.8.8",
+    "subscriptions": [
+      "production",
+      "webserver",
+      "mysql"
+    ]
+  }
+}
+~~~
+
 # Anatomy of a client definition
+
+The client definition uses the `"client": {}` definition scope.
 
 ### Definition attributes
 
