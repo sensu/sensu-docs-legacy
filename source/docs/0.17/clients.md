@@ -144,7 +144,7 @@ keepalive
     "keepalive": {}
     ~~~
 
-### Socket attributes
+#### Socket attributes
 
 bind
 : description
@@ -174,7 +174,7 @@ port
     "port": 3031
     ~~~
 
-### Keepalive attributes
+#### Keepalive attributes
 
 handler
 : description

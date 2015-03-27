@@ -271,9 +271,9 @@ subdue
     "subdue": {}
     ~~~
 
-### Subdue attributes
+#### Subdue attributes
 
-The following attributes are configured within the `subdue` attribute hash context.
+The following attributes are configured within the `"subdue": {}` check definition attribute context.
 
 at
 : description

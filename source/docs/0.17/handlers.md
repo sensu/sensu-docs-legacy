@@ -1,25 +1,299 @@
 ---
 version: 0.17
-category: 
-title: 
+category: "Reference Docs"
+title: "Handlers"
 next:
-  url: 
-  text: 
-info:
-warning: 
-danger:
+  url: "filters"
+  text: "Filters"
 ---
 
+# Anatomy of a handler definition
 
-thing
+### Name
+
+Each handler definition has a unique handler name, used for the definition key. Every handler definition is within the `"handlers": {}` definition scope.
+
+- A unique string used to name/identify the handler
+- Cannot contain special characters or spaces
+- Validated with `/^[\w\.-]+$/`
+- e.g. `"pagerduty": {}`
+
+### Definition attributes
+
+type
 : description
-  : foo
+  : The handler type. Each handler type has its own set of definition attributes, e.g. [pipe](#pipe-handler-attributes).
+: required
+  : true
+: type
+  : String
+: allowed values
+  : `pipe`, `tcp`, `udp`, `transport`, `set`
+: example
+  : ~~~ shell
+    "type": "pipe"
+    ~~~
+
+filter
+: description
+  : The Sensu event filter (name) to use when filtering events for the handler.
 : required
   : false
 : type
   : String
-: default
-  : `nil`
 : example
   : ~~~ shell
+    "filter": "recurrence"
+    ~~~
+
+filters
+: description
+  : An array of Sensu event filters (names) to use when filtering events for the handler. Each array item must be a string.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "filters": ["recurrence", "production"]
+    ~~~
+
+severities
+: description
+  : An array of check result severities the handler will handle. Event resolution bypasses this filtering.
+: required
+  : false
+: type
+  : Array
+: allowed values
+  : `ok`, `warning`, `critical`, `unknown`
+: example
+  : ~~~ shell
+    "severities": ["critical", "unknown"]
+    ~~~
+
+mutator
+: description
+  : The Sensu event mutator (name) to use to mutate event data for the handler.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "mutator": "only_check_output"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+handle_flapping
+: description
+  : If events in the flapping state should be handled.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "handle_flapping": true
+    ~~~
+
+subdue
+: description
+  : A set of attributes that determine when a handler is subdued.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "subdue": {}
+    ~~~
+
+#### Pipe handler attributes
+
+command
+: description
+  : The handler command to be executed. The event data is passed to the process via `STDIN`.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "command": "/etc/sensu/plugins/pagerduty.rb"
+    ~~~
+
+#### TCP & UDP handler attributes
+
+socket
+: description
+  : A set of attributes that configure the TCP/UDP handler socket.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "socket": {}
+    ~~~
+
+##### Socket attributes
+
+host
+: description
+  : The socket host address (IP or hostname) to connect to.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "host": "8.8.8.8"
+    ~~~
+
+port
+: description
+  : The socket port to connect to.
+: required
+  : true
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "port": 4242
+    ~~~
+
+#### Transport handler attributes
+
+pipe
+: description
+  : A set of attributes that configure the Sensu transport pipe.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "pipe": {}
+    ~~~
+
+##### Transport pipe attributes
+
+type
+: description
+  : The Sensu transport pipe type.
+: required
+  : true
+: type
+  : String
+: allowed values
+  : `direct`, `fanout`, `topic`
+: example
+  : ~~~ shell
+    "type": "direct"
+    ~~~
+
+name
+: description
+  : The Sensu transport pipe name.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "name": "graphite_plaintext"
+    ~~~
+
+options
+: description
+  : The Sensu transport pipe options. These options may be specific to the Sensu transport in use.
+: required
+  : false
+: type
+  : Hash
+: default
+  : `{}`
+: example
+  : ~~~ shell
+    "options": {"durable": true}
+    ~~~
+
+#### Set handler attributes
+
+handlers
+: description
+  : An array of Sensu event handlers (names) to use for events using the handler set. Each array item must be a string.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "handlers": ["pagerduty", "email", "ec2"]
+    ~~~
+
+#### Subdue attributes
+
+The following attributes are configured within the `"subdue": {}` handler definition attribute context.
+
+days
+: description
+  : An array of days of the week the handler is subdued. Each array item must be a string and a valid day of the week.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "days": ["monday", "wednesday"]
+    ~~~
+
+begin
+: description
+  : Beginning of the time window when the handler is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "begin": "5PM PST"
+    ~~~
+
+end
+: description
+  : End of the time window when the handler is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "end": "9AM PST"
+    ~~~
+
+exceptions
+: description
+  : Subdue time window (`begin`, `end`) exceptions. An array of time window exceptions. Each array item must be a hash containing valid `begin` and `end` times.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
     ~~~
