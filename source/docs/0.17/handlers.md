@@ -17,7 +17,53 @@ This reference document provides information to help you:
 
 # What are Sensu event handlers? {#what-are-sensu-event-handlers}
 
-Sensu event handlers are for taking action on [event](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: pipe, tcp, udp, transport, and set. Pipe handlers execute a command and pass the event data to the created process via STDIN. TCP and UDP handlers send the event data to a remote socket. Transport handlers publish the event data to the Sensu transport (message bus). Set handlers are used to group event handlers, making it easier to manage many event handlers.
+Sensu event handlers are for taking action on [events](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: pipe, tcp, udp, transport, and set. Pipe handlers execute a command and pass the event data to the created process via STDIN. TCP and UDP handlers send the event data to a remote socket. Transport handlers publish the event data to the Sensu transport (message bus). Set handlers are used to group event handlers, making it easier to manage many event handlers.
+
+## Example handler plugin {#example-handler-plugin}
+
+The following is an example Sensu handler plugin, a script located at `/etc/sensu/plugins/event_file.rb`. This handler plugin reads the event data via `STDIN`, parses it, creates a file name using the parsed event data, and then writes the event data to the file. This handler plugin is written in Ruby, but Sensu plugins can be written in any language, e.g. Python, shell, etc.
+
+~~~ ruby
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'json'
+
+# Read the JSON event data from STDIN
+event = JSON.parse(STDIN.read, :symbolize_names => true)
+
+# Write the event data to a file.
+# Using the client and check names in the file name.
+file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}"
+
+File.open(file_name, 'w') do |file|
+  file.write(JSON.pretty_generate(event))
+end
+~~~
+
+# Handler definition
+
+A Sensu handler definition is a JSON configuration file describing a Sensu handler. A definition declares how a Sensu handler is executed:
+
+- If there is a command to be run with event data provided via `STDIN`
+- If there is a socket to send event data to
+- If the event data is to be published to the Sensu transport (message bus)
+- If there is a set of handlers to be executed
+
+## Example handler definition {#example-handler-definition}
+
+The following is an example Sensu handler definition, a JSON configuration file located at `/etc/sensu/conf.d/mail_handler.json`. This handler definition uses the `mailx` unix command, to email the event data to `example@address.com`, with the email subject `sensu event`. The handler is named `mail`.
+
+~~~ json
+{
+  "handlers": {
+    "mail": {
+      "type": "pipe",
+      "command": "mailx -s 'sensu event' example@address.com"
+    }
+  }
+}
+~~~
 
 # Anatomy of a handler definition
 
