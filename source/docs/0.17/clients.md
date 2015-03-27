@@ -359,7 +359,7 @@ LOG_LEVEL
   : false
 : default
   : `info`
-: valid values
+: allowed values
   : `debug`, `info`, `warn`, `error`, `fatal`
 : example
   : ~~~ shell

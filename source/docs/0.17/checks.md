@@ -90,6 +90,8 @@ type
   : false
 : type
   : String
+: allowed values
+  : `standard`, `metric`
 : default
   : `standard`
 : example
@@ -282,6 +284,8 @@ at
   : false
 : type
   : String
+: allowed values
+  : `publisher`, `handler`
 : example
   : ~~~ shell
     "at": "handler"
