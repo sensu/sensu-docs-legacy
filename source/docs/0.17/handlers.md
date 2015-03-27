@@ -7,6 +7,18 @@ next:
   text: "Filters"
 ---
 
+# Overview
+
+This reference document provides information to help you:
+
+- Understand what a Sensu event handler is
+- How a Sensu event handler works
+- Write a Sensu event handler definition
+
+# What are Sensu event handlers? {#what-are-sensu-event-handlers}
+
+Sensu event handlers are for taking action on [event](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: pipe, tcp, udp, transport, and set. Pipe handlers execute a command and pass the event data to the created process via STDIN. TCP and UDP handlers send the event data to a remote socket. Transport handlers publish the event data to the Sensu transport (message bus). Set handlers are used to group event handlers, making it easier to manage many event handlers.
+
 # Anatomy of a handler definition
 
 ### Name
