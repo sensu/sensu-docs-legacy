@@ -15,6 +15,11 @@
     text-align: left !important;
     overflow: visible !important;
     text-overflow: clip !important;
+    padding-top: 14px;
+  }
+
+  > dl > dd {
+    padding-top: 14px;
   }
 
   > dl > dd > dl {
@@ -29,6 +34,12 @@
 
   > dl > dd > dl > dd {
 
+  }
+
+  > dl > dd > dl > dd > ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
   }
 }
 
