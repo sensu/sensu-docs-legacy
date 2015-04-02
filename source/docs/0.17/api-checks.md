@@ -74,7 +74,7 @@ List locally defined checks and request executions.
 : desc.
   : Issues a check execution request.
 
-:payload
+: payload
   : ~~~ json
     {
         "check": "chef_client_process",
