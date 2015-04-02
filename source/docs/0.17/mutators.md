@@ -9,3 +9,16 @@ info:
 warning: 
 danger:
 ---
+
+thing
+: description
+  : foo
+: required
+  : false
+: type
+  : String
+: default
+  : `nil`
+: example
+  : ~~~ shell
+    ~~~
