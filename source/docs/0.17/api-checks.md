@@ -86,5 +86,5 @@ List locally defined checks and request executions.
 
 : response codes
   : - **Success**: 202 (Accepted)
-    - **Missing**: 404 (Not Found)
+    - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
