@@ -3,8 +3,8 @@ version: 0.17
 category: "API Docs"
 title: "Checks API"
 next:
-  url: "api-handlers"
-  text: "Handlers API"
+  url: "api-events"
+  text: "Events API"
 ---
 
 # Overview

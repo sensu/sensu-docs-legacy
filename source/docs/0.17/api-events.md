@@ -3,8 +3,8 @@ version: 0.17
 category: "API Docs"
 title: "Events API"
 next:
-  url: "api-events"
-  text: "Events API"
+  url: "api-aggregates"
+  text: "Aggregates API"
 ---
 
 # Overview
