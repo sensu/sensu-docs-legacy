@@ -3,20 +3,19 @@ version: 0.17
 category: "API Docs"
 title: "Clients API"
 next:
-  url: "checks-api"
+  url: "api-checks"
   text: "Checks API"
 ---
 
-## Overview
+# Overview
 
-- some words
-- here
+List and delete client(s) information.
 
-## API Definition
+# API Definition
 
 `/clients` (GET)
 : desc.
-  : Returns a list of clients
+  : Returns a list of clients.
 
 : parameters
   : - `limit`:
