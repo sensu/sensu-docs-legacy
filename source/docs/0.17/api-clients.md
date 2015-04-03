@@ -17,6 +17,9 @@ List and delete client(s) information.
 : desc.
   : Returns a list of clients.
 
+: example url
+  : http://hostname:4567/clients
+
 : parameters
   : - `limit`:
       - **required**: false
@@ -64,6 +67,9 @@ List and delete client(s) information.
 : desc.
   : Returns a client.
 
+: example url
+  : http://hostname:4567/clients/i-424242
+
 : response type
   : Hash
 
@@ -90,6 +96,9 @@ List and delete client(s) information.
 : desc.
   : Removes a client, resolving its current events. (delayed action)
 
+: example url
+  : http://hostname:4567/clients/i-424242
+
 : response codes
   : - **Success**: 202 (Accepted)
     - **Missing**: 404 (Not Found)
@@ -98,6 +107,9 @@ List and delete client(s) information.
 `/clients/:client/history` (GET)
 : desc.
   : Returns the history for a client.
+
+: example url
+  : http://hostname:4567/clients/i-424242
 
 : response type
   : Array

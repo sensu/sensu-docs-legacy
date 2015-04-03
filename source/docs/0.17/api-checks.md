@@ -17,6 +17,9 @@ List locally defined checks and request executions.
 : desc.
   : Returns the list of checks.
 
+: example url
+  : http://hostname:4567/checks
+
 : response type
   : Array
 
@@ -50,6 +53,9 @@ List locally defined checks and request executions.
 : desc.
   : Returns a check.
 
+: example url
+  : http://hostname:4567/chef_client_process
+
 : response type
   : Hash
 
@@ -73,6 +79,9 @@ List locally defined checks and request executions.
 `/request` (POST)
 : desc.
   : Issues a check execution request.
+
+: example url
+  : http://hostname:4567/request
 
 : payload
   : ~~~ json

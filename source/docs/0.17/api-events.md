@@ -184,6 +184,9 @@ List and resolve current events. Every event occurrence has a unique ID (random 
 : desc.
   : Resolves an event. (delayed action)
 
+: example url
+  : http://hostname:4567/resolve
+
 : payload
   : ~~~ json
     {
