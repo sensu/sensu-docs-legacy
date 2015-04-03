@@ -29,7 +29,7 @@ The following is an example Sensu handler plugin, a script located at `/etc/sens
 require 'rubygems'
 require 'json'
 
-# Read the JSON event data from STDIN
+# Read the JSON event data from STDIN.
 event = JSON.parse(STDIN.read, :symbolize_names => true)
 
 # Write the event data to a file.
