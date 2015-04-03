@@ -54,7 +54,7 @@ List locally defined checks and request executions.
   : Returns a check.
 
 : example url
-  : http://hostname:4567/chef_client_process
+  : http://hostname:4567/checks/chef_client_process
 
 : response type
   : Hash
