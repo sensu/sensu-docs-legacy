@@ -16,6 +16,13 @@
     overflow: visible !important;
     text-overflow: clip !important;
     padding-top: 14px;
+    background-color: #e9e9e9;
+    width: 100%;
+    padding: 7px;
+  }
+
+  > dl > dt > code {
+    background-color: #e9e9e9 !important;
   }
 
   > dl > dd {
@@ -40,6 +47,10 @@
     margin: 0;
     padding: 0;
     list-style-type: none;
+  }
+
+  > dl > dt + dd {
+    margin-top: 60px !important;
   }
 }
 
