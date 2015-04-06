@@ -12,7 +12,7 @@ next:
 This reference document provides information to help you:
 
 - Understand what a Sensu check is
-- How a Sensu check works
+- Understand how a Sensu check works
 - Write a Sensu check definition
 - Use built-in Sensu check definition attributes
 - Use custom Sensu check definition attributes

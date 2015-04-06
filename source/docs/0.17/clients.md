@@ -12,7 +12,7 @@ next:
 This reference document provides information to help you:
 
 - Understand what a Sensu client is
-- What a Sensu client does
+- Understand what a Sensu client does
 - Write a Sensu client definition
 - Manage the Sensu client process on Linux
 - Manage the Sensu client process on Windows
