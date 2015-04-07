@@ -61,7 +61,7 @@ The primary configuration for Sensu is stored in JSON format at `/etc/sensu/conf
 sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.17/files/config.json
 ~~~
 
-_NOTE: this example file configures the RabbitMQ and Redis connection options._
+_NOTE: this example file configures the RabbitMQ and Redis connection options and the Sensu API port._
 
 ~~~ json
 {
@@ -73,6 +73,9 @@ _NOTE: this example file configures the RabbitMQ and Redis connection options._
   },
   "redis": {
     "host": "localhost"
+  },
+  "api": {
+    "port": 4567
   }
 }
 ~~~
