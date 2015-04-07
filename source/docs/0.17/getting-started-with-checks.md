@@ -17,6 +17,7 @@ What will be covered in this guide:
 
 - Creation of **standard** checks (functional tests)
 - Creation of a **metric** collection checks (machine resource, etc.)
+- Creation of a **metric** analysis checks (query time series data, etc.)
 
 # What are Sensu checks? {#what-are-sensu-checks}
 
@@ -92,7 +93,7 @@ Currently, the Cron check definition requires that check requests be sent to Sen
 }
 ~~~
 
-By default, Sensu checks use the `default` Sensu event handler for events they create. To specify a different Sensu event handler for a check, use the `handler` attribute.
+By default, Sensu checks use the `default` Sensu event handler for events they create. To specify a different Sensu event handler for a check, use the `handler` attribute. The `debug` event handler used in this example will log the Sensu event data to the Sensu server log.
 
 ~~~ json
 {
@@ -101,13 +102,13 @@ By default, Sensu checks use the `default` Sensu event handler for events they c
       "command": "/etc/sensu/plugins/check-procs.rb -p cron",
       "standalone": true,
       "interval": 60,
-      "handler": "email"
+      "handler": "debug"
     }
   }
 }
 ~~~
 
-To specify multiple Sensu event handlers, us the `handlers` attribute.
+To specify multiple Sensu event handlers, use the `handlers` attribute.
 
 ~~~ json
 {
@@ -116,7 +117,7 @@ To specify multiple Sensu event handlers, us the `handlers` attribute.
       "command": "/etc/sensu/plugins/check-procs.rb -p cron",
       "standalone": true,
       "interval": 60,
-      "handlers": ["pagerduty", "email"]
+      "handlers": ["default", "debug"]
     }
   }
 }
@@ -124,156 +125,92 @@ To specify multiple Sensu event handlers, us the `handlers` attribute.
 
 # Create a metric collection check
 
-## Monitor CPU utilization
+Standard Sensu checks are used to determine the current health of machine resources and services. A standard check will query a resource for information to determine its state. Once a standard check has determined the resource state, it outputs a human readable message, and exits with the appropriate exit status code to indicate its state/severity (OK, WARNING, etc.).
 
-## Monitor memory utilization
+Metric collection checks are used to collect measurements and other data (metrics) from machine resources, applications, and services. Metric collection checks can output in a variety of metric formats:
 
+- [Graphite plaintext](http://graphite.readthedocs.org/en/latest/feeding-carbon.html#the-plaintext-protocol)
+- [Nagios Performance Data](http://nagios.sourceforge.net/docs/3_0/perfdata.html)
+- [OpenTSDB](http://opentsdb.net/docs/build/html/user_guide/writing.html)
+- [Metrics 2.0 wire format](http://metrics20.org/spec/)
 
+## Measuring CPU utilization
 
+The following instructions install the check dependencies and configure the Sensu check definition in order to collect CPU utilization metrics.
 
+### Install dependencies {#cpu-metrics-install-dependencies}
 
+The following instructions install the `cpu-metrics` Sensu plugin (written in Ruby) to `/etc/sensu/plugins/cpu-metrics.rb`. This Sensu plugin will collect CPU metrics and output them in the Graphite plaintext format.
 
-A service stat that monitors a service (e.g. memcached) by
-attempting to interact with the service or application (e.g. querying or sending
-data to a specific port on a node and evaluating the response). Functional
-checks are particularly useful because they verify that applications and
-services are functioning as desired. Where possible, functional monitoring check
-coverage should be implemented for the same functions as source code unit tests.
+~~~ shell
+sudo wget -O /etc/sensu/plugins/cpu-metrics.rb http://sensuapp.org/docs/0.17/files/cpu-metrics.rb
+sudo chmod +x /etc/sensu/plugins/cpu-metrics.rb
+~~~
 
- demonstrate checking the state of an application or system service. If the service is running, the check will exit with a status of 0 (OK). If the service is not running, the check will exit with a status of 1 (WARNING).
+### Create the check definition for CPU utilization
 
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/cpu_metrics.json`. This check definition uses the [cpu-metrics plugin](#cpu-metrics-install-dependencies) to collect CPU utilization metrics and output them in the Graphite plaintext format.
 
-## 3.2. Sensu Checks
+By default, Sensu checks with an exit status code of `0` (for `OK`) do not create events unless they indicate a change in state from a non-zero status to a zero status (i.e. resulting in a `resolve` action; see: [Sensu Events](events#what-are-sensu-events)). Metric collection checks will output metric data regardless of the check exit status code, however, they usually exit `0`. To ensure events are always created for a metric collection check, the check `type` of `metric` is used.
 
-[32]: #32-sensu-checks
+The check is named `cpu_metrics`, and it runs `/etc/sensu/plugins/cpu-metrics.rb` on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the CPU utilization metrics to the Sensu server log.
 
-Source: [Sensu Check Definitions]()
+~~~ json
+{
+  "checks": {
+    "cpu_metrics": {
+      "type": "metric",
+      "command": "/etc/sensu/plugins/cpu-metrics.rb",
+      "subscribers": [
+        "production"
+      ],
+      "interval": 10,
+      "handler": "debug"
+    }
+  }
+}
+~~~
 
-The Echelon monitoring solution is built on top of the [Sensu][sensu] open
-source monitoring framework and the [Flapjack][flapjack] monitoring notification
-routing and event processing system.
+For a full listing of the `cpu-metrics` command line arguments, run `/etc/sensu/plugins/cpu-metrics.rb -h`.
 
-Sensu [checks][sensu-checks] are used for service monitoring (i.e. "service
-checks") and resource measurement (i.e. "metric checks"). The Sensu check
-definitions are stored in [Chef][chef] [data bags][chef-data-bags] as referenced
-above (Source). Each check has the following attributes:
+# Create a metric analysis check
 
-- `id`
-  A unique and usually descriptive identifier or name (e.g. "memcached_socket")
+A metric analysis check analyzes metric data which may or may not have been collected by a [metrics collection check](#metric-collection-checks). By querying external metric stores (e.g. Graphite) to perform data evaluations, metric analysis checks allow you to perform powerful analytics based on trends in metric data rather than a single data point. For example, where monitoring and alerting on on a single CPU utilization data point can result in false positive events based on momentary spikes, monitoring and alerting on CPU utilization data over a specified period of time will improve alerting accuracy.
 
-- `command`
-  The command that will be executed on the corresponding client(s). These
-  commands may be common system utility commands (e.g. `ps`), Sensu plugins (
-  see [Sensu Community Plugins][sensu-community-plugins]), or even Nagios
-  plugins (see
-  [Sensu Nagios Plugin Compatibility][sensu-nagios-plugin-compatibility]).
-  _NOTE: the `command` contents will commonly include parameters for setting
-  "warning" (`-w`) and "critical" (`-c`) thresholds; knowing this can help you
-  understand when a Sensu check will trigger an alert (or other event handler);
-  for example a check `command` with the parameters `-w 85 -c 95` probably means
-  "warn at 85%, critical at 95%"._
+Because metric analysis checks require interaction with an external metric store, providing a functional example is outside of the scope of this guide. However, assuming the existence of a Graphite installation that is populated with metric data, the following example checks could be used:
 
-- `notification`
-  A brief description of the check and and/or explanation of what a failure \
-  means (e.g. "memcached socket is not responding"). This content is included
-  in any notifications that are sent. _NOTE: there are plans to incorporate
-  links to support documentation in email notifications to provide context and
-  helpful information in the event of an alert; these links would be included
-  in the Sensu check `notification` content._
+The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001`. The check queries Graphite for a calculated moving average, using the last 10 data points, of the load balancer session count. The session count moving average is compared with the provided alert thresholds. A Sensu client running on the Graphite machine would be responsible for scheduling and executing this check (`standalone` mode).
 
-- `subscribers`
-  Sensu [clients][sensu-clients] are configured to "subscribe" to queues where
-  the Sensu Server will publish check requests. This parameter defines which
-  subscriptions (and thus, which roles/nodes) will execute this check.
+~~~ json
+{
+  "checks": {
+    "disk_capacity": {
+      "command": "check-data.rb -s localhost:9001 -t 'movingAverage(lb1.assets_backend.session_current,10)' -w 100 -c 200",
+      "standalone": true,
+      "interval": 30
+    }
+  }
+}
+~~~
 
-- `interval`
-  How frequently (in seconds) the check will be executed.
+The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001` for disk capacity metrics. The Graphite API query uses `highestCurrent()` to grab only the highest disk capacity metric, to be compared with the provided alert thresholds. This check will trigger an event (alert) when one or more disks on any machine are at capacity.
 
-## 3.3. Check & Alert Types
+~~~ json
+{
+  "checks": {
+    "disk_capacity": {
+      "command": "check-data.rb -s localhost:9001 -t 'highestCurrent(*.disk.*.capacity,1)' -w 85 -c 95 -a 120",
+      "standalone": true,
+      "interval": 30
+    }
+  }
+}
+~~~
 
-[33]: #33-check--alert-types
+The `check-data` plugin can be installed with the following instructions:
 
-Sensu checks can be used for _Monitoring_ services **and** for collecting
-_Metrics_. While there are not formal check "types" in Sensu, it is considered
-a best practice to combine different styles of monitoring and metrics checks, as
-follows:
-
-- Monitoring
-  - Functional Monitoring Checks
-  - Informational Monitoring Checks
-- Metrics
-  - Metrics Collection Checks
-  - Metrics Analysis Checks
-
-### 3.3.1. Functional Monitoring Checks
-
-[331]: #332-functional-monitoring-checks
-
-A [Sensu check][sensu-checks] that monitors a service (e.g. memcached) by
-attempting to interact with the service or application (e.g. querying or sending
-data to a specific port on a node and evaluating the response). Functional
-checks are particularly useful because they verify that applications and
-services are functioning as desired. Where possible, functional monitoring check
-coverage should be implemented for the same functions as source code unit tests.
-
-_EXAMPLE(S): [solr_http]() (uses
-[check-http.rb][sensu-check-http.rb]),
-[zookeeper_socket]() (uses
-[check-banner.rb][sensu-check-banner.rb])._
-
-### 3.3.2. Informational Monitoring Checks
-
-[332]: #331-information-monitoring-checks
-
-A [Sensu check][sensu-checks] that monitors a service (e.g. memcached) by
-looking for a process id file, or a running process matching a specified name is
-an informational check.
-
-_EXAMPLE(S): [solr_process]() (uses
-[check-procs.rb][sensu-check-procs.rb]),
-[zookeeper_process]() (uses
-[checks-procs.rb][sensu-check-procs.rb])._
-
-### 3.3.3. Metrics Collection Checks
-
-[333]: #333-metrics-collection-checks
-
-A [Sensu check][sensu-checks] that measures data and reports the result is a
-"metrics collection" check. No alerts are generated for metrics collection
-checks - they are only used for collecting data and/or shipping data to a metric
-store (e.g. [Graphite][graphite]) which metric store(s) may be further analyzed
-by a [Metrics Analysis Check][334] (which check(s) may result in alerts).
-
-_EXAMPLE(S): [disk_usage_metrics]() (uses
-[disk-usage-metrics.rb][sensu-disk-usage-metrics.rb]),
-[solr_metrics]() (uses
-[solr4-graphite.rb][sensu-solr4-graphite.rb])._
-
-### 3.3.4. Metrics Analysis Checks
-
-[334]: #334-metrics-analysis-checks
-
-A [Sensu check][sensu-checks] that analyzes metric data is called a "metrics
-analysis check" (which data may or may not have been collected by a
-[Metrics Analysis Check][333]). Metrics analysis checks may interact with nodes,
-or with a metric store (e.g. [Graphite][graphite]) to perform queries and/or
-other data evaluations.
-
-_EXAMPLE(S): [disk_usage]() (uses
-[check-data.rb][sensu-check-data.rb])._
-
-[sensu]: http://sensuapp.org
-[sensu-checks]: http://sensuapp.org/docs/latest/checks
-[sensu-clients]: http://sensuapp.org/docs/latest/clients
-[sensu-community-plugins]: https://github.com/sensu/sensu-community-plugins
-[sensu-nagios-plugin-compatibility]: http://sensuapp.org/docs/latest/checks#what-are-checks
-[flapjack]: http://flapjack.io
-[chef]: http://getchef.com
-[chef-data-bags]: https://docs.getchef.com/essentials_data_bags.html
-[graphite]: http://graphite.wikidot.com/
-[sensu-check-data.rb]: https://github.com/sensu/sensu-community-plugins/blob/master/plugins/graphite/check-data.rb
-[sensu-disk-usage-metrics.rb]: https://github.com/sensu/sensu-community-plugins/blob/master/plugins/system/disk-usage-metrics.rb
-[sensu-solr4-graphite.rb]: https://github.com/sensu/sensu-community-plugins/blob/master/plugins/solr/solr4-graphite.rb
-[sensu-check-http.rb]: https://github.com/sensu/sensu-community-plugins/blob/master/plugins/http/check-http.rb
-[sensu-check-banner.rb]: https://github.com/sensu/sensu-community-plugins/blob/master/plugins/network/check-banner.rb
-[sensu-check-procs.rb]: https://github.com/sensu/sensu-community-plugins/blob/master/plugins/processes/check-procs.rb
+~~~ shell
+sudo wget -O /etc/sensu/plugins/check-data.rb http://sensuapp.org/docs/0.17/files/check-data.rb
+sudo chmod +x /etc/sensu/plugins/check-data.rb
+/etc/sensu/plugins/check-data.rb -h
+~~~
