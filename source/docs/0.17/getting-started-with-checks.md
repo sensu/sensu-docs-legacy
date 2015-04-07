@@ -33,7 +33,7 @@ The following instructions install the check dependencies and configure the Sens
 
 ### Install dependencies
 
-The following instructions install the `check-procs` Sensu plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`. This Sensu plugin can reliably detect if a service, like Cron, is running or not.
+The following instructions install the `check-procs` Sensu check plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`. This Sensu plugin can reliably detect if a service, like Cron, is running or not.
 
 ~~~ shell
 sudo wget -O /etc/sensu/plugins/check-procs.rb http://sensuapp.org/docs/0.17/files/check-procs.rb

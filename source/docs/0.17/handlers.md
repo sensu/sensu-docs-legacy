@@ -17,11 +17,11 @@ This reference document provides information to help you:
 
 # What are Sensu event handlers? {#what-are-sensu-event-handlers}
 
-Sensu event handlers are for taking action on [events](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: `pipe`, `tcp`, `udp`, `transport`, and `set`. Pipe handlers execute a command and pass the event data to the created process via STDIN. TCP and UDP handlers send the event data to a remote socket. Transport handlers publish the event data to the Sensu transport (message bus). Set handlers are used to group event handlers, making it easier to manage many event handlers.
+Sensu event handlers are for taking action on [events](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: `pipe`, `tcp`, `udp`, `transport`, and `set`. Pipe handlers execute a command and pass the event data to the created process via `STDIN`. TCP and UDP handlers send the event data to a remote socket. Transport handlers publish the event data to the Sensu transport (message bus). Set handlers are used to group event handlers, making it easier to manage many event handlers.
 
 ## Example handler plugin {#example-handler-plugin}
 
-The following is an example Sensu handler plugin, a script located at `/etc/sensu/plugins/event_file.rb`. This handler plugin reads the event data via `STDIN`, parses it, creates a file name using the parsed event data, and then writes the event data to the file. This handler plugin is written in Ruby, but Sensu plugins can be written in any language, e.g. Python, shell, etc.
+The following is an example Sensu handler plugin, a script located at `/etc/sensu/plugins/event-file.rb`. This handler plugin reads the event data via `STDIN`, parses it, creates a file name using the parsed event data, and then writes the event data to the file. This handler plugin is written in Ruby, but Sensu plugins can be written in any language, e.g. Python, shell, etc.
 
 ~~~ ruby
 #!/usr/bin/env ruby
@@ -34,7 +34,7 @@ event = JSON.parse(STDIN.read, :symbolize_names => true)
 
 # Write the event data to a file.
 # Using the client and check names in the file name.
-file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}"
+file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}.json"
 
 File.open(file_name, 'w') do |file|
   file.write(JSON.pretty_generate(event))
