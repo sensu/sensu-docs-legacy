@@ -9,23 +9,23 @@ next:
 
 # Overview
 
-The purpose of this guide is to help Sensu users create monitoring checks. At the conclusion of this guide, you - the user - should have several Sensu checks in place to monitor and measure machine resources. Each Sensu monitoring check in this guide demonstrates one or more check definition features, for more information please refer to the [checks reference documentation](checks).
+The purpose of this guide is to help Sensu users create monitoring checks. At the conclusion of this guide, you - the user - should have several Sensu checks in place to monitor and measure machine resources, applications, and services. Each Sensu monitoring check in this guide demonstrates one or more check definition features, for more information please refer to the [Sensu checks reference documentation](checks).
 
 ## Objectives
 
 What will be covered in this guide:
 
 - Creation of **standard** checks (functional tests)
-- Creation of a **metric** collection checks (machine resource, etc.)
-- Creation of a **metric** analysis checks (query time series data, etc.)
+- Creation of **metric** collection checks (machine resource, etc)
+- Creation of **metric** analysis checks (query time series data, etc)
 
 # What are Sensu checks? {#what-are-sensu-checks}
 
-Sensu checks allow you to monitor services or measure resources, they are executed on servers running the Sensu client. Checks are essentially commands (or scripts) that output data to `STDOUT` or `STDERR` and produce an exit status code to indicate a state. Common exit status codes used are `0` for `OK`, `1` for `WARNING`, `2` for `CRITICAL`, and `3` or greater to indicate `UNKNOWN` or `CUSTOM`. Sensu checks use the same specification as Nagios, therefore, Nagios check plugins may be used with Sensu.
+Sensu checks allow you to monitor applications and services or measure resources; they are executed on servers running the Sensu client. Checks are essentially commands (or scripts) that output data to `STDOUT` or `STDERR` and produce an exit status code to indicate a state. The common exit status codes used are `0` for `OK`, `1` for `WARNING`, `2` for `CRITICAL`, and `3` or greater to indicate `UNKNOWN` or `CUSTOM`. Sensu checks use the same specification as Nagios, therefore, Nagios check plugins may be used with Sensu.
 
 # Create a standard check
 
-Standard Sensu checks are used to determine the current health of machine resources and services. A standard check will query a resource for information to determine its state. Once a standard check has determined the resource state, it outputs a human readable message, and exits with the appropriate exit status code to indicate its state/severity (OK, WARNING, etc.).
+Standard Sensu checks are used to determine the current health of machine resources, applications, and services. A standard check will query a resource for information to determine its state. Once a standard check has determined the resource state, it outputs a human readable message, and exits with the appropriate exit status code to indicate its state/severity (OK, WARNING, etc.).
 
 ## Monitor the cron service
 
@@ -33,7 +33,7 @@ The following instructions install the check dependencies and configure the Sens
 
 ### Install dependencies
 
-The following instructions install the `check-procs` Sensu check plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`. This Sensu plugin can reliably detect if a service, like Cron, is running or not.
+The `check-procs` Sensu plugin can reliably detect if a service such as Cron is running or not. The following instructions will install the `check-procs` Sensu check plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`.
 
 ~~~ shell
 sudo wget -O /etc/sensu/plugins/check-procs.rb http://sensuapp.org/docs/0.17/files/check-procs.rb
