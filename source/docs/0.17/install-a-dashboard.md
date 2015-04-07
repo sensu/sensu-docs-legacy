@@ -47,6 +47,7 @@ sudo yum install sensu-enterprise-dashboard
 ~~~
 
 ### Configure Sensu Enterprise Dashboard
+In /etc/sensu/dashboard.json
 
 ~~~ json
 {
