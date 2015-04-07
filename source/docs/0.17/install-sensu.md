@@ -9,9 +9,9 @@ next:
 
 # Overview
 
-Having successfully completed installation of Sensu's dependencies ([RabbitMQ](install-rabbitmq), and [Redis](install-redis)) and the [Sensu Repositories](install-repositories), we are now ready to install Sensu! Instructions are provided for installing both flavors of Sensu (Sensu Core and Sensu Enterprise). 
+Having successfully completed installation of Sensu's dependencies ([RabbitMQ](install-rabbitmq), and [Redis](install-redis)) and the [Sensu Repositories](install-repositories), we are now ready to install Sensu! Instructions are provided for installing both flavors of Sensu (Sensu Core and Sensu Enterprise).
 
-_NOTE: Sensu Core and Sensu Enterprise may be installed alongside one another, however only one flavor of Sensu should be run at any given time (see [below](#running-sensu) for more info)._ 
+_NOTE: Sensu Core and Sensu Enterprise may be installed alongside one another, however only one flavor of Sensu should be run at any given time (see [below](#running-sensu) for more info)._
 
 # Install Sensu
 
@@ -82,7 +82,7 @@ _NOTE: this example file configures the RabbitMQ and Redis connection options an
 
 ## Configure a Check
 
-Sensu Checks & Event Handlers will be covered in detail later in this guide, however it will be helpful to have at least one check and handler configured as part of the installation process. If you don't fully understand these concepts - don't worry - we'll explain later. 
+Sensu Checks & Event Handlers will be covered in detail later in this guide, however it will be helpful to have at least one check and handler configured as part of the installation process. If you don't fully understand these concepts - don't worry - we'll explain later.
 
 Create a check definition by copying the following example configuration to `/etc/sensu/conf.d/check_memory.json` manually, or via:
 
@@ -90,7 +90,7 @@ Create a check definition by copying the following example configuration to `/et
 sudo wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.17/files/check_memory.json
 ~~~
 
-_NOTE: this example config creates a [Sensu Check]() that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available)._
+_NOTE: this example config creates a [Sensu Check](checks) that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available). The check script (plugin) will be installed later in this guide._
 
 ~~~ json
 {
@@ -112,7 +112,7 @@ Create a default handler definition by copying the following example configurati
 sudo wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.17/files/default_handler.json
 ~~~
 
-_NOTE: this example config creates a [Sensu Event Handler]() that will be used by default for Sensu events that do not specify a handler._
+_NOTE: this example config creates a [Sensu Event Handler](handlers) that will be used by default for Sensu events that do not specify a handler._
 
 ~~~ json
 {
@@ -133,7 +133,7 @@ sudo chown -R sensu:sensu /etc/sensu
 
 # Running Sensu
 
-Only one flavor of Sensu should be used at any given time: Sensu Core (sensu-server + sensu-api), or Sensu Enterprise. If you have previously run Sensu Core or Sensu Enterprise and are switching flavors, simply stop one and start the other. 
+Only one flavor of Sensu should be used at any given time: Sensu Core (sensu-server + sensu-api), or Sensu Enterprise. If you have previously run Sensu Core or Sensu Enterprise and are switching flavors, simply stop one and start the other.
 
 ## Sensu Core
 
@@ -150,7 +150,7 @@ sudo /etc/init.d/sensu-enterprise start
 
 # Observe Sensu
 
-Congratulations! By now you should have successfully installed and configured Sensu! Now let's observe it in operation. 
+Congratulations! By now you should have successfully installed and configured Sensu! Now let's observe it in operation.
 
 ## Sensu Core
 
