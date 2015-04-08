@@ -18,8 +18,8 @@ The purpose of this guide is to help new Sensu users to obtain a basic understan
 
 This guide will provide an introduction to the following primitives, and built-in features (for Sensu Enterprise users):
 
-- Checks (used to monitor services or measure resources)
-- Handlers (for taking action on Sensu Events, which are produced by checks)
-- Filters (filter events destined for one or more event handlers)
-- Mutators (transform event data for handlers)
+- Checks - used to monitor services or measure resources
+- Handlers - for taking action on Sensu Events, which are produced by checks
+- Filters - for filtering (removing) events destined for one or more event handlers
+- Mutators - transform event data for handlers
 - Getting started with Sensu Enterprise
