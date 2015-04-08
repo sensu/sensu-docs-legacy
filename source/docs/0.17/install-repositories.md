@@ -29,7 +29,7 @@ Install the GPG public key, and create the APT repository configuration file for
 
 ~~~ shell
 wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
-echo "deb     http://repos.sensuapp.org/apt sensu main" | sudo tee > /etc/apt/sources.list.d/sensu.list
+echo "deb     http://repos.sensuapp.org/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
 ~~~
 
 ## CentOS/RHEL
@@ -41,7 +41,7 @@ echo '[sensu]
 name=sensu
 baseurl=http://repos.sensuapp.org/yum/el/$basearch/
 gpgcheck=0
-enabled=1' | sudo tee > /etc/yum.repos.d/sensu.repo
+enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 ~~~
 
 # Install the Sensu Enterprise Repository
@@ -65,7 +65,7 @@ Install the GPG public key, and create the APT repository configuration file for
 
 ~~~ shell
 wget -q http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt/pubkey.gpg -O- | sudo apt-key add -
-echo "deb     http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt sensu-enterprise main" | sudo tee > /etc/apt/sources.list.d/sensu-enterprise.list
+echo "deb     http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt sensu-enterprise main" | sudo tee /etc/apt/sources.list.d/sensu-enterprise.list
 ~~~
 
 ## CentOS/RHEL
@@ -77,5 +77,5 @@ echo "[sensu-enterprise]
 name=sensu-enterprise
 baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/noarch/
 gpgcheck=0
-enabled=1" | sudo tee > /etc/yum.repos.d/sensu.repo
+enabled=1" | sudo tee /etc/yum.repos.d/sensu.repo
 ~~~
