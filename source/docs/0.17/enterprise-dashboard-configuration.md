@@ -24,8 +24,8 @@ sensu
 : type
   : Array
 : example
-  : ~~~ json
-    [
+  : ~~~ shell
+    "sensu": [
         {
             "name": "API Name",
             "host": "127.0.0.1",
@@ -42,13 +42,11 @@ dashboard
 : type
   : Hash
 : example
-  : ~~~ json
-    {
-        "dashboard": {
-            "host": "0.0.0.0",
-            "port": 3000,
-            "refresh": 5
-        }
+  : ~~~ shell
+    "dashboard": {
+        "host": "0.0.0.0",
+        "port": 3000,
+        "refresh": 5
     }
     ~~~
 
@@ -64,10 +62,8 @@ name
 : default
   : randomly generated
 : example
-  : ~~~ json
-    {
-        "name": "Datacenter 1"
-    }
+  : ~~~ shell
+    "name": "Datacenter 1"
     ~~~
 
 host
@@ -78,10 +74,8 @@ host
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "host": "127.0.0.1"
-    }
+  : ~~~ shell
+    "host": "127.0.0.1"
     ~~~
 
 port
@@ -94,10 +88,8 @@ port
 : default
   : 4567
 : example
-  : ~~~ json
-    {
-        "port": 4567
-    }
+  : ~~~ shell
+    "port": 4567
     ~~~
 
 ssl
@@ -110,10 +102,8 @@ ssl
 : default
   : false
 : example
-  : ~~~ json
-    {
-        "ssl": true
-    }
+  : ~~~ shell
+    "ssl": true
     ~~~
 
 insecure
@@ -126,10 +116,8 @@ insecure
 : default
   : false
 : example
-  : ~~~ json
-    {
-        "insecure": true
-    }
+  : ~~~ shell
+    "insecure": true
     ~~~
 
 path
@@ -140,10 +128,8 @@ path
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "path": "/my_api"
-    }
+  : ~~~ shell
+    "path": "/my_api"
     ~~~
 
 timeout
@@ -156,10 +142,8 @@ timeout
 : default
   : 5
 : example
-  : ~~~ json
-    {
-        "timeout": 15
-    }
+  : ~~~ shell
+    "timeout": 15
     ~~~
 
 user
@@ -170,10 +154,8 @@ user
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "user": "my_sensu_api_username"
-    }
+  : ~~~ shell
+    "user": "my_sensu_api_username"
     ~~~
 
 pass
@@ -184,10 +166,8 @@ pass
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "pass": "my_sensu_api_password"
-    }
+  : ~~~ shell
+    "pass": "my_sensu_api_password"
     ~~~
 
 ## Dashboard attributes
@@ -202,10 +182,8 @@ host
 : default
   : "0.0.0.0"
 : example
-  : ~~~ json
-    {
-        "host": "1.2.3.4"
-    }
+  : ~~~ shell
+    "host": "1.2.3.4"
     ~~~
 
 port
@@ -218,10 +196,8 @@ port
 : default
   : 3000
 : example
-  : ~~~ json
-    {
-        "port": 3000
-    }
+  : ~~~ shell
+    "port": 3000
     ~~~
 
 refresh
@@ -234,10 +210,8 @@ refresh
 : default
   : 5
 : example
-  : ~~~ json
-    {
-        "refresh": 5
-    }
+  : ~~~ shell
+    "refresh": 5
     ~~~
 
 user
@@ -249,10 +223,8 @@ user
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "user": "admin"
-    }
+  : ~~~ shell
+    "user": "admin"
     ~~~
 
 pass
@@ -264,10 +236,8 @@ pass
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "pass": "secret"
-    }
+  : ~~~ shell
+    "pass": "secret"
     ~~~
 
 db
@@ -280,12 +250,10 @@ db
 : type
   : Hash
 : example
-  : ~~~ json
-    {
-        "db": {
-          "driver": "mymysql",
-          "scheme": "tcp:127.0.0.1:3306*sensu_enterprise_dashboard/root/mysecretmysqlpassword"
-        }
+  : ~~~ shell
+    "db": {
+        "driver": "mymysql",
+        "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
     }
     ~~~
 
@@ -306,14 +274,12 @@ driver
 : type
   : String
 : allowed values
-  : - `mymysql`
-    - `postgres`
-    - `sqlite3`
+  : - `mymysql` - For MySQL
+    - `postgres` - For PostgreSQL (versions >= 9.x)
+    - `sqlite3` - For SQLite
 : example
-  : ~~~ json
-    {
-        "driver": "postgres"
-    }
+  : ~~~ shell
+    "driver": "postgres"
     ~~~
 
 scheme
@@ -326,52 +292,38 @@ scheme
 : type
   : String
 : example
-  : ~~~ json
-    {
-        "scheme": "dashboard.db"
-    }
+  : ~~~ shell
+    "scheme": "dashboard.db"
     ~~~
 
 #### Scheme syntax
 
 mymysql
 : syntax
-  : ~~~ json
-    {
-        "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
-    }
+  : ~~~ shell
+    "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
     ~~~
 : example
-  : ~~~ json
-    {
-        "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
-    }
+  : ~~~ shell
+    "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
     ~~~
 
 postgres
 : syntax
-  : ~~~ json
-    {
-        "scheme": "user=USERNAME dbname=DB_NAME host=HOST password=PASSWORD sslmode=disable"
-    }
+  : ~~~ shell
+    "scheme": "user=USERNAME dbname=DB_NAME host=HOST password=PASSWORD sslmode=disable"
     ~~~
 : example
-  : ~~~ json
-    {
-        "scheme": "user=postgres dbname=sensu host=127.0.0.1 password=mypassword sslmode=disable"
-    }
+  : ~~~ shell
+    "scheme": "user=postgres dbname=sensu host=127.0.0.1 password=mypassword sslmode=disable"
     ~~~
 
 sqlite3
 : syntax
-  : ~~~ json
-    {
-        "scheme": "FILENAME.db"
-    }
+  : ~~~ shell
+    "scheme": "FILENAME.db"
     ~~~
 : example
-  : ~~~ json
-    {
-        "scheme": "sensu.db"
-    }
+  : ~~~ shell
+    "scheme": "sensu.db"
     ~~~
