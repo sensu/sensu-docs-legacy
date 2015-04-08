@@ -1,12 +1,17 @@
 /* Attribute name */
 #documentation {
-
   > dl {
 
   }
 
+  > dl > dd:hover {
+    background: #e9e9e9 !important;
+  }
+
   > dl > hr {
     border-top: 1px solid #ddd;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
   }
 
   > dl > dt {
@@ -16,7 +21,7 @@
     overflow: visible !important;
     text-overflow: clip !important;
     padding-top: 14px;
-    background-color: #e9e9e9;
+    background-color: white;
     width: 100%;
     padding: 7px;
     border-radius: 4px;
@@ -27,12 +32,14 @@
   }
 
   > dl > dd {
-    padding-top: 14px;
+    padding-top: 0px;
   }
 
   > dl > dd > dl {
     float: left;
     width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 
   > dl > dd > dl > dt {
@@ -51,7 +58,11 @@
   }
 
   > dl > dt + dd {
-    margin-top: 60px !important;
+    margin-top: 40px !important;
+  }
+
+  pre {
+    margin: 0px 4px 0px 0px;
   }
 }
 
