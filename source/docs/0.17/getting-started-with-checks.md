@@ -42,7 +42,7 @@ sudo chmod +x /etc/sensu/plugins/check-procs.rb
 
 The `check-procs` Sensu plugin requires a Ruby runtime and the `sensu-plugin` Ruby gem. Install Ruby from the distribution repository and `sensu-plugin` from Rubygems:
 
-_NOTE: the following Ruby installation steps may differ depending on your platform_
+_NOTE: the following Ruby installation steps may differ depending on your platform._
 
 #### Ubuntu/Debian
 
@@ -62,6 +62,8 @@ sudo gem install sensu-plugin
 ### Create the check definition for Cron
 
 The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the [check-procs plugin](#install-dependencies) to determine if the Cron service is running. The check is named `cron` and it runs `/etc/sensu/plugins/check-procs.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
+
+_NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
 ~~~ json
 {
@@ -155,6 +157,8 @@ By default, Sensu checks with an exit status code of `0` (for `OK`) do not creat
 
 The check is named `cpu_metrics`, and it runs `/etc/sensu/plugins/cpu-metrics.rb` on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the CPU utilization metrics to the Sensu server log.
 
+_NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
+
 ~~~ json
 {
   "checks": {
@@ -180,6 +184,8 @@ A metric analysis check analyzes metric data which may or may not have been coll
 Because metric analysis checks require interaction with an external metric store, providing a functional example is outside of the scope of this guide. However, assuming the existence of a Graphite installation that is populated with metric data, the following example checks could be used:
 
 The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001`. The check queries Graphite for a calculated moving average, using the last 10 data points, of the load balancer session count. The session count moving average is compared with the provided alert thresholds. A Sensu client running on the Graphite machine would be responsible for scheduling and executing this check (`standalone` mode).
+
+_NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
 ~~~ json
 {
