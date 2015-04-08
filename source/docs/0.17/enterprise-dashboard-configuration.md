@@ -10,43 +10,368 @@ warning:
 danger:
 ---
 
-## Configuration
+# Overview
 
-The `dashboard` object can contain the following attributes:
+...
 
-~~~ json
-{
-  "dashboard": {
-    "host": "0.0.0.0",
-    "port": 3000,
-    "refresh": 5
-  }
-}
-~~~
+# Configuration attributes
 
-**host**
-*String*. Address on which Uchiwa will listen. The default value is **0.0.0.0**.
+sensu
+: description
+  : An array of hashes containing [Sensu API endpoint attributes](#sensu-attributes).
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~ json
+    [
+        {
+            "name": "API Name",
+            "host": "127.0.0.1",
+            "port": 4567
+        }
+    ]
+    ~~~
 
-**port**
-*Integer*. Port on which Uchiwa will listen. The default value is **3000**.
+dashboard
+: description
+  : A hash of [dashboard configuration attributes](#dashboard-attributes).
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ json
+    {
+        "dashboard": {
+            "host": "0.0.0.0",
+            "port": 3000,
+            "refresh": 5
+        }
+    }
+    ~~~
 
-**refresh**
-*Integer*. Determines the interval to pull the Sensu APIs, in seconds. The default value is **5**.
+## Sensu attributes
 
-### Simple authentication
-In order to restrict the access to the dashboard, you can easily setup a single-user account with these attributes:
+name
+: description
+  : The name of the Sensu API (used as datacenter name).
+: required
+  : false
+: type
+  : String
+: default
+  : randomly generated
+: example
+  : ~~~ json
+    {
+        "name": "Datacenter 1"
+    }
+    ~~~
 
-~~~ json
-{
-  "uchiwa": {
-    "user": "admin",
-    "pass": "secret"
-  }
-}
-~~~
+host
+: description
+  : The hostname or IP address of the Sensu API.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "host": "127.0.0.1"
+    }
+    ~~~
 
-**user**
-*String*. Username of the Uchiwa dashboard.
+port
+: description
+  : The port of the Sensu API.
+: required
+  : false
+: type
+  : Integer
+: default
+  : 4567
+: example
+  : ~~~ json
+    {
+        "port": 4567
+    }
+    ~~~
 
-**pass**
-*String*. Password of the Uchiwa dashboard.
+ssl
+: description
+  : Determines whether or not to use the HTTPS protocol.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ json
+    {
+        "ssl": true
+    }
+    ~~~
+
+insecure
+: description
+  : Determines whether or not to accept an insecure SSL certificate.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ json
+    {
+        "insecure": true
+    }
+    ~~~
+
+path
+: description
+  : The path of the Sensu API. Leave empty unless your Sensu API is not mounted to `/`.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "path": "/my_api"
+    }
+    ~~~
+
+timeout
+: description
+  : The timeout for the Sensu API, in seconds.
+: required
+  : false
+: type
+  : Integer
+: default
+  : 5
+: example
+  : ~~~ json
+    {
+        "timeout": 15
+    }
+    ~~~
+
+user
+: description
+  : The username of the Sensu API. Leave empty for no authentication.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "user": "my_sensu_api_username"
+    }
+    ~~~
+
+pass
+: description
+  : The password of the Sensu API. Leave empty for no authentication.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "pass": "my_sensu_api_password"
+    }
+    ~~~
+
+## Dashboard attributes
+
+host
+: description
+  : The hostname or IP address on which Sensu Enterprise Dashboard will listen on.
+: required
+  : false
+: type
+  : String
+: default
+  : "0.0.0.0"
+: example
+  : ~~~ json
+    {
+        "host": "1.2.3.4"
+    }
+    ~~~
+
+port
+: description
+  : The port on which Sensu Enterprise Dashboard will listen on.
+: required
+  : false
+: type
+  : Integer
+: default
+  : 3000
+: example
+  : ~~~ json
+    {
+        "port": 3000
+    }
+    ~~~
+
+refresh
+: description
+  : Determines the interval to poll the Sensu APIs, in seconds.
+: required
+  : false
+: type
+  : Integer
+: default
+  : 5
+: example
+  : ~~~ json
+    {
+        "refresh": 5
+    }
+    ~~~
+
+user
+: description
+  : A username to enable simple authentication and restrict access to the
+    dashboard. Leave blank along with `pass` to disable simple authentication.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "user": "admin"
+    }
+    ~~~
+
+pass
+: description
+  : A password to enable simple authentication and restrict access to the
+    dashboard. Leave blank along with `user` to disable simple authentication.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "pass": "secret"
+    }
+    ~~~
+
+db
+: description
+  : A hash of [database connection attributes](#database-connection-attributes)
+    to enable SQL authentication. Overrides simple authentication.
+    _NOTE: This is only available in Sensu Enterprise Dashboard, not Uchiwa._
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ json
+    {
+        "db": {
+          "driver": "mymysql",
+          "scheme": "tcp:127.0.0.1:3306*sensu_enterprise_dashboard/root/mysecretmysqlpassword"
+        }
+    }
+    ~~~
+
+### Database connection attributes
+
+_NOTE: a default user of `admin` will automatically be created with the password
+`sensu`. This user will be created when the Sensu Enterprise Dashboard service
+starts._
+
+_NOTE: when using the `mymysql` or `postgres` drivers, you must first create the
+database you specify._
+
+driver
+: description
+  : The name of the database driver to use for SQL authentication.
+: required
+  : true
+: type
+  : String
+: allowed values
+  : - `mymysql`
+    - `postgres`
+    - `sqlite3`
+: example
+  : ~~~ json
+    {
+        "driver": "postgres"
+    }
+    ~~~
+
+scheme
+: description
+  : The scheme to use to connect to the corresponding database driver.
+    _NOTE: use the [scheme syntax](#scheme-syntax) that corresponds with the
+    database driver you choose._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ json
+    {
+        "scheme": "dashboard.db"
+    }
+    ~~~
+
+#### Scheme syntax
+
+mymysql
+: syntax
+  : ~~~ json
+    {
+        "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
+    }
+    ~~~
+: example
+  : ~~~ json
+    {
+        "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
+    }
+    ~~~
+
+postgres
+: syntax
+  : ~~~ json
+    {
+        "scheme": "user=USERNAME dbname=DB_NAME host=HOST password=PASSWORD sslmode=disable"
+    }
+    ~~~
+: example
+  : ~~~ json
+    {
+        "scheme": "user=postgres dbname=sensu host=127.0.0.1 password=mypassword sslmode=disable"
+    }
+    ~~~
+
+sqlite3
+: syntax
+  : ~~~ json
+    {
+        "scheme": "FILENAME.db"
+    }
+    ~~~
+: example
+  : ~~~ json
+    {
+        "scheme": "sensu.db"
+    }
+    ~~~
