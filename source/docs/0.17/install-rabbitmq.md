@@ -15,7 +15,7 @@ RabbitMQ is a message bus, which [describes itself](http://www.rabbitmq.com/feat
 
 The following instructions will help you to:
 
-- Install Erlang
+- Install Erlang (the runtime used by RabbitMQ)
 - Install RabbitMQ
 
 # Install RabbitMQ
@@ -90,7 +90,7 @@ sudo /etc/init.d/rabbitmq-server start
 
 # Configure RabbitMQ
 
-Access to RabbitMQ is restricted by [access controls](https://www.rabbitmq.com/access-control.html) (e.g. username/password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual host (vhost) and user credentials will need to be created. 
+Access to RabbitMQ is restricted by [access controls](https://www.rabbitmq.com/access-control.html) (e.g. username/password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual host (vhost) and user credentials will need to be created.
 
 ## Create vhost
 

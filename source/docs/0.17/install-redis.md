@@ -52,3 +52,5 @@ sudo /etc/init.d/redis-server start
 sudo /sbin/chkconfig redis on
 sudo /etc/init.d/redis start
 ~~~
+
+You should now have Redis running, which can be confirmed by running the command: <kbd>redis-cli ping</kbd>. If you get a `PONG` response, you should be ready to move on to the next step in the guide.

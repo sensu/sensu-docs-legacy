@@ -24,7 +24,6 @@ hide_toc: true
   * [Getting Started w/ Handlers](getting-started-with-handlers)
   * [Getting Started w/ Filters](getting-started-with-filters)
   * [Getting Started w/ Mutators](getting-started-with-mutators)
-  * [Getting Started w/ Enterprise](getting-started-with-enterprise)
   * [Summary](getting-started-summary)
 
 * **Reference Docs**

@@ -43,3 +43,9 @@ h5:hover .header-link,
 h6:hover .header-link {
   opacity: 1;
 }
+
+.documentation pre code {
+  overflow: auto !important;
+  white-space: pre !important;
+  word-wrap: normal;
+}

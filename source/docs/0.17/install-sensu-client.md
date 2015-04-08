@@ -5,19 +5,16 @@ title: "Install Sensu Client"
 next:
   url: "install-a-dashboard"
   text: "Install a Dashboard"
-info:
-warning:
-danger:
 ---
 
 # Overview
 
-Having successfully installed and configured Sensu, let's now configure a Sensu client. The Sensu client is run on every machine you need to monitor, including those running Sensu and its dependencies. The Sensu client is included in the Sensu Core package, but not enabled by default.
+Having successfully installed and configured Sensu, let's now configure a Sensu client. The Sensu client is run on every machine you need to monitor, including those running Sensu and its dependencies. The Sensu client is included in the Sensu Core package along with the Sensu server and API, but is not enabled by default.
 
 The following instructions will help you to:
 
 - Install and/or configure the Sensu client on the Sensu server (Sensu Core or Sensu Enterprise)
-- [OPTIONAL] Install and configure the Sensu client on a separate machine
+- **[OPTIONAL]** Install and configure the Sensu client on a separate machine
 
 
 # Install the Sensu client
@@ -35,7 +32,7 @@ Each Sensu client requires its own client definition, containing a set of requir
 sudo wget -O /etc/sensu/conf.d/client.json http://sensuapp.org/docs/0.17/files/client.json
 ~~~
 
-_NOTE: this example file configures the Sensu client with client metadata, including a unique name, an address (any string), and its [Sensu Subscriptions]()._
+_NOTE: this example file configures the Sensu client with client metadata, including a unique name, an address (any string), and its [Sensu Subscriptions](clients#what-are-sensu-clients)._
 
 ~~~ shell
 {
@@ -51,7 +48,7 @@ _NOTE: this example file configures the Sensu client with client metadata, inclu
 
 ## Install Check Dependencies
 
-Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called "memory", that runs the command `/etc/sensu/plugins/check-mem.sh`. Each Sensu client that will execute the "memory" check will require a local copy of this file. Download a copy of the `check-mem.sh` check plugin to `/etc/sensu/plugins/check-mem.sh`, via the following commands:
+Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called `memory`, that runs the command `/etc/sensu/plugins/check-mem.sh`. Each Sensu client that will execute the `memory` check will require a local copy of this file. Download a copy of the `check-mem.sh` check plugin to `/etc/sensu/plugins/check-mem.sh`, via the following commands:
 
 ~~~ shell
 sudo wget -O /etc/sensu/plugins/check-mem.sh http://sensuapp.org/docs/0.17/files/check-mem.sh
@@ -66,7 +63,7 @@ sudo chown -R sensu:sensu /etc/sensu
 
 ## Running the Sensu client
 
-Now that the Sensu client has been configured and local check dependencies have been installed, we're ready to start the Sensu client.
+Now that the Sensu client has been configured and local check dependencies (i.e. the plugins and any plugin dependencies such as Ruby) have been installed, we're ready to start the Sensu client.
 
 ~~~ shell
 sudo /etc/init.d/sensu-client start
@@ -76,19 +73,19 @@ sudo /etc/init.d/sensu-client start
 
 Congratulations! By now you should have successfully installed and configured the Sensu client! Now let's observe it in operation.
 
-Tail the Sensu client log file to observe its operation:
+_NOTE: the check requests for "memory" are being published every 10 seconds, so it should be possible to observe log activity (i.e. the check requests) at least once every 10 seconds._
 
-_NOTE: the "memory" check being executed every 10 seconds, and the results being publish._
+Tail the Sensu client log file to observe its operation:
 
 ~~~ shell
 sudo tail -f /var/log/sensu/sensu-client.log
 ~~~
 
-# Sensu client on remote machines
+# Install the Sensu client on remote hosts
 
 ## Overview
 
-Configuring the Sensu client on remote machines works much the same as the previous steps in this guide. The primary difference is that Sensu clients installed on remote machines will need to be able to traverse the network to communicate with the message bus (the RabbitMQ service).
+Configuring the Sensu client on remote hosts works much the same as the previous steps in this guide. The primary difference is that Sensu clients installed on remote hosts will need to be able to traverse the network to communicate with the transport (by default, this is the RabbitMQ service).
 
 The following instructions will help you to:
 
@@ -105,7 +102,7 @@ Please see: [Install Sensu Core](install-sensu#install-sensu-core)
 
 ## Configure the Sensu client
 
-As discussed earlier in this guide, all Sensu services use a message bus (RabbitMQ) to communicate with one another. In order for our Sensu client to communicate with the message bus (the RabbitMQ service), we need to tell it where to find the message bus. Just like we did previously in this guide for [the other Sensu services](install-sensu#configure-connections), we need to create the primary configuration file for Sensu by copying the following contents to `/etc/sensu/config.json` (replacing `YOUR_RABBITMQ_HOST_IP` with the IP address of your RabbitMQ machine):
+As discussed earlier in this guide, all Sensu services use a transport (by default, this is RabbitMQ) to communicate with one another. In order for our Sensu client to communicate with the transport, we need to tell it where to find the transport. Just like we did previously in this guide for [the other Sensu services](install-sensu#configure-connections), we need to create the primary configuration file for Sensu by copying the following contents to `/etc/sensu/config.json` (replacing `YOUR_RABBITMQ_HOST_IP` with the IP address of your RabbitMQ machine):
 
 ~~~ json
 {

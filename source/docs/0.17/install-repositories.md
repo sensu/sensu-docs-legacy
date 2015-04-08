@@ -5,9 +5,6 @@ title: "Install Repositories"
 next:
   url: "install-sensu"
   text: "Install Sensu"
-info:
-warning:
-danger:
 ---
 
 # Overview
@@ -19,9 +16,12 @@ Sensu Enterprise is also installed via software installer packages which are mad
 The following instructions will help you to:
 
 - Install the Sensu Core repository
-- [OPTIONAL] Install the Sensu Enterprise repository
+- **[OPTIONAL]** Install the Sensu Enterprise repository
 
 # Install the Sensu Core Repository
+
+_NOTE: installation of the Sensu core repository is required for all Sensu
+users, including Sensu Enterprise customers._
 
 ## Ubuntu/Debian
 
@@ -44,9 +44,7 @@ gpgcheck=0
 enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 ~~~
 
-# Install the Sensu Enterprise Repository
-
-# Sensu Enterprise installation {#enterprise-installation}
+# Install the Sensu Enterprise Repository {#enterprise-installation}
 
 _NOTE: access to the Sensu Enterprise repositories requires an active [Sensu Enterprise](http://sensuapp.org/enterprise#pricing) subscription, and valid access credentials._
 
@@ -79,3 +77,4 @@ baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/noarch/
 gpgcheck=0
 enabled=1" | sudo tee /etc/yum.repos.d/sensu.repo
 ~~~
+

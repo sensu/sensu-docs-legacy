@@ -12,12 +12,14 @@ danger:
 
 # Overview
 
-Sensu Core provides an API, enabling web dashboards to visualize Sensu data and provide additional functionality. Sensu Enterprise users have access to the Sensu Enterprise Dashboard, the official and supported web dashboard for Sensu. The Sensu community also provides several dashboard options, including the most commonly used Uchiwa dashboard.
+Sensu Core provides an API, enabling web dashboards to visualize Sensu data and provide additional functionality. The official, community supported dashboard for Sensu is called [Uchiwa](http://uchiwa.io). Sensu Enterprise users have access to the Sensu Enterprise Dashboard, the official dashboard for Sensu Enterprise.
+
+_NOTE: installation and use of a dashboard is not required for operating Sensu Core or Sensu Enterprise._
 
 The following instructions will help you to:
 
-- [OPTIONAL] Install Uchiwa
-- [OPTIONAL] Install Sensu Enterprise Dashboard
+- **[OPTIONAL]** Install Uchiwa
+- **[OPTIONAL]** Install Sensu Enterprise Dashboard
 
 # Dashboards
 
@@ -47,7 +49,14 @@ sudo yum install sensu-enterprise-dashboard
 ~~~
 
 ### Configure Sensu Enterprise Dashboard
-In /etc/sensu/dashboard.json
+
+To configure the Sensu Enterprise Dashboard, copy the following example configuration to `/etc/sensu/dashboard.json` manually, or via:
+
+~~~ shell
+sudo wget -O /etc/sensu/dashboard.json http://sensuapp.org/docs/0.17/files/dashboard.json
+~~~
+
+_NOTE: this example file configures the Sensu Enterprise Dashboard with a list of Sensu Enterprise API endpoints (the Sensu Enterprise Dashboard can be used with multiple Sensu Enterprise installations), and the hostname and port the dashboard will listen on. For more details about Sensu Enterprise Dashboard configuration, please see: [Sensu Enterprise Dashboard Docs](enterprise-dashboard-overview)_
 
 ~~~ json
 {
@@ -66,6 +75,8 @@ In /etc/sensu/dashboard.json
 ~~~
 
 ### Running Sensu Enterprise Dashboard
+
+To start the Sensu Enterprise dashboard, please run the following command:
 
 ~~~ shell
 sudo /etc/init.d/sensu-enterprise-dashboard start

@@ -9,7 +9,12 @@ next:
 
 # Overview
 
-Having successfully completed installation of Sensu's dependencies ([RabbitMQ](install-rabbitmq), and [Redis](install-redis)) and the [Sensu Repositories](install-repositories), we are now ready to install Sensu! Instructions are provided for installing both flavors of Sensu (Sensu Core and Sensu Enterprise).
+Having successfully completed installation of Sensu's dependencies ([RabbitMQ](install-rabbitmq), and [Redis](install-redis)) and the [Sensu Repositories](install-repositories), we are now ready to install Sensu!
+
+This guide will help you to:
+
+- Install Sensu Core
+- Install Sensu Enterprise
 
 _NOTE: Sensu Core and Sensu Enterprise may be installed alongside one another, however only one flavor of Sensu should be run at any given time (see [below](#running-sensu) for more info)._
 
@@ -90,7 +95,7 @@ Create a check definition by copying the following example configuration to `/et
 sudo wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.17/files/check_memory.json
 ~~~
 
-_NOTE: this example config creates a [Sensu Check](checks) that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available). The check script (plugin) will be installed later in this guide._
+_NOTE: this example config creates a [Sensu Check](checks) that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available). The check script itself (the plugin) will be installed later in this guide._
 
 ~~~ json
 {
@@ -133,7 +138,7 @@ sudo chown -R sensu:sensu /etc/sensu
 
 # Running Sensu
 
-Only one flavor of Sensu should be used at any given time: Sensu Core (sensu-server + sensu-api), or Sensu Enterprise. If you have previously run Sensu Core or Sensu Enterprise and are switching flavors, simply stop one and start the other.
+_NOTE: Only **one** flavor of Sensu should be used at any given time: Sensu Core (sensu-server + sensu-api), or Sensu Enterprise. If you have previously run Sensu Core or Sensu Enterprise and are switching flavors, simply stop one and start the other._
 
 ## Sensu Core
 
@@ -152,13 +157,13 @@ sudo /etc/init.d/sensu-enterprise start
 
 Congratulations! By now you should have successfully installed and configured Sensu! Now let's observe it in operation.
 
+_NOTE: the check requests for "memory" are being published every 10 seconds, so it should be possible to observe log activity (i.e. the check requests) at least once every 10 seconds._
+
 ## Sensu Core
 
 Tail the Sensu Core server and API log files to observe their operation:
 
 Sensu Core server logs:
-
-_NOTE: the check requests for "memory" being published every 10 seconds._
 
 ~~~ shell
 sudo tail -f /var/log/sensu/sensu-server.log
@@ -179,8 +184,6 @@ sudo kill -TRAP `cat /var/run/sensu-enterprise.pid`
 ~~~
 
 Tail the Sensu Enterprise log file to observe its operation:
-
-_NOTE: the check requests for "memory" being published every 10 seconds._
 
 ~~~ shell
 sudo tail -f /var/log/sensu-enterprise.log
