@@ -59,5 +59,4 @@ hide_toc: true
 * **Enterprise Dashboard Docs**
   * [Overview](enterprise-dashboard-overview)
   * [Configuration](enterprise-dashboard-configuration)
-  * [Role-based Access Control](enterprise-dashboard-rbac)
   * [Collections](enterprise-dashboard-collections)

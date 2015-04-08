@@ -1,18 +1,66 @@
 ---
 version: 0.17
-category: "Configuration"
-title: "Configuring Sensu Enterprise Dashboard"
+category: "Enterprise Dashboard Docs"
+title: "Enterprise Dashboard Reference Documentation"
 next:
-  url: "enterprise-dashboard-rbac"
-  text: "Role-based Access Control"
-info:
-warning:
-danger:
+  url: "enterprise-dashboard-collections"
+  text: "Enterprise Dashboard Collections"
 ---
 
 # Overview
 
-...
+This documentation is based on the [Uchiwa documentation](http://uchiwa.readthedocs.org/en/latest/).
+
+## Example configurations
+
+### Minimal configuration
+
+The following is the bare minimum that should be included in your Sensu
+Enterprise Dashboard configuration.
+
+~~~ json
+{
+  "sensu": [
+    {
+      "name": "Site 1",
+      "host": "api1.example.com",
+      "port": 4567
+    }
+  ],
+  "dashboard": {
+    "host": "0.0.0.0",
+    "port": 3000
+  }
+}
+~~~
+
+### SQL authentication configuration
+
+The following is an example of using SQL authentication (using MySQL) with Sensu
+Enterprise Dashboard. See
+[database connection attributes](#database-connection-attributes) for more
+information on SQL configuration.
+
+~~~ json
+{
+  "sensu": [
+    {
+      "name": "Site 1",
+      "host": "api1.example.com",
+      "port": 4567
+    }
+  ],
+  "dashboard": {
+    "host": "0.0.0.0",
+    "port": 3000,
+    "db": {
+      "driver": "mymysql",
+      "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
+    }
+  }
+}
+~~~
+
 
 # Configuration attributes
 
