@@ -2,7 +2,7 @@
 # the following line to use "https"
 source 'http://rubygems.org'
 
-gem "middleman"
+gem "middleman", "3.2.1"
 gem "middleman-favicon-maker"
 gem "middleman-livereload"
 gem "middleman-deploy"
@@ -19,4 +19,3 @@ gem "kramdown"
 # gem "coffee-filter"
 
 gem "therubyracer"
-

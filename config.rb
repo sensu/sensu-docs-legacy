@@ -85,18 +85,18 @@ configure :build do
   # set :http_path, "/Content/images/"
 
   # copied from https://github.com/heavywater/heavywater.github.com/blob/develop/config.rb
-  activate :asset_hash 
-  activate :minify_css 
-  activate :minify_html 
-  activate :minify_javascript 
-  activate :favicon_maker 
+  activate :asset_hash
+  activate :minify_css
+  activate :minify_html
+  activate :minify_javascript
+  activate :favicon_maker
 
 end
 
 ###
-# Custom Configs 
+# Custom Configs
 # source: https://github.com/heavywater/heavywater.github.com/blob/develop/config.rb
-### 
+###
 
 set :css_dir, 'css'
 set :js_dir, 'js'
@@ -124,6 +124,3 @@ Time.zone = "America/Los_Angeles"
 activate :directory_indexes
 activate :automatic_image_sizes
 activate :livereload
-
-
-

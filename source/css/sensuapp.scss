@@ -1,0 +1,70 @@
+// Twitter Bootstrap
+@import "bootstrap";
+@import "octicons/octicons";
+@import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css";
+@import "index";
+@import "tables";
+
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #999 !important;
+}
+
+#documentation h1:not(h1:first-child) {
+  padding-top: 14px;
+}
+
+h2 {
+  color: #555 !important;
+}
+
+h3 {
+  color: #777 !important;
+}
+
+h4 {
+  color: #888 !important;
+}
+
+h5 {
+  color: #999 !important;
+}
+
+h6 {
+  color: #aaa !important;
+}
+
+pre {
+  border: none !important;
+}
+
+.alert {
+  border: none !important;
+}
+
+.alert-info {
+  background-color: #d5e9f6 !important;
+}
+
+.note {
+  display: block;
+  background-color: #d5e9f6;
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 4px;
+}
+
+.ubuntu {
+  color: #DD4814 !important;
+}
+
+.ubuntu > i {
+  padding-right: 7px;
+}
+
+.centos {
+  color: #204C8D !important;
+}
+
+.centos > i {
+  padding-right: 7px;
+}

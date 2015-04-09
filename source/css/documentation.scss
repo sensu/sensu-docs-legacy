@@ -1,0 +1,51 @@
+$component-offset-horizontal: 130px;
+
+@import "highlighting";
+@import "bootstrap";
+
+.documentation h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+}
+
+.documentation li {
+  line-height: 20px;
+}
+
+.documentation ul p {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.documentation img {
+  width: 100%;
+}
+
+.documentation dl {
+  @extend .dl-horizontal;
+}
+
+/* http://ben.balter.com/2014/03/13/pages-anchor-links/ */
+.header-link {
+  color: inherit !important;
+  padding-left: 0.25em;
+  opacity: 0;
+
+  -webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  -moz-transition: opacity 0.2s ease-in-out 0.1s;
+  -ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+h1:hover .header-link,
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}
+
+.documentation pre code {
+  overflow: auto !important;
+  white-space: pre !important;
+  word-wrap: normal;
+}
