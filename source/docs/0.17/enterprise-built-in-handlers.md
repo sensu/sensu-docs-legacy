@@ -945,7 +945,7 @@ timeout
 
 ## Graphite
 
-Send metrics to Graphite, using the plaintext protocol over TCP. The `graphite` enterprise handler is also capable of sending metrics to [Hosted Graphite](https://www.hostedgraphite.com/), using the `prefix` attribute to prefix metric names with the Hosted Graphite API key.
+Send metrics to Graphite, using the plaintext protocol over TCP. The `graphite` enterprise handler is also capable of sending metrics to [Hosted Graphite](https://www.hostedgraphite.com/), using the `prefix` attribute to prefix metric names with the Hosted Graphite API key. This handler uses the `output_format` mutator.
 
 The following is an example global configuration for the `graphite` enterprise handler (integration).
 
@@ -959,6 +959,76 @@ The following is an example global configuration for the `graphite` enterprise h
   }
 }
 ~~~
+
+### Definition attributes
+
+graphite
+: description
+  : A set of attributes that configure the Graphite event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "graphite": {}
+    ~~~
+
+#### Graphite attributes
+
+host
+: description
+  : The Graphite Carbon host address.
+: required
+  : false
+: type
+  : String
+: default
+  : `127.0.0.1`
+: example
+  : ~~~ shell
+    "host": "carbon.hostedgraphite.com"
+    ~~~
+
+port
+: description
+  : The Graphite Carbon port.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `2003`
+: example
+  : ~~~ shell
+    "port": 3003
+    ~~~
+
+prefix_client_name
+: description
+  : If the Sensu client name should prefix (added to) the metric names.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "prefix_client_name": true
+    ~~~
+
+prefix
+: description
+  : A custom metric name prefix - this can be used to prefix the Hosted Graphite API key.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "prefix": "production"
+    ~~~
 
 ## Librato
 
