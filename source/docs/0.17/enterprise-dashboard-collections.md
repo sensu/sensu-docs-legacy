@@ -10,7 +10,7 @@ Collections are a grouping of items returned by a collection query. This query
 acts like a global search and it **persists** between the different views.
 Collections can be easily **shared** and **saved**.
 
-![collections](img/dashboard/collections.png)
+![collections](img/enterprise-dashboard-collections.png)
 
 ### Collection Query
 
