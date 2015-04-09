@@ -753,33 +753,199 @@ timeout
 
 ## Chef
 
-Deregister Sensu clients from the registry, if they no longer have
-associated Chef node data. This integration can only work if Sensu
-clients are named using the Chef node name, for the machine on which
-they reside. Configure the integration with Chef API information. You
-may use the local chef-client configuration as a reference.
+Deregister Sensu clients from the client registry, if they no longer have associated Chef node data. This integration can only work if Sensu clients are named using the Chef node name, for the machine on which they reside. The `chef` enterprise handler requires Chef Server API credentials, the local chef-client configuration can be used as a reference.
+
+The following is an example global configuration for the `chef` enterprise handler (integration).
 
 ~~~ json
 {
-    "chef": {
-        "endpoint": "https://api.opscode.com/organizations/example",
-        "flavor": "enterprise",
-        "client": "example",
-        "key": "/etc/chef/example.pem",
-        "ssl_pem_file": "/etc/chef/ssl.pem",
-        "ssl_verify": true,
-        "proxy_username": "PROXY_USER",
-        "proxy_password": "PROXY_PASSWORD",
-        "proxy_address": "proxy.example.com",
-        "proxy_port": 8080,
-        "timeout": 10
-    }
+  "chef": {
+    "endpoint": "https://api.opscode.com/organizations/example",
+    "flavor": "enterprise",
+    "client": "i-424242",
+    "key": "/etc/chef/i-424242.pem",
+    "ssl_pem_file": "/etc/chef/ssl.pem",
+    "ssl_verify": true,
+    "proxy_address": "proxy.example.com",
+    "proxy_port": 8080,
+    "proxy_username": "chef",
+    "proxy_password": "secret",
+    "timeout": 10
+  }
 }
 ~~~
 
+The Chef enterprise handler is most commonly used as part of the `keepalive` set handler. For example:
+
+~~~ json
+{
+  "handlers": {
+    "keepalive": {
+      "type": "set",
+      "handlers": [
+        "pagerduty",
+        "chef"
+      ]
+    }
+  }
+}
+~~~
+
+### Definition attributes
+
+chef
+: description
+  : A set of attributes that configure the Chef event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "chef": {}
+    ~~~
+
+#### Chef attributes
+
+endpoint
+: description
+  : The Chef Server API endpoint (URL).
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "endpoint": "https://api.opscode.com/organizations/example"
+    ~~~
+
+flavor
+: description
+  : The Chef Server flavor (is it enterprise?).
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "flavor": "enterprise"
+    ~~~
+
+client
+: description
+  : The Chef Client name to use when authenticating/querying the Chef Server API.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "client": "i-424242"
+    ~~~
+
+key
+: description
+  : The Chef Client key to use when authenticating/querying the Chef Server API.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "key": "/etc/chef/i-424242.pem"
+    ~~~
+
+ssl_pem_file
+: description
+  : The Chef SSL pem file use when querying the Chef Server API.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "ssl_pem_file": "/etc/chef/ssl.pem"
+    ~~~
+
+ssl_verify
+: description
+  : If the SSL certificate will be verified when querying the Chef Server API.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "ssl_verify": false
+    ~~~
+
+proxy_address
+: description
+  : The HTTP proxy address.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "proxy_address": "proxy.example.com"
+    ~~~
+
+proxy_port
+: description
+  : The HTTP proxy port (if there is a proxy).
+: required
+  : false
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "proxy_port": 8080
+    ~~~
+
+proxy_username
+: description
+  : The HTTP proxy username (if there is a proxy).
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "proxy_username": "chef"
+    ~~~
+
+proxy_password
+: description
+  : The HTTP proxy user password (if there is a proxy).
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "proxy_password": "secret"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
 ## Graphite
 
-Send check metric data to Graphite (TCP).
+Send metrics to Graphite, using the plaintext protocol over TCP.
 
 ~~~ json
 {
@@ -794,7 +960,7 @@ Send check metric data to Graphite (TCP).
 
 ## Librato
 
-Send check metric data to Librato (HTTP).
+Send metrics to Librato Metrics via the HTTP API.
 
 ~~~ json
 {
