@@ -4,7 +4,7 @@ category: "Getting Started Guide"
 title: "Getting Started with Sensu"
 next:
   url: "getting-started-with-checks"
-  text: "Getting Started w/ Checks"
+  text: "Getting Started with Checks"
 ---
 
 # Introduction
