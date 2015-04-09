@@ -17,7 +17,7 @@ Built-in event handlers:
 - [PagerDuty](#pagerduty) - create and resolve PagerDuty incidents for events
 - [IRC](#irc) - send notifications to an IRC channel for events
 - [Slack](#slack) - send notifications to a Slack channel for events
-- [HipChat](#hipchat) - send notifications to a Hipchat room for events
+- [HipChat](#hipchat) - send notifications to a HipChat room for events
 - [Flapjack](#flapjack) - relay Sensu check results to Flapjack
 - [EC2](#ec2) - deregister Sensu clients without an allowed EC2 instance state
 - [Chef](#chef) - deregister Sensu clients without an associated Chef node
@@ -154,9 +154,9 @@ timeout
     "timeout": 30
     ~~~
 
-## Pagerduty
+## PagerDuty
 
-Create and resolve Pagerduty incidents for events. After [configuring a service in PagerDuty](https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service), configure the handler (integration) with the provided service key.
+Create and resolve PagerDuty incidents for events. After [configuring a service in PagerDuty](https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service), configure the handler (integration) with the provided service key.
 
 The following is an example global configuration for the `pagerduty` enterprise event handler (integration).
 
@@ -425,23 +425,107 @@ timeout
     "timeout": 30
     ~~~
 
-## Hipchat
+## HipChat
 
-Send notifications to a Hipchat room for events. Configure the
-integration with Hipchat API information. You may specify a
-connection timeout, it defaults to 10 seconds.
+Send notifications to a HipChat room for events. After [creating a HipChat API token](https://www.hipchat.com/docs/api/auth), configure the handler (integration) with the provided API token.
+
+The following is an example global configuration for the `hipchat` enterprise event handler (integration).
 
 ~~~ json
 {
-    "hipchat": {
-        "api_token": "API_TOKEN",
-        "api_version": "v2",
-        "username": "sensu",
-        "room": "Operations",
-        "timeout": 10
-    }
+  "hipchat": {
+    "api_token": "L7kVQzXF7c5eUMYUon6INaSVRDU8mP",
+    "api_version": "v2",
+    "username": "sensu",
+    "room": "Operations",
+    "timeout": 10
+  }
 }
 ~~~
+
+### Definition attributes
+
+hipchat
+: description
+  : A set of attributes that configure the HipChat event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "hipchat": {}
+    ~~~
+
+#### Hipchat attributes
+
+api_token
+: description
+  : The HipChat API token - [https://www.hipchat.com/docs/api/auth](https://www.hipchat.com/docs/api/auth).
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "api_token": "L7kVQzXF7c5eUMYUon6INaSVRDU8mP"
+    ~~~
+
+api_version
+: description
+  : The HipChat API version to use.
+: required
+  : false
+: type
+  : String
+: default
+  : `v2`
+: example
+  : ~~~ shell
+    "api_version": "v2"
+    ~~~
+
+username
+: description
+  : The HipChat username to use to notify the room.
+: required
+  : false
+: type
+  : String
+: default
+  : `sensu`
+: example
+  : ~~~ shell
+    "username": "monitoring"
+    ~~~
+
+room
+: description
+  : The HipChat room to notify.
+: required
+  : false
+: type
+  : String
+: default
+  : `sensu`
+: example
+  : ~~~ shell
+    "room": "Search"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
 
 ## Flapjack
 
