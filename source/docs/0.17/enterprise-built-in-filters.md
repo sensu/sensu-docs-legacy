@@ -4,7 +4,7 @@ category: "Enterprise Docs"
 title: "Built-in Filters"
 next:
   url: "enterprise-built-in-mutators"
-  text: "Enterprise built-in mutators"
+  text: "Enterprise Built-in Mutators"
 ---
 
 # Overview
