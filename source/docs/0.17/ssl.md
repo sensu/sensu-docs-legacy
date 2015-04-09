@@ -17,7 +17,7 @@ All communication between Sensu services happens via the Sensu transport (Rabbit
 
 # Generate SSL certificates
 
-The following instructions will generate an OpenSSL certificate authority and self-signed certificates.
+The following instructions will generate an OpenSSL certificate authority and self-signed certificates. Optionally, the instructions available on the [RabbitMQ SSL page](http://www.rabbitmq.com/ssl.html) can be used instead.
 
 ## Install OpenSSL
 
