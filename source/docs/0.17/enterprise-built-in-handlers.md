@@ -945,16 +945,18 @@ timeout
 
 ## Graphite
 
-Send metrics to Graphite, using the plaintext protocol over TCP.
+Send metrics to Graphite, using the plaintext protocol over TCP. The `graphite` enterprise handler is also capable of sending metrics to [Hosted Graphite](https://www.hostedgraphite.com/), using the `prefix` attribute to prefix metric names with the Hosted Graphite API key.
+
+The following is an example global configuration for the `graphite` enterprise handler (integration).
 
 ~~~ json
 {
-    "graphite": {
-        "host": "graphite.example.com",
-        "port": 2003,
-        "prefix_client_name": false,
-        "prefix": "production"
-    }
+  "graphite": {
+    "host": "graphite.example.com",
+    "port": 2003,
+    "prefix_client_name": false,
+    "prefix": "production"
+  }
 }
 ~~~
 
@@ -962,11 +964,13 @@ Send metrics to Graphite, using the plaintext protocol over TCP.
 
 Send metrics to Librato Metrics via the HTTP API.
 
+The following is an example global configuration for the `librato` enterprise handler (integration).
+
 ~~~ json
 {
-    "librato": {
-        "email": "support@example.com",
-        "api_key": "API_KEY"
-    }
+  "librato": {
+    "email": "support@example.com",
+    "api_key": "API_KEY"
+  }
 }
 ~~~
