@@ -72,7 +72,7 @@ The following is an example global configuration for the `email` enterprise even
 
 email
 : description
-  : A set of attributes that configures the email event handler.
+  : A set of attributes that configure the Email event handler.
 : required
   : true
 : type
@@ -156,56 +156,274 @@ timeout
 
 ## Pagerduty
 
-Create and resolve Pagerduty incidents for events. After configuring a
-service in Pagerduty, configure the integration with the provided
-service key. You may specify a request timeout, it defaults to 10
-seconds.
+Create and resolve Pagerduty incidents for events. After [configuring a service in PagerDuty](https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service), configure the handler (integration) with the provided service key.
+
+The following is an example global configuration for the `pagerduty` enterprise event handler (integration).
 
 ~~~ json
 {
-    "pagerduty": {
-        "service_key": "SERVICE_KEY",
-        "timeout": 10
-    }
+  "pagerduty": {
+    "service_key": "r3FPuDvNOTEDyQYCc7trBkymIFcy2NkE",
+    "timeout": 10
+  }
 }
 ~~~
+
+### Definition attributes
+
+pagerduty
+: description
+  : A set of attributes that configure the PagerDuty event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "pagerduty": {}
+    ~~~
+
+#### Pagerduty attributes
+
+service_key
+: description
+  : The PagerDuty service key to use when creating and resolving incidents.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "service_key": "r3FPuDvNOTEDyQYCc7trBkymIFcy2NkE"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
 
 ## IRC
 
-Send notifications to an IRC channel for events. Configure the
-integration with IRC server connection information. The integration
-supports NickServ and channel authentication. You may specify a
-connection timeout, it defaults to 10 seconds.
+Send notifications to an IRC channel for events.
+
+The following is an example global configuration for the `irc` enterprise event handler (integration).
 
 ~~~ json
 {
-    "irc": {
-        "uri": "irc://nick:pass@example.com:6697/#ops",
-        "ssl": true,
-        "nickserv_password": "NICKSERV_PASSWORD",
-        "channel_password": "CHANNEL_PASSWORD",
-        "join": false,
-        "timeout": 10
-    }
+  "irc": {
+    "uri": "irc://nick:pass@example.com:6697/#ops",
+    "ssl": true,
+    "nickserv_password": "NICKSERV_PASSWORD",
+    "channel_password": "CHANNEL_PASSWORD",
+    "join": false,
+    "timeout": 10
+  }
 }
 ~~~
+
+### Definition attributes
+
+irc
+: description
+  : A set of attributes that configure the IRC event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "irc": {}
+    ~~~
+
+#### IRC attributes
+
+uri
+: description
+  : The IRC URI; including the nick, password, address, port, and channel.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "uri": "irc://nick:pass@example.com:6697/#ops"
+    ~~~
+
+ssl
+: description
+  : If SSL encryption is used for the IRC connection.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "ssl": true
+    ~~~
+
+channel_password
+: description
+  : The IRC channel password (if required).
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "channel_password": "secret"
+    ~~~
+
+nickserv_password
+: description
+  : Identify with NickServ (if required).
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "nickserv_password": "secret"
+    ~~~
+
+join
+: description
+  : If the handler must join the IRC channel before messaging.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "join": true
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
 
 ## Slack
 
-Send notifications to a Slack channel for events. Configure the
-integration with Slack API information. You may specify a
-connection timeout, it defaults to 10 seconds.
+Send notifications to a Slack channel for events. After [configuring an incoming webhook in Slack](https://api.slack.com/incoming-webhooks), configure the handler (integration) with the provided webhook url.
+
+The following is an example global configuration for the `slack` enterprise event handler (integration).
 
 ~~~ json
 {
-    "slack": {
-        "webhook_url": "WEBHOOK_URL",
-        "username": "sensu",
-        "channel": "#ops",
-        "timeout": 10
-    }
+  "slack": {
+    "webhook_url": "https://hooks.slack.com/services/IB6JgRmRJ/eL7Hgo6kF/CckJm8E4Yt8X3i6QRKHWBekc",
+    "username": "sensu",
+    "channel": "#ops",
+    "timeout": 10
+  }
 }
 ~~~
+
+### Definition attributes
+
+slack
+: description
+  : A set of attributes that configure the Slack event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "slack": {}
+    ~~~
+
+#### Slack attributes
+
+webhook_url
+: description
+  : The Slack incoming webhook URL - [https://api.slack.com/incoming-webhooks](https://api.slack.com/incoming-webhooks).
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "webhook_url": "https://hooks.slack.com/services/IB6JgRmRJ/eL7Hgo6kF/CckJm8E4Yt8X3i6QRKHWBekc"
+    ~~~
+
+channel
+: description
+  : The Slack channel to notify.
+: required
+  : false
+: type
+  : String
+: default
+  : `#general`
+: example
+  : ~~~ shell
+    "channel": "#ops"
+    ~~~
+
+username
+: description
+  : The Slack username to use to notify the channel.
+: required
+  : false
+: type
+  : String
+: default
+  : `sensu`
+: example
+  : ~~~ shell
+    "username": "monitoring"
+    ~~~
+
+icon_url
+: description
+  : The Slack icon URL to use for notifications.
+: required
+  : false
+: type
+  : String
+: default
+  : `http://www.gravatar.com/avatar/9b37917076cee4e2d331a785f3426640`
+: example
+  : ~~~ shell
+    "icon_url": "http://www.gravatar.com/avatar/9b37917076cee4e2d331a785f3426640"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
 
 ## Hipchat
 
