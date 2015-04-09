@@ -529,20 +529,109 @@ timeout
 
 ## Flapjack
 
-Relay Sensu results to Flapjack, a monitoring notification routing and
-event processing system.
+Relay Sensu results to Flapjack, a monitoring notification routing and event processing system. Flapjack uses Redis for event queuing; this integration sends event data to Flapjack through Redis, using the Flapjack event format.
+
+_NOTE: checks **DO NOT** need to specify `flapjack` as an event handler, as every check result will be relayed to Flapjack if the integration is configured._
+
+The following is an example global configuration for the `flapjack` enterprise integration.
 
 ~~~ json
 {
-    "flapjack": {
-        "host": "redis.example.com",
-        "port": 6379,
-        "channel": "events",
-        "db": 0,
-        "filter_metrics": false
-    }
+  "flapjack": {
+    "host": "redis.example.com",
+    "port": 6379,
+    "db": 0,
+    "channel": "events",
+    "filter_metrics": false
+  }
 }
 ~~~
+
+### Definition attributes
+
+flapjack
+: description
+  : A set of attributes that configure the Flapjack integration.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "flapjack": {}
+    ~~~
+
+#### Flapjack attributes
+
+host
+: description
+  : The Flapjack Redis instance address.
+: required
+  : false
+: type
+  : String
+: default
+  : `127.0.0.1`
+: example
+  : ~~~ shell
+    "host": "8.8.8.8"
+    ~~~
+
+port
+: description
+  : The Flapjack Redis instance port.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `6379`
+: example
+  : ~~~ shell
+    "port": 6380
+    ~~~
+
+db
+: description
+  : The Flapjack Redis instance database (#) to use.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `0`
+: example
+  : ~~~ shell
+    "db": 1
+    ~~~
+
+channel
+: description
+  : The Flapjack Redis instance channel (queue) to use for events.
+: required
+  : false
+: type
+  : String
+: default
+  : `events`
+: example
+  : ~~~ shell
+    "channel": "flapjack"
+    ~~~
+
+filter_metrics
+: description
+  : If check results with a `type` of `metric` are relayed to Flapjack.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "filter_metrics": true
+    ~~~
 
 ## EC2
 
