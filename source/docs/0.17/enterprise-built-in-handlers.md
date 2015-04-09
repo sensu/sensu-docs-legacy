@@ -1032,7 +1032,7 @@ prefix
 
 ## Librato
 
-Send metrics to Librato Metrics via the HTTP API.
+Send metrics to Librato Metrics using the HTTP API.
 
 The following is an example global configuration for the `librato` enterprise handler (integration).
 
@@ -1040,7 +1040,47 @@ The following is an example global configuration for the `librato` enterprise ha
 {
   "librato": {
     "email": "support@example.com",
-    "api_key": "API_KEY"
+    "api_key": "90SHpjPOFqd2YJFIX9rzDq7ik6CiDmqu2AvqcXJAX3buIwcOGqIOgNilwKMjpStO"
   }
 }
 ~~~
+
+### Definition attributes
+
+librato
+: description
+  : A set of attributes that configure the Librato event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "librato": {}
+    ~~~
+
+#### Librato attributes
+
+email
+: description
+  : The Librato account email.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "email": "support@example.com"
+    ~~~
+
+api_key
+: description
+  : The Librato account API key.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "api_key": "90SHpjPOFqd2YJFIX9rzDq7ik6CiDmqu2AvqcXJAX3buIwcOGqIOgNilwKMjpStO"
+    ~~~
