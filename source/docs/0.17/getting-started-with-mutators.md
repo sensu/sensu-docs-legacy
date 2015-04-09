@@ -12,8 +12,13 @@ The purpose of this guide is to help Sensu users create event data mutators. At 
 
 What will be covered in this guide:
 
+- What are Sensu mutators?
 - Creation of a Sensu event data mutator
 
 # What are Sensu mutators? {#what-are-sensu-mutators}
 
 Sensu mutators mutate (transform) event data for a Sensu event handler. Sensu event handlers can expect event data be in a different format and/or manipulated. Mutators allow one or more handlers to share logic, reducing code duplication, and simplifying the event handlers. Sensu mutators are executed on machines running the Sensu server or Sensu Enterprise. Mutators are essentially commands (or scripts) that receive JSON formatted event data via `STDIN` and output the mutated event data to `STDOUT`. Mutators use an exit status code of `0` to indicate a success, anything else indicates a failure. If a mutator fails to execute (non-zero exit status code), the event will not be handled, and an error will be logged.
+
+# Create an event data mutator
+
+Coming soon. Please see the [Mutators](mutators) reference documentation. If you have questions about event data mutators, please contact [Sensu Support](http://helpdesk.sensuapp.com).
