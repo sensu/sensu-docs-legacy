@@ -39,6 +39,7 @@ hide_toc: true
   * [SSL Configuration](ssl)
 
 * **API Docs**
+  * [Overview](api-overview)
   * [Clients API](api-clients)
   * [Checks API](api-checks)
   * [Events API](api-events)
