@@ -5,6 +5,10 @@ title: "Install Redis"
 next:
   url: "install-repositories"
   text: "Install Repositories"
+success: "<strong>NOTE:</strong> this is part 2 of 6 steps in the Sensu
+  Installation Guide. For the best results, please make sure to follow the
+  instructions carefully and complete all of the steps in each section before
+  moving on."
 ---
 
 # Overview
