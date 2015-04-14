@@ -440,3 +440,65 @@ sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sens
 ## Start the service {#start-the-service}
 
 Start the Sensu Client service from the Services.msc panel or the Command Prompt. Review the C:\opt\sensu\sensu-client.log for errors.
+
+# Client socket input
+
+Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on `localhost` port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your application, which can be anything) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
+
+The Sensu client socket can be configured per-client using the [client socket attributes](#socket-attributes).
+
+## Example external check result input
+
+The following is an example demonstrating external check result input via the Sensu client TCP socket. The example uses Bash's built-in `/dev/tcp` file to communicate with the Sensu client socket.
+
+~~~ shell
+echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' > /dev/tcp/localhost/3030
+~~~
+
+Netcat can also be used, instead of the TCP file:
+
+~~~ shell
+echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
+~~~
+
+## Anatomy of a check result
+
+name
+: description
+  : The check name used to identify it (context).
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "name": "db_nightly_backup"
+    ~~~
+
+output
+: description
+  : The check result output.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "output": "production db backup failed"
+    ~~~
+
+status
+: description
+  : The check result exit status to indicate severity.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `0`
+: example
+  : ~~~ shell
+    "status": 1
+    ~~~
+
+Check results can include standard [check definition attributes](checks) (e.g. `handler`), as well as custom attributes to provide additional event context and/or assist in alert routing etc.
