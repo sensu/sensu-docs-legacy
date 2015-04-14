@@ -443,7 +443,9 @@ Start the Sensu Client service from the Services.msc panel or the Command Prompt
 
 # Client socket input
 
-Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your application, which can be anything) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
+Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on `localhost` port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your application, which can be anything) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
+
+The Sensu client socket can be configured per-client using the [client socket attributes](#socket-attributes).
 
 ## Example external check result input
 
