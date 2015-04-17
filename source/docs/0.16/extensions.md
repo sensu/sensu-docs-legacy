@@ -113,7 +113,7 @@ skeleton framework above we created a handler extension and tied it to the
 In this case, you have a great deal more flexibility with what happens to the
 event\_data. For example, you could yield a wholly different data structure
 to your handler to facilitate the implementation of some more complex
-functionatliy. If, on the other hand, you want to be a passive mutator and
+functionality. If, on the other hand, you want to be a passive mutator and
 simply modify some class of events, you want to ensure that event\_data leaves
 your mutator in a similar composition.
 
@@ -122,4 +122,12 @@ mutators.
 
 ## Check Extensions {#check-extensions}
 
-... @TODO
+Check extensions are useful in situations where persistent resources are required by a check. Instance variables in check extensions are persistent since the extension's class is instantiated when the client starts and persists until the client stops, allowing checks with persistent data structures and properties. Check extensions inherit the class ```Sensu::Extension::Check```.
+
+As an example, if you needed to poll a gauge such as system CPU utilization in the last second and average that over the check's run interval to produce a metric, you could create a timer that would check the current CPU utilization periodically in your extension's ```post_init()``` method. Then, the ```run()``` method of the check extension could average these data points and return it as a metric representing average CPU utilization over some time period.
+
+The hash returned by the ```definition()``` method in the check extension defines when and how the extension should be executed, as well as the other check parameters that should be passed through as event data. This hash can include any of the check configuration options normally accepted by checks, such as ```interval```, ```refresh```, ```type```, ```handlers```, and so on. 
+
+Unlike plugin checks, check extensions inheriting from ```Sensu::Extension::Check``` return output via the ```yield``` method. The convenience methods ```ok```, ```warning```, ```critical```, and ```unknown``` are not available. This ```yield``` call takes a string to be output as the first argument and an exit code as the second. The exit code supplied to ```yield``` maps to the exit codes used by plugin checks: 0 for OK, 1 for WARNING, 2 for CRITICAL, and 3 for UNKNOWN. For example, to return the string "Everything looks okay!" as the check's output and a zero exit code indicating that the check's status is OK, you could call the following from the ```run()``` method:
+
+```yield "Everything is okay!", 0```
