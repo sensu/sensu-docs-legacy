@@ -66,7 +66,7 @@ module Sensu::Extension
 
     # Called when Sensu begins to shutdown.
     def stop
-      yield
+      true
     end
 
   end
