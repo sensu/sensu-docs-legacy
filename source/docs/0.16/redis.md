@@ -78,16 +78,18 @@ rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
 yum install redis
 ~~~
 
+## Start Redis
+
 Set Redis to start on boot and start it up:
 
-For Debian/Ubuntu:
+#### Ubuntu/Debian
 
 ~~~ shell
 update-rc.d redis-server defaults
 /etc/init.d/redis-server start
 ~~~
 
-For CentOS:
+#### CentOS/RHEL
 
 ~~~
 /sbin/chkconfig redis on
