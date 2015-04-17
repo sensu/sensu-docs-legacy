@@ -38,11 +38,12 @@ sudo yum install redis
 
 # Running Redis
 
-Enable the RabbitMQ service on boot and start it:
+Enable the Redis service on boot and start it:
 
 ## Ubuntu/Debian {#running-redis-on-ubuntu}
 
 ~~~ shell
+sudo update-rc.d redis-server defaults
 sudo /etc/init.d/redis-server start
 ~~~
 
