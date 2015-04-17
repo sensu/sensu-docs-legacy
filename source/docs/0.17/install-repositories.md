@@ -68,13 +68,22 @@ echo "deb     http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt sensu-enterpr
 
 ## CentOS/RHEL
 
-Create the YUM repository configuration file for the Sensu Core repository at `/etc/yum.repos.d/sensu-enterprise.repo`:
+Create the YUM repository configuration file for the Sensu Enterprise repository at `/etc/yum.repos.d/sensu-enterprise.repo`:
 
 ~~~ shell
 echo "[sensu-enterprise]
 name=sensu-enterprise
 baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/noarch/
 gpgcheck=0
-enabled=1" | sudo tee /etc/yum.repos.d/sensu.repo
+enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise.repo
 ~~~
 
+Create the YUM repository configuration file for the Sensu Enterprise Dashboard repository at `/etc/yum.repos.d/sensu-enterprise-dashboard.repo`:
+
+~~~ shell
+echo "[sensu-enterprise-dashboard]
+name=sensu-enterprise-dashboard
+baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/$basearch/
+gpgcheck=0
+enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise-dashboard.repo
+~~~
