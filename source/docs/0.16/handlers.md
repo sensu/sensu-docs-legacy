@@ -37,6 +37,8 @@ end
 ~~~
 
 #### Handler definition {#pipe-handler-definition}
+Create this file on the Sensu server:
+`/etc/sensu/conf.d/handler_pipe_to_file.json`.
 
 ~~~ json
 {
@@ -62,13 +64,13 @@ Here is an example that uses `mailx` to email the event data.
 }
 ~~~
 
-*Warning*: These trivial handlers will not respect the popular `refresh` 
-and `occurences` settings in the 
+*Warning*: These trivial handlers will not respect the popular `refresh`
+and `occurences` settings in the
 [check definition](checks#common-custom-check-definitions).
 
 If you need occurence filtering, advanced handler that takes advantage
 of the `sensu-plugin` gem that can filter. See the available handlers
-in the 
+in the
 [sensu-community-plugins](https://github.com/sensu/sensu-community-plugins/tree/master/handlers)
 repo for more non-trivial examples.
 
@@ -210,7 +212,7 @@ Handlers have the option to only handle events of a particular severity.
 For example, the PagerDuty handler should only be used when an event has
 a `CRITICAL` check exit status `2` or is `OK` and resolving an event `0`.
 
-*Note*: Sensu-server will always send events with the severity of OK to 
+*Note*: Sensu-server will always send events with the severity of OK to
 handlers, regardless of the severity filtering. If your handler must not
 recieve OK events, it must filter in handler code.
 
@@ -228,3 +230,25 @@ recieve OK events, it must filter in handler code.
   }
 }
 ~~~
+
+## Changing the default handler {#change-default-handler}
+
+In the case that you want to change the default handler, for example if
+you want to get messages on pagerduty when a server goes down,
+you need to create this file on the Sensu server:
+`/etc/sensu/conf.d/handlers_default.json`.
+
+~~~ json
+{
+  "handlers": {
+    "default": {
+      "handlers": [
+        "pagerduty"
+      ],
+      "type": "set"
+    }
+  }
+}
+~~~
+
+Finally, restart Sensu server and Sensu api.
