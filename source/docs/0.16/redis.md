@@ -16,17 +16,32 @@ storing persistent data.
 
 #### Debian 6.x {#install-redis-debian6x}
 
-Add Debian backports to APT sources.
+Add Debian squeeze-backports to APT sources.
 
 ~~~ shell
-echo "deb http://backports.debian.org/debian-backports squeeze-backports main contrib non-free" >> /etc/apt/sources.list
+echo "deb http://http.debian.org/debian-backports squeeze-backports main" >> /etc/apt/sources.list
 ~~~
 
-Install Redis from Debian backports.
+Install Redis from Debian Squeeze backports.
 
 ~~~ shell
 apt-get update
 apt-get -t squeeze-backports install redis-server
+~~~
+
+#### Debian 7.x {#install-redis-debian7x}
+
+Add Debian wheezy-backports to APT sources.
+
+~~~ shell
+echo "deb http://http.debian.org/debian-backports wheezy-backports main" >> /etc/apt/sources.list
+~~~
+
+Install Redis from Debian Wheezy backports.
+
+~~~ shell
+apt-get update
+apt-get -t wheezy-backports install redis-server
 ~~~
 
 #### Ubuntu <= 10.04 {#install-redis-ubuntu-1004-and-earlier}
@@ -64,6 +79,15 @@ yum install redis
 ~~~
 
 Set Redis to start on boot and start it up:
+
+For Debian/Ubuntu:
+
+~~~ shell
+update-rc.d redis-server defaults
+/etc/init.d/redis-server start
+~~~
+
+For CentOS:
 
 ~~~
 /sbin/chkconfig redis on
