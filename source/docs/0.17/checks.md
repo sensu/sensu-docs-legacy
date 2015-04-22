@@ -151,6 +151,18 @@ subscribers
     "subscribers": ["production"]
     ~~~
 
+dependencies
+: description
+  : An array of client_name/check_name values that represent dependencies of the check. If set, handlers will not fire if any of the dependent checks are non-OK.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "dependencies": ["examplehost.domain/example_check", "upstreamhost.domain/other_check"]
+    ~~~
+
 publish
 : description
   : If check requests are published for the check.
