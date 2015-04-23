@@ -12,7 +12,7 @@ sensuEnterprise MODULE-IDENTITY
     "Sean Porter
 
     Telephone: 1-855-99-SENSU
-    Email: support@sensuapp.org
+    Email: helpdesk@sensuapp.com
 
     Sensu Enterprise Information:
       http://www.sensuapp.org/enterprise
