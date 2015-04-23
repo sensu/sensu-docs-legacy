@@ -5,8 +5,15 @@ title: "Install RabbitMQ"
 next:
   url: "install-redis"
   text: "Install Redis"
-info: "Due to the state of flux in Erlang and the Erlang-SSL module, we have been unable to get RabbitMQ and SSL working on Ubuntu platforms < 11.10 and Debian 6.x."
-warning: "Erlang RB14B04 is vulnerable to the POODLE attack. Please upgrade to a more recent version; R16B01 or newer."
+success: "<strong>NOTE:</strong> this is part 1 of 6 steps in the Sensu
+  Installation Guide. For the best results, please make sure to follow the
+  instructions carefully and complete all of the steps in each section before
+  moving on."
+info: "Due to the state of flux in Erlang and the Erlang-SSL module, we have
+  been unable to get RabbitMQ and SSL working on Ubuntu platforms < 11.10 and
+  Debian 6.x."
+warning: "Erlang RB14B04 is vulnerable to the POODLE attack. Please upgrade to a
+  more recent version; R16B01 or newer."
 ---
 
 # Overview

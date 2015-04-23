@@ -5,6 +5,10 @@ title: "Install Sensu Client"
 next:
   url: "install-a-dashboard"
   text: "Install a Dashboard"
+success: "<strong>NOTE:</strong> this is part 5 of 6 steps in the Sensu
+  Installation Guide. For the best results, please make sure to follow the
+  instructions carefully and complete all of the steps in each section before
+  moving on."
 ---
 
 # Overview
