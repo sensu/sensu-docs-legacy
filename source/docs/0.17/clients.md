@@ -242,6 +242,10 @@ critical
     "critical": 90
     ~~~
 
+#### Keepalive custom attributes
+
+Custom check definition attributes may also be included within the `keepalive` scope. The custom attributes will be included in the keepalive check results, which can be used by [event handlers](handlers), e.g. notification routing.
+
 # Manage the client process on Linux
 
 The Sensu client process `sensu-client` is managed with an init script included in the Sensu Core package. The Sensu client init script is able to start/stop/restart the local process.
@@ -441,11 +445,33 @@ sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sens
 
 Start the Sensu Client service from the Services.msc panel or the Command Prompt. Review the C:\opt\sensu\sensu-client.log for errors.
 
+# Client keepalives
+
+## What are client keepalives? {#what-are-client-keepalives}
+
+Sensu client keepalives are messages published to the Sensu transport every 20 seconds, containing the client configuration data. The Sensu client data within keepalives is stored in the Sensu client registry, by Sensu servers or Sensu Enterprise. The client data is used to add context to Sensu [events](events) and to detect Sensu clients in an unhealthy state. If a Sensu client fails to send keepalives, a Sensu server or Sensu Enterprise will detect the stale client data and create a keepalive event. Keepalive events can be used to identify unhealthy machines, network partitions, and event be used to deregister a client from the client registry (e.g. a virtual machine no longer exists).
+
+## What are keepalive checks? {#what-are-keepalive-checks}
+
+Sensu monitors the Sensu client registry for stale client data, detecting clients that have failed to send [client keepalives](#what-are-client-keepalives). A Sensu server or Sensu Enterprise will generate a keepalive check result on the behalf of Sensu clients that have failed to send a keepalive in a configurable amount of time (threshold). A client may fail to publish keepalives for several reasons: machine is down, excessive load, invalid client configuration, network issues, etc.
+
+The following is an example of keepalive check result output.
+
+~~~
+No keepalive sent from client for 73 seconds (>=60)
+~~~
+
+## Client keepalive configuration
+
+Sensu client keepalives are published to the Sensu transport every 20 seconds. The keepalive check can be configured per Sensu client, allowing each Sensu client to have its own alert thresholds and keepalive event handlers. By default, client data is considered stale if a keepalive hasn't be received in `120` seconds (WARNING). By default, keepalive events will be sent to the Sensu handler named `keepalive` if defined, or the `default` handler will be used.
+
+To configure the keepalive check for a Sensu client, please refer to [the client keepalive attributes](#keepalive-attributes)
+
 # Client socket input
 
 Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on `localhost` port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your application, which can be anything) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
 
-The Sensu client socket can be configured per-client using the [client socket attributes](#socket-attributes).
+To configure the Sensu client socket for a client, please refer to [the client socket attributes](#socket-attributes).
 
 ## Example external check result input
 
