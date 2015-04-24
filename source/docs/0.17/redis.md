@@ -25,7 +25,7 @@ You can visit the official Redis website to learn more: [redis.io](http://redis.
 
 # How Sensu uses Redis
 
-Sensu uses Redis for storing persistent data. When running Sensu Core, two Sensu services, the Sensu server and API, require access to the same instance of Redis in order to function. When running Sensu Enterprise, only Sensu Enterprise requires access. Sensu uses Redis to store and access the Sensu client registry, check results, check execution history, and current event data.
+Sensu uses Redis for storing persistent data. When running Sensu Core, the Sensu server and API services (`sensu-server` and `sensu-api`) require access to Redis. When running Sensu Enterprise, only the Sensu Enterprise service (`sensu-enterprise`) requires access. All of the Sensu services for a given Sensu Core or Sensu Enterprise installation that require access to Redis **must use the same instance of Redis**, this includes distributed or HA Sensu Core and Sensu Enterprise configurations. Sensu uses Redis to store and access the Sensu client registry, check results, check execution history, and current event data.
 
 # Anatomy of a Redis connection definition
 
