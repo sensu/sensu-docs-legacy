@@ -306,7 +306,7 @@ handlers
 
 #### Subdue attributes
 
-The following attributes are configured within the `"subdue": {}` handler definition attribute context.
+The following attributes are configured within the `"subdue": {}` handler definition attribute scope.
 
 days
 : description
