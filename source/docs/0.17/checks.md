@@ -277,7 +277,7 @@ subdue
 
 #### Subdue attributes
 
-The following attributes are configured within the `"subdue": {}` check definition attribute context.
+The following attributes are configured within the `"subdue": {}` check definition attribute scope.
 
 at
 : description
