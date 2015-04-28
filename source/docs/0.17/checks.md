@@ -113,6 +113,18 @@ command
     "command": "/etc/sensu/plugins/check-chef-client.rb"
     ~~~
 
+dependencies
+: description
+  : Add a 'dependencies' list to a check definition to specify its dependencies. Dependencies can refer to checks on the same client, or a different client using the syntax client/check
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "dependencies": ["ldap.example.com/ldap", "ssh-service"]
+    ~~~
+
 extension
 : description
   : The name of a Sensu check extension to run instead of a command. This is an _advanced feature_ and is not commonly used.
