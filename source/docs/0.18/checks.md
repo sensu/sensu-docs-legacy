@@ -253,11 +253,13 @@ high_flap_threshold
 
 source
 : description
-  : A string to add context to the check result. Commonly used when the check is querying an external resource for data (e.g. a network switch).
+  : The check source, used to create a [JIT Sensu client](clients#jit-clients) for an external resource (e.g. a network switch).
 : required
   : false
 : type
   : String
+: validated
+  : `/^[\w\.-]+$/`
 : example
   : ~~~ shell
     "source": "switch-dc-01"
