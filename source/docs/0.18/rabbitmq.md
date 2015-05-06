@@ -1,5 +1,5 @@
 ---
-version: 0.17
+version: 0.18
 category: "Reference Docs"
 title: "RabbitMQ Configuration"
 next:

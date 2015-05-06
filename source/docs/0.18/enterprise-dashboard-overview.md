@@ -1,5 +1,5 @@
 ---
-version: 0.17
+version: 0.18
 category: "Enterprise Dashboard Docs"
 title: "Enterprise Dashboard Overview"
 next:

@@ -1,5 +1,5 @@
 ---
-version: "0.17"
+version: "0.18"
 category: "Configuration"
 title: "Event Data (deprecated)"
 info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a

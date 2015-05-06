@@ -67,6 +67,15 @@ alert: "Added in Sensu version 0.9.13+"
 ---
 ~~~
 
+## New Release
+
+To create documentation for a new Sensu release, copy the previous release directory, and find and replace any occurrence of the previous release. The following commands are an example of how this can be done.
+
+~~~ shell
+cp -r source/docs/0.17 source/docs/0.18
+find source/docs/0.18 -type f -exec sed -i 's/0\.17/0\.18/g' {} \;
+~~~
+
 ## License
 The Sensu Documentation is released under the 
 [MIT license][mit-license].

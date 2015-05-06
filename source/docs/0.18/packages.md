@@ -1,5 +1,5 @@
 ---
-version: "0.17"
+version: "0.18"
 category: "Installation"
 title: "Sensu packages (deprecated)"
 info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a

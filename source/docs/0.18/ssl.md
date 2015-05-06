@@ -1,5 +1,5 @@
 ---
-version: 0.17
+version: 0.18
 category: "Reference Docs"
 title: "SSL Configuration"
 ---
@@ -43,7 +43,7 @@ openssl version
 Download the Sensu SSL tool (scripts):
 
 ~~~ shell
-wget http://sensuapp.org/docs/0.17/files/sensu_ssl_tool.tar
+wget http://sensuapp.org/docs/0.18/files/sensu_ssl_tool.tar
 tar -xvf sensu_ssl_tool.tar
 ~~~
 
