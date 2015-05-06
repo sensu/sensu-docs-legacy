@@ -529,9 +529,9 @@ status
 
 Check results can include standard [check definition attributes](checks) (e.g. `handler`), as well as custom attributes to provide additional event context and/or assist in alert routing etc.
 
-# JIT clients
+# Just in Time (JIT) clients {#jit-clients}
 
-Sensu JIT clients are dynamically created clients, added to the client registry, if a client does not already exist for a check result. If a check result includes a check `source`, a JIT client will be created for the source, and the check result will be stored under the newly created client. Sensu JIT clients allow Sensu clients (`sensu-client`) to monitor external resources on their behalf, using check `source` to create a JIT clients for the resources, used to store the execution history and provide context within event data. Client keepalive monitoring is disabled for JIT clients, as they do not have a corresponding "real" Sensu client (`sensu-client`).
+Sensu JIT clients are dynamically created clients, added to the client registry if a client does not already exist for a check result. If a check result includes a check `source`, a JIT client will be created for the source, and the check result will be stored under the newly created client. Sensu JIT clients allow Sensu clients (`sensu-client`) to monitor external resources on their behalf, using check `source` to create a JIT clients for the resources, used to store the execution history and provide context within event data. Client keepalive monitoring is disabled for JIT clients, as they do not have a corresponding "real" Sensu client (`sensu-client`).
 
 By default, JIT client data includes a minimal number of attributes. The following is an example of JIT client data that is added to the registry.
 
