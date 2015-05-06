@@ -93,6 +93,7 @@ HTTP key/value data store.
 
 : response codes
   : - **Success**: 201 (Created)
+    - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
 
 `/stashes/:path` (POST)

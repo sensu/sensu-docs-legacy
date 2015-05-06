@@ -92,6 +92,31 @@ List and delete client(s) information.
     }
     ~~~
 
+`/clients` (POST)
+: desc
+  : Create or update client data (e.g. [Sensu JIT clients](clients#jit-clients)).
+
+: example URL
+  : http://hostname:4567/clients
+
+: payload
+  : ~~~ json
+    {
+        "name": "gateway-router",
+        "address": "192.168.0.1",
+        "subscriptions": [
+            "network",
+            "snmp"
+        ],
+        "environment": "production"
+    }
+    ~~~
+
+: response codes
+  : - **Success**: 201 (Created)
+    - **Malformed**: 400 (Bad Request)
+    - **Error**: 500 (Internal Server Error)
+
 `/clients/:client` (DELETE)
 : desc.
   : Removes a client, resolving its current events. (delayed action)
@@ -128,7 +153,20 @@ List and delete client(s) information.
                 1
             ],
             "last_execution": 1370725352,
-            "last_status": 1
+            "last_status": 1,
+            "last_result": {
+                "name": "chef_client_process",
+                "command": "check-procs -p chef-client -W 1",
+                "subscribers": [
+                    "production"
+                ],
+                "interval": 60,
+                "issued": 1389374667,
+                "executed": 1389374667,
+                "output": "WARNING Found 0 matching processes\n",
+                "status": 1,
+                "duration": 0.005
+            }
         },
         {
             "check": "keepalive",
@@ -137,8 +175,19 @@ List and delete client(s) information.
                 0,
                 0
             ],
-            "last_execution": 1370725351,
-            "last_status": 0
+            "last_execution": 1389374665,
+            "last_status": 0,
+            "last_result": {
+                "name": "keepalive",
+                "thresholds": {
+                    "warning": 120,
+                    "critical": 180
+                },
+                "issued": 1389374665,
+                "executed": 1389374665,
+                "output": "Keepalive sent from client 11 seconds ago",
+                "status": 0
+            }
         }
     ]
     ~~~

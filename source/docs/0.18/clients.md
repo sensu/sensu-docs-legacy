@@ -544,4 +544,4 @@ By default, JIT client data includes a minimal number of attributes. The followi
 }
 ~~~
 
-The Sensu API can be used to update the JIT client data in the registry. To update JIT client data, please refer to the Sensu API reference documentation for the POST /clients endpoint.
+The Sensu API can be used to update the JIT client data in the registry. To update JIT client data, please refer to the [Sensu API reference documentation for the POST /clients endpoint](api-clients).
