@@ -18,6 +18,7 @@ Built-in event handlers:
 - [IRC](#irc) - send notifications to an IRC channel for events
 - [Slack](#slack) - send notifications to a Slack channel for events
 - [HipChat](#hipchat) - send notifications to a HipChat room for events
+- [SNMP](#snmp) - send SNMP traps to a SNMP manager
 - [Flapjack](#flapjack) - relay Sensu check results to Flapjack
 - [EC2](#ec2) - deregister Sensu clients without an allowed EC2 instance state
 - [Chef](#chef) - deregister Sensu clients without an associated Chef node
@@ -526,6 +527,86 @@ timeout
 : example
   : ~~~ shell
     "timeout": 30
+    ~~~
+
+## SNMP
+
+Send SNMPv1 traps to a SNMP manager.
+
+Sensu Enterprise provides two SNMP MIBs (management information base) for this integration. The SNMP manager that will be receiving SNMP traps from Sensu Enterprise should load both of the provided MIBs. The Sensu Enterprise SNMP MIB files can be altered to better fit certain environments and SNMP configurations.
+
+- [SENSU-ENTERPRISE-ROOT-MIB.txt](http://sensuapp.org/docs/0.18/files/SENSU-ENTERPRISE-ROOT-MIB.txt)
+
+- [SENSU-ENTERPRISE-NOTIFY-MIB.txt](http://sensuapp.org/docs/0.18/files/SENSU-ENTERPRISE-NOTIFY-MIB.txt)
+
+The following is an example global configuration for the `snmp` enterprise event handler (integration).
+
+~~~ json
+{
+  "snmp": {
+    "host": "8.8.8.8",
+    "port": 162,
+    "community": "public"
+  }
+}
+~~~
+
+### Definition attributes
+
+snmp
+: description
+  : A set of attributes that configure the SNMP event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "snmp": {}
+    ~~~
+
+#### SNMP attributes
+
+host
+: description
+  : The SNMP manager host address.
+: required
+  : false
+: type
+  : String
+: default
+  : `127.0.0.1`
+: example
+  : ~~~ shell
+    "host": "8.8.8.8"
+    ~~~
+
+port
+: description
+  : The SNMP manager trap port (UDP).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `162`
+: example
+  : ~~~ shell
+    "port": 162
+    ~~~
+
+community
+: description
+  : The SNMP community string to use when sending traps.
+: required
+  : false
+: type
+  : String
+: default
+  : `public`
+: example
+  : ~~~ shell
+    "community": "private"
     ~~~
 
 ## Flapjack

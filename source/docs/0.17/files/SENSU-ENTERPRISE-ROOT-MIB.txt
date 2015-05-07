@@ -22,7 +22,7 @@ sensuEnterprise MODULE-IDENTITY
   REVISION "201504200000Z" -- April 20, 2015
   DESCRIPTION
     "Initial Version"
-  ::= {enterprises 45715}
+  ::= {enterprises 45717}
 
 --
 -- Textual Conventions
