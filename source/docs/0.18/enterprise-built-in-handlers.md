@@ -23,6 +23,7 @@ Built-in event handlers:
 - [Chef](#chef) - deregister Sensu clients without an associated Chef node
 - [Graphite](#graphite) - send metrics to Graphite
 - [Librato](#librato) - send metrics to Librato Metrics
+- [InfluxDB](#influxdb) - send metrics to InfluxDB
 
 The following is an example of how to configure a Sensu check to use the built-in `email` enterprise handler (integration).
 
@@ -1083,4 +1084,121 @@ api_key
 : example
   : ~~~ shell
     "api_key": "90SHpjPOFqd2YJFIX9rzDq7ik6CiDmqu2AvqcXJAX3buIwcOGqIOgNilwKMjpStO"
+    ~~~
+
+## InfluxDB
+
+Send metrics to InfluxDB using the HTTP API.
+
+The following is an example global configuration for the `influxdb` enterprise handler (integration).
+
+~~~ json
+{
+  "influxdb": {
+    "host": "8.8.8.8",
+    "port": 8086,
+    "username": "root",
+    "password": "Bfw3Bdrn5WfqvOl1"
+  }
+}
+~~~
+
+### Definition attributes
+
+influxdb
+: description
+  : A set of attributes that configure the InfluxDB event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "influxdb": {}
+    ~~~
+
+#### InfluxDB attributes
+
+host
+: description
+  : The InfluxDB host address.
+: required
+  : false
+: type
+  : String
+: default
+  : `127.0.0.1`
+: example
+  : ~~~ shell
+    "host": "8.8.8.8"
+    ~~~
+
+port
+: description
+  : The InfluxDB HTTP API port.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `8086`
+: example
+  : ~~~ shell
+    "port": 9096
+    ~~~
+
+username
+: description
+  : The InfluxDB username.
+: required
+  : false
+: type
+  : String
+: default
+  : `root`
+: example
+  : ~~~ shell
+    "username": "sensu"
+    ~~~
+
+password
+: description
+  : The InfluxDB user password.
+: required
+  : false
+: type
+  : String
+: default
+  : `root`
+: example
+  : ~~~ shell
+    "password": "secret"
+    ~~~
+
+database
+: description
+  : The InfluxDB database (name) to use.
+: required
+  : false
+: type
+  : String
+: default
+  : `db`
+: example
+  : ~~~ shell
+    "database": "sensu"
+    ~~~
+
+timeout
+: description
+  : The InfluxDB HTTP API POST timeout (write).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 20
     ~~~
