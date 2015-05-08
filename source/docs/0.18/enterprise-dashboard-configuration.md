@@ -34,6 +34,39 @@ Enterprise Dashboard configuration.
 }
 ~~~
 
+### GitHub Authentication Configuration
+
+The Sensu Enterprise dashboard includes support for using GitHub to authenticate
+via OAuth, and mapping GitHub teams to Sensu Enterprise Dashboard roles.
+
+#### Register an OAuth Application in GitHub
+
+To use GitHub for authentication requires registration of your Sensu Enterprise
+Dashboard as a GitHub "application". Please note the following instructions:
+
+1. To register a GitHub OAuth application, please navigate to your GitHub
+   organization settings page (e.g.
+   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
+   and selection "Applications" => "Register new application".
+
+   ![](img/enterprise-dashboard-github-app.png)
+
+2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
+
+3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
+
+   _NOTE: this URL does not need to be publicly accessible - as long as a user
+   has network access to **both** GitHub.com **and** the callback URL, s/he will
+   be able to authenticate; for example, this will allow users to authenticate
+   to a Sensu Enterprise Dashboard service running on a private network as long
+   as the user has access to the network (e.g. locally or via VPN)._
+
+4. Select "Register application" and note the application Client ID and Client
+   Secret.
+
+   ![](img/enterprise-dashboard-github-secret.png)
+
+
 ### SQL authentication configuration
 
 The following is an example of using SQL authentication (using MySQL) with Sensu
@@ -288,6 +321,33 @@ pass
     "pass": "secret"
     ~~~
 
+github
+: description
+  : A hash of [GitHub authentication attributes](#github-authentication-attributes) to enable
+    GitHub authentication via OAuth. Overrides simple authentication.
+    _NOTE: GitHub authentication is only available in the Sensu Enterprise
+    Dashbaord, not Uchiwa._
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "github": {
+      "clientId": "a8e43af034e7f2608780",
+      "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216",
+      "roles": {
+        "guests": [
+          "myorganization/devs"
+        ],
+        "operators": [
+          "myorganization/owners"
+        ]
+      },
+      "server": "https://github.com"
+    }
+    ~~~
+
 db
 : description
   : A hash of [database connection attributes](#database-connection-attributes)
@@ -303,6 +363,90 @@ db
         "driver": "mymysql",
         "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
     }
+    ~~~
+
+### GitHub authentication attributes
+
+clientId
+: description
+  : The GitHub OAuth Application "Client ID"
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "clientId": "a8e43af034e7f2608780"
+    ~~~
+
+clientSecret
+: description
+  : The GitHub OAuth Application "Client Secret"
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216"
+    ~~~
+
+roles
+: description
+  : A hash of [Role attributes for GitHub Teams](#role-attributes-for-github-teams)
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~shell
+    "roles": {
+      "guests": [
+        "myorganization/devs"
+      ],
+      "operators": [
+        "myorganization/owners"
+      ]
+    }
+    ~~~
+
+server
+: description
+  : The location of the GitHub server you wish to authenticate against.
+    _NOTE: currently, only GitHub.com is supported; there are known issues when
+    attempting to connect to GitHub Enterprise servers that we are working on
+    resolving and should have a fix for soon._
+: example
+  : ~~~shell
+    "server": "https://github.com"`
+    ~~~
+
+#### Role attributes for GitHub Teams
+
+guests
+: description
+  : An array of the GitHub Teams that should be allowed "guest" (i.e.
+    read-only) access.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "guests": ["myorganization/devs"]`
+    ~~~
+
+operators
+: description
+  : An array of the GitHub Teams that should be allowed "operator" (i.e. read +
+    write) access.
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~shell
+    "operators": ["myorganization/owners"]
     ~~~
 
 ### Database connection attributes
