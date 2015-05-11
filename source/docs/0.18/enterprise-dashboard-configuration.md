@@ -336,6 +336,7 @@ github
     "github": {
       "clientId": "a8e43af034e7f2608780",
       "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216",
+      "server": "https://github.com",
       "roles": {
         "guests": [
           "myorganization/devs"
@@ -343,8 +344,7 @@ github
         "operators": [
           "myorganization/owners"
         ]
-      },
-      "server": "https://github.com"
+      }
     }
     ~~~
 
@@ -393,6 +393,17 @@ clientSecret
     "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216"
     ~~~
 
+server
+: description
+  : The location of the GitHub server you wish to authenticate against.
+    _NOTE: currently, only GitHub.com is supported; there are known issues when
+    attempting to connect to GitHub Enterprise servers that we are working on
+    resolving and should have a fix for soon._
+: example
+  : ~~~shell
+    "server": "https://github.com"`
+    ~~~
+
 roles
 : description
   : A hash of [Role attributes for GitHub Teams](#role-attributes-for-github-teams)
@@ -410,17 +421,6 @@ roles
         "myorganization/owners"
       ]
     }
-    ~~~
-
-server
-: description
-  : The location of the GitHub server you wish to authenticate against.
-    _NOTE: currently, only GitHub.com is supported; there are known issues when
-    attempting to connect to GitHub Enterprise servers that we are working on
-    resolving and should have a fix for soon._
-: example
-  : ~~~shell
-    "server": "https://github.com"`
     ~~~
 
 #### Role attributes for GitHub Teams
