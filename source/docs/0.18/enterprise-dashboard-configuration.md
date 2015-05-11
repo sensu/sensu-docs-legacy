@@ -351,6 +351,32 @@ github
     }
     ~~~
 
+ldap
+: description
+  : A hash of [LDAP authentication attributes](#ldap-authentication-attributes)
+    to enable LDAP authentication. Overrides simple authentication.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~shell
+    "ldap": {
+      "server": "localhost",
+      "port": 389,
+      "basedn": "cn=users,dc=domain,dc=tld",
+      "roles": {
+        "guests": [
+          "guests_group"
+        ],
+        "operators": [
+          "operators_group"
+        ]
+      },
+      "security": "none"
+    }
+    ~~~
+
 db
 : description
   : A hash of [database connection attributes](#database-connection-attributes)
@@ -465,6 +491,114 @@ operators
   : ~~~shell
     "operators": ["myorganization/owners"]
     ~~~
+
+### LDAP authentication attributes
+
+This driver is tested with **Microsoft Active Directory** (AD) and should be
+compatible with any LDAP directory.
+
+server
+: description
+  : **IP address** or **FQDN** of the LDAP directory or the Microsoft Active
+    Directory domain controller.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "server": "localhost"
+    ~~~
+
+port
+: description
+  : Port of the LDAP/AD service (usually `389` or `636`)
+: required
+  : true
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "port": 389
+    ~~~
+
+basedn
+: description
+  : Tells which part of the directory tree to search. For example,
+    `cn=users,dc=domain,dc=tld` will search into all `users` of the
+    `domain.tld` directory.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "basedn": "cn=users,dc=domain,dc=tld"
+    ~~~
+
+security
+: description
+  : Determines the encryption type to be used for the connection to the LDAP
+    server.
+: required
+  : true
+: type
+  : String
+: allowed values
+  : `none`, `starttls`, or `tls`
+: example
+  : ~~~ shell
+    "security": "none"
+    ~~~
+
+roles
+: description
+  : A hash of [Role attributes for LDAP groups](#role-attributes-for-ldap-groups)
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "roles": {
+      "guests": [
+        "guests_group"
+      ],
+      "operators": [
+        "operators_group"
+      ]
+    }
+    ~~~
+
+#### Role attributes for LDAP groups
+
+guests
+: description
+  : An array of LDAP groups that should be allowed "guest" (i.e. read-only)
+    access.
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~ shell
+    "guests": ["guests_group"]
+    ~~~
+
+operators
+: description
+  : An array of LDAP groups that should be allowed "guest" (i.e. read + write)
+    access.
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~ shell
+    "operators": ["operators_group"]
+    ~~~
+
+
 
 ### Database connection attributes
 
