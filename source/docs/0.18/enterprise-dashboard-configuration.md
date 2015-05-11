@@ -399,6 +399,10 @@ server
     _NOTE: currently, only GitHub.com is supported; there are known issues when
     attempting to connect to GitHub Enterprise servers that we are working on
     resolving and should have a fix for soon._
+: required
+  : true
+: type
+  : String
 : example
   : ~~~shell
     "server": "https://github.com"`
