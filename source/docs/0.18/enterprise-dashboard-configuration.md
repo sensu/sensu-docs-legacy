@@ -9,7 +9,10 @@ next:
 
 # Overview
 
-This documentation is based on the [Uchiwa documentation](http://uchiwa.readthedocs.org/en/latest/).
+This reference document provides information to help you:
+
+* Configure the Sensu Enterprise Dashboard
+* Enable optional access controls
 
 ## Example configurations
 
