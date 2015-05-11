@@ -370,6 +370,7 @@ db
 clientId
 : description
   : The GitHub OAuth Application "Client ID"
+    _NOTE: requires [registration of an OAuth application in GitHub](#register-an-oauth-application-in-github)._
 : required
   : true
 : type
@@ -382,6 +383,7 @@ clientId
 clientSecret
 : description
   : The GitHub OAuth Application "Client Secret"
+  _NOTE: requires [registration of an OAuth application in GitHub](#register-an-oauth-application-in-github)._
 : required
   : true
 : type
