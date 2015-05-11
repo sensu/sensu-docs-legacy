@@ -433,6 +433,10 @@ guests
   : false
 : type
   : Array
+: allowed values
+  : any valid `organization/team` pair. For example, the team located at
+    [https://github.com/orgs/sensu/teams/owners](https://github.com/orgs/sensu/\
+    teams/owners) would be entered as `sensu/owners`.
 : example
   : ~~~shell
     "guests": ["myorganization/devs"]`
@@ -446,6 +450,10 @@ operators
   : true
 : type
   : Array
+: allowed values
+  : any valid `organization/team` pair. For example, the team located at
+    [https://github.com/orgs/sensu/teams/owners](https://github.com/orgs/sensu/\
+    teams/owners) would be entered as `sensu/owners`.
 : example
   : ~~~shell
     "operators": ["myorganization/owners"]
