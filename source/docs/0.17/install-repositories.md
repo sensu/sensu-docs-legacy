@@ -87,7 +87,7 @@ Create the YUM repository configuration file for the Sensu Enterprise Dashboard 
 ~~~ shell
 echo "[sensu-enterprise-dashboard]
 name=sensu-enterprise-dashboard
-baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/$basearch/
+baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/\$basearch/
 gpgcheck=0
 enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise-dashboard.repo
 ~~~
