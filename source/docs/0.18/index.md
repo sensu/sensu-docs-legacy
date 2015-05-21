@@ -21,7 +21,7 @@ hide_toc: true
 * **Windows Guide**
   * [Overview](windows-overview)
   * [Install Sensu MSI](windows-msi-install)
-  * [Configure Sensu on Windows](windows-sensu-configuration)
+  * [Configure Sensu on Windows](windows-service-configuration)
 
 * **Getting Started Guide**
   * [Overview](getting-started)

@@ -18,6 +18,11 @@ hide_toc: true
   * [Install a Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
 
+* **Windows Guide**
+  * [Overview](windows-overview)
+  * [Install Sensu MSI](windows-msi-install)
+  * [Configure Sensu on Windows](windows-service-configuration)
+
 * **Getting Started Guide**
   * [Overview](getting-started)
   * [Getting Started w/ Checks](getting-started-with-checks)
