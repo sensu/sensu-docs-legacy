@@ -340,3 +340,50 @@ exceptions
   : ~~~ shell
     "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
     ~~~
+
+### Sensu plugin attributes
+
+The [Sensu plugin project](https://github.com/sensu-plugins) provides a Ruby library ([sensu-plugin](https://github.com/sensu-plugins/sensu-plugin/)) to help Sensu plugin authors and offer users a variety of features. The sensu-plugin features make use of select custom check definition attributes. When using a [Sensu event handler](handlers) that makes use of the sensu-plugin library, you can configure the following attributes in any check definition.
+
+occurrences
+: description
+  : The number of event occurrences that must occur before an event is handled for the check.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `1`
+: example
+  : ~~~ shell
+    "occurrences": 3
+    ~~~
+
+refresh
+: description
+  : Time in seconds until the event occurrence count is considered reset for the purpose of counting `occurrences`, to allow an event for the check to be handled again. For example, a check with a refresh of `1800` will have its events (recurrences) handled every 30 minutes, to remind users of the issue.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `1800`
+: example
+  : ~~~ shell
+    "refresh": 3600
+    ~~~
+
+dependencies
+: description
+  : An array of check dependencies. Events for the check will not be handled if events exist for one or more of the check dependencies. A check dependency can be a check executed by the same Sensu client (eg. `check_app`), or a client/check pair (eg.`db-01/check_mysql`).
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "dependencies": [
+      "check_app",
+      "db-01/check_mysql"
+    ]
+    ~~~
