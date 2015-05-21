@@ -423,7 +423,7 @@ Edit the Windows service definition for the Sensu client at `C:\opt\sensu\bin\se
     <name>Sensu Client</name>
     <description>This service runs a Sensu client</description>
     <executable>C:\opt\sensu\embedded\bin\ruby</executable>
-    <arguments>C:\opt\sensu\embedded\bin\sensu-client -d C:\etc\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
+    <arguments>C:\opt\sensu\embedded\bin\sensu-client -c C:\opt\sensu\config.json -d C:\opt\sensu\conf.d -l C:\opt\sensu\sensu-client.log</arguments>
   </service>
 ~~~
 
@@ -443,7 +443,7 @@ sc \\HOSTNAME_OR_IP create sensu-client start= delayed-auto binPath= c:\opt\sens
 
 ## Start the service {#start-the-service}
 
-Start the Sensu Client service from the Services.msc panel or the Command Prompt. Review the C:\opt\sensu\sensu-client.log for errors.
+Start the Sensu Client service from the Services.msc panel or the Command Prompt.
 
 # Client keepalives
 
