@@ -18,6 +18,9 @@ hide_toc: true
   * [Install a Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
 
+* **Windows Guide**
+  * [Overview](windows-overview)
+
 * **Getting Started Guide**
   * [Overview](getting-started)
   * [Getting Started w/ Checks](getting-started-with-checks)
