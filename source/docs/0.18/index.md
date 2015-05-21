@@ -20,6 +20,7 @@ hide_toc: true
 
 * **Windows Guide**
   * [Overview](windows-overview)
+  * [Install Sensu MSI](windows-msi-install)
 
 * **Getting Started Guide**
   * [Overview](getting-started)
