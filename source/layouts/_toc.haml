@@ -1,4 +1,12 @@
 %div.tableofcontents
   = stylesheet_link_tag "toc"
   %div.toc.well
-    = partial "/docs/#{current_resource.data.version}/index"
+    %h3.pull-left.hidden-lg Table of Contents
+    %button.collapsed.hidden-lg.pull-right.hamburger-button
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    %div.clearfix
+    %div.toc-collapse
+      = partial "/docs/#{current_resource.data.version}/index"

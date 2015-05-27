@@ -13,4 +13,9 @@ $(document).ready(function() {
   $.each(dts, function(index, dt) {
     $("<hr/>").insertBefore(dt);
   });
+
+  $(".hamburger-button").click(function() {
+    $(this).toggleClass("collapsed");
+    $(".toc-collapse").slideToggle();
+  });
 });
