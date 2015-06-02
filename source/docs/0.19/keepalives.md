@@ -1,5 +1,5 @@
 ---
-version: "0.18"
+version: "0.19"
 category: "Configuration"
 title: "Keepalives (deprecated)"
 info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a

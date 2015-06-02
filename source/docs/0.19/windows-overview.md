@@ -1,5 +1,5 @@
 ---
-version: 0.18
+version: 0.19
 category: "Windows Guide"
 title: "Installing Sensu on Windows: Overview"
 next:

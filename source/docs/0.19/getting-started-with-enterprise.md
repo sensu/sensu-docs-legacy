@@ -1,5 +1,5 @@
 ---
-version: 0.18
+version: 0.19
 category: "Getting Started Guide"
 title: "Getting Started with Sensu Enterprise"
 next:

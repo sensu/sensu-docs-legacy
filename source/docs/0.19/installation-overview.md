@@ -1,5 +1,5 @@
 ---
-version: 0.18
+version: 0.19
 category: "Installation Guide"
 title: "Installing Sensu: Overview"
 next:

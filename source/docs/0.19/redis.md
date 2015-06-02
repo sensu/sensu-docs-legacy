@@ -1,5 +1,5 @@
 ---
-version: 0.18
+version: 0.19
 category: "Reference Docs"
 title: "Redis Configuration"
 next:
