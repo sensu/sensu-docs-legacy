@@ -173,6 +173,20 @@ The `web_application_api` check could depend on a check executed by another Sens
 }
 ~~~
 
+The following is an example of how to apply the `check_dependencies` enterprise filter to a standard Sensu `pipe` handler.
+
+~~~ json
+{
+  "handlers": {
+    "custom_mailer": {
+      "type": "pipe",
+      "command": "custom_mailer.rb",
+      "filter": "check_dependencies"
+    }
+  }
+}
+~~~
+
 ### Definition attributes
 
 dependencies
