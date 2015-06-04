@@ -545,3 +545,39 @@ By default, JIT client data includes a minimal number of attributes. The followi
 ~~~
 
 The Sensu API can be used to update the JIT client data in the registry. To update JIT client data, please refer to the [Sensu API reference documentation for the POST /clients endpoint](api-clients).
+
+# Round-robin client subscriptions
+
+Round-robin client subscriptions allow checks to be executed on a single client within a subscription, in a round-robin fashion. To create a round-robin client subscription, prepend the subscription name with `roundrobin:`, e.g. `roundrobin:elasticsearch`. Any check that targets the `roundrobin:elasticsearch` subscription will have its check requests sent to clients in a round-robin fashion.
+
+The following is a Sensu client definition that includes a round-robin subscription.
+
+~~~ json
+{
+  "client": {
+    "name": "i-424242",
+    "address": "8.8.8.8",
+    "subscriptions": [
+      "production",
+      "webserver",
+      "roundrobin:webserver"
+    ]
+  }
+}
+~~~
+
+The following is a Sensu check definition that targets a round-robin subscription.
+
+~~~ json
+{
+  "checks": {
+    "web_application_api": {
+      "command": "check-http.rb -u https://localhost:8080/api/v1/health",
+      "subscribers": [
+        "roundrobin:webserver"
+      ],
+      "interval": 20
+    }
+  }
+}
+~~~
