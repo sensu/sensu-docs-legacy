@@ -19,6 +19,7 @@ Built-in event handlers:
 - [Slack](#slack) - send notifications to a Slack channel for events
 - [HipChat](#hipchat) - send notifications to a HipChat room for events
 - [SNMP](#snmp) - send SNMP traps to a SNMP manager
+- [DataDog](#datadog) - create Datadog events
 - [Flapjack](#flapjack) - relay Sensu check results to Flapjack
 - [EC2](#ec2) - deregister Sensu clients without an allowed EC2 instance state
 - [Chef](#chef) - deregister Sensu clients without an associated Chef node
@@ -607,6 +608,63 @@ community
 : example
   : ~~~ shell
     "community": "private"
+    ~~~
+
+## Datadog
+
+Create Datadog events for Sensu events. After [managing your Datadog account API key](https://app.datadoghq.com/account/login?next=%2Faccount%2Fsettings#api), configure the handler (integration) with your API key.
+
+The following is an example global configuration for the `datadog` enterprise event handler (integration).
+
+~~~ json
+{
+  "datadog": {
+    "api_key": "9775a026f1ca7d1c6c5af9d94d9595a4",
+    "timeout": 10
+  }
+}
+~~~
+
+### Definition attributes
+
+datadog
+: description
+  : A set of attributes that configure the Datadog event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "datadog": {}
+    ~~~
+
+#### Datadog attributes
+
+api_key
+: description
+  : The Datadog account API key to use when creating Datadog events.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "api_key": "9775a026f1ca7d1c6c5af9d94d9595a4"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
     ~~~
 
 ## Flapjack
