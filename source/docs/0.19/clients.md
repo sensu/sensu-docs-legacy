@@ -548,7 +548,7 @@ The Sensu API can be used to update the JIT client data in the registry. To upda
 
 # Round-robin client subscriptions
 
-Round-robin client subscriptions allow checks to be executed on a single client within a subscription, in a round-robin fashion. To create a round-robin client subscription, prepend the subscription name with `roundrobin:`, e.g. `roundrobin:elasticsearch`. Any check that targets the `roundrobin:elasticsearch` subscription will have its check requests sent to clients in a round-robin fashion.
+Round-robin client subscriptions allow checks to be executed on a single client within a subscription, in a round-robin fashion. To create a round-robin client subscription, prepend the subscription name with `roundrobin:`, e.g. `roundrobin:elasticsearch`. Any check that targets the `roundrobin:elasticsearch` subscription will have its check requests sent to clients in a round-robin fashion, meaning only one member (client) in the subscription will execute a roundrobin check each time it is published.
 
 The following is a Sensu client definition that includes a round-robin subscription.
 
