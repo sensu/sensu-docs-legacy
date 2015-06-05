@@ -48,6 +48,7 @@ hide_toc: true
   * [Clients API](api-clients)
   * [Checks API](api-checks)
   * [Events API](api-events)
+  * [Results API](api-results)
   * [Aggregates API](api-aggregates)
   * [Stashes API](api-stashes)
   * [Health API](api-health)
