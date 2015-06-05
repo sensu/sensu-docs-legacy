@@ -131,9 +131,9 @@ Multiple enterprise filters can be applied to standard Sensu event handlers. The
 }
 ~~~
 
-## check_ dependencies
+## check_dependencies
 
-The `check_dependencies` enterprise filter is used to filter events when an event already exists for a check dependency. Check dependencies can be defined in the check definition, using `dependencies`, an array of checks (e.g. `check_app`) or Sensu client/check pairs (e.g. `db-01/check_mysql`).
+The `check_dependencies` enterprise filter is used to filter events when an event already exists for a defined check dependency, enabling the user to reduce notification noise and only be notified for the "root cause" of a given failure. Check dependencies can be defined in the check definition, using `dependencies`, an array of checks (e.g. `check_app`) or Sensu client/check pairs (e.g. `db-01/check_mysql`).
 
 The following is an example of how to configure a check dependency for a check. The example check monitors a web application API and has a dependency on another check that monitors the local MySQL database.
 
