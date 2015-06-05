@@ -15,7 +15,7 @@ List current check results.
 
 `/results` (GET)
 : desc
-  : Returns a list of current check results.
+  : Returns a list of current check results for all clients.
 
 : example url
   : http://hostname:4567/results
