@@ -250,6 +250,32 @@ critical
 
 Custom check definition attributes may also be included within the `keepalive` scope. The custom attributes will be included in the keepalive check results, which can be used by [event handlers](handlers), e.g. notification routing.
 
+# Custom client attributes
+
+Custom client definition attributes may be included to add additional information about the Sensu client and the services that run on its machine. Custom client attributes will be included in [event data](events) and can be used with check command token substitution.
+
+The following is an example Sensu client definition that has custom attributes for MySQL.
+
+~~~ json
+{
+  "client": {
+    "name": "i-424242",
+    "address": "8.8.8.8",
+    "subscriptions": [
+      "production",
+      "webserver",
+      "mysql"
+    ],
+    "mysql": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "user": "app",
+      "password": "secret"
+    }
+  }
+}
+~~~
+
 # Manage the client process on Linux
 
 The Sensu client process `sensu-client` is managed with an init script included in the Sensu Core package. The Sensu client init script is able to start/stop/restart the local process.
