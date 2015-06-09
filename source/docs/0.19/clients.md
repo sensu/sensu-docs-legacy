@@ -146,6 +146,8 @@ keepalive
 
 #### Socket attributes
 
+The following attributes are configured within the `"socket": {}` client definition attribute scope.
+
 bind
 : description
   : The address to bind the Sensu client socket to.
@@ -175,6 +177,8 @@ port
     ~~~
 
 #### Keepalive attributes
+
+The following attributes are configured within the `"keepalive": {}` client definition attribute scope.
 
 handler
 : description
