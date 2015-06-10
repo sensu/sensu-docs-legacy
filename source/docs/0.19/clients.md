@@ -304,7 +304,7 @@ To configure the keepalive check for a Sensu client, please refer to [the client
 
 # Client socket input
 
-Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on `localhost` port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your application, which can be anything) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
+Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on `localhost` port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your web application, backup scripts, etc.) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
 
 To configure the Sensu client socket for a client, please refer to [the client socket attributes](#socket-attributes).
 
@@ -320,6 +320,22 @@ Netcat can also be used, instead of the TCP file:
 
 ~~~ shell
 echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
+~~~
+
+## Creating a "dead man's switch"
+
+The Sensu client socket(s) in combination with check TTLs can be used to create what's commonly referred to as "dead man's switches". Outside of the software industry, a dead man's switch is a switch that is automatically triggered if a human operator becomes incapacitated (source: [Wikipedia](http://en.wikipedia.org/wiki/Dead_man%27s_switch)). Sensu is more interested in detecting silent failures than incapacited human operators. By using Check TTLs, Sensu is able to set an expectation that a Sensu client will continue to publish results for a check at a regular interval. If a Sensu client fails to publish a check result and the check TTL expires, Sensu will create an event to indicate the silent failure. For more information on check TTLs, please refer to [the check attributes reference documentation](checks#definition-attributes).
+
+A great use case for the Sensu client socket is to create a dead man's switch for backup scripts, to ensure they continue to run successfully at regular intervals. If an external source sends a Sensu check result with a check TTL to the Sensu client socket, Sensu will expect another check result from the same external source before the TTL expires.
+
+The following is an example of external check result input via the Sensu client TCP socket, using a check TTL to create a dead man's switch for MySQL backups. The example uses a check TTL of `25200` seconds (or 7 hours). A MySQL backup script using the following code would be expected to continue to send a check result at least once every 7 hours or Sensu will create an [event](events) to indicate the silent failure.
+
+~~~ shell
+echo '{"name": "backup_mysql", "ttl": 25200, "output": "backed up mysql successfully | size_mb=568", "status": 0}' | nc localhost 3030
+~~~
+
+~~~ shell
+echo '{"name": "backup_mysql", "ttl": 25200, "output": "failed to backup mysql", "status": 1}' | nc localhost 3030
 ~~~
 
 ## Anatomy of a check result
