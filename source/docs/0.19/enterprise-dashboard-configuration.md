@@ -341,8 +341,9 @@ github
 
 ldap
 : description
-  : A hash of [LDAP authentication attributes](#ldap-authentication-attributes)
-    to enable LDAP authentication. Overrides simple authentication.
+  : A hash of [Lightweight Directory Access Protocol (LDAP) authentication
+    attributes](#ldap-authentication-attributes) to enable LDAP authentication.
+    Overrides simple authentication.
 : required
   : false
 : type
@@ -476,7 +477,7 @@ name
 
 members
 : description
-  : An array of the GitHub Teams that should be allowed access.
+  : An array of the GitHub Teams that should be included as members of the role.
 : required
   : true
 : type
@@ -492,7 +493,12 @@ members
 
 datacenters
 : description
-  : An array of the datacenters that the role has only access to.
+  : An array of the `datacenters` (i.e. matching a defined [Sensu API endpoint
+    `name`](#sensu-api-endpoint-attributes) value) that members of the role
+    should have access to. Provided values will be used to filter which
+    `datacenters` members of the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all configured `datacenters`._
 : required
   : false
 : type
@@ -504,7 +510,11 @@ datacenters
 
 subscriptions
 : description
-  : An array of the subscriptions that the role has only access to.
+  : An array of the subscriptions that members of the role should have access
+    to. Provided values will be used to filter which subscriptions members of
+    the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all subscriptions._  
 : required
   : false
 : type
@@ -516,7 +526,8 @@ subscriptions
 
 readonly
 : description
-  : Determines whether or not to allow read-only access.
+  : Used to restrict "write" access (i.e. preventing members of the role from
+    being able to create stashes, silence checks, etc).
 : required
   : false
 : type
@@ -531,7 +542,7 @@ readonly
 ### LDAP authentication attributes
 
 This driver is tested with **Microsoft Active Directory** (AD) and should be
-compatible with any LDAP directory.
+compatible with any Lightweight Directory Access Protocol (LDAP) provider.
 
 server
 : description
@@ -636,11 +647,13 @@ name
 
 members
 : description
-  : An array of LDAP groups that should be allowed access.
+  : An array of LDAP groups that should be included as members of the role.
 : required
   : true
 : type
   : Array
+: allowed values
+  : any LDAP group name
 : example
   : ~~~shell
     "members": ["guests_group"]
@@ -648,7 +661,12 @@ members
 
 datacenters
 : description
-  : An array of the datacenters that the role has only access to.
+  : An array of the `datacenters` (i.e. matching a defined [Sensu API endpoint
+    `name`](#sensu-api-endpoint-attributes) value) that members of the role
+    should have access to. Provided values will be used to filter which
+    `datacenters` members of the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all configured `datacenters`._
 : required
   : false
 : type
@@ -660,7 +678,11 @@ datacenters
 
 subscriptions
 : description
-  : An array of the subscriptions that the role has only access to.
+  : An array of the subscriptions that members of the role should have access
+    to. Provided values will be used to filter which subscriptions members of
+    the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all subscriptions._  
 : required
   : false
 : type
@@ -672,7 +694,8 @@ subscriptions
 
 readonly
 : description
-  : Determines whether or not to allow read-only access.
+  : Used to restrict "write" access (i.e. preventing members of the role from
+    being able to create stashes, silence checks, etc).
 : required
   : false
 : type
