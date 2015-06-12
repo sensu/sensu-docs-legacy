@@ -106,11 +106,11 @@ dashboard
     }
     ~~~
 
-## Sensu attributes
+## Sensu API endpoint attributes
 
 name
 : description
-  : The name of the Sensu API (used as datacenter name).
+  : The name of the Sensu API (used elsewhere as the `datacenter` name).
 : required
   : false
 : type
@@ -119,7 +119,7 @@ name
   : randomly generated
 : example
   : ~~~ shell
-    "name": "Datacenter 1"
+    "name": "us-west-1"
     ~~~
 
 host
