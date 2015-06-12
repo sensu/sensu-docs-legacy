@@ -12,7 +12,10 @@ next:
 This reference document provides information to help you:
 
 * Configure the Sensu Enterprise Dashboard
-* Enable optional access controls
+* Enable and configure the optional [Role-Based Access Controls
+  (RBAC)](#role-based-access-controls-rbac)
+  * Configure the [GitHub driver for RBAC](#github-driver-for-rbac)
+  * Configure the [LDAP driver for RBAC](#ldap-driver-for-rbac)
 
 ## Example configurations
 
@@ -350,7 +353,19 @@ ldap
     }
     ~~~
 
-### GitHub authentication attributes
+## Role-Based Access Controls (RBAC)
+
+The Sensu Enterprise Dashboard provides comprehensive and granular Role-Based
+Access Controls (RBAC)
+
+### GitHub Driver for RBAC
+
+The Sensu Enterprise Dashboard ships with integrated support for using
+[GitHub.com](https://github.com) or a [GitHub Enterprise](https://\
+enterprise.github.com/home) installation for RBAC authentication. Please note
+the following configuration attributes for configuring the GitHub driver:
+
+#### GitHub authentication attributes
 
 clientId
 : description
@@ -507,10 +522,48 @@ readonly
     "readonly": true
     ~~~
 
+#### Register an OAuth Application in GitHub
+
+To use GitHub for authentication requires registration of your Sensu Enterprise
+Dashboard as a GitHub "application". Please note the following instructions:
+
+1. To register a GitHub OAuth application, please navigate to your GitHub
+   organization settings page (e.g.
+   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
+   and selection "Applications" => "Register new application".
+
+   ![](img/enterprise-dashboard-github-app.png)
+
+2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
+
+3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
+
+   _NOTE: this URL does not need to be publicly accessible - as long as a user
+   has network access to **both** GitHub.com **and** the callback URL, s/he will
+   be able to authenticate; for example, this will allow users to authenticate
+   to a Sensu Enterprise Dashboard service running on a private network as long
+   as the user has access to the network (e.g. locally or via VPN)._
+
+4. Select "Register application" and note the application Client ID and Client
+   Secret.
+
+   ![](img/enterprise-dashboard-github-secret.png)
+
+
+## LDAP driver for RBAC
+
+The Sensu Enterprise Dashboard ships with integrated support for using a
+Lightweight Directory Access Protocol (LDAP) provider for RBAC authentication.
+The LDAP driver for Sensu Enterprise has been tested with **Microsoft Active
+Directory (AD)**, and should be compatible with any standards-compliant LDAP
+provider. Please note the following configuration attributes for configuring the
+LDAP driver:
+
 ### LDAP authentication attributes
 
 This driver is tested with **Microsoft Active Directory** (AD) and should be
-compatible with any Lightweight Directory Access Protocol (LDAP) provider.
+compatible with any standards-compliant Lightweight Directory Access Protocol
+(LDAP) provider.
 
 server
 : description
@@ -675,35 +728,3 @@ readonly
   : ~~~ shell
     "readonly": true
     ~~~
-
-### GitHub Authentication Configuration
-
-The Sensu Enterprise dashboard includes support for using GitHub to authenticate
-via OAuth, and mapping GitHub teams to Sensu Enterprise Dashboard roles.
-
-#### Register an OAuth Application in GitHub
-
-To use GitHub for authentication requires registration of your Sensu Enterprise
-Dashboard as a GitHub "application". Please note the following instructions:
-
-1. To register a GitHub OAuth application, please navigate to your GitHub
-   organization settings page (e.g.
-   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
-   and selection "Applications" => "Register new application".
-
-   ![](img/enterprise-dashboard-github-app.png)
-
-2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
-
-3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
-
-   _NOTE: this URL does not need to be publicly accessible - as long as a user
-   has network access to **both** GitHub.com **and** the callback URL, s/he will
-   be able to authenticate; for example, this will allow users to authenticate
-   to a Sensu Enterprise Dashboard service running on a private network as long
-   as the user has access to the network (e.g. locally or via VPN)._
-
-4. Select "Register application" and note the application Client ID and Client
-   Secret.
-
-   ![](img/enterprise-dashboard-github-secret.png)
