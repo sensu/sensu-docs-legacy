@@ -340,14 +340,30 @@ github
       "clientId": "a8e43af034e7f2608780",
       "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216",
       "server": "https://github.com",
-      "roles": {
-        "guests": [
-          "myorganization/devs"
-        ],
-        "operators": [
-          "myorganization/owners"
-        ]
-      }
+      "roles": [
+        {
+          "name": "guests",
+          "members": [
+            "myorganization/devs"
+          ],
+          "datacenters": [
+            "us-west-1"
+          ],
+          "subscriptions": [
+            "webserver"
+          ],
+          "readonly": true
+        },
+        {
+          "name": "operators",
+          "members": [
+            "myorganization/owners"
+          ],
+          "datacenters": [],
+          "subscriptions": [],
+          "readonly": false
+        }
+      ]
     }
     ~~~
 
@@ -365,14 +381,31 @@ ldap
       "server": "localhost",
       "port": 389,
       "basedn": "cn=users,dc=domain,dc=tld",
-      "roles": {
-        "guests": [
-          "guests_group"
-        ],
-        "operators": [
-          "operators_group"
-        ]
-      },
+      "roles": [
+        {
+          "name": "guests",
+          "members": [
+            "guests_group"
+          ],
+          "datacenters": [
+            "us-west-1"
+          ],
+          "subscriptions": [
+            "webserver"
+          ],
+          "readonly": true
+        },
+        {
+          "name": "operators",
+          "members": [
+            "operators_group"
+          ],
+          "datacenters": [],
+          "subscriptions": [],
+          "readonly": false
+        }
+      ],
+      "insecure": false,
       "security": "none"
     }
     ~~~
@@ -439,46 +472,56 @@ server
 
 roles
 : description
-  : A hash of [Role attributes for GitHub Teams](#role-attributes-for-github-teams)
+  : An array of [Role attributes for GitHub Teams](#role-attributes-for-github-teams)
 : required
   : true
 : type
-  : Hash
+  : Array
 : example
   : ~~~shell
-    "roles": {
-      "guests": [
-        "myorganization/devs"
-      ],
-      "operators": [
-        "myorganization/owners"
-      ]
-    }
+    "roles": [
+      {
+        "name": "guests",
+        "members": [
+          "guests_group"
+        ],
+        "datacenters": [
+          "us-west-1"
+        ],
+        "subscriptions": [
+          "webserver"
+        ],
+        "readonly": true
+      },
+      {
+        "name": "operators",
+        "members": [
+          "operators_group"
+        ],
+        "datacenters": [],
+        "subscriptions": [],
+        "readonly": false
+      }
+    ]
     ~~~
 
 #### Role attributes for GitHub Teams
 
-guests
+name
 : description
-  : An array of the GitHub Teams that should be allowed "guest" (i.e.
-    read-only) access.
+  : The name of the role.
 : required
-  : false
+  : true
 : type
-  : Array
-: allowed values
-  : any valid `organization/team` pair. For example, the team located at
-    [https://github.com/orgs/sensu/teams/owners](https://github.com/orgs/sensu/\
-    teams/owners) would be entered as `sensu/owners`.
+  : String
 : example
   : ~~~shell
-    "guests": ["myorganization/devs"]`
+    "name": "operators"
     ~~~
 
-operators
+members
 : description
-  : An array of the GitHub Teams that should be allowed "operator" (i.e. read +
-    write) access.
+  : An array of the GitHub Teams that should be allowed access.
 : required
   : true
 : type
@@ -489,7 +532,45 @@ operators
     teams/owners) would be entered as `sensu/owners`.
 : example
   : ~~~shell
-    "operators": ["myorganization/owners"]
+    "members": ["myorganization/devs"]
+    ~~~
+
+datacenters
+: description
+  : An array of the datacenters that the role has only access to.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "datacenters": ["us-west-1"]
+    ~~~
+
+subscriptions
+: description
+  : An array of the subscriptions that the role has only access to.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "subscriptions": ["webserver"]
+    ~~~
+
+readonly
+: description
+  : Determines whether or not to allow read-only access.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "readonly": true
     ~~~
 
 ### LDAP authentication attributes
@@ -536,6 +617,20 @@ basedn
     "basedn": "cn=users,dc=domain,dc=tld"
     ~~~
 
+insecure
+: description
+  : Determines whether or not to accept an insecure SSL certificate.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "insecure": true
+    ~~~
+
 security
 : description
   : Determines the encryption type to be used for the connection to the LDAP
@@ -572,33 +667,67 @@ roles
 
 #### Role attributes for LDAP groups
 
-guests
+name
 : description
-  : An array of LDAP groups that should be allowed "guest" (i.e. read-only)
-    access.
+  : The name of the role.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "name": "operators"
+    ~~~
+
+members
+: description
+  : An array of LDAP groups that should be allowed access.
 : required
   : true
 : type
   : Array
 : example
-  : ~~~ shell
-    "guests": ["guests_group"]
+  : ~~~shell
+    "members": ["guests_group"]
     ~~~
 
-operators
+datacenters
 : description
-  : An array of LDAP groups that should be allowed "guest" (i.e. read + write)
-    access.
+  : An array of the datacenters that the role has only access to.
 : required
-  : true
+  : false
 : type
   : Array
 : example
-  : ~~~ shell
-    "operators": ["operators_group"]
+  : ~~~shell
+    "datacenters": ["us-west-1"]
     ~~~
 
+subscriptions
+: description
+  : An array of the subscriptions that the role has only access to.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "subscriptions": ["webserver"]
+    ~~~
 
+readonly
+: description
+  : Determines whether or not to allow read-only access.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "readonly": true
+    ~~~
 
 ### Database connection attributes
 
