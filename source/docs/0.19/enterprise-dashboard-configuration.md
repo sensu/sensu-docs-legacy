@@ -25,7 +25,7 @@ Enterprise Dashboard configuration.
 {
   "sensu": [
     {
-      "name": "Site 1",
+      "name": "sensu-server-1",
       "host": "api1.example.com",
       "port": 4567
     }
@@ -50,7 +50,7 @@ sensu
   : ~~~ shell
     "sensu": [
         {
-            "name": "API Name",
+            "name": "sensu-server-1",
             "host": "127.0.0.1",
             "port": 4567
         }
