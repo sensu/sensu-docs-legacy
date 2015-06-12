@@ -395,7 +395,8 @@ server
 
 roles
 : description
-  : An array of [Role attributes for GitHub Teams](#role-attributes-for-github-teams)
+  : An array of [Role attributes for GitHub
+    Teams](#role-attributes-for-github-teams)
 : required
   : true
 : type
