@@ -70,39 +70,11 @@ Dashboard as a GitHub "application". Please note the following instructions:
    ![](img/enterprise-dashboard-github-secret.png)
 
 
-### SQL authentication configuration
-
-The following is an example of using SQL authentication (using MySQL) with Sensu
-Enterprise Dashboard. See
-[database connection attributes](#database-connection-attributes) for more
-information on SQL configuration.
-
-~~~ json
-{
-  "sensu": [
-    {
-      "name": "Site 1",
-      "host": "api1.example.com",
-      "port": 4567
-    }
-  ],
-  "dashboard": {
-    "host": "0.0.0.0",
-    "port": 3000,
-    "db": {
-      "driver": "mymysql",
-      "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
-    }
-  }
-}
-~~~
-
-
 # Configuration attributes
 
 sensu
 : description
-  : An array of hashes containing [Sensu API endpoint attributes](#sensu-attributes).
+  : An array of hashes containing [Sensu API endpoint attributes](#sensu-api-endpoint-attributes).
 : required
   : true
 : type
