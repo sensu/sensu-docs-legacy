@@ -37,39 +37,6 @@ Enterprise Dashboard configuration.
 }
 ~~~
 
-### GitHub Authentication Configuration
-
-The Sensu Enterprise dashboard includes support for using GitHub to authenticate
-via OAuth, and mapping GitHub teams to Sensu Enterprise Dashboard roles.
-
-#### Register an OAuth Application in GitHub
-
-To use GitHub for authentication requires registration of your Sensu Enterprise
-Dashboard as a GitHub "application". Please note the following instructions:
-
-1. To register a GitHub OAuth application, please navigate to your GitHub
-   organization settings page (e.g.
-   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
-   and selection "Applications" => "Register new application".
-
-   ![](img/enterprise-dashboard-github-app.png)
-
-2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
-
-3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
-
-   _NOTE: this URL does not need to be publicly accessible - as long as a user
-   has network access to **both** GitHub.com **and** the callback URL, s/he will
-   be able to authenticate; for example, this will allow users to authenticate
-   to a Sensu Enterprise Dashboard service running on a private network as long
-   as the user has access to the network (e.g. locally or via VPN)._
-
-4. Select "Register application" and note the application Client ID and Client
-   Secret.
-
-   ![](img/enterprise-dashboard-github-secret.png)
-
-
 # Configuration attributes
 
 sensu
@@ -706,3 +673,35 @@ readonly
   : ~~~ shell
     "readonly": true
     ~~~
+
+### GitHub Authentication Configuration
+
+The Sensu Enterprise dashboard includes support for using GitHub to authenticate
+via OAuth, and mapping GitHub teams to Sensu Enterprise Dashboard roles.
+
+#### Register an OAuth Application in GitHub
+
+To use GitHub for authentication requires registration of your Sensu Enterprise
+Dashboard as a GitHub "application". Please note the following instructions:
+
+1. To register a GitHub OAuth application, please navigate to your GitHub
+   organization settings page (e.g.
+   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
+   and selection "Applications" => "Register new application".
+
+   ![](img/enterprise-dashboard-github-app.png)
+
+2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
+
+3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
+
+   _NOTE: this URL does not need to be publicly accessible - as long as a user
+   has network access to **both** GitHub.com **and** the callback URL, s/he will
+   be able to authenticate; for example, this will allow users to authenticate
+   to a Sensu Enterprise Dashboard service running on a private network as long
+   as the user has access to the network (e.g. locally or via VPN)._
+
+4. Select "Register application" and note the application Client ID and Client
+   Secret.
+
+   ![](img/enterprise-dashboard-github-secret.png)
