@@ -382,23 +382,6 @@ ldap
     }
     ~~~
 
-db
-: description
-  : A hash of [database connection attributes](#database-connection-attributes)
-    to enable SQL authentication. Overrides simple authentication.
-    _NOTE: This is only available in Sensu Enterprise Dashboard, not Uchiwa._
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    "db": {
-        "driver": "mymysql",
-        "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
-    }
-    ~~~
-
 ### GitHub authentication attributes
 
 clientId
@@ -699,75 +682,4 @@ readonly
 : example
   : ~~~ shell
     "readonly": true
-    ~~~
-
-### Database connection attributes
-
-_NOTE: a default user of `admin` will automatically be created with the password
-`sensu`. This user will be created when the Sensu Enterprise Dashboard service
-starts._
-
-_NOTE: when using the `mymysql` or `postgres` drivers, you must first create the
-database you specify._
-
-driver
-: description
-  : The name of the database driver to use for SQL authentication.
-: required
-  : true
-: type
-  : String
-: allowed values
-  : - `mymysql` - For MySQL
-    - `postgres` - For PostgreSQL (versions >= 9.x)
-    - `sqlite3` - For SQLite
-: example
-  : ~~~ shell
-    "driver": "postgres"
-    ~~~
-
-scheme
-: description
-  : The scheme to use to connect to the corresponding database driver.
-    _NOTE: use the [scheme syntax](#scheme-syntax) that corresponds with the
-    database driver you choose._
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "scheme": "dashboard.db"
-    ~~~
-
-#### Scheme syntax
-
-mymysql
-: syntax
-  : ~~~ shell
-    "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
-    ~~~
-: example
-  : ~~~ shell
-    "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
-    ~~~
-
-postgres
-: syntax
-  : ~~~ shell
-    "scheme": "user=USERNAME dbname=DB_NAME host=HOST password=PASSWORD sslmode=disable"
-    ~~~
-: example
-  : ~~~ shell
-    "scheme": "user=postgres dbname=sensu host=127.0.0.1 password=mypassword sslmode=disable"
-    ~~~
-
-sqlite3
-: syntax
-  : ~~~ shell
-    "scheme": "FILENAME.db"
-    ~~~
-: example
-  : ~~~ shell
-    "scheme": "sensu.db"
     ~~~
