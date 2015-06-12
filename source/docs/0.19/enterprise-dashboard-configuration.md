@@ -553,7 +553,8 @@ basedn
 
 insecure
 : description
-  : Determines whether or not to accept an insecure SSL certificate.
+  : Determines whether or not to skip SSL certificate verification (e.g. for
+    self-signed certificates).
 : required
   : false
 : type
