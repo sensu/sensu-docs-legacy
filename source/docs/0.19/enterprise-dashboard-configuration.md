@@ -12,7 +12,10 @@ next:
 This reference document provides information to help you:
 
 * Configure the Sensu Enterprise Dashboard
-* Enable optional access controls
+* Enable and configure the optional [Role-Based Access Controls
+  (RBAC)](#role-based-access-controls-rbac)
+  * Configure the [GitHub driver for RBAC](#github-driver-for-rbac)
+  * Configure the [LDAP driver for RBAC](#ldap-driver-for-rbac)
 
 ## Example configurations
 
@@ -25,7 +28,7 @@ Enterprise Dashboard configuration.
 {
   "sensu": [
     {
-      "name": "Site 1",
+      "name": "sensu-server-1",
       "host": "api1.example.com",
       "port": 4567
     }
@@ -37,72 +40,11 @@ Enterprise Dashboard configuration.
 }
 ~~~
 
-### GitHub Authentication Configuration
-
-The Sensu Enterprise dashboard includes support for using GitHub to authenticate
-via OAuth, and mapping GitHub teams to Sensu Enterprise Dashboard roles.
-
-#### Register an OAuth Application in GitHub
-
-To use GitHub for authentication requires registration of your Sensu Enterprise
-Dashboard as a GitHub "application". Please note the following instructions:
-
-1. To register a GitHub OAuth application, please navigate to your GitHub
-   organization settings page (e.g.
-   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
-   and selection "Applications" => "Register new application".
-
-   ![](img/enterprise-dashboard-github-app.png)
-
-2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
-
-3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
-
-   _NOTE: this URL does not need to be publicly accessible - as long as a user
-   has network access to **both** GitHub.com **and** the callback URL, s/he will
-   be able to authenticate; for example, this will allow users to authenticate
-   to a Sensu Enterprise Dashboard service running on a private network as long
-   as the user has access to the network (e.g. locally or via VPN)._
-
-4. Select "Register application" and note the application Client ID and Client
-   Secret.
-
-   ![](img/enterprise-dashboard-github-secret.png)
-
-
-### SQL authentication configuration
-
-The following is an example of using SQL authentication (using MySQL) with Sensu
-Enterprise Dashboard. See
-[database connection attributes](#database-connection-attributes) for more
-information on SQL configuration.
-
-~~~ json
-{
-  "sensu": [
-    {
-      "name": "Site 1",
-      "host": "api1.example.com",
-      "port": 4567
-    }
-  ],
-  "dashboard": {
-    "host": "0.0.0.0",
-    "port": 3000,
-    "db": {
-      "driver": "mymysql",
-      "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
-    }
-  }
-}
-~~~
-
-
 # Configuration attributes
 
 sensu
 : description
-  : An array of hashes containing [Sensu API endpoint attributes](#sensu-attributes).
+  : An array of hashes containing [Sensu API endpoint attributes](#sensu-api-endpoint-attributes).
 : required
   : true
 : type
@@ -111,7 +53,7 @@ sensu
   : ~~~ shell
     "sensu": [
         {
-            "name": "API Name",
+            "name": "sensu-server-1",
             "host": "127.0.0.1",
             "port": 4567
         }
@@ -134,11 +76,11 @@ dashboard
     }
     ~~~
 
-## Sensu attributes
+## Sensu API endpoint attributes
 
 name
 : description
-  : The name of the Sensu API (used as datacenter name).
+  : The name of the Sensu API (used elsewhere as the `datacenter` name).
 : required
   : false
 : type
@@ -147,7 +89,7 @@ name
   : randomly generated
 : example
   : ~~~ shell
-    "name": "Datacenter 1"
+    "name": "us-west-1"
     ~~~
 
 host
@@ -328,8 +270,8 @@ github
 : description
   : A hash of [GitHub authentication attributes](#github-authentication-attributes) to enable
     GitHub authentication via OAuth. Overrides simple authentication.
-    _NOTE: GitHub authentication is only available in the Sensu Enterprise
-    Dashbaord, not Uchiwa._
+    _NOTE: GitHub authentication is only available in the [Sensu
+    Enterprise](https://sensuapp.org/enterprise) Dashbaord._
 : required
   : false
 : type
@@ -340,21 +282,38 @@ github
       "clientId": "a8e43af034e7f2608780",
       "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216",
       "server": "https://github.com",
-      "roles": {
-        "guests": [
-          "myorganization/devs"
-        ],
-        "operators": [
-          "myorganization/owners"
-        ]
-      }
+      "roles": [
+        {
+          "name": "guests",
+          "members": [
+            "myorganization/devs"
+          ],
+          "datacenters": [
+            "us-west-1"
+          ],
+          "subscriptions": [
+            "webserver"
+          ],
+          "readonly": true
+        },
+        {
+          "name": "operators",
+          "members": [
+            "myorganization/owners"
+          ],
+          "datacenters": [],
+          "subscriptions": [],
+          "readonly": false
+        }
+      ]
     }
     ~~~
 
 ldap
 : description
-  : A hash of [LDAP authentication attributes](#ldap-authentication-attributes)
-    to enable LDAP authentication. Overrides simple authentication.
+  : A hash of [Lightweight Directory Access Protocol (LDAP) authentication
+    attributes](#ldap-authentication-attributes) to enable LDAP authentication.
+    Overrides simple authentication.
 : required
   : false
 : type
@@ -365,36 +324,58 @@ ldap
       "server": "localhost",
       "port": 389,
       "basedn": "cn=users,dc=domain,dc=tld",
-      "roles": {
-        "guests": [
-          "guests_group"
-        ],
-        "operators": [
-          "operators_group"
-        ]
-      },
+      "roles": [
+        {
+          "name": "guests",
+          "members": [
+            "guests_group"
+          ],
+          "datacenters": [
+            "us-west-1"
+          ],
+          "subscriptions": [
+            "webserver"
+          ],
+          "readonly": true
+        },
+        {
+          "name": "operators",
+          "members": [
+            "operators_group"
+          ],
+          "datacenters": [],
+          "subscriptions": [],
+          "readonly": false
+        }
+      ],
+      "insecure": false,
       "security": "none"
     }
     ~~~
 
-db
-: description
-  : A hash of [database connection attributes](#database-connection-attributes)
-    to enable SQL authentication. Overrides simple authentication.
-    _NOTE: This is only available in Sensu Enterprise Dashboard, not Uchiwa._
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    "db": {
-        "driver": "mymysql",
-        "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
-    }
-    ~~~
+## Role-Based Access Controls (RBAC)
 
-### GitHub authentication attributes
+The Sensu Enterprise Dashboard provides comprehensive and granular Role-Based
+Access Controls (RBAC), with support for using [GitHub.com](https://github.com),
+a GitHub Enterprise installation, and/or a Lightweight Access Directory Provider
+(LDAP) for authentication. RBAC for Sensu Enterprise enables administrators to
+grant the correct level access to many different development and operations
+teams, without requiring them to maintain yet another user registry.
+
+Sensu Enterprise currently includes the following authentication drivers for
+RBAC:
+
+* [GitHub](#github-driver-for-rbac)
+* [LDAP](#ldap-driver-for-rbac)
+
+### GitHub Driver for RBAC
+
+The Sensu Enterprise Dashboard ships with integrated support for using
+[GitHub.com](https://github.com) or a [GitHub Enterprise](https://\
+enterprise.github.com/home) installation for RBAC authentication. Please note
+the following configuration attributes for configuring the GitHub driver:
+
+#### GitHub authentication attributes
 
 clientId
 : description
@@ -439,46 +420,57 @@ server
 
 roles
 : description
-  : A hash of [Role attributes for GitHub Teams](#role-attributes-for-github-teams)
+  : An array of [Role attributes for GitHub
+    Teams](#role-attributes-for-github-teams)
 : required
   : true
 : type
-  : Hash
+  : Array
 : example
   : ~~~shell
-    "roles": {
-      "guests": [
-        "myorganization/devs"
-      ],
-      "operators": [
-        "myorganization/owners"
-      ]
-    }
+    "roles": [
+      {
+        "name": "guests",
+        "members": [
+          "guests_group"
+        ],
+        "datacenters": [
+          "us-west-1"
+        ],
+        "subscriptions": [
+          "webserver"
+        ],
+        "readonly": true
+      },
+      {
+        "name": "operators",
+        "members": [
+          "operators_group"
+        ],
+        "datacenters": [],
+        "subscriptions": [],
+        "readonly": false
+      }
+    ]
     ~~~
 
 #### Role attributes for GitHub Teams
 
-guests
+name
 : description
-  : An array of the GitHub Teams that should be allowed "guest" (i.e.
-    read-only) access.
+  : The name of the role.
 : required
-  : false
+  : true
 : type
-  : Array
-: allowed values
-  : any valid `organization/team` pair. For example, the team located at
-    [https://github.com/orgs/sensu/teams/owners](https://github.com/orgs/sensu/\
-    teams/owners) would be entered as `sensu/owners`.
+  : String
 : example
   : ~~~shell
-    "guests": ["myorganization/devs"]`
+    "name": "operators"
     ~~~
 
-operators
+members
 : description
-  : An array of the GitHub Teams that should be allowed "operator" (i.e. read +
-    write) access.
+  : An array of the GitHub Teams that should be included as members of the role.
 : required
   : true
 : type
@@ -489,13 +481,99 @@ operators
     teams/owners) would be entered as `sensu/owners`.
 : example
   : ~~~shell
-    "operators": ["myorganization/owners"]
+    "members": ["myorganization/devs"]
     ~~~
+
+datacenters
+: description
+  : An array of the `datacenters` (i.e. matching a defined [Sensu API endpoint
+    `name`](#sensu-api-endpoint-attributes) value) that members of the role
+    should have access to. Provided values will be used to filter which
+    `datacenters` members of the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all configured `datacenters`._
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "datacenters": ["us-west-1"]
+    ~~~
+
+subscriptions
+: description
+  : An array of the subscriptions that members of the role should have access
+    to. Provided values will be used to filter which subscriptions members of
+    the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all subscriptions._  
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "subscriptions": ["webserver"]
+    ~~~
+
+readonly
+: description
+  : Used to restrict "write" access (i.e. preventing members of the role from
+    being able to create stashes, silence checks, etc).
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "readonly": true
+    ~~~
+
+#### Register an OAuth Application in GitHub
+
+To use GitHub for authentication requires registration of your Sensu Enterprise
+Dashboard as a GitHub "application". Please note the following instructions:
+
+1. To register a GitHub OAuth application, please navigate to your GitHub
+   organization settings page (e.g.
+   `github.com/organizations/YOUR-GITHUB-ORGANIZATION/settings/applications`),
+   and selection "Applications" => "Register new application".
+
+   ![](img/enterprise-dashboard-github-app.png)
+
+2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
+
+3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
+
+   _NOTE: this URL does not need to be publicly accessible - as long as a user
+   has network access to **both** GitHub.com **and** the callback URL, s/he will
+   be able to authenticate; for example, this will allow users to authenticate
+   to a Sensu Enterprise Dashboard service running on a private network as long
+   as the user has access to the network (e.g. locally or via VPN)._
+
+4. Select "Register application" and note the application Client ID and Client
+   Secret.
+
+   ![](img/enterprise-dashboard-github-secret.png)
+
+
+## LDAP driver for RBAC
+
+The Sensu Enterprise Dashboard ships with integrated support for using a
+Lightweight Directory Access Protocol (LDAP) provider for RBAC authentication.
+The LDAP driver for Sensu Enterprise has been tested with **Microsoft Active
+Directory (AD)**, and should be compatible with any standards-compliant LDAP
+provider. Please note the following configuration attributes for configuring the
+LDAP driver:
 
 ### LDAP authentication attributes
 
 This driver is tested with **Microsoft Active Directory** (AD) and should be
-compatible with any LDAP directory.
+compatible with any standards-compliant Lightweight Directory Access Protocol
+(LDAP) provider.
 
 server
 : description
@@ -536,6 +614,21 @@ basedn
     "basedn": "cn=users,dc=domain,dc=tld"
     ~~~
 
+insecure
+: description
+  : Determines whether or not to skip SSL certificate verification (e.g. for
+    self-signed certificates).
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "insecure": true
+    ~~~
+
 security
 : description
   : Determines the encryption type to be used for the connection to the LDAP
@@ -572,101 +665,76 @@ roles
 
 #### Role attributes for LDAP groups
 
-guests
+name
 : description
-  : An array of LDAP groups that should be allowed "guest" (i.e. read-only)
-    access.
-: required
-  : true
-: type
-  : Array
-: example
-  : ~~~ shell
-    "guests": ["guests_group"]
-    ~~~
-
-operators
-: description
-  : An array of LDAP groups that should be allowed "guest" (i.e. read + write)
-    access.
-: required
-  : true
-: type
-  : Array
-: example
-  : ~~~ shell
-    "operators": ["operators_group"]
-    ~~~
-
-
-
-### Database connection attributes
-
-_NOTE: a default user of `admin` will automatically be created with the password
-`sensu`. This user will be created when the Sensu Enterprise Dashboard service
-starts._
-
-_NOTE: when using the `mymysql` or `postgres` drivers, you must first create the
-database you specify._
-
-driver
-: description
-  : The name of the database driver to use for SQL authentication.
+  : The name of the role.
 : required
   : true
 : type
   : String
+: example
+  : ~~~shell
+    "name": "operators"
+    ~~~
+
+members
+: description
+  : An array of LDAP groups that should be included as members of the role.
+: required
+  : true
+: type
+  : Array
 : allowed values
-  : - `mymysql` - For MySQL
-    - `postgres` - For PostgreSQL (versions >= 9.x)
-    - `sqlite3` - For SQLite
+  : any LDAP group name
 : example
-  : ~~~ shell
-    "driver": "postgres"
+  : ~~~shell
+    "members": ["guests_group"]
     ~~~
 
-scheme
+datacenters
 : description
-  : The scheme to use to connect to the corresponding database driver.
-    _NOTE: use the [scheme syntax](#scheme-syntax) that corresponds with the
-    database driver you choose._
+  : An array of the `datacenters` (i.e. matching a defined [Sensu API endpoint
+    `name`](#sensu-api-endpoint-attributes) value) that members of the role
+    should have access to. Provided values will be used to filter which
+    `datacenters` members of the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all configured `datacenters`._
 : required
-  : true
+  : false
 : type
-  : String
+  : Array
 : example
-  : ~~~ shell
-    "scheme": "dashboard.db"
+  : ~~~shell
+    "datacenters": ["us-west-1"]
     ~~~
 
-#### Scheme syntax
-
-mymysql
-: syntax
-  : ~~~ shell
-    "scheme": "tcp:MYSQL_HOST:MYSQL_PORT*DB_NAME/USERNAME/PASSWORD"
-    ~~~
+subscriptions
+: description
+  : An array of the subscriptions that members of the role should have access
+    to. Provided values will be used to filter which subscriptions members of
+    the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all subscriptions._  
+: required
+  : false
+: type
+  : Array
 : example
-  : ~~~ shell
-    "scheme": "tcp:127.0.0.1:3306*sensu/root/mypassword"
-    ~~~
-
-postgres
-: syntax
-  : ~~~ shell
-    "scheme": "user=USERNAME dbname=DB_NAME host=HOST password=PASSWORD sslmode=disable"
-    ~~~
-: example
-  : ~~~ shell
-    "scheme": "user=postgres dbname=sensu host=127.0.0.1 password=mypassword sslmode=disable"
+  : ~~~shell
+    "subscriptions": ["webserver"]
     ~~~
 
-sqlite3
-: syntax
-  : ~~~ shell
-    "scheme": "FILENAME.db"
-    ~~~
+readonly
+: description
+  : Used to restrict "write" access (i.e. preventing members of the role from
+    being able to create stashes, silence checks, etc).
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
 : example
   : ~~~ shell
-    "scheme": "sensu.db"
+    "readonly": true
     ~~~
