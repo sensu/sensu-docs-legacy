@@ -432,7 +432,7 @@ roles
       {
         "name": "guests",
         "members": [
-          "guests_group"
+          "myorganization/guests"
         ],
         "datacenters": [
           "us-west-1"
@@ -445,7 +445,7 @@ roles
       {
         "name": "operators",
         "members": [
-          "operators_group"
+          "myorganization/operators"
         ],
         "datacenters": [],
         "subscriptions": [],
@@ -652,16 +652,32 @@ roles
 : type
   : Hash
 : example
-  : ~~~ shell
-    "roles": {
-      "guests": [
+: ~~~shell
+  "roles": [
+    {
+      "name": "guests",
+      "members": [
         "guests_group"
       ],
-      "operators": [
+      "datacenters": [
+        "us-west-1"
+      ],
+      "subscriptions": [
+        "webserver"
+      ],
+      "readonly": true
+    },
+    {
+      "name": "operators",
+      "members": [
         "operators_group"
-      ]
+      ],
+      "datacenters": [],
+      "subscriptions": [],
+      "readonly": false
     }
-    ~~~
+  ]
+  ~~~
 
 #### Role attributes for LDAP groups
 
