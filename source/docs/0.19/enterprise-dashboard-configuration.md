@@ -646,11 +646,11 @@ security
 
 roles
 : description
-  : A hash of [Role attributes for LDAP groups](#role-attributes-for-ldap-groups)
+  : An array of [Role attributes for LDAP groups](#role-attributes-for-ldap-groups)
 : required
   : true
 : type
-  : Hash
+  : Array
 : example
   : ~~~shell
     "roles": [
