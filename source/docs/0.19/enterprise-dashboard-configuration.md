@@ -356,7 +356,17 @@ ldap
 ## Role-Based Access Controls (RBAC)
 
 The Sensu Enterprise Dashboard provides comprehensive and granular Role-Based
-Access Controls (RBAC)
+Access Controls (RBAC), with support for using [GitHub.com](https://github.com),
+a GitHub Enterprise installation, and/or a Lightweight Access Directory Provider
+(LDAP) for authentication. RBAC for Sensu Enterprise enables administrators to
+grant the correct level access to many different development and operations
+teams, without requiring them to maintain yet another user registry.
+
+Sensu Enterprise currently includes the following authentication drivers for
+RBAC:
+
+* [GitHub](#github-driver-for-rbac)
+* [LDAP](#ldap-driver-for-rbac)
 
 ### GitHub Driver for RBAC
 
