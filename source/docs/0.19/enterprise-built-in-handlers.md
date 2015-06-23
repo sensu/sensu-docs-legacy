@@ -15,6 +15,7 @@ Built-in event handlers:
 
 - [Email](#email) - send email notifications for events
 - [PagerDuty](#pagerduty) - create and resolve PagerDuty incidents for events
+- [VictorOps](#victorops) - create and resolve VictorOps messages for events
 - [IRC](#irc) - send notifications to an IRC channel for events
 - [Slack](#slack) - send notifications to a Slack channel for events
 - [HipChat](#hipchat) - send notifications to a HipChat room for events
@@ -198,6 +199,78 @@ service_key
 : example
   : ~~~ shell
     "service_key": "r3FPuDvNOTEDyQYCc7trBkymIFcy2NkE"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+## VictorOps
+
+Create VictorOps messages for events. After [configuring a service in VictorOps](https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service), configure the handler (integration) with the provided service key.
+
+The following is an example global configuration for the `victorops` enterprise event handler (integration).
+
+~~~ json
+{
+  "victorops": {
+    "api_key": "a53265cd-d2ef-fa32-fc54de52659a",
+    "routing_key": "everyone",
+    "timeout": 10
+  }
+}
+~~~
+
+### Definition attributes
+
+victorops
+: description
+  : A set of attributes that configure the VictorOps event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "victorops": {}
+    ~~~
+
+#### VictorOps attributes
+
+api_key
+: description
+  : The VictorOps api key to use when creating messages.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "api_key": "a53265cd-d2ef-fa32-fc54de52659a"
+    ~~~
+
+routing_key
+: description
+  : The VictorOps routing key to decide what team(s) to send alerts to.
+: required
+  : false
+: type
+  : String
+: default
+  : `everyone`
+: example
+  : ~~~ shell
+    "routing_key": "ops"
     ~~~
 
 timeout
