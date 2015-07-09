@@ -34,7 +34,7 @@ Install Erlang from the official Erlang repositories:
 sudo wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 sudo dpkg -i erlang-solutions_1.0_all.deb
 sudo apt-get update
-sudo apt-get install erlang
+sudo apt-get -y install erlang
 ~~~
 
 ### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
