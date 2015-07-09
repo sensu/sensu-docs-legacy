@@ -46,7 +46,7 @@ sudo wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 sudo apt-key add rabbitmq-signing-key-public.asc
 echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 sudo apt-get update
-sudo apt-get install rabbitmq-server
+sudo apt-get -y install rabbitmq-server
 ~~~
 
 ## CentOS/RHEL {#install-rabbitmq-on-centos}

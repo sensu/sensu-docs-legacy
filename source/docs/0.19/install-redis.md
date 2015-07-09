@@ -27,7 +27,7 @@ Install Redis (>= 1.3.14) from the distribution repository:
 
 ~~~ shell
 sudo apt-get update
-sudo apt-get install redis-server
+sudo apt-get -y install redis-server
 ~~~
 
 ## CentOS/RHEL {#install-redis-on-centos}
