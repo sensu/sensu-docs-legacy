@@ -9,11 +9,6 @@ success: "<strong>NOTE:</strong> this is part 1 of 6 steps in the Sensu
   Installation Guide. For the best results, please make sure to follow the
   instructions carefully and complete all of the steps in each section before
   moving on."
-info: "Due to the state of flux in Erlang and the Erlang-SSL module, we have
-  been unable to get RabbitMQ and SSL working on Ubuntu platforms < 11.10 and
-  Debian 6.x."
-warning: "Erlang RB14B04 is vulnerable to the POODLE attack. Please upgrade to a
-  more recent version; R16B01 or newer."
 ---
 
 # Overview
@@ -25,17 +20,21 @@ The following instructions will help you to:
 - Install Erlang (the runtime used by RabbitMQ)
 - Install RabbitMQ
 
+_NOTE: the instructions use the official software repositories for Erlang and RabbitMQ, as many Linux distributions provide outdated versions that contain known security vulnerabilities and bugs._
+
 # Install RabbitMQ
 
 ## Ubuntu/Debian {#install-rabbitmq-on-ubuntu}
 
 ### Step #1: Install Erlang {#install-rabbitmq-on-ubuntu-step-1}
 
-Install Erlang from the distribution repository:
+Install Erlang from the official Erlang repositories:
 
 ~~~ shell
+sudo wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+sudo dpkg -i erlang-solutions_1.0_all.deb
 sudo apt-get update
-sudo apt-get -y install erlang-nox
+sudo apt-get -y install erlang
 ~~~
 
 ### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
@@ -47,24 +46,18 @@ sudo wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 sudo apt-key add rabbitmq-signing-key-public.asc
 echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 sudo apt-get update
-sudo apt-get install rabbitmq-server
+sudo apt-get -y install rabbitmq-server
 ~~~
 
 ## CentOS/RHEL {#install-rabbitmq-on-centos}
 
 ### Step #1: Install Erlang {#install-rabbitmq-on-centos-step-1}
 
-Install the [EPEL](https://fedoraproject.org/wiki/EPEL) repository [for your CentOS/RHEL release](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse):
-
-The following command will install the EPEL repository for CentOS/RHEL 6; for other CentOS/RHEL releases, please refer to [http://fedoraproject.org/wiki/EPEL/FAQ#howtouse](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse).
+Install Erlang from the official Erlang repositories:
 
 ~~~ shell
-sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-~~~
-
-Install Erlang from the EPEL repository:
-
-~~~ shell
+sudo wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
 sudo yum install erlang
 ~~~
 
@@ -74,7 +67,7 @@ Install RabbitMQ using the official RabbitMQ RPM, as suggested in the official R
 
 ~~~ shell
 sudo rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.0/rabbitmq-server-3.5.0-1.noarch.rpm
+sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.3/rabbitmq-server-3.5.3-1.noarch.rpm
 ~~~
 
 # Running RabbitMQ

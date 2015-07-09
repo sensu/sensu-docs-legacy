@@ -27,14 +27,20 @@ Install Redis (>= 1.3.14) from the distribution repository:
 
 ~~~ shell
 sudo apt-get update
-sudo apt-get install redis-server
+sudo apt-get -y install redis-server
 ~~~
 
 ## CentOS/RHEL {#install-redis-on-centos}
 
-Install Redis (>= 1.3.14) from the EPEL repository:
+Install the [EPEL](https://fedoraproject.org/wiki/EPEL) repository [for your CentOS/RHEL release](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse):
 
-_NOTE: installation of Redis from EPEL repositories depends on having already installed the EPEL repositories for your CentOS/RHEL release, as described during [RabbitMQ installation](install-rabbitmq#install-rabbitmq-on-centos-step-1)._
+The following command will install the EPEL repository for CentOS/RHEL 6; for other CentOS/RHEL releases, please refer to [http://fedoraproject.org/wiki/EPEL/FAQ#howtouse](http://fedoraproject.org/wiki/EPEL/FAQ#howtouse).
+
+~~~ shell
+sudo rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+~~~
+
+Install Redis (>= 1.3.14) from the EPEL repository:
 
 ~~~ shell
 sudo yum install redis
