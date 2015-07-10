@@ -1,5 +1,5 @@
 ---
-version: 0.19
+version: 0.20
 category: "Enterprise Docs"
 title: "Built-in Handlers"
 next:
@@ -536,9 +536,9 @@ Send SNMPv1 traps to a SNMP manager.
 
 Sensu Enterprise provides two SNMP MIBs (management information base) for this integration. The SNMP manager that will be receiving SNMP traps from Sensu Enterprise should load both of the provided MIBs. The Sensu Enterprise SNMP MIB files can be altered to better fit certain environments and SNMP configurations.
 
-- [SENSU-ENTERPRISE-ROOT-MIB.txt](http://sensuapp.org/docs/0.19/files/SENSU-ENTERPRISE-ROOT-MIB.txt)
+- [SENSU-ENTERPRISE-ROOT-MIB.txt](http://sensuapp.org/docs/0.20/files/SENSU-ENTERPRISE-ROOT-MIB.txt)
 
-- [SENSU-ENTERPRISE-NOTIFY-MIB.txt](http://sensuapp.org/docs/0.19/files/SENSU-ENTERPRISE-NOTIFY-MIB.txt)
+- [SENSU-ENTERPRISE-NOTIFY-MIB.txt](http://sensuapp.org/docs/0.20/files/SENSU-ENTERPRISE-NOTIFY-MIB.txt)
 
 The following is an example global configuration for the `snmp` enterprise event handler (integration).
 

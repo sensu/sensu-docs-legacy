@@ -1,5 +1,5 @@
 ---
-version: 0.19
+version: 0.20
 category: "Installation Guide"
 title: "Install a Dashboard"
 next:
@@ -54,7 +54,7 @@ sudo yum install sensu-enterprise-dashboard
 To configure the Sensu Enterprise Dashboard, copy the following example configuration to `/etc/sensu/dashboard.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/dashboard.json http://sensuapp.org/docs/0.19/files/dashboard.json
+sudo wget -O /etc/sensu/dashboard.json http://sensuapp.org/docs/0.20/files/dashboard.json
 ~~~
 
 _NOTE: this example file configures the Sensu Enterprise Dashboard with a list of Sensu Enterprise API endpoints (the Sensu Enterprise Dashboard can be used with multiple Sensu Enterprise installations), and the hostname and port the dashboard will listen on. For more details about Sensu Enterprise Dashboard configuration, please see: [Sensu Enterprise Dashboard Docs](enterprise-dashboard-overview)_

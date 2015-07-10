@@ -1,5 +1,5 @@
 ---
-version: 0.19
+version: 0.20
 category: "Installation Guide"
 title: "Install Sensu Client"
 next:
@@ -33,7 +33,7 @@ However, if you are a Sensu Enterprise user and skipped installation of Sensu Co
 Each Sensu client requires its own client definition, containing a set of required attributes (name, address, subscriptions). To configure the Sensu client, copy the following example configuration to `/etc/sensu/conf.d/client.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/client.json http://sensuapp.org/docs/0.19/files/client.json
+sudo wget -O /etc/sensu/conf.d/client.json http://sensuapp.org/docs/0.20/files/client.json
 ~~~
 
 _NOTE: this example file configures the Sensu client with client metadata, including a unique name, an address (any string), and its [Sensu Subscriptions](clients#what-are-sensu-clients)._
@@ -55,7 +55,7 @@ _NOTE: this example file configures the Sensu client with client metadata, inclu
 Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called `memory`, that runs the command `/etc/sensu/plugins/check-mem.sh`. Each Sensu client that will execute the `memory` check will require a local copy of this file. Download a copy of the `check-mem.sh` check plugin to `/etc/sensu/plugins/check-mem.sh`, via the following commands:
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-mem.sh http://sensuapp.org/docs/0.19/files/check-mem.sh
+sudo wget -O /etc/sensu/plugins/check-mem.sh http://sensuapp.org/docs/0.20/files/check-mem.sh
 sudo chmod +x /etc/sensu/plugins/check-mem.sh
 ~~~
 
