@@ -9,4 +9,4 @@
       %span.icon-bar
     %div.clearfix
     %div.toc-collapse
-      = partial "/docs/#{current_resource.data.version}/index"
+      = partial File.join("/docs", sprintf("%.2f", current_resource.data.version), "index")
