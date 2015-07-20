@@ -277,6 +277,20 @@ source
     "source": "switch-dc-01"
     ~~~
 
+aggregate
+: description
+  : Create a result aggregate for the check. Check result data will be aggregated and exposed via the [Sensu API /aggregates endpoint](api-aggregates). This feature does not work with `standalone` checks.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "aggregate": true
+    ~~~
+
 subdue
 : description
   : A set of attributes that determine when a check is subdued.
