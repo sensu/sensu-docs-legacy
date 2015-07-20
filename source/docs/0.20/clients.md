@@ -593,6 +593,74 @@ SERVICE_MAX_WAIT
     SERVICE_MAX_WAIT=10
     ~~~
 
+SENSU_TRANSPORT_NAME
+: description
+  : The Sensu transport name, indicating the Sensu transport to load and use. This value is used if a transport definition does not already define one.
+: required
+  : false
+: default
+  : `rabbitmq`
+: example
+  : ~~~ shell
+    SENSU_TRANSPORT_NAME="redis"
+    ~~~
+
+RABBITMQ_URL
+: description
+  : The RabbitMQ URL Sensu will use when connecting to RabbitMQ, used if a RabbitMQ definition does not already define connection options. The RabbitMQ URL uses the [AMQP URI spec](https://www.rabbitmq.com/uri-spec.html).
+: required
+  : false
+: example
+  : ~~~ shell
+    RABBITMQ_URL="amqp://user:password@hostname:5672/vhost"
+    ~~~
+
+REDIS_URL
+: description
+  : The Redis URL Sensu will use when connecting to Redis, used if a Redis definition does not already define connection options.
+: required
+  : false
+: example
+  : ~~~ shell
+    REDIS_URL="redis://hostname:6379/0"
+    ~~~
+
+SENSU_CLIENT_ADDRESS
+: description
+  : The Sensu client address, used if a client definition does not already define one.
+: required
+  : false
+: default
+  : `hostname`
+: example
+  : ~~~ shell
+    SENSU_CLIENT_ADDRESS="8.8.8.8"
+    ~~~
+
+SENSU_CLIENT_SUBSCRIPTIONS
+: description
+  : The Sensu client subscriptions, comma delimited, used if a client definition does not already define them.
+: required
+  : false
+: default
+  : `[]`
+: example
+  : ~~~ shell
+    SENSU_CLIENT_SUBSCRIPTIONS="production,webserver,nginx,memcached,all"
+    ~~~
+
+SENSU_API_PORT
+: description
+  : The Sensu API TCP port to bind to and listen on, used if an API definition does not already define one. This is only used by the Sensu API.
+: required
+  : false
+: default
+  : `4567`
+: example
+  : ~~~ shell
+    SENSU_API_PORT=8080
+    ~~~
+
 # Manage the client process on Windows
 
 The Sensu Core MSI package includes a Sensu client service wrapper, allowing Sensu to be registered as a Windows service. The Sensu client service wrapper uses an XML configuration file, to configure the `sensu-client` run arguments, e.g. `--log C:\opt\sensu\sensu-client.log`.
