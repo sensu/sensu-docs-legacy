@@ -605,9 +605,11 @@ timeout
 
 ## SNMP
 
-Send SNMPv1 traps to a SNMP manager.
+Send SNMP traps to a SNMP manager.
 
-Sensu Enterprise provides two SNMP MIBs (management information base) for this integration. The SNMP manager that will be receiving SNMP traps from Sensu Enterprise should load the provided MIBs. The Sensu Enterprise SNMP MIB files can be altered to better fit certain environments and SNMP configurations.
+Sensu Enterprise provides two SNMP MIBs (management information base) for this integration. The SNMP integration is capable of creating either SNMPv1 or SNMPv2 traps for Sensu events. By default, SNMPv2 traps are created unless the integration is configured for SNMPv1, e.g. `"version": 1`.  The SNMP manager that will be receiving SNMP traps from Sensu Enterprise should load the appropriate provided MIBs. The Sensu Enterprise SNMP MIB files can be altered to better fit certain environments and SNMP configurations.
+
+_NOTE: Sensu Enterprise 1.3.0 changed the default SNMP trap version from `1` to `2`_
 
 SNMPv1 MIBs:
 
@@ -617,6 +619,12 @@ SNMPv1 MIBs:
 
 - [SENSU-ENTERPRISE-V1-MIB.txt](http://sensuapp.org/docs/0.20/files/SENSU-ENTERPRISE-V1-MIB.txt)
 
+SNMPv2 MIBs:
+
+- [SENSU-ENTERPRISE-ROOT-MIB.txt](http://sensuapp.org/docs/0.20/files/SENSU-ENTERPRISE-ROOT-MIB.txt)
+
+- [SENSU-ENTERPRISE-NOTIFY-MIB.txt](http://sensuapp.org/docs/0.20/files/SENSU-ENTERPRISE-NOTIFY-MIB.txt)
+
 The following is an example global configuration for the `snmp` enterprise event handler (integration).
 
 ~~~ json
@@ -624,7 +632,8 @@ The following is an example global configuration for the `snmp` enterprise event
   "snmp": {
     "host": "8.8.8.8",
     "port": 162,
-    "community": "public"
+    "community": "public",
+    "version": 2
   }
 }
 ~~~
