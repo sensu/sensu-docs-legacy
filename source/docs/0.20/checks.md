@@ -11,11 +11,13 @@ next:
 
 This reference document provides information to help you:
 
-- Understand what a Sensu check is
-- Understand how a Sensu check works
-- Write a Sensu check definition
-- Use built-in Sensu check definition attributes
-- Use custom Sensu check definition attributes
+- [Understand what a Sensu check is](#what-are-sensu-checks)
+- [Understand what a Sensu check plugin is and how they work](#example-check-plugin)
+- [Write a Sensu check definition](#check-definition)
+- [Use standard Sensu check definition attributes](#definition-attributes)
+- [Use custom Sensu check definition attributes](#custom-definition-attributes)
+- [Use sensu-plugin custom Sensu check definition attributes](#sensu-plugin-attributes)
+- [Understand what Sensu check command tokens are and how to use them](#check-command-tokens)
 
 # What are Sensu checks? {#what-are-sensu-checks}
 
@@ -369,7 +371,28 @@ exceptions
     "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
     ~~~
 
-### Sensu plugin attributes
+# Custom definition attributes
+
+Custom check definition attributes may be included to add additional information (context) about the Sensu check. Custom check attributes will be included in [event data](events). Some great example use cases for custom check definition attributes are contact routing, documentation links, and metric graph image URLs.
+
+The following is an example Sensu check definition that a custom definition attribute, `"playbook"`, a URL for documentation to aid in the resolution of events for the check. The playbook URL will be available in [event data](events) and thus able to be included in event notifications (e.g. email).
+
+~~~ json
+{
+  "checks": {
+    "check_mysql_replication": {
+      "command": "check-mysql-replication-status.rb --user sensu --password secret",
+      "subscribers": [
+        "mysql"
+      ],
+      "interval": 30,
+      "playbook": "http://docs.example.com/wiki/mysql-replication-playbook"
+    }
+  }
+}
+~~~
+
+# Sensu plugin attributes
 
 The [Sensu plugin project](https://github.com/sensu-plugins) provides a Ruby library ([sensu-plugin](https://github.com/sensu-plugins/sensu-plugin/)) to help Sensu plugin authors and offer users a variety of features. The sensu-plugin features make use of select custom check definition attributes. When using a [Sensu event handler](handlers) that makes use of the sensu-plugin library, you can configure the following attributes in any check definition.
 
@@ -415,3 +438,45 @@ dependencies
       "db-01/check_mysql"
     ]
     ~~~
+
+# Check command tokens
+
+Sensu check plugins may use command line arguments for execution options, such as thresholds, file paths, URls, and credentials. In some cases, the command line arguments may need to differ per client in a Sensu [client subscription](clients#client-subscriptions). Sensu check command tokens, a pattern containing a dot notation client attribute key (e.g. `:::disk.warning:::`), are substituted by the client attribute value before the command is executed by the Sensu client. Command tokens allow the check command to be customized by the Sensu client definition attributes at execution time. Sensu check command tokens may also have a default value, after a `|`, if the client executing the check does not have the matching client definition attribute, e.g. `:::disk.warning:::|2GB`. If a command token does not provide a default value, and the client does not have the definition attribute, a check result stating the unmatched tokens will be published for the check execution, e.g. `"Unmatched command tokens: disk.warning"`.
+
+## Example check command tokens
+
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition makes use of Sensu check command tokens. The check is named `chef_disk_usage` and it runs `check-disk-usage.rb` on Sensu clients with the `production` subscription, every `60` seconds.
+
+~~~ json
+{
+  "checks": {
+    "chef_client": {
+      "command": "check-disk-usage.rb -w :::disk.warning|90::: -c :::disk.critical|95:::",
+      "subscribers": [
+        "production"
+      ],
+      "interval": 60
+    }
+  }
+}
+~~~
+
+The following is an example Sensu client definition, containing the custom attributes used by the above check for disk usage thresholds.
+
+~~~ json
+{
+  "client": {
+    "name": "i-424242",
+    "address": "8.8.8.8",
+    "subscriptions": [
+      "production",
+      "webserver",
+      "mysql"
+    ],
+    "disk": {
+      "warning": 97,
+      "critical": 99
+    }
+  }
+}
+~~~
