@@ -441,16 +441,16 @@ dependencies
 
 # Check command tokens
 
-Sensu check plugins may use command line arguments for execution options, such as thresholds, file paths, URls, and credentials. In some cases, the command line arguments may need to differ per client in a Sensu [client subscription](clients#client-subscriptions). Sensu check command tokens, a pattern containing a dot notation client attribute key (e.g. `:::disk.warning:::`), are substituted by the client attribute value before the command is executed by the Sensu client. Command tokens allow the check command to be customized by the Sensu client definition attributes at execution time. Sensu check command tokens may also have a default value, after a `|`, if the client executing the check does not have the matching client definition attribute, e.g. `:::disk.warning:::|2GB`. If a command token does not provide a default value, and the client does not have the definition attribute, a check result stating the unmatched tokens will be published for the check execution, e.g. `"Unmatched command tokens: disk.warning"`.
+Sensu check plugins may use command line arguments for execution options, such as thresholds, file paths, URls, and credentials. In some cases, the command line arguments may need to differ per client in a Sensu [client subscription](clients#client-subscriptions). Sensu check command tokens, a pattern containing a dot notation client attribute key (e.g. `:::disk.warning:::`), are substituted by the client attribute value before the command is executed by the Sensu client. Command tokens allow the check command to be customized by the Sensu client definition attributes at execution time. Sensu check command tokens may provide a default value, separated by a `|` character, for clients executing the check that do not have the matching client definition attribute (e.g. `:::disk.warning|2GB:::`). If a command token does not provide a default value, and the client does not have the definition attribute, a check result indicating unmatched tokens will be published for the check execution, e.g. `"Unmatched command tokens: disk.warning"`.
 
 ## Example check command tokens
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition makes use of Sensu check command tokens. The check is named `chef_disk_usage` and it runs `check-disk-usage.rb` on Sensu clients with the `production` subscription, every `60` seconds.
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition makes use of Sensu check command tokens. The check is named `check_disk_usage` and it runs `check-disk-usage.rb` with client specific thresholds on Sensu clients with the `production` subscription, every `60` seconds.
 
 ~~~ json
 {
   "checks": {
-    "chef_client": {
+    "check_disk_usage": {
       "command": "check-disk-usage.rb -w :::disk.warning|90::: -c :::disk.critical|95:::",
       "subscribers": [
         "production"
