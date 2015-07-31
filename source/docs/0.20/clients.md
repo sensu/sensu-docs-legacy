@@ -13,6 +13,7 @@ This reference document provides information to help you:
 
 - [Understand what a Sensu client is and what it does](#what-are-sensu-clients)
 - [Write a Sensu client definition to configure a client](#client-definition)
+- [Understand what Sensu client subscriptions are](#client-subscriptions)
 - [Use custom Sensu client definition attributes](#custom-definition-attributes)
 - [Understand what Sensu client keepalives are](#client-keepalives)
 - [Use the Sensu client socket for external check result input](#client-socket-input)
@@ -79,7 +80,7 @@ address
 
 subscriptions
 : description
-  : An array of client subscriptions that check requests will be sent to. The array cannot be empty and its items must each be a string.
+  : An array of client subscriptions, a list of roles/responsibilities that the machine has (e.g. webserver). These subscriptions determine which monitoring checks are executed by the client, as check requests are sent to subscriptions. The subscriptions array cannot be empty and its items must each be a string.
 : required
   : true
 : type
@@ -279,6 +280,14 @@ The following is an example Sensu client definition that has custom attributes f
   }
 }
 ~~~
+
+# Client subscriptions
+
+Sensu's use of the pubsub pattern of communication allows for automated registration & de-registration of ephemeral systems. At the core of this model are Sensu client subscriptions. Each Sensu client has a defined set of subscriptions, a list of roles/responsibilities the machine has (e.g. webserver), these subscriptions determine which monitoring checks are executed by the client. Client subscriptions allow Sensu to request a check be executed on a number (or group) of machines at a time, instead of a traditional 1:1 mapping of configured hosts to monitoring checks. Sensu checks target Sensu client subscriptions, using the [check definition attribute `subscribers`](checks#definition-attributes).
+
+## Client subscription configuration
+
+To configure Sensu client subscriptions for a client, please refer to [the client definition attribute `subscriptions`](#definition-attributes).
 
 # Client keepalives
 
