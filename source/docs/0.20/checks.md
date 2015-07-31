@@ -439,6 +439,18 @@ dependencies
     ]
     ~~~
 
+notification
+: description
+  : The notification message used for events created by the check, instead of the commonly used check output. This attribute is used by most notification event handlers that use the sensu-plugin library.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "notification": "the shopping cart application is not responding to requests"
+    ~~~
+
 # Check command tokens
 
 Sensu check plugins may use command line arguments for execution options, such as thresholds, file paths, URls, and credentials. In some cases, the command line arguments may need to differ per client in a Sensu [client subscription](clients#client-subscriptions). Sensu check command tokens, a pattern containing a dot notation client attribute key (e.g. `:::disk.warning:::`), are substituted by the client attribute value before the command is executed by the Sensu client. Command tokens allow the check command to be customized by the Sensu client definition attributes at execution time. Sensu check command tokens may provide a default value, separated by a `|` character, for clients executing the check that do not have the matching client definition attribute (e.g. `:::disk.warning|2GB:::`). If a command token does not provide a default value, and the client does not have the definition attribute, a check result indicating unmatched tokens will be published for the check execution, e.g. `"Unmatched command tokens: disk.warning"`.
