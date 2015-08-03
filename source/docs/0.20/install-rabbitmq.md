@@ -53,9 +53,10 @@ sudo apt-get -y install rabbitmq-server
 
 ### Step #1: Install Erlang {#install-rabbitmq-on-centos-step-1}
 
-Install Erlang from the official Erlang repositories:
+Install Erlang from the official Erlang repositories (requires EPEL):
 
 ~~~ shell
+sudo yum install epel-release
 sudo wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
 sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
 sudo yum install erlang
