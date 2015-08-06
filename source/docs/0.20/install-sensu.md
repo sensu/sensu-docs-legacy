@@ -193,3 +193,39 @@ Tail the Sensu Enterprise log file to observe its operation:
 ~~~ shell
 sudo tail -f /var/log/sensu-enterprise.log
 ~~~
+
+# Enable Sensu on boot
+
+By default, the Sensu Core services and Sensu Enterprise do not start on boot. Use the following instructions to enable/start your flavor of Sensu on boot.
+
+_NOTE: Only **one** flavor of Sensu should be used at any given time: Sensu Core (sensu-server + sensu-api), or Sensu Enterprise. If you have previously enabled Sensu Core or Sensu Enterprise on boot and are switching flavors, simply stop and disable one and enable the other._
+
+## Sensu Core
+
+### Ubuntu/Debian
+
+~~~ shell
+update-rc.d sensu-server defaults
+update-rc.d sensu-api defaults
+~~~
+
+### CentOS/RHEL
+
+~~~ shell
+chkconfig sensu-server on
+chkconfig sensu-api on
+~~~
+
+## Sensu Enterprise
+
+### Ubuntu/Debian
+
+~~~ shell
+update-rc.d sensu-enterprise defaults
+~~~
+
+### CentOS/RHEL
+
+~~~ shell
+chkconfig sensu-enterprise on
+~~~

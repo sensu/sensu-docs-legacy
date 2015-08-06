@@ -85,6 +85,22 @@ Tail the Sensu client log file to observe its operation:
 sudo tail -f /var/log/sensu/sensu-client.log
 ~~~
 
+# Enable Sensu on boot
+
+By default, the Sensu client service does not start on boot. Use the following instructions to enable/start Sensu client on boot.
+
+## Ubuntu/Debian
+
+~~~ shell
+update-rc.d sensu-client defaults
+~~~
+
+## CentOS/RHEL
+
+~~~ shell
+chkconfig sensu-client on
+~~~
+
 # Install the Sensu client on remote hosts
 
 ## Overview
