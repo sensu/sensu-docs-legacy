@@ -92,13 +92,13 @@ By default, the Sensu client service does not start on boot. Use the following i
 ## Ubuntu/Debian
 
 ~~~ shell
-update-rc.d sensu-client defaults
+sudo update-rc.d sensu-client defaults
 ~~~
 
 ## CentOS/RHEL
 
 ~~~ shell
-chkconfig sensu-client on
+sudo chkconfig sensu-client on
 ~~~
 
 # Install the Sensu client on remote hosts
