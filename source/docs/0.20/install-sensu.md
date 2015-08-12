@@ -106,7 +106,7 @@ _NOTE: this example config creates a [Sensu Check](checks) that will alert based
 {
   "checks": {
     "memory": {
-      "command": "/etc/sensu/plugins/check-mem.sh -w 128 -c 64",
+      "command": "/etc/sensu/plugins/check-memory.sh -w 128 -c 64",
       "interval": 10,
       "subscribers": [
         "test"
