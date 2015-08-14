@@ -7,9 +7,9 @@ Documentation for the Sensu monitoring framework.
 All documentation is written in [Markdown][markdown]. To preview the documentation in your browser run the following:
 
 ~~~ shell
-bundle install
+bundle install --path vendor/bundle
 bundle exec middleman
-~~~ 
+~~~
 
 Then go view the docs at [http://localhost:4567](http://localhost:4567) (which redirects to [http://localhost:4567/docs/](http://localhost:4567/docs/)). Edits to the documentation source files should cause the `middleman` server to reload so you can see your changes update live.
 
@@ -17,13 +17,13 @@ Then go view the docs at [http://localhost:4567](http://localhost:4567) (which r
 
 ## Hosting
 
-All documentation is hosted on the official Sensu website (http://sensuapp.org), which is a static site built with [Middleman][middleman], and hosted on [GitHub Pages][pages]. 
+All documentation is hosted on the official Sensu website (http://sensuapp.org), which is a static site built with [Middleman][middleman], and hosted on [GitHub Pages][pages].
 
-The important parts to familiarize yourself with for contributing to the Sensu documentation are the markdown renderer and syntax highlighting engines used to power http://sensuapp.org. 
+The important parts to familiarize yourself with for contributing to the Sensu documentation are the markdown renderer and syntax highlighting engines used to power http://sensuapp.org.
 
-Markdown rendering is handled by [Kramdown][kramdown]. 
+Markdown rendering is handled by [Kramdown][kramdown].
 
-Syntax Highlighting is handled by [middleman-syntax][syntax], which uses [Rouge][rouge], which is a ruby-based syntax highlighting engine that is compatible with [Pygments][pygments] templates and supports things like "fenced code blocks" and language-specific syntax highlighting from Markdown. 
+Syntax Highlighting is handled by [middleman-syntax][syntax], which uses [Rouge][rouge], which is a ruby-based syntax highlighting engine that is compatible with [Pygments][pygments] templates and supports things like "fenced code blocks" and language-specific syntax highlighting from Markdown.
 
 ## Metadata
 
@@ -34,7 +34,7 @@ Each page also contains some YAML "frontmatter" that is used to compile the navi
 version: "0.12"
 category: "overview"
 title: "Sensu Overview"
---- 
+---
 ~~~
 
 In addition to these required properties, there are also some optional metadata properties which can be employed:
@@ -44,7 +44,7 @@ In addition to these required properties, there are also some optional metadata 
 Some portions of the documentation should be read like a guide, prompting you on to the next step in the process. So, when present the "next" property will cause a prompt to appear at the bottom of the documentation page on http://sensuapp.org to guide the reader to the next relevant topic. If this property is missing (or if the corresponding "url" + "text" properties are omitted), no such prompt will appear.
 
 ~~~ yaml
---- 
+---
 version: "0.12"
 category: "overview"
 title: "Sensu Overview"
@@ -56,7 +56,7 @@ next:
 
 **Banners**
 
-Sometimes it is helpful to alert the reader to changes, warn them of common pitfalls, or make it known that _there be dragons_. Adding a **alert**, **warning**, or **danger** property to the frontmatter will cause a corresponding blue, yellow, or red banner to be displayed at the top of the content section of the documentation page on http://sensuapp.org. 
+Sometimes it is helpful to alert the reader to changes, warn them of common pitfalls, or make it known that _there be dragons_. Adding a **alert**, **warning**, or **danger** property to the frontmatter will cause a corresponding blue, yellow, or red banner to be displayed at the top of the content section of the documentation page on http://sensuapp.org.
 
 ~~~ yaml
 ---
@@ -77,7 +77,7 @@ find source/docs/0.18 -type f -exec sed -i 's/0\.17/0\.18/g' {} \;
 ~~~
 
 ## License
-The Sensu Documentation is released under the 
+The Sensu Documentation is released under the
 [MIT license][mit-license].
 
 
