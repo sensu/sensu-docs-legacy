@@ -61,9 +61,9 @@ SensuEnterpriseEventEntry ::= SEQUENCE {
 	sensuEventID
 		OCTET STRING,
 	sensuNotification
-		INTEGER,
+		OCTET STRING,
 	sensuClientName
-		INTEGER,
+		OCTET STRING,
 	sensuCheckName
 		OCTET STRING,
 	sensuCheckSeverity
@@ -98,7 +98,7 @@ sensuEventID  OBJECT-TYPE
 -- Event notification message.
 
 sensuNotification  OBJECT-TYPE
-	SYNTAX     INTEGER
+	SYNTAX     OCTET STRING
 	ACCESS     read-only
 	STATUS     mandatory
 	DESCRIPTION
@@ -108,7 +108,7 @@ sensuNotification  OBJECT-TYPE
 -- Sensu client name.
 
 sensuClientName  OBJECT-TYPE
-	SYNTAX     INTEGER
+	SYNTAX     OCTET STRING
 	ACCESS     read-only
 	STATUS     mandatory
 	DESCRIPTION
