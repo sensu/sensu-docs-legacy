@@ -205,15 +205,15 @@ _NOTE: Only **one** flavor of Sensu should be used at any given time: Sensu Core
 ### Ubuntu/Debian
 
 ~~~ shell
-update-rc.d sensu-server defaults
-update-rc.d sensu-api defaults
+sudo update-rc.d sensu-server defaults
+sudo update-rc.d sensu-api defaults
 ~~~
 
 ### CentOS/RHEL
 
 ~~~ shell
-chkconfig sensu-server on
-chkconfig sensu-api on
+sudo chkconfig sensu-server on
+sudo chkconfig sensu-api on
 ~~~
 
 ## Sensu Enterprise
@@ -221,11 +221,11 @@ chkconfig sensu-api on
 ### Ubuntu/Debian
 
 ~~~ shell
-update-rc.d sensu-enterprise defaults
+sudo update-rc.d sensu-enterprise defaults
 ~~~
 
 ### CentOS/RHEL
 
 ~~~ shell
-chkconfig sensu-enterprise on
+sudo chkconfig sensu-enterprise on
 ~~~
