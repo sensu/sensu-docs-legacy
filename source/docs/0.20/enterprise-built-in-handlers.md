@@ -1319,7 +1319,7 @@ port
 
 tag_host
 : description
-  : If the OpenTSDB handler should add a `host` tag to metric data points, using the Sensu client name as the value. The handler will always add a host tag to metric data points that do not have tags.
+  : If automatic host tagging should be used for metric data points. The Sensu client `name` is used as the `host` tag value. The OpenTSDB handler will always add a `host` tag to metric data points that do not have tags.
 : required
   : false
 : type
