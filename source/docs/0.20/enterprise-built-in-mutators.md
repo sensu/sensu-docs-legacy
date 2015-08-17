@@ -17,7 +17,7 @@ Sensu Core ships with a set of built-in [mutators](mutators) for transforming ev
 
 Sensu Enterprise simplifies the process of gaining insightful metrics from complex distributed systems. The `output_format` enterprise mutator makes it possible to mutate collected metrics in various formats from disparate data sources, into a [proprietary intermediate format](#sensu-metric-format) that has been optimized for portability.
 
-The `output_format` enterprise mutator extracts metrics from check result output. Users can specify an output format per check, enabling the use of various check plugins (Nagios plugins, etc.) and data sources. The `output_format` mutator currently supports several mainstream specifications: [Graphite Plaintext][graphite_plaintext], [Nagios PerfData][nagios_perfdata], [OpenTSDB][opentsdb], and [Metrics 2.0 as a wire format][metrics20_wire]. The `output_format` enterprise mutator can be leveraged when writing standard Sensu event handlers.
+The `output_format` enterprise mutator extracts metrics from check result output. Users can specify an output format per check, enabling the use of various check plugins (Nagios plugins, etc.) and data sources. The `output_format` mutator currently supports several mainstream specifications: [Graphite Plaintext][graphite_plaintext], [Nagios PerfData][nagios_perfdata], [OpenTSDB][opentsdb], [Metrics 2.0 as a wire format][metrics20_wire], and [Wizardvan JSON][wizardvan_json].
 
 The following is an example of how to configure an output format for a metric collection check, one that is making use of a Nagios plugin. This example check not only monitors NTP but also collects several metrics. Note the multiple event handlers: one for notifications (`pagerduty`), another for metric storage (`graphite`).
 
@@ -35,20 +35,6 @@ The following is an example of how to configure an output format for a metric co
         "pagerduty",
         "graphite"
       ]
-    }
-  }
-}
-~~~
-
-The following is an example of how to configure a standard Sensu event handler to use the `output_format` enterprise mutator.
-
-~~~ json
-{
-  "handlers": {
-    "metrics": {
-      "type": "pipe",
-      "command": "custom-metric-handler.rb",
-      "mutator": "output_format"
     }
   }
 }
@@ -89,7 +75,7 @@ output_format
 : type
   : String
 : allowed values
-  : `graphite_plaintext`, `nagios_perfdata`, `opentsdb`, `metrics20_wire`
+  : `graphite_plaintext`, `nagios_perfdata`, `opentsdb`, `metrics20_wire`, `wizardvan_json`
 : default
   : `graphite_plaintext`
 : example
@@ -101,3 +87,4 @@ output_format
 [graphite_plaintext]: http://graphite.readthedocs.org/en/latest/feeding-carbon.html#the-plaintext-protocol
 [opentsdb]: http://opentsdb.net/docs/build/html/user_guide/writing.html
 [metrics20_wire]: http://metrics20.org/spec/#wire_format
+[wizardvan_json]: https://github.com/opower/sensu-metrics-relay#json-metric-format
