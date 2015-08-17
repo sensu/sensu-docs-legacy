@@ -7,7 +7,7 @@ SENSU-ENTERPRISE-NOTIFY-MIB DEFINITIONS ::= BEGIN
       FROM SENSU-ENTERPRISE-ROOT-MIB;
 
 sensuEnterpriseNotify MODULE-IDENTITY
-  LAST-UPDATED "201504200000Z" -- April 20, 2015
+  LAST-UPDATED "201508170000Z" -- August 17, 2015
   ORGANIZATION "Sensu Enterprise"
   CONTACT-INFO
     "Sean Porter
@@ -20,6 +20,9 @@ sensuEnterpriseNotify MODULE-IDENTITY
     "
   DESCRIPTION
     "Objects for the Sensu Enterprise SNMP integration."
+  REVISION "201508170000Z" -- August 17, 2015
+  DESCRIPTION
+    "Added check output object, changing several OIDs"
   REVISION "201504200000Z" -- April 20, 2015
   DESCRIPTION
     "Initial Version"

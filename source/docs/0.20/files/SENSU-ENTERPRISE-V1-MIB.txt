@@ -12,7 +12,7 @@ IMPORTS
 		FROM RFC-1215;
 
 -- sensuEnterprise MODULE-IDENTITY
---     LAST-UPDATED "201504200000Z"
+--     LAST-UPDATED "201508170000Z"
 --     ORGANIZATION
 --         "Sensu Enterprise"
 --     CONTACT-INFO
@@ -25,6 +25,9 @@ IMPORTS
 --            http://www.sensuapp.org/enterprise"
 --     DESCRIPTION
 --         "Objects for the Sensu Enterprise SNMP integration"
+--     REVISION    "201508170000Z"
+--     DESCRIPTION
+--         "Added check output object, changing several OIDs"
 --     REVISION    "201504200000Z"
 --     DESCRIPTION
 --         "Initial Version"
