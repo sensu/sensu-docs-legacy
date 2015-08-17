@@ -39,6 +39,7 @@ SensuEnterpriseEventEntry ::= SEQUENCE {
   sensuClientName       OCTET STRING,
   sensuCheckName        OCTET STRING,
   sensuCheckSeverity    CheckSeverity,
+  sensuCheckOutput      OCTET STRING,
   sensuEventAction      EventAction,
   sensuEventTimestamp   Integer32,
   sensuEventOccurrences Integer32
@@ -94,6 +95,14 @@ sensuCheckSeverity OBJECT-TYPE
     0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN."
   ::= { sensuEnterpriseEventEntry 5 }
 
+sensuCheckOutput OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu check output."
+  ::= { sensuEnterpriseEventEntry 6 }
+
 sensuEventAction OBJECT-TYPE
   SYNTAX      EventAction
   MAX-ACCESS  read-only
@@ -101,7 +110,7 @@ sensuEventAction OBJECT-TYPE
   DESCRIPTION
     "A string identifying the current event action (CREATE, RESOLVE,
     FLAPPING)."
-  ::= { sensuEnterpriseEventEntry 6 }
+  ::= { sensuEnterpriseEventEntry 7 }
 
 sensuEventTimestamp OBJECT-TYPE
   SYNTAX      Integer32
@@ -109,7 +118,7 @@ sensuEventTimestamp OBJECT-TYPE
   STATUS      current
   DESCRIPTION
    "The event timestamp (seconds since the UNIX epoch)."
-  ::= { sensuEnterpriseEventEntry 7 }
+  ::= { sensuEnterpriseEventEntry 8 }
 
 sensuEventOccurrences OBJECT-TYPE
   SYNTAX      Integer32
@@ -117,12 +126,13 @@ sensuEventOccurrences OBJECT-TYPE
   STATUS      current
   DESCRIPTION
    "The event occurrence count."
-  ::= { sensuEnterpriseEventEntry 8 }
+  ::= { sensuEnterpriseEventEntry 9 }
 
 sensuEnterpriseEventTrap NOTIFICATION-TYPE
   OBJECTS { sensuEventID, sensuNotification, sensuClientName,
-            sensuCheckName, sensuCheckSeverity, sensuEventAction,
-            sensuEventTimestamp, sensuEventOccurrences }
+            sensuCheckName, sensuCheckSeverity, sensuCheckOutput,
+            sensuEventAction, sensuEventTimestamp,
+            sensuEventOccurrences }
   STATUS  current
   DESCRIPTION
     "The SNMP trap that is sent from Sensu Enterprise for an event."
