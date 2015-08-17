@@ -1259,7 +1259,7 @@ prefix
 
 ## OpenTSDB
 
-Send metrics to OpenTSDB, using the telnet protocol (TCP). This handler uses the `output_format` mutator.
+Send metrics to OpenTSDB, using the telnet protocol (TCP). This handler uses the [`output_format` mutator](https://sensuapp.org/docs/latest/enterprise-built-in-mutators#output-format).
 
 The following is an example global configuration for the `opentsdb` enterprise handler (integration).
 
