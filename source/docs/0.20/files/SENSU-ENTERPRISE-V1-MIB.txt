@@ -12,7 +12,7 @@ IMPORTS
 		FROM RFC-1215;
 
 -- sensuEnterprise MODULE-IDENTITY
---     LAST-UPDATED "201504200000Z"
+--     LAST-UPDATED "201508170000Z"
 --     ORGANIZATION
 --         "Sensu Enterprise"
 --     CONTACT-INFO
@@ -25,6 +25,9 @@ IMPORTS
 --            http://www.sensuapp.org/enterprise"
 --     DESCRIPTION
 --         "Objects for the Sensu Enterprise SNMP integration"
+--     REVISION    "201508170000Z"
+--     DESCRIPTION
+--         "Added check output object, changing several OIDs"
 --     REVISION    "201504200000Z"
 --     DESCRIPTION
 --         "Initial Version"
@@ -68,6 +71,8 @@ SensuEnterpriseEventEntry ::= SEQUENCE {
 		OCTET STRING,
 	sensuCheckSeverity
 		CheckSeverity,
+	sensuCheckOutput
+		OCTET STRING,
 	sensuEventAction
 		EventAction,
 	sensuEventTimestamp
@@ -139,13 +144,23 @@ sensuCheckSeverity  OBJECT-TYPE
 -- A string identifying the current event action (CREATE, RESOLVE,
 --    FLAPPING).
 
+-- Sensu check output.
+
+sensuCheckOutput  OBJECT-TYPE
+	SYNTAX     OCTET STRING
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION
+		""
+	::= { sensuEnterpriseEventEntry 6 }
+
 sensuEventAction  OBJECT-TYPE
 	SYNTAX     EventAction
 	ACCESS     read-only
 	STATUS     optional
 	DESCRIPTION
 		""
-	::= { sensuEnterpriseEventEntry 6 }
+	::= { sensuEnterpriseEventEntry 7 }
 
 -- The event timestamp (seconds since the UNIX epoch).
 
@@ -155,7 +170,7 @@ sensuEventTimestamp  OBJECT-TYPE
 	STATUS     optional
 	DESCRIPTION
 		""
-	::= { sensuEnterpriseEventEntry 7 }
+	::= { sensuEnterpriseEventEntry 8 }
 
 -- The event occurrence count.
 
@@ -165,7 +180,7 @@ sensuEventOccurrences  OBJECT-TYPE
 	STATUS     mandatory
 	DESCRIPTION
 		""
-	::= { sensuEnterpriseEventEntry 8 }
+	::= { sensuEnterpriseEventEntry 9 }
 
 sensuEnterpriseEventTrap  TRAP-TYPE
 	ENTERPRISE sensuEnterprise
@@ -174,6 +189,7 @@ sensuEnterpriseEventTrap  TRAP-TYPE
                   sensuClientName,
                   sensuCheckName,
                   sensuCheckSeverity,
+                  sensuCheckOutput,
                   sensuEventAction,
                   sensuEventTimestamp,
                   sensuEventOccurrences
