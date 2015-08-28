@@ -243,7 +243,7 @@ handlers
 
 low_flap_threshold
 : description
-  : The flap detection low threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](http://nagios.sourceforge.net/docs/3_0/flapping.html).
+  : The flap detection low threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html).
 : required
   : false
 : type
@@ -255,7 +255,7 @@ low_flap_threshold
 
 high_flap_threshold
 : description
-  : The flap detection high threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](http://nagios.sourceforge.net/docs/3_0/flapping.html).
+  : The flap detection high threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html).
 : required
   : true (if `low_flap_threshold` is configured)
 : type
