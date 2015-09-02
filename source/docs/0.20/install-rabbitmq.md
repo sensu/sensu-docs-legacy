@@ -61,13 +61,17 @@ sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
 sudo yum install erlang
 ~~~
 
+_NOTE: If using CentOS7, please consult the following issue: https://github.com/jjasghar/rabbitmq/issues/189
+sudo yum install epel-release will allow you to properly install erlang in centOS7.
+
+
 ### Step #2: Install RabbitMQ {#install-rabbitmq-on-centos-step-2}
 
 Install RabbitMQ using the official RabbitMQ RPM, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-rpm.html):
 
 ~~~ shell
 sudo rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.3/rabbitmq-server-3.5.3-1.noarch.rpm
+sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.4/rabbitmq-server-3.5.4-1.noarch.rpm
 ~~~
 
 # Running RabbitMQ
