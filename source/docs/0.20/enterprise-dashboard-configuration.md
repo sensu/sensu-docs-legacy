@@ -324,6 +324,8 @@ ldap
       "server": "localhost",
       "port": 389,
       "basedn": "cn=users,dc=domain,dc=tld",
+      "binduser": "cn=binder,cn=users,dc=domain,dc=tld",
+      "bindpass": "secret",
       "roles": [
         {
           "name": "guests",
@@ -349,7 +351,8 @@ ldap
         }
       ],
       "insecure": false,
-      "security": "none"
+      "security": "none",
+      "userattribute": "sAMAccountName"
     }
     ~~~
 
@@ -614,6 +617,34 @@ basedn
     "basedn": "cn=users,dc=domain,dc=tld"
     ~~~
 
+binduser
+: description
+  : The LDAP account that performs user lookups. We recommend to
+    use a read-only account. Use the distinguished name (DN) format,
+    such as `cn=binder,cn=users,dc=domain,dc=tld`.
+    _NOTE: using a binder account is not required with Active Directory,
+    although it is highly recommended._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "binduser": "cn=binder,cn=users,dc=domain,dc=tld"
+    ~~~
+
+bindpass
+: description
+  : The password for the binduser.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "bindpass": "secret"
+    ~~~
+
 insecure
 : description
   : Determines whether or not to skip SSL certificate verification (e.g. for
@@ -642,6 +673,22 @@ security
 : example
   : ~~~ shell
     "security": "none"
+    ~~~
+
+userattribute
+: description
+  : The LDAP attribute used to identify an account. You should typically use
+    `sAMAccountName` for Active Directory and `uid` for other LDAP softwares,
+    such as OpenLDAP, but it may vary.
+: required
+  : false
+: type
+  : String
+: default
+  : `sAMAccountName`
+: example
+  : ~~~ shell
+    "userattribute": "uid"
     ~~~
 
 roles
@@ -696,6 +743,8 @@ name
 members
 : description
   : An array of LDAP groups that should be included as members of the role.
+    _NOTE: Sensu Enterprise Dashboard supports the following LDAP group object
+    classes: `group`, `groupOfNames`, `groupOfUniqueNames` and `posixGroup`._
 : required
   : true
 : type
