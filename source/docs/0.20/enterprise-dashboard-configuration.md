@@ -691,6 +691,34 @@ userattribute
     "userattribute": "uid"
     ~~~
 
+userobjectclass
+: description
+  : The LDAP object class used for the user accounts.
+: required
+  : false
+: type
+  : String
+: default
+  : `person`
+: example
+  : ~~~ shell
+    "userobjectclass": "inetOrgPerson"
+    ~~~
+
+groupobjectclass
+: description
+  : The LDAP object class used for the groups.
+: required
+  : false
+: type
+  : String
+: default
+  : `groupOfNames`
+: example
+  : ~~~ shell
+    "groupobjectclass": "posixGroup"
+    ~~~
+
 roles
 : description
   : An array of [Role attributes for LDAP groups](#role-attributes-for-ldap-groups)
