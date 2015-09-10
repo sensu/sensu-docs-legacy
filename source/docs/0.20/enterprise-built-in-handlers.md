@@ -291,7 +291,7 @@ timeout
 
 ## OpsGenie
 
-Create and close OpsGenie alerts for events.
+Create and close [OpsGenie](https://www.opsgenie.com/) alerts for events.
 
 The following is an example global configuration for the `opsgenie` enterprise event handler (integration).
 
