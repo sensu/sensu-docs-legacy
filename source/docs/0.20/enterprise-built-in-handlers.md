@@ -16,6 +16,7 @@ Built-in event handlers:
 - [Email](#email) - send email notifications for events
 - [PagerDuty](#pagerduty) - create and resolve PagerDuty incidents for events
 - [VictorOps](#victorops) - create and resolve VictorOps messages for events
+- [OpsGenie](#opsgenie) - create and close OpsGenie alerts for events
 - [IRC](#irc) - send notifications to an IRC channel for events
 - [Slack](#slack) - send notifications to a Slack channel for events
 - [HipChat](#hipchat) - send notifications to a HipChat room for events
@@ -218,7 +219,7 @@ timeout
 
 ## VictorOps
 
-Create VictorOps messages for events. After [configuring a service in VictorOps](https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service), configure the handler (integration) with the provided service key.
+Create VictorOps messages for events.
 
 The following is an example global configuration for the `victorops` enterprise event handler (integration).
 
@@ -272,6 +273,138 @@ routing_key
 : example
   : ~~~ shell
     "routing_key": "ops"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+## OpsGenie
+
+Create and close [OpsGenie](https://www.opsgenie.com/) alerts for events.
+
+The following is an example global configuration for the `opsgenie` enterprise event handler (integration).
+
+~~~ json
+{
+  "opsgenie": {
+    "api_key": "eed02a0d-85a4-427b-851a-18dd8fd80d93",
+    "source": "Sensu Enterprise (AWS)",
+    "teams": ["ops", "web"],
+    "recipients": ["afterhours"],
+    "tags": ["production"],
+    "overwrites_quiet_hours": true,
+    "timeout": 10
+  }
+}
+~~~
+
+### Definition attributes
+
+opsgenie
+: description
+  : A set of attributes that configure the OpsGenie event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "opsgenie": {}
+    ~~~
+
+#### OpsGenie attributes
+
+api_key
+: description
+  : The OpsGenie Alert API key to use when creating/closing alerts.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "api_key": "eed02a0d-85a4-427b-851a-18dd8fd80d93"
+    ~~~
+
+source
+: description
+  : The source to use for OpsGenie alerts.
+: required
+  : false
+: type
+  : String
+: default
+  : `Sensu Enterprise`
+: example
+  : ~~~ shell
+    "source": "Sensu (us-west-1)"
+    ~~~
+
+teams
+: description
+  : An array of OpsGenie team names to be used to calculate which users will be responsible for created alerts.
+: required
+  : false
+: type
+  : Array
+: default
+  : `[]`
+: example
+  : ~~~ shell
+    "teams": ["ops", "web"]
+    ~~~
+
+recipients
+: description
+  : An array of OpsGenie group, schedule, or escalation names to be used to calculate which users will be responsible for created alerts.
+: required
+  : false
+: type
+  : Array
+: default
+  : `[]`
+: example
+  : ~~~ shell
+    "recipients": ["web", "afterhours"]
+    ~~~
+
+tags
+: description
+  : An array of OpsGenie alert tags that will be added to created alerts.
+: required
+  : false
+: type
+  : Array
+: default
+  : `[]`
+: example
+  : ~~~ shell
+    "tags": ["production"]
+    ~~~
+
+overwrites_quiet_hours
+: description
+  : If events with a critical severity should be tagged with "OverwritesQuietHours". This tag can be used to bypass quiet (or off) hour alert notification filtering.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "overwrites_quiet_hours": true
     ~~~
 
 timeout
@@ -950,7 +1083,7 @@ secret_access_key
 
 allowed_instance_states
 : description
-  : An array of allowed EC2 instance states. Each array items must each be a string. Any other state(s) will cause the Sensu client to be deregistered.
+  : An array of allowed EC2 instance states. Each array item must each be a string. Any other state(s) will cause the Sensu client to be deregistered.
 : required
   : false
 : type
