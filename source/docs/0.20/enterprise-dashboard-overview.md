@@ -18,4 +18,6 @@ Sensu Enterprise ships with a dashboard that provides a "single-pane of glass" f
 What will be covered in this documentation:
 
 - Configuration of the Sensu Enterprise Dashboard
+- How to enable Role-Based Access Controls
+- Configuration of Audit Logging
 - How to use the global search features (Collections)
