@@ -853,7 +853,11 @@ readonly
 ## Audit Logging
 
 As of Sensu Enterprise Dashboard version 1.3, Audit Logging is enabled by
-default.
+default. Audit Logging captures user events in the dashboard such as user
+login/logout, and any user "write" actions in the dashboard (i.e. silencing
+checks, deleting clients, deleting stashes). Optionally, it is also possible to
+log all `HTTP GET` requests (i.e. every view requested by the user, and every
+search query performed by the user).
 
 ### Example configuration
 
