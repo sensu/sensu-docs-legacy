@@ -67,3 +67,4 @@ hide_toc: true
   * [Configuration](enterprise-dashboard-configuration)
   * [Audit Logging](enterprise-dashboard-audit-logging)
   * [Collections](enterprise-dashboard-collections)
+  * [HUD](enterprise-dashboard-hud)

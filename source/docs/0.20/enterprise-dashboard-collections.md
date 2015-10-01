@@ -2,6 +2,9 @@
 version: 0.20
 category: "Collections"
 title: "Collections"
+next:
+  url: "enterprise-dashboard-overview-dashboard"
+  text: "Enterprise Dashboard Overview Dashboard"
 ---
 
 ## Collections
