@@ -1531,7 +1531,8 @@ The following is an example global configuration for the `influxdb` enterprise h
     "host": "8.8.8.8",
     "port": 8086,
     "username": "root",
-    "password": "Bfw3Bdrn5WfqvOl1"
+    "password": "Bfw3Bdrn5WfqvOl1",
+    "api_version": "0.9"
   }
 }
 ~~~
@@ -1622,6 +1623,22 @@ database
     "database": "sensu"
     ~~~
 
+api_version
+: description
+  : The InfluxDB API version.
+: required
+  : false
+: type
+  : String
+: allowed values
+  : `0.8`, `0.9`
+: default
+  : `0.8`
+: example
+  : ~~~ shell
+    "api_version": "0.9"
+    ~~~
+
 timeout
 : description
   : The InfluxDB HTTP API POST timeout (write).
@@ -1633,5 +1650,5 @@ timeout
   : `10`
 : example
   : ~~~ shell
-    "timeout": 20
+    "timeout": 3
     ~~~
