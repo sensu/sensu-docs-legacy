@@ -22,7 +22,7 @@ The following instructions will help you to:
 
 # Download the Sensu Core MSI
 
-The Sensu Core MSI can be downloaded from [http://repos.sensuapp.org/msi/sensu-0.20.0-1.msi](http://repos.sensuapp.org/msi/sensu-0.20.0-1.msi).
+The Sensu Core MSI can be downloaded from [http://repositories.sensuapp.org/msi/sensu-0.20.6-1.msi](http://repositories.sensuapp.org/msi/sensu-0.20.6-1.msi).
 
 # Install the Sensu Core MSI
 
