@@ -32,8 +32,8 @@ users, including Sensu Enterprise customers._
 Install the GPG public key, and create the APT repository configuration file for the Sensu Core repository:
 
 ~~~ shell
-wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
-echo "deb     http://repos.sensuapp.org/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
+wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
+echo "deb     http://repositories.sensuapp.org/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
 ~~~
 
 ## CentOS/RHEL
@@ -43,7 +43,7 @@ Create the YUM repository configuration file for the Sensu Core repository at `/
 ~~~ shell
 echo '[sensu]
 name=sensu
-baseurl=http://repos.sensuapp.org/yum/el/$basearch/
+baseurl=http://repositories.sensuapp.org/yum/$basearch/
 gpgcheck=0
 enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 ~~~
