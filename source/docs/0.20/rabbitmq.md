@@ -157,9 +157,9 @@ private_key_file
     "private_key_file": "/etc/sensu/ssl/key.pem"
     ~~~
 
-# Configuring Multiple (clustered) RabbitMQ servers
+# Configuration for RabbitMQ clusters
 
-If you have more than one RabbitMQ server, you can group multiple `rabbitmq: {}` directives into an array, Sensu will attempt to connect them based on their order in the array.
+If you are running a RabbitMQ cluster, you can configure sensu with a collection of `rabbitmq: {}` directives in an array. Sensu will attempt to connect to them based on their order in the array.
 
 ~~~ shell
   "rabbitmq": [
