@@ -159,7 +159,7 @@ private_key_file
 
 # Configuration for RabbitMQ clusters
 
-If you are running a RabbitMQ cluster, you can configure sensu with a collection of `rabbitmq: {}` directives in an array. Sensu will attempt to connect to them based on their order in the array.
+If you are running a RabbitMQ cluster, you can configure Sensu with a collection of `rabbitmq: {}` connection configurations in an array. Sensu will attempt to connect to them based on their order in the array.
 
 ~~~ shell
   "rabbitmq": [
