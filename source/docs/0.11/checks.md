@@ -366,7 +366,7 @@ Sensu supports check state flap detection, adding a flag `"flapping":
 true` to event data when a check changes state "too frequently",
 determined by thresholds. An event marked as flapping will not resolve
 until it is no longer flapping. The implementation is very similar to
-[Nagios flap detection](http://nagios.sourceforge.net/docs/3_0/flapping.html).
+[Nagios flap detection](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html).
 
 #### Example
 
