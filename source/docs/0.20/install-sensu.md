@@ -191,7 +191,7 @@ sudo kill -TRAP `cat /var/run/sensu-enterprise.pid`
 Tail the Sensu Enterprise log file to observe its operation:
 
 ~~~ shell
-sudo tail -f /var/log/sensu-enterprise.log
+sudo tail -f /var/log/sensu/sensu-enterprise.log
 ~~~
 
 # Enable Sensu on boot
