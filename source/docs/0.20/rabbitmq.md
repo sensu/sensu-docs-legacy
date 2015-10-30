@@ -201,5 +201,5 @@ By default, queues within a RabbitMQ cluster are located on a single node (the n
 RabbitMQ uses policies to determine which queues are mirrored. The following will create a RabbitMQ policy to mirror the Sensu `results` and `keealives` queues in the `/sensu` vhost (documentation default).
 
 ~~~
-rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
+sudo rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
 ~~~
