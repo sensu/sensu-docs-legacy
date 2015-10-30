@@ -16,6 +16,7 @@ This reference document provides information to help you:
 - How to configure the Sensu RabbitMQ connection
 - How to configure RabbitMQ
 - How to secure RabbitMQ in production
+- How to configure RabbitMQ for High Availability (HA)
 
 # What is RabbitMQ?
 
@@ -164,3 +165,43 @@ To configure RabbitMQ, please refer to the [official RabbitMQ configuration docu
 # Security
 
 Sensu leverages RabbitMQ access control and SSL for secure communication. Sensu was created to deal with dynamic infrastructure, where it is not feasible to maintain strict firewall rules. It is common to expose RabbitMQ’s SSL port (`5671`) without any restrictions, if certain conditions are met. Removing the default RabbitMQ user `guest` is mandatory and using a generated user name, password, and vhost is highly recommended. Enabling SSL peer certificate verification will ensure only trusted RabbitMQ clients with the correct private key are able to connect.
+
+# Configuring RabbitMQ for High Availability (HA)
+
+For the best results when configuring HA RabbitMQ, we recommend the following:
+
+## Use a three node (RAM nodes) RabbitMQ cluster
+
+### Hardware requirements
+
+The Sensu transport does not require message persistence, making throughput the primary concern for RabbitMQ (i.e. memory is more important than disk performance). When starting with a RabbitMQ cluster it is important to use systems (e.g. virtual machines) with sufficient compute, memory, and network resources. Although it's challenging to provide "recommended hardware requirements" for the broad variety of Sensu deployments, we have found that starting with three nodes equivalent to [AWS EC2 m3.medium instances](http://aws.amazon.com/ec2/instance-types/#M3) generally provides a solid baseline for monitoring 1000+ servers, each reporting 10-20 checks (& metrics) at a 10-second interval.
+
+### RabbitMQ cluster configuration
+
+When configuring a RabbitMQ cluster, the recommended method is via the RabbitMQ configuration file `/etc/rabbitmq/rabbitmq.conf`. For more on using the RabbitMQ configuration file for auto-configuration of a cluster, please refer to the [official RabbitMQ clustering documentation](https://www.rabbitmq.com/clustering.html), under the heading "Auto-configuration of a cluster".
+
+_NOTE: An essential configuration step that is commonly forgotten is the management of the Erlang cookie that RabbitMQ nodes in a cluster must share (same). The cookie will be typically located in `/var/lib/rabbitmq/.erlang.cookie`._
+
+A RabbitMQ cluster offers several methods of handling network partitions. A RabbitMQ cluster should not span regions (e.g. WAN links), as doing so would increase latency and the probability of network partitions. The recommended network partition handling mode for a three node RabbitMQ cluster is [pause_minority](https://www.rabbitmq.com/partitions.html#pause-minority). The [pause_minority](https://www.rabbitmq.com/partitions.html#pause-minority) mode will cause the RabbitMQ node(s) in the partition minority to pause, triggering connected clients to reconnect to a "healthy" node in the partition majority.
+
+The following is a portion of a `/etc/rabbitmq/rabbitmq.conf` configuration file, which configures the auto-configuration of a three node RabbitMQ cluster that uses the `pause_minority` network partition handling mode.
+
+~~~ erlang
+[
+  {rabbit, [
+    {cluster_nodes, {['rabbit@host-1', 'rabbit@host-2', 'rabbit@host-3'], ram}},
+    {cluster_partition_handling, pause_minority},
+    ...
+  ]}
+].
+~~~
+
+### Mirroring the Sensu queues
+
+By default, queues within a RabbitMQ cluster are located on a single node (the node on which they were first declared). This is in contrast to exchanges and bindings, which can always be considered to be on all nodes. Sensu requires specific queues be mirrored across all RabbitMQ nodes in the RabbitMQ cluster. The Sensu `results` and `keepalives` queues MUST be mirrored. Sensu client subscription queues do not need to be mirrored.
+
+RabbitMQ uses policies to determine which queues are mirrored. The following will create a RabbitMQ policy to mirror the Sensu `results` and `keealives` queues in the `/sensu` vhost (documentation default).
+
+~~~
+sudo rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
+~~~
