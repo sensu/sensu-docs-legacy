@@ -180,6 +180,8 @@ The Sensu transport does not require message persistence, making throughput the 
 
 When configuring a RabbitMQ cluster, the recommended method is via the RabbitMQ configuration file `/etc/rabbitmq/rabbitmq.conf`. For more on using the RabbitMQ configuration file for auto-configuration of a cluster, please refer to the [official RabbitMQ clustering documentation](https://www.rabbitmq.com/clustering.html), under the heading "Auto-configuration of a cluster".
 
+_NOTE: An essential configuration step that is commonly forgotten is the management of the Erlang cookie that RabbitMQ nodes in a cluster must share (same). The cookie will be typically located in `/var/lib/rabbitmq/.erlang.cookie`._
+
 A RabbitMQ cluster offers several methods of handling network partitions. A RabbitMQ cluster should not span regions (e.g. WAN links), as doing so would increase latency and the probability of network partitions. The recommended network partition handling mode for a three node RabbitMQ cluster is [pause_minority](https://www.rabbitmq.com/partitions.html#pause-minority). The [pause_minority](https://www.rabbitmq.com/partitions.html#pause-minority) mode will cause the RabbitMQ node(s) in the partition minority to pause, triggering connected clients to reconnect to a "healthy" node in the partition majority.
 
 The following is a portion of a `/etc/rabbitmq/rabbitmq.conf` configuration file, which configures the auto-configuration of a three node RabbitMQ cluster that uses the `pause_minority` network partition handling mode.
