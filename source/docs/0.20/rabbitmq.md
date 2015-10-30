@@ -174,7 +174,7 @@ For the best results when configuring HA RabbitMQ, we recommend the following:
 
 ### Hardware requirements
 
-The Sensu transport does not require message persistence, making throughput the primary concern for RabbitMQ (i.e. memory is more important than disk performance). When starting with a RabbitMQ cluster it is important to use systems (e.g. virtual machines) with sufficient compute, memory, and network resources. Although it's challenging to provide "recommended hardware requirements" for the broad variety of Sensu deployments, we have found that starting with three nodes equivalent to [AWS EC2 m3.medium instances](http://aws.amazon.com/ec2/instance-types/#M3) generally provides a solid baseline for monitoring upwards of 1000+ servers, each reporting 10-20 checks & metrics at 10-second resolution.
+The Sensu transport does not require message persistence, making throughput the primary concern for RabbitMQ (i.e. memory is more important than disk performance). When starting with a RabbitMQ cluster it is important to use systems (e.g. virtual machines) with sufficient compute, memory, and network resources. Although it's challenging to provide "recommended hardware requirements" for the broad variety of Sensu deployments, we have found that starting with three nodes equivalent to [AWS EC2 m3.medium instances](http://aws.amazon.com/ec2/instance-types/#M3) generally provides a solid baseline for monitoring 1000+ servers, each reporting 10-20 checks (& metrics) at a 10-second interval.
 
 ### RabbitMQ cluster configuration
 
@@ -196,7 +196,9 @@ The following is a portion of a `/etc/rabbitmq/rabbitmq.conf` configuration file
 
 ### Mirroring the Sensu queues
 
-WIP
+By default, queues within a RabbitMQ cluster are located on a single node (the node on which they were first declared). This is in contrast to exchanges and bindings, which can always be considered to be on all nodes. Sensu requires specific queues be mirrored across all RabbitMQ nodes in the RabbitMQ cluster. The Sensu `results` and `keepalives` queues MUST be mirrored. Sensu client subscription queues do not need to be mirrored.
+
+RabbitMQ uses policies to determine which queues are mirrored. The following will create a RabbitMQ policy to mirror the Sensu `results` and `keealives` queues in the `/sensu` vhost (documentation default).
 
 ~~~
 rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
