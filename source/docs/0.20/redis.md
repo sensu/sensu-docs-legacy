@@ -16,6 +16,7 @@ This reference document provides information to help you:
 - How to configure the Sensu Redis connection
 - How to configure Redis
 - How to secure Redis in production
+- How to configure Redis for High Availability (HA)
 
 # What is Redis?
 
@@ -124,3 +125,118 @@ To configure Redis, please refer to the [official Redis configuration documentat
 Redis is designed to be accessed by trusted clients inside trusted environments. Access to the Redis TCP port (default is `6379`) should be limited, this can be accomplished with firewall rules (e.g. IPTables, EC2 security group). Redis does not support native SSL encryption, however, a SSL proxy like [Stunnel](https://www.stunnel.org/index.html) may be used to provide an encrypted tunnel, at the cost of added complexity. Redis does not provide access controls, however, it does support plain-text password authentication. Redis password authentication may be limited but it is recommended.
 
 For more on Redis security, please refer to the [official Redis security documentation](http://redis.io/topics/security).
+
+# Configuring Redis for High Availability (HA)
+
+Redis supports asynchronous master-slave replication which allows one or more Redis servers to be exact copies of a master Redis server. Configuration of Redis master-slave replication is straightforward, requiring only a few steps beyond installation. For more information about Redis replication, please refer to the [official Redis replication documentation](http://redis.io/topics/replication).
+
+## Redis master-slave replication
+
+### Hardware requirements
+
+
+### Install Redis
+
+Before configuring Redis master-slave replication, Redis must first be installed on both servers. For Redis installation instructions, please refer to the [Sensu Redis installation guide](install-redis). Once Redis has been installed and started on both servers, you may proceed to configure Redis master-slave replication.
+
+### Configure Redis master
+
+A Redis server requires a few configuration changes before it is capable of becoming a Redis master. The Redis configuration file can be found at `/etc/redis/redis.conf` and can be edited by your preferred text editor with sudo privileges, e.g. `sudo nano /etc/redis/redis.conf`.
+
+The Redis server must be configured to bind/listen on a network interface other than localhost (`127.0.0.1`). To allow external network connectivity (for slaves etc.), ensure that the `bind` configuration option is either commented out or modified to an appropriate network interface IP address.
+
+~~~
+#bind 127.0.0.1
+~~~
+
+Redis password authentication must be enabled, ensure that the `requirepass` configuration option is uncommented and its value is a complex string (for increased security).
+
+~~~
+requirepass your_redis_password
+~~~
+
+Restart the Redis server to reload the now modified configuration.
+
+#### Ubuntu/Debian
+
+~~~ shell
+sudo /etc/init.d/redis-server restart
+~~~
+
+#### CentOS/RHEL
+
+~~~ shell
+sudo /etc/init.d/redis restart
+~~~
+
+### Configure Redis slave
+
+A Redis server requires a few configuration changes before it is capable of becoming a Redis slave. The Redis configuration file can be found at `/etc/redis/redis.conf` and can be edited by your preferred text editor with sudo privileges, e.g. `sudo nano /etc/redis/redis.conf`.
+
+The Redis server must be configured to bind/listen on a network interface other than localhost (`127.0.0.1`). To allow external network connectivity, ensure that the `bind` configuration option is either commented out or modified to an appropriate network interface IP address.
+
+~~~
+#bind 127.0.0.1
+~~~
+
+Redis password authentication must be enabled, ensure that the `requirepass` configuration option is uncommented and its value is a complex string (for increased security). The Redis password string should match that of the Redis master.
+
+~~~
+requirepass your_redis_password
+~~~
+
+The Redis server must configured as a slave for a specific Redis master. To configure the Redis server as a slave, the `slaveof` configuration option must be uncommented and its value updated to point at the appropriate host address and Redis port for the Redis master. The default Redis port is `6379`.
+
+~~~
+slaveof your_redis_master_ip 6379
+~~~
+
+The Redis slave must be configured with the Redis master authentication password in order to connect to it. The `masterauth` configuration option must be uncommented and its value updated to equal the Redis master password (value of `requirepass`).
+
+~~~
+masterauth your_redis_password
+~~~
+
+Restart the Redis server to reload the now modified configuration.
+
+#### Ubuntu/Debian
+
+~~~ shell
+sudo /etc/init.d/redis-server restart
+~~~
+
+#### CentOS/RHEL
+
+~~~ shell
+sudo /etc/init.d/redis restart
+~~~
+
+### Verify master-slave replication
+
+To verify that Redis master-slave replication has been configured correctly and that it is operating, the Redis CLI tool (`redis-cli`) can be used to issue Redis commands to query for information.
+
+The following commands can be executed on both Redis servers, the master and the slave. The Redis command `INFO` provides replication status information.
+
+~~~ shell
+redis-cli
+AUTH your_redis_password
+INFO
+~~~
+
+Example `INFO` replication information:
+
+~~~
+...
+
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=10.0.0.171,port=6379,state=online,offset=5475,lag=0
+master_repl_offset:5475
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:2
+repl_backlog_histlen:5474
+
+...
+~~~
