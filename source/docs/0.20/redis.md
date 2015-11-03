@@ -134,7 +134,7 @@ Redis supports asynchronous master-slave replication which allows one or more Re
 
 ### Hardware requirements
 
-Due to the performance characteristics of Redis as an in-memory key/value data store and Sensu's relatively small data set, the hardware requirements for Redis are minimal. When provisioning a Redis server for Sensu it is important to use systems (e.g. virtual machines) with sufficient compute, memory, and network resources. Redis is a single threaded service, because of this it can only utilize a single CPU, so quality over quantity in regards to processors.
+Due to the performance characteristics of Redis as an in-memory key/value data store and Sensu's relatively small data set, the hardware requirements for Redis are relatively minimal. When provisioning a Redis server for Sensu it is important to use systems (e.g. virtual machines) with sufficient compute, memory, and network resources. Redis is a single threaded service, because of this it can only utilize a single CPU, so the quality of processor is more important than the quantity. In most cases Redis will be network bound so providing it with good network connectivity is most important. The `redis-benchmark` utility can be used to test the capabilities of Redis on a machine, please refer to the [official redis-benchmark documentation](http://redis.io/topics/benchmarks) for more information. Redis is a fast in-memory key/value data store and given enough resources it is unlikely to become a bottleneck for your Sensu installation.
 
 ### Install Redis
 
