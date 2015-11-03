@@ -150,10 +150,14 @@ The Redis server must be configured to bind/listen on a network interface other 
 #bind 127.0.0.1
 ~~~
 
-Redis password authentication must be enabled, ensure that the `requirepass` configuration option is uncommented and its value is a complex string (for increased security).
+Redis password authentication must be enabled, ensure that the `requirepass` and `masterauth` configuration options are uncommented and their values are the SAME complex string (for increased security), e.g. `thW0K5tB4URO5a9wsykBH8ja4AdwkQcw`.
 
 ~~~
 requirepass your_redis_password
+~~~
+
+~~~
+masterauth your_redis_password
 ~~~
 
 Restart the Redis server to reload the now modified configuration.
@@ -192,7 +196,7 @@ The Redis server must configured as a slave for a specific Redis master. To conf
 slaveof your_redis_master_ip 6379
 ~~~
 
-The Redis slave must be configured with the Redis master authentication password in order to connect to it. The `masterauth` configuration option must be uncommented and its value updated to equal the Redis master password (value of `requirepass`).
+The Redis slave must be configured with the Redis master authentication password in order to connect to it. The `masterauth` configuration option must be uncommented and its value updated to equal the Redis master password (same value of `requirepass`).
 
 ~~~
 masterauth your_redis_password
