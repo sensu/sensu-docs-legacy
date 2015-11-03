@@ -245,3 +245,7 @@ repl_backlog_histlen:5474
 
 ...
 ~~~
+
+## Redis Sentinel
+
+Redis master-slave replication is able to produce one or more copies of a Redis server, however, it does not provide automatic failover between the master and slave Redis servers. Redis Sentinel is a service for managing Redis servers, capable of promoting a slave to master if the current master is not working as expected. Redis Sentinel can run on the same machines as Redis or on machines responsible for other services (preferred), such as RabbitMQ. At least three instances of Redis Sentinel are required for a robust deployment. For more information about Redis Sentinel, please refer to the [official Sentinel documentation](http://redis.io/topics/sentinel).
