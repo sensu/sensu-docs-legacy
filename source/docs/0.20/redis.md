@@ -26,7 +26,7 @@ You can visit the official Redis website to learn more: [redis.io](http://redis.
 
 # How Sensu uses Redis
 
-Sensu uses Redis for storing persistent data. When running Sensu Core, the Sensu server and API services (`sensu-server` and `sensu-api`) require access to Redis. When running Sensu Enterprise, only the Sensu Enterprise service (`sensu-enterprise`) requires access. All of the Sensu services for a given Sensu Core or Sensu Enterprise installation that require access to Redis **must use the same instance of Redis**, this includes distributed or HA Sensu Core and Sensu Enterprise configurations. Sensu uses Redis to store and access the Sensu client registry, check results, check execution history, and current event data.
+Sensu uses Redis for storing persistent data (e.g. current events). When running Sensu Core, the Sensu server and API services (`sensu-server` and `sensu-api`) require access to Redis. When running Sensu Enterprise, only the Sensu Enterprise service (`sensu-enterprise`) requires access. All of the Sensu services for a given Sensu Core or Sensu Enterprise installation that require access to Redis **must use the same instance of Redis**, this includes distributed or HA Sensu Core and Sensu Enterprise configurations. Sensu uses Redis to store and access the Sensu client registry, check results, check execution history, and current event data.
 
 # Anatomy of a Redis definition
 
@@ -248,7 +248,7 @@ repl_backlog_histlen:5474
 
 ## Redis Sentinel
 
-Redis master-slave replication is able to produce one or more copies of a Redis server, however, it does not provide automatic failover between the master and slave Redis servers. Redis Sentinel is a service for managing Redis servers, capable of promoting a slave to master if the current master is not working as expected. Redis Sentinel can run on the same machines as Redis or on machines responsible for other services (preferred), such as RabbitMQ. Sentinel should be placed on machines that are believed to fail in an independent way. At least three instances of Redis Sentinel are required for a robust deployment. For more information about Redis Sentinel, please refer to the [official Sentinel documentation](http://redis.io/topics/sentinel).
+Redis master-slave replication is able to produce one or more copies of a Redis server, however, it does not provide automatic failover between the master and slave Redis servers. Redis Sentinel is a service for managing Redis servers, capable of promoting a slave to master if the current master is not working as expected. Redis Sentinel is only available for Redis >= 2.8. Redis Sentinel can run on the same machines as Redis or on machines responsible for other services (preferred), such as RabbitMQ. Sentinel should be placed on machines that are believed to fail in an independent way. At least three instances of Redis Sentinel are required for a robust deployment. For more information about Redis Sentinel, please refer to the [official Sentinel documentation](http://redis.io/topics/sentinel). The following instructions will help you install and configure Redis Sentinel for Sensu's Redis connectivity.
 
 _NOTE: [Redis master-slave replication](#redis-master-slave-replication) must be configured before configuring Sentinel._
 
@@ -288,10 +288,10 @@ sudo chown redis:redis /etc/redis/sentinel.conf
 
 The Redis Sentinel configuration file requires a few changes before Sentinel can be started. The Sentinel configuration file at `/etc/redis/sentinel.conf` can be edited by your preferred text editor with sudo privileges, e.g. `sudo nano /etc/redis/sentinel.conf`.
 
-Sentinel needs to be pointed at the current Redis master server. Change `127.0.0.1` to the address that the Redis master server is listening on. Leaving the master name as `mymaster` is recommended, as many other configuration options reference it.
+Sentinel needs to be pointed at the current Redis master server. Change `your_redis_master_ip` to the address that the Redis master server is listening on. Leaving the master name as `mymaster` is recommended, as many other configuration options reference it.
 
 ~~~
-sentinel monitor mymaster 127.0.0.1 6379 2
+sentinel monitor mymaster your_redis_master_ip 6379 2
 ~~~
 
 Sentinel needs to know the Redis password, change `your_redis_password` to be the same value as `masterauth` (and `requirepass`) on the Redis master server.
@@ -355,3 +355,94 @@ master0:name=mymaster,status=ok,address=10.0.0.214:6379,slaves=1,sentinels=3
 
 ...
 ~~~
+
+## HAProxy for Redis
+
+Sensu is currently unable to automatically switch between instances of Redis as the master changes. Because of this limitation, Sensu services that communicate with Redis (`sensu-server`, `sensu-api`, and `sensu-enterprise`) require a local instance of HAProxy to send their Redis commands to the correct instance of Redis (master). The following instructions will help you install and configure HAProxy for Sensu's Redis connectivity.
+
+### Install HAProxy
+
+HAProxy >= 1.5 is required in order for it to effectively route Redis traffic. Most Linux distributions require additional software repositories for HAProxy 1.5. The following commands add the appropriate repository for the distribution and install HAProxy.
+
+#### Debian
+
+~~~ shell
+echo "deb http://cdn.debian.net/debian wheezy-backports main" | sudo tee -a /etc/apt/sources.list.d/backports.list
+sudo apt-get update
+sudo apt-get -y install haproxy -t wheezy-backports
+~~~
+
+#### Ubuntu
+
+~~~ shell
+sudo add-apt-repository ppa:vbernat/haproxy-1.5
+sudo apt-get update
+sudo apt-get -y install haproxy
+~~~
+
+#### CentOS/RHEL
+
+To install HAProxy 1.5 on CentOS/RHEL, it must be compiled/installed from source.
+
+The 1.5 source can be found at: [http://www.haproxy.org/download/1.5/src/](http://www.haproxy.org/download/1.5/src/)
+
+### Configure HAProxy
+
+By default, HAProxy reads a configuration file that can be found at `/etc/haproxy/haproxy.cfg`. The HAProxy package may provide its own example `haproxy.cfg` file, however, the Sensu docs provided file is required in order for the following instructions to work. Run the following command to download the provided HAProxy configuration file.
+
+~~~ shell
+sudo wget -O /etc/haproxy/haproxy.cfg http://sensuapp.org/docs/0.20/files/haproxy.cfg
+~~~
+
+The HAProxy configuration file requires a few changes before HAProxy can proxy traffic for Redis. The HAProxy configuration file at `/etc/haproxy/haproxy.cfg` can be edited by your preferred text editor with sudo privileges, e.g. `sudo nano /etc/haproxy/haproxy.cfg`.
+
+HAProxy needs the Redis password in order to determine the health of the Redis backends and which one is the current master. Change `your_redis_password` to be the same value as `masterauth` (and `requirepass`) on the Redis servers.
+
+~~~
+tcp-check send AUTH\ your_redis_password\r\n
+~~~
+
+HAProxy needs to be pointed at the Redis servers (the backend). Change `your_redis_master_ip` to the address that the Redis master server is listening on. Change `your_redis_slave_ip` to the address that the Redis slave server is listening on. If you have configured additional Redis machines, add additional `server` lines here to add them to the backend.
+
+~~~
+server redis1 your_redis_master_ip:6379 check inter 5s
+server redis2 your_redis_slave_ip:6379 check inter 5s
+~~~
+
+Restart HAProxy to load the new configuration.
+
+~~~ shell
+sudo /etc/init.d/haproxy restart
+~~~
+
+### Verify HAProxy for Redis operation
+
+To verify that HAProxy has been configured correctly and is able to proxy Redis commands to the current Redis master, the Redis CLI tool (`redis-cli`) can be used to issue the `AUTH` and `INFO` commands to HAProxy. The `redis-cli` command line argument `-h` must be used to specify the HAProxy address and `-p` must be used to specify the port (`6380`).
+
+The following commands can be executed on any machine with the `redis-cli` tool installed and network access to HAProxy. The Redis command `INFO` should provide the Redis master replication information (not the slave).
+
+~~~ shell
+redis-cli -h your_haproxy_ip -p 6380
+AUTH your_redis_password
+INFO
+~~~
+
+Example Redis master `INFO` via HAProxy:
+
+~~~
+...
+
+# Replication
+role:master
+connected_slaves:1
+slave0:ip=10.0.0.171,port=6379,state=online,offset=5475,lag=0
+master_repl_offset:5475
+repl_backlog_active:1
+repl_backlog_size:1048576
+repl_backlog_first_byte_offset:2
+repl_backlog_histlen:5474
+
+...
+~~~
+
+The provided HAProxy configuration file at (`/etc/haproxy/haproxy.cfg`) includes a stats web interface, available on port `4242`, that uses basic authentication (admin:admin). The stats web interface can be used to observe the health of the Redis servers, only a single Redis server should be labeled as `UP` (the Redis master).
