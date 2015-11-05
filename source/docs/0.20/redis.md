@@ -11,12 +11,12 @@ next:
 
 This reference document provides information to help you:
 
-- Understand what Redis is
-- Understand how Sensu uses Redis
-- How to configure the Sensu Redis connection
-- How to configure Redis
-- How to secure Redis in production
-- How to configure Redis for High Availability (HA)
+- [Understand what Redis is](#what-is-redis)
+- [Understand how Sensu uses Redis](#how-sensu-uses-redis)
+- [How to configure the Sensu Redis connection](#anatomy-of-a-redis-definition)
+- [How to configure Redis](#configuring-redis)
+- [How to secure Redis in production](#security)
+- [How to configure Redis for High Availability (HA)](#configuring-redis-for-high-availability-ha)
 
 # What is Redis?
 
@@ -128,7 +128,7 @@ For more on Redis security, please refer to the [official Redis security documen
 
 # Configuring Redis for High Availability (HA)
 
-Redis supports asynchronous master-slave replication which allows one or more Redis servers to be exact copies of a master Redis server. Configuration of Redis master-slave replication is straightforward, requiring only a few steps beyond installation. For more information about Redis replication, please refer to the [official Redis replication documentation](http://redis.io/topics/replication).
+Redis supports asynchronous master-slave replication which allows one or more Redis servers to be exact copies of a master Redis server. Configuration of Redis master-slave replication is straightforward, requiring only a few steps beyond installation. For more information about Redis replication, please refer to the [official Redis replication documentation](http://redis.io/topics/replication). All Sensu components that communicate with Redis must use the same instance of Redis, the current Redis master.
 
 ## Redis master-slave replication
 
@@ -150,14 +150,14 @@ The Redis server must be configured to bind/listen on a network interface other 
 #bind 127.0.0.1
 ~~~
 
-Redis password authentication must be enabled, ensure that the `requirepass` and `masterauth` configuration options are uncommented and their values are the SAME complex string (for increased security), e.g. `thW0K5tB4URO5a9wsykBH8ja4AdwkQcw`.
-
-~~~
-requirepass your_redis_password
-~~~
+Redis password authentication must be enabled, ensure that the `masterauth` and `requirepass` configuration options are uncommented and their values are the SAME complex string (for increased security), e.g. `thW0K5tB4URO5a9wsykBH8ja4AdwkQcw`.
 
 ~~~
 masterauth your_redis_password
+~~~
+
+~~~
+requirepass your_redis_password
 ~~~
 
 Restart the Redis server to reload the now modified configuration.
@@ -220,7 +220,7 @@ sudo /etc/init.d/redis restart
 
 To verify that Redis master-slave replication has been configured correctly and that it is operating, the Redis CLI tool (`redis-cli`) can be used to issue Redis commands to query for information.
 
-The following commands can be executed on both Redis servers, the master and the slave. The Redis command `INFO` provides replication status information.
+The following commands can be executed on both Redis servers, the master and the slave. The Redis command `AUTH` must first be used to authenticate with `your_redis_password` before other commands can be used. The Redis command `INFO` provides replication status information.
 
 ~~~ shell
 redis-cli
@@ -248,4 +248,110 @@ repl_backlog_histlen:5474
 
 ## Redis Sentinel
 
-Redis master-slave replication is able to produce one or more copies of a Redis server, however, it does not provide automatic failover between the master and slave Redis servers. Redis Sentinel is a service for managing Redis servers, capable of promoting a slave to master if the current master is not working as expected. Redis Sentinel can run on the same machines as Redis or on machines responsible for other services (preferred), such as RabbitMQ. At least three instances of Redis Sentinel are required for a robust deployment. For more information about Redis Sentinel, please refer to the [official Sentinel documentation](http://redis.io/topics/sentinel).
+Redis master-slave replication is able to produce one or more copies of a Redis server, however, it does not provide automatic failover between the master and slave Redis servers. Redis Sentinel is a service for managing Redis servers, capable of promoting a slave to master if the current master is not working as expected. Redis Sentinel can run on the same machines as Redis or on machines responsible for other services (preferred), such as RabbitMQ. Sentinel should be placed on machines that are believed to fail in an independent way. At least three instances of Redis Sentinel are required for a robust deployment. For more information about Redis Sentinel, please refer to the [official Sentinel documentation](http://redis.io/topics/sentinel).
+
+_NOTE: [Redis master-slave replication](#redis-master-slave-replication) must be configured before configuring Sentinel._
+
+### Install Redis
+
+To configure Redis Sentinel on a machine, the Redis package must first be installed as it includes Sentinel. For Redis installation instructions, please refer to the [Sensu Redis installation guide](install-redis).
+
+If the machine is not a regular Redis instance (master or slave) be sure to stop the Redis process and disable it on boot.
+
+#### Ubuntu/Debian
+
+~~~ shell
+sudo /etc/init.d/redis-server stop
+sudo update-rc.d redis-server disable
+~~~
+
+#### CentOS/RHEL
+
+~~~ shell
+sudo /etc/init.d/redis stop
+sudo /sbin/chkconfig redis off
+~~~
+
+### Configure Redis Sentinel
+
+By default, Sentinel reads a configuration file that can be found at `/etc/redis/sentinel.conf`. The Redis package may provide its own example `sentinel.conf` file, however, the Sensu docs provided file is required in order for the following instructions to work. Run the following command to download the provided Redis Sentinel configuration file.
+
+~~~ shell
+sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/0.20/files/sentinel.conf
+~~~
+
+Sentinel not only reads its configuration from `/etc/redis/sentinel.conf`, but it also writes changes to it (state), so the Redis user must own the configuration file.
+
+~~~ shell
+sudo chown redis:redis /etc/redis/sentinel.conf
+~~~
+
+The Redis Sentinel configuration file requires a few changes before Sentinel can be started. The Sentinel configuration file at `/etc/redis/sentinel.conf` can be edited by your preferred text editor with sudo privileges, e.g. `sudo nano /etc/redis/sentinel.conf`.
+
+Sentinel needs to be pointed at the current Redis master server. Change `127.0.0.1` to the address that the Redis master server is listening on. Leaving the master name as `mymaster` is recommended, as many other configuration options reference it.
+
+~~~
+sentinel monitor mymaster 127.0.0.1 6379 2
+~~~
+
+Sentinel needs to know the Redis password, change `your_redis_password` to be the same value as `masterauth` (and `requirepass`) on the Redis master server.
+
+~~~
+sentinel auth-pass mymaster your_redis_password
+~~~
+
+The Redis package does not provide an init script for Sentinel. Run the following command to download a working Redis Sentinel init script.
+
+~~~ shell
+sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/0.20/files/redis-sentinel
+~~~
+
+The Redis Sentinel init script file needs to be executable.
+
+~~~ shell
+sudo chmod +x /etc/init.d/redis-sentinel
+~~~
+
+Enable the Redis Sentinel service on boot and start it:
+
+#### Ubuntu/Debian
+
+~~~ shell
+sudo update-rc.d redis-sentinel defaults
+sudo /etc/init.d/redis-sentinel start
+~~~
+
+#### CentOS/RHEL
+
+~~~ shell
+sudo /sbin/chkconfig redis-sentinel on
+sudo /etc/init.d/redis-sentinel start
+~~~
+
+_NOTE: At least three instances of Redis Sentinel are required for a robust deployment._
+
+### Verify Redis Sentinel operation
+
+To verify that Redis Sentinel has been configured correctly and that it is operating, the Redis CLI tool (`redis-cli`) can be used to issue Redis commands to Sentinel to query for information. The `redis-cli` command line argument `-p` must be used to specify the Sentinel port (`26379`).
+
+The following commands can be executed on any configured instance of Redis Sentinel. The Redis command `INFO` provides the Sentinel information.
+
+~~~ shell
+redis-cli -p 26379
+INFO
+~~~
+
+Example `INFO` Sentinel information:
+
+~~~
+...
+
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+master0:name=mymaster,status=ok,address=10.0.0.214:6379,slaves=1,sentinels=3
+
+...
+~~~
