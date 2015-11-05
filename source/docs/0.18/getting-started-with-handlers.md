@@ -100,7 +100,7 @@ To specify which check result severities (`OK`, `WARNING`, etc.) the handler sup
       "type": "pipe",
       "command": "/etc/sensu/plugins/event-file.rb",
       "timeout": 10,
-      "severites": ["critical", "unknown"]
+      "severities": ["critical", "unknown"]
     }
   }
 }
