@@ -446,3 +446,17 @@ repl_backlog_histlen:5474
 ~~~
 
 The provided HAProxy configuration file at (`/etc/haproxy/haproxy.cfg`) includes a stats web interface, available on port `4242`, that uses basic authentication (admin:admin). The stats web interface can be used to observe the health of the Redis servers, only a single Redis server should be labeled as `UP` (the Redis master).
+
+### Configuring Sensu for HA Redis
+
+Once Redis master-slave replication, Redis Sentinel, and the local HAProxy instances have been configured, it's time to configure Sensu. To configure the Sensu services that communicate with Redis (`sensu-server`, `sensu-api`, and `sensu-enterprise`) to use the HA Redis configuration, they must be configured to use their local HAProxy instance for Redis connectivity. The following is an example Sensu redis configuration snippet, located at `/etc/sensu/conf.d/redis.json`. The following configuration could also be in `/etc/sensu/config.json`.
+
+~~~ json
+{
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6380,
+    "password": "your_redis_password"
+  }
+}
+~~~
