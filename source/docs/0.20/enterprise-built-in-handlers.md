@@ -30,7 +30,13 @@ Built-in event handlers:
 - [Librato](#librato) - send metrics to Librato Metrics
 - [InfluxDB](#influxdb) - send metrics to InfluxDB
 
+# Using enterprise handlers
+
+After configuring one or more [enterprise handlers](#enterprise-handlers), you can specify which ones are used per check or create a default handler set to specify those used by default.
+
 The following is an example of how to configure a Sensu check to use the built-in `email` enterprise handler (integration).
+
+`/etc/sensu/conf.d/checks/load_balancer_listeners.json`
 
 ~~~ json
 {
@@ -42,6 +48,24 @@ The following is an example of how to configure a Sensu check to use the built-i
       ],
       "interval": 20,
       "handler": "email"
+    }
+  }
+}
+~~~
+
+The following is an example of how to configure the Sensu default handler in order to specify one or more built-in enterprise handlers. The default handler is used when a check definition does not specify one or more event handlers. This example specifies the built-in `email` and `slack` enterprise handlers.
+
+`/etc/sensu/conf.d/handlers/default.json`
+
+~~~ json
+{
+  "handlers": {
+    "default": {
+      "type": "set",
+      "handlers": [
+        "email",
+        "slack"
+      ]
     }
   }
 }
