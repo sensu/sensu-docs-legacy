@@ -23,6 +23,9 @@ hide_toc: true
   * [Install Sensu MSI](windows-msi-install)
   * [Configure Sensu on Windows](windows-service-configuration)
 
+* **Upgrading Guide**
+  * [Upgrading Sensu](upgrading)
+
 * **Getting Started Guide**
   * [Overview](getting-started)
   * [Getting Started w/ Checks](getting-started-with-checks)
