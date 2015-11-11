@@ -158,6 +158,28 @@ private_key_file
     "private_key_file": "/etc/sensu/ssl/key.pem"
     ~~~
 
+### Example RabbitMQ definition
+
+The following is an example RabbitMQ connection definition at `/etc/sensu/conf.d/rabbitmq.json`.
+
+~~~ json
+{
+  "rabbitmq": {
+    "host": "57.43.53.42",
+    "port": 5671,
+    "vhost": "/sensu",
+    "user": "sensu",
+    "password": "secret",
+    "heartbeat": 30,
+    "prefetch": 50,
+    "ssl": {
+      "cert_chain_file": "/etc/sensu/ssl/cert.pem",
+      "private_key_file": "/etc/sensu/ssl/key.pem"
+    }
+  }
+}
+~~~
+
 # Configuring RabbitMQ
 
 To configure RabbitMQ, please refer to the [official RabbitMQ configuration documentation](https://www.rabbitmq.com/configure.html).
@@ -166,11 +188,27 @@ To configure RabbitMQ, please refer to the [official RabbitMQ configuration docu
 
 Sensu leverages RabbitMQ access control and SSL for secure communication. Sensu was created to deal with dynamic infrastructure, where it is not feasible to maintain strict firewall rules. It is common to expose RabbitMQ’s SSL port (`5671`) without any restrictions, if certain conditions are met. Removing the default RabbitMQ user `guest` is mandatory and using a generated user name, password, and vhost is highly recommended. Enabling SSL peer certificate verification will ensure only trusted RabbitMQ clients with the correct private key are able to connect.
 
+## SELinux
+
+If SELinux is enabled on the machine(s) reponsible for running RabbitMQ, you may need to make minor policy changes in order for RabbitMQ (and Erlang) to run successfully.
+
+To list the available SELinux booleans, run the following command:
+
+~~~ shell
+sudo getsebool -a
+~~~
+
+For some reason, enabling the NIS boolean allows RabbitMQ to bind to its TCP socket and operate normally.
+
+~~~ shell
+sudo setsebool -P nis_enabled 1
+~~~
+
 # Configuring RabbitMQ for High Availability (HA)
 
-For the best results when configuring HA RabbitMQ, we recommend the following:
+For the best results when configuring HA RabbitMQ, we recommend reading the following information and instructions. Running a three node RabbitMQ cluster is recommended, as running fewer or more nodes introduces additional failure modes.
 
-## Use a three node (RAM nodes) RabbitMQ cluster
+## Configure a three node RabbitMQ cluster
 
 ### Hardware requirements
 
@@ -178,18 +216,19 @@ The Sensu transport does not require message persistence, making throughput the 
 
 ### RabbitMQ cluster configuration
 
-When configuring a RabbitMQ cluster, the recommended method is via the RabbitMQ configuration file `/etc/rabbitmq/rabbitmq.conf`. For more on using the RabbitMQ configuration file for auto-configuration of a cluster, please refer to the [official RabbitMQ clustering documentation](https://www.rabbitmq.com/clustering.html), under the heading "Auto-configuration of a cluster".
+When configuring a RabbitMQ cluster, the recommended method is via the `rabbitmqctl` CLI tool provided by the RabbitMQ package. For more information on this method of clustering RabbitMQ, please refer to the [official RabbitMQ clustering guide](https://www.rabbitmq.com/clustering.html).
 
-_NOTE: An essential configuration step that is commonly forgotten is the management of the Erlang cookie that RabbitMQ nodes in a cluster must share (same). The cookie will be typically located in `/var/lib/rabbitmq/.erlang.cookie`._
+_NOTE: An essential configuration step that is commonly skipped is the management of the Erlang cookie that RabbitMQ nodes in a cluster must share (same). The cookie will be typically located in `/var/lib/rabbitmq/.erlang.cookie`._
+
+_NOTE: When adding a RabbitMQ broker to a cluster, e.g. `rabbitmqctl join_cluster rabbit@rabbit1`, the brokers must be able to successfully resolve each other's hostname (e.g. `rabbit1`)._
 
 A RabbitMQ cluster offers several methods of handling network partitions. A RabbitMQ cluster should not span regions (e.g. WAN links), as doing so would increase latency and the probability of network partitions. The recommended network partition handling mode for a three node RabbitMQ cluster is [pause_minority](https://www.rabbitmq.com/partitions.html#pause-minority). The [pause_minority](https://www.rabbitmq.com/partitions.html#pause-minority) mode will cause the RabbitMQ node(s) in the partition minority to pause, triggering connected clients to reconnect to a "healthy" node in the partition majority.
 
-The following is a portion of a `/etc/rabbitmq/rabbitmq.conf` configuration file, which configures the auto-configuration of a three node RabbitMQ cluster that uses the `pause_minority` network partition handling mode.
+The following is a portion of a `/etc/rabbitmq/rabbitmq.config` configuration file, which configures RabbitMQ to use the `pause_minority` network partition handling mode when the RabbitMQ cluster experiences a network partition (and/or connectivity issues). For more information about `rabbitmq.config`, please refer to the [official RabbitMQ configuration file documentation](https://www.rabbitmq.com/configure.html#configuration-file).
 
 ~~~ erlang
 [
   {rabbit, [
-    {cluster_nodes, {['rabbit@host-1', 'rabbit@host-2', 'rabbit@host-3'], ram}},
     {cluster_partition_handling, pause_minority},
     ...
   ]}
@@ -204,4 +243,60 @@ RabbitMQ uses policies to determine which queues are mirrored. The following wil
 
 ~~~
 sudo rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
+~~~
+
+### Configuring Sensu for a RabbitMQ cluster
+
+Sensu services (e.g. `sensu-client`) can be configured with the connection information for each RabbitMQ node in a RabbitMQ cluster. Sensu will randomly sort the configured RabbitMQ connections and attempt to connect to one of them. If Sensu is unable to connect to a RabbitMQ node in a cluster, or looses connectivity (reconnect), it will attempt to connect to the next RabbitMQ node in the cluster. Having Sensu be aware of all RabbitMQ nodes in a cluster is essential and removes any need for a load balancer etc.
+
+To configure Sensu to connect to RabbitMQ nodes in a cluster, the `"rabbitmq"` scope can be provided with an array of RabbitMQ connection configurations, e.g. `"rabbitmq": []`.
+
+The following is an example RabbitMQ definition that configures Sensu to connect to a RabbitMQ cluster.
+
+_NOTE: the RabbitMQ nodes must first be successfully clustered in order for Sensu to operate._
+
+~~~ json
+{
+  "rabbitmq": [
+    {
+      "host": "57.43.53.42",
+      "port": 5671,
+      "vhost": "/sensu",
+      "user": "sensu",
+      "password": "secret",
+      "heartbeat": 30,
+      "prefetch": 50,
+      "ssl": {
+        "cert_chain_file": "/etc/sensu/ssl/cert.pem",
+        "private_key_file": "/etc/sensu/ssl/key.pem"
+      }
+    },
+    {
+      "host": "57.43.53.43",
+      "port": 5671,
+      "vhost": "/sensu",
+      "user": "sensu",
+      "password": "secret",
+      "heartbeat": 30,
+      "prefetch": 50,
+      "ssl": {
+        "cert_chain_file": "/etc/sensu/ssl/cert.pem",
+        "private_key_file": "/etc/sensu/ssl/key.pem"
+      }
+    },
+    {
+      "host": "57.43.53.44",
+      "port": 5671,
+      "vhost": "/sensu",
+      "user": "sensu",
+      "password": "secret",
+      "heartbeat": 30,
+      "prefetch": 50,
+      "ssl": {
+        "cert_chain_file": "/etc/sensu/ssl/cert.pem",
+        "private_key_file": "/etc/sensu/ssl/key.pem"
+      }
+    }
+  ]
+}
 ~~~
