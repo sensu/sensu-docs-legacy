@@ -11,12 +11,12 @@ next:
 
 This reference document provides information to help you:
 
-- Understand what RabbitMQ is
-- Understand how Sensu uses RabbitMQ
-- How to configure the Sensu RabbitMQ connection
-- How to configure RabbitMQ
-- How to secure RabbitMQ in production
-- How to configure RabbitMQ for High Availability (HA)
+- [Understand what RabbitMQ is](#what-is-rabbitmq)
+- [Understand how Sensu uses RabbitMQ](#how-sensu-uses-rabbitmq)
+- [How to configure the Sensu RabbitMQ connection](#anatomy-of-a-rabbitmq-definition)
+- [How to configure RabbitMQ](#configuring-rabbitmq)
+- [How to secure RabbitMQ in production](#security)
+- [How to configure RabbitMQ for High Availability (HA)](#configuring-rabbitmq-for-high-availability-ha)
 
 # What is RabbitMQ?
 
