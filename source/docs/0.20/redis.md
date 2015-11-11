@@ -123,7 +123,7 @@ The following is an example Redis connection definition at `/etc/sensu/conf.d/re
 ~~~ json
 {
   "redis": {
-    "host": "127.0.0.1",
+    "host": "57.43.53.37",
     "port": 6379,
     "password": "secret"
   }
