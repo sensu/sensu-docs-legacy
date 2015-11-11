@@ -116,6 +116,20 @@ reconnect_on_error
     "reconnect_on_error": true
     ~~~
 
+### Example Redis definition
+
+The following is an example Redis connection definition at `/etc/sensu/conf.d/redis.json`.
+
+~~~ json
+{
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "password": "secret"
+  }
+}
+~~~
+
 # Configuring Redis
 
 To configure Redis, please refer to the [official Redis configuration documentation](http://redis.io/topics/config).
