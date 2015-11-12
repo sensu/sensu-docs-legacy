@@ -19,4 +19,4 @@ What will be covered in this documentation:
 - Configuration of the built-in Sensu Enterprise filters
 - Configuration of the built-in Sensu Enterprise mutators
 - Configuration of Sensu Enterprise contact routing
-- Configuration of the Sensu Enterprise transports
+- Configuration of the Sensu Enterprise API
