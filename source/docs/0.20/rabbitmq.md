@@ -106,7 +106,7 @@ password
 
 prefetch
 : description
-  : The RabbitMQ AMQP consumer prefetch value, setting the number of unacknowledged messages allowed for the channel. This option can be used as a flow control mechanism, to tune message throughput performance. _NOTE: an increased prefetch value should be used if you are experiencing a backlog of messages in RabbitMQ while the Sensu server(s) load remains low. Increasing the prefetch value will effect the distribution of messages in Sensu configurations with more than one Sensu server._
+  : The RabbitMQ AMQP consumer prefetch value, setting the number of unacknowledged messages allowed for the channel. This attribute can be used as a flow control mechanism, to tune message throughput performance. _NOTE: an increased prefetch value should be used if you are experiencing a backlog of messages in RabbitMQ while the Sensu server(s) load remains low. Increasing the prefetch value will effect the distribution of messages in Sensu configurations with more than one Sensu server._
 : required
   : false
 : type
@@ -120,7 +120,7 @@ prefetch
 
 ssl
 : description
-  : A set of attributes that configure SSL encryption for the connection. SSL encryption will be enabled if this option is configured.
+  : A set of attributes that configure SSL encryption for the connection. SSL encryption will be enabled if this attribute is configured.
 : required
   : false
 : type
