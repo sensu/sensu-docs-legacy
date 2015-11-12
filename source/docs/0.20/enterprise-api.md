@@ -6,7 +6,7 @@ title: "Enterprise API"
 
 # Overview
 
-Every instance of Sensu Enterprise provides the Sensu Enterprise HTTP API, built upon the [Sensu Core API](api-overview).
+Every instance of Sensu Enterprise provides the Sensu Enterprise API, built upon the [Sensu Core API](api-overview).
 
 The Sensu Enterprise API has the functionality of the Core API with the addition of several endpoints to provide access to data for generating reports, visualizing internal metrics, and more. The Enterprise API also supports native SSL, for end-to-end SSL, eliminating the need for a proxy to terminate SSL.
 
@@ -23,7 +23,7 @@ The API definition uses the `"api": {}` definition scope.
 
 host
 : description
-  : The API hostname or IP address (recommended) used when querying it. This attribute does not configure the address that the API binds to (that's `bind`).
+  : The hostname or IP address that is used when querying the API. This attribute does not configure the address that the API binds to (that's `bind`). This attribute is used by Sensu tooling to know how to query the Sensu API.
 : required
   : false
 : type
