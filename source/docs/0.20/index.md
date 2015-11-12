@@ -63,7 +63,7 @@ hide_toc: true
   * [Built-in Filters](enterprise-built-in-filters)
   * [Built-in Mutators](enterprise-built-in-mutators)
   * [Contact Routing](enterprise-contact-routing)
-  * [Transports](enterprise-transports)
+  * [API](enterprise-api)
 
 * **Enterprise Dashboard Docs**
   * [Overview](enterprise-dashboard-overview)
