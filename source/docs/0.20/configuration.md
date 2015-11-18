@@ -17,12 +17,12 @@ question has always been multifaceted.
 
 This reference document provides information to help you:
 
-- [Understand how the Sensu services are configured](#sensu-configuration-overview)
+- [Understand how the Sensu services are configured](#sensu-configuration-sources)
 - [Understand configuration "scopes"](#configuration-scopes)
 - [Understand the order in which Sensu loads configuration settings](#configuration-load-order)
 - [Understand the anatomy of the Sensu configuration](#anatomy-of-a-sensu-configuration)
 
-# Sensu Configuration {#sensu-configuration-overview}
+# Sensu Configuration Sources {#sensu-configuration-sources}
 
 By default, the main configuration file for the Sensu platform is located at
 `/etc/sensu/config.json`. However, Sensu also provides support for loading
@@ -32,7 +32,7 @@ provided from these three distinct configuration sources (environment variables,
 configuration file, and configuration directories) into a single Hash. This type
 of Hash merging is often called "deep merging".
 
-## Example Effect of Configuration Merging {#example-effect-of-configuration-merging}
+## How Configuration Merging Works {#how-configuration-merging-works}
 
 To explain how Sensu merges configuration parameters from the various disparate
 configuration sources, please note the following example scenario:
