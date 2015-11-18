@@ -1,5 +1,5 @@
 ---
-version: 0.20
+version: 0.21
 category: "Installation Guide"
 title: "Install Sensu"
 next:
@@ -67,7 +67,7 @@ sudo yum install sensu-enterprise
 The primary configuration for Sensu is stored in JSON format at `/etc/sensu/config.json`. To configure the Sensu services, copy the following example configuration to `/etc/sensu/config.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.20/files/config.json
+sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.21/files/config.json
 ~~~
 
 _NOTE: this example file configures the RabbitMQ and Redis connection options and the Sensu API._
@@ -97,7 +97,7 @@ Sensu Checks & Event Handlers will be covered in detail later in this guide, how
 Create a check definition by copying the following example configuration to `/etc/sensu/conf.d/check_memory.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.20/files/check_memory.json
+sudo wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.21/files/check_memory.json
 ~~~
 
 _NOTE: this example config creates a [Sensu Check](checks) that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available). The check script itself (the plugin) will be installed later in this guide._
@@ -119,7 +119,7 @@ _NOTE: this example config creates a [Sensu Check](checks) that will alert based
 Create a default handler definition by copying the following example configuration to `/etc/sensu/conf.d/default_handler.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.20/files/default_handler.json
+sudo wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.21/files/default_handler.json
 ~~~
 
 _NOTE: this example config creates a [Sensu Event Handler](handlers) that will be used by default for Sensu events that do not specify a handler._

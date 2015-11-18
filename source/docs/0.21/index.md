@@ -1,5 +1,5 @@
 ---
-version: "0.20"
+version: "0.21"
 category:
 title: "Table of contents"
 hide_toc: true

@@ -1,5 +1,5 @@
 ---
-version: "0.20"
+version: "0.21"
 category: "Project"
 title: "Presentations about Sensu (deprecated)"
 info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a

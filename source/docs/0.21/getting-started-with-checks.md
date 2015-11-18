@@ -1,5 +1,5 @@
 ---
-version: 0.20
+version: 0.21
 category: "Getting Started Guide"
 title: "Getting Started with Checks"
 next:
@@ -36,7 +36,7 @@ The following instructions install the check dependencies and configure the Sens
 The `check-procs` Sensu plugin can reliably detect if a service such as Cron is running or not. The following instructions will install the `check-procs` Sensu check plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-procs.rb http://sensuapp.org/docs/0.20/files/check-procs.rb
+sudo wget -O /etc/sensu/plugins/check-procs.rb http://sensuapp.org/docs/0.21/files/check-procs.rb
 sudo chmod +x /etc/sensu/plugins/check-procs.rb
 ~~~
 
@@ -145,7 +145,7 @@ Metric collection checks are used to collect measurements and other data (metric
 The following instructions install the `cpu-metrics` Sensu plugin (written in Ruby) to `/etc/sensu/plugins/cpu-metrics.rb`. This Sensu plugin will collect CPU metrics and output them in the Graphite plaintext format.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/cpu-metrics.rb http://sensuapp.org/docs/0.20/files/cpu-metrics.rb
+sudo wget -O /etc/sensu/plugins/cpu-metrics.rb http://sensuapp.org/docs/0.21/files/cpu-metrics.rb
 sudo chmod +x /etc/sensu/plugins/cpu-metrics.rb
 ~~~
 
@@ -216,7 +216,7 @@ The following check uses the `check-data` plugin to query the Graphite API at `l
 The `check-data` plugin can be installed with the following instructions:
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-data.rb http://sensuapp.org/docs/0.20/files/check-data.rb
+sudo wget -O /etc/sensu/plugins/check-data.rb http://sensuapp.org/docs/0.21/files/check-data.rb
 sudo chmod +x /etc/sensu/plugins/check-data.rb
 /etc/sensu/plugins/check-data.rb -h
 ~~~

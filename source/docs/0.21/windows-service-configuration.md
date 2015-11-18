@@ -1,5 +1,5 @@
 ---
-version: 0.20
+version: 0.21
 category: "Windows Guide"
 title: "Configure Sensu on Windows"
 success: "<strong>NOTE:</strong> this is part 2 of 2 steps in the Sensu

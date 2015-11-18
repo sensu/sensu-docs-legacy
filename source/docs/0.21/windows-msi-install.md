@@ -1,5 +1,5 @@
 ---
-version: 0.20
+version: 0.21
 category: "Windows Guide"
 title: "Install Sensu MSI"
 next:
@@ -22,7 +22,7 @@ The following instructions will help you to:
 
 # Download the Sensu Core MSI
 
-The Sensu Core MSI can be downloaded from [http://repositories.sensuapp.org/msi/sensu-0.20.6-1.msi](http://repositories.sensuapp.org/msi/sensu-0.20.6-1.msi).
+The Sensu Core MSI can be downloaded from [http://repositories.sensuapp.org/msi/sensu-0.21.0-1.msi](http://repositories.sensuapp.org/msi/sensu-0.21.0-1.msi).
 
 # Install the Sensu Core MSI
 

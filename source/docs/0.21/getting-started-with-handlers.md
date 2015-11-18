@@ -1,5 +1,5 @@
 ---
-version: 0.20
+version: 0.21
 category: "Getting Started Guide"
 title: "Getting Started with Handlers"
 next:
@@ -39,7 +39,7 @@ Pipe event handlers execute a command and pass the event data to the correspondi
 The following instructions install the `event-file` Sensu handler plugin (written in Ruby) to `/etc/sensu/plugins/event-file.rb`. This handler plugin reads the event data via `STDIN`, parses it, creates a file name using the parsed event data, and then writes the event data to the file (e.g. `/tmp/client_name/check_name.json`).
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/event-file.rb http://sensuapp.org/docs/0.20/files/event-file.rb
+sudo wget -O /etc/sensu/plugins/event-file.rb http://sensuapp.org/docs/0.21/files/event-file.rb
 sudo chmod +x /etc/sensu/plugins/event-file.rb
 ~~~
 
