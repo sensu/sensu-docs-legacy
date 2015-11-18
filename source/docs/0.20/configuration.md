@@ -7,7 +7,7 @@ next:
   text: "Clients"
 ---
 
-# Overview
+# Configuration
 
 One of the most commonly asked questions when getting started with Sensu is
 "where do the config files go"? Because Sensu was designed to be used alongside
@@ -20,10 +20,13 @@ This reference document provides information to help you:
 - [Understand how the Sensu services are configured](#sensu-configuration-sources)
 - [Understand how configuration merging works](#how-configuration-merging-works)
 - [Understand configuration "scopes"](#configuration-scopes)
+- [Understand the anatomy of a Sensu configuration](#anatomy-of-a-sensu-configuration)
+- [Understand the Sensu service init](#sensu-service-init)
+- [Understand the Sensu configuration variables](#configuration-variables)
 - [Understand the order in which Sensu loads configuration](#configuration-load-order)
-- [Understand the anatomy of the Sensu configuration](#anatomy-of-a-sensu-configuration)
+- [Understand the Sensu service command line arguments](#sensu-service-cli-arguments)
 
-# Sensu configuration sources {#sensu-configuration-sources}
+## Sensu configuration sources {#sensu-configuration-sources}
 
 By default, the main configuration file for the Sensu platform is located at
 `/etc/sensu/config.json`. However, Sensu also provides support for loading
@@ -34,7 +37,7 @@ configuration file, and configuration directories) into a single Hash. This type
 of Hash merging is often called "deep merging", and is probably the most
 important concept to understand when learning how to configure Sensu.
 
-## How configuration merging works {#how-configuration-merging-works}
+### How configuration merging works {#how-configuration-merging-works}
 
 To explain how Sensu merges configuration parameters from the various disparate
 configuration sources, please note the following example scenario:
@@ -144,7 +147,13 @@ configuration sources, please note the following example scenario:
    attributes that already existed in the `rabbitmq` configuration scope - even
    though they weren't provided by the configuration snippet.
 
-## Configuration scopes {#configuration-scopes}
+### Configuration logging
+
+As configuration snippets are applied to the Sensu configuration Hash (i.e.
+during "deep merge"), all configuration changes are logged to the corresponding
+log file (e.g. the Sensu server, API, or Client logs).
+
+### Configuration scopes {#configuration-scopes}
 
 Because Sensu configuration can be provided in so many different sources, it is
 important to understand that &ndash; _regardless of the physical location of the
@@ -170,14 +179,14 @@ scope(s) for additional configuration settings (e.g. the `rabbitmq` attribute
 defined above provides the `rabbitmq` scope, a JSON Hash, for the actual RabbitMQ
 configuration settings).
 
-### Configuration scopes are relative {#configuration-scopes-are-relative}
+#### Configuration scopes are relative {#configuration-scopes-are-relative}
 
 Throughout the Sensu documentation whenever a configuration scope is mentioned,
 it is describing the named "level" that the corresponding configuration
 attributes should be defined within, **which may be _relative_ to any
 potentially related scopes**. Please note the following examples:
 
-#### The client scope (`"client": {}`)
+##### The client scope (`"client": {}`)
 
 In the [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
 it explains that:
@@ -195,7 +204,7 @@ called `"client"`:
 }
 ~~~
 
-#### The client socket scope (`"socket": {}`)
+##### The client socket scope (`"socket": {}`)
 
 The [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
 continues to explain that Sensu clients may have a `"socket"` attribute, and
@@ -237,61 +246,9 @@ loaded by Sensu).
 }
 ~~~
 
-## Configuration load order {#configuration-load-order}
+## Anatomy of a Sensu configuration {#anatomy-of-a-sensu-configuration}
 
-Sensu configuration can be provided via three distinct sources: environment
-variables, a configuration file, and one or more directories containing
-configuration files. Sensu loads configuration from these sources in the
-following order:
-
-1. The Sensu init script provides the locations for the configuration file
-   (`-c`) and configuration directory (`-d`) when the corresponding Sensu
-   service is started. For example:
-
-   ~~~shell
-   /opt/sensu/bin/sensu-server -b -c /etc/sensu/config.json -d /etc/sensu/conf.d/
-   ~~~
-
-   _NOTE: Environment variables will override the configuration file (`-c`) and
-   configuration directory (`-d`) locations provided by the init script._
-
-2. Sensu loads configuration settings from the following environment variables
-   (primarily useful for configuring the Sensu Client; see [Client Configuration
-   Environment Variables](clients#client-configuration-environment-variables)
-   for more information):
-
-   - `SENSU_TRANSPORT_NAME`
-   - `RABBITMQ_URL`
-   - `REDIS_URL`
-   - `SENSU_CLIENT_NAME`
-   - `SENSU_CLIENT_ADDRESS`
-   - `SENSU_CLIENT_SUBSCRIPTIONS`
-   - `SENSU_API_PORT`
-
-3. Sensu loads configuration from the configuration file (by default, this is
-   located at `/etc/sensu/config.json`).
-
-4. Sensu loads configuration snippets from configuration files located in a
-   Sensu configuration directory (by default, this is `/etc/sensu/conf.d/`).
-
-   _NOTE: configuration file load order is dictated by a order provided by a
-   `*.json` glob of the configuration directory; as such it is **strongly**
-   recommended to avoid a dependency on configuration directory file load
-   order (e.g. if you're attempting to name configuration files in the
-   configuration directory to control load order, you're doing it wrong)._
-
-5. As configuration snippets are applied to the Sensu configuration Hash (i.e.
-   during "deep merge"), all configuration changes are logged to the
-   corresponding log file (e.g. the Sensu server, API, or Client logs).
-
-   _NOTE: the Sensu configuration logger will automatically redact sensitive
-   information contained within keys named `password`, `passwd`, `pass`,
-   `api_key`, `api_token`, `access_key`, `secret_key`, `private_key`, and
-   `secret`._
-
-# Anatomy of a Sensu configuration {#anatomy-of-a-sensu-configuration}
-
-## Example Sensu configuration {#example-sensu-configuration}
+### Example Sensu configuration {#example-sensu-configuration}
 
 The following is an example Sensu configuration, a JSON configuration file
 located at `/etc/sensu/config.json`. This Sensu configuration provides Sensu
@@ -318,9 +275,9 @@ with information it needs to communicate with RabbitMQ and Redis:
 }
 ~~~
 
-## Configuration attributes {#configuration-attributes}
+### Configuration attributes {#configuration-attributes}
 
-The Sensu configuration attributes defined at the "root" scope are as follows
+The Sensu configuration attributes defined at the top level scope are as follows
 (these attributes live at the top level of their respective JSON documents):
 
 rabbitmq
@@ -476,12 +433,29 @@ mutators
     }
     ~~~
 
-## Configuration variables
+### Sensu service init {#sensu-service-init}
+
+The Sensu services are managed by init scripts that are provided in the Sensu
+packages. The Sensu init scripts are able to start/stop/restart the
+corresponding Sensu services (e.g. the Sensu server, API, client, etc).
+
+The default Sensu init scripts and related configuration file(s) (containing
+configuration variables) are located as follows:
+
+- `/etc/default/sensu` (sourced by the init scripts to provide
+  [configuration variables](#configuration-variables))
+- `/etc/init.d/sensu-service` (shared init script used by the Sensu service
+  init scripts)
+- `/etc/init.d/sensu-server`
+- `/etc/init.d/sensu-api`
+- `/etc/init.d/sensu-client`
+- `/etc/init.d/sensu-enterprise`
+- `/etc/init.d/sensu-enterprise-dashboard`
+
+#### Configuration variables {#configuration-variables}
 
 The following configuration variables can be set in the init script(s) for the
-platform, or as environment variables. Environment variables take precedence
-(i.e. if a configuration variable is provided in _both_ an init script _and_ an
-environment variable, the environment variable will be used).
+platform.
 
 EMBEDDED_RUBY
 : description
@@ -619,6 +593,16 @@ SERVICE_MAX_WAIT
     SERVICE_MAX_WAIT=10
     ~~~
 
+## Environment variables {#environment-variables}
+
+The Sensu services are aware of the following environment variables.
+Configuration provided via environment variables will only be used if no
+corresponding configuration is provided via the Sensu configuration file, or
+configuration directories. Providing configuration via environment variables is
+primarily beneficial in environments where configuration management tools (e.g.
+Chef or Puppet) are not used &ndash; for example, in container-based
+environments.
+
 SENSU_TRANSPORT_NAME
 : description
   : The Sensu transport name, indicating the Sensu transport to load and use.
@@ -692,4 +676,123 @@ SENSU_API_PORT
 : example
   : ~~~ shell
     SENSU_API_PORT=8080
+    ~~~
+
+### Configuration load order {#configuration-load-order}
+
+Sensu configuration can be provided via three distinct sources: environment
+variables, a configuration file, and one or more directories containing
+configuration files. Sensu loads configuration from these sources in the
+following order:
+
+1. The Sensu init scripts provide [command line
+   arguments](#command-line-arguments) for starting the Sensu services (e.g. the
+   location of the configuration file (`-c`), the location of configuration
+   directories (`-d`), etc).  
+
+2. Sensu will load configuration from [environment variables](#environment-variables).
+
+3. Sensu loads configuration from the configuration file (by default, this is
+   located at `/etc/sensu/config.json`).
+
+3. Sensu loads configuration snippets from configuration files located in a
+   Sensu configuration directory (by default, this is `/etc/sensu/conf.d/`,
+   however it is possible to configure Sensu to load from multiple configuration
+   directories; see: [command line arguments](#command-line-arguments), below).
+
+   _NOTE: configuration file load order is dictated by a `*.json` glob of the
+   configuration directory; as such it is **strongly** recommended to avoid a
+   dependency on configuration directory file load order (e.g. if you're
+   attempting to name configuration files in the configuration directory to
+   control load order, you're doing it wrong)._
+
+### Sensu Service CLI arguments {#sensu-service-cli-arguments}
+
+The Sensu services can be run from the command line with the following command
+line options:
+
+_NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
+`sensu-api`, `sensu-client`, and  `sensu-enterprise`)._
+
+`-h` (`--help`)
+: description
+  : Display the help documentation.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -h
+    ~~~
+
+`-V` (`--version`)
+: description
+  : Display the Sensu version.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-client -V
+    ~~~
+
+`-c` (`--config FILE`)
+: description
+  : Provide the path to the Sensu configuration `FILE`.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-api -c /etc/sensu/config.json
+    ~~~
+
+`-d` (`--directory DIR[,DIR]`)
+: description
+  : Provide the path to the Sensu configuration `DIR`, or comma delimited `DIR`
+    list. Configuration directories are loaded in the order provided.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -d /etc/sensu/conf.d,/path/to/more/configuration
+    ~~~
+
+`-e` (`--extensions_dir DIR`)
+: description
+  : Provide the path to the Sensu extensions `DIR`.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -e /etc/sensu/extensions
+    ~~~
+
+`-l` (`--log LOG`)
+: description
+  : The path to the `LOG` file. Defaults to `STDOUT` if not provided.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -l /var/log/sensu/sensu-server.log
+    ~~~
+
+`-L` (`--log_level LEVEL`)
+: description
+  : Log security `LEVEL`
+: allowed values
+  : `debug`, `info`, `warn`, `error`, `fatal`
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -L warn
+    ~~~
+
+`-v` (`--verbose`)
+: description
+  : Enable verbose logging.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-client -v
+    ~~~
+
+`-b` (`--background`)
+: description
+  : Detach the process and run in the background (i.e. run as a "daemon")
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -b
+    ~~~
+
+`-p` `(--pid_file FILE)`
+: description
+  : Write the PID to a given `FILE`.
+: example
+  : ~~~ shell
+    /opt/sensu/bin/sensu-server -p /var/run/sensu-server.pid
     ~~~
