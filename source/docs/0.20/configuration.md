@@ -295,7 +295,7 @@ following order:
 
 The following is an example Sensu configuration, a JSON configuration file
 located at `/etc/sensu/config.json`. This Sensu configuration provides Sensu
-with information it needs to communicate with other Sensu services.
+with information it needs to communicate with RabbitMQ and Redis:
 
 ~~~json
 {
