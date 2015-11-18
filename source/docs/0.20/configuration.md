@@ -22,7 +22,7 @@ This reference document provides information to help you:
 - [Understand the order in which Sensu loads configuration settings](#configuration-load-order)
 - [Understand the anatomy of the Sensu configuration](#anatomy-of-a-sensu-configuration)
 
-# Sensu Configuration Sources {#sensu-configuration-sources}
+# Sensu configuration sources {#sensu-configuration-sources}
 
 By default, the main configuration file for the Sensu platform is located at
 `/etc/sensu/config.json`. However, Sensu also provides support for loading
@@ -32,7 +32,7 @@ provided from these three distinct configuration sources (environment variables,
 configuration file, and configuration directories) into a single Hash. This type
 of Hash merging is often called "deep merging".
 
-## How Configuration Merging Works {#how-configuration-merging-works}
+## How configuration merging works {#how-configuration-merging-works}
 
 To explain how Sensu merges configuration parameters from the various disparate
 configuration sources, please note the following example scenario:
@@ -142,7 +142,7 @@ configuration sources, please note the following example scenario:
    attributes that already existed in the `rabbitmq` configuration scope - even
    though they weren't provided by the configuration snippet.
 
-## Configuration Scopes {#configuration-scopes}
+## Configuration scopes {#configuration-scopes}
 
 Because Sensu configuration can be provided in so many different places (i.e.
 from so many disparate sources), it is important to understand that &ndash;
@@ -172,10 +172,10 @@ configuration settings).
 
 Throughout the Sensu documentation whenever a configuration scope is mentioned,
 it is describing the named "level" that the corresponding configuration
-attributes should be defined in, **which may _relative_ to any potential related
-scopes**. Please note the following examples:
+attributes should be defined in, **which may be _relative_ to any potentially
+related scopes**. Please note the following examples:
 
-#### The Client Scope (`"client": {}`)
+#### The client scope (`"client": {}`)
 
 In the [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
 it explains that:
@@ -193,7 +193,7 @@ called `"client"`:
 }
 ~~~
 
-#### The Client Socket Scope (`"socket": {}`)
+#### The client socket scope (`"socket": {}`)
 
 The [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
 continues to explain that Sensu clients may have a `"socket"` attribute, and
@@ -235,7 +235,7 @@ loaded by Sensu).
 }
 ~~~
 
-## Configuration Load Order {#configuration-load-order}
+## Configuration load order {#configuration-load-order}
 
 Sensu configuration can be provided via three distinct sources: environment
 variables, a configuration file, and one or more directories containing
@@ -292,9 +292,9 @@ following order:
    - https://github.com/sensu/sensu/blob/master/lib/sensu/daemon.rb#L64-L74
    - https://github.com/sensu/sensu/blob/master/lib/sensu/daemon.rb#L76-L94
 
-# Anatomy of a Sensu Configuration {#anatomy-of-a-sensu-configuration}
+# Anatomy of a Sensu configuration {#anatomy-of-a-sensu-configuration}
 
-## Example Sensu Configuration {#example-sensu-configuration}
+## Example Sensu configuration {#example-sensu-configuration}
 
 The following is an example Sensu configuration snippet, a JSON configuration
 file located at `/etc/sensu/config.json`. This Sensu configuration snippet
