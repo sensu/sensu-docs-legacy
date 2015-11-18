@@ -18,6 +18,7 @@ question has always been multifaceted.
 This reference document provides information to help you:
 
 - [Understand how the Sensu services are configured](#sensu-configuration-sources)
+- [Understand how configuration merging works](#how-configuration-merging-works)
 - [Understand configuration "scopes"](#configuration-scopes)
 - [Understand the order in which Sensu loads configuration settings](#configuration-load-order)
 - [Understand the anatomy of the Sensu configuration](#anatomy-of-a-sensu-configuration)
