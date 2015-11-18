@@ -678,7 +678,7 @@ SENSU_API_PORT
     SENSU_API_PORT=8080
     ~~~
 
-### Configuration load order {#configuration-load-order}
+## Configuration load order {#configuration-load-order}
 
 Sensu configuration can be provided via three distinct sources: environment
 variables, a configuration file, and one or more directories containing
@@ -706,7 +706,7 @@ following order:
    attempting to name configuration files in the configuration directory to
    control load order, you're doing it wrong)._
 
-### Sensu Service CLI arguments {#sensu-service-cli-arguments}
+## Sensu Service CLI arguments {#sensu-service-cli-arguments}
 
 The Sensu services can be run from the command line with the following command
 line options:
