@@ -30,7 +30,8 @@ configuration from a directory (containing multiple/disparate configuration
 files), and/or environment variables. Sensu merges configuration parameters
 provided from these three distinct configuration sources (environment variables,
 configuration file, and configuration directories) into a single Hash. This type
-of Hash merging is often called "deep merging".
+of Hash merging is often called "deep merging", and is probably the most
+important concept to understand when learning how to configure Sensu.
 
 ## How configuration merging works {#how-configuration-merging-works}
 
