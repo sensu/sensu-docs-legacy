@@ -333,11 +333,13 @@ rabbitmq
   : Hash
 : example
   : ~~~ shell
-    "rabbitmq": {
-      "host": "10.0.1.10",
-      "vhost": "/sensu",
-      "user": "sensu",
-      "password": "secret"
+    {
+      "rabbitmq": {
+        "host": "10.0.1.10",
+        "vhost": "/sensu",
+        "user": "sensu",
+        "password": "secret"
+      }
     }
     ~~~
 
@@ -351,10 +353,12 @@ redis
   : Hash
 : example
   : ~~~ shell
-    "redis": {
-      "host": "10.0.1.20",
-      "port": 6379,
-      "password": "secret"
+    {
+      "redis": {
+        "host": "10.0.1.20",
+        "port": 6379,
+        "password": "secret"
+      }
     }
     ~~~
 
@@ -368,9 +372,106 @@ api
   : Hash
 : example
   : ~~~ shell
-    "api": {
-      "host": "10.0.1.30",
-      "bind": "0.0.0.0",
-      "port": 4242
+    {
+      "api": {
+        "host": "10.0.1.30",
+        "bind": "0.0.0.0",
+        "port": 4242
+      }
+    }
+    ~~~
+
+client
+: description
+  : The Sensu Client definition scope (see:
+    [Clients](clients#anatomy-of-a-client-definition))
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "client": {
+        "name": "i-424242",
+        "address": "8.8.8.8",
+        "subscriptions": [
+          "production",
+          "webserver",
+          "mysql"
+        ]
+      }
+    }
+    ~~~
+
+checks
+: description
+  : The Sensu Checks definition scope (see:
+    [Checks](checks#anatomy-of-a-check-definition))
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "checks": {
+        "example_check": {},
+        "another_check": {}
+      }
+    }
+    ~~~
+
+handlers
+: description
+  : The Sensu Handlers definition scope (see:
+    [Handlers](handlers#anatomy-of-a-handler-definition))
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "handlers": {
+        "example_handler": {},
+        "another_handler": {}
+      }
+    }
+    ~~~
+
+filters
+: description
+  : The Sensu Filters definition scope (see:
+    [Filters](filters#anatomy-of-a-filter-definition))
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "filters": {
+        "example_filter": {},
+        "another_filter": {}
+      }
+    }
+    ~~~
+
+mutators
+: description
+  : The Sensu Mutators definition scope (see:
+    [Mutators](mutators#anatomy-of-a-mutator-definition))
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "mutators": {
+        "example_mutator": {},
+        "another_mutator": {}
+      }
     }
     ~~~
