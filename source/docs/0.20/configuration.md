@@ -1,7 +1,7 @@
 ---
 version: 0.20
 category: "Reference Docs"
-title: "Sensu Configuration"
+title: "Configuration"
 next:
   url: "clients"
   text: "Clients"
@@ -17,29 +17,30 @@ question has always been multifaceted.
 
 This reference document provides information to help you:
 
-- [Understand how Sensu is configured](#sensu-configuration-overview)
+- [Understand how the Sensu services are configured](#sensu-configuration-overview)
+- [Understand configuration "scopes"](#configuration-scopes)
 - [Understand the order in which Sensu loads configuration settings](#configuration-load-order)
-- [Understand the anatomy of the Sensu configuration](#configuring-sensu)
+- [Understand the anatomy of the Sensu configuration](#anatomy-of-a-sensu-configuration)
 
 # Sensu Configuration {#sensu-configuration-overview}
 
-The main configuration file for Sensu is located at `/etc/sensu/config.json`,
-however Sensu also provides support for loading configuration from a
-configuration directory (containing multiple/disparate configuration files),
-and/or environment variables. Sensu merges configuration parameters provided
-from these three distinct configuration sources (environment variables,
-configuration file, and one or more configuration directories) into a single
-Hash. This type of Hash merging is often called "deep merging", as it is
-possible
+By default, the main configuration file for the Sensu platform is located at
+`/etc/sensu/config.json`. However, Sensu also provides support for loading
+configuration from a directory (containing multiple/disparate configuration
+files), and/or environment variables. Sensu merges configuration parameters
+provided from these three distinct configuration sources (environment variables,
+configuration file, and configuration directories) into a single Hash. This type
+of Hash merging is often called "deep merging".
 
 ## Example Effect of Configuration Merging {#example-effect-of-configuration-merging}
 
 To explain how Sensu merges configuration parameters from the various disparate
-configuration sources, please note the following:
+configuration sources, please note the following example scenario:
 
-1. Sensu runtime configuration is a Hash object. For the purposes of this
-   example, let's imagine that this Hash object is actually a JSON document,
-   which begins life (before Sensu is started) as an empty JSON document.
+1. The Sensu runtime configuration is stored as an in-memory Hash object. For
+   the purposes of providing a visual example, let's imagine that this Hash
+   object is actually a JSON document, which begins life (as Sensu is started)
+   as an empty JSON document.
 
    #### Initial Sensu configuration Hash (in memory)
 
@@ -47,14 +48,16 @@ configuration sources, please note the following:
    {}
    ~~~
 
-   When Sensu is started, it will begin to collect configuration from environment
-   variables, a configuration file, and one ore more configuration directories.
+   When Sensu is started, it will begin to collect configuration from
+   environment variables, a configuration file, and one ore more configuration
+   directories, which configuration parameters will be used to build up this
+   configuration Hash.
 
 2. For the purposes of this example, let's assume that the first configuration
-   that encounters is a configuration file, located at `/etc/sensu/config.json`
-   with the following contents:
+   snippet that Sensu encounters is a configuration file, located at
+   `/etc/sensu/config.json` with the following contents:
 
-   #### New configuration file (on disk at `/etc/snesu/config.json`)
+   #### New configuration file (on disk at `/etc/sensu/config.json`)
 
    ~~~json
    {
@@ -92,8 +95,8 @@ configuration sources, please note the following:
    }
    ~~~
 
-3. Now let's see what happens when Sensu encounters another configuration file
-   (e.g. a file located in a Sensu configuration directory, such as
+3. Now let's see what happens when Sensu encounters another configuration
+   snippet (e.g. a file located in a Sensu configuration directory, such as
    `/etc/sensu/conf.d/rabbitmq.json`):
 
    #### New configuration file contents (on disk at `/etc/sensu/conf.d/rabbitmq.json`)
@@ -108,10 +111,11 @@ configuration sources, please note the following:
    }
    ~~~
 
-   The second configuration file provided configuration for the `rabbitmq` scope,
-   which already exists in the Sensu configuration Hash (in memory). The
-   result of merging this configuration into the Sensu configuration Hash (in
-   memory) is as follows:
+   The second configuration snippet provided configuration for the `rabbitmq`
+   scope, some of which already exists in the Sensu configuration Hash (in
+   memory) - but also missing some attributes which already exist in the Sensu
+   configuration Hash (i.e. `vhost`). The result of merging this configuration
+   snippet into the Sensu configuration Hash (in memory) is as follows:
 
    #### Updated Sensu configuration Hash (in memory)
 
@@ -133,8 +137,103 @@ configuration sources, please note the following:
 
    The result of the deep merge is that the configuration snippet provided by
    `/etc/sensu/conf.d/rabbitmq.json` was overlaid on the Sensu configuration
-   Hash (in memory), essentially overwriting the previous values.
+   Hash (in memory), essentially overwriting the previously existing values
+   provided by the configuration snippet, while not discarding configuration
+   attributes that already existed in the `rabbitmq` configuration scope - even
+   though they weren't provided by the configuration snippet.
 
+## Configuration Scopes {#configuration-scopes}
+
+Because Sensu configuration can be provided in so many different places (i.e.
+from so many disparate sources), it is important to understand that &ndash;
+_regardless of the physical location of the configuration data (e.g. from the
+main configuration file, or from a configuration file in the configuration
+directory)_ &ndash; all configuration must be placed in the appropriate "scope"
+in the JSON file (i.e. the named "level" that attributes should be defined in).
+
+For example, the "root" or scope of the Sensu configuration would be any
+attributes defined at the top "level" of a JSON configuration file, such as the
+configuration attributes for `rabbitmq`, `redis`, or the `api`:
+
+~~~json
+{
+  "rabbitmq": {},
+  "redis": {},
+  "api": {}
+}
+~~~
+
+Attributes defined in the root scope (or top "level") provide the corresponding
+scope(s) for additional configuration settings (e.g. the `rabbitmq` attribute
+defined above provides the `rabbitmq` scope, a JSON Hash, for the actual RabbitMQ
+configuration settings).
+
+### Configuration scopes are relative {#configuration-scopes-are-relative}
+
+Throughout the Sensu documentation whenever a configuration scope is mentioned,
+it is describing the named "level" that the corresponding configuration
+attributes should be defined in, **which may _relative_ to any potential related
+scopes**. Please note the following examples:
+
+#### The Client Scope (`"client": {}`)
+
+In the [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
+it explains that:
+
+> _"The client definition uses the `"client": {}` definition scope."_
+
+Which means that, regardless where you might store a configuration file
+containing Sensu client configuration on disk (assuming it is in a location that
+will be loaded by Sensu), the file should contain a top "level" attribute
+called `"client"`:
+
+~~~json
+{
+  "client": {}  
+}
+~~~
+
+#### The Client Socket Scope (`"socket": {}`)
+
+The [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
+continues to explain that Sensu clients may have a `"socket"` attribute, and
+that there are additional [Client Socket attributes](clients#socket-attributes)
+which should be defined within the `"socket"` scope:
+
+> _"The following attributes are configured within the `"socket": {}` client
+definition attribute scope."_
+
+Which means that, regardless where you might store a configuration file
+containing Sensu Client Socket configuration on disk (assuming it is in a
+location that will be loaded by Sensu), the file should contain a top "level"
+attribute called `"client"`, _and another attribute_ defined within the
+`"client"` scope (or level) called `"socket"`:
+
+~~~json
+{
+  "client": {
+    "socket": {}
+  }
+}
+~~~
+
+Thus, when the Client Socket reference documentation continues to explain that
+the `bind` and `port` attributes should be defined in the Client Socket scope,
+it means they should live under the `"socket"` "level" of the JSON file,
+regardless of where you might store a configuration file containing said
+configuration attributes on disk (assuming it is in a location that will be
+loaded by Sensu).
+
+~~~json
+{
+  "client": {
+    "socket": {
+      "bind": "0.0.0.0",
+      "port": 3031
+    }
+  }
+}
+~~~
 
 ## Configuration Load Order {#configuration-load-order}
 
@@ -154,8 +253,10 @@ following order:
    _NOTE: Environment variables will override the configuration file (`-c`) and
    configuration directory (`-d`) locations provided by the init script._
 
-2. ASSUMPTION: Sensu loads configuration settings from the following environment
-   variables:
+2. Sensu loads configuration settings from the following environment variables
+   (primarily useful for configuring the Sensu Client; see [Client Configuration
+   Environment Variables](clients#client-configuration-environment-variables)
+   for more information):
 
    - `SENSU_TRANSPORT_NAME`
    - `RABBITMQ_URL`
@@ -195,9 +296,10 @@ following order:
 
 ## Example Sensu Configuration {#example-sensu-configuration}
 
-The following is an example Sensu check definition, a JSON configuration file
-located at `/etc/sensu/config.json`. This Sensu configuration provides Sensu
-with information it needs to communicate with other Sensu services.
+The following is an example Sensu configuration snippet, a JSON configuration
+file located at `/etc/sensu/config.json`. This Sensu configuration snippet
+provides Sensu with information it needs to communicate with other Sensu
+services.
 
 ~~~json
 {
@@ -273,6 +375,6 @@ api
     "api": {
       "host": "10.0.1.30",
       "bind": "0.0.0.0",
-      "port": "4242"
+      "port": 4242
     }
     ~~~

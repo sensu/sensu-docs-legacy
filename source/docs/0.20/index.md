@@ -35,7 +35,7 @@ hide_toc: true
   * [Summary](getting-started-summary)
 
 * **Reference Docs**
-  * [Sensu Configuration](configuration)
+  * [Configuration](configuration)
   * [Clients](clients)
   * [Checks](checks)
   * [Handlers](handlers)
