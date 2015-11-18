@@ -54,7 +54,7 @@ configuration sources, please note the following:
    that encounters is a configuration file, located at `/etc/sensu/config.json`
    with the following contents:
 
-   #### New configuration file
+   #### New configuration file (on disk at `/etc/snesu/config.json`)
 
    ~~~json
    {
@@ -93,16 +93,16 @@ configuration sources, please note the following:
    ~~~
 
 3. Now let's see what happens when Sensu encounters another configuration file
-   (e.g. a file located in a Sensu configuration directory):
+   (e.g. a file located in a Sensu configuration directory, such as
+   `/etc/sensu/conf.d/rabbitmq.json`):
 
-   #### New configuration file contents
+   #### New configuration file contents (on disk at `/etc/sensu/conf.d/rabbitmq.json`)
 
    ~~~json
    {
      "rabbitmq": {
        "host": "10.0.1.10",
-       "vhost": "/sensu",
-       "user": "sensu",
+       "user": "sensu01",
        "password": "newsecret"
      }
    }
@@ -120,12 +120,20 @@ configuration sources, please note the following:
      "rabbitmq": {
        "host": "10.0.1.10",
        "vhost": "/sensu",
-       "user": "sensu",
+       "user": "sensu01",
        "password": "newsecret"
+     },
+     "redis": {
+       "host": "localhost",
+       "port": 6379,
+       "password": "secret"
      }
    }
    ~~~
 
+   The result of the deep merge is that the configuration snippet provided by
+   `/etc/sensu/conf.d/rabbitmq.json` was overlaid on the Sensu configuration
+   Hash (in memory), essentially overwriting the previous values.
 
 
 ## Configuration Load Order {#configuration-load-order}

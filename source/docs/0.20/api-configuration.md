@@ -19,9 +19,23 @@ native SSL encryption)._
 
 # Anatomy of an API definition
 
-The API definition uses the `"api": {}` definition scope.
+### Example API definition
+
+The following is an example API definition at `/etc/sensu/conf.d/api.json`.
+
+~~~ json
+{
+  "api": {
+    "host": "57.43.53.22",
+    "bind": "0.0.0.0",
+    "port": 4567
+  }
+}
+~~~
 
 ### Definition attributes
+
+The API definition uses the `"api": {}` definition scope.
 
 host
 : description
@@ -64,17 +78,3 @@ port
   : ~~~ shell
     "port": 4242
     ~~~
-
-### Example API definition
-
-The following is an example API definition at `/etc/sensu/conf.d/api.json`.
-
-~~~ json
-{
-  "api": {
-    "host": "57.43.53.22",
-    "bind": "0.0.0.0",
-    "port": 4567
-  }
-}
-~~~
