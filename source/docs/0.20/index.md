@@ -35,6 +35,7 @@ hide_toc: true
   * [Summary](getting-started-summary)
 
 * **Reference Docs**
+  * [Configuration](configuration)
   * [Clients](clients)
   * [Checks](checks)
   * [Handlers](handlers)
@@ -56,6 +57,7 @@ hide_toc: true
   * [Stashes API](api-stashes)
   * [Health API](api-health)
   * [Info API](api-info)
+  * [API Configuration](api-configuration)
 
 * **Enterprise Docs**
   * [Overview](enterprise-overview)
