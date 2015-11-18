@@ -20,7 +20,7 @@ This reference document provides information to help you:
 - [Understand how the Sensu services are configured](#sensu-configuration-sources)
 - [Understand how configuration merging works](#how-configuration-merging-works)
 - [Understand configuration "scopes"](#configuration-scopes)
-- [Understand the order in which Sensu loads configuration settings](#configuration-load-order)
+- [Understand the order in which Sensu loads configuration](#configuration-load-order)
 - [Understand the anatomy of the Sensu configuration](#anatomy-of-a-sensu-configuration)
 
 # Sensu configuration sources {#sensu-configuration-sources}
@@ -146,12 +146,12 @@ configuration sources, please note the following example scenario:
 
 ## Configuration scopes {#configuration-scopes}
 
-Because Sensu configuration can be provided in so many different places (i.e.
-from so many disparate sources), it is important to understand that &ndash;
-_regardless of the physical location of the configuration data (e.g. from the
-main configuration file, or from a configuration file in the configuration
-directory)_ &ndash; all configuration must be placed in the appropriate "scope"
-in the JSON file (i.e. the named "level" that attributes should be defined in).
+Because Sensu configuration can be provided in so many different sources, it is
+important to understand that &ndash; _regardless of the physical location of the
+configuration data (e.g. from the main configuration file, or from a
+configuration file in a configuration directory)_ &ndash; all configuration
+must be placed in the appropriate "scope" in the JSON file (i.e. the named
+"level" that attributes should be defined in).
 
 For example, the "root" or scope of the Sensu configuration would be any
 attributes defined at the top "level" of a JSON configuration file, such as the
@@ -174,8 +174,8 @@ configuration settings).
 
 Throughout the Sensu documentation whenever a configuration scope is mentioned,
 it is describing the named "level" that the corresponding configuration
-attributes should be defined in, **which may be _relative_ to any potentially
-related scopes**. Please note the following examples:
+attributes should be defined within, **which may be _relative_ to any
+potentially related scopes**. Please note the following examples:
 
 #### The client scope (`"client": {}`)
 
@@ -268,40 +268,34 @@ following order:
    - `SENSU_CLIENT_SUBSCRIPTIONS`
    - `SENSU_API_PORT`
 
-3. Sensu loads configuration settings from the configuration file (by default,
-   this is `/etc/sensu/config.json`).
+3. Sensu loads configuration from the configuration file (by default, this is
+   located at `/etc/sensu/config.json`).
 
-4. Sensu loads configuration snippets from configuration files located in the
+4. Sensu loads configuration snippets from configuration files located in a
    Sensu configuration directory (by default, this is `/etc/sensu/conf.d/`).
 
-   _NOTE: configuration file load order is dicated by a order provided by a
+   _NOTE: configuration file load order is dictated by a order provided by a
    `*.json` glob of the configuration directory; as such it is **strongly**
    recommended to avoid a dependency on configuration directory file load
    order (e.g. if you're attempting to name configuration files in the
    configuration directory to control load order, you're doing it wrong)._
 
-5. As config snippets are applied to the Sensu configuration Hash, (i.e. during
-   "deep merge"), the changes are logged to the corresponding log file (e.g.
-   the Sensu server, API, or Client logs).
+5. As configuration snippets are applied to the Sensu configuration Hash (i.e.
+   during "deep merge"), all configuration changes are logged to the
+   corresponding log file (e.g. the Sensu server, API, or Client logs).
 
    _NOTE: the Sensu configuration logger will automatically redact sensitive
    information contained within keys named `password`, `passwd`, `pass`,
    `api_key`, `api_token`, `access_key`, `secret_key`, `private_key`, and
    `secret`._
 
-6. Config logger automatically redacts sensitive information (!); see:
-   - https://github.com/sensu/sensu/blob/master/lib/sensu/utilities.rb#L56-L86
-   - https://github.com/sensu/sensu/blob/master/lib/sensu/daemon.rb#L64-L74
-   - https://github.com/sensu/sensu/blob/master/lib/sensu/daemon.rb#L76-L94
-
 # Anatomy of a Sensu configuration {#anatomy-of-a-sensu-configuration}
 
 ## Example Sensu configuration {#example-sensu-configuration}
 
-The following is an example Sensu configuration snippet, a JSON configuration
-file located at `/etc/sensu/config.json`. This Sensu configuration snippet
-provides Sensu with information it needs to communicate with other Sensu
-services.
+The following is an example Sensu configuration, a JSON configuration file
+located at `/etc/sensu/config.json`. This Sensu configuration provides Sensu
+with information it needs to communicate with other Sensu services.
 
 ~~~json
 {
@@ -326,8 +320,8 @@ services.
 
 ## Configuration attributes {#configuration-attributes}
 
-The main Sensu configuration uses the "root" scope (i.e. these attributes live
-at the top-level of the JSON document).
+The Sensu configuration attributes defined at the "root" scope are as follows
+(these attributes live at the top level of their respective JSON documents):
 
 rabbitmq
 : description
