@@ -50,19 +50,18 @@ _NOTE: this example file configures the Sensu client with client metadata, inclu
 }
 ~~~
 
-## Install Check Dependencies
-
-Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called `memory`, that runs the command `/etc/sensu/plugins/check-memory.sh`. Each Sensu client that will execute the `memory` check will require a local copy of this file. Download a copy of the `check-memory.sh` check plugin to `/etc/sensu/plugins/check-memory.sh`, via the following commands:
+Ensure the Sensu client definition configuration file is owned by the Sensu user and group `sensu`:
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-memory.sh http://sensuapp.org/docs/0.21/files/check-memory.sh
-sudo chmod +x /etc/sensu/plugins/check-memory.sh
+sudo chown -R sensu:sensu /etc/sensu/conf.d
 ~~~
 
-Ensure the Sensu configuration files and plugins are owned by the Sensu user and group `sensu`:
+## Install Check Dependencies
+
+Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called `memory`, that runs the command `check-memory.sh`. Each Sensu client that will execute the `memory` check will require a local copy of this file. To install the Sensu plugin that includes a copy of `check-memory.sh`, run the following command:
 
 ~~~ shell
-sudo chown -R sensu:sensu /etc/sensu
+sudo sensu-install -p memory-checks:0.0.7
 ~~~
 
 ## Running the Sensu client
