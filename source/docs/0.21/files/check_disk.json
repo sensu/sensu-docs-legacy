@@ -1,7 +1,7 @@
 {
   "checks": {
-    "memory": {
-      "command": "check-memory.sh -w 128 -c 64",
+    "disk": {
+      "command": "check-disk-usage.rb -w 85 -c 95",
       "interval": 10,
       "subscribers": [
         "test"

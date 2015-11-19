@@ -94,19 +94,19 @@ _NOTE: this example file configures the RabbitMQ and Redis connection options an
 
 Sensu Checks & Event Handlers will be covered in detail later in this guide, however it will be helpful to have at least one check and handler configured as part of the installation process. If you don't fully understand these concepts - don't worry - we'll explain later.
 
-Create a check definition by copying the following example configuration to `/etc/sensu/conf.d/check_memory.json` manually, or via:
+Create a check definition by copying the following example configuration to `/etc/sensu/conf.d/check_disk.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/check_memory.json http://sensuapp.org/docs/0.21/files/check_memory.json
+sudo wget -O /etc/sensu/conf.d/check_disk.json http://sensuapp.org/docs/0.21/files/check_disk.json
 ~~~
 
-_NOTE: this example config creates a [Sensu Check](checks) that will alert based on memory thresholds (it will raise a warning if less than 128 MB of memory is available, and raise a critical alert if less than 64 MB of memory is available). The check script itself (the plugin) will be installed later in this guide._
+_NOTE: this example config creates a [Sensu Check](checks) that will alert based on disk usage thresholds (it will raise a critical alert if 95% or more disk space has been used, or raise a warning alert if 85% or more has been used). The check script itself (the plugin) will be installed later in this guide._
 
 ~~~ json
 {
   "checks": {
-    "memory": {
-      "command": "check-memory.sh -w 128 -c 64",
+    "disk": {
+      "command": "check-disk-usage.rb -w 85 -c 95",
       "interval": 10,
       "subscribers": [
         "test"
@@ -162,7 +162,7 @@ sudo /etc/init.d/sensu-enterprise start
 
 Congratulations! By now you should have successfully installed and configured Sensu! Now let's observe it in operation.
 
-_NOTE: the check requests for "memory" are being published every 10 seconds, so it should be possible to observe log activity (i.e. the check requests) at least once every 10 seconds._
+_NOTE: the check requests for "disk" are being published every 10 seconds, so it should be possible to observe log activity (i.e. the check requests) at least once every 10 seconds._
 
 ## Sensu Core
 
