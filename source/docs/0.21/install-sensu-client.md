@@ -50,19 +50,18 @@ _NOTE: this example file configures the Sensu client with client metadata, inclu
 }
 ~~~
 
-## Install Check Dependencies
-
-Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called `memory`, that runs the command `/etc/sensu/plugins/check-memory.sh`. Each Sensu client that will execute the `memory` check will require a local copy of this file. Download a copy of the `check-memory.sh` check plugin to `/etc/sensu/plugins/check-memory.sh`, via the following commands:
-
-~~~ shell
-sudo wget -O /etc/sensu/plugins/check-memory.sh http://sensuapp.org/docs/0.21/files/check-memory.sh
-sudo chmod +x /etc/sensu/plugins/check-memory.sh
-~~~
-
-Ensure the Sensu configuration files and plugins are owned by the Sensu user and group `sensu`:
+Ensure the Sensu configuration files are owned by the Sensu user and group `sensu`:
 
 ~~~ shell
 sudo chown -R sensu:sensu /etc/sensu
+~~~
+
+## Install Check Dependencies
+
+Some Sensu [Checks](checks) have dependencies that are required for execution (e.g. local copies of check plugins/scripts). Earlier in the guide, we configured a monitoring check called `disk`, that runs the command `check-disk-usage.rb`. Each Sensu client that will execute the `disk` check will require a local copy of this file. To install the Sensu plugin that includes a copy of `check-disk-usage.rb`, run the following commands:
+
+~~~ shell
+sudo sensu-install -p disk-checks:1.0.2
 ~~~
 
 ## Running the Sensu client
@@ -77,7 +76,7 @@ sudo /etc/init.d/sensu-client start
 
 Congratulations! By now you should have successfully installed and configured the Sensu client! Now let's observe it in operation.
 
-_NOTE: the check requests for "memory" are being published every 10 seconds, so it should be possible to observe log activity (i.e. the check requests) at least once every 10 seconds._
+_NOTE: the check requests for "disk" are being published every 10 seconds, so it should be possible to observe log activity (i.e. the check requests) at least once every 10 seconds._
 
 Tail the Sensu client log file to observe its operation:
 

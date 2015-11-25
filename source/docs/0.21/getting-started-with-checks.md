@@ -31,37 +31,17 @@ Standard Sensu checks are used to determine the health of server resources, serv
 
 The following instructions install the check dependencies and configure the Sensu check definition in order to monitor the Cron service.
 
-### Install dependencies
+### Install dependencies  {#check-cron-install-dependencies}
 
-The `check-procs` Sensu plugin can reliably detect if a service such as Cron is running or not. The following instructions will install the `check-procs` Sensu check plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`.
-
-~~~ shell
-sudo wget -O /etc/sensu/plugins/check-procs.rb http://sensuapp.org/docs/0.21/files/check-procs.rb
-sudo chmod +x /etc/sensu/plugins/check-procs.rb
-~~~
-
-The `check-procs` Sensu plugin requires a Ruby runtime and the `sensu-plugin` Ruby gem. Install Ruby from the distribution repository and `sensu-plugin` from Rubygems:
-
-_NOTE: the following Ruby installation steps may differ depending on your platform._
-
-#### Ubuntu/Debian
+The `check-procs.rb` script provided by the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) can reliably detect if a service such as Cron is running or not. The following instructions will install the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) (version 0.0.6) using Sensu's embedded Ruby, providing the `check-procs.rb` script.
 
 ~~~ shell
-sudo apt-get update
-sudo apt-get install ruby ruby-dev
-sudo gem install sensu-plugin
-~~~
-
-#### CentOS/RHEL
-
-~~~ shell
-sudo yum install ruby ruby-devel
-sudo gem install sensu-plugin
+sudo sensu-install -p process-checks:0.0.6
 ~~~
 
 ### Create the check definition for Cron
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the check-procs plugin ([installed above](#install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs <kbd>/etc/sensu/plugins/check-procs.rb -p cron</kbd> on Sensu clients with the `production` subscription, every `60` seconds (interval).
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-procs.rb` script ([installed above](#check-cron-install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-procs.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -69,7 +49,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "subscribers": [
         "production"
       ],
@@ -79,15 +59,15 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-For a full listing of the `check-procs` command line arguments, run <kbd>/etc/sensu/plugins/check-procs.rb -h</kbd>.
+For a full listing of the `check-procs.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/check-procs.rb -h</kbd>.
 
-Currently, the Cron check definition requires that check requests be sent to Sensu clients with the `production` subscription. This is known as **check subscription mode**. Optionally, a check may use `standalone` mode, which allows clients to schedule their own check executions. The following is an example of the Cron check using `standalone` mode (`true`). The Cron check will now be executed every `60` seconds on each Sensu client with the check definition. A Sensu check definition with `"standalone": true` does not need to specify `subscribers`.
+Currently, the Cron check definition requires that check requests be sent to Sensu clients with the `production` subscription. This is known as **pubsub check**. Optionally, a check may use `standalone` mode, which allows clients to schedule their own check executions. The following is an example of the Cron check using `standalone` mode (`true`). The Cron check will now be executed every `60` seconds on each Sensu client with the check definition. A Sensu check definition with `"standalone": true` does not need to specify `subscribers`.
 
 ~~~ json
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "standalone": true,
       "interval": 60
     }
@@ -95,13 +75,13 @@ Currently, the Cron check definition requires that check requests be sent to Sen
 }
 ~~~
 
-By default, Sensu checks use the `default` Sensu event handler for events they create. To specify a different Sensu event handler for a check, use the `handler` attribute. The `debug` event handler used in this example will log the Sensu event data to the Sensu server log.
+By default, Sensu checks use the `default` Sensu event handler for events they create. To specify a different Sensu event handler for a check, use the `handler` attribute. The `debug` event handler used in this example will log the Sensu event data to the Sensu server (or Sensu Enterprise) log.
 
 ~~~ json
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "standalone": true,
       "interval": 60,
       "handler": "debug"
@@ -120,7 +100,7 @@ _NOTE: if both `handler` and `handlers` (plural) check definition attributes are
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "standalone": true,
       "interval": 60,
       "handlers": ["default", "debug"]
@@ -131,7 +111,7 @@ _NOTE: if both `handler` and `handlers` (plural) check definition attributes are
 
 # Create a metric collection check
 
-Metric collection checks are used to collect measurements and other data (metrics) from server resources, services, and applications. Metric collection checks can output in a variety of metric formats:
+Metric collection checks are used to collect measurements from server resources, services, and applications. Metric collection checks can output metric data in a variety of metric formats:
 
 - [Graphite plaintext](http://graphite.readthedocs.org/en/latest/feeding-carbon.html#the-plaintext-protocol)
 - [Nagios Performance Data](http://nagios.sourceforge.net/docs/3_0/perfdata.html)
@@ -142,20 +122,19 @@ Metric collection checks are used to collect measurements and other data (metric
 
 ### Install dependencies {#cpu-metrics-install-dependencies}
 
-The following instructions install the `cpu-metrics` Sensu plugin (written in Ruby) to `/etc/sensu/plugins/cpu-metrics.rb`. This Sensu plugin will collect CPU metrics and output them in the Graphite plaintext format.
+The `metrics-cpu.rb` script provided by the [Sensu CPU Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-cpu-checks) collects and outputs CPU metrics in the Graphite plaintext format. The following instructions will install the [Sensu CPU Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-cpu-checks) (version 0.0.3) using Sensu's embedded Ruby, providing the `metrics-cpu.rb` script.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/cpu-metrics.rb http://sensuapp.org/docs/0.21/files/cpu-metrics.rb
-sudo chmod +x /etc/sensu/plugins/cpu-metrics.rb
+sudo sensu-install -p cpu-checks:0.0.3
 ~~~
 
-### Create the check definition for CPU utilization
+### Create the check definition for CPU metrics
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/cpu_metrics.json`. This check definition uses the `cpu-metrics` plugin ([installed above](#cpu-metrics-install-dependencies)) to collect CPU utilization metrics and output them in the Graphite plaintext format.
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/cpu_metrics.json`. This check definition uses the `metrics-cpu.rb` script ([installed above](#cpu-metrics-install-dependencies)) to collect CPU metrics and output them in the Graphite plaintext format.
 
 By default, Sensu checks with an exit status code of `0` (for `OK`) do not create events unless they indicate a change in state from a non-zero status to a zero status (i.e. resulting in a `resolve` action; see: [Sensu Events](events#what-are-sensu-events)). Metric collection checks will output metric data regardless of the check exit status code, however, they usually exit `0`. To ensure events are always created for a metric collection check, the check `type` of `metric` is used.
 
-The check is named `cpu_metrics`, and it runs <kbd>/etc/sensu/plugins/cpu-metrics.rb</kbd> on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the CPU utilization metrics to the Sensu server log.
+The check is named `cpu_metrics`, and it runs `metrics-cpu.rb` on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the graphite plaintext CPU metrics to the Sensu server (or Sensu Enterprise) log.
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -164,7 +143,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
   "checks": {
     "cpu_metrics": {
       "type": "metric",
-      "command": "/etc/sensu/plugins/cpu-metrics.rb",
+      "command": "metrics-cpu.rb",
       "subscribers": [
         "production"
       ],
@@ -175,7 +154,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-For a full listing of the `cpu-metrics` command line arguments, run <kbd>/etc/sensu/plugins/cpu-metrics.rb -h</kbd>.
+For a full listing of the `metrics-cpu.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/metrics-cpu.rb -h</kbd>.
 
 # Create a metric analysis check
 
@@ -183,7 +162,7 @@ A metric analysis check analyzes metric data which may or may not have been coll
 
 Because metric analysis checks require interaction with an external metric store, providing a functional example is outside of the scope of this guide. However, assuming the existence of a Graphite installation that is populated with metric data, the following example checks could be used.
 
-The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001`. The check queries Graphite for a calculated moving average (using the last 10 data points) of the load balancer session count. The session count moving average is compared with the provided alert thresholds. A Sensu client running on the Graphite server would be responsible for scheduling and executing this check (`standalone` mode).
+The following check uses the `check-graphite-data.rb` script, provided by the [Sensu Graphite Plugin](https://github.com/sensu-plugins/sensu-plugins-graphite), to query the Graphite API at `localhost:9001`. The check queries Graphite for a calculated moving average (using the last 10 data points) of the load balancer session count. The session count moving average is compared with the provided alert thresholds. A Sensu client running on the Graphite server would be responsible for scheduling and executing this check (`standalone` mode).
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -191,7 +170,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 {
   "checks": {
     "disk_capacity": {
-      "command": "check-data.rb -s localhost:9001 -t 'movingAverage(lb1.assets_backend.session_current,10)' -w 100 -c 200",
+      "command": "check-graphite-data.rb -s localhost:9001 -t 'movingAverage(lb1.assets_backend.session_current,10)' -w 100 -c 200",
       "standalone": true,
       "interval": 30
     }
@@ -199,13 +178,13 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001` for disk capacity metrics. The Graphite API query uses `highestCurrent()` to grab only the highest disk capacity metric, to be compared with the provided alert thresholds. This check will trigger an event (alert) when one or more disks on any machine are at the configured capacity threshold. In this example configuration, the check is configured to **warn** at 85% capacity (`-w 85`), and to raise a **critical** alert at 95% capacity (`-c 95`).
+The following check uses the `check-graphite-data.rb` script, provided by the [Sensu Graphite Plugin](https://github.com/sensu-plugins/sensu-plugins-graphite), to query the Graphite API at `localhost:9001` for disk capacity metrics. The Graphite API query uses `highestCurrent()` to grab only the highest disk capacity metric, to be compared with the provided alert thresholds. This check will trigger an event (alert) when one or more disks on any machine are at the configured capacity threshold. In this example configuration, the check is configured to **warn** at 85% capacity (`-w 85`), and to raise a **critical** alert at 95% capacity (`-c 95`).
 
 ~~~ json
 {
   "checks": {
     "disk_capacity": {
-      "command": "check-data.rb -s localhost:9001 -t 'highestCurrent(*.disk.*.capacity,1)' -w 85 -c 95 -a 120",
+      "command": "check-graphite-data.rb -s localhost:9001 -t 'highestCurrent(*.disk.*.capacity,1)' -w 85 -c 95 -a 120",
       "standalone": true,
       "interval": 30
     }
@@ -213,10 +192,8 @@ The following check uses the `check-data` plugin to query the Graphite API at `l
 }
 ~~~
 
-The `check-data` plugin can be installed with the following instructions:
+The following instructions will install the [Sensu Graphite Plugin](https://github.com/sensu-plugins/sensu-plugins-graphite) (version 0.0.6) using Sensu’s embedded Ruby, providing the `check-graphite-data.rb` script.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-data.rb http://sensuapp.org/docs/0.21/files/check-data.rb
-sudo chmod +x /etc/sensu/plugins/check-data.rb
-/etc/sensu/plugins/check-data.rb -h
+sudo sensu-install -p graphite:0.0.6
 ~~~
