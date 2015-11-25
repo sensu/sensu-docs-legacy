@@ -31,7 +31,7 @@ Standard Sensu checks are used to determine the health of server resources, serv
 
 The following instructions install the check dependencies and configure the Sensu check definition in order to monitor the Cron service.
 
-### Install dependencies
+### Install dependencies  {#check-cron-install-dependencies}
 
 The `check-procs.rb` script provided by the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) can reliably detect if a service such as Cron is running or not. The following instructions will install the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) (version 0.0.6) using Sensu's embedded Ruby, providing the `check-procs.rb` script.
 
@@ -41,7 +41,7 @@ sudo sensu-install -p process-checks:0.0.6
 
 ### Create the check definition for Cron
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-procs.rb` script ([installed above](#install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-procs.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-procs.rb` script ([installed above](#check-cron-install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-procs.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -111,7 +111,7 @@ _NOTE: if both `handler` and `handlers` (plural) check definition attributes are
 
 # Create a metric collection check
 
-Metric collection checks are used to collect measurements and other data (metrics) from server resources, services, and applications. Metric collection checks can output in a variety of metric formats:
+Metric collection checks are used to collect measurements from server resources, services, and applications. Metric collection checks can output metric data in a variety of metric formats:
 
 - [Graphite plaintext](http://graphite.readthedocs.org/en/latest/feeding-carbon.html#the-plaintext-protocol)
 - [Nagios Performance Data](http://nagios.sourceforge.net/docs/3_0/perfdata.html)
@@ -162,7 +162,7 @@ A metric analysis check analyzes metric data which may or may not have been coll
 
 Because metric analysis checks require interaction with an external metric store, providing a functional example is outside of the scope of this guide. However, assuming the existence of a Graphite installation that is populated with metric data, the following example checks could be used.
 
-The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001`. The check queries Graphite for a calculated moving average (using the last 10 data points) of the load balancer session count. The session count moving average is compared with the provided alert thresholds. A Sensu client running on the Graphite server would be responsible for scheduling and executing this check (`standalone` mode).
+The following check uses the `check-graphite-data.rb` script, provided by the [Sensu Graphite Plugin](https://github.com/sensu-plugins/sensu-plugins-graphite), to query the Graphite API at `localhost:9001`. The check queries Graphite for a calculated moving average (using the last 10 data points) of the load balancer session count. The session count moving average is compared with the provided alert thresholds. A Sensu client running on the Graphite server would be responsible for scheduling and executing this check (`standalone` mode).
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -170,7 +170,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 {
   "checks": {
     "disk_capacity": {
-      "command": "check-data.rb -s localhost:9001 -t 'movingAverage(lb1.assets_backend.session_current,10)' -w 100 -c 200",
+      "command": "check-graphite-data.rb -s localhost:9001 -t 'movingAverage(lb1.assets_backend.session_current,10)' -w 100 -c 200",
       "standalone": true,
       "interval": 30
     }
@@ -178,13 +178,13 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-The following check uses the `check-data` plugin to query the Graphite API at `localhost:9001` for disk capacity metrics. The Graphite API query uses `highestCurrent()` to grab only the highest disk capacity metric, to be compared with the provided alert thresholds. This check will trigger an event (alert) when one or more disks on any machine are at the configured capacity threshold. In this example configuration, the check is configured to **warn** at 85% capacity (`-w 85`), and to raise a **critical** alert at 95% capacity (`-c 95`).
+The following check uses the `check-graphite-data.rb` script, provided by the [Sensu Graphite Plugin](https://github.com/sensu-plugins/sensu-plugins-graphite), to query the Graphite API at `localhost:9001` for disk capacity metrics. The Graphite API query uses `highestCurrent()` to grab only the highest disk capacity metric, to be compared with the provided alert thresholds. This check will trigger an event (alert) when one or more disks on any machine are at the configured capacity threshold. In this example configuration, the check is configured to **warn** at 85% capacity (`-w 85`), and to raise a **critical** alert at 95% capacity (`-c 95`).
 
 ~~~ json
 {
   "checks": {
     "disk_capacity": {
-      "command": "check-data.rb -s localhost:9001 -t 'highestCurrent(*.disk.*.capacity,1)' -w 85 -c 95 -a 120",
+      "command": "check-graphite-data.rb -s localhost:9001 -t 'highestCurrent(*.disk.*.capacity,1)' -w 85 -c 95 -a 120",
       "standalone": true,
       "interval": 30
     }
@@ -192,10 +192,8 @@ The following check uses the `check-data` plugin to query the Graphite API at `l
 }
 ~~~
 
-The `check-data` plugin can be installed with the following instructions:
+The following instructions will install the [Sensu Graphite Plugin](https://github.com/sensu-plugins/sensu-plugins-graphite) (version 0.0.6) using Sensu’s embedded Ruby, providing the `check-graphite-data.rb` script.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-data.rb http://sensuapp.org/docs/0.21/files/check-data.rb
-sudo chmod +x /etc/sensu/plugins/check-data.rb
-/etc/sensu/plugins/check-data.rb -h
+sudo sensu-install -p graphite:0.0.6
 ~~~
