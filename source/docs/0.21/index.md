@@ -28,14 +28,14 @@ hide_toc: true
 
 * **Getting Started Guide**
   * [Overview](getting-started)
-  * [Getting Started w/ Checks](getting-started-with-checks)
-  * [Getting Started w/ Handlers](getting-started-with-handlers)
-  * [Getting Started w/ Filters](getting-started-with-filters)
-  * [Getting Started w/ Mutators](getting-started-with-mutators)
-  * [Summary](getting-started-summary)
+  * [Checks](getting-started-with-checks)
+  * [Handlers](getting-started-with-handlers)
+  * [Filters](getting-started-with-filters)
+  * [Mutators](getting-started-with-mutators)
 
 * **Reference Docs**
   * [Configuration](configuration)
+  * [Plugins](plugins)
   * [Clients](clients)
   * [Checks](checks)
   * [Handlers](handlers)

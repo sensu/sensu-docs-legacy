@@ -3,8 +3,8 @@ version: 0.21
 category: "Reference Docs"
 title: "Configuration"
 next:
-  url: "clients"
-  text: "Clients"
+  url: "plugins"
+  text: "Plugins"
 ---
 
 # Configuration
