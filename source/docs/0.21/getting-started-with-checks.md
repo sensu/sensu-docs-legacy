@@ -33,35 +33,15 @@ The following instructions install the check dependencies and configure the Sens
 
 ### Install dependencies
 
-The `check-procs` Sensu plugin can reliably detect if a service such as Cron is running or not. The following instructions will install the `check-procs` Sensu check plugin (written in Ruby) to `/etc/sensu/plugins/check-procs.rb`.
+The `check-procs.rb` script provided by the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) can reliably detect if a service such as Cron is running or not. The following instructions will install the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) (version 0.0.6) using Sensu's embedded Ruby, providing the `check-procs.rb` script.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/check-procs.rb http://sensuapp.org/docs/0.21/files/check-procs.rb
-sudo chmod +x /etc/sensu/plugins/check-procs.rb
-~~~
-
-The `check-procs` Sensu plugin requires a Ruby runtime and the `sensu-plugin` Ruby gem. Install Ruby from the distribution repository and `sensu-plugin` from Rubygems:
-
-_NOTE: the following Ruby installation steps may differ depending on your platform._
-
-#### Ubuntu/Debian
-
-~~~ shell
-sudo apt-get update
-sudo apt-get install ruby ruby-dev
-sudo gem install sensu-plugin
-~~~
-
-#### CentOS/RHEL
-
-~~~ shell
-sudo yum install ruby ruby-devel
-sudo gem install sensu-plugin
+sudo sensu-install -p process-checks:0.0.6
 ~~~
 
 ### Create the check definition for Cron
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the check-procs plugin ([installed above](#install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs <kbd>/etc/sensu/plugins/check-procs.rb -p cron</kbd> on Sensu clients with the `production` subscription, every `60` seconds (interval).
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-procs.rb` script ([installed above](#install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-procs.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -69,7 +49,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "subscribers": [
         "production"
       ],
@@ -79,15 +59,15 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-For a full listing of the `check-procs` command line arguments, run <kbd>/etc/sensu/plugins/check-procs.rb -h</kbd>.
+For a full listing of the `check-procs.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/check-procs.rb -h</kbd>.
 
-Currently, the Cron check definition requires that check requests be sent to Sensu clients with the `production` subscription. This is known as **check subscription mode**. Optionally, a check may use `standalone` mode, which allows clients to schedule their own check executions. The following is an example of the Cron check using `standalone` mode (`true`). The Cron check will now be executed every `60` seconds on each Sensu client with the check definition. A Sensu check definition with `"standalone": true` does not need to specify `subscribers`.
+Currently, the Cron check definition requires that check requests be sent to Sensu clients with the `production` subscription. This is known as **pubsub check**. Optionally, a check may use `standalone` mode, which allows clients to schedule their own check executions. The following is an example of the Cron check using `standalone` mode (`true`). The Cron check will now be executed every `60` seconds on each Sensu client with the check definition. A Sensu check definition with `"standalone": true` does not need to specify `subscribers`.
 
 ~~~ json
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "standalone": true,
       "interval": 60
     }
@@ -95,13 +75,13 @@ Currently, the Cron check definition requires that check requests be sent to Sen
 }
 ~~~
 
-By default, Sensu checks use the `default` Sensu event handler for events they create. To specify a different Sensu event handler for a check, use the `handler` attribute. The `debug` event handler used in this example will log the Sensu event data to the Sensu server log.
+By default, Sensu checks use the `default` Sensu event handler for events they create. To specify a different Sensu event handler for a check, use the `handler` attribute. The `debug` event handler used in this example will log the Sensu event data to the Sensu server (or Sensu Enterprise) log.
 
 ~~~ json
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "standalone": true,
       "interval": 60,
       "handler": "debug"
@@ -120,7 +100,7 @@ _NOTE: if both `handler` and `handlers` (plural) check definition attributes are
 {
   "checks": {
     "cron": {
-      "command": "/etc/sensu/plugins/check-procs.rb -p cron",
+      "command": "check-procs.rb -p cron",
       "standalone": true,
       "interval": 60,
       "handlers": ["default", "debug"]
@@ -142,7 +122,7 @@ Metric collection checks are used to collect measurements and other data (metric
 
 ### Install dependencies {#cpu-metrics-install-dependencies}
 
-The following instructions install the `cpu-metrics` Sensu plugin (written in Ruby) to `/etc/sensu/plugins/cpu-metrics.rb`. This Sensu plugin will collect CPU metrics and output them in the Graphite plaintext format.
+The following instructions install the `cpu-metrics.rb` metric check script Sensu plugin (written in Ruby) to `/etc/sensu/plugins/cpu-metrics.rb`. This Sensu plugin will collect CPU metrics and output them in the Graphite plaintext format.
 
 ~~~ shell
 sudo wget -O /etc/sensu/plugins/cpu-metrics.rb http://sensuapp.org/docs/0.21/files/cpu-metrics.rb
@@ -155,7 +135,7 @@ The following is an example Sensu check definition, a JSON configuration file lo
 
 By default, Sensu checks with an exit status code of `0` (for `OK`) do not create events unless they indicate a change in state from a non-zero status to a zero status (i.e. resulting in a `resolve` action; see: [Sensu Events](events#what-are-sensu-events)). Metric collection checks will output metric data regardless of the check exit status code, however, they usually exit `0`. To ensure events are always created for a metric collection check, the check `type` of `metric` is used.
 
-The check is named `cpu_metrics`, and it runs <kbd>/etc/sensu/plugins/cpu-metrics.rb</kbd> on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the CPU utilization metrics to the Sensu server log.
+The check is named `cpu_metrics`, and it runs `/etc/sensu/plugins/cpu-metrics.rb` on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the CPU utilization metrics to the Sensu server log.
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
