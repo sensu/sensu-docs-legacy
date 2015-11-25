@@ -122,20 +122,19 @@ Metric collection checks are used to collect measurements and other data (metric
 
 ### Install dependencies {#cpu-metrics-install-dependencies}
 
-The following instructions install the `cpu-metrics.rb` metric check script Sensu plugin (written in Ruby) to `/etc/sensu/plugins/cpu-metrics.rb`. This Sensu plugin will collect CPU metrics and output them in the Graphite plaintext format.
+The `metrics-cpu.rb` script provided by the [Sensu CPU Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-cpu-checks) collects and outputs CPU metrics in the Graphite plaintext format. The following instructions will install the [Sensu CPU Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-cpu-checks) (version 0.0.3) using Sensu's embedded Ruby, providing the `metrics-cpu.rb` script.
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/cpu-metrics.rb http://sensuapp.org/docs/0.21/files/cpu-metrics.rb
-sudo chmod +x /etc/sensu/plugins/cpu-metrics.rb
+sudo sensu-install -p cpu-checks:0.0.3
 ~~~
 
-### Create the check definition for CPU utilization
+### Create the check definition for CPU metrics
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/cpu_metrics.json`. This check definition uses the `cpu-metrics` plugin ([installed above](#cpu-metrics-install-dependencies)) to collect CPU utilization metrics and output them in the Graphite plaintext format.
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/cpu_metrics.json`. This check definition uses the `metrics-cpu.rb` script ([installed above](#cpu-metrics-install-dependencies)) to collect CPU metrics and output them in the Graphite plaintext format.
 
 By default, Sensu checks with an exit status code of `0` (for `OK`) do not create events unless they indicate a change in state from a non-zero status to a zero status (i.e. resulting in a `resolve` action; see: [Sensu Events](events#what-are-sensu-events)). Metric collection checks will output metric data regardless of the check exit status code, however, they usually exit `0`. To ensure events are always created for a metric collection check, the check `type` of `metric` is used.
 
-The check is named `cpu_metrics`, and it runs `/etc/sensu/plugins/cpu-metrics.rb` on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the CPU utilization metrics to the Sensu server log.
+The check is named `cpu_metrics`, and it runs `metrics-cpu.rb` on Sensu clients with the `production` subscription, every `10` seconds (interval). The `debug` handler is used to log the graphite plaintext CPU metrics to the Sensu server (or Sensu Enterprise) log.
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -144,7 +143,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
   "checks": {
     "cpu_metrics": {
       "type": "metric",
-      "command": "/etc/sensu/plugins/cpu-metrics.rb",
+      "command": "metrics-cpu.rb",
       "subscribers": [
         "production"
       ],
@@ -155,7 +154,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-For a full listing of the `cpu-metrics` command line arguments, run <kbd>/etc/sensu/plugins/cpu-metrics.rb -h</kbd>.
+For a full listing of the `metrics-cpu.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/metrics-cpu.rb -h</kbd>.
 
 # Create a metric analysis check
 
