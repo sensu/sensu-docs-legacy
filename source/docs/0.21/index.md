@@ -43,6 +43,7 @@ hide_toc: true
   * [Mutators](mutators)
   * [Extensions](extensions)
   * [Events](events)
+  * [Transport](transport)
   * [RabbitMQ Configuration](rabbitmq)
   * [Redis Configuration](redis)
   * [SSL Configuration](ssl)

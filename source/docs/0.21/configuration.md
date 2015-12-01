@@ -319,6 +319,23 @@ redis
     }
     ~~~
 
+transport
+: description
+  : The Sensu Transport definition scope (see:
+    [Transport Configuration](transport)).
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "transport": {
+        "name": "rabbitmq"
+      }
+    }
+    ~~~
+
 api
 : description
   : The Sensu API definition scope (see:
