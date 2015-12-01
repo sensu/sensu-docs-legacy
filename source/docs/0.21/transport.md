@@ -58,7 +58,7 @@ name
 : type
   : String
 : allowed values
-  : `rabbitmq`, `redis`, [`stomp` (Sensu Enterprise only)](enterprise-transports)
+  : `rabbitmq`, `redis`
 : default
   : `rabbitmq`
 : example
@@ -86,4 +86,3 @@ Sensu currently supports the following Transports:
 
 - [RabbitMQ (default)](redis)
 - [Redis](redis)
-- [STOMP (Sensu Enterprise Only)](enterprise-transports)
