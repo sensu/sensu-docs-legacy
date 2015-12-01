@@ -68,8 +68,7 @@ name
 
 reconnect_on_error
 : description
-  : Attempt to reconnect after a connection error (e.g. in case a transient
-    network issue would cause a connection error).
+  : Attempt to reconnect after a connection error.
 : required
   : false
 : type
