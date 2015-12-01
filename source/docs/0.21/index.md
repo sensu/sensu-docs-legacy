@@ -43,6 +43,7 @@ hide_toc: true
   * [Mutators](mutators)
   * [Extensions](extensions)
   * [Events](events)
+  * [Transport](transport)
   * [RabbitMQ Configuration](rabbitmq)
   * [Redis Configuration](redis)
   * [SSL Configuration](ssl)
@@ -66,6 +67,7 @@ hide_toc: true
   * [Built-in Mutators](enterprise-built-in-mutators)
   * [Contact Routing](enterprise-contact-routing)
   * [API](enterprise-api)
+  * [Transports](enterprise-transports)
 
 * **Enterprise Dashboard Docs**
   * [Overview](enterprise-dashboard-overview)
