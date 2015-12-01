@@ -321,7 +321,8 @@ redis
 
 transport
 : description
-  : The Sensu Transport to use (see: [Transport Configuration](transport)).
+  : The Sensu Transport definition scope (see:
+    [Transport Configuration](transport)).
 : required
   : false
 : type
