@@ -45,7 +45,7 @@ transport
     }
     ~~~
 
-### Transport attributes
+### Transport definition attributes
 
 The following attributes are defined within the `"transport": {}`
 [definition scope](configuration#configuration-scopes).
@@ -64,6 +64,21 @@ name
 : example
   : ~~~ shell
     "name": "redis"
+    ~~~
+
+reconnect_on_error
+: description
+  : Attempt to reconnect after a connection error (e.g. in case a transient
+    network issue would cause a connection error).
+: required
+  : false
+: type
+  : String
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "reconnect_on_error": "false"
     ~~~
 
 ## Sensu Transport Options
