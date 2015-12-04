@@ -65,6 +65,40 @@ The following is an example Sensu handler definition, a JSON configuration file 
 }
 ~~~
 
+## Abrief note about handlers
+
+At startup the Sensu server reads all the json config files inside the `conf.d` directory and creates an object called `jsonconfig` that is basically a long json that includes all the config files read at starup separated by keys so if you have a file called `hipchat.json` whatever key name you define inside of it will be added to the `jsonconfig` object, for example :
+
+~~~json
+{
+  "hipchat-team1": {
+    "apikey": "1234566gggg55555",
+    "apiversion": "v1",
+    "room": "Ops",
+    "from": "Sensu"
+  }
+}
+~~~
+
+The key `"hipchat"` will be added to the main sensu `jsonconfig` and will be use by the handler to find its config, so if you need to have multiple handlers with multiple configs you need to change the main key name and configure your handler properly to handle it. In this case for the hipchat handler the handler definition will look like this :
+
+~~~json
+{
+  "handlers": {
+    "hipchat-team-one": {
+      "type": "pipe",
+      "command": "handler-hipchat.rb -j hipchat-team1",
+      "severities": [
+        "ok",
+        "critical"
+      ]
+    }
+  }
+}
+~~~
+
+Make sure to read the handler's own documentation before atempting to use it since they may not have the option for multiple config files.
+
 # Anatomy of a handler definition
 
 ### Name
