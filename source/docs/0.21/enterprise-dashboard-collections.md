@@ -3,8 +3,8 @@ version: 0.21
 category: "Collections"
 title: "Collections"
 next:
-  url: "enterprise-dashboard-overview-dashboard"
-  text: "Enterprise Dashboard Overview Dashboard"
+  url: "enterprise-dashboard-hud"
+  text: "Enterprise Dashboard HUD"
 ---
 
 ## Collections
