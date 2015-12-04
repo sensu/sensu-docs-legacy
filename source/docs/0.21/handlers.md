@@ -65,7 +65,7 @@ The following is an example Sensu handler definition, a JSON configuration file 
 }
 ~~~
 
-## Abrief note about handlers
+## A brief note about handlers
 
 At startup the Sensu server reads all the json config files inside the `conf.d` directory and creates an object called `jsonconfig` that is basically a long json that includes all the config files read at starup separated by keys so if you have a file called `hipchat.json` whatever key name you define inside of it will be added to the `jsonconfig` object, for example :
 
