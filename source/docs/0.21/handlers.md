@@ -80,7 +80,7 @@ At startup the Sensu server reads all the json config files inside the `conf.d` 
 }
 ~~~
 
-The key `"hipchat-team1"` will be added to the main sensu `jsonconfig` and used by the handler to find its config, so if you need to have one handler with multiple configs you need to change the main key name and configure your handler properly to handle it. In this case for the hipchat handler the handler definition will look like this :
+The key `"hipchat-team1"` will be added to the main sensu `jsonconfig` and used by the handler to find its config, so if you need to have one handler with multiple configs you need to change the main key name and configure your handler properly. In this case for the hipchat handler the handler definition will look like this :
 
 ~~~json
 {
