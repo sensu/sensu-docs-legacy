@@ -15,6 +15,7 @@ This reference document provides information to help you:
 * Enable and configure the optional [Role-Based Access Controls
   (RBAC)](#role-based-access-controls-rbac)
   * Configure the [GitHub driver for RBAC](#github-driver-for-rbac)
+  * Configure the [GitLab driver for RBAC](#gitlab-driver-for-rbac)
   * Configure the [LDAP driver for RBAC](#ldap-driver-for-rbac)
 * Configure or disable [Audit Logging](#audit-logging)
 
@@ -387,6 +388,7 @@ Sensu Enterprise currently includes the following authentication drivers for
 RBAC:
 
 * [GitHub](#github-driver-for-rbac)
+* [GitLab](#gitlab-driver-for-rbac)
 * [LDAP](#ldap-driver-for-rbac)
 
 ### GitHub Driver for RBAC
@@ -577,6 +579,199 @@ Dashboard as a GitHub "application". Please note the following instructions:
 
    ![](img/enterprise-dashboard-github-secret.png)
 
+### GitLab Driver for RBAC
+
+The Sensu Enterprise Dashboard ships with integrated support for using
+[GitLab.com](https://gitlab.com) or a [self-hosted GitLab](https://\
+about.gitlab.com/) installation for RBAC authentication. Please note
+the following configuration attributes for configuring the GitLab driver:
+
+#### GitLab authentication attributes
+
+applicationid
+: description
+  : The GitLab OAuth Application "Application Id"
+   _NOTE: requires [registration of an OAuth application in GitLab](#register-an-oauth-application-in-gitlab)._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "applicationid": "6141d36e5ea48103bc39bb3eb5eede8735f0dd8f9788d8b30255dbf4d218628f"
+    ~~~
+
+secret
+: description
+  : The GitLab OAuth Application "Secret"
+  _NOTE: requires [registration of an OAuth application in GitLab](#register-an-oauth-application-in-gitlab)._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "secret": "7d419a3b2f7b92edab30f963d7c0a4d1841f0dc46b4403b11146b4f1d5cb3a4e"
+    ~~~
+
+redirecturl
+: description
+  : The GitLab OAuth Application "Callback url"
+  _NOTE: requires [registration of an OAuth application in GitLab](#register-an-oauth-application-in-gitlab)._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "redirecturl": "https://sensu.example.org/login/callback"
+    ~~~
+
+server
+: description
+  : The location of the GitLab server you wish to authenticate against.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "server": "https://gitlab.com"`
+    ~~~
+
+roles
+: description
+  : An array of [Role attributes for GitLab
+    Groups](#role-attributes-for-gitlab-groups)
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~shell
+    "roles": [
+      {
+        "name": "guests",
+        "members": [
+          "guests"
+        ],
+        "datacenters": [
+          "us-west-1"
+        ],
+        "subscriptions": [
+          "webserver"
+        ],
+        "readonly": true
+      },
+      {
+        "name": "operators",
+        "members": [
+          "operators"
+        ],
+        "datacenters": [],
+        "subscriptions": [],
+        "readonly": false
+      }
+    ]
+    ~~~
+
+#### Role attributes for GitLab Groups
+
+name
+: description
+  : The name of the role.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~shell
+    "name": "operators"
+    ~~~
+
+members
+: description
+  : An array of the GitLab Groups that should be included as members of the role.
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~shell
+    "members": ["operators"]
+    ~~~
+
+datacenters
+: description
+  : An array of the `datacenters` (i.e. matching a defined [Sensu API endpoint
+    `name`](#sensu-api-endpoint-attributes) value) that members of the role
+    should have access to. Provided values will be used to filter which
+    `datacenters` members of the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all configured `datacenters`._
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "datacenters": ["us-west-1"]
+    ~~~
+
+subscriptions
+: description
+  : An array of the subscriptions that members of the role should have access
+    to. Provided values will be used to filter which subscriptions members of
+    the role will have access to.
+    _NOTE: omitting this configuration attribute or providing an empty array
+    will allow members of the role access to all subscriptions._  
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "subscriptions": ["webserver"]
+    ~~~
+
+readonly
+: description
+  : Used to restrict "write" access (i.e. preventing members of the role from
+    being able to create stashes, silence checks, etc).
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "readonly": true
+    ~~~
+
+#### Register an OAuth Application in GitLab
+
+To use GitLab for authentication requires registration of your Sensu Enterprise
+Dashboard as a GitLab "application". Please note the following instructions:
+
+1. To register a GitLab OAuth application, please navigate to your GitLab
+  profile section and selection "Applications" => "New application".
+
+    ![](img/enterprise-dashboard-gitlab-app.png)
+
+2. Give your application a name (e.g. "Sensu Enterprise Dashboard")
+
+3. Provide the Authorization callback URL (e.g. `{HOSTNAME}/login/callback`)
+
+    _NOTE: this URL does not need to be publicly accessible - as long as a user
+    has network access to **both** GitLab **and** the callback URL, s/he will
+    be able to authenticate; for example, this will allow users to authenticate
+    to a Sensu Enterprise Dashboard service running on a private network as long
+    as the user has access to the network (e.g. locally or via VPN)._
+
+4. Select "Submit" and note the application Application Id and Secret.
+
+    ![](img/enterprise-dashboard-gitlab-secret.png)
 
 ## LDAP driver for RBAC
 
