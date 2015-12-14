@@ -427,9 +427,6 @@ clientSecret
 server
 : description
   : The location of the GitHub server you wish to authenticate against.
-    _NOTE: currently, only GitHub.com is supported; there are known issues when
-    attempting to connect to GitHub Enterprise servers that we are working on
-    resolving and should have a fix for soon._
 : required
   : true
 : type
