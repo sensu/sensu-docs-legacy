@@ -131,11 +131,19 @@ sensuEventOccurrences OBJECT-TYPE
    "The event occurrence count."
   ::= { sensuEnterpriseEventEntry 9 }
 
+sensuClientAddress OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu client address."
+  ::= { sensuEnterpriseEventEntry 10 }
+
 sensuEnterpriseEventTrap NOTIFICATION-TYPE
   OBJECTS { sensuEventID, sensuNotification, sensuClientName,
             sensuCheckName, sensuCheckSeverity, sensuCheckOutput,
             sensuEventAction, sensuEventTimestamp,
-            sensuEventOccurrences }
+            sensuEventOccurrences, sensuClientAddress }
   STATUS  current
   DESCRIPTION
     "The SNMP trap that is sent from Sensu Enterprise for an event."
