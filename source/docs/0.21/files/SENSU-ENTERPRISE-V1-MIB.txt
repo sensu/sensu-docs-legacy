@@ -12,7 +12,7 @@ IMPORTS
 		FROM RFC-1215;
 
 -- sensuEnterprise MODULE-IDENTITY
---     LAST-UPDATED "201508170000Z"
+--     LAST-UPDATED "201512150000Z"
 --     ORGANIZATION
 --         "Sensu Enterprise"
 --     CONTACT-INFO
@@ -23,6 +23,9 @@ IMPORTS
 --
 --          Sensu Enterprise Information:
 --            http://www.sensuapp.org/enterprise"
+--     DESCRIPTION
+--         "Added client address object"
+--     REVISION    "201512150000Z"
 --     DESCRIPTION
 --         "Objects for the Sensu Enterprise SNMP integration"
 --     REVISION    "201508170000Z"
@@ -78,7 +81,9 @@ SensuEnterpriseEventEntry ::= SEQUENCE {
 	sensuEventTimestamp
 		INTEGER,
 	sensuEventOccurrences
-		INTEGER
+		INTEGER,
+	sensuClientAddress
+		OCTET STRING
 }
 
 sensuEnterpriseEventEntry  OBJECT-TYPE
@@ -182,6 +187,16 @@ sensuEventOccurrences  OBJECT-TYPE
 		""
 	::= { sensuEnterpriseEventEntry 9 }
 
+-- Sensu client address.
+
+sensuClientAddress  OBJECT-TYPE
+	SYNTAX     OCTET STRING
+	ACCESS     read-only
+	STATUS     mandatory
+	DESCRIPTION
+		""
+	::= { sensuEnterpriseEventEntry 10 }
+
 sensuEnterpriseEventTrap  TRAP-TYPE
 	ENTERPRISE sensuEnterprise
 	VARIABLES { sensuEventID,
@@ -192,7 +207,8 @@ sensuEnterpriseEventTrap  TRAP-TYPE
                   sensuCheckOutput,
                   sensuEventAction,
                   sensuEventTimestamp,
-                  sensuEventOccurrences
+                  sensuEventOccurrences,
+                  sensuClientAddress
 		 }
 	DESCRIPTION
 		"The SNMP trap that is sent from Sensu Enterprise for an event."

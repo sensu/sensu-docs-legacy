@@ -7,7 +7,7 @@ SENSU-ENTERPRISE-NOTIFY-MIB DEFINITIONS ::= BEGIN
       FROM SENSU-ENTERPRISE-ROOT-MIB;
 
 sensuEnterpriseNotify MODULE-IDENTITY
-  LAST-UPDATED "201508170000Z" -- August 17, 2015
+  LAST-UPDATED "201512170000Z" -- December 17, 2015
   ORGANIZATION "Sensu Enterprise"
   CONTACT-INFO
     "Sean Porter
@@ -18,6 +18,9 @@ sensuEnterpriseNotify MODULE-IDENTITY
     Sensu Enterprise Information:
       http://www.sensuapp.org/enterprise
     "
+  DESCRIPTION
+    "Added client address object"
+  REVISION "201512170000Z" -- December 17, 2015
   DESCRIPTION
     "Objects for the Sensu Enterprise SNMP integration."
   REVISION "201508170000Z" -- August 17, 2015
@@ -131,11 +134,19 @@ sensuEventOccurrences OBJECT-TYPE
    "The event occurrence count."
   ::= { sensuEnterpriseEventEntry 9 }
 
+sensuClientAddress OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu client address."
+  ::= { sensuEnterpriseEventEntry 10 }
+
 sensuEnterpriseEventTrap NOTIFICATION-TYPE
   OBJECTS { sensuEventID, sensuNotification, sensuClientName,
             sensuCheckName, sensuCheckSeverity, sensuCheckOutput,
             sensuEventAction, sensuEventTimestamp,
-            sensuEventOccurrences }
+            sensuEventOccurrences, sensuClientAddress }
   STATUS  current
   DESCRIPTION
     "The SNMP trap that is sent from Sensu Enterprise for an event."
