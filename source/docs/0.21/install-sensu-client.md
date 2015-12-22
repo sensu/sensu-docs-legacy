@@ -130,6 +130,13 @@ As discussed earlier in this guide, all Sensu services use a transport (by defau
     "vhost": "/sensu",
     "user": "sensu",
     "password": "secret"
+  },
+  "client": {
+    "name": "localhost",
+    "address": "127.0.0.1",
+    "subscriptions": [
+      "test"
+    ]
   }
 }
 ~~~
