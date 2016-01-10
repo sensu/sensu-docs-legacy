@@ -33,7 +33,7 @@ The following instructions install the check dependencies and configure the Sens
 
 ### Install dependencies  {#check-cron-install-dependencies}
 
-The `check-procs.rb` script provided by the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) can reliably detect if a service such as Cron is running or not. The following instructions will install the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) (version 0.0.6) using Sensu's embedded Ruby, providing the `check-procs.rb` script.
+The `check-process.rb` script provided by the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) can reliably detect if a service such as Cron is running or not. The following instructions will install the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) (version 0.0.6) using Sensu's embedded Ruby, providing the `check-process.rb` script.
 
 ~~~ shell
 sudo sensu-install -p process-checks:0.0.6
@@ -41,7 +41,7 @@ sudo sensu-install -p process-checks:0.0.6
 
 ### Create the check definition for Cron
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-procs.rb` script ([installed above](#check-cron-install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-procs.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
+The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-process.rb` script ([installed above](#check-cron-install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-process.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
 
 _NOTE: Sensu services must be restarted in order to pick up configuration changes. Sensu Enterprise can be reloaded._
 
@@ -49,7 +49,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 {
   "checks": {
     "cron": {
-      "command": "check-procs.rb -p cron",
+      "command": "check-process.rb -p cron",
       "subscribers": [
         "production"
       ],
@@ -59,7 +59,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-For a full listing of the `check-procs.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/check-procs.rb -h</kbd>.
+For a full listing of the `check-process.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/check-process.rb -h</kbd>.
 
 Currently, the Cron check definition requires that check requests be sent to Sensu clients with the `production` subscription. This is known as **pubsub check**. Optionally, a check may use `standalone` mode, which allows clients to schedule their own check executions. The following is an example of the Cron check using `standalone` mode (`true`). The Cron check will now be executed every `60` seconds on each Sensu client with the check definition. A Sensu check definition with `"standalone": true` does not need to specify `subscribers`.
 
@@ -67,7 +67,7 @@ Currently, the Cron check definition requires that check requests be sent to Sen
 {
   "checks": {
     "cron": {
-      "command": "check-procs.rb -p cron",
+      "command": "check-process.rb -p cron",
       "standalone": true,
       "interval": 60
     }
@@ -81,7 +81,7 @@ By default, Sensu checks use the `default` Sensu event handler for events they c
 {
   "checks": {
     "cron": {
-      "command": "check-procs.rb -p cron",
+      "command": "check-process.rb -p cron",
       "standalone": true,
       "interval": 60,
       "handler": "debug"
@@ -100,7 +100,7 @@ _NOTE: if both `handler` and `handlers` (plural) check definition attributes are
 {
   "checks": {
     "cron": {
-      "command": "check-procs.rb -p cron",
+      "command": "check-process.rb -p cron",
       "standalone": true,
       "interval": 60,
       "handlers": ["default", "debug"]
