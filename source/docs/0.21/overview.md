@@ -12,7 +12,47 @@ danger:
 
 # What is Sensu? {#what-is-sensu}
 
-Sensu is often described as the "monitoring router". Essentially,
+Sensu is a monitoring and telemetry solution. Sensu provides a framework for monitoring infrastructure, service & application health, and business KPIs. Sensu is specifically designed to solve monitoring challenges introduced by dynamic and/or ephemeral infrastructure at scale (e.g. public, private, and hybrid clouds). 
+
+Sensu allows organizations to compose comprehensive monitoring & telemetry solutions to meet unique business requirements. By providing a platform to build upon, Sensu enables you to focus on _what_ to monitor and measure, rather than _how_. Sensu is installed on your organizations infrastructure &ndash; it is not a Software-as-a-Service (SaaS) solution &ndash; which means Sensu gives you full control over the availability of your monitoring solution.
+
+As a framework, Sensu provides the following components:
+
+- [Secure Transport](transport)
+- [Data Store](redis)
+- [Check Execution Scheduler](#)
+- [Monitoring Agent](clients)
+- [Event Processor](#)
+- [RESTful API](api-overview) 
+
+Sensu's modern architecture facilitates the execution of service checks, collection of metric data, and event processing at scale. 
+
+![](img/sensu-diagram.gif)
+
+
+
+## What is a Service Check?
+
+Service checks allow you to monitor services (e.g. is Nginx running?) or measure resources (e.g. disk capacity). Service checks are executed on machines running a monitoring agent (i.e. the [Sensu client](clients)). Service checks are essentially commands (or scripts) that output data to `STDOUT` or `STDERR` and produce an exit status code to indicate a state. Common exit status codes used are 0 for OK, 1 for WARNING, 2 for CRITICAL, and 3 or greater to indicate UNKNOWN or CUSTOM. Sensu checks use the same specification as Nagios, therefore, Nagios check plugins may be used with Sensu. Service checks produce results that are processed by the event processor (i.e. the Sensu server). 
+
+[Learn more >](checks)
+
+## What is Event Processing?
+
+Event processing (also called stream processing) is a method of analyzing (processing) and storing streams of information (data) about things that happen (events), deriving a conclusion from them, and potentially executing some action (handling). The Sensu event processor (the Sensu server) enables you to execute [Handlers](handlers) for taking action on events (produced by service checks), such as sending an email alert, creating or resolving an incident (e.g. in PagerDuty or ServiceNow), or storing metric data in a time-series database (e.g. Graphite). 
+
+[Learn more >](handlers)
+
+## Benefits of the Sensu Model
+  
+
+- Compose your own solution
+- Service checks are infinitely extensible 
+- Event processing is simple, yet powerful 
+- 
+
+
+ is often described as the "monitoring router". Essentially,
 Sensu takes the results of "check" scripts run across many systems,
 and if certain conditions are met, passes their information to one or
 more "handlers". [Checks](checks) are used, for example, to determine
