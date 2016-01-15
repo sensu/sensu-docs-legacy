@@ -28,7 +28,7 @@ Sensu clients are monitoring agents, running on every machine that needs to be m
 
 # Client definition
 
-The following is an example Sensu client definition, a JSON configuration file located at `/etc/sensu/conf.d/client.json`. This client definition provides Sensu with information about the machine on which it resides. This is a production machine, running a web server and a MySQL database.
+The following is an example Sensu client definition, a JSON configuration file located at `/etc/sensu/conf.d/client.json`. This client definition provides Sensu with information about the machine on which it resides. This is a production machine, running a web server and a MySQL database. The client 'name' attribute is required in the definition, and must be unique.
 
 ## Example client definition
 
