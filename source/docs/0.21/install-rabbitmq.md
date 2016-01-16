@@ -34,7 +34,7 @@ Install Erlang from the official Erlang repositories:
 sudo wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 sudo dpkg -i erlang-solutions_1.0_all.deb
 sudo apt-get update
-sudo apt-get -y install erlang=1:18.1
+sudo apt-get -y install erlang=1:18.2
 ~~~
 
 ### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
@@ -46,7 +46,7 @@ sudo wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 sudo apt-key add rabbitmq-signing-key-public.asc
 echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
 sudo apt-get update
-sudo apt-get -y install rabbitmq-server=3.5.6-1
+sudo apt-get -y install rabbitmq-server=3.6.0-1
 ~~~
 
 ## CentOS/RHEL {#install-rabbitmq-on-centos}
@@ -59,7 +59,7 @@ Install Erlang from the official Erlang repositories:
 sudo wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
 sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
 redhat_release=`cat /etc/redhat-release | awk {'print int($3)'}`
-sudo yum install -y erlang-18.1-1.el${redhat_release}
+sudo yum install -y erlang-18.2-1.el${redhat_release}
 ~~~
 
 _NOTE: if you are using CentOS 7, you may need to install the EPEL repository prior to installing Erlang. Running `sudo yum install epel-release` will allow you to properly install Erlang on CentOS 7._
@@ -70,7 +70,7 @@ Install RabbitMQ using the official RabbitMQ RPM, as suggested in the official R
 
 ~~~ shell
 sudo rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.5.6/rabbitmq-server-3.5.6-1.noarch.rpm
+sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server-3.6.0-1.noarch.rpm
 ~~~
 
 # Running RabbitMQ
