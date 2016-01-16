@@ -3,8 +3,8 @@ version: 0.21
 category: "API Docs"
 title: "Sensu API Overview"
 next:
-  url: "api-checks"
-  text: "Checks API"
+  url: "api-clients"
+  text: "Clients API"
 ---
 
 # Overview
