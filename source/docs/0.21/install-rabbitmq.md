@@ -59,7 +59,7 @@ Install Erlang from the official Erlang repositories:
 sudo wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
 sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
 redhat_release=`cat /etc/redhat-release | awk {'print int($3)'}`
-sudo yum install -y erlang-18.1-1.el${redhat_release}
+sudo yum install -y erlang-18.2-1.el${redhat_release}
 ~~~
 
 _NOTE: if you are using CentOS 7, you may need to install the EPEL repository prior to installing Erlang. Running `sudo yum install epel-release` will allow you to properly install Erlang on CentOS 7._
