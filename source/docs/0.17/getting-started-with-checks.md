@@ -190,7 +190,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 ~~~ json
 {
   "checks": {
-    "disk_capacity": {
+    "session_count": {
       "command": "check-data.rb -s localhost:9001 -t 'movingAverage(lb1.assets_backend.session_current,10)' -w 100 -c 200",
       "standalone": true,
       "interval": 30
