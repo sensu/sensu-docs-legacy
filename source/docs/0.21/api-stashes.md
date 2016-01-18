@@ -9,7 +9,7 @@ next:
 
 # Overview
 
-The Stashes API is basically an to Create, list, and delete stashes (JSON documents). The stashes endpoint is a key/value store provided by Redis (Sensu's datastore). Stashes are created and then accessible via a "path", which is equivalent to the "key". 
+The Stashes API is used to Create, list, and delete stashes (JSON documents) in a key/value store provided by Redis (Sensu's datastore). Stashes are created and then accessible via a "path", which is equivalent to the "key".
 
 
 ## Silence Stashes
