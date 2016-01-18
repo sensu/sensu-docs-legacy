@@ -59,10 +59,10 @@ provides the following benefits:
 
   Sensu's use of a [secure transport](architecture#secure-transport) protects
   your infrastructure from exposure and makes it possible for Sensu to traverse
-  complex network topologies, including those use NAT and VPNs, and span public
-  networks. Sensu provides a secure monitoring solution trusted by international
-  banking institutions, government agencies, Fortune 100 organizations, and many
-  more.
+  complex network topologies, including those that use NAT and VPNs, and span
+  public networks. Sensu provides a secure monitoring solution trusted by
+  international banking institutions, government agencies, Fortune 100
+  organizations, and many more.
 
 - **Designed for automation**  
 

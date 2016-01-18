@@ -12,7 +12,7 @@ danger:
 
 # Technical Overview
 
-One of advantages Sensu provides over other monitoring solutions is its
+One of advantages that Sensu provides over other monitoring solutions is its
 architecture, which facilitates the execution of service checks, collection of
 metric data, and event processing at scale. This architecture is comprised of
 the following components:
@@ -24,7 +24,11 @@ the following components:
 - [Event Processor](#event-processor)
 - [RESTful API](#restful-api)
 
-## Secure Transport
+![](img/sensu-diagram.gif)
+
+## Components
+
+### Secure Transport
 
 Sensu services use a message bus (e.g. [RabbitMQ][rabbitmq]) to communicate with
 one another (technically speaking, the Sensu services don’t actually communicate
@@ -38,7 +42,7 @@ are published as "messages" to  the Sensu Transport, and the corresponding Sensu
 services receive these messages  by subscribing to the appropriate
 subscriptions.
 
-## Data Store
+### Data Store
 
 Sensu leverages a data store ([Redis][redis]) for data persistence. Only the
 Sensu server, API, and dashboard services require access to the data store - the
@@ -53,7 +57,7 @@ state data:
 - check history
 - stashes (exposing the underlying Redis key-value store via the Sensu API)
 
-## Check Execution Scheduler
+### Check Execution Scheduler
 
 Sensu offers two distinct check execution schedulers: the Sensu server, and the
 Sensu client (monitoring agent). The Sensu server schedules and publishes check
@@ -64,7 +68,7 @@ so monitoring checks may be configured for both of Sensu's schedulers (the Sensu
 server and Sensu client), and Sensu will ensure that the corresponding checks
 are executed on the appropriate systems.
 
-## Monitoring Agent
+### Monitoring Agent
 
 The Sensu client is a fully featured monitoring agent which provides the
 following features:
@@ -77,7 +81,7 @@ following features:
   external resources
 - an input socket for accepting input from external services.
 
-## Event Processor
+### Event Processor
 
 The Sensu server is a scalable event processor that processes event data and
 takes action. Sensu's event processing capabilities include:
@@ -95,7 +99,7 @@ scheduling conflicts between Sensu servers, and the Sensu [transport][transport]
 distributes (via round-robin) check results between Sensu servers for
 processing, which provides load-balancing.
 
-## RESTful API
+### RESTful API
 
 Sensu provides access to monitoring data and core functionality via a RESTful
 HTTP JSON API, including:
@@ -124,6 +128,7 @@ HTTP JSON API, including:
 [filters]:            filters
 [mutators]:           mutators
 [handlers]:           handlers
+[transport]:          transport
 [clients-api]:        api-clients
 [checks-api]:         api-checks
 [events-api]:         api-events
