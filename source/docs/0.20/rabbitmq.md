@@ -130,6 +130,20 @@ ssl
     "ssl": {}
     ~~~
 
+reconnect_on_error
+: description
+  : Reconnect to RabbitMQ in the event of an error.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "reconnect_on_error": true
+    ~~~
+
 #### SSL attributes
 
 The following attributes are configured within the `"ssl": {}` RabbitMQ definition attribute scope.
