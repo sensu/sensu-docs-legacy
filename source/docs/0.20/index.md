@@ -70,6 +70,5 @@ hide_toc: true
 * **Enterprise Dashboard Docs**
   * [Overview](enterprise-dashboard-overview)
   * [Configuration](enterprise-dashboard-configuration)
-  * [Audit Logging](enterprise-dashboard-audit-logging)
   * [Collections](enterprise-dashboard-collections)
   * [HUD](enterprise-dashboard-hud)
