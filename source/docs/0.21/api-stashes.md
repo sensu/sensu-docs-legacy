@@ -9,8 +9,18 @@ next:
 
 # Overview
 
-Create, list, and delete stashes (JSON documents). The stashes endpoint is an
-HTTP key/value data store.
+The Stashes API is basically an to Create, list, and delete stashes (JSON documents). The stashes endpoint is a key/value store provided by Redis (Sensu's datastore). Stashes are created and then accessible via a "path", which is equivalent to the "key". 
+
+
+## Silence Stashes
+
+Silence stashes are special types of stashes used to silence (prevent handlers from processing) a check or a client. Silence stashes are stashes stored at a path that begins with `"silence/"`. 
+
+####Examples:
+
+* Setting a Stash path to `"silence/<client_name_here>"` will prevent handlers from processing events for a specific client.
+* Setting a Stash path to `"silence/<client_name_here>/<check_name_here>"` will prevent handlers from processing events from a specific check on a specific client. 
+* Setting a Stash path to `"silence/<client_name_here>/keepalive"` will silence keepalive events for a specific client. 
 
 # API Definition
 
@@ -95,6 +105,8 @@ HTTP key/value data store.
   : - **Success**: 201 (Created)
     - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
+
+_NOTE: When sending the JSON payload to `/stashes`, the payload must contain a 'path' key. If they payload does not contain a 'path' key, the stash path must be provided as part of the request (see below `stashes/:path`)._
 
 `/stashes/:path` (POST)
 : desc
