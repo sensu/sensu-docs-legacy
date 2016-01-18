@@ -18,7 +18,7 @@ this message bus communication in Sensu has been abstracted as the
 to leverage alternate transport solutions in place of RabbitMQ (the default
 Transport). Sensu services requires access to the same instance of the defined
 Sensu Transport (e.g. a RabbitMQ cluster) to function. Sensu check requests and
-check results are published as "messages" to the Sensu Tranport, and the
+check results are published as "messages" to the Sensu Transport, and the
 corresponding Sensu services receive these messages by subscribing to the
 appropriate subscriptions.
 
