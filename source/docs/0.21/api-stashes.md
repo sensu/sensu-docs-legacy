@@ -14,13 +14,13 @@ The Stashes API is used to create, list, and delete stashes (JSON documents) in 
 
 ## Silence Stashes
 
-Silence stashes are special types of stashes used to silence (prevent handlers from processing) a check or a client. Silence stashes are stashes stored at a path that begins with `"silence/"`. 
+Silence stashes are used by the [Sensu Enterprise Silence Stashes Filter](enterprise-built-in-filters#silencestashes) and by handlers using the [sensu-plugin library](#) to prevent handlers from processing events from a check or a client. Silence stashes are stashes stored at a path that begins with `"silence/"`.
 
-####Examples:
+#### Silence Stashes Examples:
 
-* Setting a Stash path to `"silence/<client_name_here>"` will prevent handlers from processing events for a specific client.
-* Setting a Stash path to `"silence/<client_name_here>/<check_name_here>"` will prevent handlers from processing events from a specific check on a specific client. 
-* Setting a Stash path to `"silence/<client_name_here>/keepalive"` will silence keepalive events for a specific client. 
+* Creating a Stash with the path `"silence/<client_name_here>"` will prevent handlers from processing events for a specific client.
+* Creating a Stash with the path `"silence/<client_name_here>/<check_name_here>"` will prevent handlers from processing events from a specific check on a specific client. 
+* Creating a Stash with the path `"silence/<client_name_here>/keepalive"` will silence keepalive events for a specific client. 
 
 # API Definition
 
