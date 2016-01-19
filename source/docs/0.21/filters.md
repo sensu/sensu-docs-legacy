@@ -51,12 +51,13 @@ filter analysis flow performs these steps:
 ## When should I use a Filter? {#when-should-i-use-a-filter}
 
 Sensu Filters allow you to configure conditional logic to be applied during the
-event processing cycle. Comparing Event data is an inexpensive compute
-operation, and reducing the number of events that need to be handled can provide
-overall monitoring performance gains. Additionally, by using Sensu Filters
-instead of building conditional logic into custom Handlers, conditional logic
-can be applied to multiple Handlers, and monitoring configuration stays <abbr
-title="Don't Repeat Yourself">DRY</abbr>.
+event processing cycle. Compared to executing an event handler, evaluating event
+filters is an inexpensive operation which can provide overall monitoring
+performance gains by reducing the overall number of events that need to be
+handled. Additionally, by using Sensu Filters instead of building conditional
+logic into custom Handlers, conditional logic can be applied to multiple
+Handlers, and monitoring configuration stays <abbr title="Don't Repeat
+Yourself">DRY</abbr>.
 
 ## Filter definition
 
