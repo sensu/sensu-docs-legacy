@@ -70,7 +70,26 @@ provides the following benefits:
   extremely automation&ndash;friendly (e.g. it was designed to work with tools
   like [Chef][chef], [Puppet][puppet], and [Ansible][ansible]).
 
-## What is a Service Check? {#service-checks}
+- **Open source software with commercial support**
+
+  Sensu is an open-source software (OSS) project, made freely available under a
+  permissive [MIT License][mit-license] (the source code is publicly available
+  on [GitHub][source-code]). [Sensu Enterprise](/sensu-enterprise) is based on
+  Sensu Core (the OSS version of Sensu) which makes added-value features,
+  commercial support, training, and many other benefits available under the
+  [Sensu License](/sensu-license).
+
+## A Simple, Yet Powerful Framework
+
+Sensu is a comprehensive monitoring solution that is powerful enough to
+solve complex monitoring problems at scale, yet simple enough to use for
+traditional monitoring scenarios and small environments. It achieves this broad
+appeal via building upon two simple, yet powerful monitoring primitives:
+[Service Checks](#service-checks) and [Event Processing](#event-processing).
+These building blocks also provide an infinitely extensible framework for
+composing monitoring solutions.
+
+### What is a Service Check? {#service-checks}
 
 Service checks allow you to monitor services (e.g. is Nginx running?) or measure
 resources (e.g. how much disk space do I have left?). Service checks are
@@ -85,7 +104,7 @@ server).
 
 [Learn more >](checks)
 
-## What is Event Processing? {#event-processing}
+### What is Event Processing? {#event-processing}
 
 Event processing (also called stream processing) is a method of analyzing
 (processing) and storing streams of information (data) about things that happen
@@ -98,10 +117,14 @@ Graphite).
 
 [Learn more >](handlers)
 
-[chef]:       http://www.chef.io
-[puppet]:     https://puppetlabs.com
-[ansible]:    http://www.ansible.com
-[pubsub]:     #
-[pagerduty]:  https://www.pagerduty.com
-[slack]:      https://slack.com
-[hipchat]:    http://www.hipchat.com
+
+
+[chef]:           http://www.chef.io
+[puppet]:         https://puppetlabs.com
+[ansible]:        http://www.ansible.com
+[mit-license]:    https://github.com/sensu/sensu/blob/master/MIT-LICENSE.txt
+[source-code]:    http://github.com/sensu
+[pubsub]:         #
+[pagerduty]:      https://www.pagerduty.com
+[slack]:          https://slack.com
+[hipchat]:        http://www.hipchat.com
