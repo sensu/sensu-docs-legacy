@@ -3,8 +3,8 @@ version: 0.21
 category: "Overview"
 title: "What is Sensu?"
 next:
-  url: "installation-overview"
-  text: "Installation Guide"
+  url: "architecture"
+  text: "Technical Overview"
 info:
 warning:
 danger:
@@ -12,85 +12,123 @@ danger:
 
 # What is Sensu? {#what-is-sensu}
 
-Sensu is often described as the "monitoring router". Essentially,
-Sensu takes the results of "check" scripts run across many systems,
-and if certain conditions are met, passes their information to one or
-more "handlers". [Checks](checks) are used, for example, to determine
-if a service like Apache is up or down. Checks can also be
-used to collect data, such as MySQL query statistics or Rails
-application metrics. [Handlers](handlers) take actions, using result
-information, such as sending an email, messaging a chat room, or
-adding a data point to a graph. There are several types of
-handlers, but the most common and most powerful is "pipe",
-a script that receives data via standard input. Check and
-handler scripts can be written in any language, and the
-[community
-repository](https://github.com/sensu/sensu-community-plugins)
-continues to grow!
+Sensu is an infrastructure and application monitoring and telemetry solution.
+Sensu provides a framework for monitoring infrastructure, service & application
+health, and business KPIs. Sensu is specifically designed to solve monitoring
+challenges introduced by modern infrastructure platforms with a mix of static,
+dynamic, and ephemeral infrastructure at scale (i.e. public, private, and hybrid
+clouds).
 
-Some Sensu features / design choices:
+Sensu allows organizations to compose comprehensive monitoring & telemetry
+solutions to meet unique business requirements. By providing a platform to build
+upon, Sensu enables you to focus on _what_ to monitor and measure, rather than
+_how_. Sensu is installed on your organizations infrastructure &ndash; it is not
+a Software-as-a-Service (SaaS) solution &ndash; which means Sensu gives you full
+control over the availability of your monitoring solution.
 
-- Written in Ruby, using EventMachine
-- Great test coverage with continuous integration via [Travis
-CI](http://travis-ci.org/#!/sensu/sensu)
-- Can use existing Nagios plugins
-- Configuration all in JSON
-- Has a message-oriented architecture, using RabbitMQ and JSON
-payloads
-- Packages are "omnibus", for consistency, isolation, and low-friction
-deployment
+## Benefits
 
-Sensu embraces modern infrastructure design, works elegantly with
-configuration management tools, and is built for the cloud.
+Sensu is a comprehensive infrastructure and application monitoring solution that
+provides the following benefits:
+
+- **Monitor servers, services, application health, and business KPIs**
+
+  Sensu is an infrastructure and application monitoring & telemetry solution.
+
+- **Send alerts and notifications**
+
+  Sensu integrates with the tools and services your organization is already
+  using to do things like send emails, [PagerDuty][pagerduty] alerts,
+  [Slack][slack], [HipChat][hipchat], IRC notifications, and [many][plugins]
+  [more][enterprise-integrations].
+
+- **Dynamic client registration & de-registration**  
+
+  When servers are provisioned, they automatically register themselves with
+  Sensu, so there's no need to manually add or configure new servers.
+
+- **A simple yet extensible model for monitoring**
+
+  Sensu provides a sophisticated, yet simple to understand solution for
+  executing [service checks](#service-checks) and
+  [processing events](#event-processing) at scale. Service checks provide status
+  and telemetry data, and event handlers process results. Hundreds of plugins
+  are available for monitoring the tools and services you're already using.
+  Plugins have a very simple specification, and can be written in any
+  programming language.
+
+- **Built for mission-critical applications and multi-tiered networks**
+
+  Sensu's use of a [secure transport](architecture#secure-transport) protects
+  your infrastructure from exposure and makes it possible for Sensu to traverse
+  complex network topologies, including those that use NAT and VPNs, and span
+  public networks. Sensu provides a secure monitoring solution trusted by
+  international banking institutions, government agencies, Fortune 100
+  organizations, and many more.
+
+- **Designed for automation**  
+
+  Sensu exposes 100% of its configuration as JSON files, which makes it
+  extremely automation&ndash;friendly (e.g. it was designed to work with tools
+  like [Chef][chef], [Puppet][puppet], and [Ansible][ansible]).
+
+- **Open source software with commercial support**
+
+  Sensu is an open-source software (OSS) project, made freely available under a
+  permissive [MIT License][mit-license] (the source code is publicly available
+  on [GitHub][source-code]). [Sensu Enterprise](/sensu-enterprise) is based on
+  Sensu Core (the OSS version of Sensu) which makes added-value features,
+  commercial support, training, and many other benefits available under the
+  [Sensu License](/sensu-license).
+
+## A Simple, Yet Powerful Framework
+
+Sensu is a comprehensive monitoring solution that is powerful enough to
+solve complex monitoring problems at scale, yet simple enough to use for
+traditional monitoring scenarios and small environments. It achieves this broad
+appeal via building upon two simple, yet powerful monitoring primitives:
+[Service Checks](#service-checks) and [Event Processing](#event-processing).
+These building blocks also provide an infinitely extensible framework for
+composing monitoring solutions.
+
+### What is a Service Check? {#service-checks}
+
+Service checks allow you to monitor services (e.g. is Nginx running?) or measure
+resources (e.g. how much disk space do I have left?). Service checks are
+executed on machines running a monitoring agent (i.e. [Sensu client](clients)).
+Service checks are essentially commands (or scripts) that output data to
+`STDOUT` or `STDERR` and produce an exit status code to indicate a state. Common
+exit status codes used are 0 for OK, 1 for WARNING, 2 for CRITICAL, and 3 or
+greater to indicate UNKNOWN or CUSTOM. Sensu checks use the same specification
+as Nagios, therefore, Nagios check plugins may be used with Sensu. Service
+checks produce results that are processed by the event processor (i.e. the Sensu
+server).
+
+[Learn more >](checks)
+
+### What is Event Processing? {#event-processing}
+
+Event processing (also called stream processing) is a method of analyzing
+(processing) and storing streams of information (data) about things that happen
+(events), deriving a conclusion from them, and potentially executing some action
+(handling). The Sensu event processor (the Sensu server) enables you to execute
+[Handlers](handlers) for taking action on events (produced by service checks),
+such as sending an email alert, creating or resolving an incident (e.g. in
+PagerDuty or ServiceNow), or storing metric data in a time-series database (e.g.
+Graphite).
+
+[Learn more >](handlers)
 
 
-# Components {#sensu-components}
 
-The Sensu framework contains a number of components.
-
-The following diagram depicts these core elements and how they
-interact with one another.
-
-![Sensu Diagram](img/sensu-diagram.gif)
-
-## Dependencies {#sensu-dependencies}
-
-All of the Sensu components require access to an instance of RabbitMQ
-in order to communicate with each-other.
-
-A few components require access to an instance of Redis for storing
-persistent data.
-
-## Server {#sensu-server}
-
-Depends on: RabbitMQ, Redis
-
-The Sensu server is responsible for orchestrating check executions,
-processing check results, and handling events. You may run one
-or more Sensu servers; tasks are distributed amongst them, and they
-can be ephemeral. Servers will inspect every check result, saving some
-of their information for a period of time. Check results that indicate
-a service failure or contain data such as metrics, will have
-additional context added to them, creating an [event](event_data). The
-Sensu server passes events to [handlers](handlers).
-
-## Client {#sensu-client}
-
-Depends on: RabbitMQ
-
-The Sensu client runs on all of your systems that you want to monitor.
-The client receives check execution requests, executes the checks, and
-publishes their results. Clients can also schedule their own check
-executions, these are called "standalone" [checks](checks). The client
-provides a local TCP and UDP socket for external check result input,
-allowing applications to easily integrate with Sensu.
-
-## API {#sensu-api}
-
-Depends on: RabbitMQ, Redis
-
-The Sensu API provides a REST-like interface to Sensu's data, such as
-registered clients and current events. You may run one or more Sensu
-APIs. The API is capable of many actions, such as issuing check
-execution requests, resolving events, and removing a registered
-client.
+[chef]:                     http://www.chef.io
+[puppet]:                   https://puppetlabs.com
+[ansible]:                  http://www.ansible.com
+[mit-license]:              https://github.com/sensu/sensu/blob/master/MIT-LICENSE.txt
+[source-code]:              http://github.com/sensu
+[pubsub]:                   #
+[pagerduty]:                https://www.pagerduty.com
+[slack]:                    https://slack.com
+[hipchat]:                  http://www.hipchat.com
+[plugins]:                  /plugins
+[enterprise-integrations]:  /sensu-enterprise#integrations

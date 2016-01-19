@@ -7,6 +7,7 @@ hide_toc: true
 
 * **Overview**
   * [What is Sensu?](overview)
+  * [Technical Overview](architecture)
 
 * **Installation Guide**
   * [Overview](installation-overview)

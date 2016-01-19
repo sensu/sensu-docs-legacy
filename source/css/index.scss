@@ -7,8 +7,9 @@
   text-decoration: none !important;
 }
 
-.banner .logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+.banner h1,
+.banner h1:focus,
+.banner h1:hover,
+.banner h1:visited {
+  text-decoration: none !important;
+};
