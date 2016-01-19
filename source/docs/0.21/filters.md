@@ -31,7 +31,7 @@ from systems in pre-production environments.
 ## How do Filters work? {#how-do-filters-work}
 
 Sensu Filters are applied when Event [Handlers](handlers) are configured to use
-one or more Filters. Prior to executing the Handler, the Sensu server will apply
+one or more Filters. Prior to executing a Handler, the Sensu server will apply
 any Filters configured for the Handler to the Event Data. If the Event is not
 removed by the Filter(s) (i.e. filtered out), the Handler will be executed. The
 filter analysis flow performs these steps:
@@ -45,19 +45,17 @@ filter analysis flow performs these steps:
 - Filters can be inclusive (only matching events are handled) or exclusive
   (matching events are _not_ handled)
 - As soon as a Filter removes an Event (i.e. filters it out), no further
-  analysis is performed (e.g. if multiple `filters` are configured), and the
-  Event Handler will not be executed
+  analysis is performed and the Event Handler will not be executed
 
 ## When should I use a Filter? {#when-should-i-use-a-filter}
 
 Sensu Filters allow you to configure conditional logic to be applied during the
-event processing cycle. Compared to executing an event handler, evaluating event
+event processing flow. Compared to executing an event handler, evaluating event
 filters is an inexpensive operation which can provide overall monitoring
-performance gains by reducing the overall number of events that need to be
-handled. Additionally, by using Sensu Filters instead of building conditional
-logic into custom Handlers, conditional logic can be applied to multiple
-Handlers, and monitoring configuration stays <abbr title="Don't Repeat
-Yourself">DRY</abbr>.
+performance gains by reducing the  number of events that need to be handled.
+Additionally, by using Sensu Filters, instead of building conditional logic into
+custom Handlers, conditional logic can be applied to multiple Handlers, and
+monitoring configuration stays <abbr title="Don't Repeat Yourself">DRY</abbr>.
 
 ## Filter definition
 
@@ -145,7 +143,7 @@ to use multiple _exclusive_ `filters` (`"negate": true`) is the equivalent of
 using an `OR` operator (i.e. only handle events if they don't match `x OR y OR
 z`).
 
-## Filter attributes evaluation {#filter-attribute-evaluation}
+## Filter attribute evaluation {#filter-attribute-evaluation}
 
 Filter `attributes` are compared directly with their Event data counterparts
 (e.g. `"attributes: {"environment": "production"}"` is looking for exact matches
