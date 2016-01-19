@@ -15,8 +15,9 @@ danger:
 Sensu is an infrastructure and application monitoring and telemetry solution.
 Sensu provides a framework for monitoring infrastructure, service & application
 health, and business KPIs. Sensu is specifically designed to solve monitoring
-challenges introduced by dynamic and/or ephemeral infrastructure at scale (e.g.
-public, private, and hybrid clouds).
+challenges introduced by modern infrastructure platforms with a mix of static,
+dynamic, and ephemeral infrastructure at scale (i.e. public, private, and hybrid
+clouds).
 
 Sensu allows organizations to compose comprehensive monitoring & telemetry
 solutions to meet unique business requirements. By providing a platform to build
@@ -38,12 +39,13 @@ provides the following benefits:
 
   Sensu integrates with the tools and services your organization is already
   using to do things like send emails, [PagerDuty][pagerduty] alerts,
-  [Slack][slack], [HipChat][hipchat], or IRC notifications, and more.
+  [Slack][slack], [HipChat][hipchat], IRC notifications, and [many][plugins]
+  [more][enterprise-integrations].
 
 - **Dynamic client registration & de-registration**  
 
-  When new servers are provisioned, they automatically register themselves with
-  Sensu.
+  When servers are provisioned, they automatically register themselves with
+  Sensu, so there's no need to manually add or configure new servers.
 
 - **A simple yet extensible model for monitoring**
 
@@ -55,7 +57,7 @@ provides the following benefits:
   Plugins have a very simple specification, and can be written in any
   programming language.
 
-- **Built for mission-critical applications and complex networks**
+- **Built for mission-critical applications and multi-tiered networks**
 
   Sensu's use of a [secure transport](architecture#secure-transport) protects
   your infrastructure from exposure and makes it possible for Sensu to traverse
@@ -119,12 +121,14 @@ Graphite).
 
 
 
-[chef]:           http://www.chef.io
-[puppet]:         https://puppetlabs.com
-[ansible]:        http://www.ansible.com
-[mit-license]:    https://github.com/sensu/sensu/blob/master/MIT-LICENSE.txt
-[source-code]:    http://github.com/sensu
-[pubsub]:         #
-[pagerduty]:      https://www.pagerduty.com
-[slack]:          https://slack.com
-[hipchat]:        http://www.hipchat.com
+[chef]:                     http://www.chef.io
+[puppet]:                   https://puppetlabs.com
+[ansible]:                  http://www.ansible.com
+[mit-license]:              https://github.com/sensu/sensu/blob/master/MIT-LICENSE.txt
+[source-code]:              http://github.com/sensu
+[pubsub]:                   #
+[pagerduty]:                https://www.pagerduty.com
+[slack]:                    https://slack.com
+[hipchat]:                  http://www.hipchat.com
+[plugins]:                  /plugins
+[enterprise-integrations]:  /sensu-enterprise#integrations
