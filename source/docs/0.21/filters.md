@@ -17,7 +17,7 @@ This reference document provides information to help you:
 - [Write a Filter definition](#example-filter-definition)
 - [Use filter definition attributes](#definition-attributes)
 - [Understand how to perform inclusive and exclusive filtering](#inclusive-and-exclusive-filtering)
-- [Understand how to ]
+- [Understand how to use attribute evaluation](#filter-attribute-evaluation)
 
 ## What are Sensu filters? {#what-are-sensu-filters}
 
@@ -144,7 +144,7 @@ to use multiple _exclusive_ `filters` (`"negate": true`) is the equivalent of
 using an `OR` operator (i.e. only handle events if they don't match `x OR y OR
 z`).
 
-## Filter eval attributes
+## Filter attributes evaluation {#filter-attribute-evaluation}
 
 Filter `attributes` are compared directly with their Event data counterparts
 (e.g. `"attributes: {"environment": "production"}"` is looking for exact matches
