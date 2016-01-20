@@ -4,7 +4,7 @@ category: "Reference Docs"
 title: "Clients"
 next:
   url: "checks"
-  text: "checks"
+  text: "Checks"
 ---
 
 # Overview

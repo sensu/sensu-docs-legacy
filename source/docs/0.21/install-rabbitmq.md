@@ -11,7 +11,7 @@ success: "<strong>NOTE:</strong> this is part 1 of 6 steps in the Sensu
   moving on."
 ---
 
-# Overview
+# Install RabbitMQ
 
 RabbitMQ is a message bus, which [describes itself](http://www.rabbitmq.com/features.html) as _"a messaging broker - an intermediary for messaging. It gives your applications a common platform to send and receive messages, and your messages a safe place to live until received"_. Sensu services use RabbitMQ to communicate with one another. Every Sensu service requires access to the same instance of RabbitMQ to function.
 
@@ -22,11 +22,11 @@ The following instructions will help you to:
 
 _NOTE: the instructions use the official software repositories for Erlang and RabbitMQ, as many Linux distributions provide outdated versions that contain known security vulnerabilities and bugs._
 
-# Install RabbitMQ
+## Manual Installation
 
-## Ubuntu/Debian {#install-rabbitmq-on-ubuntu}
+### Ubuntu/Debian {#install-rabbitmq-on-ubuntu}
 
-### Step #1: Install Erlang {#install-rabbitmq-on-ubuntu-step-1}
+#### Step #1: Install Erlang {#install-rabbitmq-on-ubuntu-step-1}
 
 Install Erlang from the official Erlang repositories:
 
@@ -37,7 +37,7 @@ sudo apt-get update
 sudo apt-get -y install erlang=1:18.2
 ~~~
 
-### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
+#### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
 
 Install RabbitMQ from the official RabbitMQ repositories, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-debian.html):
 
@@ -49,9 +49,9 @@ sudo apt-get update
 sudo apt-get -y install rabbitmq-server=3.6.0-1
 ~~~
 
-## CentOS/RHEL {#install-rabbitmq-on-centos}
+### CentOS/RHEL {#install-rabbitmq-on-centos}
 
-### Step #1: Install Erlang {#install-rabbitmq-on-centos-step-1}
+#### Step #1: Install Erlang {#install-rabbitmq-on-centos-step-1}
 
 Install Erlang from the official Erlang repositories:
 
@@ -64,7 +64,7 @@ sudo yum install -y erlang-18.2-1.el${redhat_release}
 
 _NOTE: if you are using CentOS 7, you may need to install the EPEL repository prior to installing Erlang. Running `sudo yum install epel-release` will allow you to properly install Erlang on CentOS 7._
 
-### Step #2: Install RabbitMQ {#install-rabbitmq-on-centos-step-2}
+#### Step #2: Install RabbitMQ {#install-rabbitmq-on-centos-step-2}
 
 Install RabbitMQ using the official RabbitMQ RPM, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-rpm.html):
 
@@ -73,35 +73,35 @@ sudo rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
 sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server-3.6.0-1.noarch.rpm
 ~~~
 
-# Running RabbitMQ
+## Running RabbitMQ
 
 Enable the RabbitMQ service on boot and start it:
 
-## Ubuntu/Debian {#running-rabbitmq-on-ubuntu}
+### Ubuntu/Debian {#running-rabbitmq-on-ubuntu}
 
 ~~~ shell
 sudo update-rc.d rabbitmq-server defaults
 sudo /etc/init.d/rabbitmq-server start
 ~~~
 
-## CentOS/RHEL {#running-rabbitmq-on-centos}
+### CentOS/RHEL {#running-rabbitmq-on-centos}
 
 ~~~ shell
 sudo chkconfig rabbitmq-server on
 sudo /etc/init.d/rabbitmq-server start
 ~~~
 
-# Configure RabbitMQ
+## Configure RabbitMQ
 
 Access to RabbitMQ is restricted by [access controls](https://www.rabbitmq.com/access-control.html) (e.g. username/password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual host (vhost) and user credentials will need to be created.
 
-## Create vhost
+### Create vhost
 
 ~~~ shell
 sudo rabbitmqctl add_vhost /sensu
 ~~~
 
-## Create user
+### Create user
 
 ~~~ shell
 sudo rabbitmqctl add_user sensu secret

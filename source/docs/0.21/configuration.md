@@ -62,7 +62,7 @@ configuration sources, please note the following example scenario:
    snippet that Sensu encounters is a configuration file, located at
    `/etc/sensu/config.json` with the following contents:
 
-   #### New configuration file (on disk at `/etc/sensu/config.json`)
+   ###### New config file (on disk at `/etc/sensu/config.json`)
 
    ~~~json
    {
@@ -82,7 +82,7 @@ configuration sources, please note the following example scenario:
 
    At this time, the Sensu configuration Hash (in memory) will look like:
 
-   #### Updated Sensu configuration Hash (in memory)
+   ###### Updated Sensu configuration Hash (in memory)
 
    ~~~json
    {
@@ -104,7 +104,7 @@ configuration sources, please note the following example scenario:
    snippet (e.g. a file located in a Sensu configuration directory, such as
    `/etc/sensu/conf.d/rabbitmq.json`):
 
-   #### New configuration file contents (on disk at `/etc/sensu/conf.d/rabbitmq.json`)
+   ###### New config file contents (on disk at `/etc/sensu/conf.d/rabbitmq.json`)
 
    ~~~json
    {
@@ -122,7 +122,7 @@ configuration sources, please note the following example scenario:
    configuration Hash (i.e. `vhost`). The result of merging this configuration
    snippet into the Sensu configuration Hash (in memory) is as follows:
 
-   #### Updated Sensu configuration Hash (in memory)
+   ###### Updated Sensu configuration Hash (in memory)
 
    ~~~json
    {

@@ -15,6 +15,7 @@ This reference document provides information to help you:
 - [Understand what `sensu-install` is](#what-is-sensu-install)
 - [Use `sensu-install` to install a Sensu Plugin](#sensu-install-example)
 - [Understand the Sensu Plugin spec](#sensu-plugin-spec)
+- [Understand what the Sensu Plugin gem is](#sensu-plugin-gem)
 
 ## What are Sensu Plugins?
 
@@ -96,3 +97,44 @@ else
   exit 1
 end
 ~~~
+
+
+## The Sensu Plugin gem {#sensu-plugin-gem}
+
+Although Sensu Plugins may be written in any programming language, there are
+certain advantages of writing plugins in Ruby. From an operations perspective,
+Ruby-based plugins are convenient because they are able to run on Sensu's
+[embedded Ruby][embedded-ruby]. Ruby-based plugins also benefit from the [Sensu
+Plugin gem][sensu-plugin-gem] &mdash; a Ruby library that provides some built-in
+functionality and a number of helper classes and  that simplify custom plugin
+development.
+
+### Sensu Plugin best practices {#sensu-plugin-best-practices}
+
+Coming soon.
+
+#### Custom Attribute Support
+
+
+
+occurrences
+: description
+  : Provide support for a user-defined number of occurrences that should occur
+    before the event is handled.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `1`
+: example
+  : ~~~ shell
+    "occurrences": 3
+    ~~~
+
+
+
+
+
+[embedded-ruby]:            configuration#configuration-variables
+[sensu-plugin-gem]:         https://github.com/sensu-plugins/sensu-plugin

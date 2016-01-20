@@ -11,7 +11,7 @@ success: "<strong>NOTE:</strong> this is part 6 of 6 steps in the Sensu
   moving on."
 ---
 
-# Overview
+# Install a Dashboard
 
 Sensu Core provides an API, enabling web dashboards to visualize Sensu data and provide additional functionality. The official, community supported dashboard for Sensu is called [Uchiwa](http://uchiwa.io). Sensu Enterprise users have access to the Sensu Enterprise Dashboard, the official dashboard for Sensu Enterprise.
 
@@ -22,34 +22,34 @@ The following instructions will help you to:
 - **[OPTIONAL]** Install Uchiwa
 - **[OPTIONAL]** Install Sensu Enterprise Dashboard
 
-# Dashboards
+## Dashboards
 
-## Uchiwa
+### Uchiwa
 
 The Uchiwa dashboard project provides its own installation and configuration guide. The guide can be found at [http://docs.uchiwa.io/en/latest/getting-started/](http://docs.uchiwa.io/en/latest/getting-started/).
 
-## Sensu Enterprise Dashboard
+### Sensu Enterprise Dashboard
 
-### Install Sensu Enterprise Dashboard
+#### Install Sensu Enterprise Dashboard
 
 _NOTE: access to the Sensu Enterprise repositories requires an active [Sensu Enterprise](http://sensuapp.org/enterprise#pricing) subscription, and valid access credentials._
 
 The Sensu Enterprise Dashboard package is available via the [Sensu Enterprise Repositories](install-repositories#enterprise-installation).
 
-### Ubuntu/Debian
+#### Ubuntu/Debian
 
 ~~~ shell
 sudo apt-get update
 sudo apt-get install sensu-enterprise-dashboard
 ~~~
 
-### CentOS/RHEL
+#### CentOS/RHEL
 
 ~~~ shell
 sudo yum install sensu-enterprise-dashboard
 ~~~
 
-### Configure Sensu Enterprise Dashboard
+#### Configure Sensu Enterprise Dashboard
 
 To configure the Sensu Enterprise Dashboard, copy the following example configuration to `/etc/sensu/dashboard.json` manually, or via:
 
@@ -75,7 +75,7 @@ _NOTE: this example file configures the Sensu Enterprise Dashboard with a list o
 }
 ~~~
 
-### Running Sensu Enterprise Dashboard
+#### Running Sensu Enterprise Dashboard
 
 To start the Sensu Enterprise dashboard, please run the following command:
 
@@ -83,7 +83,7 @@ To start the Sensu Enterprise dashboard, please run the following command:
 sudo /etc/init.d/sensu-enterprise-dashboard start
 ~~~
 
-### Observing the Sensu Enterprise Dashboard logs
+#### Observing the Sensu Enterprise Dashboard logs
 
 Congratulations! By now you should have successfully installed and configured Sensu Enterprise Dashboard! Now let's observe it in operation.
 
@@ -99,6 +99,6 @@ If Sensu Enterprise Dashboard started successfully you should notice a line cont
 now listening on 0.0.0.0:3000
 ~~~
 
-### Viewing Sensu Enterprise Dashboard
+#### Viewing Sensu Enterprise Dashboard
 
 Now that Sensu Enterprise Dashboard is up and running, you can view the dashboard at `http://<DASHBOARD_IP_ADDRESS>:3000`.
