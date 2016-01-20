@@ -20,7 +20,7 @@ The following instructions will help you to:
 - Install Erlang (the runtime used by RabbitMQ)
 - Install RabbitMQ
 
-_NOTE: the instructions use the official software repositories for Erlang and RabbitMQ, as many Linux distributions provide outdated versions that contain known security vulnerabilities and bugs._
+_NOTE: the instructions use the official software repositories and packages for Erlang and RabbitMQ, as many Linux distributions provide outdated versions that contain known security vulnerabilities and bugs._
 
 ## Manual Installation
 
@@ -34,19 +34,16 @@ Install Erlang from the official Erlang repositories:
 sudo wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 sudo dpkg -i erlang-solutions_1.0_all.deb
 sudo apt-get update
-sudo apt-get -y install erlang=1:18.2
+sudo apt-get -y install erlang-nox=1:18.2
 ~~~
 
 #### Step #2: Install RabbitMQ {#install-rabbitmq-on-ubuntu-step-2}
 
-Install RabbitMQ from the official RabbitMQ repositories, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-debian.html):
+Install RabbitMQ using the official RabbitMQ DEB, as suggested in the official RabbitMQ [installation guide](http://www.rabbitmq.com/install-debian.html):
 
 ~~~ shell
-sudo wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-sudo apt-key add rabbitmq-signing-key-public.asc
-echo "deb     http://www.rabbitmq.com/debian/ testing main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
-sudo apt-get update
-sudo apt-get -y install rabbitmq-server=3.6.0-1
+sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server_3.6.0-1_all.deb
+sudo dpkg -i rabbitmq-server_3.6.0-1_all.deb
 ~~~
 
 ### CentOS/RHEL {#install-rabbitmq-on-centos}
