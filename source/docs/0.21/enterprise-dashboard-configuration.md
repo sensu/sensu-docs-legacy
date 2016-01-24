@@ -268,6 +268,34 @@ pass
     "pass": "secret"
     ~~~
 
+users
+: description
+  : A hash of user attributes to enable multiple users with simple
+    authentication.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "users": [
+      {
+        "username": "guest",
+        "password": "secret",
+        "role": {
+          "readonly": true,
+        }
+      },
+      {
+        "username" : "admin",
+        "password": "secret",
+        "role": {
+          "readonly": false
+        }
+      }
+    ]
+    ~~~
+
 github
 : description
   : A hash of [GitHub authentication attributes](#github-authentication-attributes) to enable
@@ -527,7 +555,7 @@ subscriptions
     to. Provided values will be used to filter which subscriptions members of
     the role will have access to.
     _NOTE: omitting this configuration attribute or providing an empty array
-    will allow members of the role access to all subscriptions._  
+    will allow members of the role access to all subscriptions._
 : required
   : false
 : type
@@ -724,7 +752,7 @@ subscriptions
     to. Provided values will be used to filter which subscriptions members of
     the role will have access to.
     _NOTE: omitting this configuration attribute or providing an empty array
-    will allow members of the role access to all subscriptions._  
+    will allow members of the role access to all subscriptions._
 : required
   : false
 : type
@@ -1017,7 +1045,7 @@ subscriptions
     to. Provided values will be used to filter which subscriptions members of
     the role will have access to.
     _NOTE: omitting this configuration attribute or providing an empty array
-    will allow members of the role access to all subscriptions._  
+    will allow members of the role access to all subscriptions._
 : required
   : false
 : type
