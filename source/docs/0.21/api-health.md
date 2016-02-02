@@ -31,14 +31,6 @@ transport's status. (consumer and message counts)
       - **type**: Integer
       - **description**: The maximum ammount of transport queued messages to be considered healthy.
 
-: response type
-  : REPLACEME
-
 : response codes
   : - **Success**: 204 (No Content)
     - **Error**: 503 (Service Unavailable)
-
-: output
-  : ~~~ json
-    [ "REPLACEME" ]
-    ~~~
