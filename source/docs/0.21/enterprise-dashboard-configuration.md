@@ -242,6 +242,21 @@ refresh
     "refresh": 5
     ~~~
 
+ssl
+: description
+  : A hash of SSL configuration for native SSL support.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "ssl": {
+        "certfile": "/path/to/dashboard.pem",
+        "keyfile": "/path/to/dashboard.key"
+    }
+    ~~~
+
 user
 : description
   : A username to enable simple authentication and restrict access to the
@@ -527,7 +542,7 @@ subscriptions
     to. Provided values will be used to filter which subscriptions members of
     the role will have access to.
     _NOTE: omitting this configuration attribute or providing an empty array
-    will allow members of the role access to all subscriptions._  
+    will allow members of the role access to all subscriptions._
 : required
   : false
 : type
@@ -724,7 +739,7 @@ subscriptions
     to. Provided values will be used to filter which subscriptions members of
     the role will have access to.
     _NOTE: omitting this configuration attribute or providing an empty array
-    will allow members of the role access to all subscriptions._  
+    will allow members of the role access to all subscriptions._
 : required
   : false
 : type
@@ -1017,7 +1032,7 @@ subscriptions
     to. Provided values will be used to filter which subscriptions members of
     the role will have access to.
     _NOTE: omitting this configuration attribute or providing an empty array
-    will allow members of the role access to all subscriptions._  
+    will allow members of the role access to all subscriptions._
 : required
   : false
 : type
