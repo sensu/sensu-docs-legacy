@@ -102,3 +102,5 @@ now listening on 0.0.0.0:3000
 #### Viewing Sensu Enterprise Dashboard
 
 Now that Sensu Enterprise Dashboard is up and running, you can view the dashboard at `http://<DASHBOARD_IP_ADDRESS>:3000`.
+
+_NOTE: Multiple Sensu Enterprise Dashboard instances can be installed. When load balancing across multiple Dashboard instances, your load balancer should support 'sticky sessions'._
