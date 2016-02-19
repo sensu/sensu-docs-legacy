@@ -7,7 +7,7 @@ next:
   text: "Enterprise Dashboard HUD"
 ---
 
-## Collections
+# Sensu Enterprise Dashboard Collections
 
 Collections are a grouping of items returned by a collection query. This query
 acts like a global search and it **persists** between the different views.
@@ -15,7 +15,7 @@ Collections can be easily **shared** and **saved**.
 
 ![collections](img/enterprise-dashboard-collections.png)
 
-### Collection Query
+## Collection Query
 
 The most basic query is composed of a *field* and its *value*, in the form of
 `field:value`. A query can use any field, visible or not, to match a value, such

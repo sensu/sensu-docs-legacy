@@ -7,7 +7,7 @@ next:
   text: "Enterprise Built-in Filters"
 ---
 
-# Overview
+# Integrated Handlers in Sensu Enterprise
 
 Sensu Enterprise has many third-party integrations, provided by its built-in Sensu event handlers. Enterprise event handlers can be used to handle events for any check. The enterprise handlers (integrations) use their own global configuration in combination with [enterprise contact routing](enterprise-contact-routing) to provide the flexibility organizations require.
 
@@ -30,9 +30,11 @@ Built-in event handlers:
 - [Librato](#librato) - send metrics to Librato Metrics
 - [InfluxDB](#influxdb) - send metrics to InfluxDB
 
-# Using enterprise handlers
+## Using Enterprise handlers
 
 After configuring one or more [enterprise handlers](#enterprise-handlers), you can specify which ones are used per check or create a default handler set to specify those used by default.
+
+### Example Enterprise handler configurations
 
 The following is an example of how to configure a Sensu check to use the built-in `email` enterprise handler (integration).
 
@@ -71,9 +73,9 @@ The following is an example of how to configure the Sensu default handler in ord
 }
 ~~~
 
-# Enterprise handlers
+## Enterprise handlers
 
-## Email
+### Email
 
 Send email notifications for events, using SMTP.
 
@@ -98,7 +100,7 @@ The following is an example global configuration for the `email` enterprise even
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 email
 : description
@@ -184,7 +186,7 @@ timeout
     "timeout": 30
     ~~~
 
-## PagerDuty
+### PagerDuty
 
 Create and resolve PagerDuty incidents for events. After [configuring a service in PagerDuty](https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service), configure the handler (integration) with the provided service key.
 
@@ -199,7 +201,7 @@ The following is an example global configuration for the `pagerduty` enterprise 
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 pagerduty
 : description
@@ -241,7 +243,7 @@ timeout
     "timeout": 30
     ~~~
 
-## VictorOps
+### VictorOps
 
 Create VictorOps messages for events.
 
@@ -257,7 +259,7 @@ The following is an example global configuration for the `victorops` enterprise 
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 victorops
 : description
@@ -313,7 +315,7 @@ timeout
     "timeout": 30
     ~~~
 
-## OpsGenie
+### OpsGenie
 
 Create and close [OpsGenie](https://www.opsgenie.com/) alerts for events.
 
@@ -333,7 +335,7 @@ The following is an example global configuration for the `opsgenie` enterprise e
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 opsgenie
 : description
@@ -445,7 +447,7 @@ timeout
     "timeout": 30
     ~~~
 
-## IRC
+### IRC
 
 Send notifications to an IRC channel for events.
 
@@ -464,7 +466,7 @@ The following is an example global configuration for the `irc` enterprise event 
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 irc
 : description
@@ -558,7 +560,7 @@ timeout
     "timeout": 30
     ~~~
 
-## Slack
+### Slack
 
 Send notifications to a Slack channel for events. After [configuring an incoming webhook in Slack](https://api.slack.com/incoming-webhooks), configure the handler (integration) with the provided webhook url.
 
@@ -575,7 +577,7 @@ The following is an example global configuration for the `slack` enterprise even
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 slack
 : description
@@ -659,7 +661,7 @@ timeout
     "timeout": 30
     ~~~
 
-## HipChat
+### HipChat
 
 Send notifications to a HipChat room for events. After [creating a HipChat API token](https://www.hipchat.com/docs/api/auth), configure the handler (integration) with the provided API token.
 
@@ -677,7 +679,7 @@ The following is an example global configuration for the `hipchat` enterprise ev
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 hipchat
 : description
@@ -691,7 +693,7 @@ hipchat
     "hipchat": {}
     ~~~
 
-#### Hipchat attributes
+#### HipChat attributes
 
 api_token
 : description
@@ -761,7 +763,7 @@ timeout
     "timeout": 30
     ~~~
 
-## SNMP
+### SNMP
 
 Send SNMP traps to a SNMP manager.
 
@@ -796,7 +798,7 @@ The following is an example global configuration for the `snmp` enterprise event
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 snmp
 : description
@@ -854,7 +856,7 @@ community
     "community": "private"
     ~~~
 
-## Datadog
+### Datadog
 
 Create Datadog events for Sensu events. After [managing your Datadog account API key](https://app.datadoghq.com/account/login?next=%2Faccount%2Fsettings#api), configure the handler (integration) with your API key.
 
@@ -869,7 +871,7 @@ The following is an example global configuration for the `datadog` enterprise ev
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 datadog
 : description
@@ -911,7 +913,7 @@ timeout
     "timeout": 30
     ~~~
 
-## Flapjack
+### Flapjack
 
 Relay Sensu results to Flapjack, a monitoring notification routing and event processing system. Flapjack uses Redis for event queuing; this integration sends event data to Flapjack through Redis, using the Flapjack event format.
 
@@ -931,7 +933,7 @@ The following is an example global configuration for the `flapjack` enterprise i
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 flapjack
 : description
@@ -1017,7 +1019,7 @@ filter_metrics
     "filter_metrics": true
     ~~~
 
-## EC2
+### EC2
 
 Deregister Sensu clients from the client registry, if they no longer have an associated EC2 instance in the allowed state(s). This enterprise handler (integration) will only work if Sensu clients are named using the EC2 instance ID, for the instance on which they reside. The `ec2` enterprise handler requires valid [AWS IAM user credentials](http://aws.amazon.com/iam/) with the EC2 describe instances action in a policy, e.g. `ec2:DescribeInstances`.
 
@@ -1051,7 +1053,7 @@ The EC2 enterprise handler is most commonly used as part of the `keepalive` set 
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 ec2
 : description
@@ -1135,7 +1137,7 @@ timeout
     "timeout": 30
     ~~~
 
-## Chef
+### Chef
 
 Deregister Sensu clients from the client registry, if they no longer have associated Chef node data. This integration can only work if Sensu clients are named using the Chef node name, for the machine on which they reside. The `chef` enterprise handler requires Chef Server API credentials, the local chef-client configuration can be used as a reference.
 
@@ -1175,7 +1177,7 @@ The Chef enterprise handler is most commonly used as part of the `keepalive` set
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 chef
 : description
@@ -1327,7 +1329,7 @@ timeout
     "timeout": 30
     ~~~
 
-## Graphite
+### Graphite
 
 Send metrics to Graphite, using the plaintext protocol over TCP. The `graphite` enterprise handler is also capable of sending metrics to [Hosted Graphite](https://www.hostedgraphite.com/), using the `prefix` attribute to prefix metric names with the Hosted Graphite API key. This handler uses the `output_format` mutator.
 
@@ -1344,7 +1346,7 @@ The following is an example global configuration for the `graphite` enterprise h
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 graphite
 : description
@@ -1414,7 +1416,7 @@ prefix
     "prefix": "production"
     ~~~
 
-## OpenTSDB
+### OpenTSDB
 
 Send metrics to OpenTSDB, using the telnet protocol (TCP). This handler uses the [`output_format` mutator](https://sensuapp.org/docs/latest/enterprise-built-in-mutators#output-format).
 
@@ -1430,7 +1432,7 @@ The following is an example global configuration for the `opentsdb` enterprise h
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 opentsdb
 : description
@@ -1488,7 +1490,7 @@ tag_host
     "tag_host": false
     ~~~
 
-## Librato
+### Librato
 
 Send metrics to Librato Metrics using the HTTP API.
 
@@ -1503,7 +1505,7 @@ The following is an example global configuration for the `librato` enterprise ha
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 librato
 : description
@@ -1543,7 +1545,7 @@ api_key
     "api_key": "90SHpjPOFqd2YJFIX9rzDq7ik6CiDmqu2AvqcXJAX3buIwcOGqIOgNilwKMjpStO"
     ~~~
 
-## InfluxDB
+### InfluxDB
 
 Send metrics to InfluxDB using the HTTP API.
 
@@ -1561,7 +1563,7 @@ The following is an example global configuration for the `influxdb` enterprise h
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 influxdb
 : description

@@ -7,11 +7,11 @@ next:
   text: "Events API"
 ---
 
-# Overview
+# Sensu Checks API
 
 List locally defined checks and request executions.
 
-# API Definition
+## API Definition
 
 `/checks` (GET)
 : desc.

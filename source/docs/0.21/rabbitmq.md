@@ -7,7 +7,7 @@ next:
   text: "Redis Configuration"
 ---
 
-# Overview
+# The RabbitMQ Sensu Transport
 
 This reference document provides information to help you:
 
@@ -18,17 +18,17 @@ This reference document provides information to help you:
 - [How to secure RabbitMQ in production](#security)
 - [How to configure RabbitMQ for High Availability (HA)](#configuring-rabbitmq-for-high-availability-ha)
 
-# What is RabbitMQ?
+## What is RabbitMQ?
 
 RabbitMQ is a message bus, which [describes itself](http://www.rabbitmq.com/features.html) as _"a messaging broker - an intermediary for messaging. It gives your applications a common platform to send and receive messages, and your messages a safe place to live until received"_.
 
 You can visit the official RabbitMQ website to learn more: [rabbitmq.com](http://www.rabbitmq.com/)
 
-# How Sensu uses RabbitMQ
+## How Sensu uses RabbitMQ
 
-Sensu services use RabbitMQ (the default Sensu transport) to communicate with one another. Every Sensu service requires access to the same instance of RabbitMQ or a RabbitMQ cluster to function. Sensu check requests and check results are sent over RabbitMQ to the approprate Sensu services.
+Sensu services use RabbitMQ (the default Sensu [transport](/transport)) to communicate with one another. Every Sensu service requires access to the same instance of RabbitMQ or a RabbitMQ cluster to function. Sensu check requests and check results are sent over RabbitMQ to the approprate Sensu services.
 
-# Anatomy of a RabbitMQ definition
+## Anatomy of a RabbitMQ definition
 
 The RabbitMQ definition uses the `"rabbitmq": {}` definition scope.
 
@@ -180,15 +180,15 @@ The following is an example RabbitMQ connection definition at `/etc/sensu/conf.d
 }
 ~~~
 
-# Configuring RabbitMQ
+## Configuring RabbitMQ
 
 To configure RabbitMQ, please refer to the [official RabbitMQ configuration documentation](https://www.rabbitmq.com/configure.html).
 
-# Security
+## Security
 
 Sensu leverages RabbitMQ access control and SSL for secure communication. Sensu was created to deal with dynamic infrastructure, where it is not feasible to maintain strict firewall rules. It is common to expose RabbitMQ’s SSL port (`5671`) without any restrictions, if certain conditions are met. Removing the default RabbitMQ user `guest` is mandatory and using a generated user name, password, and vhost is highly recommended. Enabling SSL peer certificate verification will ensure only trusted RabbitMQ clients with the correct private key are able to connect.
 
-## SELinux
+### SELinux
 
 If SELinux is enabled on the machine(s) reponsible for running RabbitMQ, you may need to make minor policy changes in order for RabbitMQ (and Erlang) to run successfully.
 
@@ -204,17 +204,17 @@ For some reason, enabling the NIS boolean allows RabbitMQ to bind to its TCP soc
 sudo setsebool -P nis_enabled 1
 ~~~
 
-# Configuring RabbitMQ for High Availability (HA)
+## Configuring RabbitMQ for High Availability (HA)
 
 For the best results when configuring HA RabbitMQ, we recommend reading the following information and instructions. Running a three node RabbitMQ cluster is recommended, as running fewer or more nodes introduces additional failure modes.
 
-## Configure a three node RabbitMQ cluster
+### Configure a three node RabbitMQ cluster
 
-### Hardware requirements
+#### Hardware requirements
 
 The Sensu transport does not require message persistence, making throughput the primary concern for RabbitMQ (i.e. memory is more important than disk performance). When starting with a RabbitMQ cluster it is important to use systems (e.g. virtual machines) with sufficient compute, memory, and network resources. Although it's challenging to provide "recommended hardware requirements" for the broad variety of Sensu deployments, we have found that starting with three nodes equivalent to [AWS EC2 m3.medium instances](http://aws.amazon.com/ec2/instance-types/#M3) generally provides a solid baseline for monitoring 1000+ servers, each reporting 10-20 checks (& metrics) at a 10-second interval.
 
-### RabbitMQ cluster configuration
+#### RabbitMQ cluster configuration
 
 When configuring a RabbitMQ cluster, the recommended method is via the `rabbitmqctl` CLI tool provided by the RabbitMQ package. For more information on this method of clustering RabbitMQ, please refer to the [official RabbitMQ clustering guide](https://www.rabbitmq.com/clustering.html).
 
@@ -235,7 +235,7 @@ The following is a portion of a `/etc/rabbitmq/rabbitmq.config` configuration fi
 ].
 ~~~
 
-### Mirroring the Sensu queues
+#### Mirroring the Sensu queues
 
 By default, queues within a RabbitMQ cluster are located on a single node (the node on which they were first declared). This is in contrast to exchanges and bindings, which can always be considered to be on all nodes. Sensu requires specific queues be mirrored across all RabbitMQ nodes in the RabbitMQ cluster. The Sensu `results` and `keepalives` queues MUST be mirrored. Sensu client subscription queues do not need to be mirrored.
 
@@ -245,7 +245,7 @@ RabbitMQ uses policies to determine which queues are mirrored. The following wil
 sudo rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
 ~~~
 
-### Configuring Sensu for a RabbitMQ cluster
+#### Configuring Sensu for a RabbitMQ cluster
 
 Sensu services (e.g. `sensu-client`) can be configured with the connection information for each RabbitMQ node in a RabbitMQ cluster. Sensu will randomly sort the configured RabbitMQ connections and attempt to connect to one of them. If Sensu is unable to connect to a RabbitMQ node in a cluster, or looses connectivity (reconnect), it will attempt to connect to the next RabbitMQ node in the cluster. Having Sensu be aware of all RabbitMQ nodes in a cluster is essential and removes any need for a load balancer etc.
 

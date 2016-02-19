@@ -7,12 +7,12 @@ next:
   text: "Info API"
 ---
 
-# Overview
+# Sensu Health API
 
 Check the status of the API's transport & Redis connections, and query the
 transport's status. (consumer and message counts)
 
-# API Definition
+## API Definition
 
 `/health` (GET)
 : desc

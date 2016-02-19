@@ -7,7 +7,7 @@ next:
   text: "Mutators"
 ---
 
-# Filters
+# Sensu Event Filters
 
 This reference document provides information to help you:
 

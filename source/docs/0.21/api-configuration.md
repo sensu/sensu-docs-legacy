@@ -4,7 +4,7 @@ category: "API Docs"
 title: "API Configuration"
 ---
 
-# Overview
+# Sensu API Configuration
 
 The Sensu API provides several endpoints to access Sensu data for Checks,
 Clients, Events, Aggregates, Stashes, and more.
@@ -17,7 +17,7 @@ _NOTE: Please visit the [Sensu Enterprise API](enterprise-api) reference
 documentation for information on configuring the Sensu Enterprise API (including
 native SSL encryption)._
 
-# Anatomy of an API definition
+## Anatomy of an API definition
 
 ### Example API definition
 

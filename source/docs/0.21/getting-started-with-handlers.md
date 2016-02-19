@@ -7,7 +7,7 @@ next:
   text: "Getting Started with Filters"
 ---
 
-# Overview
+# Getting Started with Handlers
 
 The purpose of this guide is to help Sensu users create event handlers. At the conclusion of this guide, you - the user - should have several Sensu handlers in place to handle events. Each Sensu event handler in this guide demonstrates one or more handler types and definition features, for more information please refer to the [handlers reference documentation](handlers).
 
@@ -21,7 +21,7 @@ What will be covered in this guide:
 - Creation of a **transport** handler
 - Creation of a **set** handler
 
-# What are Sensu event handlers? {#what-are-sensu-event-handlers}
+## What are Sensu event handlers? {#what-are-sensu-event-handlers}
 
 Sensu event handlers are for taking action on [events](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: `pipe`, `tcp`, `udp`, `transport`, and `set`.
 
@@ -30,11 +30,11 @@ Sensu event handlers are for taking action on [events](events) (produced by chec
 - **Transport handlers** publish the event data to the Sensu transport (by default, this is RabbitMQ).
 - **Set handlers** are used to group event handlers, making it easier to manage many event handlers.
 
-# Create a pipe handler
+## Create a pipe handler
 
 Pipe event handlers execute a command and pass the event data to the corresponding process via `STDIN`.
 
-## Install dependencies
+### Install dependencies
 
 The following instructions install the `event-file` Sensu handler plugin (written in Ruby) to `/etc/sensu/plugins/event-file.rb`. This handler plugin reads the event data via `STDIN`, parses it, creates a file name using the parsed event data, and then writes the event data to the file (e.g. `/tmp/client_name/check_name.json`).
 
@@ -47,20 +47,20 @@ The `event-file` Sensu plugin requires a Ruby runtime. Install Ruby from the dis
 
 _NOTE: the following Ruby installation steps may differ depending on your platform. You may have already done the following steps as part of the [getting started with checks guide](getting-started-with-checks#install-dependencies)._
 
-### Ubuntu/Debian
+#### Ubuntu/Debian
 
 ~~~ shell
 sudo apt-get update
 sudo apt-get install ruby ruby-dev
 ~~~
 
-### CentOS/RHEL
+#### CentOS/RHEL
 
 ~~~ shell
 sudo yum install ruby ruby-devel
 ~~~
 
-## Create the pipe handler definition
+### Create the pipe handler definition
 
 The following is an example Sensu handler definition, a JSON configuration file located at `/etc/sensu/conf.d/event_file.json`. This handler definition uses the `event-file` plugin ([installed above](#install-dependencies)) to write event data to a file. The handler is named `file` and it runs `/etc/sensu/plugins/event-file.rb`, providing it with JSON event data via `STDIN`.
 
@@ -108,13 +108,13 @@ To specify which check result severities (`OK`, `WARNING`, etc.) the handler sup
 
 To use the `file` handler for a check, please refer to the [getting started with checks guide](getting-started-with-checks#create-the-check-definition-for-cron).
 
-# Create a TCP handler
+## Create a TCP handler
 
 TCP and UDP event handlers send event data to a remote socket. Both TCP and UDP handler types use the same definition attributes. The following TCP handler instructions will work for UDP with minor adjustments.
 
 Because TCP and UDP handlers require interaction with an external service, providing a functional example is outside of the scope of this guide. However, the following instructions will allow you to run a simple TCP socket that echoes any input to `STDOUT` for testing purposes.
 
-## Run a TCP server
+### Run a TCP server
 
 To test the TCP handler, a listening TCP socket server is required. For the following examples, netcat (`nc`) will be used as the TCP server.
 
@@ -132,7 +132,7 @@ To test the netcat TCP socket server, run the following command and observe the 
 echo "testing" | nc localhost 6000
 ~~~
 
-## Create the TCP handler definition
+### Create the TCP handler definition
 
 The following is an example Sensu handler definition, a JSON configuration file located at `/etc/sensu/conf.d/tcp_socket.json`. This TCP handler will send JSON event data to the TCP socket server (netcat in this example).
 
@@ -152,11 +152,11 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-# Create a transport handler
+## Create a transport handler
 
 Transport handlers publish event data to the Sensu transport (by default this is RabbitMQ). Transport event handlers are used to deliver event data to other services, using the Sensu transport.
 
-## Create the transport handler definition
+### Create the transport handler definition
 
 The following is an example Sensu handler definition, a JSON configuration file located at `/etc/sensu/conf.d/transport_events.json`. This transport handler will publish JSON event data to the Sensu transport.
 
@@ -176,11 +176,11 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 }
 ~~~
 
-# Create a set handler
+## Create a set handler
 
 Set handlers are used to group event handlers into _sets of handlers_, making it easier to reference a set of event handlers from a check definition.
 
-## Create the set handler definition
+### Create the set handler definition
 
 The following is an example Sensu handler definition, a JSON configuration file located at `/etc/sensu/conf.d/default_handler.json`. This set handler is named `default`, the handler that is used for events where a handler is not specified. The previous Sensu event handler examples are included in the set.
 

@@ -11,7 +11,7 @@ success: "<strong>NOTE:</strong> this is part 1 of 2 steps in the Sensu
   moving on."
 ---
 
-# Overview
+# MSI Installer
 
 Unlike linux-based operating systems which install software from package repositories using package management, software on Windows is _primarily_ installed via standalone installer packages (e.g. .msi or .exe files). Sensu Core is installed on Windows using a MSI package. Please note the following instructions for installing Sensu on Windows.
 
@@ -20,11 +20,11 @@ The following instructions will help you to:
 - Download the Sensu Core MSI
 - Install the Sensu Core MSI
 
-# Download the Sensu Core MSI
+## Download the Sensu Core MSI
 
 The Sensu Core MSI can be downloaded from [http://repositories.sensuapp.org/msi/sensu-0.21.0-1.msi](http://repositories.sensuapp.org/msi/sensu-0.21.0-1.msi).
 
-# Install the Sensu Core MSI
+## Install the Sensu Core MSI
 
 Double-click on the downloaded Sensu Core MSI to begin the installation process. Follow the installation prompts, to accept the [Sensu Core license](https://github.com/sensu/sensu/blob/master/MIT-LICENSE.txt) and the default installation options.
 

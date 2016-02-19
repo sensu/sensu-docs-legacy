@@ -3,15 +3,15 @@ version: 0.21
 category: "API Docs"
 title: "Info API"
 next:
-  url: "enterprise-overview"
-  text: "Enterprise Overview"
+  url: "api-configuration"
+  text: "Sensu API Configuration"
 ---
 
-# Overview
+# Sensu Info API
 
 List the Sensu version and the transport and Redis connection information. This is the same information that [/health](api-health) uses to determine system health.
 
-# API Definition
+## API Definition
 
 `/info` (GET)
 : desc

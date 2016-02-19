@@ -7,7 +7,7 @@ next:
   text: "Events"
 ---
 
-# Overview
+# Sensu Extensions
 
 This reference document provides information to help you:
 
@@ -16,6 +16,6 @@ This reference document provides information to help you:
 - Write a Sensu extension
 - Use a Sensu extension
 
-# What are Sensu extensions? {#what-are-sensu-extensions}
+## What are Sensu extensions? {#what-are-sensu-extensions}
 
 This document is currently a WIP.

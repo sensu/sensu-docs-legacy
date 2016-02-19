@@ -7,11 +7,11 @@ next:
   text: "Aggregates API"
 ---
 
-# Overview
+# Sensu Results API
 
 List current check results.
 
-# API Definition
+## API Definition
 
 `/results` (GET)
 : desc

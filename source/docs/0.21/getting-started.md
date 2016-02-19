@@ -7,7 +7,7 @@ next:
   text: "Getting Started with Checks"
 ---
 
-# Introduction
+# Getting Started with Sensu
 
 The purpose of this guide is to help new Sensu users to obtain a basic understanding of the primitives or components used to build a comprehensive monitoring solution. In the course of working through this guide, users should be able to start monitoring servers, services, and application health, collect and analyze metrics, and setup alerts.
 

@@ -7,11 +7,13 @@ next:
   text: "Enterprise API"
 ---
 
-# Overview
+# Contact Routing
 
 Every incident or outage has an ideal first responder, a team or individual with the knowledge to triage and address the issue. Sensu Enterprise contact routing makes it possible to assign checks to specific teams and/or individuals, reducing mean time to response and recovery, MTTR. Contact routing works with all of the Sensu Enterprise third-party integrations.
 
 A contact is composed of a name and configuration for one or more integrations. Contact integration configuration is merged upon the global (top-level) configuration. The contact example below specifies an email address which overrides the address specified in the global integration configuration.
+
+## Example contact routing configuration
 
 ~~~ json
 {

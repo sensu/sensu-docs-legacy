@@ -7,7 +7,7 @@ next:
   text: "Install RabbitMQ"
 ---
 
-# Introduction
+# Installation Guide
 
 The purpose of this guide is to help new Sensu users get up and running with a basic Sensu installation. At the conclusion of this guide, you - the user - should have a single server running all of the Sensu services, their dependencies, and a running Sensu client; optionally, this guide also provides instructions for getting Sensu client installed and running on one or more remote machines. Please note that this guide is not intended to provide instruction for deploying Sensu into "production" environments. However, production deployment strategies will be discussed at the conclusion of the guide.
 
