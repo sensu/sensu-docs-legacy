@@ -7,13 +7,13 @@ next:
   text: "Enterprise Built-in Mutators"
 ---
 
-# Overview
+# Built-in Filters in Sensu Enterprise
 
 Sensu Enterprise has several built-in event filters, used by many of the third-party integrations, and made available to standard Sensu event handlers. These enterprise filters can be used to combat alert fatigue.
 
-# Enterprise filters
+## Enterprise filters
 
-## handle_when
+### The handle_when filter
 
 The `handle_when` enterprise filter is used to reduce notification "noise". Users can define a minimum number of event `occurrences` before notifications will be sent. Users can also specify a `reset` time, in seconds, to reset where recurrences are counted from, to control when reminder/update notifications are sent. By default, `occurrences` is set to `1`, and reset is `1800` (30 minutes). The `handle_when` filter is used by all of the [enterprise third-party integrations](enterprise_integrations).
 
@@ -51,7 +51,7 @@ The following is an example of how to apply the `handle_when` enterprise filter 
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 handle_when
 : description
@@ -65,7 +65,7 @@ handle_when
     "handle_when": {}
     ~~~
 
-#### Handle when attributes
+##### handle_when attributes
 
 occurrences
 : description
@@ -95,9 +95,11 @@ reset
     "reset": 3600
     ~~~
 
-## silence_stashes
+### The silence_stashes filter
 
-The `silence_stashes` enterprise filter is used to filter events when specific [Sensu API stashes](api-stashes) exist. The Sensu Enterprise Dashboard and many community tools make use of "silence stashes" to indicate Sensu clients and/or their checks that are "silenced" or under maintenance. Events will be filtered if a silence stash exists for the client and/or its check specified in the event data.
+The `silence_stashes` Enterprise filter is used to filter events when specific [Sensu API stashes](api-stashes) exist. The Sensu Enterprise Dashboard and many community tools make use of "silence stashes" to indicate Sensu clients and/or their checks that are "silenced" or under maintenance. Events will be filtered if a silence stash exists for the client and/or its check specified in the event data.
+
+#### Example silence_stashes filter configuration
 
 The following is an example of how to apply the `silence_stashes` enterprise filter to a standard Sensu `pipe` handler.
 
@@ -113,27 +115,11 @@ The following is an example of how to apply the `silence_stashes` enterprise fil
 }
 ~~~
 
-
-Multiple enterprise filters can be applied to standard Sensu event handlers. The following example event handler uses the `handle_when` and `silence_stashes` event filters.
-
-~~~ json
-{
-  "handlers": {
-    "custom_mailer": {
-      "type": "pipe",
-      "command": "custom_mailer.rb",
-      "filters": [
-        "handle_when",
-        "silence_stashes"
-      ]
-    }
-  }
-}
-~~~
-
-## check_dependencies
+### The check_dependencies filter
 
 The `check_dependencies` enterprise filter is used to filter events when an event already exists for a defined check dependency, enabling the user to reduce notification noise and only be notified for the "root cause" of a given failure. Check dependencies can be defined in the check definition, using `dependencies`, an array of checks (e.g. `check_app`) or Sensu client/check pairs (e.g. `db-01/check_mysql`).
+
+#### Example check_dependencies filter configurations
 
 The following is an example of how to configure a check dependency for a check. The example check monitors a web application API and has a dependency on another check that monitors the local MySQL database.
 
@@ -187,7 +173,7 @@ The following is an example of how to apply the `check_dependencies` enterprise 
 }
 ~~~
 
-### Definition attributes
+#### Definition attributes
 
 dependencies
 : description
@@ -203,3 +189,22 @@ dependencies
       "db-01/check_mysql"
     ]
     ~~~
+
+### Using multiple Enterprise filters
+
+Multiple enterprise filters can be applied to standard Sensu event handlers. The following example event handler uses the `handle_when` and `silence_stashes` event filters.
+
+~~~ json
+{
+  "handlers": {
+    "custom_mailer": {
+      "type": "pipe",
+      "command": "custom_mailer.rb",
+      "filters": [
+        "handle_when",
+        "silence_stashes"
+      ]
+    }
+  }
+}
+~~~

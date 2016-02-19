@@ -7,7 +7,7 @@ next:
   text: "Handlers"
 ---
 
-# Overview
+# Sensu Checks
 
 This reference document provides information to help you:
 
@@ -19,11 +19,11 @@ This reference document provides information to help you:
 - [Use sensu-plugin custom Sensu check definition attributes](#sensu-plugin-attributes)
 - [Understand what Sensu check command tokens are and how to use them](#check-command-tokens)
 
-# What are Sensu checks? {#what-are-sensu-checks}
+## What are Sensu checks? {#what-are-sensu-checks}
 
 Sensu checks allow you to monitor services or measure resources, they are executed on machines running the Sensu client. Checks are essentially commands (or scripts) that output data to `STDOUT` or `STDERR` and produce an exit status code to indicate a state. Common exit status codes used are `0` for `OK`, `1` for `WARNING`, `2` for `CRITICAL`, and `3` or greater to indicate `UNKNOWN` or `CUSTOM`. Sensu checks use the same specification as Nagios, therefore, Nagios check plugins may be used with Sensu.
 
-## Example check plugin {#example-check-plugin}
+### Example check plugin {#example-check-plugin}
 
 The following is an example Sensu check plugin, a script located at `/etc/sensu/plugins/check-chef-client.rb`. This check plugin uses the running process list to determine if the Chef client process is running. This check plugin is written in Ruby, but Sensu plugins can be written in any language, e.g. Python, shell, etc.
 
@@ -48,7 +48,7 @@ else
 end
 ~~~
 
-# Check definition
+## Check definition
 
 A Sensu check definition is a JSON configuration file describing a Sensu check. A definition declares how a Sensu check is executed:
 
@@ -56,7 +56,7 @@ A Sensu check definition is a JSON configuration file describing a Sensu check. 
 - How frequently it should be executed (interval)
 - Where it should be executed (which machines)
 
-## Example check definition {#example-check-definition}
+### Example check definition {#example-check-definition}
 
 The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_chef_client.json`. This check definition uses the [example check plugin](#example-check-plugin) above, to determine if the Chef client process is running. The check is named `chef_client` and it runs `/etc/sensu/plugins/check-chef-client.rb` on Sensu clients with the `production` subscription, every `60` seconds (interval).
 
@@ -74,7 +74,7 @@ The following is an example Sensu check definition, a JSON configuration file lo
 }
 ~~~
 
-# Anatomy of a check definition
+## Anatomy of a check definition
 
 ### Name
 
@@ -371,7 +371,7 @@ exceptions
     "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
     ~~~
 
-# Custom definition attributes
+## Custom definition attributes
 
 Custom check definition attributes may be included to add additional information (context) about the Sensu check. Custom check attributes will be included in [event data](events). Some great example use cases for custom check definition attributes are contact routing, documentation links, and metric graph image URLs.
 
@@ -392,7 +392,7 @@ The following is an example Sensu check definition that a custom definition attr
 }
 ~~~
 
-# Sensu plugin attributes
+## Sensu plugin attributes
 
 The [Sensu plugin project](https://github.com/sensu-plugins) provides a Ruby library ([sensu-plugin](https://github.com/sensu-plugins/sensu-plugin/)) to help Sensu plugin authors and offer users a variety of features. The sensu-plugin features make use of select custom check definition attributes. When using a [Sensu event handler](handlers) that makes use of the sensu-plugin library, you can configure the following attributes in any check definition.
 
@@ -451,11 +451,11 @@ notification
     "notification": "the shopping cart application is not responding to requests"
     ~~~
 
-# Check command tokens
+## Check command tokens
 
 Sensu check plugins may use command line arguments for execution options, such as thresholds, file paths, URls, and credentials. In some cases, the command line arguments may need to differ per client in a Sensu [client subscription](clients#client-subscriptions). Sensu check command tokens, a pattern containing a dot notation client attribute key (e.g. `:::disk.warning:::`), are substituted by the client attribute value before the command is executed by the Sensu client. Command tokens allow the check command to be customized by the Sensu client definition attributes at execution time. Sensu check command tokens may provide a default value, separated by a `|` character, for clients executing the check that do not have the matching client definition attribute (e.g. `:::disk.warning|2GB:::`). If a command token does not provide a default value, and the client does not have the definition attribute, a check result indicating unmatched tokens will be published for the check execution, e.g. `"Unmatched command tokens: disk.warning"`.
 
-## Example check command tokens
+### Example check command tokens
 
 The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition makes use of Sensu check command tokens. The check is named `check_disk_usage` and it runs `check-disk-usage.rb` with client specific thresholds on Sensu clients with the `production` subscription, every `60` seconds.
 

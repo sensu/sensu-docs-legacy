@@ -7,7 +7,7 @@ next:
   text: "RabbitMQ Configuration"
 ---
 
-# Overview
+# Sensu Events & Event Data
 
 This reference document provides information to help you:
 
@@ -15,11 +15,11 @@ This reference document provides information to help you:
 - How and when Sensu events are created
 - What is included in event data
 
-# What are Sensu events? {#what-are-sensu-events}
+## What are Sensu events? {#what-are-sensu-events}
 
 A Sensu Event is created when a check result indicates a change in state. Sensu events are created to acknowledge that something potentially noteworthy has occurred, which may then be associated with one or more event handlers to do things such as send an email, or invoke an automated action. Every Sensu event provides context, called "event data", which contains information about the originating Sensu client and the corresponding check result. When a check result indicates a change in state from a zero to a non-zero status, this generates a Sensu event with a "create" `action`; when a check result indicates a change in state from a non-zero to a zero status, this generates a Sensu event with a "resolve" `action` (see reference documentation for `action`, below).
 
-# Sensu event data {#sensu-event-data}
+## Sensu event data {#sensu-event-data}
 
 The following is an example Sensu event. By default, event data is JSON formatted, making it language-independent and fairly human readable.
 
@@ -56,7 +56,7 @@ The following is an example Sensu event. By default, event data is JSON formatte
 }
 ~~~
 
-# Anatomy of event data
+## Anatomy of event data
 
 ### Event data attributes
 

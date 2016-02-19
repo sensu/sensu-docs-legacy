@@ -7,11 +7,11 @@ next:
   text: "Results API"
 ---
 
-# Overview
+# Sensu Events API
 
 List and resolve current events. Every event occurrence has a unique ID (random UUID).
 
-# API Definition
+## API Definition
 
 `/events` (GET)
 : desc

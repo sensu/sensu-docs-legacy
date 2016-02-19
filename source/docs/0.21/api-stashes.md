@@ -7,12 +7,12 @@ next:
   text: "Health API"
 ---
 
-# Overview
+# Sensu Stashes API
 
 Create, list, and delete stashes (JSON documents). The stashes endpoint is an
 HTTP key/value data store.
 
-# API Definition
+## API Definition
 
 `/stashes` (GET)
 : desc

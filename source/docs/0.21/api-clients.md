@@ -7,11 +7,11 @@ next:
   text: "Checks API"
 ---
 
-# Overview
+# Sensu Clients API
 
 List and delete client(s) information.
 
-# API Definition
+## API Definition
 
 `/clients` (GET)
 : desc.

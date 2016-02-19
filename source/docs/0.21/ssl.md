@@ -4,26 +4,26 @@ category: "Reference Docs"
 title: "SSL Configuration"
 ---
 
-# Overview
+# Sensu and SSL
 
 This reference document provides information to help you:
 
 - Understand how Sensu uses SSL
 - How to generate self-signed SSL certificates
 
-# Sensu and SSL
+## How Sensu uses SSL
 
 All communication between Sensu services happens via the Sensu transport (RabbitMQ by default). As such, to secure a Sensu installation means to secure communication between all of the Sensu services and the Sensu transport via SSL encryption. Sensu can operate without the use of SSL encryption, however, this practice is heavily discouraged.
 
-# Generate SSL certificates
+## Generate SSL certificates
 
 The following instructions will generate an OpenSSL certificate authority and self-signed certificates. Optionally, the instructions available on the [RabbitMQ SSL page](http://www.rabbitmq.com/ssl.html) can be used instead.
 
-## Install OpenSSL
+### Install OpenSSL
 
 OpenSSL is required on the machine that will generate the SSL certificates. Install OpenSSL on your platform:
 
-### Ubuntu/Debian
+#### Ubuntu/Debian
 
 ~~~ shell
 sudo apt-get update
@@ -31,14 +31,14 @@ sudo apt-get install openssl
 openssl version
 ~~~
 
-### CentOS/RHEL
+#### CentOS/RHEL
 
 ~~~ shell
 sudo yum install openssl
 openssl version
 ~~~
 
-## Download the Sensu SSL tool
+### Download the Sensu SSL tool
 
 Download the Sensu SSL tool (scripts):
 
@@ -47,7 +47,7 @@ wget http://sensuapp.org/docs/0.21/files/sensu_ssl_tool.tar
 tar -xvf sensu_ssl_tool.tar
 ~~~
 
-## Generate the SSL certificates
+### Generate the SSL certificates
 
 Run the Sensu SSL tool to generate an OpenSSL certificate authority and self-signed certificates:
 

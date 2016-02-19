@@ -7,14 +7,14 @@ next:
   text: "Stashes API"
 ---
 
-# Overview
+# Sensu Aggregates API
 
 List and delete check aggregates.
 
 This endpoint provides the information needed to monitor a collection of
 machines running a service.
 
-# API Definition
+## API Definition
 
 `/aggregates` (GET)
 : desc

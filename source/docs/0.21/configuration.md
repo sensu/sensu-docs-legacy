@@ -7,7 +7,7 @@ next:
   text: "Plugins"
 ---
 
-# Configuration
+# Sensu Configuration
 
 One of the most commonly asked questions when getting started with Sensu is
 "where do the config files go"? Because Sensu was designed to be used alongside

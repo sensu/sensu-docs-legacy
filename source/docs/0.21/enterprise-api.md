@@ -4,7 +4,7 @@ category: "Enterprise Docs"
 title: "Enterprise API"
 ---
 
-# Overview
+# Sensu Enterprise API
 
 Every instance of Sensu Enterprise provides the Sensu Enterprise API, built upon the [Sensu Core API](api-overview).
 
@@ -15,7 +15,7 @@ This reference document provides information to help you:
 - [How to configure the Enterprise API](#anatomy-of-an-api-definition)
 - [Create an SSL keystore](#create-an-ssl-keystore)
 
-# Anatomy of an API definition
+## Anatomy of an API definition
 
 The API definition uses the `"api": {}` definition scope.
 
@@ -134,15 +134,15 @@ The following is an example API definition at `/etc/sensu/conf.d/api.json`.
 }
 ~~~
 
-# Create an SSL keystore
+## Create an SSL keystore
 
 The following instructions will generate an OpenSSL certificate authority, self-signed certificates, and a password protected keystore for the Sensu Enteprise API. Alternatively, you may create a keystore with third-party issued SSL certificates.
 
-## Install OpenSSL
+### Install OpenSSL
 
 OpenSSL is required on the machine that will generate the SSL certificates. Install OpenSSL on your platform:
 
-### Ubuntu/Debian
+#### Ubuntu/Debian
 
 ~~~ shell
 sudo apt-get update
@@ -150,14 +150,14 @@ sudo apt-get install openssl
 openssl version
 ~~~
 
-### CentOS/RHEL
+#### CentOS/RHEL
 
 ~~~ shell
 sudo yum install openssl
 openssl version
 ~~~
 
-# Generate SSL certificates and keystore
+### Generate SSL certificates and keystore
 
 The generate an OpenSSL certificate authority, self-signed certificates, and a password protected keystore for the Sensu Enteprise API, run the following commands, providing information when prompted:
 
@@ -200,7 +200,7 @@ sudo chown sensu:sensu /etc/sensu/api.keystore
 sudo chmod 600 /etc/sensu/api.keystore
 ~~~
 
-# Configure the Enterprise API for SSL
+## Configure the Enterprise API for SSL
 
 Once you have successfully [created an SSL certificate keystore](#create-an-ssl-keystore), Sensu Enterprise can be configured to provide an SSL listener for the API (HTTPS). The [keystore instructions](#create-an-ssl-keystore) produced a password protected keystore at `/etc/sensu/api.keystore`, the following API definition examples loads it.
 

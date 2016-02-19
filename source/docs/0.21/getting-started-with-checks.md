@@ -7,7 +7,7 @@ next:
   text: "Getting Started with Handlers"
 ---
 
-# Overview
+# Getting Started with Checks
 
 The purpose of this guide is to help Sensu users create monitoring checks. At the conclusion of this guide, you - the user - should have several Sensu checks in place to monitor and measure machine resources, applications, and services. Each Sensu monitoring check in this guide demonstrates one or more check definition features, for more information please refer to the [Sensu checks reference documentation](checks).
 
@@ -19,19 +19,19 @@ What will be covered in this guide:
 - Creation of **metric collection** checks (server resources, etc)
 - Creation of **metric analysis** checks (querying time series data, etc)
 
-# What are Sensu checks? {#what-are-sensu-checks}
+## What are Sensu checks? {#what-are-sensu-checks}
 
 Sensu checks allow you to monitor server resources, services, and application health, as well as collect & analyze metrics; they are executed on servers running the Sensu client. Checks are essentially commands (or scripts) that output data to `STDOUT` or `STDERR` and produce an exit status code to indicate a state. The common exit status codes used are `0` for `OK`, `1` for `WARNING`, `2` for `CRITICAL`, and `3` or greater to indicate `UNKNOWN` or `CUSTOM`. **Sensu checks use the same specification as Nagios**, therefore, Nagios check plugins may be used with Sensu.
 
-# Create a standard check
+## Create a standard check
 
 Standard Sensu checks are used to determine the health of server resources, services and applications. A standard check will query a resource for information to determine its state. Once a standard check has determined the resource state, it outputs a human readable message, and exits with the appropriate exit status code to indicate its state/severity (`OK`, `WARNING`, etc.).
 
-## Monitor the cron service
+### Monitor the cron service
 
 The following instructions install the check dependencies and configure the Sensu check definition in order to monitor the Cron service.
 
-### Install dependencies  {#check-cron-install-dependencies}
+#### Install dependencies  {#check-cron-install-dependencies}
 
 The `check-process.rb` script provided by the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) can reliably detect if a service such as Cron is running or not. The following instructions will install the [Sensu Process Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-process-checks) (version 0.0.6) using Sensu's embedded Ruby, providing the `check-process.rb` script.
 
@@ -39,7 +39,7 @@ The `check-process.rb` script provided by the [Sensu Process Checks Plugin](http
 sudo sensu-install -p process-checks:0.0.6
 ~~~
 
-### Create the check definition for Cron
+#### Create the check definition for Cron
 
 The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_cron.json`. This check definition uses the `check-process.rb` script ([installed above](#check-cron-install-dependencies)) to determine if the Cron service is running. The check is named `cron` and it runs `check-process.rb -p cron` on Sensu clients with the `production` subscription, every `60` seconds (interval).
 
@@ -90,7 +90,7 @@ By default, Sensu checks use the `default` Sensu event handler for events they c
 }
 ~~~
 
-#### Using multiple handlers
+### Using multiple handlers
 
 To specify multiple Sensu event handlers, use the `handlers` attribute (plural).
 
@@ -109,7 +109,7 @@ _NOTE: if both `handler` and `handlers` (plural) check definition attributes are
 }
 ~~~
 
-# Create a metric collection check
+## Create a metric collection check
 
 Metric collection checks are used to collect measurements from server resources, services, and applications. Metric collection checks can output metric data in a variety of metric formats:
 
@@ -118,9 +118,9 @@ Metric collection checks are used to collect measurements from server resources,
 - [OpenTSDB](http://opentsdb.net/docs/build/html/user_guide/writing.html)
 - [Metrics 2.0 wire format](http://metrics20.org/spec/)
 
-## Measuring CPU utilization
+### Measuring CPU utilization
 
-### Install dependencies {#cpu-metrics-install-dependencies}
+#### Install dependencies {#cpu-metrics-install-dependencies}
 
 The `metrics-cpu.rb` script provided by the [Sensu CPU Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-cpu-checks) collects and outputs CPU metrics in the Graphite plaintext format. The following instructions will install the [Sensu CPU Checks Plugin](https://github.com/sensu-plugins/sensu-plugins-cpu-checks) (version 0.0.3) using Sensu's embedded Ruby, providing the `metrics-cpu.rb` script.
 
@@ -128,7 +128,7 @@ The `metrics-cpu.rb` script provided by the [Sensu CPU Checks Plugin](https://gi
 sudo sensu-install -p cpu-checks:0.0.3
 ~~~
 
-### Create the check definition for CPU metrics
+#### Create the check definition for CPU metrics
 
 The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/cpu_metrics.json`. This check definition uses the `metrics-cpu.rb` script ([installed above](#cpu-metrics-install-dependencies)) to collect CPU metrics and output them in the Graphite plaintext format.
 
@@ -156,7 +156,7 @@ _NOTE: Sensu services must be restarted in order to pick up configuration change
 
 For a full listing of the `metrics-cpu.rb` command line arguments, run <kbd>/opt/sensu/embedded/bin/metrics-cpu.rb -h</kbd>.
 
-# Create a metric analysis check
+## Create a metric analysis check
 
 A metric analysis check analyzes metric data which may or may not have been collected by a [metrics collection check](#metric-collection-checks). By querying external metric stores (e.g. Graphite) to perform data evaluations, metric analysis checks allow you to perform powerful analytics based on trends in metric data rather than a single data point. For example, where monitoring and alerting on on a single CPU utilization data point can result in false positive events based on momentary spikes, monitoring and alerting on CPU utilization data over a specified period of time will improve alerting accuracy.
 

@@ -1,13 +1,13 @@
 ---
 version: 0.21
 category: "Enterprise Dashboard Docs"
-title: "Enterprise Dashboard Reference Documentation"
+title: "Enterprise Dashboard Configuration"
 next:
   url: "enterprise-dashboard-audit-logging"
   text: "Enterprise Dashboard Audit Logging"
 ---
 
-# Overview
+# Sensu Enterprise Dashboard Configuration
 
 This reference document provides information to help you:
 
@@ -41,7 +41,7 @@ Enterprise Dashboard configuration.
 }
 ~~~
 
-# Configuration attributes
+## Configuration attributes
 
 sensu
 : description
@@ -77,7 +77,7 @@ dashboard
     }
     ~~~
 
-## Sensu API endpoint attributes
+### Sensu API endpoint attributes
 
 name
 : description
