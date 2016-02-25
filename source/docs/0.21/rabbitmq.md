@@ -245,6 +245,9 @@ RabbitMQ uses policies to determine which queues are mirrored. The following wil
 sudo rabbitmqctl set_policy ha-sensu "^(results$|keepalives$)" '{"ha-mode":"all", "ha-sync-mode":"automatic"}' -p /sensu
 ~~~
 
+_NOTE: RabbitMQ cluster configuration will remove existing vhost and user configuration, these will need to be reconfigured following the initial [RabbitMQ installation guide](install-rabbitmq#configure-rabbitmq)._
+
+
 ### Configuring Sensu for a RabbitMQ cluster
 
 Sensu services (e.g. `sensu-client`) can be configured with the connection information for each RabbitMQ node in a RabbitMQ cluster. Sensu will randomly sort the configured RabbitMQ connections and attempt to connect to one of them. If Sensu is unable to connect to a RabbitMQ node in a cluster, or looses connectivity (reconnect), it will attempt to connect to the next RabbitMQ node in the cluster. Having Sensu be aware of all RabbitMQ nodes in a cluster is essential and removes any need for a load balancer etc.
