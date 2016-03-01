@@ -399,6 +399,7 @@ The [Sensu plugin project](https://github.com/sensu-plugins) provides a Ruby lib
 occurrences
 : description
   : The number of event occurrences that must occur before an event is handled for the check.
+  _NOTE: Sensu Enterprise users will need to define `occurrences` as part of `handle_when` configuration, see  [Built in Filters](enterprise-built-in-filters#the-handlewhen-filter) for more information._
 : required
   : false
 : type
@@ -413,6 +414,7 @@ occurrences
 refresh
 : description
   : Time in seconds until the event occurrence count is considered reset for the purpose of counting `occurrences`, to allow an event for the check to be handled again. For example, a check with a refresh of `1800` will have its events (recurrences) handled every 30 minutes, to remind users of the issue.
+  _NOTE: Sensu Enterprise users will need to define `refresh` as part of `handle_when` configuration, see  [Built in Filters](enterprise-built-in-filters#the-handlewhen-filter) for more information._
 : required
   : false
 : type
