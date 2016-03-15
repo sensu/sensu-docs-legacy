@@ -1,5 +1,5 @@
 ---
-version: 0.21
+version: 0.22
 category: "Enterprise Dashboard Docs"
 title: "Enterprise Dashboard Audit Logging"
 next:

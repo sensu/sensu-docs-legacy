@@ -1,5 +1,5 @@
 ---
-version: "0.21"
+version: "0.22"
 category: "Enterprise"
 title: "Enterprise contact routing (deprecated)"
 info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a

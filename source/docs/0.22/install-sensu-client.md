@@ -1,5 +1,5 @@
 ---
-version: 0.21
+version: 0.22
 category: "Installation Guide"
 title: "Install Sensu Client"
 next:
@@ -33,7 +33,7 @@ However, if you are a Sensu Enterprise user and skipped installation of Sensu Co
 Each Sensu client requires its own client definition, containing a set of required attributes (name, address, subscriptions). To configure the Sensu client, copy the following example configuration to `/etc/sensu/conf.d/client.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/client.json http://sensuapp.org/docs/0.21/files/client.json
+sudo wget -O /etc/sensu/conf.d/client.json http://sensuapp.org/docs/0.22/files/client.json
 ~~~
 
 _NOTE: this example file configures the Sensu client with client metadata, including a unique name, an address (any string), and its [Sensu Subscriptions](clients#what-are-sensu-clients)._

@@ -1,5 +1,5 @@
 ---
-version: 0.21
+version: 0.22
 category: "Installation Guide"
 title: "Install Sensu"
 next:
@@ -67,7 +67,7 @@ sudo yum install sensu-enterprise
 The primary configuration for Sensu is stored in JSON format at `/etc/sensu/config.json`. To configure the Sensu services, copy the following example configuration to `/etc/sensu/config.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.21/files/config.json
+sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.22/files/config.json
 ~~~
 
 _NOTE: this example file configures the RabbitMQ and Redis connection options and the Sensu API._
@@ -97,7 +97,7 @@ Sensu Checks & Event Handlers will be covered in detail later in this guide, how
 Create a check definition by copying the following example configuration to `/etc/sensu/conf.d/check_disk.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/check_disk.json http://sensuapp.org/docs/0.21/files/check_disk.json
+sudo wget -O /etc/sensu/conf.d/check_disk.json http://sensuapp.org/docs/0.22/files/check_disk.json
 ~~~
 
 _NOTE: this example config creates a [Sensu Check](checks) that will alert based on disk usage thresholds (it will raise a critical alert if 95% or more disk space has been used, or raise a warning alert if 85% or more has been used). The check script itself (the plugin) will be installed later in this guide._
@@ -119,7 +119,7 @@ _NOTE: this example config creates a [Sensu Check](checks) that will alert based
 Create a default handler definition by copying the following example configuration to `/etc/sensu/conf.d/default_handler.json` manually, or via:
 
 ~~~ shell
-sudo wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.21/files/default_handler.json
+sudo wget -O /etc/sensu/conf.d/default_handler.json http://sensuapp.org/docs/0.22/files/default_handler.json
 ~~~
 
 _NOTE: this example config creates a [Sensu Event Handler](handlers) that will be used by default for Sensu events that do not specify a handler._

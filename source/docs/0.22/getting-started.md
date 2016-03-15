@@ -1,5 +1,5 @@
 ---
-version: 0.21
+version: 0.22
 category: "Getting Started Guide"
 title: "Getting Started with Sensu"
 next:

@@ -1,5 +1,5 @@
 ---
-version: 0.21
+version: 0.22
 category: "Installation Guide"
 title: "Install Redis"
 next:
