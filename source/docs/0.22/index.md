@@ -11,22 +11,23 @@ hide_toc: true
   * [Release Notes](changelog)
 
 * **Installation Guide**
-  * [Overview](installation-overview)
-  * [Install RabbitMQ](install-rabbitmq)
-  * [Install Redis](install-redis)
-  * [Install Repositories](install-repositories)
-  * [Install Sensu](install-sensu)
+  * [Installation Overview](installation-guide)
+  * [Installation Strategies](installation-strategies)
+  * [Installation Prerequisites](installation-prerequisites)
+  * [Install Sensu Server & API](install-sensu-server-api)
   * [Install Sensu Client](install-sensu-client)
-  * [Install a Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
-
-* **Windows Guide**
-  * [Overview](windows-overview)
-  * [Install Sensu MSI](windows-msi-install)
-  * [Configure Sensu on Windows](windows-service-configuration)
-
-* **Upgrading Guide**
   * [Upgrading Sensu](upgrading)
+
+* **OS Guides**
+  * [Ubuntu/Debian](sensu-on-ubuntu-debian)
+  * [RedHat/CentOS](sensu-on-rhel-centos)
+  * [Microsoft Windows](sensu-on-windows)
+  * [Mac OS X](sensu-on-mac-os-x)
+  * [FreeBSD](sensu-on-freebsd)
+  * [IBM AIX](sensu-on-ibm-aix)
+  * [Oracle Solaris](sensu-on-oracle-solaris)
+  * [RaspberryPI](sensu-on-raspberry-pi)
 
 * **Getting Started Guide**
   * [Overview](getting-started)

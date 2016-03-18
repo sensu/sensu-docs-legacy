@@ -19,3 +19,12 @@ This guide will provide an introduction to the following primitives, and built-i
 - Handlers - for taking action on Sensu events, which are produced by checks
 - Filters - for filtering (removing) events destined for one or more event handlers
 - Mutators - transform event data for handlers
+
+
+## WIP:
+
+- Familiarity with [standard streams][wiki-streams] (i.e. `stdin`, `stdout`,
+  and `stderr`)
+
+[wiki-cli]:       https://en.wikipedia.org/wiki/Command-line_interface
+[wiki-streams]:   https://en.wikipedia.org/wiki/Standard_streams

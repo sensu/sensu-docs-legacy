@@ -1,7 +1,7 @@
 ---
 version: 0.22
 category: "Overview"
-title: "Sensu Core version 0.22.x changelog"
+title: "Sensu 0.22.x changelog"
 next:
   url: "architecture"
   text: "Technical Overview"
@@ -11,6 +11,36 @@ danger:
 ---
 
 # Sensu Core version 0.22.x changelog
+
+## 0.22.2 Release Notes
+
+Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0222---2016-03-16)
+
+**March 16, 2016** &mdash; Sensu Core version 0.22.2 has been released and is
+available for immediate download. Please note the following improvements:
+
+- **BUGFIX:** FFI library loading no longer causes a load error on AIX &
+  Solaris.
+
+- Removed unused cruft from extension API `run()` and `safe_run()`. Optional
+  `options={}` was never implemented in Sensu Core and event data `dup()` never
+  provided the necessary protection that it claimed (only top level hash
+  object).
+
+## 0.22.1 Release Notes
+
+Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0221---2016-03-01)
+
+**March 01, 2016** &mdash; Sensu Core version 0.22.1 has been released and is
+available for immediate download. Please note the following improvements:
+
+- Performance improvements. Using frozen constants for common values and
+  comparisons. Reduced the use of block arguments for callbacks.
+
+- Improved RabbitMQ transport channel error handling.
+
+- Fixed client signatures inspection/comparison when upgrading from a previous
+  release.
 
 ## 0.22.0 Release Notes
 
@@ -45,33 +75,3 @@ available for immediate download. Please note the following improvements:
   install a plugin if a or specified version has already been installed.
 
 - **NEW:** The Sensu client socket now supports UTF-8 encoding.
-
-## 0.22.1 Release Notes
-
-Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0221---2016-03-01)
-
-**March 01, 2016** &mdash; Sensu Core version 0.22.1 has been released and is
-available for immediate download. Please note the following improvements:
-
-- Performance improvements. Using frozen constants for common values and
-  comparisons. Reduced the use of block arguments for callbacks.
-
-- Improved RabbitMQ transport channel error handling.
-
-- Fixed client signatures inspection/comparison when upgrading from a previous
-  release.
-
-## 0.22.2 Release Notes
-
-Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0222---2016-03-16)
-
-**March 16, 2016** &mdash; Sensu Core version 0.22.2 has been released and is
-available for immediate download. Please note the following improvements:
-
-- **BUGFIX:** FFI library loading no longer causes a load error on AIX &
-  Solaris.
-
-- Removed unused cruft from extension API `run()` and `safe_run()`. Optional
-  `options={}` was never implemented in Sensu Core and event data `dup()` never
-  provided the necessary protection that it claimed (only top level hash
-  object).
