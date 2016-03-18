@@ -20,7 +20,7 @@ This reference document provides information to help you:
 
 ## What are Sensu mutators? {#what-are-sensu-mutators}
 
-Sensu mutators mutate (transform) event data for a Sensu event handler. Sensu event handlers can expect event data be in a different format and/or manipulated. Mutators allow one or more handlers to share logic, reducing code duplication, and simplifying the event handlers. Sensu Mutators are executed on machines running the Sensu server or Sensu Enterprise.
+Sensu mutators mutate (transform) event data for a Sensu event handler. Mutators allow one or more handlers to share logic, reducing code duplication, and simplifying the event handlers. Sensu Mutators are executed on machines running the Sensu server or Sensu Enterprise. For example, a 'graphite' event handler that expects to recieve Graphite-formatted data on STDIN cannot directly accept the output of existing plugins which provide metrics in the statsd format. In this case, a 'graphite to statsd' script and mutator definition could be used to transform the format of the output from one format to the other.
 
 ## How do Mutators work? {#how-do-mutators-work}
 
