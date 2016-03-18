@@ -11,14 +11,26 @@ next:
 
 This reference document provides information to help you:
 
-- Understand what a Sensu mutator is
-- How a Sensu mutator works
-- Write a Sensu mutator definition
-- Use Sensu mutator definition attributes
+- [Understand what a Sensu mutator is](#what-are-sensu-mutators)
+- [Understand how a Sensu mutator works](#how-do-mutators-work)
+- [Understand when to use a Sensu mutator](#when-should-i-use-a-mutator)
+- [Write a Sensu mutator plugin](#example-mutator-plugin)
+- [Write a Sensu mutator definition](#example-mutator-definition)
+- [Understand Sensu mutator definitions](#mutator-definition)
 
 ## What are Sensu mutators? {#what-are-sensu-mutators}
 
-Sensu mutators mutate (transform) event data for a Sensu event handler. Sensu event handlers can expect event data be in a different format and/or manipulated. Mutators allow one or more handlers to share logic, reducing code duplication, and simplifying the event handlers. Sensu mutators are executed on machines running the Sensu server or Sensu Enterprise. Mutators are essentially commands (or scripts) that receive JSON formatted event data via `STDIN` and output the mutated event data to `STDOUT`. Mutators use an exit status code of `0` to indicate a success, anything else indicates a failure. If a mutator fails to execute (non-zero exit status code), the event will not be handled, and an error will be logged.
+Sensu mutators mutate (transform) event data for a Sensu event handler. Mutators allow one or more handlers to share logic, reducing code duplication, and simplifying the event handlers. Sensu Mutators are executed on machines running the Sensu server or Sensu Enterprise. For example, a 'graphite' event handler that expects to recieve Graphite-formatted data on STDIN cannot directly accept the output of existing plugins which provide metrics in the statsd format. In this case, a 'graphite to statsd' script and mutator definition could be used to transform the format of the output from one format to the other.
+
+## How do Mutators work? {#how-do-mutators-work}
+
+Sensu mutators are applied when Event [Handlers](handlers) are configured to use a Mutator. Prior to executing a Handler with a Mutator defined, the Sensu server will apply the configured Mutator to the Event Data. Mutators are plugins (e.g. commands or scripts) that receive JSON formatted event data via `STDIN` and output the mutated event data to `STDOUT`. Mutators use an exit status code of `0` to indicate a success, anything else indicates a failure. If a mutator fails to execute (non-zero exit status code), the event will not be handled, and an error will be logged.
+
+## When should I use a Mutator? {#when-should-i-use-a-mutator}
+
+Sensu mutators can be helpful if you need to:
+* Use tcp, udp or transport handlers to route data to services which expect data in a different format
+* Abstract common code for data processing out of check plugins, reducing code repetition between plugins
 
 ### Example mutator plugin {#example-mutator-plugin}
 
@@ -42,9 +54,7 @@ puts JSON.dump(event)
 
 ## Mutator definition
 
-A Sensu mutator definition is a JSON configuration file describing a Sensu mutator. A definition declares how a Sensu mutator is executed:
-
-- The command to run (e.g. script)
+A Sensu mutator definition is a JSON configuration file describing a Sensu mutator. A definition declares how a Sensu mutator is executed, i.e. the command or script to run.
 
 ### Example mutator definition {#example-mutator-definition}
 
@@ -62,7 +72,7 @@ The following is an example Sensu mutator definition, a JSON configuration file 
 
 ## Anatomy of a mutator definition
 
-### Name
+### Mutator naming
 
 Each mutator definition has a unique mutator name, used for the definition key. Every mutator definition is within the `"mutators": {}` definition scope.
 
