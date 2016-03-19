@@ -21,9 +21,8 @@ tools like [Chef](https://chef.io), [Puppet](https://puppetlabs.com), or
 [Ansible](https://www.ansible.com) to install and configure Sensu &ndash;
 running through a manual installation for the exercise alone is _strongly
 recommended_. Sensu's [architecture](/architecture) is one of its most
-compelling features, and learning how all of Sensu's moving parts work together
-will greatly improve your ability to leverage Sensu's architecture to your
-advantage.
+compelling features, and learning how Sensu's components work together will
+greatly improve your ability to leverage Sensu's architecture to your advantage.
 
 _**NOTE: manual installation is recommended for pre-production environments
 only.** Please note that this guide is not intended to provide instruction for
