@@ -56,9 +56,9 @@ What will be covered in this guide:
 
 Upon the completion of the first five (5) steps in this guide, you &ndash; the
 user &ndash; should have a fully functional Sensu installation, with one or more
-Sensu clients reporting [keepalives](clients) (Sensu's built-in "phone home", or
-"heartbeat" mechanism) back to the Sensu server, _and_ a web-based Sensu
-dashboard providing visibility into the health of your infrastructure.
+Sensu clients reporting [keepalives](clients) (Sensu's built-in "heartbeat"
+mechanism) back to the Sensu server, _and_ a web-based Sensu dashboard providing
+visibility into the health of your infrastructure.
 
 Once you have  a fully functional Sensu installation, you will be encouraged to
 move on to the  [Getting Started Guide](getting-started-guide), which will
