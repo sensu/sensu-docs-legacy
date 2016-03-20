@@ -113,57 +113,51 @@ sudo rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
 
 ## Configuring system limits on Linux
 
-Source: [rabbitmq.com][rabbitmq-install]
+By default, most Linux operating systems will limit the maximum number of file
+handles a single process is allowed to have open to `1024`. RabbitMQ recommends
+adjusting this number to `65536` for production systems, and at least `4096` for
+development environments.
 
-RabbitMQ installations running production workloads may need system limits and
-kernel parameters tuning in order to handle a decent number of concurrent
-connections and queues. The main setting that needs adjustment is the max number
-of open files, also known as `ulimit -n`. The default value on many operating
-systems is too low for a messaging broker (eg. 1024 on several Linux
-distributions). We recommend allowing for at least 65536 file descriptors for
-user `rabbitmq` in production environments. 4096 should be sufficient for most
-development workloads.
+> RabbitMQ installations running production workloads may need system limits and
+  kernel parameters tuning in order to handle a decent number of concurrent
+  connections and queues. The main setting that needs adjustment is the max
+  number of open files, also known as `ulimit -n`. The default value on many
+  operating systems is too low for a messaging broker (eg. 1024 on several Linux
+  distributions). We recommend allowing for at least 65536 file descriptors for
+  user `rabbitmq` in production environments. 4096 should be sufficient for most
+  development workloads.
+>
+> There are two limits in play: the maximum number of open files the OS kernel
+  allows (`fs.file-max`) and the per-user limit (`ulimit -n`). The former must be
+  higher than the latter.
 
-There are two limits in play: the maximum number of open files the OS kernel
-allows (`fs.file-max`) and the per-user limit (`ulimit -n`). The former must be
-higher than the latter.
+  _Source: [rabbitmq.com][rabbitmq-install]_
 
-The most straightforward way to adjust the per-user limit for RabbitMQ is to
-edit the [`rabbitmq-env.conf`][rabbitmq-config] to invoke `ulimit` before the
-service is started.
+To adjust this limit, please edit the configuration file found at
+`/etc/defaults/rabbitmq-server` by uncommenting the last line in the file, and
+adjusting the ulimit value to the recommendation corresponding to the
+environment where RabbitMQ is running.
 
 ~~~ shell
-ulimit -S -n 4096
+# This file is sourced by /etc/init.d/rabbitmq-server. Its primary
+# reason for existing is to allow adjustment of system limits for the
+# rabbitmq-server process.
+#
+# Maximum number of open file handles. This will need to be increased
+# to handle many simultaneous connections. Refer to the system
+# documentation for ulimit (in man bash) for more information.
+#
+ulimit -n 65536
 ~~~
-
-This soft limit cannot go higher than the hard limit (which defaults to 4096 in
-many distributions). [The hard limit can be increased][basho-ulimit] via
-`/etc/security/limits.conf`. This also requires enabling the
-[`pam_limits.so`][http://askubuntu.com/a/34559] module and re-login or reboot.
-
-Note that limits cannot be changed for running OS processes.
-
-For more information about controlling `fs.file-max` with sysctl, please refer
-to the [excellent Riak guide on open file limit tuning][basho-ulimit].
 
 ### Verifying the Limit
 
-RabbitMQ management UI displays the number of file descriptors available for it
-to use on the Overview tab.
+To verify that the RabbitMQ open file handle limit has been increase, please
+run:
 
 ~~~ shell
 rabbitmqctl status
 ~~~
-
-includes the same value. The following command:
-
-~~~ shell
-cat /proc/$RABBITMQ_BEAM_PROCESS_PID/limits
-~~~
-
-can be used to display effective limits of a running process.
-`$RABBITMQ_BEAM_PROCESS_PID` is the OS PID of the Erlang VM running RabbitMQ, as
-returned by <kbd>rabbitmqctl status</kbd>.
 
 
 [erlang]:             https://www.erlang.org/
@@ -173,4 +167,3 @@ returned by <kbd>rabbitmqctl status</kbd>.
 [rabbitmq-config]:    http://www.rabbitmq.com/configure.html
 [chkconfig]:          https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
 [support]:            https://sensuapp.org/support
-[basho-ulimit]:       http://docs.basho.com/riak/latest/ops/tuning/open-files-limit/#Linux
