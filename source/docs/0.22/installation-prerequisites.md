@@ -21,7 +21,7 @@ _NOTE: this guide will focus on installing Sensu's dependencies in a
 [standalone](installation-strategies#standalone) configuration. However, in a
 live/production environment, it is strongly recommended that &ndash; at minimum
 &ndash; the Sensu data store and transport run on a different system than the
-Sensu server and API (i.e. in a [distributed](installation-strategies#\
+Sensu server and API (i.e. in a [distributed](installation-strategies#
 distributed) or [high availability](installation-strategies#high-availability)
 configuration). Please review the Sensu [Installation Strategies](installation-\
 strategies) for more information._
