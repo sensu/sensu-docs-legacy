@@ -1,0 +1,184 @@
+---
+version: 0.22
+category: "Installation Guide"
+title: "Install RabbitMQ on Ubuntu/Debian"
+next:
+  url: "install-redis"
+  text: "Install Redis"
+---
+
+# Install RabbitMQ on Ubuntu/Debian
+
+- [Install Erlang (the RabbitMQ runtime)](#install-erlang)
+- [Install RabbitMQ](#install-rabbitmq)
+  - [Download and install RabbitMQ using `dpkg` (recommended)](#download-and-install-rabbitmq-using-dpkg)
+  - [Install RabbitMQ using APT](#install-rabbitmq-using-apt)
+- [Managing the RabbitMQ service/process](#managing-the-rabbitmq-serviceprocess)
+- [Configure RabbitMQ access controls](#configure-rabbitmq-access-controls)
+- [Configuring system limits on Linux](#configuring-system-limits-on-linux)
+
+## Install Erlang (the RabbitMQ runtime) {#install-erlang}
+
+RabbitMQ runs on the [Erlang runtime][erlang], so before you can install and run
+RabbitMQ, you'll need to install Erlang.
+
+1. Add the Erlang Solutions APT repository
+
+   ~~~ shell
+   sudo wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+   sudo dpkg -i erlang-solutions_1.0_all.deb
+   sudo apt-get update
+   ~~~
+
+2. Install Erlang
+
+   ~~~ shell
+   sudo apt-get -y install erlang-nox=1:18.2
+   ~~~
+
+## Install RabbitMQ
+
+According to the [official RabbitMQ installation guide][rabbitmq-install],
+although RabbitMQ packages are included in the Ubuntu and Debian distribution
+repositories, downloading and installing RabbitMQ from the RabbitMQ website is
+the recommended installation method.
+
+> `rabbitmq-server` is included in Debian since 6.0 (squeeze) and in Ubuntu
+  since 9.04. However, the versions included are often quite old. You will
+  _probably_ get better results installing the `.deb` from our website. Check
+  the Debian package and Ubuntu package details for which version of the server
+  is available for which versions of the distribution.
+
+[Sensu Support][support] is available for RabbitMQ versions 3.6.0 and newer ([on
+Erlang version R16B03 or newer][rabbitmq-erlang]).
+
+### Download and install RabbitMQ using `dpkg`
+
+1. Download the official RabbitMQ 3.6.0 .deb installer package, as suggested in
+   the [official RabbitMQ installation guide][rabbitmq-install]:
+
+   ~~~ shell
+   sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server_3.6.0-1_all.deb
+   ~~~
+
+2. Install the package using `dpkg`
+
+   ~~~ shell
+   sudo dpkg -i rabbitmq-server_3.6.0-1_all.deb
+   ~~~
+
+### Install RabbitMQ using APT
+
+The RabbitMQ website provides [instructions for installing from the official
+RabbitMQ APT repository][rabbitmq-install].
+
+_WARNING: this installation method is not recommended for Sensu Enterprise
+users, as the repository is labeled as a "testing" repo, because (according to
+the RabbitMQ website) "[they] release somewhat frequently", and there shouldn't
+be a reason to upgrade RabbitMQ versions frequently._
+
+## Managing the RabbitMQ service/process
+
+1. To enable the RabbitMQ service, you'll need to install its init scripts using
+   the `update-rc.d` utility:
+
+   ~~~ shell
+   sudo update-rc.d rabbitmq-server defaults
+   ~~~
+
+2. Start and stop the RabbitMQ service using the installed init scripts:
+
+   ~~~ shell
+   sudo /etc/init.d/rabbitmq-server start
+   sudo /etc/init.d/rabbitmq-server stop
+   ~~~
+
+   Alternatively, it is also possible to use the `service` command to start and
+   stop the RabbitMQ service:
+
+   ~~~ shell
+   sudo service rabbitmq-server start
+   sudo service rabbitmq-server stop
+   ~~~
+
+## Configure RabbitMQ access controls
+
+Access to RabbitMQ is restricted by [access controls](rabbitmq-acl) (e.g.
+username/password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual
+host (`vhost`) and user credentials will need to be created.
+
+### Create a dedicated RabbitMQ `vhost` for Sensu
+
+~~~ shell
+sudo rabbitmqctl add_vhost /sensu
+~~~
+
+### Create a RabbitMQ user for Sensu
+
+~~~ shell
+sudo rabbitmqctl add_user sensu secret
+sudo rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+~~~
+
+## Configuring system limits on Linux
+
+Source: [rabbitmq.com][rabbitmq-install]
+
+RabbitMQ installations running production workloads may need system limits and
+kernel parameters tuning in order to handle a decent number of concurrent
+connections and queues. The main setting that needs adjustment is the max number
+of open files, also known as `ulimit -n`. The default value on many operating
+systems is too low for a messaging broker (eg. 1024 on several Linux
+distributions). We recommend allowing for at least 65536 file descriptors for
+user `rabbitmq` in production environments. 4096 should be sufficient for most
+development workloads.
+
+There are two limits in play: the maximum number of open files the OS kernel
+allows (`fs.file-max`) and the per-user limit (`ulimit -n`). The former must be
+higher than the latter.
+
+The most straightforward way to adjust the per-user limit for RabbitMQ is to
+edit the [`rabbitmq-env.conf`][rabbitmq-config] to invoke `ulimit` before the
+service is started.
+
+~~~ shell
+ulimit -S -n 4096
+~~~
+
+This soft limit cannot go higher than the hard limit (which defaults to 4096 in
+many distributions). [The hard limit can be increased][basho-ulimit] via
+`/etc/security/limits.conf`. This also requires enabling the
+[`pam_limits.so`][http://askubuntu.com/a/34559] module and re-login or reboot.
+
+Note that limits cannot be changed for running OS processes.
+
+For more information about controlling `fs.file-max` with sysctl, please refer
+to the [excellent Riak guide on open file limit tuning][basho-ulimit].
+
+### Verifying the Limit
+
+RabbitMQ management UI displays the number of file descriptors available for it
+to use on the Overview tab.
+
+~~~ shell
+rabbitmqctl status
+~~~
+
+includes the same value. The following command:
+
+~~~ shell
+cat /proc/$RABBITMQ_BEAM_PROCESS_PID/limits
+~~~
+
+can be used to display effective limits of a running process.
+`$RABBITMQ_BEAM_PROCESS_PID` is the OS PID of the Erlang VM running RabbitMQ, as
+returned by <kbd>rabbitmqctl status</kbd>.
+
+
+[erlang]:             https://www.erlang.org/
+[rabbitmq-install]:   http://www.rabbitmq.com/install-debian.html
+[rabbitmq-acl]:       https://www.rabbitmq.com/access-control.html
+[rabbitmq-erlang]:    https://www.rabbitmq.com/which-erlang.html
+[rabbitmq-config]:    http://www.rabbitmq.com/configure.html
+[support]:            https://sensuapp.org/support
+[basho-ulimit]:       http://docs.basho.com/riak/latest/ops/tuning/open-files-limit/#Linux
