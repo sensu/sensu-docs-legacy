@@ -3,8 +3,8 @@ version: 0.22
 category: "Installation Guide"
 title: "Install RabbitMQ on Ubuntu/Debian"
 next:
-  url: "install-redis"
-  text: "Install Redis"
+  url: "install-sensu-server-api"
+  text: "Install the Sensu Server & API"
 ---
 
 # Install RabbitMQ on Ubuntu/Debian
