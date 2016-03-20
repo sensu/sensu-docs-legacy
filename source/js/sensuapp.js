@@ -12,10 +12,10 @@ $(document).ready(function() {
     };
     var alerts = $("em:contains(" + alertLabel.toUpperCase() + ")")
     $("em:contains(" + alertLabel.toUpperCase() + ") > a").addClass('alert-link')
-    $.each(alerts, function(index,alertHTML) {
-      var alertContent = alertHTML.innerHTML;
+    $.each(alerts, function(index,alertElement) {
+      var alertContent = alertElement.innerHTML;
       alertContent = alertContent.replace(alertLabel.toUpperCase(), "<strong>" + alertLabel.toUpperCase() + "</strong>");
-      alertHTML.innerHTML = "<div class='alert alert-" + alert + "'>" + alertContent + "</div>";
+      alertElement.innerHTML = "<div class='alert alert-" + alert + "'>" + alertContent + "</div>";
     });
   };
 
