@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+  // Wrap any <em> tags beginning with "NOTE:", "WARNING:", etc in the
+  // corresponding Bootstrap alert
   var alertStates = ["info", "success", "warning", "danger"];
   for (i = 0; i < alertStates.length; i++) {
     var alert = alertStates[i];
@@ -9,6 +11,7 @@ $(document).ready(function() {
       var alertLabel = alert;
     };
     var alerts = $("em:contains(" + alertLabel.toUpperCase() + ")")
+    $("em:contains(" + alertLabel.toUpperCase() + ") > a").addClass('alert-link')
     $.each(alerts, function(index,alertHTML) {
       var alertContent = alertHTML.innerHTML;
       alertContent = alertContent.replace(alertLabel.toUpperCase(), "<strong>" + alertLabel.toUpperCase() + "</strong>");
