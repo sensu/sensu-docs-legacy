@@ -1,12 +1,17 @@
 $(document).ready(function() {
 
-  var alertStates = ["note", "success", "warning", "danger"];
+  var alertStates = ["info", "success", "warning", "danger"];
   for (i = 0; i < alertStates.length; i++) {
     var alert = alertStates[i];
-    var alerts = $("em:contains(" + alert.toUpperCase() + ")")
+    if (alert == "info") {
+      var alertLabel = "note";
+    } else {
+      var alertLabel = alert;
+    };
+    var alerts = $("em:contains(" + alertLabel.toUpperCase() + ")")
     $.each(alerts, function(index,alertHTML) {
       var alertContent = alertHTML.innerHTML;
-      alertContent = alertContent.replace(alert.toUpperCase(), "<strong>" + alert.toUpperCase() + "</strong>");
+      alertContent = alertContent.replace(alertLabel.toUpperCase(), "<strong>" + alertLabel.toUpperCase() + "</strong>");
       alertHTML.innerHTML = "<div class='alert alert-" + alert + "'>" + alertContent + "</div>";
     });
   };
