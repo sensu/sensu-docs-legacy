@@ -1,22 +1,23 @@
 ---
 version: 0.22
 category: "Installation Guide"
-title: "The 5-minute install"
+title: "The five minute install"
 ---
 
-# The 5-minute Sensu Install
+# The five minute Sensu Install
+
+## Objective
 
 Although Sensu’s [architecture](architecture) is one of its most compelling
-features, and the [installation guide](installation-guide) can help you get
-Sensu installed in [a variety of configurations](installation-strategies) in any
-operating environment, you might not actually care about any of that until you
-can get Sensu up and running in a testing and/or development environment and try
-it out.
+features, and the [complete installation guide](installation-guide) can help you
+get Sensu installed and configured for [a variety of operating
+environments](installation-strategies), you might not actually care about any of
+that until you can get Sensu up and running in a development environment for
+testing purposes. This installation guide is intended to help you to **install
+Sensu in five minutes or less, or we'll give you your money back, guaranteed**.
 
-This installation guide is intended to help you to **install Sensu in 5 minutes
-or less, or we'll give you your money back, guaranteed**. After completing the
-steps in this guide, you will have a fully functional Sensu Core installation in
-a [standalone][standalone] configuration.
+After completing the steps in this guide, you will have a fully functional Sensu
+Core installation in a [standalone][standalone] configuration.
 
 ## Installation Requirements
 
@@ -25,7 +26,8 @@ What will you need to complete this guide?
 - A virtual machine, or physical computer running 64-bit
   [Ubuntu 14.04][ubuntu1404] with a minimum of 2GB of memory (4GB recommended)
 - Familiarity with a modern command-line interface
-- 300 seconds (the amount of time it should take to complete this installation guide)
+- 300 seconds (the amount of time it should take to complete this installation
+  guide)
 
 Ready? Let's get started!
 
@@ -136,14 +138,18 @@ configurations, please consult the [installation guide](installation-guide).
    If the Sensu API returns a JSON array of Sensu clients similar to this:
 
    ~~~ shell
-   curl http://localhost:4567/clients | jq .
+   $ curl http://localhost:4567/clients | jq .
      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                     Dload  Upload   Total   Spent    Left  Speed
-   100   133  100   133    0     0  19993      0 --:--:-- --:--:-- --:--:-- 22166
+   100   175  100   175    0     0  26014      0 --:--:-- --:--:-- --:--:-- 29166
    [
      {
-       "timestamp": 1458606481,
+       "timestamp": 1458625739,
        "version": "0.22.1",
+       "socket": {
+         "port": 3030,
+         "bind": "127.0.0.1"
+       },
        "subscriptions": [
          "dev"
        ],
