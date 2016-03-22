@@ -159,12 +159,12 @@ information on how Sensu is configured.
    ~~~ json
    {
      "client": {
-       "name": "ubuntu",
+       "name": "rhel",
        "address": "localhost",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "ubuntu"
+         "rhel"
        ],
        "socket": {
          "bind": "127.0.0.1",
