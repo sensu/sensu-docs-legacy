@@ -44,7 +44,7 @@ platform(s) where you will run your Sensu client(s).
 - [FreeBSD](sensu-on-freebsd#install-sensu-core) (beta)
 - [IBM AIX](sensu-on-ibm-aix#install-sensu-core) (coming soon)
 - [Oracle Solaris](sensu-on-oracle-solaris#install-sensu-core) (coming soon)
-- [Raspberry Pi](sensu-on-raspberry-pi#install-sensu-core) (beta)
+- [Raspberry Pi](sensu-on-raspberry-pi#install-sensu-core) (coming soon)
 
 
 [standalone]:       installation-strategies#standalone
