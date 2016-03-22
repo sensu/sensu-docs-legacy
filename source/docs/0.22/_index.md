@@ -22,7 +22,7 @@ hide_toc: true
 * **OS Guides**
   * [Ubuntu/Debian](sensu-on-ubuntu-debian)
   * [RedHat/CentOS](sensu-on-rhel-centos)
-  * [Microsoft Windows](sensu-on-windows)
+  * [Microsoft Windows](sensu-on-microsoft-windows)
   * [Mac OS X](sensu-on-mac-os-x)
   * [FreeBSD](sensu-on-freebsd)
   * [IBM AIX](sensu-on-ibm-aix)

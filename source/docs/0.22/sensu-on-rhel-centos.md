@@ -13,8 +13,11 @@ title: "Install Sensu on RHEL/CentOS"
   - [Install the Sensu Enterprise repository](#install-sensu-enterprise-repository)
   - [Install Sensu Enterprise (server & API)](#install-sensu-enterprise)
 - [Configure Sensu](#configure-sensu)
-  - [Example standalone configuration](#example-standalone-configuration)
-  - [Example distributed configuration](#example-distributed-configuration)
+  - [Example client configuration](#example-client-configuration)
+  - [Example transport configuration](#example-transport-configuration)
+  - [Example data store configuration](#example-data-store-configuration)
+  - [Example standalone API configuration](#example-standalone-configuration)
+  - [Example distributed API configuration](#example-distributed-configuration)
   - [Enable the Sensu services to start on boot](#enable-the-sensu-services-to-start-on-boot)
   - [Disable the Sensu services on boot](#disable-the-sensu-services-on-boot)
 - [Operating Sensu](#operating-sensu)
@@ -148,7 +151,45 @@ The following Sensu configuration files are provided as examples. Please review
 the [Sensu configuration reference documentation](configuration) for additional
 information on how Sensu is configured.
 
-### Example Standalone Configuration
+### Example client configuration
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/client.json`:
+
+   ~~~ json
+   {
+     "client": {
+       "name": "ubuntu",
+       "address": "localhost",
+       "environment": "development",
+       "subscriptions": [
+         "dev",
+         "ubuntu"
+       ],
+       "socket": {
+         "bind": "127.0.0.1",
+         "port": 3030
+       }
+     }
+   }
+   ~~~
+
+### Example transport configuration
+
+At minimum, all of the Sensu processes require configuration to tell them how to
+connect to the configured [Sensu Transport](transport). Please refer to the
+configuration instructions for the corresponding transport for configuration
+file examples (see [Install Redis](install-redis), or [Install
+RabbitMQ](install-rabbitmq)).
+
+### Example data store configuration
+
+The Sensu Core server and API processes, and the Sensu Enterprise process all
+require configuration to tell them how to connect to Redis (the Sensu data
+store). Please refer to the [Redis installation instructions](install-redis) for
+configuration file examples.
+
+### Example Standalone API Configuration
 
 1. Copy the following contents to a configuration file located at
    `/etc/sensu/conf.d/api.json`:
@@ -163,7 +204,7 @@ information on how Sensu is configured.
    }
    ~~~
 
-### Example Distributed Configuration
+### Example Distributed API Configuration
 
 1. Obtain the IP address of the system where the Sensu API is installed. For the
    purpose of this guide, we will use `10.0.1.7` as our example IP address.
@@ -180,7 +221,6 @@ information on how Sensu is configured.
      }
    }
    ~~~
-
 
 ### Enable the Sensu services to start on boot
 
