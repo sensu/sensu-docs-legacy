@@ -1,7 +1,7 @@
 ---
 version: 0.22
 category: "Installation Guide"
-title: "Install Sensu on FreeBSD"
+title: "Sensu on FreeBSD"
 ---
 
 # Sensu on FreeBSD

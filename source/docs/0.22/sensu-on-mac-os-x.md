@@ -1,7 +1,7 @@
 ---
 version: 0.22
 category: "Installation Guide"
-title: "Install Sensu on Mac OS X"
+title: "Sensu on Mac OS X"
 ---
 
 # Sensu on Mac OS X
