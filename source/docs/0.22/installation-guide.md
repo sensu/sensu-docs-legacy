@@ -7,25 +7,33 @@ next:
   text: "Installation Strategies"
 ---
 
-# Installation Guide
+# Installation Guides
 
-## Objective
+## The five minute install
 
-The purpose of this guide is to help new Sensu users get up and running with a
-basic Sensu installation as quickly as possible. At the conclusion of this
-guide, you &ndash; the user &ndash; should have a single server running all of
-the Sensu services, their dependencies, and one or more Sensu clients.
+**TL;DR**: if you're not interest in learning about Sensu's architecture as part
+of the manual installation exercise, or if you just need a working Sensu
+installation for development purposes &mdash; you can skip the remainder of the
+instructions on this page (i.e. _"The complete installation guide"_) and skip to
+[**the five minute install**][five-minutes].
+
+## The complete installation guide
+
+The purpose of this guide is to help provide new and experienced Sensu users
+alike with a detailed guide for installing and configuring Sensu into a variety
+of operating environments. By default, this guide will direct you to install and
+configure Sensu Core or Sensu Enterprise in a standalone configuration.
 
 If you are a new Sensu user &ndash; or if you have only ever used automation
 tools like [Chef](https://chef.io), [Puppet](https://puppetlabs.com), or
 [Ansible](https://www.ansible.com) to install and configure Sensu &ndash;
-running through a manual installation for the exercise alone is _strongly
+working through this installation guide for the exercise alone is _strongly
 recommended_. Sensu's [architecture](/architecture) is one of its most
-compelling features, and learning how Sensu's components work together will
+compelling features, so learning how Sensu's components work together will
 greatly improve your ability to leverage Sensu's architecture to your advantage.
 
 _**NOTE: manual installation is recommended for pre-production environments
-only.** Please note that this guide is not intended to provide instruction for
+only.** Please note that this guide is not intended to provide instructions for
 deploying Sensu into "production" environments. Production deployment strategies
 &ndash; including using automation tools like Chef, Puppet, or Ansible to
 install and configure Sensu &ndash; will be discussed [at the conclusion of this
@@ -42,11 +50,13 @@ What will be covered in this guide:
 2. [How to install and configure Sensu's prerequisites](install-prerequisites)
   - [How to install and configure Redis](install-redis)
   - [How to install and configure RabbitMQ](install-rabbitmq)
-3. [How to install and configure the Sensu server and API](install-sensu-server-api) (Sensu Core or Sensu Enterprise)
+3. [How to install and configure the Sensu server and
+   API](install-sensu-server-api) (Sensu Core or Sensu Enterprise)
   - [OS-specific installation steps](install-sensu-server-api#platforms)
 4. [How to install and configure a Sensu Client](install-sensu-client)
   - [OS-specific installation steps](install-sensu-client#platforms)
-5. [How to install and configure a Sensu Dashboard](install-a-dashboard) (Uchiwa or Sensu Enterprise Dashboard)
+5. [How to install and configure a Sensu Dashboard](install-a-dashboard) (Uchiwa
+   or Sensu Enterprise Dashboard)
   - [OS-specific installation steps](install-a-dashboard#platforms)
 6. [Next steps](installation-summary)
   - [Monitoring infrastructure and applications with Sensu](installation-summary#instrumentation)
@@ -76,3 +86,5 @@ What will you need to install Sensu?
   installing Sensu Enterprise).
 
 Ready? Let's get started with selecting an installation strategy!
+
+[five-minutes]:     the-five-minute-install
