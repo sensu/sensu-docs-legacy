@@ -50,12 +50,9 @@ What will be covered in this guide:
   - [How to install and configure RabbitMQ](install-rabbitmq)
 3. [How to install and configure the Sensu server and
    API](install-sensu-server-api) (Sensu Core or Sensu Enterprise)
-  - [OS-specific installation steps](install-sensu-server-api#platforms)
 4. [How to install and configure a Sensu Client](install-sensu-client)
-  - [OS-specific installation steps](install-sensu-client#platforms)
 5. [How to install and configure a Sensu Dashboard](install-a-dashboard) (Uchiwa
    or Sensu Enterprise Dashboard)
-  - [OS-specific installation steps](install-a-dashboard#platforms)
 6. [Next steps](installation-summary)
   - [Monitoring infrastructure and applications with Sensu](installation-summary#instrumentation)
   - [Automating Sensu installation](installation-summary#automation)
