@@ -18,7 +18,6 @@ hide_toc: true
   * [Install Sensu Client](install-sensu-client)
   * [Install a Sensu Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
-  * [Upgrading Sensu](upgrading)
 
 * **OS Guides**
   * [Ubuntu/Debian](sensu-on-ubuntu-debian)
