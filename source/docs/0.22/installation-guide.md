@@ -11,11 +11,9 @@ next:
 
 ## The five minute install
 
-**TL;DR**: if you're not interest in learning about Sensu's architecture as part
-of the manual installation exercise, or if you just need a working Sensu
-installation for development purposes &mdash; you can skip the remainder of the
-instructions on this page (i.e. _"The complete installation guide"_) and skip to
-[**the five minute install**][five-minutes].
+**TL;DR**: if you just need a working Sensu installation for development or
+testing purposes &mdash; you can skip the remainder of the instructions on this
+page and skip to [**the five minute install**][five-minutes].
 
 ## The complete installation guide
 

@@ -14,7 +14,9 @@ get Sensu installed and configured for [a variety of operating
 environments](installation-strategies), you might not actually care about any of
 that until you can get Sensu up and running in a development environment for
 testing purposes. This installation guide is intended to help you to **install
-Sensu in five minutes or less, or we'll give you your money back, guaranteed**.
+Sensu Core in five minutes or less, <abbr title='all $0 of it you paid for that
+"free as in beer open source software :)"'>or we'll give you your money
+back</abbr>, guaranteed**.
 
 After completing the steps in this guide, you will have a fully functional Sensu
 Core installation in a [standalone][standalone] configuration.
@@ -84,7 +86,7 @@ configurations, please consult the [installation guide](installation-guide).
      "transport": {
        "name": "redis"
      },
-       "api": {
+     "api": {
        "host": "localhost",
        "port": 4567
      }
@@ -109,7 +111,11 @@ configurations, please consult the [installation guide](installation-guide).
        "environment": "development",
        "subscriptions": [
          "dev"
-       ]
+       ],
+       "socket": {
+         "bind": "127.0.0.1",
+         "port": 3030
+       }
      }
    }
    ~~~

@@ -15,7 +15,11 @@ next:
   - [Install RabbitMQ using YUM](#install-rabbitmq-using-yum)
 - [Managing the RabbitMQ service/process](#managing-the-rabbitmq-serviceprocess)
 - [Configure RabbitMQ access controls](#configure-rabbitmq-access-controls)
-- [Configuring system limits on Linux](#configuring-system-limits-on-linux)
+- [Configure system limits on Linux](#configure-system-limits-on-linux)
+- [Configure Sensu](#configure-sensu)
+  - [Example standalone configuration](#example-standalone-configuration)
+  - [Example distributed configuration](#example-distributed-configuration)
+
 
 _NOTE: this guide uses the official software repositories and packages for
 Erlang and RabbitMQ, as many Linux distributions provide outdated versions that
@@ -111,7 +115,7 @@ sudo rabbitmqctl add_user sensu secret
 sudo rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
 ~~~
 
-## Configuring system limits on Linux
+## Configure system limits on Linux
 
 By default, most Linux operating systems will limit the maximum number of file
 handles a single process is allowed to have open to `1024`. RabbitMQ recommends
@@ -158,6 +162,53 @@ run:
 ~~~ shell
 rabbitmqctl status
 ~~~
+
+## Configure Sensu
+
+The following Sensu configuration files are provided as examples. Please review
+the [RabbitMQ reference documentation](rabbitmq) for additional information on
+configuring Sensu to communicate with RabbitMQ, and the [reference documentation
+on Sensu configuration](configuration) for more information on how Sensu loads
+configuration.
+
+### Example Standalone Configuration
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/rabbitmq.json`:
+
+   ~~~ json
+   {
+     "rabbitmq": {
+       "host": "localhost",
+       "port": 5672,
+       "vhost": "/sensu",
+       "user": "sensu",
+       "password": "secret"
+     }
+   }
+   ~~~
+
+### Example Distributed Configuration
+
+1. Obtain the IP address of the system where RabbitMQ is installed. For the
+   purpose of this example, we will assume `10.0.1.6` is our IP address.
+
+2. Create a configuration file  with the following contents at
+   `/etc/sensu/conf.d/rabbitmq.json` on the Sensu server and API system(s), and
+   all systems running the Sensu client:
+
+   ~~~ json
+   {
+     "rabbitmq": {
+       "host": "10.0.1.6",
+       "port": 5672,
+       "vhost": "/sensu",
+       "user": "sensu",
+       "password": "secret"
+     }
+   }
+   ~~~
+
 
 
 [erlang]:             https://www.erlang.org/
