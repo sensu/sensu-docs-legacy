@@ -2,9 +2,6 @@
 version: 0.22
 category: "Installation Guide"
 title: "Install the Sensu Server and API"
-next:
-  url: "install-sensu-client"
-  text: "Install Sensu Client"
 ---
 
 # Install the Sensu Server and API
