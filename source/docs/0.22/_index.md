@@ -16,6 +16,7 @@ hide_toc: true
   * [Installation Prerequisites](installation-prerequisites)
   * [Install Sensu Server & API](install-sensu-server-api)
   * [Install Sensu Client](install-sensu-client)
+  * [Install a Sensu Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
   * [Upgrading Sensu](upgrading)
 

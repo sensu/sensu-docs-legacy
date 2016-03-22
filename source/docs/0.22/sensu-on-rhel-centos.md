@@ -16,8 +16,12 @@ title: "Install Sensu on RHEL/CentOS"
   - [Example client configuration](#example-client-configuration)
   - [Example transport configuration](#example-transport-configuration)
   - [Example data store configuration](#example-data-store-configuration)
-  - [Example standalone API configuration](#example-standalone-configuration)
-  - [Example distributed API configuration](#example-distributed-configuration)
+  - [Example API configurations](#example-api-configurations)
+    - [Standalone API](#standalone-api)
+    - [Distributed API](#distributed-api)
+  - [Example Sensu Enterprise Dashboard configurations](#example-sensu-enterprise-dashboard-configurations)
+    - [Standalone dashboard](#standalone-dashboard)
+    - [Distributed dashboard](#distributed-dashboard)
   - [Enable the Sensu services to start on boot](#enable-the-sensu-services-to-start-on-boot)
   - [Disable the Sensu services on boot](#disable-the-sensu-services-on-boot)
 - [Operating Sensu](#operating-sensu)
@@ -189,7 +193,9 @@ require configuration to tell them how to connect to Redis (the Sensu data
 store). Please refer to the [Redis installation instructions](install-redis) for
 configuration file examples.
 
-### Example Standalone API Configuration
+### Example API configurations
+
+#### Standalone API
 
 1. Copy the following contents to a configuration file located at
    `/etc/sensu/conf.d/api.json`:
@@ -204,7 +210,7 @@ configuration file examples.
    }
    ~~~
 
-### Example Distributed API Configuration
+#### Distributed API
 
 1. Obtain the IP address of the system where the Sensu API is installed. For the
    purpose of this guide, we will use `10.0.1.7` as our example IP address.
@@ -221,6 +227,61 @@ configuration file examples.
      }
    }
    ~~~
+
+### Example Sensu Enterprise Dashboard configurations
+
+#### Standalone dashboard
+
+1. Copy the following contents to a configuration file located at
+  `/etc/sensu/dashboard.json`:
+
+  ~~~ json
+  {
+    "sensu": [
+      {
+        "name": "Datacenter 1",
+        "host": "localhost",
+        "port": 4567
+      }
+    ],
+    "dashboard": {
+      "host": "0.0.0.0",
+      "port": 3000
+    }
+  }
+  ~~~
+
+#### Distributed dashboard
+
+1. Obtain the IP address of the system where Sensu Enterprise is installed. For
+   the purpose of this guide, we will use `10.0.1.7` as our example IP address.
+
+2. Copy the following contents to a configuration file located at
+   `/etc/sensu/dashboard.json`:
+
+   ~~~ json
+   {
+     "sensu": [
+       {
+         "name": "Datacenter 1",
+         "host": "10.0.1.7",
+         "port": 4567
+       }
+     ],
+     "dashboard": {
+       "host": "0.0.0.0",
+       "port": 3000
+     }
+   }
+   ~~~
+
+   _NOTE: Multiple Sensu Enterprise Dashboard instances can be installed. When
+   load balancing across multiple Dashboard instances, your load balancer should
+   support "sticky sessions"._
+
+3. The Sensu Enterprise Dashboard process requires configuration to tell it how
+   to connect to Redis (the Sensu data store). Please refer to the [Redis
+   installation instructions](install-redis) for configuration file examples.
 
 ### Enable the Sensu services to start on boot
 
@@ -259,6 +320,18 @@ boot, use the [`chkconfig` utility][chkconfig].
   system](#disable-the-sensu-services-on-boot) boot before enabling Sensu
   Enterprise to start on system boot._
 
+- Enable Sensu Enterprise Dashboard on system boot
+
+  ~~~ shell
+  sudo update-rc.d sensu-enterprise-dashboard defaults
+  ~~~
+
+  _WARNING: the `sensu-enterprise-dashboard` process is intended to be a drop-in
+  replacement for the Uchiwa dashboard. Please ensure that the Uchiwa processes
+  are not configured to start on system boot before enabling the Sensu
+  Enterprise Dashboard to start on system boot._
+
+
 ### Disable the Sensu services on boot
 
 If you have enabled Sensu services on boot and now need to disable them, this
@@ -286,6 +359,12 @@ can also be accomplished using the [`chkconfig` utility][chkconfig].
 
   ~~~ shell
   sudo chkconfig sensu-enterprise off
+  ~~~
+
+- Disable Sensu Enterprise Dashboard on system boot
+
+  ~~~ shell
+  sudo update-rc.d sensu-enterprise-dashboard remove
   ~~~
 
 ## Operating Sensu {#operating-sensu}
@@ -322,6 +401,16 @@ To manually start and stop the Sensu services, use the provided init scripts:
   sudo /etc/init.d/sensu-enterprise stop
   ~~~
 
+- Start or stop the Sensu Enterprise Dashboard
+
+  ~~~ shell
+  sudo /etc/init.d/sensu-enterprise-dashboard start
+  sudo /etc/init.d/sensu-enterprise-dashboard stop
+  ~~~
+
+  Verify the Sensu Enterprise Dashboard is running by visiting view the
+  dashboard at http://localhost:3000 (replace `localhost` with the hostname or
+  IP address where the Sensu Enterprise Dashboard is running).
 
 
 [download]:             https://sensuapp.org/download
