@@ -9,7 +9,9 @@ next:
 
 # The Sensu Client
 
-- [What are Sensu clients?](#what-are-sensu-clients)
+## Reference Documentation
+
+- [What is a Sensu client?](#what-is-a-sensu-client)
 - [Client keepalives](#client-keepalives)
   - [What is a client keepalive?](#what-is-a-client-keepalive)
   - [Client registration & the client registry](#registration-and-registry)
@@ -31,9 +33,9 @@ next:
     - [`socket` attributes](#socket-attributes)
     - [`keepalive` attributes](#keepalive-attributes)
     - [`thresholds` attributes](#thresholds-attributes)
-  - [Custom client definition attributes](#custom-client-definition-attributes)
+    - [Custom attributes](#custom-attributes)
 
-## What are Sensu clients? {#what-are-sensu-clients}
+## What is a Sensu clients? {#what-is-a-sensu-client}
 
 Sensu clients are [monitoring agents](architecture#monitoring-agent), which are
 installed and run on every system (e.g. server, container, etc) that needs to
@@ -510,19 +512,22 @@ configuration attributes that are not part of the Sensu client specification.
 Custom client definition attributes may be defined to provide context about the
 Sensu client and the services that run on its system. Custom client attributes
 will be included in client [keepalives](#client-keepalives), and [event
-data](events) and can be access via [check command token
+data](events) and can be used by Sensu [filters](filters) (e.g. only alert on
+events in the "production" environment), and accessed via [check command token
 substitution][token-substitution].
 
-#### EXAMPLE
+##### EXAMPLE
 
 The following is an example Sensu client definition that has custom attributes
-for MySQL, and a link to an operational playbook/wiki.
+for the `environment` it is running in, a `mysql` attribute containing
+information about a local database, and a link to an operational `playbook`.
 
 ~~~ json
 {
   "client": {
     "name": "i-424242",
     "address": "10.0.2.101",
+    "environment": "production",
     "subscriptions": [
       "production",
       "webserver",
