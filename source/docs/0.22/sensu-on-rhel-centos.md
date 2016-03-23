@@ -8,7 +8,6 @@ title: "Install Sensu on RHEL/CentOS"
 
 - [Installing Sensu Core](#sensu-core)
   - [Install Sensu using YUM](#install-sensu-core-repository)
-  - [Download and install Sensu using `rpm`](#download-and-install-sensu-core)
 - [Installing Sensu Enterprise](#sensu-enterprise)
   - [Install the Sensu Enterprise repository](#install-sensu-enterprise-repository)
   - [Install Sensu Enterprise (server & API)](#install-sensu-enterprise)
@@ -17,11 +16,11 @@ title: "Install Sensu on RHEL/CentOS"
   - [Example transport configuration](#example-transport-configuration)
   - [Example data store configuration](#example-data-store-configuration)
   - [Example API configurations](#example-api-configurations)
-    - [Standalone API](#standalone-api)
-    - [Distributed API](#distributed-api)
+    - [Standalone configuration](#api-standalone-configuration)
+    - [Distributed configuration](#api-distributed-configuration)
   - [Example Sensu Enterprise Dashboard configurations](#example-sensu-enterprise-dashboard-configurations)
-    - [Standalone dashboard](#standalone-dashboard)
-    - [Distributed dashboard](#distributed-dashboard)
+    - [Standalone configuration](#dashboard-standalone-configuration)
+    - [Distributed configuration](#dashboard-distributed-configuration)
   - [Enable the Sensu services to start on boot](#enable-the-sensu-services-to-start-on-boot)
   - [Disable the Sensu services on boot](#disable-the-sensu-services-on-boot)
 - [Operating Sensu](#operating-sensu)
@@ -56,23 +55,6 @@ The Sensu Core package installs several processes including `sensu-server`,
 
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
-
-### Download and install Sensu using `dpkg` {#download-and-install-sensu-core}
-
-1. Download and install Sensu using `rpm` (or visit the Sensu website and
-   download Sensu from the [Sensu Downloads][download] page)
-
-   For `x86_64` architectures:
-
-   ~~~ shell
-   rpm -Uvh https://core.sensuapp.com/yum/x86_64/sensu-0.22.1-1.x86_64.rpm
-   ~~~
-
-   For `i386` architectures:
-
-   ~~~ shell
-   rpm -Uvh https://core.sensuapp.com/yum/i386/sensu-0.22.1-1.i386.rpm
-   ~~~
 
 ## Install Sensu Enterprise {#sensu-enterprise}
 
@@ -195,7 +177,7 @@ configuration file examples.
 
 ### Example API configurations
 
-#### Standalone API
+#### Standalone configuration {#api-standalone-configuration}
 
 1. Copy the following contents to a configuration file located at
    `/etc/sensu/conf.d/api.json`:
@@ -210,7 +192,7 @@ configuration file examples.
    }
    ~~~
 
-#### Distributed API
+#### Distributed configuration {#api-distributed-configuration}
 
 1. Obtain the IP address of the system where the Sensu API is installed. For the
    purpose of this guide, we will use `10.0.1.7` as our example IP address.
@@ -230,28 +212,28 @@ configuration file examples.
 
 ### Example Sensu Enterprise Dashboard configurations
 
-#### Standalone dashboard
+#### Standalone configuration {#dashboard-standalone-configuration}
 
 1. Copy the following contents to a configuration file located at
-  `/etc/sensu/dashboard.json`:
+   `/etc/sensu/dashboard.json`:
 
-  ~~~ json
-  {
-    "sensu": [
-      {
-        "name": "Datacenter 1",
-        "host": "localhost",
-        "port": 4567
-      }
-    ],
-    "dashboard": {
-      "host": "0.0.0.0",
-      "port": 3000
-    }
-  }
-  ~~~
+   ~~~ json
+   {
+     "sensu": [
+       {
+         "name": "Datacenter 1",
+         "host": "localhost",
+         "port": 4567
+       }
+     ],
+     "dashboard": {
+       "host": "0.0.0.0",
+       "port": 3000
+     }
+   }
+   ~~~
 
-#### Distributed dashboard
+#### Distributed configuration {#dashboard-distributed-configuration}
 
 1. Obtain the IP address of the system where Sensu Enterprise is installed. For
    the purpose of this guide, we will use `10.0.1.7` as our example IP address.
@@ -296,34 +278,30 @@ boot, use the [`chkconfig` utility][chkconfig].
   sudo chkconfig sensu-client on
   ~~~
 
-- Enable the Sensu Core server on system boot
+- Enable the Sensu server and API to start on system boot
+  - For Sensu Core users (i.e. `sensu-server` and `sensu-api`)
 
-  ~~~ shell
-  sudo chkconfig sensu-server on
-  ~~~
+    ~~~ shell
+    sudo chkconfig sensu-server on
+    sudo chkconfig sensu-api on
+    ~~~
 
-- Enable the Sensu Core API on system boot
+  - For Sensu Enterprise users
 
-  ~~~ shell
-  sudo chkconfig sensu-api on
-  ~~~
+    ~~~ shell
+    sudo chkconfig sensu-enterprise on
+    ~~~
 
-- Enable Sensu Enterprise on system boot
-
-  ~~~ shell
-  sudo chkconfig sensu-enterprise on
-  ~~~
-
-  _WARNING: the `sensu-enterprise` process is intended to be a drop-in
-  replacement for the Sensu Core `sensu-server` and `sensu-api` processes.
-  Please [ensure that the Sensu Core processes are not configured to start on
-  system](#disable-the-sensu-services-on-boot) boot before enabling Sensu
-  Enterprise to start on system boot._
+    _WARNING: the `sensu-enterprise` process is intended to be a drop-in
+    replacement for the Sensu Core `sensu-server` and `sensu-api` processes.
+    Please [ensure that the Sensu Core processes are not configured to start on
+    system](#disable-the-sensu-services-on-boot) boot before enabling Sensu
+    Enterprise to start on system boot._
 
 - Enable Sensu Enterprise Dashboard on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-enterprise-dashboard defaults
+  sudo chkconfig sensu-enterprise-dashboard defaults
   ~~~
 
   _WARNING: the `sensu-enterprise-dashboard` process is intended to be a drop-in
@@ -364,7 +342,7 @@ can also be accomplished using the [`chkconfig` utility][chkconfig].
 - Disable Sensu Enterprise Dashboard on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-enterprise-dashboard remove
+  sudo chkconfig sensu-enterprise-dashboard remove
   ~~~
 
 ## Operating Sensu {#operating-sensu}

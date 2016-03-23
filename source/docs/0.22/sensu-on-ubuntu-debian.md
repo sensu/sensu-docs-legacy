@@ -8,7 +8,6 @@ title: "Install Sensu on Ubuntu/Debian"
 
 - [Installing Sensu Core](#sensu-core)
   - [Install Sensu using APT](#install-sensu-core-repository)
-  - [Download and install Sensu using `dpkg`](#download-and-install-sensu-core)
 - [Installing Sensu Enterprise](#sensu-enterprise)
   - [Install the Sensu Enterprise repository](#install-sensu-enterprise-repository)
   - [Install Sensu Enterprise (server & API)](#install-sensu-enterprise)
@@ -17,11 +16,11 @@ title: "Install Sensu on Ubuntu/Debian"
   - [Example transport configuration](#example-transport-configuration)
   - [Example data store configuration](#example-data-store-configuration)
   - [Example API configurations](#example-api-configurations)
-    - [Standalone API](#example-standalone-configuration)
-    - [Distributed API](#example-distributed-configuration)
+    - [Standalone configuration](#api-standalone-configuration)
+    - [Distributed configuration](#api-distributed-configuration)
   - [Example Sensu Enterprise Dashboard configurations](#example-sensu-enterprise-dashboard-configurations)
-    - [Standalone Dashboard](#standalone-dashboard)
-    - [Distributed Dashboard](#distributed-dashboard)  
+    - [Standalone configuration](#dashboard-standalone-configuration)
+    - [Distributed configuration](#dashboard-distributed-configuration)  
   - [Enable the Sensu services to start on boot](#enable-the-sensu-services-to-start-on-boot)
   - [Disable the Sensu services on boot](#disable-the-sensu-services-on-boot)
 - [Operating Sensu](#operating-sensu)
@@ -63,37 +62,6 @@ The Sensu Core package installs several processes including `sensu-server`,
 
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
-
-### Download and install Sensu using `dpkg` {#download-and-install-sensu-core}
-
-1. Download Sensu using `wget` (or visit the Sensu website and download Sensu
-   from the [Sensu Downloads][download] page)
-
-   For `amd64` architectures:
-
-   ~~~ shell
-   wget https://core.sensuapp.com/apt/pool/sensu/main/s/sensu/sensu_0.22.1-1_amd64.deb
-   ~~~
-
-   For `i386` architectures:
-
-   ~~~ shell
-   wget https://core.sensuapp.com/apt/pool/sensu/main/s/sensu/sensu_0.22.1-1_i386.deb
-   ~~~
-
-2. Install Sensu using the `dpkg` utility:
-
-   For `amd64` architectures:
-
-   ~~~ shell
-   sudo dpkg -i sensu_0.22.1-1_amd64.deb
-   ~~~
-
-   For `i386` architectures:
-
-   ~~~ shell
-   sudo dpkg -i sensu_0.22.1-1_i386.deb
-   ~~~
 
 ## Install Sensu Enterprise {#sensu-enterprise}
 
@@ -206,7 +174,7 @@ configuration file examples.
 
 ### Example API configurations
 
-#### Standalone API
+#### Standalone configuration {#api-standalone-configuration}
 
 1. Copy the following contents to a configuration file located at
    `/etc/sensu/conf.d/api.json`:
@@ -221,7 +189,7 @@ configuration file examples.
    }
    ~~~
 
-#### Distributed API
+#### Distributed configuration {#api-distributed-configuration}
 
 1. Obtain the IP address of the system where the Sensu API is installed. For the
    purpose of this guide, we will use `10.0.1.7` as our example IP address.
@@ -241,7 +209,7 @@ configuration file examples.
 
 ### Example Sensu Enterprise Dashboard configurations
 
-#### Standalone dashboard
+#### Standalone configuration {#dashboard-standalone-configuration}
 
 1. Copy the following contents to a configuration file located at
    `/etc/sensu/dashboard.json`:
@@ -262,7 +230,7 @@ configuration file examples.
    }
    ~~~
 
-#### Distributed dashboard
+#### Distributed configuration {#dashboard-distributed-configuration}
 
 1. Obtain the IP address of the system where Sensu Enterprise is installed. For
    the purpose of this guide, we will use `10.0.1.7` as our example IP address.
@@ -308,29 +276,26 @@ boot, use the `update-rc.d` utility.
   sudo update-rc.d sensu-client defaults
   ~~~
 
-- Enable the Sensu Core server on system boot
+- Enable the Sensu server and API to start on system boot
 
-  ~~~ shell
-  sudo update-rc.d sensu-server defaults
-  ~~~
+  - For Sensu Core users (i.e. `sensu-server` and `sensu-api`)
 
-- Enable the Sensu Core API on system boot
+    ~~~ shell
+    sudo update-rc.d sensu-server defaults
+    sudo update-rc.d sensu-api defaults
+    ~~~
 
-  ~~~ shell
-  sudo update-rc.d sensu-api defaults
-  ~~~
+  - For Sensu Enterprise users
 
-- Enable Sensu Enterprise on system boot
+    ~~~ shell
+    sudo update-rc.d sensu-enterprise defaults
+    ~~~
 
-  ~~~ shell
-  sudo update-rc.d sensu-enterprise defaults
-  ~~~
-
-  _WARNING: the `sensu-enterprise` process is intended to be a drop-in
-  replacement for the Sensu Core `sensu-server` and `sensu-api` processes.
-  Please [ensure that the Sensu Core processes are not configured to start on
-  system boot](#disable-the-sensu-services-on-boot) before enabling Sensu
-  Enterprise to start on system boot._
+    _WARNING: the `sensu-enterprise` process is intended to be a drop-in
+    replacement for the Sensu Core `sensu-server` and `sensu-api` processes.
+    Please [ensure that the Sensu Core processes are not configured to start on
+    system boot](#disable-the-sensu-services-on-boot) before enabling Sensu
+    Enterprise to start on system boot._
 
 - Enable Sensu Enterprise Dashboard on system boot
 
@@ -352,31 +317,31 @@ can also be accomplished using the [`update-rc.d` utility][update-rcd].
 - Disable the Sensu client on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-client remove
+  sudo update-rc.d sensu-client disable
   ~~~
 
 - Disable the Sensu Core server on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-server remove
+  sudo update-rc.d sensu-server disable
   ~~~
 
 - Disable the Sensu Core API on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-api remove
+  sudo update-rc.d sensu-api disable
   ~~~
 
 - Disable Sensu Enterprise on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-enterprise remove
+  sudo update-rc.d sensu-enterprise disable
   ~~~
 
 - Disable Sensu Enterprise Dashboard on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-enterprise-dashboard remove
+  sudo update-rc.d sensu-enterprise-dashboard disable
   ~~~
 
 ## Operating Sensu
