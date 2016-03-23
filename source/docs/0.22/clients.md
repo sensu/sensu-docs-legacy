@@ -21,9 +21,12 @@ next:
   - [Round-robin client subscriptions](#round-robin-client-subscriptions)
   - [Client subscription configuration](#client-subscription-configuration)
 - [Client socket input](#client-socket-input)
+  - [What is the Sensu client socket](#what-is-the-sensu-client-socket)
+  - [Example client socket usage](#example-client-socket-usage)
+  - [Client socket configuration](#client-socket-configuration)
 - [Client configuration](#client-configuration)
   - [Example client definition](#example-client-definition)
-  - [Client definition attributes](#anatomy-of-a-client-definition)
+  - [Client definition specification](#client-definition-specification)
     - [`client` attributes](#client-attributes)
     - [`socket` attributes](#socket-attributes)
     - [`keepalive` attributes](#keepalive-attributes)
@@ -55,7 +58,7 @@ containing client configuration data to the Sensu transport every 20 seconds (by
 default). If a Sensu client fails to send keepalive messages over a period of
 120 seconds (by default), the Sensu server (or Sensu Enterprise) will create a
 keepalive [event](events). Keepalives can be used to identify unhealthy
-machines and network partitions (among other things), and keepalive events can
+systems and network partitions (among other things), and keepalive events can
 trigger email notifications and other useful actions.
 
 ### Client registration & the client registry {#registration-and-registry}
@@ -140,11 +143,11 @@ registration & de-registration of ephemeral systems. At the core of this model
 are Sensu client `subscriptions`.
 
 Each Sensu client has a defined set of subscriptions, a list of roles and/or
-responsibilities assigned to the system (e.g. a webserver,  database, etc).
-These subscriptions determine which monitoring checks are  executed by the
-client. Client subscriptions allow Sensu to request check  executions on a group
-of machines at a time, instead of a traditional 1:1  mapping of configured hosts
-to monitoring checks. Sensu checks target Sensu client subscriptions, using the
+responsibilities assigned to the system (e.g. a webserver, database, etc). These
+subscriptions determine which monitoring checks are executed by the client.
+Client subscriptions allow Sensu to request check  executions on a group of
+systems at a time, instead of a traditional 1:1  mapping of configured hosts to
+monitoring checks. Sensu checks target Sensu client subscriptions, using the
 [check definition attribute `subscribers`](checks#definition-attributes).
 
 ### Round-robin client subscriptions
@@ -197,15 +200,82 @@ To configure Sensu client subscriptions for a client, please refer to [the
 client `subscriptions` attribute reference
 documentation](#definition-attributes).
 
+## Client socket input
+
+### What is the Sensu client socket?
+
+Every Sensu client has a TCP & UDP socket listening for external check result
+input. The Sensu client socket(s) listen on `localhost` port `3030` by default
+and expect JSON formatted check results, allowing external sources (e.g. your
+web application, backup scripts, etc.) to push check results without needing to
+know anything about Sensu's internal implementation. An excellent client socket
+use case example is a web application pushing check results to indicate database
+connectivity issues.
+
+To configure the Sensu client socket for a client, please refer to [the client
+socket attributes](#socket-attributes).
+
+### Example client socket usage
+
+The following is an example demonstrating external check result input via the
+Sensu client TCP socket. The example uses Bash's built-in `/dev/tcp` file to
+communicate with the Sensu client socket.
+
+~~~ shell
+echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' > /dev/tcp/localhost/3030
+~~~
+
+[Netcat][nc] can also be used, instead of the TCP file:
+
+~~~ shell
+echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
+~~~
+
+#### Creating a "dead man's switch"
+
+The Sensu client socket(s) in combination with check TTLs can be used to create
+what's commonly referred to as "dead man's switches". Outside of the software
+industry, a dead man's switch is a switch that is automatically triggered if a
+human operator becomes incapacitated (source:
+[Wikipedia](http://en.wikipedia.org/wiki/Dead_man%27s_switch)). Sensu is more
+interested in detecting silent failures than incapacited human operators. By
+using Check TTLs, Sensu is able to set an expectation that a Sensu client will
+continue to publish results for a check at a regular interval. If a Sensu client
+fails to publish a check result and the check TTL expires, Sensu will create an
+event to indicate the silent failure. For more information on check TTLs, please
+refer to [the check attributes reference
+documentation](checks#definition-attributes).
+
+A great use case for the Sensu client socket is to create a dead man's switch
+for backup scripts, to ensure they continue to run successfully at regular
+intervals. If an external source sends a Sensu check result with a check TTL to
+the Sensu client socket, Sensu will expect another check result from the same
+external source before the TTL expires.
+
+The following is an example of external check result input via the Sensu client
+TCP socket, using a check TTL to create a dead man's switch for MySQL backups.
+The example uses a check TTL of `25200` seconds (or 7 hours). A MySQL backup
+script using the following code would be expected to continue to send a check
+result at least once every 7 hours or Sensu will create an [event](events) to
+indicate the silent failure.
+
+~~~ shell
+echo '{"name": "backup_mysql", "ttl": 25200, "output": "backed up mysql successfully | size_mb=568", "status": 0}' | nc localhost 3030
+~~~
+
+~~~ shell
+echo '{"name": "backup_mysql", "ttl": 25200, "output": "failed to backup mysql", "status": 1}' | nc localhost 3030
+~~~
+
 ## Client configuration
+
+### Example client definition
 
 The following is an example Sensu client definition, a JSON configuration file
 located at `/etc/sensu/conf.d/client.json`. This client definition provides
-Sensu with information about the machine on which it resides. This is a
-production machine, running a web server and a MySQL database. The client 'name'
+Sensu with information about the system on which it resides. This is a
+production system, running a web server and a MySQL database. The client 'name'
 attribute is required in the definition, and must be unique.
-
-### Example client definition
 
 ~~~ json
 {
@@ -221,15 +291,16 @@ attribute is required in the definition, and must be unique.
 }
 ~~~
 
-### Anatomy of a client definition
+### Client definition specification
 
-The client definition uses the `"client": {}` definition scope.
+The client definition uses the `"client": {}` [definition scope][config-scopes].
 
 #### `client` attributes
 
 name
 : description
-  : A unique name for the client. The name cannot contain special characters or spaces.
+  : A unique name for the client. The name cannot contain special characters or
+    spaces.
 : required
   : true
 : type
@@ -255,7 +326,10 @@ address
 
 subscriptions
 : description
-  : An array of client subscriptions, a list of roles/responsibilities that the machine has (e.g. webserver). These subscriptions determine which monitoring checks are executed by the client, as check requests are sent to subscriptions. The `subscriptions` array items must be strings.
+  : An array of client subscriptions, a list of roles and/or responsibilities
+    assigned to the system (e.g. webserver). These subscriptions determine which
+    monitoring checks are executed by the client, as check requests are sent to
+    subscriptions. The `subscriptions` array items must be strings.
 : required
   : true
 : type
@@ -386,7 +460,8 @@ handlers
 
 thresholds
 : description
-  : A set of attributes that configure the client keepalive "staleness" thresholds, when a client is determined to be unhealthy.
+  : A set of attributes that configure the client keepalive "staleness"
+    thresholds, when a client is determined to be unhealthy.
 : required
   : false
 : type
@@ -400,7 +475,8 @@ thresholds
 
 warning
 : description
-  : The warning threshold (in seconds) where a Sensu client is determined to be unhealthy, not having sent a keepalive in so many seconds.
+  : The warning threshold (in seconds) where a Sensu client is determined to be
+    unhealthy, not having sent a keepalive in so many seconds.
 : required
   : false
 : type
@@ -414,7 +490,8 @@ warning
 
 critical
 : description
-  : The critical threshold (in seconds) where a Sensu client is determined to be unhealthy, not having sent a keepalive in so many seconds.
+  : The critical threshold (in seconds) where a Sensu client is determined to be
+    unhealthy, not having sent a keepalive in so many seconds.
 : required
   : false
 : type
@@ -426,122 +503,50 @@ critical
     "critical": 90
     ~~~
 
-#### Keepalive custom attributes
+#### Custom attributes
 
-Custom check definition attributes may also be included within the `keepalive`
-scope. The custom attributes will be included in the keepalive check results,
-which can be used by [event handlers](handlers), e.g. notification routing.
+Because Sensu configuration is just [JSON][json] data, it is possible to define
+configuration attributes that are not part of the Sensu client specification.
+Custom client definition attributes may be defined to provide context about the
+Sensu client and the services that run on its system. Custom client attributes
+will be included in client [keepalives](#client-keepalives), and [event
+data](events) and can be access via [check command token
+substitution][token-substitution].
 
-### Custom client definition attributes
+#### EXAMPLE
 
-Custom client definition attributes may be included to add additional
-information about the Sensu client and the services that run on its machine.
-Custom client attributes will be included in [event data](events) and can be
-used with check command token substitution.
-
-The following is an example Sensu client definition that has custom attributes for MySQL.
+The following is an example Sensu client definition that has custom attributes
+for MySQL, and a link to an operational playbook/wiki.
 
 ~~~ json
 {
   "client": {
     "name": "i-424242",
-    "address": "8.8.8.8",
+    "address": "10.0.2.101",
     "subscriptions": [
       "production",
       "webserver",
       "mysql"
     ],
     "mysql": {
-      "host": "127.0.0.1",
+      "host": "10.0.2.101",
       "port": 3306,
       "user": "app",
       "password": "secret"
-    }
+    },
+    "playbook": "https://wiki.example.com/ops/mysql-playbook"
   }
 }
 ~~~
 
-## Client socket input
-
-Every Sensu client has a TCP & UDP socket listening for external check result input. The Sensu client socket(s) listen on `localhost` port `3030` by default and expect JSON formatted check results, allowing external sources (e.g. your web application, backup scripts, etc.) to push check results without needing to know anything about Sensu's internal implementation. An excellent client socket use case example is a web application pushing check results to indicate database connectivity issues.
-
-To configure the Sensu client socket for a client, please refer to [the client socket attributes](#socket-attributes).
-
-### Example external check result input
-
-The following is an example demonstrating external check result input via the Sensu client TCP socket. The example uses Bash's built-in `/dev/tcp` file to communicate with the Sensu client socket.
-
-~~~ shell
-echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' > /dev/tcp/localhost/3030
-~~~
-
-Netcat can also be used, instead of the TCP file:
-
-~~~ shell
-echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
-~~~
-
-## Creating a "dead man's switch"
-
-The Sensu client socket(s) in combination with check TTLs can be used to create what's commonly referred to as "dead man's switches". Outside of the software industry, a dead man's switch is a switch that is automatically triggered if a human operator becomes incapacitated (source: [Wikipedia](http://en.wikipedia.org/wiki/Dead_man%27s_switch)). Sensu is more interested in detecting silent failures than incapacited human operators. By using Check TTLs, Sensu is able to set an expectation that a Sensu client will continue to publish results for a check at a regular interval. If a Sensu client fails to publish a check result and the check TTL expires, Sensu will create an event to indicate the silent failure. For more information on check TTLs, please refer to [the check attributes reference documentation](checks#definition-attributes).
-
-A great use case for the Sensu client socket is to create a dead man's switch for backup scripts, to ensure they continue to run successfully at regular intervals. If an external source sends a Sensu check result with a check TTL to the Sensu client socket, Sensu will expect another check result from the same external source before the TTL expires.
-
-The following is an example of external check result input via the Sensu client TCP socket, using a check TTL to create a dead man's switch for MySQL backups. The example uses a check TTL of `25200` seconds (or 7 hours). A MySQL backup script using the following code would be expected to continue to send a check result at least once every 7 hours or Sensu will create an [event](events) to indicate the silent failure.
-
-~~~ shell
-echo '{"name": "backup_mysql", "ttl": 25200, "output": "backed up mysql successfully | size_mb=568", "status": 0}' | nc localhost 3030
-~~~
-
-~~~ shell
-echo '{"name": "backup_mysql", "ttl": 25200, "output": "failed to backup mysql", "status": 1}' | nc localhost 3030
-~~~
-
-## Anatomy of a check result
-
-name
-: description
-  : The check name used to identify it (context).
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "name": "db_nightly_backup"
-    ~~~
-
-output
-: description
-  : The check result output.
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "output": "production db backup failed"
-    ~~~
-
-status
-: description
-  : The check result exit status to indicate severity.
-: required
-  : false
-: type
-  : Integer
-: default
-  : `0`
-: example
-  : ~~~ shell
-    "status": 1
-    ~~~
-
-Check results can include standard [check definition attributes](checks) (e.g.
-`handler`), as well as custom attributes to provide additional event context
-and/or assist in alert routing etc.
+_NOTE: Because client data is included in alerts created by Sensu, custom
+attributes that only exist for the purpose of providing troubleshooting
+information for operations teams can be extremely valuable._
 
 
-
-
-[requests]:       checks#check-requests
+[requests]:             checks#check-requests
+[event-data]:           events#event-data
+[nc]:                   http://nc110.sourceforge.net/
+[config-scopes]:        configuration#configuration-scopes
+[json]:                 http://www.json.org/
+[token-substitution]:   checks#token-substitution
