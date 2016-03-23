@@ -68,6 +68,9 @@ recommended solution for running Sensu in production environments.
 
 - Adds Erlang as a runtime dependency to the Sensu architecture
 
+  _NOTE: to be clear, Erlang only needs to be installed on the system(s) where
+  RabbitMQ is running. For more information, please see the [FAQ][faq]._
+
 #### The Redis Transport
 
 The Redis Transport was an obvious alternative to the original RabbitMQ
@@ -92,3 +95,4 @@ runtime).
 [sensu-transport]:  https://github.com/sensu/sensu-transport
 [redis]:            http://redis.io/
 [redis-about]:      http://redis.io/topics/introduction
+[faq]:              https://sensuapp.org/faq
