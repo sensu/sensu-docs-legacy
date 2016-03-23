@@ -16,8 +16,8 @@ hide_toc: true
   * [Installation Prerequisites](installation-prerequisites)
   * [Install Sensu Server & API](install-sensu-server-api)
   * [Install Sensu Client](install-sensu-client)
+  * [Install a Sensu Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
-  * [Upgrading Sensu](upgrading)
 
 * **OS Guides**
   * [Ubuntu/Debian](sensu-on-ubuntu-debian)
@@ -30,7 +30,7 @@ hide_toc: true
   * [RaspberryPI](sensu-on-raspberry-pi)
 
 * **Getting Started Guide**
-  * [Overview](getting-started)
+  * [Overview](getting-started-guide)
   * [Checks](getting-started-with-checks)
   * [Handlers](getting-started-with-handlers)
   * [Filters](getting-started-with-filters)

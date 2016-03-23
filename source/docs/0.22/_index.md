@@ -30,7 +30,7 @@ hide_toc: true
   * [RaspberryPI](sensu-on-raspberry-pi)
 
 * **Getting Started Guide**
-  * [Overview](getting-started)
+  * [Overview](getting-started-guide)
   * [Checks](getting-started-with-checks)
   * [Handlers](getting-started-with-handlers)
   * [Filters](getting-started-with-filters)
