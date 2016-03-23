@@ -30,21 +30,22 @@ strategies) for more information._
 
 [Redis][redis] is a key-value database, which [describes itself][redis-about] as
 _"an open source, BSD licensed, advanced key-value cache and store"_. Sensu uses
-Redis for storing persistent data such as the client registry and check results.
-Two Sensu services, the server and API, require access to the same instance of
-Redis to function (i.e. the Sensu client does not communicate with Redis).
+Redis as a [data-store](data-store) for storing persistent data such as the
+client registry and check results. Two Sensu Core services, the server and API
+require access to the same instance of Redis to function (i.e. the Sensu client
+does not communicate with Redis).
 
 ## Transport {#sensu-transport}
 
 Sensu services use a message bus (e.g. [RabbitMQ][rabbitmq]) for communication.
 This message bus communication is provided by the [Sensu
-Transport][sensu-transport], which is a library that makes it possible to
-leverage alternate transport solutions in  place of RabbitMQ (the default
-Transport). Sensu services requires access to the  same instance of the defined
-Sensu Transport (e.g. a RabbitMQ cluster) to  function. Sensu check requests and
-check results are published as "messages" to  the Sensu Transport, and the
-corresponding Sensu services receive these messages  by subscribing to the
-appropriate subscriptions.
+Transport](transport), which is a library that makes it possible to leverage
+alternate transport solutions in  place of RabbitMQ (the default transport).
+Sensu services requires access to the  same instance of the defined transport
+(e.g. a RabbitMQ cluster) to  function. Sensu check requests and check results
+are published as "messages" to  the Sensu Transport, and the corresponding Sensu
+services receive these messages  by subscribing to the appropriate
+subscriptions.
 
 ### Selecting a Transport
 
@@ -90,9 +91,7 @@ runtime).
 - No native support for SSL
 
 
-
-[rabbitmq]:         https://www.rabbitmq.com/
-[sensu-transport]:  https://github.com/sensu/sensu-transport
-[redis]:            http://redis.io/
+[rabbitmq]:         rabbitmq
+[redis]:            redis
 [redis-about]:      http://redis.io/topics/introduction
 [faq]:              https://sensuapp.org/faq

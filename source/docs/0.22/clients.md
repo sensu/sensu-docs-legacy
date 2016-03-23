@@ -68,8 +68,8 @@ trigger email notifications and other useful actions.
 In practice, client registrations happens when a Sensu server processes a client
 `keepalive` message for a client that is not already registered in the Sensu
 client registry (based on the configured client `name` or `source` attribute).
-This client registry is stored in Redis, and is accessible via the Sensu
-[Clients API](api-clients).
+This client registry is stored in the Sensu [data store](data-store), and is
+accessible via the Sensu [Clients API](api-clients).
 
 All Sensu client data provided in client keepalive messages gets stored in the
 client registry, which data is used to add context to Sensu [Events](events) and

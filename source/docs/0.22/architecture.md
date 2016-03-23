@@ -72,18 +72,18 @@ subscriptions.
 
 ### Data Store
 
-Sensu leverages a data store ([Redis][redis]) for data persistence. Only the
-Sensu server, API, and dashboard services require access to the data store - the
-Sensu client (monitoring agent) does not. By storing data in Redis, the Sensu
-services themselves can remain stateless. Although Sensu is designed to route
-telemetry data to external time-series databases (e.g. [Graphite][graphite],
-[Librato][librato], [InfluxDB][influxdb], etc), Sensu does store the following
-state data:
+Sensu leverages a [data store](data-store) for data persistence. Only the Sensu
+server, API, and dashboard services require access to the data store &mdash; the
+[Sensu client](clients) (monitoring agent) does not. By storing data in Redis,
+the Sensu services themselves can remain stateless. Although Sensu is designed
+to route telemetry data to external time-series databases (e.g.
+[Graphite][graphite], [Librato][librato], [InfluxDB][influxdb], etc), Sensu does
+store the following state data:
 
-- client registry
-- event registry
-- check history
-- stashes (exposing the underlying Redis key-value store via the Sensu API)
+- [Client registry](clients#registration-and-registry)
+- Check history
+- Event registry
+- Stashes (a key-value store provided by the [Sensu API](api-overview))
 
 ### Check Execution Scheduler
 
