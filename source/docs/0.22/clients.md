@@ -33,7 +33,7 @@ next:
 ## What are Sensu clients? {#what-are-sensu-clients}
 
 Sensu clients are [monitoring agents](architecture#monitoring-agent), which are
-installaed and run on every system (e.g. server, container, etc) that needs to
+installed and run on every system (e.g. server, container, etc) that needs to
 be monitored. The client is responsible for registering the system with Sensu,
 sending client [keepalive](#client-keepalives) messages (the Sensu heartbeat
 mechanism), and executing monitoring checks. Each client is a member of one or
