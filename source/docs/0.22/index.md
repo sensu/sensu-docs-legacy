@@ -19,16 +19,6 @@ hide_toc: true
   * [Install a Sensu Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
 
-* **OS Guides**
-  * [Ubuntu/Debian](sensu-on-ubuntu-debian)
-  * [RedHat/CentOS](sensu-on-rhel-centos)
-  * [Microsoft Windows](sensu-on-microsoft-windows)
-  * [Mac OS X](sensu-on-mac-os-x)
-  * [FreeBSD](sensu-on-freebsd)
-  * [IBM AIX](sensu-on-ibm-aix)
-  * [Oracle Solaris](sensu-on-oracle-solaris)
-  * [RaspberryPI](sensu-on-raspberry-pi)
-
 * **Getting Started Guide**
   * [Overview](getting-started-guide)
   * [Checks](getting-started-with-checks)
@@ -78,3 +68,13 @@ hide_toc: true
   * [Audit Logging](enterprise-dashboard-audit-logging)
   * [Collections](enterprise-dashboard-collections)
   * [HUD](enterprise-dashboard-hud)
+
+* **OS Guides**
+  * [Ubuntu/Debian](sensu-on-ubuntu-debian)
+  * [RedHat/CentOS](sensu-on-rhel-centos)
+  * [Microsoft Windows](sensu-on-microsoft-windows)
+  * [Mac OS X](sensu-on-mac-os-x)
+  * [FreeBSD](sensu-on-freebsd)
+  * [IBM AIX](sensu-on-ibm-aix)
+  * [Oracle Solaris](sensu-on-oracle-solaris)
+  * [RaspberryPI](sensu-on-raspberry-pi)
