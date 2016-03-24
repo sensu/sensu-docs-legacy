@@ -7,8 +7,12 @@ hide_toc: true
 
 * **Overview**
   * [What is Sensu?](overview)
-  * [Technical Overview](architecture)
+  * [Architecture](architecture)
   * [Release Notes](changelog)
+
+* **Quick Start Guide**
+  * [The five minute install](the-five-minute-install)
+  * [Learn Sensu in 15 minutes](learn-sensu-in-15m)
 
 * **Installation Guide**
   * [Installation Overview](installation-guide)
@@ -20,13 +24,14 @@ hide_toc: true
   * [Summary & Next Steps](installation-summary)
 
 * **Getting Started Guide**
-  * [Overview](getting-started-guide)
-  * [Checks](getting-started-with-checks)
-  * [Handlers](getting-started-with-handlers)
-  * [Filters](getting-started-with-filters)
-  * [Mutators](getting-started-with-mutators)
+  * [Getting Started with Sensu](getting-started-guide)
+  * [Intro to Checks](getting-started-with-checks)
+  * [Intro to Handlers](getting-started-with-handlers)
+  * [Intro to Filters](getting-started-with-filters)
+  * [Intro to Mutators](getting-started-with-mutators)
 
 * **Reference Docs**
+  * [Server](server)
   * [Clients](clients)
   * [Checks](checks)
   * [Events](events)
