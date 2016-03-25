@@ -53,7 +53,7 @@ specification:
   * `2` indicates "CRITICAL"
   * `3` or higher indicates an "UNKNOWN" or custom status
 
-Those familiar with the [Nagios](nagios) monitoring system may recognize this specification,
+Those familiar with the [Nagios][nagios] monitoring system may recognize this specification,
 as it is the same one used by Nagios plugins. As a result, Nagios plugins can be
 used with Sensu without any modification.
 
@@ -108,7 +108,7 @@ subscriptions) via their individual [client definitions][client-definitions] (se
 `subscriptions` attribute). In practice, subscriptions will typically correspond
 to a specific role and/or responsibility (e.g. a webserver, database, etc).
 
-Subscriptions are a powerful primitive in the monitoring context because they
+Subscriptions are a powerful primitives in the monitoring context because they
 allow you to effectively monitor for specific behaviors or characteristics
 corresponding to the function being provided by a particular system. For
 example, disk capacity thresholds might be more important (or at least
