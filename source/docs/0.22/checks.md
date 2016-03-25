@@ -38,15 +38,16 @@ next:
 
 ## What is a Sensu check?
 
-Sensu checks define commands run by the [Sensu client](clients) which monitor a condition
-(e.g. is Nginx running?) or read measurements (e.g. how much disk space do I
-have left?). Although the Sensu client will attempt to execute any command defined
-for a check, successful processing of check results requires adherence to a simple
-specification:
+Sensu checks define commands run by the [Sensu client](clients) which monitor a
+condition (e.g. is Nginx running?) or read measurements (e.g. how much disk
+space do I have left?). Although the Sensu client will attempt to execute any
+command defined for a check, successful processing of check results requires
+adherence to a simple specification:
 
 * Result data is output to [STDOUT or STDERR][std-streams]
   * For standard checks this output is typically a human-readable message
-  * For metrics checks this output contains the measurements gathered by the check
+  * For metrics checks this output contains the measurements gathered by the
+    check
 * Exit status code indicates state
   * `0` indicates "OK"
   * `1` indicates "WARNING"
@@ -54,21 +55,22 @@ specification:
   * exit status codes other than `0`, `1`, or `2` indicate an "UNKNOWN" or
     custom status
 
-Those familiar with the [Nagios][nagios] monitoring system may recognize this specification,
-as it is the same one used by Nagios plugins. As a result, Nagios plugins can be
-used with Sensu without any modification.
+Those familiar with the [Nagios][nagios] monitoring system may recognize this
+specification, as it is the same one used by Nagios plugins. As a result, Nagios
+plugins can be used with Sensu without any modification.
 
 At every execution of a check command, the Sensu client publishes the check's
-result for eventual handling by the [event processor](architecture#event-processor)
-(i.e. the Sensu Core server or Sensu Enterprise).
+result for eventual handling by the [event
+processor](architecture#event-processor) (i.e. the Sensu Core server or Sensu
+Enterprise).
 
 ## Check commands
 
 ### What is a check command?
 
-Each [Sensu check definition](#check-definitions)
-defines a `command` and the interval at which it  should be executed. Check commands
-are literally executable commands which will be executed on the [Sensu client](clients),
+Each [Sensu check definition](#check-definitions) defines a `command` and the
+interval at which it  should be executed. Check commands are literally
+executable commands which will be executed on the [Sensu client](clients),
 run as the `sensu` user.
 
 ### How and where are check commands executed?
