@@ -51,10 +51,10 @@ configuration from the following locations:
 - `/etc/sensu/conf.d/`
 
 _NOTE: additional or alternative configuration file and directory locations may
-be used by modifying Sensu's service configuration XML and/or by starting the
-Sensu services with the corresponding CLI arguments. For more information,
-please consult the [Sensu Configuration](configuration) reference
-documentation._
+be used by modifying Sensu's `launchd` daemon configuration XML and/or by
+starting the Sensu services with the corresponding CLI arguments. For more
+information, please see the [configure the Sensu client `launchd`
+daemon](#configure-the-sensu-client-launchd-daemon) section, below._
 
 The following Sensu configuration files are provided as examples. Please review
 the [Sensu configuration reference documentation](configuration) for additional
