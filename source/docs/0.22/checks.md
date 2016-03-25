@@ -51,7 +51,8 @@ specification:
   * `0` indicates "OK"
   * `1` indicates "WARNING"
   * `2` indicates "CRITICAL"
-  * `3` or higher indicates an "UNKNOWN" or custom status
+  * exit status codes other than `0`, `1`, or `2` indicate an "UNKNOWN" or
+    custom status
 
 Those familiar with the [Nagios][nagios] monitoring system may recognize this specification,
 as it is the same one used by Nagios plugins. As a result, Nagios plugins can be
