@@ -93,11 +93,6 @@ RabbitMQ](install-rabbitmq)).
 
 ### Configure the Sensu client `launchd` daemon
 
-The Sensu client installer package for Mac OS X provides a `plist` file for
-configuring and running the Sensu client as a `launchd` job or daemon.
-
-#### Sensu client daemon `plist` configuration
-
 The Sensu Core .pkg package includes a Sensu client daemon configuration,
 allowing Sensu to be run as a `launchd` job, or daemon. The OS X `launchd`
 service and `launchctl` utility use a ["plist" file][plist] (an XML-based
