@@ -1,13 +1,13 @@
 ---
 version: 0.22
 category: "Reference Docs"
-title: "The Sensu Client(s)"
+title: "Sensu Client"
 next:
   url: "checks"
   text: "Checks"
 ---
 
-# The Sensu Client
+# Sensu Client
 
 ## Reference Documentation
 
@@ -26,6 +26,7 @@ next:
   - [What is the Sensu client socket](#what-is-the-sensu-client-socket)
   - [Example client socket usage](#example-client-socket-usage)
   - [Client socket configuration](#client-socket-configuration)
+- [Standalone check execution scheduler](#standalone-check-execution-scheduler)
 - [Client configuration](#client-configuration)
   - [Example client definition](#example-client-definition)
   - [Client definition specification](#client-definition-specification)
@@ -45,9 +46,9 @@ mechanism), and executing monitoring checks. Each client is a member of one or
 more [subscriptions](#client-subscriptions) &ndash; a list of roles and/or
 responsibilities assigned to the system (e.g. a webserver, database, etc).
 Sensu clients will "subscribe" to (or watch for) [check requests][requests]
-published by the Sensu server (via the [Sensu Transport](transport)), execute
-the corresponding requests locally, and publish the results of the check back to
-the transport (to be processed by a Sensu server).
+published by the [Sensu server](server) (via the [Sensu Transport](transport)),
+execute the corresponding requests locally, and publish the results of the check
+back to the transport (to be processed by a Sensu server).
 
 ## Client keepalives
 
@@ -140,9 +141,9 @@ To configure the keepalive check for a Sensu client, please refer to [the client
 
 ### What is a client subscription?
 
-Sensu's use of the pubsub pattern of communication allows for automated
-registration & de-registration of ephemeral systems. At the core of this model
-are Sensu client `subscriptions`.
+Sensu's use of the [publish/subscribe pattern of communication][pubsub] allows
+for automated registration & de-registration of ephemeral systems. At the core
+of this model are Sensu client `subscriptions`.
 
 Each Sensu client has a defined set of subscriptions, a list of roles and/or
 responsibilities assigned to the system (e.g. a webserver, database, etc). These
@@ -269,6 +270,21 @@ echo '{"name": "backup_mysql", "ttl": 25200, "output": "backed up mysql successf
 echo '{"name": "backup_mysql", "ttl": 25200, "output": "failed to backup mysql", "status": 1}' | nc localhost 3030
 ~~~
 
+## Standalone check execution scheduler
+
+In addition to subscribing to [client subscriptions](client-subscriptions) and
+executing check requests published by the [Sensu server][server-scheduler], the
+Sensu client is able to maintain its own/separate schedule for [standalone
+checks](checks#standalone-checks).
+
+Because the Sensu client shares the same [check scheduling
+algorithm][server-algorithm] as the Sensu server, it is not only possible to
+have consistency between [subscription checks](checks#subscription-checks) and
+standalone checks &mdash; it's also possible to maintain <abbr  title="typically
+accurate within 500ms">consistency</abbr> between standalone checks _across an
+entire infrastructure_ (assuming that system clocks  are synchronized via
+[NTP](http://www.ntp.org/)).
+
 ## Client configuration
 
 ### Example client definition
@@ -316,7 +332,8 @@ name
 
 address
 : description
-  : An address to help identify and reach the client. This is only informational, usually an IP address or hostname.
+  : An address to help identify and reach the client. This is only
+    informational, usually an IP address or hostname.
 : required
   : true
 : type
@@ -343,7 +360,8 @@ subscriptions
 
 safe_mode
 : description
-  : If safe mode is enabled for the client. Safe mode requires local check definitions in order to accept a check request and execute the check.
+  : If safe mode is enabled for the client. Safe mode requires local check
+    definitions in order to accept a check request and execute the check.
 : required
   : false
 : type
@@ -357,7 +375,8 @@ safe_mode
 
 redact
 : description
-  : Client definition attributes to redact (values) when logging and sending client keepalives.
+  : Client definition attributes to redact (values) when logging and sending
+    client keepalives.
 : required
   : false
 : type
@@ -402,7 +421,8 @@ keepalive
 
 #### `socket` attributes
 
-The following attributes are configured within the `"socket": {}` client definition attribute scope.
+The following attributes are configured within the `"socket": {}` client
+definition attribute scope.
 
 bind
 : description
@@ -434,7 +454,8 @@ port
 
 #### `keepalive` attributes
 
-The following attributes are configured within the `"keepalive": {}` client definition attribute scope.
+The following attributes are configured within the `"keepalive": {}` client
+definition attribute scope.
 
 handler
 : description
@@ -450,7 +471,8 @@ handler
 
 handlers
 : description
-  : An array of Sensu event handlers (names) to use for events created by keepalives. Each array item must be a string.
+  : An array of Sensu event handlers (names) to use for events created by
+    keepalives. Each array item must be a string.
 : required
   : false
 : type
@@ -555,3 +577,6 @@ information for operations teams can be extremely valuable._
 [config-scopes]:        configuration#configuration-scopes
 [json]:                 http://www.json.org/
 [token-substitution]:   checks#token-substitution
+[server-scheduler]:     server#check-execution-scheduling
+[server-algorithm]:     server#check-scheduling-algorithm--synchronization
+[pubsub]:               https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern

@@ -66,7 +66,7 @@ Multiple contacts can be specified for a check, using the check definition attri
       "interval": 20,
       "handler": "email",
       "contacts": [
-        "ops"
+        "ops",
         "search"
       ]
     }

@@ -9,56 +9,207 @@ next:
 
 # Sensu Checks
 
-This reference document provides information to help you:
+## Reference Documentation
 
-- [Understand what a Sensu check is](#what-are-sensu-checks)
-- [Understand what a Sensu check plugin is and how they work](#example-check-plugin)
-- [Write a Sensu check definition](#check-definition)
-- [Use standard Sensu check definition attributes](#definition-attributes)
-- [Use custom Sensu check definition attributes](#custom-definition-attributes)
-- [Use sensu-plugin custom Sensu check definition attributes](#sensu-plugin-attributes)
-- [Understand what Sensu check command tokens are and how to use them](#check-command-tokens)
+- [What is a Sensu check?](#what-is-a-sensu-check)
+- [Check commands](#check-commands)
+  - [What is a check command?](#what-is-a-check-command)
+  - [How and where are check commands executed?](#how-and-where-are-check-commands-executed)
+- [Check execution platform](#check-execution-platform)
+  - [How are checks scheduled?](#how-are-checks-scheduled)
+    - [Subscription checks](#subscription-checks)
+    - [Standalone checks](#standalone-checks)
+- [Check results](#check-results)
+  - [What is a check result?](#what-is-a-check-result)
+  - [Example check result output](#example-check-result-output)
+- [Check command tokens](#check-command-tokens)
+  - [What are check command tokens?](#what-are-check-command-tokens)
+  - [Example check command tokens](#example-check-command-tokens)
+- [Check definitions](#check-definitions)
+  - [Example check definition](#example-check-definition)
+  - [Check definition specification](#check-definition-specification)
+    - [Check name(s)](#check-names)
+    - [`check` attributes](#check-attributes)
+    - [`subdue` attributes](#subdue-attributes)
+    - [Custom attributes](#custom-attributes)
+  - [Check result specification](#check-result-specification)
+    - [`check` attributes](#check-result-check-attributes)
+    - [`client` attributes](#check-result-client-attributes)
 
-## What are Sensu checks? {#what-are-sensu-checks}
+## What is a Sensu check?
 
-Sensu checks allow you to monitor services or measure resources, they are executed on machines running the Sensu client. Checks are essentially commands (or scripts) that output data to `STDOUT` or `STDERR` and produce an exit status code to indicate a state. Common exit status codes used are `0` for `OK`, `1` for `WARNING`, `2` for `CRITICAL`, and `3` or greater to indicate `UNKNOWN` or `CUSTOM`. Sensu checks use the same specification as Nagios, therefore, Nagios check plugins may be used with Sensu.
+Sensu checks are [service checks](overview#service-checks), which allow you to
+monitor services (e.g. is Nginx running?) or measure resources (e.g. how much
+disk space do I have left?). Sensu checks are executed by systems running the
+[Sensu client](clients). Sensu checks are essentially commands (or scripts) that
+output data to [STDOUT or STDERR][std-streams] and produce an exit status code
+to indicate a state. Common exit status codes used are 0 for OK, 1 for WARNING,
+2 for CRITICAL, and 3 or greater to indicate an UNKNOWN or CUSTOM state. Sensu
+checks use the same specification as [Nagios][nagios], therefore, Nagios check
+plugins may be used with Sensu. Service checks produce results that are
+processed by the [event processor](architecture#event-processor) (i.e. the Sensu
+Core server or Sensu Enterprise).
 
-### Example check plugin {#example-check-plugin}
+## Check commands
 
-The following is an example Sensu check plugin, a script located at `/etc/sensu/plugins/check-chef-client.rb`. This check plugin uses the running process list to determine if the Chef client process is running. This check plugin is written in Ruby, but Sensu plugins can be written in any language, e.g. Python, shell, etc.
+### What is a check command?
 
-~~~ ruby
-#!/usr/bin/env ruby
+At it's core, the [Sensu check specification](#check-definition-specification)
+defines a `command` that should be executed. Check commands are literally
+executable commands which will be executed on the [Sensu client](clients), run
+as the `sensu` user. A command
 
-# get the current list of processes
-processes = `ps aux`
+### How and where are check commands executed?
 
-# determine if the chef-client process is running
-running = processes.lines.detect do |process|
-  process.include?('chef-client')
-end
+As mentioned above, all check commands are executed by [Sensu clients](clients)
+as the `sensu` user. Commands must be executable files that are discoverable on
+the Sensu client system (i.e. installed in a system [`$PATH` directory][path]).
 
-# return appropriate check output and exit status code
-if running
-  puts 'OK - Chef client process is running'
-  exit 0
-else
-  puts 'WARNING - Chef client process is NOT running'
-  exit 1
-end
+## Check execution platform
+
+### How are checks scheduled?
+
+Sensu offers two distinct check execution schedulers: the [Sensu
+server](server), and the [Sensu client][client-scheduler] (monitoring agent).
+The Sensu server schedules and publishes check execution requests to client
+subscriptions (via a [Publish/Subscribe model](#subscription-checks)). The Sensu
+client (monitoring agent) schedules and executes [standalone
+checks](#standalone-checks) (on the local system only). Sensu’s execution
+schedulers are not <abbr title="in other words, you don't have to choose one or
+the other - you can use both">mutually exclusive</abbr>, so monitoring checks
+may be configured for both of Sensu’s schedulers (the Sensu server and Sensu
+client), and Sensu will ensure that the corresponding checks are executed on the
+appropriate systems, at the right time.
+
+#### Subscription checks
+
+Sensu checks which are centrally defined and scheduled (i.e. from the [Sensu
+server](server)) are called "subscription checks". Sensu’s use of a [message bus
+(transport)](transport) for communication enables [topic-based
+communication][pubsub-topics] &mdash; where messages are published to a specific
+"topic", and consumers _subscribe_ to one or more specific topics. This form of
+communication is commonly referred to as the ["publish-subscribe
+pattern"][pubsub], or "pubsub" for short.
+
+Subscription checks have a defined set of [subscribers][subscribers],
+a list of [transport](transport) [topics][pubsub-topics] that check requests
+will be published to. Sensu clients become subscribers to these topics (i.e.
+subscriptions) via their [client definitions][client-definitions] (see the
+`subscriptions` attribute). In practice, subscriptions will typically correspond
+to a specific role and/or responsibility (e.g. a webserver, database, etc).
+
+Subscriptions are a powerful primitive in the monitoring context because they
+allow you to effectively monitor for specific behaviors or characteristics
+corresponding to the function being provided by a particular system. For
+example, disk capacity  thresholds might be more important (or at least
+different) on a database server as opposed to a webserver; conversely, cpu
+and/or memory usage thresholds might be more important on a caching system than
+on a file server. Subscriptions also allow you to configure check requests for
+an entire group or subgroup of systems rather than require a traditional 1:1
+mapping.
+
+#### Standalone checks
+
+
+## Check results
+
+### What is a check result?
+
+### Example check result output
+
+~~~ json
+{
+  "check": {
+    "issued": 1458919602,
+    "executed": 1458919602,
+    "handlers": [],
+    "output": "CheckDiskUsage OK: Filesystem / space usage is 34.91%",
+    "status": 0,
+    "name": "disk-usage-space-_"
+  },
+  "client": "demo"
+}
 ~~~
 
-## Check definition
+## Check command tokens
 
-A Sensu check definition is a JSON configuration file describing a Sensu check. A definition declares how a Sensu check is executed:
+### What are check command tokens?
+
+Sensu check plugins may use command line arguments for execution options, such
+as thresholds, file paths, URls, and credentials. In some cases, the command
+line arguments may need to differ per client in a Sensu [client
+subscription][subscribers]. Sensu check command tokens, a
+pattern containing a dot notation client attribute key (e.g.
+`:::disk.warning:::`), are substituted by the client attribute value before the
+command is executed by the Sensu client. Command tokens allow the check command
+to be customized by the Sensu client definition attributes at execution time.
+Sensu check command tokens may provide a default value, separated by a `|`
+character, for clients executing the check that do not have the matching client
+definition attribute (e.g. `:::disk.warning|2GB:::`). If a command token does
+not provide a default value, and the client does not have the definition
+attribute, a check result indicating unmatched tokens will be published for the
+check execution, e.g. `"Unmatched command tokens: disk.warning"`.
+
+### Example check command tokens
+
+The following is an example Sensu check definition, a JSON configuration file
+located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition
+makes use of Sensu check command tokens. The check is named `check_disk_usage`
+and it runs `check-disk-usage.rb` with client specific thresholds on Sensu
+clients with the `production` subscription, every `60` seconds.
+
+~~~ json
+{
+  "checks": {
+    "check_disk_usage": {
+      "command": "check-disk-usage.rb -w :::disk.warning|90::: -c :::disk.critical|95:::",
+      "subscribers": [
+        "production"
+      ],
+      "interval": 60
+    }
+  }
+}
+~~~
+
+The following is an example Sensu client definition, containing the custom
+attributes used by the above check for disk usage thresholds.
+
+~~~ json
+{
+  "client": {
+    "name": "i-424242",
+    "address": "8.8.8.8",
+    "subscriptions": [
+      "production",
+      "webserver",
+      "mysql"
+    ],
+    "disk": {
+      "warning": 97,
+      "critical": 99
+    }
+  }
+}
+~~~
+
+## Check definitions
+
+A Sensu check definition is a JSON configuration file describing a Sensu check.
+A definition declares how a Sensu check is executed:
 
 - The command to run (e.g. script)
 - How frequently it should be executed (interval)
 - Where it should be executed (which machines)
 
-### Example check definition {#example-check-definition}
+### Example check definition
 
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_chef_client.json`. This check definition uses the [example check plugin](#example-check-plugin) above, to determine if the Chef client process is running. The check is named `chef_client` and it runs `/etc/sensu/plugins/check-chef-client.rb` on Sensu clients with the `production` subscription, every `60` seconds (interval).
+The following is an example Sensu check definition, a JSON configuration file
+located at `/etc/sensu/conf.d/check_chef_client.json`. This check definition
+uses the [example check plugin](#example-check-plugin) above, to determine if
+the Chef client process is running. The check is named `chef_client` and it runs
+`/etc/sensu/plugins/check-chef-client.rb` on Sensu clients with the `production`
+subscription, every `60` seconds (interval).
 
 ~~~ json
 {
@@ -74,22 +225,24 @@ The following is an example Sensu check definition, a JSON configuration file lo
 }
 ~~~
 
-## Anatomy of a check definition
+### Check definition specification
 
-### Name
+#### Check names(s) {#check-names}
 
-Each check definition has a unique check name, used for the definition key. Every check definition is within the `"checks": {}` definition scope.
+Each check definition has a unique check name, used for the definition key.
+Every check definition is within the `"checks": {}` definition scope.
 
 - A unique string used to name/identify the check
 - Cannot contain special characters or spaces
 - Validated with `/^[\w\.-]+$/`
 - e.g. `"chef_client": {}`
 
-### Definition attributes
+#### `check` attributes
 
 type
 : description
-  : The check type, either `standard` or `metric`. Setting type to `metric` will cause OK (exit 0) check results to create events.
+  : The check type, either `standard` or `metric`. Setting type to `metric` will
+    cause OK (exit 0) check results to create events.
 : required
   : false
 : type
@@ -117,7 +270,8 @@ command
 
 extension
 : description
-  : The name of a Sensu check extension to run instead of a command. This is an _advanced feature_ and is not commonly used.
+  : The name of a Sensu check extension to run instead of a command. This is an
+    _advanced feature_ and is not commonly used.
 : required
   : true (unless `command` is configured)
 : type
@@ -129,7 +283,8 @@ extension
 
 standalone
 : description
-  : If the check is scheduled by the local Sensu client instead of the Sensu server (standalone mode).
+  : If the check is scheduled by the local Sensu client instead of the Sensu
+    server (standalone mode).
 : required
   : false
 : type
@@ -143,7 +298,8 @@ standalone
 
 subscribers
 : description
-  : An array of Sensu client subscriptions that check requests will be sent to. The array cannot be empty and its items must each be a string.
+  : An array of Sensu client subscriptions that check requests will be sent to.
+    The array cannot be empty and its items must each be a string.
 : required
   : true (unless `standalone` is `true`)
 : type
@@ -193,7 +349,13 @@ timeout
 
 ttl
 : description
-  : The time to live (TTL) in seconds until check results are considered stale. If a client stops publishing results for the check, and the TTL expires, an event will be created for the client. The check `ttl` must be greater than the check `interval`, and should accomodate time for the check execution and result processing to complete. For example, if a check has an `interval` of `60` (seconds) and a `timeout` of `30` (seconds), an appropriate `ttl` would be a minimum of `90` (seconds).
+  : The time to live (TTL) in seconds until check results are considered stale.
+    If a client stops publishing results for the check, and the TTL expires, an
+    event will be created for the client. The check `ttl` must be greater than
+    the check `interval`, and should accomodate time for the check execution and
+    result processing to complete. For example, if a check has an `interval` of
+    `60` (seconds) and a `timeout` of `30` (seconds), an appropriate `ttl` would
+    be a minimum of `90` (seconds).
 : required
   : false
 : type
@@ -231,7 +393,8 @@ handler
 
 handlers
 : description
-  : An array of Sensu event handlers (names) to use for events created by the check. Each array item must be a string.
+  : An array of Sensu event handlers (names) to use for events created by the
+    check. Each array item must be a string.
 : required
   : false
 : type
@@ -243,7 +406,8 @@ handlers
 
 low_flap_threshold
 : description
-  : The flap detection low threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html).
+  : The flap detection low threshold (% state change) for the check. Sensu uses
+    the same [flap detection algorithm as Nagios][nagios-flapping].
 : required
   : false
 : type
@@ -255,7 +419,8 @@ low_flap_threshold
 
 high_flap_threshold
 : description
-  : The flap detection high threshold (% state change) for the check. Sensu uses the same [flap detection algorithm as Nagios](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html).
+  : The flap detection high threshold (% state change) for the check. Sensu uses
+    the same [flap detection algorithm as Nagios][nagios-flapping].
 : required
   : true (if `low_flap_threshold` is configured)
 : type
@@ -267,7 +432,8 @@ high_flap_threshold
 
 source
 : description
-  : The check source, used to create a [JIT Sensu client](clients#jit-clients) for an external resource (e.g. a network switch).
+  : The check source, used to create a [JIT Sensu client](clients#proxy-clients)
+    for an external resource (e.g. a network switch).
 : required
   : false
 : type
@@ -281,7 +447,9 @@ source
 
 aggregate
 : description
-  : Create a result aggregate for the check. Check result data will be aggregated and exposed via the [Sensu API /aggregates endpoint](api-aggregates). This feature does not work with `standalone` checks.
+  : Create a result aggregate for the check. Check result data will be
+    aggregated and exposed via the [Sensu Aggregates API](api-aggregates). This
+    feature does not work with `standalone` checks.
 : required
   : false
 : type
@@ -305,13 +473,15 @@ subdue
     "subdue": {}
     ~~~
 
-#### Subdue attributes
+#### `subdue` attributes
 
-The following attributes are configured within the `"subdue": {}` check definition attribute scope.
+The following attributes are configured within the `"subdue": {}` check
+definition attribute scope.
 
 at
 : description
-  : Where the check is subdued, either `publisher` or `handler`, at the check request publisher or event handler.
+  : Where the check is subdued, either `publisher` or `handler`, at the check
+    request publisher or event handler.
 : required
   : false
 : type
@@ -325,7 +495,8 @@ at
 
 days
 : description
-  : An array of days of the week the check is subdued. Each array item must be a string and a valid day of the week.
+  : An array of days of the week the check is subdued. Each array item must be a
+    string and a valid day of the week.
 : required
   : false
 : type
@@ -337,7 +508,8 @@ days
 
 begin
 : description
-  : Beginning of the time window when the check is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+  : Beginning of the time window when the check is subdued. Parsed by Ruby's
+    `Time.parse()`. Time may include a time zone.
 : required
   : true
 : type
@@ -349,7 +521,8 @@ begin
 
 end
 : description
-  : End of the time window when the check is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+  : End of the time window when the check is subdued. Parsed by Ruby's
+    `Time.parse()`. Time may include a time zone.
 : required
   : true
 : type
@@ -361,7 +534,9 @@ end
 
 exceptions
 : description
-  : Subdue time window (`begin`, `end`) exceptions. An array of time window exceptions. Each array item must be a hash containing valid `begin` and `end` times.
+  : Subdue time window (`begin`, `end`) exceptions. An array of time window
+    exceptions. Each array item must be a hash containing valid `begin` and
+    `end` times.
 : required
   : false
 : type
@@ -371,11 +546,18 @@ exceptions
     "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
     ~~~
 
-## Custom definition attributes
+#### Custom attributes
 
-Custom check definition attributes may be included to add additional information (context) about the Sensu check. Custom check attributes will be included in [event data](events). Some great example use cases for custom check definition attributes are contact routing, documentation links, and metric graph image URLs.
+Custom check definition attributes may be included to add additional information
+(context) about the Sensu check. Custom check attributes will be included in
+[event data](events). Some great example use cases for custom check definition
+attributes are contact routing, documentation links, and metric graph image
+URLs.
 
-The following is an example Sensu check definition that a custom definition attribute, `"playbook"`, a URL for documentation to aid in the resolution of events for the check. The playbook URL will be available in [event data](events) and thus able to be included in event notifications (e.g. email).
+The following is an example Sensu check definition that a custom definition
+attribute, `"playbook"`, a URL for documentation to aid in the resolution of
+events for the check. The playbook URL will be available in [event data](events)
+and thus able to be included in event notifications (e.g. email).
 
 ~~~ json
 {
@@ -392,105 +574,21 @@ The following is an example Sensu check definition that a custom definition attr
 }
 ~~~
 
-## Sensu plugin attributes
+### Check result specification
 
-The [Sensu plugin project](https://github.com/sensu-plugins) provides a Ruby library ([sensu-plugin](https://github.com/sensu-plugins/sensu-plugin/)) to help Sensu plugin authors and offer users a variety of features. The sensu-plugin features make use of select custom check definition attributes. When using a [Sensu event handler](handlers) that makes use of the sensu-plugin library, you can configure the following attributes in any check definition.
+#### `check` attributes {#check-result-check-attributes}
 
-occurrences
-: description
-  : The number of event occurrences that must occur before an event is handled for the check.
-  _NOTE: Sensu Enterprise users will need to define `occurrences` as part of `handle_when` configuration, see  [Built in Filters](enterprise-built-in-filters#the-handlewhen-filter) for more information._
-: required
-  : false
-: type
-  : Integer
-: default
-  : `1`
-: example
-  : ~~~ shell
-    "occurrences": 3
-    ~~~
+#### `client` attributes {#check-result-client-attributes}
 
-refresh
-: description
-  : Time in seconds until the event occurrence count is considered reset for the purpose of counting `occurrences`, to allow an event for the check to be handled again. For example, a check with a refresh of `1800` will have its events (recurrences) handled every 30 minutes, to remind users of the issue.
-  _NOTE: Sensu Enterprise users will need to define `refresh` as part of `handle_when` configuration, see  [Built in Filters](enterprise-built-in-filters#the-handlewhen-filter) for more information._
-: required
-  : false
-: type
-  : Integer
-: default
-  : `1800`
-: example
-  : ~~~ shell
-    "refresh": 3600
-    ~~~
 
-dependencies
-: description
-  : An array of check dependencies. Events for the check will not be handled if events exist for one or more of the check dependencies. A check dependency can be a check executed by the same Sensu client (eg. `check_app`), or a client/check pair (eg.`db-01/check_mysql`).
-: required
-  : false
-: type
-  : Array
-: example
-  : ~~~ shell
-    "dependencies": [
-      "check_app",
-      "db-01/check_mysql"
-    ]
-    ~~~
 
-notification
-: description
-  : The notification message used for events created by the check, instead of the commonly used check output. This attribute is used by most notification event handlers that use the sensu-plugin library.
-: required
-  : false
-: type
-  : String
-: example
-  : ~~~ shell
-    "notification": "the shopping cart application is not responding to requests"
-    ~~~
-
-## Check command tokens
-
-Sensu check plugins may use command line arguments for execution options, such as thresholds, file paths, URls, and credentials. In some cases, the command line arguments may need to differ per client in a Sensu [client subscription](clients#client-subscriptions). Sensu check command tokens, a pattern containing a dot notation client attribute key (e.g. `:::disk.warning:::`), are substituted by the client attribute value before the command is executed by the Sensu client. Command tokens allow the check command to be customized by the Sensu client definition attributes at execution time. Sensu check command tokens may provide a default value, separated by a `|` character, for clients executing the check that do not have the matching client definition attribute (e.g. `:::disk.warning|2GB:::`). If a command token does not provide a default value, and the client does not have the definition attribute, a check result indicating unmatched tokens will be published for the check execution, e.g. `"Unmatched command tokens: disk.warning"`.
-
-### Example check command tokens
-
-The following is an example Sensu check definition, a JSON configuration file located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition makes use of Sensu check command tokens. The check is named `check_disk_usage` and it runs `check-disk-usage.rb` with client specific thresholds on Sensu clients with the `production` subscription, every `60` seconds.
-
-~~~ json
-{
-  "checks": {
-    "check_disk_usage": {
-      "command": "check-disk-usage.rb -w :::disk.warning|90::: -c :::disk.critical|95:::",
-      "subscribers": [
-        "production"
-      ],
-      "interval": 60
-    }
-  }
-}
-~~~
-
-The following is an example Sensu client definition, containing the custom attributes used by the above check for disk usage thresholds.
-
-~~~ json
-{
-  "client": {
-    "name": "i-424242",
-    "address": "8.8.8.8",
-    "subscriptions": [
-      "production",
-      "webserver",
-      "mysql"
-    ],
-    "disk": {
-      "warning": 97,
-      "critical": 99
-    }
-  }
-}
-~~~
+[nagios-flapping]:        https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/flapping.html
+[handle_when]:            enterprise-built-in-filters#the-handlewhen-filter
+[std-streams]:            https://en.wikipedia.org/wiki/Standard_streams
+[nagios]:                 https://www.nagios.org/
+[client-scheduler]:       clients#standalone-check-execution-scheduler
+[pubsub]:                 https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
+[pubsub-topics]:          https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern#Message_filtering
+[subscribers]:            clients#client-subscriptions
+[client-definitions]:     clients#client-definition-specification
+[path]:                   https://en.wikipedia.org/wiki/PATH_(variable)
