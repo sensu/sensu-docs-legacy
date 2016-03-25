@@ -38,26 +38,37 @@ next:
 
 ## What is a Sensu check?
 
-Sensu checks are [service checks](overview#service-checks), which allow you to
-monitor services (e.g. is Nginx running?) or measure resources (e.g. how much
-disk space do I have left?). Sensu checks are executed by systems running the
-[Sensu client](clients). Sensu checks are essentially commands (or scripts) that
-output data to [STDOUT or STDERR][std-streams] and produce an exit status code
-to indicate a state. Common exit status codes used are 0 for OK, 1 for WARNING,
-2 for CRITICAL, and 3 or greater to indicate an UNKNOWN or CUSTOM state. Sensu
-checks use the same specification as [Nagios][nagios], therefore, Nagios check
-plugins may be used with Sensu. Service checks produce results that are
-processed by the [event processor](architecture#event-processor) (i.e. the Sensu
-Core server or Sensu Enterprise).
+Sensu checks define commands run by the Sensu client which monitor a condition
+(e.g. is Nginx running?) or read measurements (e.g. how much disk space do I
+have left?). Although the Sensu client will attempt to execute any command defined
+for a check, successful processing of check results requires adherence to a simple
+specification:
+
+* Result data is output to STDOUT or STDERR
+  * For standard checks this output is typically a human-readable message
+  * For metrics checks this output contains the measurements gathered by the check
+* Exit status code indicates state
+  * `0` indicates "OK"
+  * `1` indicates "WARNING"
+  * `2` indicates "CRITICAL"
+  * `3` or higher indicates an "UNKNOWN" or custom status
+
+Those familiar with the Nagios monitoring system may recognize this specification,
+as it is the same one used by Nagios plugins. As a result, Nagios plugins can be
+used with Sensu without any modification.
+
+At every execution of a check command, the Sensu client publishes the check's
+result for eventual handling by the [event processor](architecture#event-processor)
+(i.e. the Sensu Core server or Sensu Enterprise).
 
 ## Check commands
 
 ### What is a check command?
 
-At it's core, the [Sensu check specification](#check-definition-specification)
-defines a `command` that should be executed. Check commands are literally
-executable commands which will be executed on the [Sensu client](clients), run
-as the `sensu` user. A command
+Each [Sensu check definition](#check-definitions)
+defines a `command` and the interval at which it  should be executed. Check commands
+are literally executable commands which will be executed on the [Sensu client](clients),
+run as the `sensu` user.
 
 ### How and where are check commands executed?
 
@@ -74,16 +85,15 @@ server](server), and the [Sensu client][client-scheduler] (monitoring agent).
 The Sensu server schedules and publishes check execution requests to client
 subscriptions (via a [Publish/Subscribe model](#subscription-checks)). The Sensu
 client (monitoring agent) schedules and executes [standalone
-checks](#standalone-checks) (on the local system only). Sensu’s execution
+checks](#standalone-checks) (on the local system only). Because Sensu’s execution
 schedulers are not <abbr title="in other words, you don't have to choose one or
-the other - you can use both">mutually exclusive</abbr>, so monitoring checks
-may be configured for both of Sensu’s schedulers (the Sensu server and Sensu
-client), and Sensu will ensure that the corresponding checks are executed on the
-appropriate systems, at the right time.
+the other - you can use both">mutually exclusive</abbr>, any Sensu client may
+be configured to both schedule and execute it's own standalone as well as execute
+subscription checks scheduled by the Sensu server.
 
 #### Subscription checks
 
-Sensu checks which are centrally defined and scheduled (i.e. from the [Sensu
+Sensu checks which are centrally defined and scheduled (i.e. by the [Sensu
 server](server)) are called "subscription checks". Sensu’s use of a [message bus
 (transport)](transport) for communication enables [topic-based
 communication][pubsub-topics] &mdash; where messages are published to a specific
@@ -94,15 +104,15 @@ pattern"][pubsub], or "pubsub" for short.
 Subscription checks have a defined set of [subscribers][subscribers],
 a list of [transport](transport) [topics][pubsub-topics] that check requests
 will be published to. Sensu clients become subscribers to these topics (i.e.
-subscriptions) via their [client definitions][client-definitions] (see the
+subscriptions) via their individual [client definitions][client-definitions] (see the
 `subscriptions` attribute). In practice, subscriptions will typically correspond
 to a specific role and/or responsibility (e.g. a webserver, database, etc).
 
 Subscriptions are a powerful primitive in the monitoring context because they
 allow you to effectively monitor for specific behaviors or characteristics
 corresponding to the function being provided by a particular system. For
-example, disk capacity  thresholds might be more important (or at least
-different) on a database server as opposed to a webserver; conversely, cpu
+example, disk capacity thresholds might be more important (or at least
+different) on a database server as opposed to a webserver; conversely, CPU
 and/or memory usage thresholds might be more important on a caching system than
 on a file server. Subscriptions also allow you to configure check requests for
 an entire group or subgroup of systems rather than require a traditional 1:1
@@ -136,7 +146,7 @@ mapping.
 ### What are check command tokens?
 
 Sensu check plugins may use command line arguments for execution options, such
-as thresholds, file paths, URls, and credentials. In some cases, the command
+as thresholds, file paths, URLs, and credentials. In some cases, the command
 line arguments may need to differ per client in a Sensu [client
 subscription][subscribers]. Sensu check command tokens, a
 pattern containing a dot notation client attribute key (e.g.
@@ -352,7 +362,7 @@ ttl
   : The time to live (TTL) in seconds until check results are considered stale.
     If a client stops publishing results for the check, and the TTL expires, an
     event will be created for the client. The check `ttl` must be greater than
-    the check `interval`, and should accomodate time for the check execution and
+    the check `interval`, and should accommodate time for the check execution and
     result processing to complete. For example, if a check has an `interval` of
     `60` (seconds) and a `timeout` of `30` (seconds), an appropriate `ttl` would
     be a minimum of `90` (seconds).
