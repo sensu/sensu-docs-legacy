@@ -27,9 +27,12 @@ What will you need to complete this guide?
 
 - A virtual machine, or physical computer running 64-bit
   [Ubuntu 14.04][ubuntu1404] with a minimum of 2GB of memory (4GB recommended)
-- Familiarity with a modern command-line interface
-- 300 seconds (the amount of time it should take to complete this installation
-  guide)
+- Familiarity with a <abbr title='do you even pipe to grep?!'>command-line
+  interface</abbr>
+- Willingness to run a [shell script downloaded from the internet][sensu-bash]
+  ([or not](sensu-on-ubuntu-debian#install-sensu-core-repository))
+- The commitment to count to [10][ten] (the number of steps in this guide)
+- 300 seconds (the amount of time it should take to complete this installation)
 
 Ready? Let's get started!
 
@@ -40,14 +43,21 @@ The following installation steps will help you get Sensu Core installed in a
 For installation on other platforms, and/or alternative installation
 configurations, please consult the [installation guide](installation-guide).
 
-1. Install Redis (>= 1.3.14) from the distribution repository:
+1. Install the Sensu software repositories:
 
    ~~~ shell
+   wget https://sensuapp.org/install.sh
+   sudo bash install.sh
    sudo apt-get update
+   ~~~
+
+2. Install Redis (>= 1.3.14) from the distribution repository:
+
+   ~~~ shell
    sudo apt-get -y install redis-server curl jq
    ~~~
 
-2. Install the Redis init scripts using the `update-rc.d` utility, and start
+3. Install the Redis init scripts using the `update-rc.d` utility, and start
    Redis:
 
    ~~~ shell
@@ -55,24 +65,24 @@ configurations, please consult the [installation guide](installation-guide).
    sudo /etc/init.d/redis-server start
    ~~~
 
-3. Download and install Sensu using `wget` and `dpkg`:
+4. Install Sensu
 
    ~~~ shell
-   wget https://core.sensuapp.com/apt/pool/sensu/main/s/sensu/sensu_0.22.1-1_amd64.deb
-   sudo dpkg -i sensu_0.22.1-1_amd64.deb
+   sudo apt-get install sensu
    ~~~
 
-   Verify that Sensu is installed by running the following command:
+   ...and if you're using [Sensu Enterprise][sensu-enterprise], go ahead and
+   install Sensu Enterprise as well
 
    ~~~ shell
-   /opt/sensu/bin/sensu-server --version
+   sudo apt-get install sensu-enterprise sensu-enterprise-dashboard
    ~~~
 
-4. Configure Sensu by downloading this [example configuration
+5. Configure Sensu by downloading this [example configuration
    file][simple-sensu-config]:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/config.json http://sensuapp.org/docs/0.22/files/simple-sensu-config.json
+   sudo wget -O /etc/sensu/config.json https://sensuapp.org/docs/0.22/files/simple-sensu-config.json
    ~~~
 
    Alternatively, please copy the following example configuration file contents
@@ -93,11 +103,11 @@ configurations, please consult the [installation guide](installation-guide).
    }
    ~~~
 
-5. Configure the Sensu client by downloading this [example configuration
+6. Configure the Sensu client by downloading this [example configuration
    file][simple-client-config]:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/conf.d/client.json http://sensuapp.org/docs/0.22/files/simple-client-config.json
+   sudo wget -O /etc/sensu/conf.d/client.json https://sensuapp.org/docs/0.22/files/simple-client-config.json
    ~~~
 
    Alternatively, please copy the following example configuration file contents
@@ -106,7 +116,7 @@ configurations, please consult the [installation guide](installation-guide).
    ~~~ shell
    {
      "client": {
-       "name": "test",
+       "name": "my-first-sensu-client",
        "address": "localhost",
        "environment": "development",
        "subscriptions": [
@@ -120,13 +130,41 @@ configurations, please consult the [installation guide](installation-guide).
    }
    ~~~
 
-6. Make sure that the `sensu` user owns all of the Sensu configuration files:
+7. Configure a Sensu dashboard by downloading this [example configuration
+   file][simple-dashboard-config]:
+
+   ~~~ shell
+   sudo wget -O /etc/sensu/dashboard.json https://sensuapp.org/docs/0.22/files/simple-dashboard-config.json
+   ~~~
+
+   Alternatively, please copy the following example configuration file contents
+   to `/etc/sensu/dashboard.json`:
+
+   ~~~
+   {
+     "sensu": [
+       {
+         "name": "sensu",
+         "host": "localhost",
+         "port": 4567
+       }
+     ],
+     "dashboard": {
+       "host": "0.0.0.0",
+       "port": 3000
+     }
+   }
+   ~~~
+
+8. Make sure that the `sensu` user owns all of the Sensu configuration files:
 
    ~~~ shell
    sudo chown -R sensu:sensu /etc/sensu
    ~~~
 
-7. Start the Sensu services
+9. Start the Sensu services
+
+   Sensu Core users:
 
    ~~~ shell
    sudo /etc/init.d/sensu-server start
@@ -134,39 +172,55 @@ configurations, please consult the [installation guide](installation-guide).
    sudo /etc/init.d/sensu-client start
    ~~~
 
-8. Verify that your installation is ready to use by querying the Sensu API
-   using the `curl` utility (and piping the result to `jq`):
+   Sensu Enterprise users:
 
    ~~~ shell
-   curl http://localhost:4567/clients | jq .
-   ~~~
+   sudo /etc/init.d/sensu-enterprise start
+   sudo /etc/init.d/sensu-enterprise-dashboard start
+   sudo /etc/init.d/sensu-client start
+   ~~~   
 
-   If the Sensu API returns a JSON array of Sensu clients similar to this:
+10. Verify that your installation is ready to use by querying the Sensu API
+    using the `curl` utility (and piping the result to `jq`):
 
-   ~~~ shell
-   $ curl http://localhost:4567/clients | jq .
-     % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                    Dload  Upload   Total   Spent    Left  Speed
-   100   175  100   175    0     0  26014      0 --:--:-- --:--:-- --:--:-- 29166
-   [
-     {
-       "timestamp": 1458625739,
-       "version": "0.22.1",
-       "socket": {
-         "port": 3030,
-         "bind": "127.0.0.1"
-       },
-       "subscriptions": [
-         "dev"
-       ],
-       "environment": "development",
-       "address": "localhost",
-       "name": "test"
-     }
-   ]
-   ~~~
+    ~~~ shell
+    curl http://localhost:4567/clients | jq .
+    ~~~
 
-   ...you have successfully installed and configured Sensu!
+    If the Sensu API returns a JSON array of Sensu clients similar to this:
+
+    ~~~ shell
+    $ curl http://localhost:4567/clients | jq .
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100   175  100   175    0     0  26014      0 --:--:-- --:--:-- --:--:-- 29166
+    [
+      {
+        "timestamp": 1458625739,
+        "version": "0.22.1",
+        "socket": {
+          "port": 3030,
+          "bind": "127.0.0.1"
+        },
+        "subscriptions": [
+          "dev"
+        ],
+        "environment": "development",
+        "address": "localhost",
+        "name": "my-first-sensu-client"
+      }
+    ]
+    ~~~
+
+    ...you have successfully installed and configured Sensu!
+
+    If you you're using Sensu Enterprise, you should also be able to load the
+    Sensu Enterprise Dashboard in your browser by visiting
+    [http://hostname:3000](http://hostname:3000) (replacing `hostname` with the
+    hostname or IP address of the system where the dashboard is installed).
+
+    ![](img/five-minute-dashboard-1.png)
+    ![](img/five-minute-dashboard-2.png)
 
 ## Next Steps
 
@@ -174,5 +228,8 @@ Coming soon...
 
 [ubuntu1404]:             http://releases.ubuntu.com/14.04/
 [standalone]:             installation-strategies#standalone
+[sensu-bash]:             http://github.com/sensu/sensu-bash
+[ten]:                    https://www.youtube.com/watch?v=J2D1XF40-ok
 [simple-sensu-config]:    /docs/0.22/files/simple-sensu-config.json
 [simple-client-config]:   /docs/0.22/files/simple-client-config.json
+[sensu-core-apt]:         sensu-on-ubuntu##install-sensu-core-repository

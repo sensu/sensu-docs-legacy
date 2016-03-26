@@ -5,7 +5,7 @@
   "transport": {
     "name": "redis"
   },
-    "api": {
+  "api": {
     "host": "localhost",
     "port": 4567
   }
