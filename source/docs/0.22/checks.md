@@ -12,6 +12,7 @@ next:
 ## Reference Documentation
 
 - [What is a Sensu check?](#what-is-a-sensu-check)
+  - [Sensu check specification](#sensu-check-specification)
 - [Check commands](#check-commands)
   - [What is a check command?](#what-is-a-check-command)
   - [How and where are check commands executed?](#how-and-where-are-check-commands-executed)
@@ -25,6 +26,10 @@ next:
 - [Check command tokens](#check-command-tokens)
   - [What are check command tokens?](#what-are-check-command-tokens)
   - [Example check command tokens](#example-check-command-tokens)
+  - [Check command token specification](#check-command-token-specification)
+    - [Command token declaration syntax](#command-token-declaration)
+    - [Command token client attributes](#command-token-client-attributes)
+    - [Command token alternate values](#command-token-alternate-values)
 - [Check definitions](#check-definitions)
   - [Example check definition](#example-check-definition)
   - [Check definition specification](#check-definition-specification)
@@ -42,7 +47,9 @@ Sensu checks define commands run by the [Sensu client](clients) which monitor a
 condition (e.g. is Nginx running?) or read measurements (e.g. how much disk
 space do I have left?). Although the Sensu client will attempt to execute any
 command defined for a check, successful processing of check results requires
-adherence to a simple specification:
+adherence to a simple specification.
+
+### Sensu check specification
 
 * Result data is output to [STDOUT or STDERR][std-streams]
   * For standard checks this output is typically a human-readable message
@@ -55,14 +62,14 @@ adherence to a simple specification:
   * exit status codes other than `0`, `1`, or `2` indicate an "UNKNOWN" or
     custom status
 
-Those familiar with the [Nagios][nagios] monitoring system may recognize this
+_PRO TIP: Those familiar with the [Nagios][nagios] monitoring system may recognize this
 specification, as it is the same one used by Nagios plugins. As a result, Nagios
-plugins can be used with Sensu without any modification.
+plugins can be used with Sensu without any modification._
 
-At every execution of a check command, the Sensu client publishes the check's
-result for eventual handling by the [event
-processor](architecture#event-processor) (i.e. the Sensu Core server or Sensu
-Enterprise).
+At every execution of a check command &ndash; regardless of success or failure
+&ndash; the Sensu client publishes the check's [result](#check-results) for
+eventual handling by the [event processor](architecture#event-processor) (i.e.
+the [Sensu server](server)).
 
 ## Check commands
 
@@ -73,11 +80,21 @@ interval at which it  should be executed. Check commands are literally
 executable commands which will be executed on the [Sensu client](clients),
 run as the `sensu` user.
 
+### Check command arguments
+
+
+
 ### How and where are check commands executed?
 
 As mentioned above, all check commands are executed by [Sensu clients](clients)
 as the `sensu` user. Commands must be executable files that are discoverable on
 the Sensu client system (i.e. installed in a system [`$PATH` directory][path]).
+
+_NOTE: By default, the Sensu installer packages will modify the system `$PATH` for the
+`sensu` user to include `/etc/sensu/plugins`. As a result, executable scripts
+(e.g. plugins) located in `/etc/sensu/plugins` will be valid commands. This
+allows `command` attributes to use "relative paths" for Sensu plugin commands;
+<br><br>e.g.: `"command": "check-http.rb -u https://sensuapp.org"`_
 
 ## Check execution platform
 
@@ -86,13 +103,14 @@ the Sensu client system (i.e. installed in a system [`$PATH` directory][path]).
 Sensu offers two distinct check execution schedulers: the [Sensu
 server](server), and the [Sensu client][client-scheduler] (monitoring agent).
 The Sensu server schedules and publishes check execution requests to client
-subscriptions (via a [Publish/Subscribe model](#subscription-checks)). The Sensu
-client (monitoring agent) schedules and executes [standalone
-checks](#standalone-checks) (on the local system only). Because Sensu’s execution
-schedulers are not <abbr title="in other words, you don't have to choose one or
-the other - you can use both">mutually exclusive</abbr>, any Sensu client may
-be configured to both schedule and execute it's own standalone as well as execute
-subscription checks scheduled by the Sensu server.
+subscriptions via a [Publish/Subscribe model][pubsub] (i.e. [subscription
+checks](#subscription-checks)). The Sensu client (monitoring agent) schedules and
+executes [standalone checks](#standalone-checks) (on the local system only).
+Because Sensu’s execution schedulers are not <abbr title="in other words, you
+don't have to choose one or the other - you can use both">mutually
+exclusive</abbr>, any Sensu client may be configured to both schedule and
+execute it's own standalone checks as well as execute subscription checks
+scheduled by the Sensu server.
 
 #### Subscription checks
 
@@ -107,8 +125,8 @@ pattern"][pubsub], or "pubsub" for short.
 Subscription checks have a defined set of [subscribers][subscribers],
 a list of [transport](transport) [topics][pubsub-topics] that check requests
 will be published to. Sensu clients become subscribers to these topics (i.e.
-subscriptions) via their individual [client definitions][client-definitions] (see the
-`subscriptions` attribute). In practice, subscriptions will typically correspond
+subscriptions) via their individual [client definition][client-definitions]
+`subscriptions` attribute. In practice, subscriptions will typically correspond
 to a specific role and/or responsibility (e.g. a webserver, database, etc).
 
 Subscriptions are a powerful primitives in the monitoring context because they
@@ -123,24 +141,46 @@ mapping.
 
 #### Standalone checks
 
+Sensu checks which are defined on a [Sensu client](clients) with the [definition attribute](#check-definition-specification) `standalone` set to `true` are
+called "standalone checks". The Sensu client provides its own
+[scheduler](client-scheduler) for scheduling standalone checks which ensures
+<abbr title='typically withing 500ms'>scheduling consistency</abbr> between
+Sensu clients with identical check definitions (assuming that system clocks are
+synchronized via [NTP][ntp]).
+
+Standalone checks are an important complement to [subscription
+checks](#subscription-checks) because they provide a de-centralized management
+alternative for Sensu.
 
 ## Check results
 
 ### What is a check result?
+
+A check result is a [JSON][json] document published as a message on the [Sensu
+transport](transport) by the Sensu client upon completion of a check execution.
+Sensu check results include the [check definition
+attributes](#check-definition-specification) (e.g. `command`, `subscribers`,
+`interval`, `name`, etc; including [custom attributes](#custom-attributes)), the
+client name the result was submitted from, and the `output` of the check.
 
 ### Example check result output
 
 ~~~ json
 {
   "check": {
-    "issued": 1458919602,
-    "executed": 1458919602,
-    "handlers": [],
-    "output": "CheckDiskUsage OK: Filesystem / space usage is 34.91%",
     "status": 0,
-    "name": "disk-usage-space-_"
+    "command": "check-http.rb -u https://sensuapp.org",
+    "subscribers": [
+      "demo"
+    ],
+    "interval": 60,
+    "name": "sensu-website",
+    "issued": 1458934742,
+    "executed": 1458934742,
+    "duration": 0.637,
+    "output": "CheckHttp OK: 200, 78572 bytes\n"
   },
-  "client": "demo"
+  "client": "sensu-docs"
 }
 ~~~
 
@@ -148,34 +188,37 @@ mapping.
 
 ### What are check command tokens?
 
-Sensu check plugins may use command line arguments for execution options, such
-as thresholds, file paths, URLs, and credentials. In some cases, the command
-line arguments may need to differ per client in a Sensu [client
-subscription][subscribers]. Sensu check command tokens, a
-pattern containing a dot notation client attribute key (e.g.
-`:::disk.warning:::`), are substituted by the client attribute value before the
-command is executed by the Sensu client. Command tokens allow the check command
-to be customized by the Sensu client definition attributes at execution time.
-Sensu check command tokens may provide a default value, separated by a `|`
-character, for clients executing the check that do not have the matching client
-definition attribute (e.g. `:::disk.warning|2GB:::`). If a command token does
-not provide a default value, and the client does not have the definition
-attribute, a check result indicating unmatched tokens will be published for the
-check execution, e.g. `"Unmatched command tokens: disk.warning"`.
+Sensu [check commands](#check-commands) may include [command line
+arguments](#check-command-arguments) for controlling the behavior of the check
+command (e.g. a [Sensu plugin](plugins)). Sensu check command arguments can be
+used for configuring thresholds, file paths, URLs, and credentials. In some
+cases, the check command arguments may need to differ on a clieny-by-client
+basis in a Sensu [client subscription][subscribers]. Sensu check command tokens
+are check command argument placeholders that can be replaced by [Sensu client
+definition attributes][client-definitions] (including [custom check definition
+attributes](clients#custom-attributes))).
+
+_NOTE: as Sensu check command tokens are also sometimes referred to as **"Sensu
+client overrides"**; a reference to the fact that command tokens allow client
+attributes to "override" [check command arguments](#check-command-arguments)._
 
 ### Example check command tokens
 
-The following is an example Sensu check definition, a JSON configuration file
-located at `/etc/sensu/conf.d/check_disk_usage.json`. This check definition
-makes use of Sensu check command tokens. The check is named `check_disk_usage`
-and it runs `check-disk-usage.rb` with client specific thresholds on Sensu
-clients with the `production` subscription, every `60` seconds.
+The following is an example Sensu [check definition][check-spec], which is
+using two check command tokens for [check command arguments][check-args]. In
+this example, the `check-disk-usage.rb` command accepts `-w` (warning) and `-c`
+(critical) arguments to indicate the thresholds (as percentages) for creating
+warning or critical events. As configured, this check will create a warning
+event at 80% disk capacity, unless a different threshold is provided by the
+client definition (i.e. `:::disk.warning|80:::`); and a critical event will be
+created if disk capacity reaches 90%, unless a different threshold is provided
+by the client definition (i.e. `:::disk.critical|90:::`).
 
 ~~~ json
 {
   "checks": {
     "check_disk_usage": {
-      "command": "check-disk-usage.rb -w :::disk.warning|90::: -c :::disk.critical|95:::",
+      "command": "check-disk-usage.rb -w :::disk.warning|80::: -c :::disk.critical|90:::",
       "subscribers": [
         "production"
       ],
@@ -185,26 +228,79 @@ clients with the `production` subscription, every `60` seconds.
 }
 ~~~
 
-The following is an example Sensu client definition, containing the custom
-attributes used by the above check for disk usage thresholds.
+The following example [Sensu client definition][client-definitions] would
+provide the necessary attributes to override the `disk.warning` and
+`disk.critical` tokens declared above.
 
 ~~~ json
 {
   "client": {
     "name": "i-424242",
-    "address": "8.8.8.8",
+    "address": "10.0.2.100",
     "subscriptions": [
       "production",
       "webserver",
       "mysql"
     ],
     "disk": {
-      "warning": 97,
-      "critical": 99
+      "warning": 75,
+      "critical": 85
     }
   }
 }
 ~~~
+
+### Check command token specification
+
+Sensu check command tokens provide access to [Sensu client definition
+attributes][client-definitions] via "dot notation" (e.g. `disk.warning`).
+
+#### Command token declaration syntax
+
+Command tokens are declared by wrapping [client
+attributes](#command-token-client-attributes) with "triple colons" (i.e. three
+colon characters, i.e. `:::`).
+
+##### Examples {#command-token-declaration-examples}
+
+- `:::address:::` would be replaced with the [client `address`
+  attribute](clients#client-attributes)
+- `:::url:::` would be replaced with a [custom
+  attribute](clients#custom-attributes) called `url`
+
+#### Command token client attributes
+
+Command token attributes are "dot notation" references to [Sensu client
+definition attributes][client-definitions].
+
+##### Examples {#command-token-client-attributes-examples}
+
+- `:::address:::` would be replaced with the [client `address`
+  attribute](clients#client-attributes)
+- `:::disk.warning:::` would be replaced with a [custom
+  attribute](clients#custom-attributes) called `warning` nested inside of a JSON
+  hash called `disk`
+
+#### Command token alternate values
+
+Command token alternate values can be used as a fallback in the event that no
+a [command token client attribute](#command-token-client-attribute) is not
+provided by the [client definition][client-definitions]. Command token alternate
+values are separated by a pipe character (`|`), and can be used to provide a
+"default values" for clients that are missing the declared token attribute.
+
+##### Examples {#command-token-alternate-values}
+
+- `:::url|https://sensuapp.org:::` would be replaced with a [custom
+  attribute](clients#custom-attributes) called `url`. If no such attribute
+  called `url` is included in the client definition, the alternate (or default)
+  value of `https://sensuapp.org` will be used.
+
+_NOTE: if a command token alternate value is not provided (i.e. as a default
+value), and the Sensu client definition does not have a matching [command token
+client attribute](#command-token-client-attribute), a [check
+result](#check-results) indicating unmatched tokens will be published for the
+check execution (e.g.: `"Unmatched command tokens: disk.warning"`)_
 
 ## Check definitions
 
@@ -605,3 +701,7 @@ and thus able to be included in event notifications (e.g. email).
 [subscribers]:            clients#client-subscriptions
 [client-definitions]:     clients#client-definition-specification
 [path]:                   https://en.wikipedia.org/wiki/PATH_(variable)
+[json]:                   http://www.json.org/
+[ntp]:                    http://www.ntp.org/
+[check-spec]:             #check-defintiion-specification
+[check-args]:             #check-command-arguments
