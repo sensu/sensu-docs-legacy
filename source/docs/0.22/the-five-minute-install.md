@@ -116,7 +116,7 @@ configurations, please consult the [installation guide](installation-guide).
    ~~~ shell
    {
      "client": {
-       "name": "my-first-sensu-client",
+       "name": "client-01",
        "address": "localhost",
        "environment": "development",
        "subscriptions": [
@@ -184,16 +184,13 @@ configurations, please consult the [installation guide](installation-guide).
     using the `curl` utility (and piping the result to `jq`):
 
     ~~~ shell
-    curl http://localhost:4567/clients | jq .
+    curl -s http://localhost:4567/clients | jq .
     ~~~
 
     If the Sensu API returns a JSON array of Sensu clients similar to this:
 
     ~~~ shell
-    $ curl http://localhost:4567/clients | jq .
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100   175  100   175    0     0  26014      0 --:--:-- --:--:-- --:--:-- 29166
+    $ curl -s http://localhost:4567/clients | jq .
     [
       {
         "timestamp": 1458625739,
@@ -207,7 +204,7 @@ configurations, please consult the [installation guide](installation-guide).
         ],
         "environment": "development",
         "address": "localhost",
-        "name": "my-first-sensu-client"
+        "name": "client-01"
       }
     ]
     ~~~
