@@ -6,22 +6,22 @@ title: "Install the Sensu Server and API"
 
 # Install the Sensu Server and API
 
-Once you have installed [Sensu's prerequisites][prereqs] (RabbitMQ and/or
-Redis), you are ready to install a Sensu Server and API. The Sensu Server and
-API are available in two flavors:
+Once you have installed [Sensu's prerequisites][1] (RabbitMQ and/or Redis), you
+are ready to install a Sensu Server and API. The Sensu Server and API are
+available in two flavors:
 
 - [Sensu Core](#sensu-core)
 - [Sensu Enterprise](#sensu-enterprise)
 
 _NOTE: only one flavor of the Sensu server & API should be used at any given
 time. Sensu Enterprise users should skip Sensu Core server & API installation
-and jump directly to [installing Sensu Enterprise](#sensu-enterprise)._
+and jump directly to [installing Sensu Enterprise][2]._
 
 ## Sensu Core (OSS) {#sensu-core}
 
 Sensu Core is installed via native system installer package formats (e.g. .deb,
 .rpm, .msi, .pkg, etc), which are available for download from the [Sensu
-Downloads][downloads] page, and from package manager repositories for APT (for
+Downloads][3] page, and from package manager repositories for APT (for
 Ubuntu/Debian systems), and YUM (for RHEL/CentOS). The Sensu Core packages
 installs several processes, including `sensu-server`, `sensu-api`, and
 `sensu-client`.
@@ -49,5 +49,6 @@ server and API from a single process).
 - [Install Sensu Enterprise on Ubuntu/Debian](sensu-on-ubuntu-debian#sensu-enterprise)
 - [Install Sensu Enterprise on RHEL/CentOS](sensu-on-rhel-centos#sensu-enterprise)
 
-[prereqs]:        installation-prerequisites
-[downloads]:      https://sensuapp.org/download
+[1]:  installation-prerequisites
+[2]:  #sensu-enterprise
+[3]:  https://sensuapp.org/download

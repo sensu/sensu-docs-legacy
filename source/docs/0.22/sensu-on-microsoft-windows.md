@@ -21,18 +21,17 @@ title: "Install Sensu on Microsoft Windows"
 
 Sensu Core is installed on Microsoft Windows systems via a native system
 installer package (i.e. a .msi file), which is available for download from the
-[Sensu Downloads][download] page, and from [this repository][msi-repo].
+[Sensu Downloads][1] page, and from [this repository][2].
 
 ### Download and install Sensu using the Sensu MSI {#download-and-install-sensu-core}
 
-1. Download Sensu from the [Sensu Downloads][download] page, or by using this
-   link:
+1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [https://core.sensuapp.com/msi/sensu-0.22.1-1.msi](https://core.sensuapp.com/msi/sensu-0.22.1-1.msi)
+   [https://core.sensuapp.com/msi/sensu-0.22.1-1.msi][3]
 
 2. Double-click the `sensu-0.22.1-1.msi` installer package to launch the
-   installer, accept the Sensu Core [MIT License][mit-license] and install Sensu
-   using the default settings (e.g. install location, etc).
+   installer, accept the Sensu Core [MIT License][4] and install Sensu using the
+   default settings (e.g. install location, etc).
 
    _WARNING: changing the default installation path from `C:\opt` is strongly
    discouraged._
@@ -51,11 +50,11 @@ these will correspond to `C:\opt\sensu` on Microsoft Windows systems. Additional
 or alternative configuration file and directory locations may be used by
 modifying Sensu's service configuration XML and/or by starting the Sensu
 services with the corresponding CLI arguments. For more information, please
-consult the [Sensu Configuration](configuration) reference documentation._
+consult the [Sensu Configuration][5] reference documentation._
 
 The following Sensu configuration files are provided as examples. Please review
-the [Sensu configuration reference documentation](configuration) for additional
-information on how Sensu is configured.
+the [Sensu configuration reference documentation][5] for additional information
+on how Sensu is configured.
 
 ### Create the Sensu configuration directory
 
@@ -93,10 +92,9 @@ mkdir C:\opt\sensu\conf.d\
 ### Example Transport Configuration
 
 At minimum, the Sensu client process requires configuration to tell it how to
-connect to the configured [Sensu Transport](transport). Please refer to the
+connect to the configured [Sensu Transport][6]. Please refer to the
 configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis](install-redis), or [Install
-RabbitMQ](install-rabbitmq)).
+file examples (see [Install Redis][7], or [Install RabbitMQ][8]).
 
 ### Configure the Sensu client Windows service wrapper
 
@@ -107,11 +105,10 @@ uses an XML configuration file to configure the `sensu-client` run arguments
 
 To configure the Sensu client service wrapper, edit the service definition file
 at `C:\opt\sensu\bin\sensu-client.xml` with your favorite text editor. This XML
-configuration file allows you to set [Sensu client CLI arguments][cli-args]. The
-following example configuration file sets the Sensu client primary
-configuration file path to `C:\opt\sensu\config.json`, the Sensu configuration
-directory to `C:\opt\sensu\conf.d`, and the log file path to
-`C:\opt\sensu\sensu-client.log`.
+configuration file allows you to set [Sensu client CLI arguments][9]. The
+following example configuration file sets the Sensu client primary configuration
+file path to `C:\opt\sensu\config.json`, the Sensu configuration directory to
+`C:\opt\sensu\conf.d`, and the log file path to `C:\opt\sensu\sensu-client.log`.
 
 ~~~ xml
 <!--
@@ -132,7 +129,7 @@ directory to `C:\opt\sensu\conf.d`, and the log file path to
    client is installed. For the purpose of this example, we will assume
    `10.0.1.100` is our IP address.
 
-2. Open a Command Prompt and use the [Windows SC][sc] utility to create the
+2. Open a Command Prompt and use the [Windows SC][10] utility to create the
    Windows service for the Sensu client:
 
    ~~~ cmd
@@ -146,7 +143,7 @@ directory to `C:\opt\sensu\conf.d`, and the log file path to
 ### Managing the Sensu client Windows service {#service-management}
 
 To manually start and stop the Sensu client Windows service, use the
-[Services.msc][msc] utility, or via the Command Prompt.
+[Services.msc][11] utility, or via the Command Prompt.
 
 - Start or stop the Sensu client
 
@@ -156,9 +153,14 @@ To manually start and stop the Sensu client Windows service, use the
   ~~~
 
 
-[download]:             https://sensuapp.org/download
-[msi-repo]:             https://core.sensuapp.com/msi/
-[mit-license]:          https://sensuapp.org/mit-license
-[cli-args]:             configuration#sensu-service-cli-arguments
-[sc]:                   https://technet.microsoft.com/en-us/library/bb490995.aspx
-[msc]:                  https://technet.microsoft.com/en-us/library/cc755249.aspx
+[1]:  https://sensuapp.org/download
+[2]:  https://core.sensuapp.com/msi/
+[3]:  https://core.sensuapp.com/msi/sensu-0.22.1-1.msi
+[4]:  https://sensuapp.org/mit-license
+[5]:  configuration
+[6]:  transport
+[7]:  install-redis
+[8]:  install-rabbitmq
+[9]:  configuration#sensu-service-cli-arguments
+[10]: https://technet.microsoft.com/en-us/library/bb490995.aspx
+[11]: https://technet.microsoft.com/en-us/library/cc755249.aspx

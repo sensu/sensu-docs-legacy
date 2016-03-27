@@ -19,22 +19,22 @@ title: "Sensu on Mac OS X"
 
 Sensu Core is installed on Mac OS X systems via a native system installer
 package (i.e. a .pkg file), which is available for download from the
-[Sensu Downloads][download] page, and from [this repository][osx-repo].
+[Sensu Downloads][1] page, and from [this repository][2].
 
-_WARNING: Mac OS X packages are currently as a "beta" release. Support for running
-Sensu on Mac OS X will be provided on a best-effort basis until further notice._
+_WARNING: Mac OS X packages are currently as a "beta" release. Support for
+running Sensu on Mac OS X will be provided on a best-effort basis until further
+notice._
 
 ### Download and install Sensu using the Sensu Universal .pkg file {#download-and-install-sensu-core}
 
-1. Download Sensu from the [Sensu Downloads][download] page, or via the `curl`
-   utility
+1. Download Sensu from the [Sensu Downloads][1] page, or via the `curl` utility
 
    ~~~ shell
    curl -LO https://core.sensuapp.com/osx-unstable/sensu-0.22.0-1.pkg
    ~~~
 
    _NOTE: the Universal .pkg file supports OS X "Mavericks" (10.9) and newer.
-   Mountain Lion users: please use [this installer][pkg-mountainlion]._
+   Mountain Lion users: please use [this installer][3]._
 
 2. Install the package using the `installer` utility
 
@@ -53,12 +53,12 @@ configuration from the following locations:
 _NOTE: additional or alternative configuration file and directory locations may
 be used by modifying Sensu's `launchd` daemon configuration XML and/or by
 starting the Sensu services with the corresponding CLI arguments. For more
-information, please see the [configure the Sensu client `launchd`
-daemon](#configure-the-sensu-client-launchd-daemon) section, below._
+information, please see the [configure the Sensu client `launchd` daemon][4]
+section, below._
 
 The following Sensu configuration files are provided as examples. Please review
-the [Sensu configuration reference documentation](configuration) for additional
-information on how Sensu is configured.
+the [Sensu configuration reference documentation][5] for additional information
+on how Sensu is configured.
 
 ### Example client configuration
 
@@ -86,16 +86,15 @@ information on how Sensu is configured.
 ### Example Transport Configuration
 
 At minimum, the Sensu client process requires configuration to tell it how to
-connect to the configured [Sensu Transport](transport). Please refer to the
+connect to the configured [Sensu Transport][6]. Please refer to the
 configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis](install-redis), or [Install
-RabbitMQ](install-rabbitmq)).
+file examples (see [Install Redis][7], or [Install RabbitMQ][8]).
 
 ### Configure the Sensu client `launchd` daemon
 
 The Sensu Core .pkg package includes a Sensu client daemon configuration,
 allowing Sensu to be run as a `launchd` job, or daemon. The OS X `launchd`
-service and `launchctl` utility use a ["plist" file][plist] (an XML-based
+service and `launchctl` utility use a ["plist" file][9] (an XML-based
 configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 `--log /var/log/sensu/sensu-client.log`).
 
@@ -109,7 +108,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
-   arguments][cli-args]. The following example configuration file sets the Sensu
+   arguments][10]. The following example configuration file sets the Sensu
    client primary configuration file path to `/etc/sensu/config.json`, the Sensu
    configuration directory to `/etc/sensu/conf.d`, and the log file path to
    `/etc/sensu/sensu-client.log`.
@@ -141,7 +140,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 
 ### Managing the Sensu client process {#service-management}
 
-Start or stop the Sensu client using the [`launchctl` utility][launchctl]:
+Start or stop the Sensu client using the [`launchctl` utility][11]:
 
 ~~~ shell
 sudo launchctl load -w /etc/sensu/org.sensuapp.sensu-client.plist
@@ -149,11 +148,14 @@ sudo launchctl unload -w /etc/sensu/org.sensuapp.sensu-client.plist
 ~~~
 
 
-[download]:             https://sensuapp.org/download
-[osx-repo]:             https://core.sensuapp.com/osx-unstable/
-[pkg-universal]:        https://core.sensuapp.com/osx-unstable/sensu-0.22.0-1.pkg
-[pkg-mountainlion]:     https://core.sensuapp.com/osx-unstable/sensu-0.22.1-1.mountainlion.pkg
-[mit-license]:          https://sensuapp.org/mit-license
-[cli-args]:             configuration#sensu-service-cli-arguments
-[launchctl]:            https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/launchctl.1.html
-[plist]:                https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/plist.5.html
+[1]:  https://sensuapp.org/download
+[2]:  https://core.sensuapp.com/osx-unstable/
+[3]:  https://core.sensuapp.com/osx-unstable/sensu-0.22.1-1.mountainlion.pkg
+[4]:  #configure-the-sensu-client-launchd-daemon
+[5]:  configuration
+[6]:  transport
+[7]:  install-redis
+[8]:  install-rabbitmq
+[9]:  https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/plist.5.html
+[10]: configuration#sensu-service-cli-arguments
+[11]: https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/launchctl.1.html

@@ -27,7 +27,7 @@ contain known security vulnerabilities and bugs._
 
 ## Install Erlang (the RabbitMQ runtime) {#install-erlang}
 
-RabbitMQ runs on the [Erlang runtime][erlang], so before you can install and run
+RabbitMQ runs on the [Erlang runtime][1], so before you can install and run
 RabbitMQ, you'll need to install Erlang.
 
 1. Add the Erlang Solutions YUM repository:
@@ -50,16 +50,19 @@ RabbitMQ, you'll need to install Erlang.
 
 ## Install RabbitMQ
 
-According to the [official RabbitMQ installation guide][rabbitmq-install],
-although RabbitMQ packages are included in the RPM-based distribution
-repositories, downloading and installing RabbitMQ from the RabbitMQ website is
-the recommended installation method.
+According to the [official RabbitMQ installation guide][2], although RabbitMQ
+packages are included in the RPM-based distribution repositories, downloading
+and installing RabbitMQ from the RabbitMQ website is the recommended
+installation method.
 
 > `rabbitmq-server` is included in [RPM-based distributions]. However, the
-versions included are often quite old. You will probably get better results
-installing the .rpm from our website. Check the [distribution] package details
-for which version of the server is available for which versions of the
-distribution.
+  versions included are often quite old. You will probably get better results
+  installing the .rpm from our website. Check the [distribution] package details
+  for which version of the server is available for which versions of the
+  distribution.
+
+[Sensu Support][3] is available for RabbitMQ versions 3.6.0 and newer ([on
+Erlang version R16B03 or newer][4]).
 
 ### Download and install RabbitMQ using `rpm`
 
@@ -74,7 +77,7 @@ distribution.
 ### Install RabbitMQ using YUM
 
 The RabbitMQ website provides [instructions for installing from the official
-RabbitMQ YUM repository][rabbitmq-install].
+RabbitMQ YUM repository][2].
 
 _WARNING: this installation method is not recommended for Sensu Enterprise
 users, as the repository is labeled as a "testing" repo, because (according to
@@ -83,7 +86,7 @@ be a reason to upgrade RabbitMQ versions frequently._
 
 ## Managing the RabbitMQ service/process
 
-1. Install the RabbitMQ init scripts using the [`chkconfig` utility][chkconfig]:
+1. Install the RabbitMQ init scripts using the [`chkconfig` utility][5]:
 
    ~~~ shell
    sudo chkconfig rabbitmq-server on
@@ -98,9 +101,9 @@ be a reason to upgrade RabbitMQ versions frequently._
 
 ## Configure RabbitMQ access controls
 
-Access to RabbitMQ is restricted by [access controls](rabbitmq-acl) (e.g.
-username/password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual
-host (`vhost`) and user credentials will need to be created.
+Access to RabbitMQ is restricted by [access controls][6] (e.g. username and
+password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual host
+(`vhost`) and user credentials will need to be created.
 
 ### Create a dedicated RabbitMQ `vhost` for Sensu
 
@@ -135,7 +138,7 @@ development environments.
   allows (`fs.file-max`) and the per-user limit (`ulimit -n`). The former must be
   higher than the latter.
 
-  _Source: [rabbitmq.com][rabbitmq-install]_
+  _Source: [rabbitmq.com][2]_
 
 To adjust this limit, please edit the configuration file found at
 `/etc/defaults/rabbitmq-server` by uncommenting the last line in the file, and
@@ -166,9 +169,9 @@ rabbitmqctl status
 ## Configure Sensu
 
 The following Sensu configuration files are provided as examples. Please review
-the [RabbitMQ reference documentation](rabbitmq) for additional information on
+the [RabbitMQ reference documentation][7] for additional information on
 configuring Sensu to communicate with RabbitMQ, and the [reference documentation
-on Sensu configuration](configuration) for more information on how Sensu loads
+on Sensu configuration][8] for more information on how Sensu loads
 configuration.
 
 ### Example Standalone Configuration
@@ -211,10 +214,11 @@ configuration.
 
 
 
-[erlang]:             https://www.erlang.org/
-[rabbitmq-install]:   http://www.rabbitmq.com/install-rpm.html
-[rabbitmq-acl]:       https://www.rabbitmq.com/access-control.html
-[rabbitmq-erlang]:    https://www.rabbitmq.com/which-erlang.html
-[rabbitmq-config]:    http://www.rabbitmq.com/configure.html
-[chkconfig]:          https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
-[support]:            https://sensuapp.org/support
+[1]:  https://www.erlang.org/
+[2]:  http://www.rabbitmq.com/install-rpm.html
+[3]:  https://sensuapp.org/support
+[4]:  https://www.rabbitmq.com/which-erlang.html
+[5]:  https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
+[6]:  https://www.rabbitmq.com/access-control.html
+[7]:  rabbitmq
+[8]:  configuration

@@ -9,7 +9,7 @@ next:
 
 # Installation strategies
 
-Sensu's [architecture](architecture) is one of its most compelling features. It
+Sensu's [architecture][1] is one of its most compelling features. It
 is flexible enough to be installed on a single system for
 development/testing/lab purposes (or small production environments), and
 sophisticated enough to support highly available configurations capable of
@@ -32,7 +32,7 @@ installation is recommended.
 To proceed with a standalone installation, please select a single compute
 resource with a **minimum of 2GB of memory (4GB recommended)** (e.g. a physical
 computer, virtual machine, or container) as your installation target, and
-[continue to the next step in the guide](installation-prerequisites).
+[continue to the next step in the guide][2].
 
 _NOTE: Sensu's modular design makes it easy to upgrade from a standalone
 installation to a distributed or high-availability installation, so unless you
@@ -57,7 +57,7 @@ rules will allow said services to communicate with one another).
 To proceed with a distributed installation, please select a minimum of two (2)
 compute resources (e.g. physical computers, virtual machines, or containers) as
 your installation targets, and [continue to the next step in the
-guide](installation-prerequisites).
+guide][2].
 
 _NOTE: for the purposes of this installation guide, distributed installation
 will be described in terms of two (2) installation targets. One system will act
@@ -72,4 +72,8 @@ clients)._
 **Install Sensu's dependencies across multiple systems, in a high-availability
 configuration (clustering, etc), _and_ install the Sensu services on multiple
 systems in a clustered configuration.** High availability configurations will be
-introduced at [conclusion of this guide](installation-summary).
+introduced at [conclusion of this guide][3].
+
+[1]:  architecture
+[2]:  installation-prerequisites
+[3]:  installation-summary

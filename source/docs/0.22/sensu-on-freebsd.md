@@ -16,10 +16,9 @@ title: "Sensu on FreeBSD"
 
 ## Install Sensu Core {#sensu-core}
 
-Sensu Core is installed on FreeBSD systems via a native system installer
-package (i.e. a .txz file), which is available for download from the
-[Sensu Downloads][download] page, and from [this repository (64-bit FreeBSD
-10+ only)][bsd-repo].
+Sensu Core is installed on FreeBSD systems via a native system installer package
+(i.e. a .txz file), which is available for download from the [Sensu
+Downloads][1] page, and from [this repository (64-bit FreeBSD 10+ only)][2].
 
 _WARNING: FreeBSD packages are currently as a "beta" release. Support for
 running Sensu on FreeBSD will be provided on a best-effort basis until further
@@ -27,13 +26,12 @@ notice._
 
 ### Download and install Sensu using the Sensu Universal .pkg file {#download-and-install-sensu-core}
 
-1. Download Sensu from the [Sensu Downloads][download] page, or by using this
-   link:
+1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [https://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-0.22.0_1.txz][https://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-0.22.0_1.txz]
+   [https://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-0.22.0_1.txz][3]
 
 2. Double-click the `sensu-0.22.0_1.txz` installer package to launch the
-   installer, accept the Sensu Core [MIT License][mit-license] and install Sensu
+   installer, accept the Sensu Core [MIT License][4] and install Sensu
    using the default settings (e.g. install location, etc).
 
    _WARNING: changing the default installation path from `/opt/sensu` is
@@ -54,8 +52,8 @@ please consult the [Sensu Configuration](configuration) reference
 documentation._
 
 The following Sensu configuration files are provided as examples. Please review
-the [Sensu configuration reference documentation](configuration) for additional
-information on how Sensu is configured.
+the [Sensu configuration reference documentation][5] for additional information
+on how Sensu is configured.
 
 ### Example client configuration
 
@@ -83,16 +81,19 @@ information on how Sensu is configured.
 ### Example Transport Configuration
 
 At minimum, the Sensu client process requires configuration to tell it how to
-connect to the configured [Sensu Transport](transport). Please refer to the
+connect to the configured [Sensu Transport][6]. Please refer to the
 configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis](install-redis), or [Install
-RabbitMQ](install-rabbitmq)).
+file examples (see [Install Redis][7], or [Install RabbitMQ][8]).
 
 ## Operating Sensu
 
 Coming soon...
 
-[download]:             https://sensuapp.org/download
-[bsd-repo]:             https://core.sensuapp.com/freebsd-unstable/10.0/amd64/
-[mit-license]:          https://sensuapp.org/mit-license
-[cli-args]:             configuration#sensu-service-cli-arguments
+[1]:  https://sensuapp.org/download
+[2]:  https://core.sensuapp.com/freebsd-unstable/10.0/amd64/
+[3]:  https://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-0.22.0_1.txz
+[4]:  https://sensuapp.org/mit-license
+[5]:  configuration
+[6]:  transport
+[7]:  install-redis
+[8]:  install-rabbitmq

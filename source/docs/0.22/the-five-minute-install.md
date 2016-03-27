@@ -8,30 +8,29 @@ title: "The five minute install"
 
 ## Objective
 
-Although Sensu’s [architecture](architecture) is one of its most compelling
-features, and the [complete installation guide](installation-guide) can help you
-get Sensu installed and configured for [a variety of operating
-environments](installation-strategies), you might not actually care about any of
-that until you can get Sensu up and running in a development environment for
-testing purposes. This installation guide is intended to help you to **install
-Sensu Core in five minutes or less, <abbr title='all $0 of it you paid for that
-"free as in beer open source software :)"'>or we'll give you your money
-back</abbr>, guaranteed**.
+Although Sensu’s [architecture][1] is one of its most compelling features, and
+the [complete installation guide][2] can help you get Sensu installed and
+configured for [a variety of operating environments][3], you might not actually
+care about any of that until you can get Sensu up and running in a development
+environment for testing purposes. This installation guide is intended to help
+you to **install Sensu Core in five minutes or less, <abbr title='all $0 of it
+you paid for that "free as in beer open source software :)"'>or we'll give you
+your money back</abbr>, guaranteed**.
 
 After completing the steps in this guide, you will have a fully functional Sensu
-Core installation in a [standalone][standalone] configuration.
+Core installation in a [standalone][4] configuration.
 
 ## Installation Requirements
 
 What will you need to complete this guide?
 
 - A virtual machine, or physical computer running 64-bit
-  [Ubuntu 14.04][ubuntu1404] with a minimum of 2GB of memory (4GB recommended)
+  [Ubuntu 14.04][5] with a minimum of 2GB of memory (4GB recommended)
 - Familiarity with a <abbr title='do you even pipe to grep?!'>command-line
   interface</abbr>
-- Willingness to run a [shell script downloaded from the internet][sensu-bash]
-  ([or not](sensu-on-ubuntu-debian#install-sensu-core-repository))
-- The commitment to count to [10][ten] (the number of steps in this guide)
+- Willingness to run a [shell script downloaded from the internet][6]
+  ([or not][7])
+- The commitment to count to [ten][8] (the number of steps in this guide)
 - 300 seconds (the amount of time it should take to complete this installation)
 
 Ready? Let's get started!
@@ -39,9 +38,9 @@ Ready? Let's get started!
 ## Install Sensu in 5-minutes or less {#install-sensu}
 
 The following installation steps will help you get Sensu Core installed in a
-[standalone][standalone] on a system running [Ubuntu 14.04][ubuntu1404], only.
-For installation on other platforms, and/or alternative installation
-configurations, please consult the [installation guide](installation-guide).
+[standalone][4] on a system running [Ubuntu 14.04][5], only. For installation on
+other platforms, and/or alternative installation configurations, please consult
+the [installation guide](2).
 
 1. Install the Sensu software repositories:
 
@@ -71,15 +70,14 @@ configurations, please consult the [installation guide](installation-guide).
    sudo apt-get install sensu
    ~~~
 
-   ...and if you're using [Sensu Enterprise][sensu-enterprise], go ahead and
-   install Sensu Enterprise as well
+   ...and if you're using [Sensu Enterprise][9], let's go ahead and install
+   Sensu Enterprise as well:
 
    ~~~ shell
    sudo apt-get install sensu-enterprise sensu-enterprise-dashboard
    ~~~
 
-5. Configure Sensu by downloading this [example configuration
-   file][simple-sensu-config]:
+5. Configure Sensu by downloading this [example configuration file][10]:
 
    ~~~ shell
    sudo wget -O /etc/sensu/config.json https://sensuapp.org/docs/0.22/files/simple-sensu-config.json
@@ -104,7 +102,7 @@ configurations, please consult the [installation guide](installation-guide).
    ~~~
 
 6. Configure the Sensu client by downloading this [example configuration
-   file][simple-client-config]:
+   file][11]:
 
    ~~~ shell
    sudo wget -O /etc/sensu/conf.d/client.json https://sensuapp.org/docs/0.22/files/simple-client-config.json
@@ -131,7 +129,7 @@ configurations, please consult the [installation guide](installation-guide).
    ~~~
 
 7. Configure a Sensu dashboard by downloading this [example configuration
-   file][simple-dashboard-config]:
+   file][12]:
 
    ~~~ shell
    sudo wget -O /etc/sensu/dashboard.json https://sensuapp.org/docs/0.22/files/simple-dashboard-config.json
@@ -181,7 +179,7 @@ configurations, please consult the [installation guide](installation-guide).
    ~~~   
 
 10. Verify that your installation is ready to use by querying the Sensu API
-    using the `curl` utility (and piping the result to `jq`):
+    using the `curl` utility (and piping the result to the [`jq` utility][13]):
 
     ~~~ shell
     curl -s http://localhost:4567/clients | jq .
@@ -223,10 +221,16 @@ configurations, please consult the [installation guide](installation-guide).
 
 Coming soon...
 
-[ubuntu1404]:             http://releases.ubuntu.com/14.04/
-[standalone]:             installation-strategies#standalone
-[sensu-bash]:             http://github.com/sensu/sensu-bash
-[ten]:                    https://www.youtube.com/watch?v=J2D1XF40-ok
-[simple-sensu-config]:    /docs/0.22/files/simple-sensu-config.json
-[simple-client-config]:   /docs/0.22/files/simple-client-config.json
-[sensu-core-apt]:         sensu-on-ubuntu##install-sensu-core-repository
+[1]:  architecture
+[2]:  installation-guide
+[3]:  installation-strategies
+[4]:  installation-strategies#standalone
+[5]:  http://releases.ubuntu.com/14.04/
+[6]:  http://github.com/sensu/sensu-bash
+[7]:  sensu-on-ubuntu-debian#install-sensu-core-repository
+[8]:  https://www.youtube.com/watch?v=J2D1XF40-ok
+[9]:  https://sensuapp.org/sensu-enterprise
+[10]: /docs/0.22/files/simple-sensu-config.json
+[11]: /docs/0.22/files/simple-client-config.json
+[12]: /docs/0.22/files/simple-dashboard-config.json
+[13]: https://stedolan.github.io/jq/

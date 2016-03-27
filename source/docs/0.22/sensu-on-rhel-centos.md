@@ -30,9 +30,9 @@ title: "Install Sensu on RHEL/CentOS"
 
 Sensu Core is installed on RHEL and CentOS systems via a native system installer
 package (i.e. a .rpm file), which is available for download from the [Sensu
-Downloads][download] page, and from YUM package management repositories.
-The Sensu Core package installs several processes including `sensu-server`,
-`sensu-api`, and `sensu-client`.
+Downloads][1] page, and from YUM package management repositories. The Sensu Core
+package installs several processes including `sensu-server`, `sensu-api`, and
+`sensu-client`.
 
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
@@ -58,13 +58,13 @@ The Sensu Core package installs several processes including `sensu-server`,
 
 ## Install Sensu Enterprise {#sensu-enterprise}
 
-[Sensu Enterprise][sensu-enterprise] is installed on RHEL and CentOS systems
-via a native system installer package (i.e. a .rpm file). The Sensu Enterprise
-installer package is made available via the Sensu Enterprise YUM repository,
-which requires access credentials to access. The Sensu Enterprise packages
-install two processes: `sensu-enterprise` (which provides the Sensu server and
-API from a single process), and `sensu-enterprise-dashboard` (which provides
-the dashboard API and web application).
+[Sensu Enterprise][2] is installed on RHEL and CentOS systems via a native
+system installer package (i.e. a .rpm file). The Sensu Enterprise installer
+package is made available via the Sensu Enterprise YUM repository, which
+requires access credentials to access. The Sensu Enterprise packages install two
+processes: `sensu-enterprise` (which provides the Sensu server and API from a
+single process), and `sensu-enterprise-dashboard` (which provides the dashboard
+API and web application).
 
 ### Install the Sensu Enterprise repository {#install-sensu-enterprise-repository}
 
@@ -131,11 +131,11 @@ configuration from the following locations:
 _NOTE: Additional or alternative configuration file and directory locations may
 be used by modifying Sensu's init scripts and/or by starting the Sensu services
 with the corresponding CLI arguments. For more information, please consult the
-[Sensu Configuration](configuration) reference documentation._
+[Sensu Configuration][3] reference documentation._
 
 The following Sensu configuration files are provided as examples. Please review
-the [Sensu configuration reference documentation](configuration) for additional
-information on how Sensu is configured.
+the [Sensu configuration reference documentation][3] for additional information
+on how Sensu is configured.
 
 ### Example client configuration
 
@@ -163,16 +163,15 @@ information on how Sensu is configured.
 ### Example transport configuration
 
 At minimum, all of the Sensu processes require configuration to tell them how to
-connect to the configured [Sensu Transport](transport). Please refer to the
+connect to the configured [Sensu Transport][4]. Please refer to the
 configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis](install-redis), or [Install
-RabbitMQ](install-rabbitmq)).
+file examples (see [Install Redis][5], or [Install RabbitMQ][6]).
 
 ### Example data store configuration
 
 The Sensu Core server and API processes, and the Sensu Enterprise process all
 require configuration to tell them how to connect to Redis (the Sensu data
-store). Please refer to the [Redis installation instructions](install-redis) for
+store). Please refer to the [Redis installation instructions][5] for
 configuration file examples.
 
 ### Example API configurations
@@ -263,14 +262,14 @@ configuration file examples.
 
 3. The Sensu Enterprise Dashboard process requires configuration to tell it how
    to connect to Redis (the Sensu data store). Please refer to the [Redis
-   installation instructions](install-redis) for configuration file examples.
+   installation instructions][5] for configuration file examples.
 
 ### Enable the Sensu services to start on boot
 
 By default, the Sensu services are not configured to start automatically on
 system boot (we recommend managing the Sensu services with a process supervisor
-such as [runit](http://smarden.org/runit/)). To enable Sensu services on system
-boot, use the [`chkconfig` utility][chkconfig].
+such as [runit][7]). To enable Sensu services on system boot, use the
+[`chkconfig` utility][8].
 
 - Enable the Sensu client on system boot
 
@@ -295,8 +294,7 @@ boot, use the [`chkconfig` utility][chkconfig].
     _WARNING: the `sensu-enterprise` process is intended to be a drop-in
     replacement for the Sensu Core `sensu-server` and `sensu-api` processes.
     Please [ensure that the Sensu Core processes are not configured to start on
-    system](#disable-the-sensu-services-on-boot) boot before enabling Sensu
-    Enterprise to start on system boot._
+    system][8] boot before enabling Sensu Enterprise to start on system boot._
 
 - Enable Sensu Enterprise Dashboard on system boot
 
@@ -313,7 +311,7 @@ boot, use the [`chkconfig` utility][chkconfig].
 ### Disable the Sensu services on boot
 
 If you have enabled Sensu services on boot and now need to disable them, this
-can also be accomplished using the [`chkconfig` utility][chkconfig].
+can also be accomplished using the [`chkconfig` utility][9].
 
 - Disable the Sensu client on system boot
 
@@ -391,6 +389,12 @@ To manually start and stop the Sensu services, use the provided init scripts:
   IP address where the Sensu Enterprise Dashboard is running).
 
 
-[download]:             https://sensuapp.org/download
-[sensu-enterprise]:     https://sensuapp.org/sensu-enterprise
-[chkconfig]:            https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
+[1]:  https://sensuapp.org/download
+[2]:  https://sensuapp.org/sensu-enterprise
+[3]:  configuration
+[4]:  transport
+[5]:  install-redis
+[6]:  install-rabbitmq
+[7]:  http://smarden.org/runit/
+[8]:  #disable-the-sensu-services-on-boot
+[9]:  https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html

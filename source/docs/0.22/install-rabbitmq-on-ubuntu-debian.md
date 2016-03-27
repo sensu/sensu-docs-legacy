@@ -22,7 +22,7 @@ next:
 
 ## Install Erlang (the RabbitMQ runtime) {#install-erlang}
 
-RabbitMQ runs on the [Erlang runtime][erlang], so before you can install and run
+RabbitMQ runs on the [Erlang runtime][1], so before you can install and run
 RabbitMQ, you'll need to install Erlang.
 
 1. Add the Erlang Solutions APT repository
@@ -41,10 +41,10 @@ RabbitMQ, you'll need to install Erlang.
 
 ## Install RabbitMQ
 
-According to the [official RabbitMQ installation guide][rabbitmq-install],
-although RabbitMQ packages are included in the Ubuntu and Debian distribution
-repositories, downloading and installing RabbitMQ from the RabbitMQ website is
-the recommended installation method.
+According to the [official RabbitMQ installation guide][2], although RabbitMQ
+packages are included in the Ubuntu and Debian distribution repositories,
+downloading and installing RabbitMQ from the RabbitMQ website is the recommended
+installation method.
 
 > `rabbitmq-server` is included in Debian since 6.0 (squeeze) and in Ubuntu
   since 9.04. However, the versions included are often quite old. You will
@@ -52,13 +52,13 @@ the recommended installation method.
   the Debian package and Ubuntu package details for which version of the server
   is available for which versions of the distribution.
 
-[Sensu Support][support] is available for RabbitMQ versions 3.6.0 and newer ([on
-Erlang version R16B03 or newer][rabbitmq-erlang]).
+[Sensu Support][3] is available for RabbitMQ versions 3.6.0 and newer ([on
+Erlang version R16B03 or newer][4]).
 
 ### Download and install RabbitMQ using `dpkg`
 
 1. Download the official RabbitMQ 3.6.0 .deb installer package, as suggested in
-   the [official RabbitMQ installation guide][rabbitmq-install]:
+   the [official RabbitMQ installation guide][2]:
 
    ~~~ shell
    sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.0/rabbitmq-server_3.6.0-1_all.deb
@@ -73,7 +73,7 @@ Erlang version R16B03 or newer][rabbitmq-erlang]).
 ### Install RabbitMQ using APT
 
 The RabbitMQ website provides [instructions for installing from the official
-RabbitMQ APT repository][rabbitmq-install].
+RabbitMQ APT repository][2].
 
 _WARNING: this installation method is not recommended for Sensu Enterprise
 users, as the repository is labeled as a "testing" repo, because (according to
@@ -106,9 +106,9 @@ be a reason to upgrade RabbitMQ versions frequently._
 
 ## Configure RabbitMQ access controls
 
-Access to RabbitMQ is restricted by [access controls](rabbitmq-acl) (e.g.
-username/password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual
-host (`vhost`) and user credentials will need to be created.
+Access to RabbitMQ is restricted by [access controls][5] (e.g. username and
+password). For Sensu services to connect to RabbitMQ a RabbitMQ virtual host
+(`vhost`) and user credentials will need to be created.
 
 ### Create a dedicated RabbitMQ `vhost` for Sensu
 
@@ -143,7 +143,7 @@ development environments.
   allows (`fs.file-max`) and the per-user limit (`ulimit -n`). The former must be
   higher than the latter.
 
-  _Source: [rabbitmq.com][rabbitmq-install]_
+  _Source: [rabbitmq.com][2]_
 
 To adjust this limit, please edit the configuration file found at
 `/etc/defaults/rabbitmq-server` by uncommenting the last line in the file, and
@@ -174,9 +174,9 @@ rabbitmqctl status
 ## Configure Sensu
 
 The following Sensu configuration files are provided as examples. Please review
-the [RabbitMQ reference documentation](rabbitmq) for additional information on
+the [RabbitMQ reference documentation][6] for additional information on
 configuring Sensu to communicate with RabbitMQ, and the [reference documentation
-on Sensu configuration](configuration) for more information on how Sensu loads
+on Sensu configuration][7] for more information on how Sensu loads
 configuration.
 
 ### Example Standalone Configuration
@@ -219,9 +219,10 @@ configuration.
 
 
 
-[erlang]:             https://www.erlang.org/
-[rabbitmq-install]:   http://www.rabbitmq.com/install-debian.html
-[rabbitmq-acl]:       https://www.rabbitmq.com/access-control.html
-[rabbitmq-erlang]:    https://www.rabbitmq.com/which-erlang.html
-[rabbitmq-config]:    http://www.rabbitmq.com/configure.html
-[support]:            https://sensuapp.org/support
+[1]:  https://www.erlang.org/
+[2]:  http://www.rabbitmq.com/install-debian.html
+[3]:  https://sensuapp.org/support
+[4]:  https://www.rabbitmq.com/which-erlang.html
+[5]:  https://www.rabbitmq.com/access-control.html
+[6]:  rabbitmq
+[7]:  configuration

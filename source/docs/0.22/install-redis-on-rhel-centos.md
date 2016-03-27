@@ -20,9 +20,9 @@ next:
 ## Install Redis from the EPEL repositories
 
 Because Redis is not available by default in all RHEL and CentOS distribution
-repositories, you will need to install the corresponding [EPEL][epel] repository
-[for your CentOS/RHEL release][epel-howto] (supported platforms are RHEL 5, RHEL
-6, and RHEL 7).
+repositories, you will need to install the corresponding [EPEL][1] repository
+[for your CentOS/RHEL release][2] (supported platforms are RHEL 5, RHEL 6, and
+RHEL 7).
 
 1. Install EPEL on RHEL/CentOS 6:
 
@@ -33,7 +33,7 @@ repositories, you will need to install the corresponding [EPEL][epel] repository
    _NOTE: the preceding command will install the EPEL repository for
    RHEL/CentOS **version 6 ONLY**. For other RHEL/CentOS releases (i.e. version
    5 or 7), please refer to the [intructions for installing the correct EPEL for
-   your release][epel-howto]._
+   your release][2]._
 
 2. Install Redis using YUM
 
@@ -45,7 +45,7 @@ repositories, you will need to install the corresponding [EPEL][epel] repository
 
 ## Managing the Redis service/process
 
-Install the Redis init scripts using the [`chkconfig` utility][chkconfig]:
+Install the Redis init scripts using the [`chkconfig` utility][3]:
 
 ~~~ shell
 sudo /sbin/chkconfig redis on
@@ -62,10 +62,9 @@ step in the guide.
 ## Configure Sensu
 
 The following Sensu configuration files are provided as examples. Please review
-the [Redis reference documentation](redis) for additional information on
-configuring Sensu to communicate with Redis, and the [reference documentation on
-Sensu configuration](configuration) for more information on how Sensu loads
-configuration.
+the [Redis reference documentation][4] for additional information on configuring
+Sensu to communicate with Redis, and the [reference documentation on Sensu
+configuration][5] for more information on how Sensu loads configuration.
 
 ### Example Standalone Configuration
 
@@ -101,15 +100,15 @@ configuration.
    ~~~
 
    _NOTE: the `sensu-client` process does not require Redis configuration
-   unless Redis is being used as the [Sensu Transport](transport). If you're not
+   unless Redis is being used as the [Sensu Transport][6]. If you're not
    planning on using Redis as the Sensu Transport, you do not need to create a
    Redis configuration file on systems where the Sensu client is installed._
 
 ### Using Redis as the Sensu Transport
 
-1. If you are [planning to use Redis][prereqs] as your [Sensu
-   Transport](transport), please copy the following contents to a configuration
-   file located at `/etc/sensu/conf.d/transport.json`:
+1. If you are [planning to use Redis][7] as your [Sensu Transport][6], please
+   copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
 
    ~~~ json
    {
@@ -123,7 +122,10 @@ configuration.
    This will inform the Sensu services to use the defined Redis configuration as
    the Sensu Transport (instead of looking for the default transport, RabbitMQ).
 
-[epel]:         https://fedoraproject.org/wiki/EPEL
-[epel-howto]:   http://fedoraproject.org/wiki/EPEL/FAQ#howtouse
-[chkconfig]:    https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
-[prereqs]:      installation-strategies#selecting-a-transport
+[1]:  https://fedoraproject.org/wiki/EPEL
+[2]:  http://fedoraproject.org/wiki/EPEL/FAQ#howtouse
+[3]:  https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
+[4]:  redis
+[5]:  configuration
+[6]:  transport
+[7]:  installation-prerequisites#selecting-a-transport

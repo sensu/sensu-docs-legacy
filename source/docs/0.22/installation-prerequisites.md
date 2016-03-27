@@ -9,7 +9,7 @@ next:
 
 # Installation Prerequisites
 
-As mentioned earlier in this guide, Sensu's [architecture](architecture) is one
+As mentioned earlier in this guide, Sensu's [architecture][1] is one
 of its most compelling features. While this modular design makes it infinitely
 adaptable to monitor any infrastructure, it also depends on some external
 services to function:
@@ -18,34 +18,29 @@ services to function:
 - [Transport](#transport)
 
 _NOTE: this guide will focus on installing Sensu's dependencies in a
-[standalone](installation-strategies#standalone) configuration. However, in a
-live/production environment, it is strongly recommended that &ndash; at minimum
-&ndash; the Sensu data store and transport run on a different system than the
-Sensu server and API (i.e. in a [distributed](installation-strategies#
-distributed) or [high availability](installation-strategies#high-availability)
-configuration). Please review the Sensu [Installation Strategies](installation-\
-strategies) for more information._
+[standalone][2] configuration. However, in a live/production environment, it is
+strongly recommended that &ndash; at minimum &ndash; the Sensu data store and
+transport run on a different system than the Sensu server and API (i.e. in a
+[distributed][3] or [high availability][4] configuration). Please review the
+Sensu [Installation Strategies][5] for more information._
 
 ## Data Store (Redis) {#data-store}
 
-[Redis][redis] is a key-value database, which [describes itself][redis-about] as
-_"an open source, BSD licensed, advanced key-value cache and store"_. Sensu uses
-Redis as a [data-store](data-store) for storing persistent data such as the
+Sensu uses [Redis][6] as a [data-store][7] for storing persistent data such as the
 client registry and check results. Two Sensu Core services, the server and API
 require access to the same instance of Redis to function (i.e. the Sensu client
 does not communicate with Redis).
 
 ## Transport {#sensu-transport}
 
-Sensu services use a message bus (e.g. [RabbitMQ][rabbitmq]) for communication.
-This message bus communication is provided by the [Sensu
-Transport](transport), which is a library that makes it possible to leverage
-alternate transport solutions in  place of RabbitMQ (the default transport).
-Sensu services requires access to the  same instance of the defined transport
-(e.g. a RabbitMQ cluster) to  function. Sensu check requests and check results
-are published as "messages" to  the Sensu Transport, and the corresponding Sensu
-services receive these messages  by subscribing to the appropriate
-subscriptions.
+Sensu services use a message bus (e.g. [RabbitMQ][8]) for communication. This
+message bus communication is provided by the [Sensu Transport][9], which is a
+library that makes it possible to leverage alternate transport solutions in
+place of RabbitMQ (the default transport). Sensu services requires access to the
+same instance of the defined transport (e.g. a RabbitMQ cluster) to  function.
+Sensu check requests and check results are published as "messages" to  the Sensu
+Transport, and the corresponding Sensu services receive these messages  by
+subscribing to the appropriate subscriptions.
 
 ### Selecting a Transport
 
@@ -67,10 +62,8 @@ recommended solution for running Sensu in production environments.
 
 ##### Cons {#rabbitmq-transport-cons}
 
-- Adds Erlang as a runtime dependency to the Sensu architecture
-
-  _NOTE: to be clear, Erlang only needs to be installed on the system(s) where
-  RabbitMQ is running. For more information, please see the [FAQ][faq]._
+- Adds Erlang as a runtime dependency to the Sensu architecture (only on systems
+  where RabbitMQ is running)
 
 #### The Redis Transport
 
@@ -91,7 +84,12 @@ runtime).
 - No native support for SSL
 
 
-[rabbitmq]:         rabbitmq
-[redis]:            redis
-[redis-about]:      http://redis.io/topics/introduction
-[faq]:              https://sensuapp.org/faq
+[1]:  architecture
+[2]:  installation-strategies#standalone
+[3]:  installation-strategies#distributed
+[4]:  installation-strategies#high-availability
+[5]:  installation-strategies
+[6]:  http://redis.io
+[7]:  data-store
+[8]:  rabbitmq
+[9]:  transport

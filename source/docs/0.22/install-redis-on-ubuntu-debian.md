@@ -46,10 +46,9 @@ step in the guide.
 ## Configure Sensu
 
 The following Sensu configuration files are provided as examples. Please review
-the [Redis reference documentation](redis) for additional information on
-configuring Sensu to communicate with Redis, and the [reference documentation on
-Sensu configuration](configuration) for more information on how Sensu loads
-configuration.
+the [Redis reference documentation][1] for additional information on configuring
+Sensu to communicate with Redis, and the [reference documentation on Sensu
+configuration][2] for more information on how Sensu loads configuration.
 
 ### Example Standalone Configuration
 
@@ -85,15 +84,15 @@ configuration.
    ~~~
 
    _NOTE: the `sensu-client` process does not require Redis configuration
-   unless Redis is being used as the [Sensu Transport](transport). If you're not
+   unless Redis is being used as the [Sensu Transport][3]. If you're not
    planning on using Redis as the Sensu Transport, you do not need to create a
    Redis configuration file on systems where the Sensu client is installed._
 
 ### Using Redis as the Sensu Transport
 
-1. If you are [planning to use Redis][prereqs] as your [Sensu
-   Transport](transport), please copy the following contents to a configuration
-   file located at `/etc/sensu/conf.d/transport.json`:
+1. If you are [planning to use Redis][4] as your [Sensu Transport][3], please
+   copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
 
    ~~~ json
    {
@@ -107,4 +106,7 @@ configuration.
    This will inform the Sensu services to use the defined Redis configuration as
    the Sensu Transport (instead of looking for the default transport, RabbitMQ).
 
-[prereqs]:        installation-strategies#selecting-a-transport
+[1]:  redis
+[2]:  configuration
+[3]:  transport
+[4]:  installation-prerequisites#selecting-a-transport
