@@ -38,17 +38,16 @@ next:
 
 ## What is a Sensu clients? {#what-is-a-sensu-client}
 
-Sensu clients are [monitoring agents](architecture#monitoring-agent), which are
-installed and run on every system (e.g. server, container, etc) that needs to
-be monitored. The client is responsible for registering the system with Sensu,
-sending client [keepalive](#client-keepalives) messages (the Sensu heartbeat
-mechanism), and executing monitoring checks. Each client is a member of one or
-more [subscriptions](#client-subscriptions) &ndash; a list of roles and/or
-responsibilities assigned to the system (e.g. a webserver, database, etc).
-Sensu clients will "subscribe" to (or watch for) [check requests][requests]
-published by the [Sensu server](server) (via the [Sensu Transport](transport)),
-execute the corresponding requests locally, and publish the results of the check
-back to the transport (to be processed by a Sensu server).
+Sensu clients are [monitoring agents][1], which are installed and run on every
+system (e.g. server, container, etc) that needs to be monitored. The client is
+responsible for registering the system with Sensu, sending client [keepalive][2]
+messages (the Sensu heartbeat mechanism), and executing monitoring checks. Each
+client is a member of one or more [subscriptions][3] &ndash; a list of roles
+and/or responsibilities assigned to the system (e.g. a webserver, database,
+etc). Sensu clients will "subscribe" to (or watch for) [check requests][4]
+published by the [Sensu server][5] (via the [Sensu Transport][6]), execute the
+corresponding requests locally, and publish the results of the check back to the
+transport (to be processed by a Sensu server).
 
 ## Client keepalives
 
@@ -56,24 +55,24 @@ back to the transport (to be processed by a Sensu server).
 
 Sensu Client `keepalives` are the heartbeat mechanism used by Sensu to ensure
 that all registered Sensu clients are still operational and able to reach the
-[Sensu Transport](transport). Sensu clients publish keepalive messages
-containing client configuration data to the Sensu transport every 20 seconds (by
-default). If a Sensu client fails to send keepalive messages over a period of
-120 seconds (by default), the Sensu server (or Sensu Enterprise) will create a
-keepalive [event](events). Keepalives can be used to identify unhealthy
-systems and network partitions (among other things), and keepalive events can
-trigger email notifications and other useful actions.
+[Sensu Transport][6]. Sensu clients publish keepalive messages containing client
+configuration data to the Sensu transport every 20 seconds (by default). If a
+Sensu client fails to send keepalive messages over a period of 120 seconds (by
+default), the Sensu server (or Sensu Enterprise) will create a keepalive
+[event][7]. Keepalives can be used to identify unhealthy systems and network
+partitions (among other things), and keepalive events can trigger email
+notifications and other useful actions.
 
 ### Client registration & the client registry {#registration-and-registry}
 
 In practice, client registrations happens when a Sensu server processes a client
 `keepalive` message for a client that is not already registered in the Sensu
 client registry (based on the configured client `name` or `source` attribute).
-This client registry is stored in the Sensu [data store](data-store), and is
-accessible via the Sensu [Clients API](api-clients).
+This client registry is stored in the Sensu [data store][8], and is accessible
+via the Sensu [Clients API][9].
 
 All Sensu client data provided in client keepalive messages gets stored in the
-client registry, which data is used to add context to Sensu [Events](events) and
+client registry, which data is used to add context to Sensu [Events][7] and
 to detect Sensu clients in an unhealthy state.
 
 #### Proxy clients
@@ -110,22 +109,22 @@ following is an example of proxy client data that is added to the registry.
 
 The Sensu API can be used to update proxy client data in the client registry. To
 update proxy client data, please refer to the [Client API reference
-documentation](api-clients).
+documentation][9].
 
 ### How are keepalive events created? {#keepalive-events}
 
 Sensu servers (including Sensu Enterprise) monitor the Sensu client registry for
 stale client data, detecting clients that have failed to send [client keepalive
-messages](#what-is-a-client-keepalive) for more than 120 seconds (by default).
-When a Sensu server detects that a client hasn't sent a keepalive message within
-the configured `threshold`, _the Sensu server (or Sensu Enterprise)_ will create
-an event (this is different from how events are created for monitoring checks;
-see ["How are Sensu events created?"](events#how-are-events-created)).
+messages][10] for more than 120 seconds (by default). When a Sensu server
+detects that a client hasn't sent a keepalive message within the configured
+`threshold`, _the Sensu server (or Sensu Enterprise)_ will create an event (this
+is different from how events are created for monitoring checks; see ["How are
+Sensu events created?"][11]).
 
 ### Client keepalive configuration
 
 For more information on configuring client keepalives, please see the [client
-keepalive attribute reference documentation](#keepalive-attributes) (below).
+keepalive attribute reference documentation][12] (below).
 
 Sensu client keepalives are published to the Sensu transport every 20 seconds.
 Client keepalive behavior can be configured per Sensu client, allowing each
@@ -135,15 +134,15 @@ default, client data is considered stale if a keepalive hasn't be received in
 handler named `keepalive` if defined, or the `default` handler will be used.
 
 To configure the keepalive check for a Sensu client, please refer to [the client
-`keepalive` attributes reference documentation](#keepalive-attributes).
+`keepalive` attributes reference documentation][12].
 
 ## Client subscriptions
 
 ### What is a client subscription?
 
-Sensu's use of the [publish/subscribe pattern of communication][pubsub] allows
-for automated registration & de-registration of ephemeral systems. At the core
-of this model are Sensu client `subscriptions`.
+Sensu's use of the [publish/subscribe pattern of communication][13] allows for
+automated registration & de-registration of ephemeral systems. At the core of
+this model are Sensu client `subscriptions`.
 
 Each Sensu client has a defined set of subscriptions, a list of roles and/or
 responsibilities assigned to the system (e.g. a webserver, database, etc). These
@@ -151,7 +150,7 @@ subscriptions determine which monitoring checks are executed by the client.
 Client subscriptions allow Sensu to request check  executions on a group of
 systems at a time, instead of a traditional 1:1  mapping of configured hosts to
 monitoring checks. Sensu checks target Sensu client subscriptions, using the
-[check definition attribute `subscribers`](checks#definition-attributes).
+[check definition attribute `subscribers`][14].
 
 ### Round-robin client subscriptions
 
@@ -200,8 +199,7 @@ subscription.
 ### Client subscription configuration
 
 To configure Sensu client subscriptions for a client, please refer to [the
-client `subscriptions` attribute reference
-documentation](#definition-attributes).
+client `subscriptions` attribute reference documentation][15].
 
 ## Client socket input
 
@@ -216,7 +214,7 @@ use case example is a web application pushing check results to indicate database
 connectivity issues.
 
 To configure the Sensu client socket for a client, please refer to [the client
-socket attributes](#socket-attributes).
+socket attributes][16].
 
 ### Example client socket usage
 
@@ -228,7 +226,7 @@ communicate with the Sensu client socket.
 echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' > /dev/tcp/localhost/3030
 ~~~
 
-[Netcat][nc] can also be used, instead of the TCP file:
+[Netcat][17] can also be used, instead of the TCP file:
 
 ~~~ shell
 echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
@@ -239,15 +237,13 @@ echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' |
 The Sensu client socket(s) in combination with check TTLs can be used to create
 what's commonly referred to as "dead man's switches". Outside of the software
 industry, a dead man's switch is a switch that is automatically triggered if a
-human operator becomes incapacitated (source:
-[Wikipedia](http://en.wikipedia.org/wiki/Dead_man%27s_switch)). Sensu is more
+human operator becomes incapacitated (source: [Wikipedia][18]). Sensu is more
 interested in detecting silent failures than incapacited human operators. By
 using Check TTLs, Sensu is able to set an expectation that a Sensu client will
 continue to publish results for a check at a regular interval. If a Sensu client
 fails to publish a check result and the check TTL expires, Sensu will create an
 event to indicate the silent failure. For more information on check TTLs, please
-refer to [the check attributes reference
-documentation](checks#definition-attributes).
+refer to [the check attributes reference documentation][14].
 
 A great use case for the Sensu client socket is to create a dead man's switch
 for backup scripts, to ensure they continue to run successfully at regular
@@ -259,7 +255,7 @@ The following is an example of external check result input via the Sensu client
 TCP socket, using a check TTL to create a dead man's switch for MySQL backups.
 The example uses a check TTL of `25200` seconds (or 7 hours). A MySQL backup
 script using the following code would be expected to continue to send a check
-result at least once every 7 hours or Sensu will create an [event](events) to
+result at least once every 7 hours or Sensu will create an [event][7] to
 indicate the silent failure.
 
 ~~~ shell
@@ -272,18 +268,16 @@ echo '{"name": "backup_mysql", "ttl": 25200, "output": "failed to backup mysql",
 
 ## Standalone check execution scheduler
 
-In addition to subscribing to [client subscriptions](client-subscriptions) and
-executing check requests published by the [Sensu server][server-scheduler], the
-Sensu client is able to maintain its own/separate schedule for [standalone
-checks](checks#standalone-checks).
+In addition to subscribing to [client subscriptions][3] and executing check
+requests published by the [Sensu server][19], the Sensu client is able to
+maintain its own/separate schedule for [standalone checks][20].
 
-Because the Sensu client shares the same [check scheduling
-algorithm][server-algorithm] as the Sensu server, it is not only possible to
-have consistency between [subscription checks](checks#subscription-checks) and
-standalone checks &mdash; it's also possible to maintain <abbr  title="typically
-accurate within 500ms">consistency</abbr> between standalone checks _across an
-entire infrastructure_ (assuming that system clocks  are synchronized via
-[NTP](http://www.ntp.org/)).
+Because the Sensu client shares the same [check scheduling algorithm][21] as the
+Sensu server, it is not only possible to have consistency between [subscription
+checks][22] and standalone checks &mdash; it's also possible to maintain <abbr
+title="typically accurate within 500ms">consistency</abbr> between standalone
+checks _across an entire infrastructure_ (assuming that system clocks are
+synchronized via [NTP][23]).
 
 ## Client configuration
 
@@ -311,7 +305,7 @@ attribute is required in the definition, and must be unique.
 
 ### Client definition specification
 
-The client definition uses the `"client": {}` [definition scope][config-scopes].
+The client definition uses the `"client": {}` [definition scope][24].
 
 #### `client` attributes
 
@@ -529,14 +523,13 @@ critical
 
 #### Custom attributes
 
-Because Sensu configuration is just [JSON][json] data, it is possible to define
+Because Sensu configuration is just [JSON][25] data, it is possible to define
 configuration attributes that are not part of the Sensu client specification.
 Custom client definition attributes may be defined to provide context about the
 Sensu client and the services that run on its system. Custom client attributes
-will be included in client [keepalives](#client-keepalives), and [event
-data](events) and can be used by Sensu [filters](filters) (e.g. only alert on
-events in the "production" environment), and accessed via [check command token
-substitution][token-substitution].
+will be included in client [keepalives][2], and [event data][7] and can be used
+by Sensu [filters][26] (e.g. only alert on events in the "production"
+environment), and accessed via [check command token substitution][27].
 
 ##### EXAMPLE
 
@@ -571,12 +564,31 @@ attributes that only exist for the purpose of providing troubleshooting
 information for operations teams can be extremely valuable._
 
 
-[requests]:             checks#check-requests
-[event-data]:           events#event-data
-[nc]:                   http://nc110.sourceforge.net/
-[config-scopes]:        configuration#configuration-scopes
-[json]:                 http://www.json.org/
-[token-substitution]:   checks#token-substitution
-[server-scheduler]:     server#check-execution-scheduling
-[server-algorithm]:     server#check-scheduling-algorithm--synchronization
-[pubsub]:               https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
+[?]:  #
+[1]:  architecture#monitoring-agent
+[2]:  #client-keepalives
+[3]:  #client-subscriptions
+[4]:  checks#check-requests
+[5]:  server
+[6]:  transport
+[7]:  events
+[8]:  data-store
+[9]:  api-clients
+[10]: #what-is-a-client-keepalive
+[11]: events#how-are-events-created
+[12]: #keepalive-attributes
+[13]: https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
+[14]: checks#definition-attributes
+[15]: #definition-attributes
+[16]: #socket-attributes
+[17]: http://nc110.sourceforge.net/
+[18]: http://en.wikipedia.org/wiki/Dead_man%27s_switch
+[19]: server#check-execution-scheduling
+[20]: checks#standalone-checks
+[21]: server#check-scheduling-algorithm--synchronization
+[22]: checks#subscription-checks
+[23]: http://www.ntp.org/
+[24]: configuration#configuration-scopes
+[25]: http://www.json.org/
+[26]: filters
+[27]: checks#token-substitution

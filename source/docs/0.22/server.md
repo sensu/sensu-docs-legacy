@@ -22,17 +22,17 @@ next:
 
 ## What is the Sensu server?
 
-The Sensu server schedules and publishes [check execution requests][requests] to
-[client subscriptions][subscriptions] (via a [Publish/Subscribe model][pubsub]),
-and provides a scalable [event processing platform][event-processor] for
-processing check results and monitoring events.
+The Sensu server schedules and publishes [check execution requests][1] to
+[client subscriptions][2] (via a [Publish/Subscribe model][3]), and provides a
+scalable [event processing platform][4] for processing check results and
+monitoring events.
 
 ## Sensu Core vs Sensu Enterprise
 
-The Sensu server comes in two flavors: the open-source [Sensu Core][sensu-core]
-(via the `sensu-server` process), and [Sensu Enterprise][enterprise] (via the
-`sensu-enterprise` process). To learn more about the differences between
-Sensu Core and Sensu Enterprise, [please visit the Sensu website][compare].
+The Sensu server comes in two flavors: the open-source [Sensu Core][5] (via the
+`sensu-server` process), and [Sensu Enterprise][6] (via the `sensu-enterprise`
+process). To learn more about the differences between Sensu Core and Sensu
+Enterprise, [please visit the Sensu website][7].
 
 _NOTE: Sensu Enterprise (i.e. the `sensu-enterprise` process) was designed to be
 a drop-in replacement for the Sensu Core server and API (i.e. the `sensu-server`
@@ -50,7 +50,7 @@ ports, etc._
 ## Check execution scheduling
 
 Check execution scheduling is performed by the Sensu server (or the [Sensu
-server leader](#leadership-duties)). Checks are scheduled by querying Sensu's
+server leader][8]). Checks are scheduled by querying Sensu's
 configuration for defined checks &ndash; excluding check with the attributes
 `"standalone": true` or `"publish": false` &ndash; and calculating when
 executions should occur based on their defined `interval`s.
@@ -79,9 +79,9 @@ check names and `interval`s are consistent).
 ## Event processing
 
 The Sensu server provides a scalable event processor. Event processing involves
-conversion of [check results](checks#check-results) into Sensu events, and then
-applying any defined [event filters](filters), [event data mutators](mutators),
-and [event handlers](handlers). All event processing happens on a Sensu server
+conversion of [check results][9] into Sensu events, and then
+applying any defined [event filters][10], [event data mutators][11],
+and [event handlers][12]. All event processing happens on a Sensu server
 system.
 
 The event processing workflow happens in the following order:
@@ -94,16 +94,16 @@ mutators](mutators) or [event handlers](handlers)._
 
 Sensu's event processing capabilities can be distributed among multiple Sensu
 servers in a Sensu cluster. For more information on configuring a Sensu cluster,
-please see [Scaling Sensu](#scaling-sensu) (below).
+please see [Scaling Sensu][13] (below).
 
 ## Automated leader election
 
 The Sensu server processes (i.e. `sensu-server` and `sensu-enterprise`) are
-designed to [scale horizontally][wiki-scalability] (i.e. by adding systems).
-No additional configuration is required to run a cluster of Sensu servers, other
-than the location of the [transport](transport) and [data store](data-store).
-When Sensu servers start, they will automatically identify or elect a "leader",
-which leader will fulfill certain [leadership duties](#leadership-duties).
+designed to [scale horizontally][14] (i.e. by adding systems). No additional
+configuration is required to run a cluster of Sensu servers, other than the
+location of the [transport][15] and [data store][16]. When Sensu
+servers start, they will automatically identify or elect a "leader", which
+leader will fulfill certain [leadership duties][17].
 
 All Sensu servers in a Sensu cluster monitor the state of cluster leadership on
 a 10-second interval, automatically electing a new leader if the current leader
@@ -117,14 +117,12 @@ by the Sensu server leader:
 
 - **Check request publisher**. The Sensu server leader is responsible for
   publishing check requests to the transport for all configured checks. See
-  [check execution scheduling](#check-execution-scheduling) for more
-  information.
+  [check execution scheduling][18] for more information.
 - **Client monitor**. The Sensu server leader is responsible for monitoring the
-  [client registry][client-registry] and creating [client keepalive
-  events][keepalive-events] for stale clients.
+  [client registry][19] and creating [client keepalive events][20] for stale clients.
 - **Check result monitor**. The Sensu server leader is responsible for
   monitoring check results and creating TTL events for check results with
-  expired [check TTLs][check-ttls]
+  expired [check TTLs][21]
 - **Check result aggregation pruning**. The Sensu server leader is responsible
   for monitoring check aggregates and pruning stale aggregate results.
 
@@ -133,14 +131,24 @@ by the Sensu server leader:
 Coming soon...
 
 
-[requests]:           checks#check-requests
-[subscriptions]:      clients#client-subscriptions
-[pubsub]:             checks#pubsub-checks
-[event-processor]:    architecture#event-processor
-[wiki-scalability]:   https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling
-[client-registry]:    clients#registration-and-registry
-[check-ttls]:         checks#check-ttls
-[keepalive-events]:   clients#keepalive-events
-[sensu-core]:         https://sensuapp.org/
-[enterprise]:         https://sensuapp.org/sensu-enterprise
-[compare]:            https://sensuapp.org/#compare
+[1]:  checks#check-requests
+[2]:  clients#client-subscriptions
+[3]:  checks#pubsub-checks
+[4]:  architecture#event-processor
+[5]:  https://sensuapp.org/
+[6]:  https://sensuapp.org/sensu-enterprise
+[7]:  https://sensuapp.org/#compare
+[8]:  #leadership-duties
+[9]:  checks#check-results
+[10]: filters
+[11]: mutators
+[12]: handlers
+[13]: #scaling-sensu
+[14]: https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling
+[15]: transport
+[16]: data-store
+[17]: #leadership-duties
+[18]: #check-execution-scheduling
+[19]: clients#registration-and-registry
+[20]: clients#keepalive-events
+[21]: checks#check-ttls
