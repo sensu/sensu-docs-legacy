@@ -707,6 +707,18 @@ api_token
     "api_token": "L7kVQzXF7c5eUMYUon6INaSVRDU8mP"
     ~~~
 
+server_url
+: description
+  : The URL of the HipChat server (used for self-hosted HipChat installations)
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "server_url": "https://hipchat.example.com"
+    ~~~
+
 api_version
 : description
   : The HipChat API version to use.
