@@ -15,6 +15,7 @@ next:
 - [Client keepalives](#client-keepalives)
   - [What is a client keepalive?](#what-is-a-client-keepalive)
   - [Client registration & the client registry](#registration-and-registry)
+    - [Registration events](#registration-events)
     - [Proxy clients](#proxy-clients)
   - [How are keepalive events created?](#keepalive-events)
   - [Client keepalive configuration](#client-keepalive-configuration)
@@ -34,9 +35,10 @@ next:
     - [`socket` attributes](#socket-attributes)
     - [`keepalive` attributes](#keepalive-attributes)
     - [`thresholds` attributes](#thresholds-attributes)
+    - [`registration` attributes](#registration-attributes)
     - [Custom attributes](#custom-attributes)
 
-## What is a Sensu clients? {#what-is-a-sensu-client}
+## What is a Sensu client?
 
 Sensu clients are [monitoring agents][1], which are installed and run on every
 system (e.g. server, container, etc) that needs to be monitored. The client is
@@ -74,6 +76,25 @@ via the Sensu [Clients API][9].
 All Sensu client data provided in client keepalive messages gets stored in the
 client registry, which data is used to add context to Sensu [Events][7] and
 to detect Sensu clients in an unhealthy state.
+
+#### Registration events
+
+If a [Sensu event handler][30] named `registration` is configured, or if a Sensu
+client definition includes a [registration attribute][31], the [Sensu server][5]
+will create and process a [Sensu event][7] for the client registration, applying
+any configured [filters][26] and [mutators][32] before executing the configured
+[handler(s)][30].
+
+Registration events are useful for executing one-time handlers for new Sensu
+clients. For example, registration event handlers can be used to update external
+[Configuration Management Databases (CMDBs)][34] such as [ServiceNow][35], etc.
+
+To configure a registration event handler, please refer to the [Sensu event
+handler documentation][?] for instructions on creating a handler named
+`registration`. Alternatively, please see [Client definition `registration`
+attributes][31], below.
+
+_NOTE: registration events are new to [Sensu Core 0.22][33]._
 
 #### Proxy clients
 
@@ -413,6 +434,18 @@ keepalive
     "keepalive": {}
     ~~~
 
+registration
+: description
+  : A set of attributes for configuring Sensu registration event handlers.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "registration": {}
+    ~~~
+
 #### `socket` attributes
 
 The following attributes are configured within the `"socket": {}` client
@@ -521,6 +554,30 @@ critical
     "critical": 90
     ~~~
 
+#### `registration` attributes
+
+handler
+: description
+  : The registration handler that should process the client registration event.
+: required
+  : false
+: type
+  : String
+: default
+  : `registration`
+: example
+  : ~~~ shell
+    "handler": "registration_cmdb"
+    ~~~
+
+_NOTE: client `registration` attributes are used to generate [check result][28]
+data for the registration [event][7]. Client `registration` attributes are
+merged with some default check definition attributes by the [Sensu server][5]
+during client registration, so any [valid check definition attributes][14]
+&ndash; including [custom check definition attributes][29] &ndash; may be used
+as `registration` attributes. The following attributes are provided as
+recommendations for controlling client registration behavior._
+
 #### Custom attributes
 
 Because Sensu configuration is just [JSON][25] data, it is possible to define
@@ -592,3 +649,11 @@ information for operations teams can be extremely valuable._
 [25]: http://www.json.org/
 [26]: filters
 [27]: checks#token-substitution
+[28]: checks#check-results
+[29]: checks#custom-attributes
+[30]: handlers
+[31]: #registration-attributes
+[32]: mutators
+[33]: changelog#v0-22-0
+[34]: https://en.wikipedia.org/wiki/Configuration_management_database
+[35]: http://www.servicenow.com/solutions/it-operations-management.html
