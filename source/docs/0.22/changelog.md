@@ -2,9 +2,6 @@
 version: 0.22
 category: "Overview"
 title: "Sensu 0.22.x changelog"
-next:
-  url: "architecture"
-  text: "Technical Overview"
 info:
 warning:
 danger:
@@ -12,7 +9,7 @@ danger:
 
 # Sensu Core version 0.22.x changelog
 
-## 0.22.2 Release Notes
+## 0.22.2 Release Notes {#v0-22-2}
 
 Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0222---2016-03-16)
 
@@ -27,7 +24,7 @@ available for immediate download. Please note the following improvements:
   provided the necessary protection that it claimed (only top level hash
   object).
 
-## 0.22.1 Release Notes
+## 0.22.1 Release Notes {#v0-22-1}
 
 Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0221---2016-03-01)
 
@@ -42,7 +39,7 @@ available for immediate download. Please note the following improvements:
 - Fixed client signatures inspection/comparison when upgrading from a previous
   release.
 
-## 0.22.0 Release Notes
+## 0.22.0 Release Notes {#v0-22-0}
 
 Source: [GitHub.com](https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0220---2016-01-29)
 
