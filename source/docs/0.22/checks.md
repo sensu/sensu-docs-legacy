@@ -783,8 +783,9 @@ output
 name
 : description
   : The name of the [Sensu client][1] that generated the check result. The Sensu
-    server will use the client `name` value to add client attributes to the
-    resulting [Sensu event data][34] (for context).
+    server will use the client `name` value to fetch the corresponding client
+    attributes from the [Clients API][39] and add them to the resulting [Sensu
+    event][34] for context.
 : type
   : String
 : example
@@ -831,4 +832,5 @@ name
 [35]: handlers
 [36]: enterprise-contact-routing
 [37]: #example-check-result-output
-[38]: #check-result-specification 
+[38]: #check-result-specification
+[39]: api-clients
