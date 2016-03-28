@@ -7,6 +7,8 @@ $(document).ready(function() {
     var alert = alertStates[i];
     if (alert == "info") {
       var alertLabel = "note";
+    } else if (alert == "success") {
+      var alertLabel = "pro tip"
     } else {
       var alertLabel = alert;
     };
@@ -17,6 +19,14 @@ $(document).ready(function() {
       alertContent = alertContent.replace(alertLabel.toUpperCase(), "<strong>" + alertLabel.toUpperCase() + "</strong>");
       alertElement.innerHTML = "<div class='alert alert-" + alert + "'>" + alertContent + "</div>";
     });
+  };
+
+  // replace janky right-arrow text " -> " with pretty fontawesome icons
+  var textArrows = $('p:contains(" -> ")');
+  for (i = 0; i < textArrows.length; i++) {
+    var textSnippet = textArrows[i];
+    arrowIcon = "<icon class='fa fa-long-arrow-right' />"
+    textSnippet.innerHTML = textSnippet.innerHTML.replace(/-&gt;/g, arrowIcon);
   };
 
   var dts = $("#documentation > dl > dt");
