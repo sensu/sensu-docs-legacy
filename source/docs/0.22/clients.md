@@ -92,7 +92,7 @@ clients. For example, registration event handlers can be used to update external
 [Configuration Management Databases (CMDBs)][34] such as [ServiceNow][35], etc.
 
 To configure a registration event handler, please refer to the [Sensu event
-handler documentation][?] for instructions on creating a handler named
+handler documentation][30] for instructions on creating a handler named
 `registration`. Alternatively, please see [Client definition `registration`
 attributes][31], below.
 
