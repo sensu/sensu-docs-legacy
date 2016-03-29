@@ -643,12 +643,15 @@ exceptions
 
 #### Custom attributes
 
-Custom check definition attributes may be included to add additional information
-(context) about the Sensu check. Custom check attributes will be included in
-[event data][34] and available to [Sensu event handlers][35]. Some great example
-use cases for custom check definition attributes are links to playbook
-documentation (i.e. "here's a link to some instructions for how to fix this if
-it's broken"), [contact routing][36], and metric graph image URLs.
+Because Sensu configuration is just JSON data, it is possible to define
+configuration attributes that are not part of the Sensu [check definition
+specification][17]. Custom check definition attributes may be defined to provide
+context about the check, or to control or modify check `command` or `handler`
+behaviors. Custom check definition attributes will be included in [check
+results][4] and [event data][40]. Some great example use cases for custom check
+definition attributes are links to playbook documentation (i.e. "here's a link
+to some instructions for how to fix this if it's broken"), [contact
+routing][36], and metric graph image URLs.
 
 ##### EXAMPLE
 
@@ -834,3 +837,4 @@ name
 [37]: #example-check-result-output
 [38]: #check-result-specification
 [39]: api-clients
+[40]: events#event-data
