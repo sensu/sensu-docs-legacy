@@ -79,6 +79,8 @@ to detect Sensu clients in an unhealthy state.
 
 #### Registration events
 
+_NOTE: registration events are new to [Sensu Core 0.22][33]._
+
 If a [Sensu event handler][30] named `registration` is configured, or if a Sensu
 client definition includes a [registration attribute][31], the [Sensu server][5]
 will create and process a [Sensu event][7] for the client registration, applying
@@ -94,7 +96,9 @@ handler documentation][?] for instructions on creating a handler named
 `registration`. Alternatively, please see [Client definition `registration`
 attributes][31], below.
 
-_NOTE: registration events are new to [Sensu Core 0.22][33]._
+_WARNING: registration events are not stored in the event registry (in the Sensu
+[data store][8]), so they are not accessible via the Sensu API; however, all
+registration events are logged in the [Sensu server][5] log._
 
 #### Proxy clients
 
