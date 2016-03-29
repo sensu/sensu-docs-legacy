@@ -10,10 +10,6 @@ hide_toc: true
   * [Architecture](architecture)
   * [Release Notes](changelog)
 
-* **Quick Start Guide**
-  * [The five minute install](the-five-minute-install)
-  * [Learn Sensu in 15 minutes](learn-sensu-in-15m)
-
 * **Installation Guide**
   * [Installation Overview](installation-guide)
   * [Installation Strategies](installation-strategies)
