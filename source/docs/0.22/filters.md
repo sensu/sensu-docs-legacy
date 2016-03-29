@@ -7,32 +7,45 @@ next:
   text: "Mutators"
 ---
 
-# Sensu Event Filters
+# Sensu Filters
 
-This reference document provides information to help you:
+## Reference Documentation
 
-- [Understand what a Sensu Filter is](#what-are-sensu-filters)
-- [How a Sensu Filter works](#how-do-filters-work)
-- [When you should use Filters](#when-should-i-use-a-filter)
-- [Write a Filter definition](#example-filter-definition)
-- [Use filter definition attributes](#definition-attributes)
-- [Understand how to perform inclusive and exclusive filtering](#inclusive-and-exclusive-filtering)
-- [Understand how to use attribute evaluation](#filter-attribute-evaluation)
+- [What are Sensu Filters?](#what-are-sensu-filters)
+  - [When to use a filter](#when-to-use-a-filter)
+- [How do Sensu filters work?](#how-do-sensu-filters-work)
+  - [Inclusive and exclusive filtering](#inclusive-and-exclusive-filtering)
+  - [Filter attribute comparison](#filter-attribute-comparison)
+  - [Filter attribute evaluation](#filter-attribute-evaluation)
+- [Filter configuration](#filter-configuration)
+  - [Filter definition specification](#filter-definition-specification)
+    - [Filter naming](#filter-naming)
+    - [Filter attributes](#filter-attributes)
 
-## What are Sensu filters? {#what-are-sensu-filters}
+## What are Sensu filters?
 
 Sensu Filters (also called Event Filters) allow you to filter events destined
-for one or more event [Handlers](handlers). Sensu filters inspect event data and
+for one or more event [Handlers][1]. Sensu filters inspect event data and
 match its keys/values with filter definition attributes, to determine if the
 event should be passed to an event handler. Filters are commonly used to filter
 recurring events (i.e. to eliminate notification noise) and to filter events
 from systems in pre-production environments.
 
-## How do Filters work? {#how-do-filters-work}
+### When to use a filter
 
-Sensu Filters are applied when Event [Handlers](handlers) are configured to use
-one or more Filters. Prior to executing a Handler, the Sensu server will apply
-any Filters configured for the Handler to the Event Data. If the Event is not
+Sensu Filters allow you to configure conditional logic to be applied during the
+event processing flow. Compared to executing an event handler, evaluating event
+filters is an inexpensive operation which can provide overall monitoring
+performance gains by reducing the  number of events that need to be handled.
+Additionally, by using Sensu Filters, instead of building conditional logic into
+custom Handlers, conditional logic can be applied to multiple Handlers, and
+monitoring configuration stays <abbr title="Don't Repeat Yourself">DRY</abbr>.
+
+## How do Sensu filters work?
+
+Sensu Filters are applied when Event [Handlers][1] are configured to use one or
+more Filters. Prior to executing a Handler, the Sensu server will apply any
+Filters configured for the Handler to the Event Data. If the Event is not
 removed by the Filter(s) (i.e. filtered out), the Handler will be executed. The
 filter analysis flow performs these steps:
 
@@ -47,29 +60,128 @@ filter analysis flow performs these steps:
 - As soon as a Filter removes an Event (i.e. filters it out), no further
   analysis is performed and the Event Handler will not be executed
 
-## When should I use a Filter? {#when-should-i-use-a-filter}
+### Inclusive and Exclusive Filtering
 
-Sensu Filters allow you to configure conditional logic to be applied during the
-event processing flow. Compared to executing an event handler, evaluating event
-filters is an inexpensive operation which can provide overall monitoring
-performance gains by reducing the  number of events that need to be handled.
-Additionally, by using Sensu Filters, instead of building conditional logic into
-custom Handlers, conditional logic can be applied to multiple Handlers, and
-monitoring configuration stays <abbr title="Don't Repeat Yourself">DRY</abbr>.
+Filters can be _inclusive_ (`"negate": false`) or _exclusive_  (`"negate":
+true`). Configuring a handler to use multiple _inclusive_ `filters` is the
+equivalent of using an `AND`  query operator (i.e. only handle events if they
+match _inclusive_ filters  `x AND y AND z`). Configuring a handler to use
+multiple _exclusive_ `filters` is the equivalent of using an `OR` operator (i.e.
+only handle events if they don't match `x OR y OR z`).
 
-## Filter definition
+- **Inclusive filtering**: by setting the [filter definition attribute][2]
+  `"negate": false`, only events that match the defined filter attributes are
+  handled.
 
-A Sensu filter definition is a JSON configuration file describing a Sensu
-Filter. A Filter definition declares how a Sensu Filter is applied to an Event
-to determine if an Event should be handled or not.
+- **Exclusive filtering**: by setting the [filter definition attribute][2]
+  `"negate": true`, events are only handled if they do not match the defined
+  filter attributes.
+
+_NOTE: unless otherwise configured in the [filter definition][2], the default
+filtering behavior is **inclusive filtering** (i.e. `"negate": false`)._
+
+### Filter attribute comparison
+
+Filter attributes are compared directly with their [event data][3] counterparts.
+For [inclusive filter definitions][4] (i.e. `"negate": false`), matching
+attributes will result in the filter returning a `true` value; for [exclusive
+filter definitions][4] (i.e. `"negate": true`), matching attributes will result
+in the filter returning a `false` value (i.e. the event does not pass through
+the filter). Filters that return a true value will continue to be processed
+&mdash; via additional filters (if defined), mutators (if defined), and
+handlers.
+
+#### EXAMPLE
+
+The following example filter definition, entitled `production_filter` will match
+[event data][3] with a [custom client definition attribute][5] `"environment":
+"production"`.
+
+~~~ json
+{
+  "filters": {
+    "production_filter": {
+      "negate": false,
+      "attributes": {
+        "client": {
+          "environment": "production"
+        }
+      }
+    }
+  }
+}
+~~~
+
+### Filter attribute evaluation
+
+When more complex conditional logic is needed than [direct filter attribute
+comparison][10], Sensu filters provide support for
+attribute evaluation using Ruby expressions. When a Filter attribute value is a
+string beginning with `eval:`, the remainder is evaluated as a Ruby expression.
+The Ruby expression is evaluated in a "sandbox" and provided a single variable
+(`value`) which is equal to the event data attribute value being compared. If
+the evaluated expression returns true, the attribute is a match.
+
+#### EXAMPLE
+
+The following example filter definition, entitled `filter_interval_60_hourly`,
+will match [event data][3] with a [check `interval`][6] of `60` seconds, _and_
+an `occurrences` value of `1` (i.e. the first occurrence) _-OR-_ any
+`occurrences` value that is evenly divisible by 60 (via a [modulo operator][7]
+calculation; i.e. calculating the remainder after dividing `occurrences` by 60).
+
+~~~ json
+{
+  "filters": {
+    "filter_interval_60_hourly": {
+      "negate": true,
+      "attributes": {
+        "check": {
+          "interval": 60
+        },
+        "occurrences": "eval: value != 1 || value % 60 != 0"
+      }
+    }
+  }
+}
+~~~
+
+The next example will apply the same logic as the previous example, but for
+checks with a 30 second `interval`.
+
+~~~ json
+{
+  "filters": {
+    "filter_interval_30_hourly": {
+      "negate": true,
+      "attributes": {
+        "check": {
+          "interval": 30
+        },
+        "occurrences": "eval: value != 1 || value % 120 != 0"
+      }
+    }
+  }
+}
+~~~
+
+_NOTE: The effect of both of these filters is that they will only allow an
+events with 30-second or 60-second intervals to be [handled][1] on the first
+occurrence of the event, and again every hour. Previous examples in the older
+Sensu docs have not included the `"check": { "interval": 60 }` attribute, which
+has confused some users because filtering based on occurrences alone assumes
+some understanding of the relationship between `occurrences` and `interval`,
+which isn't always obvious._
+
+## Filter configuration
 
 ### Example filter definition {#example-filter-definition}
 
 The following is an example Sensu filter definition, a JSON configuration file
 located at `/etc/sensu/conf.d/filter_production.json`. This is an inclusive
 filter definition called `production`. The effect of this filter is that only
-events with the [custom client attribute][client-custom-attributes]
-`"environment": "production"` will be handled.
+events with the [custom client attribute][8] `"environment": "production"` will
+be handled.
 
 ~~~ json
 {
@@ -86,25 +198,24 @@ events with the [custom client attribute][client-custom-attributes]
 }
 ~~~
 
-## Anatomy of a filter definition {#anatomy-of-a-filter-definition}
+### Filter definition specification
 
-### Filter naming
+#### Filter naming
 
 Each filter definition has a unique name, used for the definition key. Every
 filter definition is within the `"filters": {}` definition scope.
 
 - A unique string used to name/identify the filter
 - Cannot contain special characters or spaces
-- Validated with `/^[\w\.-]+$/`
-- e.g. `"production": {}`
+- Validated with [Ruby regex][9] `/^[\w\.-]+$/.match("filter-name")`
 
-### Definition attributes {#definition-attributes}
+
+#### Filter attributes
 
 negate
 : description
   : If the filter will negate events that match the filter attributes.
-    _NOTE: see [Inclusive and exclusive
-    filtering](#inclusive-and-exclusive-filtering) for more information._
+    _NOTE: see [Inclusive and exclusive filtering][4] for more information._
 : required
   : false
 : type
@@ -132,50 +243,13 @@ attributes
     }
     ~~~
 
-## Inclusive and Exclusive Filtering {#inclusive-and-exclusive-filtering}
-
-Filters can be _inclusive_ (i.e. `"negate": false`; only Events that match are
-handled) or _exclusive_ (i.e. `"negate": true`; events are not handled if they
-match). Configuring a Handler to use multiple _inclusive_ `filters` (`"negate":
-false`) is the equivalent of using an `AND` query operator (i.e. only handle
-events if they match _inclusive_ filter `x AND y AND z`). Configuring a Handler
-to use multiple _exclusive_ `filters` (`"negate": true`) is the equivalent of
-using an `OR` operator (i.e. only handle events if they don't match `x OR y OR
-z`).
-
-## Filter attribute evaluation {#filter-attribute-evaluation}
-
-Filter `attributes` are compared directly with their Event data counterparts
-(e.g. `"attributes: {"environment": "production"}"` is looking for exact matches
-to a custom attribute called `environment` with the value `production`).
-However, if (or _when_) more complex conditional logic is needed, Sensu Filters
-provide support for attribute evaluation using Ruby expressions.
-
-When a Filter `attribute` value is a string beginning with `eval:`, the
-remainder is evaluated as a Ruby expression. The Ruby expression is evaluated in
-a "sandbox" and provided a single variable, `value`, equal to the event data
-attribute value being compared. If the evaluated expression returns `true`, the
-attribute is a match.
-
-### Example filter attribute evaluation
-
-The following is an example Sensu Filter definition, a JSON configuration file
-located at `/etc/sensu/conf.d/filter_recurrences.json`. This is an inclusive
-filter definition called `recurrences`. The effect of this filter is that the
-Handler this Filter is applied to will only be executed on the first occurrence
-of an Event, and every subsequent occurrence that is divisible by 60 (i.e. every
-60th occurrence).
-
-~~~ json
-{
-  "filters": {
-    "recurrences": {
-      "attributes": {
-        "occurrences": "eval: value == 1 || value % 60 == 0"
-      }
-    }
-  }
-}
-~~~
-
-[client-custom-attributes]:     clients#custom-definition-attributes
+[1]:  handlers
+[2]:  #filter-definition-specification
+[3]:  events#event-data
+[4]:  #inclusive-and-exclusive-filtering
+[5]:  client#custom-attributes
+[6]:  checks#check-definition-specification
+[7]:  https://en.wikipedia.org/wiki/Modulo_operation
+[8]:  clients#custom-definition-attributes
+[9]:  http://ruby-doc.org/core-2.2.0/Regexp.html
+[10]: #filter-attribute-comparison
