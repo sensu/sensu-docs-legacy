@@ -43,3 +43,17 @@ Event data is JSON encoded, making it  language-independent and fairly human rea
   "action": "create"
 }
 ~~~
+# Sensu client event data {#sensu-client-event-data}
+
+The Sensu client listens on udp and tcp port 3030.  Metric and check results can be submitted to this port unsolicited and will enter the Sensu pipeline.
+
+The content of the result is JSON encoded and contains any value that would occur inside the "check" block above.  The minimum required fields are "name" and "output". A Handler is highly desirable. "Status" defaults to 0.
+
+~~~ json
+{
+    "name": "metric_cpu_load",
+    "type": "metric",
+    "handler": "graphite",
+    "output": "ip-10-10-10-10.cpu.load.1m .5 1406129070\nip-10-10-10-10.cpu.load.1m .5 1406129070\nip-10-10-10-10.cpu.load.1m .5 1406129070"
+}
+~~~
