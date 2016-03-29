@@ -48,7 +48,7 @@ The Sensu framework is made up of a number of components.
 The following is a diagram of the core components and how they
 interact with one another.
 
-![Sensu Diagram](img/sensu-diagram.gif)
+![Sensu Diagram](img/sensu-diagram-flow.png)
 
 ## Dependencies {#sensu-dependencies}
 
@@ -102,3 +102,11 @@ communicates with the Sensu API, exposing its features/abilities, with
 a human friendly interface. The Sensu dashboard is not part of the
 Sensu "core", as it's common to create custom dashboards, however, it
 is included in the Sensu package.
+
+# Use Case
+The diagram below shows that a use case of Sensu with other monitoring tools.
+
+Case1. Sensu with resource monitoring (with graphite/Grafana)
+
+![Sensu with resource monitoring](img/sensu-usecase-overview.png)
+
