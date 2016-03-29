@@ -7,13 +7,11 @@ next:
   text: "Getting Started with Checks"
 ---
 
-# Getting Started with Sensu
+# Getting Started Guides
 
 ## Learn Sensu in 15 minutes or less
 
-**TL;DR**: if you are looking for a quick & high-level overview of how Sensu
-works &mdash; you can skip the remainder of this guide and jump to [**the quick
-start guide**](learn-sensu-in-15m).
+Coming soon...
 
 ## The complete getting started guide
 
@@ -25,19 +23,15 @@ and analyze metrics, and setup alerts.
 
 ## Objectives
 
-This guide will provide an introduction to the following primitives, and
-built-in features (for Sensu Enterprise users):
+This guide will provide an introduction to the following building blocks:
 
-- Checks - used to monitor services or measure resources
-- Handlers - for taking action on Sensu events, which are produced by checks
-- Filters - for filtering (removing) events destined for one or more event handlers
-- Mutators - transform event data for handlers
+- [Intro to Checks][1] - used to monitor services or measure resources
+- [Intro to Handlers][2] - for taking action on Sensu events, which are produced by checks
+- [Intro to Filters][3] - for filtering (removing) events destined for one or more event handlers
+- [Intro to Mutators][4] - transform event data for handlers
 
 
-## WIP:
-
-- Familiarity with [standard streams][wiki-streams] (i.e. `stdin`, `stdout`,
-  and `stderr`)
-
-[wiki-cli]:       https://en.wikipedia.org/wiki/Command-line_interface
-[wiki-streams]:   https://en.wikipedia.org/wiki/Standard_streams
+[1]:  getting-started-with-checks
+[2]:  getting-started-with-handlers
+[3]:  getting-started-with-filters
+[4]:  getting-started-with-mutators
