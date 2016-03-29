@@ -38,7 +38,6 @@ Sensu supports the following event actions.
 - **create**. Indicates a check result `status` change from zero to non-zero.
 - **resolve**. Indicates a check result `status` change from a non-zero to zero.
 - **flapping**. Indicates a rapid change in check result `status`.
-- **registration**. Indicates ???
 
 _NOTE: for more information on event `action`s, please see the [Sensu event data
 specification][5], below._
