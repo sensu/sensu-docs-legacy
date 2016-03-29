@@ -7,7 +7,7 @@ next:
   text: "Extensions"
 ---
 
-# Sensu Event Data Mutators
+# Sensu Mutators
 
 This reference document provides information to help you:
 
