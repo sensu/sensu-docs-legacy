@@ -2,6 +2,9 @@
 version: 0.22
 category: "Installation Guide"
 title: "The five minute install"
+next:
+  url: "getting-started-guide"
+  text: "Getting Started with Sensu"
 ---
 
 # The five minute Sensu Install
@@ -217,9 +220,6 @@ the [installation guide](2).
     ![](img/five-minute-dashboard-1.png)
     ![](img/five-minute-dashboard-2.png)
 
-## Next Steps
-
-Coming soon...
 
 [1]:  architecture
 [2]:  installation-guide
