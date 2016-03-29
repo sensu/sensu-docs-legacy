@@ -841,6 +841,30 @@ basedn
     "basedn": "cn=users,dc=domain,dc=tld"
     ~~~
 
+groupbasedn
+: description
+  : Overrides the `basedn` attribute for the group lookups.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "groupbasedn": "cn=groups,dc=domain,dc=tld"
+    ~~~
+
+userbasedn
+: description
+  : Overrides the `basedn` attribute for the user lookups.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "userbasedn": "cn=admins,dc=domain,dc=tld"
+    ~~~
+
 binduser
 : description
   : The LDAP account that performs user lookups. We recommend to
@@ -913,6 +937,20 @@ userattribute
 : example
   : ~~~ shell
     "userattribute": "uid"
+    ~~~
+
+groupmemberattribute
+: description
+  : The LDAP attribute used to identify the group memberships.
+: required
+  : false
+: type
+  : String
+: default
+  : `member`
+: example
+  : ~~~ shell
+    "groupmemberattribute": "uniqueMember"
     ~~~
 
 userobjectclass
