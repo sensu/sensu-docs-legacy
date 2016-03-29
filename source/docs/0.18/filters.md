@@ -92,7 +92,7 @@ attributes
 
 Filter attributes are compared directly with their event data counterparts, with the exception of eval attribute values. When a filter attribute value is a string, beginning with `eval:`, the remainder is evaluated as a Ruby expression. The Ruby expression is evaluated in a "sandbox" and provided a single variable, `value`, equal to the event data attribute value being compared. If the evaluated expression returns `true`, the attribute is a match.
 
-The following is an example Sensu filter definition, a JSON configuration file located at `/etc/sensu/conf.d/filter_recurrences.json`. This filter negates events that are not the first occurrence and those that do not have an occurrence count divisible by 60 without a remainder (recurrence).
+The following is an example Sensu filter definition, a JSON configuration file located at `/etc/sensu/conf.d/filter_recurrences.json`. This filter negates events that are not the first occurrence and those that do not have an occurrence count divisible by 60 without a remainder (recurrence). Let's say your check runs every minute, the example below will run the handler the first time then every hour following.
 
 ~~~ json
 {
