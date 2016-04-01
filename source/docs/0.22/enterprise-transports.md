@@ -30,7 +30,7 @@ export SE_PASS=PASSWORD
 Add the Sensu Enterprise Rubygem repository as a gem source for Sensu's embedded Ruby:
 
 ~~~ shell
-sudo /opt/sensu/embedded/bin/gem sources --add "http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/gem"
+sudo /opt/sensu/embedded/bin/gem sources --add "http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/gem/"
 ~~~
 
 ### Install the STOMP transport Rubygem
