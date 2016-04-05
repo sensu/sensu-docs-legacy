@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Reference Docs"
 title: "Sensu Client"
 next:
@@ -78,8 +78,6 @@ client registry, which data is used to add context to Sensu [Events][7] and
 to detect Sensu clients in an unhealthy state.
 
 #### Registration events
-
-_NOTE: registration events are new to [Sensu Core 0.22][33]._
 
 If a [Sensu event handler][30] named `registration` is configured, or if a Sensu
 client definition includes a [registration attribute][31], the [Sensu server][5]

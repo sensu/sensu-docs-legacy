@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Enterprise Docs"
 title: "Built-in Handlers"
 next:
@@ -785,17 +785,17 @@ _NOTE: Sensu Enterprise 1.3.0 changed the default SNMP trap version from `1` to 
 
 SNMPv1 MIBs:
 
-- [RFC-1212-MIB.txt](http://sensuapp.org/docs/0.22/files/RFC-1212-MIB.txt)
+- [RFC-1212-MIB.txt](http://sensuapp.org/docs/0.23/files/RFC-1212-MIB.txt)
 
-- [RFC-1215-MIB.txt](http://sensuapp.org/docs/0.22/files/RFC-1215-MIB.txt)
+- [RFC-1215-MIB.txt](http://sensuapp.org/docs/0.23/files/RFC-1215-MIB.txt)
 
-- [SENSU-ENTERPRISE-V1-MIB.txt](http://sensuapp.org/docs/0.22/files/SENSU-ENTERPRISE-V1-MIB.txt)
+- [SENSU-ENTERPRISE-V1-MIB.txt](http://sensuapp.org/docs/0.23/files/SENSU-ENTERPRISE-V1-MIB.txt)
 
 SNMPv2 MIBs:
 
-- [SENSU-ENTERPRISE-ROOT-MIB.txt](http://sensuapp.org/docs/0.22/files/SENSU-ENTERPRISE-ROOT-MIB.txt)
+- [SENSU-ENTERPRISE-ROOT-MIB.txt](http://sensuapp.org/docs/0.23/files/SENSU-ENTERPRISE-ROOT-MIB.txt)
 
-- [SENSU-ENTERPRISE-NOTIFY-MIB.txt](http://sensuapp.org/docs/0.22/files/SENSU-ENTERPRISE-NOTIFY-MIB.txt)
+- [SENSU-ENTERPRISE-NOTIFY-MIB.txt](http://sensuapp.org/docs/0.23/files/SENSU-ENTERPRISE-NOTIFY-MIB.txt)
 
 The following is an example global configuration for the `snmp` enterprise event handler (integration).
 

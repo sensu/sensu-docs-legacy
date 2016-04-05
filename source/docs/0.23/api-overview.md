@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "API Docs"
 title: "Sensu API Overview"
 next:

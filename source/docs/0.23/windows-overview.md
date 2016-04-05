@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Windows Guide (deprecated)"
 title: "Installing Sensu on Windows: Overview"
 ---

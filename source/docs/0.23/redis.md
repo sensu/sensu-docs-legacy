@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Reference Docs"
 title: "Redis Configuration"
 next:
@@ -291,7 +291,7 @@ sudo /sbin/chkconfig redis off
 By default, Sentinel reads a configuration file that can be found at `/etc/redis/sentinel.conf`. The Redis package may provide its own example `sentinel.conf` file, however, the Sensu docs provided file is required in order for the following instructions to work. Run the following command to download the provided Redis Sentinel configuration file.
 
 ~~~ shell
-sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/0.22/files/sentinel.conf
+sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/0.23/files/sentinel.conf
 ~~~
 
 Sentinel not only reads its configuration from `/etc/redis/sentinel.conf`, but it also writes changes to it (state), so the Redis user must own the configuration file.
@@ -317,7 +317,7 @@ sentinel auth-pass mymaster your_redis_password
 The Redis package does not provide an init script for Sentinel. Run the following command to download a working Redis Sentinel init script.
 
 ~~~ shell
-sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/0.22/files/redis-sentinel
+sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/0.23/files/redis-sentinel
 ~~~
 
 The Redis Sentinel init script file needs to be executable.
@@ -405,7 +405,7 @@ The 1.5 source can be found at: [http://www.haproxy.org/download/1.5/src/](http:
 By default, HAProxy reads a configuration file that can be found at `/etc/haproxy/haproxy.cfg`. The HAProxy package may provide its own example `haproxy.cfg` file, however, the Sensu docs provided file is required in order for the following instructions to work. Run the following command to download the provided HAProxy configuration file.
 
 ~~~ shell
-sudo wget -O /etc/haproxy/haproxy.cfg http://sensuapp.org/docs/0.22/files/haproxy.cfg
+sudo wget -O /etc/haproxy/haproxy.cfg http://sensuapp.org/docs/0.23/files/haproxy.cfg
 ~~~
 
 The HAProxy configuration file requires a few changes before HAProxy can proxy traffic for Redis. The HAProxy configuration file at `/etc/haproxy/haproxy.cfg` can be edited by your preferred text editor with sudo privileges, e.g. `sudo nano /etc/haproxy/haproxy.cfg`.

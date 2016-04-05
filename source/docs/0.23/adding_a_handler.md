@@ -1,5 +1,5 @@
 ---
-version: "0.22"
+version: "0.23"
 category: "Getting Started"
 title: "Adding a handler (deprecated)"
 info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a

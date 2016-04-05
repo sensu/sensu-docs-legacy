@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Getting Started Guide"
 title: "Getting Started with Filters"
 next:

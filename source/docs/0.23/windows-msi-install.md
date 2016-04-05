@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Windows Guide"
 title: "Install Sensu MSI (deprecated)"
 ---

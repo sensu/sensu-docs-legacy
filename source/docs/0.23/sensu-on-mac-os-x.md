@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Installation Guide"
 title: "Sensu on Mac OS X"
 ---
@@ -30,7 +30,7 @@ notice._
 1. Download Sensu from the [Sensu Downloads][1] page, or via the `curl` utility
 
    ~~~ shell
-   curl -LO https://core.sensuapp.com/osx-unstable/sensu-0.22.0-1.pkg
+   curl -LO https://core.sensuapp.com/osx-unstable/sensu-0.23.0-1.pkg
    ~~~
 
    _NOTE: the Universal .pkg file supports OS X "Mavericks" (10.9) and newer.
@@ -39,7 +39,7 @@ notice._
 2. Install the package using the `installer` utility
 
    ~~~ shell
-   sudo installer -pkg sensu-0.22.0-1.pkg -target /
+   sudo installer -pkg sensu-0.23.0-1.pkg -target /
    ~~~
 
 ## Configure Sensu
@@ -104,7 +104,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
    text editor.
 
    ~~~ shell
-   sudo cp /opt/sensu/embedded/Cellar/sensu/0.22.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /etc/sensu/org.sensuapp.sensu-client.plist
+   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /etc/sensu/org.sensuapp.sensu-client.plist
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
@@ -150,7 +150,7 @@ sudo launchctl unload -w /etc/sensu/org.sensuapp.sensu-client.plist
 
 [1]:  https://sensuapp.org/download
 [2]:  https://core.sensuapp.com/osx-unstable/
-[3]:  https://core.sensuapp.com/osx-unstable/sensu-0.22.1-1.mountainlion.pkg
+[3]:  https://core.sensuapp.com/osx-unstable/sensu-0.23.0-1.mountainlion.pkg
 [4]:  #configure-the-sensu-client-launchd-daemon
 [5]:  configuration
 [6]:  transport

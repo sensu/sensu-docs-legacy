@@ -1,5 +1,5 @@
 ---
-version: 0.22
+version: 0.23
 category: "Reference Docs"
 title: "Data Store"
 next:
