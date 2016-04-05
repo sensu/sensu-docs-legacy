@@ -116,6 +116,50 @@ reconnect_on_error
     "reconnect_on_error": true
     ~~~
 
+sentinels
+: description
+  : A set of Redis Sentinel connection information.
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "sentinels": [{"host": "10.0.1.23", "port": 26379}]
+    ~~~
+
+#### `sentinels` item attributes
+
+The following attributes are configured within each item in `"sentinels": []`.
+
+host
+: description
+  : The Redis Sentinel instance hostname or IP address (recommended).
+: required
+  : true
+: type
+  : String
+: default
+  : `127.0.0.1`
+: example
+  : ~~~ shell
+    "host": "10.0.1.23"
+    ~~~
+
+port
+: description
+  : The Redis Sentinel instance TCP port.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `26379`
+: example
+  : ~~~ shell
+    "port": 26380
+    ~~~
+
 ### Example Redis definition
 
 The following is an example Redis connection definition at `/etc/sensu/conf.d/redis.json`.
