@@ -118,7 +118,7 @@ reconnect_on_error
 
 sentinels
 : description
-  : A set of Redis Sentinel connection information.
+  : Redis Sentinel configuration, connection information for one or more Redis Sentinel instances.
 : required
   : false
 : type
@@ -128,9 +128,9 @@ sentinels
     "sentinels": [{"host": "10.0.1.23", "port": 26379}]
     ~~~
 
-#### `sentinels` item attributes
+#### `sentinels` instance attributes
 
-The following attributes are configured within each item in `"sentinels": []`.
+The following attributes are configured within each item in `"sentinels": []`, e.g. `"sentinels": [{"host": "10.0.1.23"}]`.
 
 host
 : description
