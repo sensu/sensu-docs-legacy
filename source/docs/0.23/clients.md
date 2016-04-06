@@ -58,12 +58,12 @@ transport (to be processed by a Sensu server).
 Sensu Client `keepalives` are the heartbeat mechanism used by Sensu to ensure
 that all registered Sensu clients are still operational and able to reach the
 [Sensu Transport][6]. Sensu clients publish keepalive messages containing client
-configuration data to the Sensu transport every 20 seconds (by default). If a
-Sensu client fails to send keepalive messages over a period of 120 seconds (by
-default), the Sensu server (or Sensu Enterprise) will create a keepalive
-[event][7]. Keepalives can be used to identify unhealthy systems and network
-partitions (among other things), and keepalive events can trigger email
-notifications and other useful actions.
+configuration data to the Sensu transport every 20 seconds. If a Sensu client
+fails to send keepalive messages over a period of 120 seconds (by default), the
+Sensu server (or Sensu Enterprise) will create a keepalive [event][7].
+Keepalives can be used to identify unhealthy systems and network partitions
+(among other things), and keepalive events can trigger email notifications and
+other useful actions.
 
 ### Client registration & the client registry {#registration-and-registry}
 
@@ -530,6 +530,14 @@ warning
 : description
   : The warning threshold (in seconds) where a Sensu client is determined to be
     unhealthy, not having sent a keepalive in so many seconds.
+
+    _WARNING: keepalive messages are sent at an interval of 20 seconds. Setting
+    a `warning` threshold of 20 seconds or fewer will result in false-positive
+    events. Also note that due to the potential for NTP synchronization issues
+    and/or network latency or packet loss interfering with regular delivery of
+    client keepalive messages, we recommend a minimum `warning` threshold of 40
+    seconds._
+
 : required
   : false
 : type
@@ -545,6 +553,14 @@ critical
 : description
   : The critical threshold (in seconds) where a Sensu client is determined to be
     unhealthy, not having sent a keepalive in so many seconds.
+
+    _WARNING: keepalive messages are sent at an interval of 20 seconds. Setting
+    a `critical` threshold of 20 seconds or fewer will result in false-positive
+    events. Also note that due to the potential for NTP synchronization issues
+    and/or network latency or packet loss interfering with regular delivery of
+    client keepalive messages, we recommend a minimum `critical` threshold of 60
+    seconds._
+
 : required
   : false
 : type
