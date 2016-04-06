@@ -30,7 +30,7 @@ next:
   - [Check command token specification](#check-command-token-specification)
     - [Command token declaration syntax](#command-token-declaration)
     - [Command token client attributes](#command-token-client-attributes)
-    - [Command token alternate values](#command-token-alternate-values)
+    - [Command token default values](#command-token-default-values)
 - [Check configuration](#check-configuration)
   - [Example check definition](#example-check-definition)
   - [Check definition specification](#check-definition-specification)
@@ -275,22 +275,22 @@ definition attributes][16].
 - `:::disk.warning:::` would be replaced with a [custom attribute][24] called
   `warning` nested inside of a JSON hash called `disk`
 
-#### Command token alternate values
+#### Command token default values
 
-Command token alternate values can be used as a fallback in the event that no a
+Command token default values can be used as a fallback in the event that no a
 [command token client attribute][25] is not provided by the [client
-definition][16]. Command token alternate values are separated by a pipe
-character (`|`), and can be used to provide a "default values" for clients that
+definition][16]. Command token default values are separated by a pipe
+character (`|`), and can be used to provide a "fallback value" for clients that
 are missing the declared token attribute.
 
-##### Examples {#command-token-alternate-values}
+##### Examples {#command-token-default-values}
 
 - `:::url|https://sensuapp.org:::` would be replaced with a [custom
   attribute][24] called `url`. If no such attribute called `url` is included in
-  the client definition, the alternate (or default) value of
+  the client definition, the default (or fallback) value of
   `https://sensuapp.org` will be used.
 
-_NOTE: if a command token alternate value is not provided (i.e. as a default
+_NOTE: if a command token default value is not provided (i.e. as a fallback
 value), and the Sensu client definition does not have a matching [command token
 client attribute][25], a [check result][4] indicating unmatched tokens will be
 published for the check execution (e.g.: `"Unmatched command tokens:
