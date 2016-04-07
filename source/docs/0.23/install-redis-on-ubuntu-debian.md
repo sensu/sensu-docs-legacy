@@ -58,11 +58,19 @@ configuration][2] for more information on how Sensu loads configuration.
    ~~~ json
    {
      "redis": {
-       "host": "localhost",
+       "host": "127.0.0.1",
        "port": 6379
      }
    }
    ~~~
+
+   _WARNING: using `"localhost"` instead of `127.0.0.1` for the `host`
+   configuration on systems that support IPv6 may result in an [IPv6 "localhost"
+   resolution (i.e. `::1`)][5] rather than an IPv4 "localhost" resolution (i.e.
+   `127.0.0.1`). This is not incorrect behavior because Sensu does support IPv6,
+   however if Redis is not configured to listen on IPv6, this will result in a
+   connection error and log entries indicating a **"redis connection error"**
+   with an **"unable to connect to redis server"** error message._
 
 ### Example Distributed Configuration
 
@@ -110,3 +118,4 @@ configuration][2] for more information on how Sensu loads configuration.
 [2]:  configuration
 [3]:  transport
 [4]:  installation-prerequisites#selecting-a-transport
+[5]:  https://en.wikipedia.org/wiki/IPv6_address#Local_addresses
