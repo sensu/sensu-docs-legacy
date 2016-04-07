@@ -9,6 +9,7 @@ title: "Sensu on Mac OS X"
 - [Installing Sensu Core](#sensu-core)
   - [Download and install Sensu using the Sensu Universal .pkg file](#download-and-install-sensu-core)
 - [Configure Sensu](#configure-sensu)
+  - [Create the Sensu configuration directory](#create-the-sensu-configuration-directory)
   - [Example client configuration](#example-client-configuration)
   - [Example transport configuration](#example-transport-configuration)
   - [Configure the Sensu client `launchd` daemon](#configure-the-sensu-client-launchd-daemon)
@@ -59,6 +60,16 @@ section, below._
 The following Sensu configuration files are provided as examples. Please review
 the [Sensu configuration reference documentation][5] for additional information
 on how Sensu is configured.
+
+### Create the Sensu configuration directory
+
+In some cases, the default Sensu configuration directory (i.e.
+`/etc/sensu/conf.d/`) is not created by the Sensu installer, in which case it is
+necessary to create this directory manually.
+
+~~~ shell
+mkdir /etc/sensu/conf.d
+~~~
 
 ### Example client configuration
 

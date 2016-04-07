@@ -12,6 +12,7 @@ title: "Install Sensu on Ubuntu/Debian"
   - [Install the Sensu Enterprise repository](#install-sensu-enterprise-repository)
   - [Install Sensu Enterprise (server & API)](#install-sensu-enterprise)
 - [Configure Sensu](#configure-sensu)
+  - [Create the Sensu configuration directory](#create-the-sensu-configuration-directory)
   - [Example client configuration](#example-client-configuration)
   - [Example transport configuration](#example-transport-configuration)
   - [Example data store configuration](#example-data-store-configuration)
@@ -133,6 +134,16 @@ with the corresponding CLI arguments. For more information, please consult the
 The following Sensu configuration files are provided as examples. Please review
 the [Sensu configuration reference documentation][3] for additional information
 on how Sensu is configured.
+
+### Create the Sensu configuration directory
+
+In some cases, the default Sensu configuration directory (i.e.
+`/etc/sensu/conf.d/`) is not created by the Sensu installer, in which case it is
+necessary to create this directory manually.
+
+~~~ shell
+sudo mkdir /etc/sensu/conf.d
+~~~
 
 ### Example client configuration
 
