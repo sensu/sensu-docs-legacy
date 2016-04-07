@@ -34,7 +34,7 @@ Downloads][1] page, and from YUM package management repositories. The Sensu Core
 package installs several processes including `sensu-server`, `sensu-api`, and
 `sensu-client`.
 
-### Install Sensu using APT (recommended) {#install-sensu-core-repository}
+### Install Sensu using YUM (recommended) {#install-sensu-core-repository}
 
 1. Create the YUM repository configuration file for the Sensu Core repository at
    `/etc/yum.repos.d/sensu.repo`:
