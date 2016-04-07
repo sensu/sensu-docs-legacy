@@ -34,9 +34,9 @@ Downloads][1] page, and from YUM package management repositories. The Sensu Core
 package installs several processes including `sensu-server`, `sensu-api`, and
 `sensu-client`.
 
-### Install Sensu using APT (recommended) {#install-sensu-core-repository}
+### Install Sensu using YUM (recommended) {#install-sensu-core-repository}
 
-1. Create the YUM repository configuration file for the Sensu Core repository at    
+1. Create the YUM repository configuration file for the Sensu Core repository at
    `/etc/yum.repos.d/sensu.repo`:
 
    ~~~ shell
@@ -86,13 +86,7 @@ API and web application).
    1234567890:PASSWORD
    ~~~
 
-2. Install the GPG public key
-
-   ~~~ shell
-   wget -q http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt/pubkey.gpg -O- | sudo apt-key add -
-   ~~~
-
- 3. Create a YUM repository configuration file for the Sensu Enterprise
+2. Create a YUM repository configuration file for the Sensu Enterprise
     repository at `/etc/yum.repos.d/sensu-enterprise.repo`:
 
     ~~~ shell
@@ -103,7 +97,7 @@ API and web application).
     enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise.repo
     ~~~
 
-4. Create a YUM repository configuration file for the Sensu Enterprise Dashboard
+3. Create a YUM repository configuration file for the Sensu Enterprise Dashboard
    repository at `/etc/yum.repos.d/sensu-enterprise-dashboard.repo`:
 
    ~~~ shell
@@ -114,7 +108,7 @@ API and web application).
    enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise-dashboard.repo
    ~~~
 
-5. Install Sensu Enterprise
+4. Install Sensu Enterprise
 
    ~~~ shell
    sudo yum install sensu-enterprise sensu-enterprise-dashboard
