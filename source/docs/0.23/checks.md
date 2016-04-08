@@ -277,7 +277,7 @@ definition attributes][16].
 
 #### Command token default values
 
-Command token default values can be used as a fallback in the event that no a
+Command token default values can be used as a fallback in the event that a
 [command token client attribute][25] is not provided by the [client
 definition][16]. Command token default values are separated by a pipe
 character (`|`), and can be used to provide a "fallback value" for clients that
