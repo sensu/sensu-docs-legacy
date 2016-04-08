@@ -24,7 +24,7 @@ _WARNING: FreeBSD packages are currently as a "beta" release. Support for
 running Sensu on FreeBSD will be provided on a best-effort basis until further
 notice._
 
-### Download and install Sensu using the Sensu Universal .pkg file {#download-and-install-sensu-core}
+### Download and install Sensu using the Sensu .txz package {#download-and-install-sensu-core}
 
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
@@ -43,13 +43,12 @@ By default, all of the Sensu services on FreeBSD systems will load configuration
 from the following locations:
 
 - `/etc/sensu/config.json`
-- `/etc/sensu/conf.d/`
+- `/etc/sensu/conf.d/**/*.json`
 
 _NOTE: additional or alternative configuration file and directory locations may
-be used by modifying Sensu's service configuration XML and/or by starting the
-Sensu services with the corresponding CLI arguments. For more information,
-please consult the [Sensu Configuration](configuration) reference
-documentation._
+be used by modifying Sensu's service configuration and/or by starting the Sensu
+services with the corresponding CLI arguments. For more information, please
+consult the [Sensu Configuration][5] reference documentation._
 
 The following Sensu configuration files are provided as examples. Please review
 the [Sensu configuration reference documentation][5] for additional information

@@ -266,8 +266,8 @@ configuration file examples.
 
 By default, the Sensu services are not configured to start automatically on
 system boot (we recommend managing the Sensu services with a process supervisor
-such as [runit][7]). To enable Sensu services on system
-boot, use the `update-rc.d` utility.
+such as [runit][7]). To enable Sensu services on system boot, use the
+`update-rc.d` utility.
 
 - Enable the Sensu client on system boot
 
