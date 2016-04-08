@@ -111,11 +111,11 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 
 1. To configure the Sensu client service wrapper, copy the default service
    definition file entitled `org.sensuapp.sensu-client.plist` to
-   `/etc/sensu/org.sensuapp.sensu-client.plist` and edit it with your favorite
-   text editor.
+   `/Library/LaunchDaemons/org.sensuapp.sensu-client.plist` and edit it with
+   your favorite text editor.
 
    ~~~ shell
-   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /etc/sensu/org.sensuapp.sensu-client.plist
+   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
@@ -154,8 +154,8 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 Start or stop the Sensu client using the [`launchctl` utility][11]:
 
 ~~~ shell
-sudo launchctl load -w /etc/sensu/org.sensuapp.sensu-client.plist
-sudo launchctl unload -w /etc/sensu/org.sensuapp.sensu-client.plist
+sudo launchctl load -w /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
+sudo launchctl unload -w /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
 ~~~
 
 
