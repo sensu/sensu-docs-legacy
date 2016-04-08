@@ -92,9 +92,8 @@ below)._
   : - **Success**: 200 (OK)
     - **Error**: 500 (Internal Server Error)
 
-: example
-  : ~~~ shell
-    $ curl -s http://hostname:4567/clients | jq .
+: output
+  : ~~~ json
     [
         {
             "name": "i-334455",
