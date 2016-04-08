@@ -34,8 +34,9 @@ created [via HTTP POST to the `/clients` API][4].
 
 #### EXAMPLES {#clients-get-example}
 
-Querying the `/clients` API will return a JSON array of JSON hashes containing
-client data.
+The following example demonstrates a `/clients` API query which returns a JSON
+Array of JSON Hashes containing client data (i.e. the [Sensu client
+registry][1]).
 
 ~~~ shell
 $ curl -s http://127.0.0.1:4567/clients | jq .
@@ -56,6 +57,11 @@ $ curl -s http://127.0.0.1:4567/clients | jq .
   }
 ]
 ~~~
+
+_NOTE: for larger Sensu installations it may be undesirable to get the entire
+[client registry][1] in a single API request. The `/clients` API provides
+pagination controls via the [`limit` and `offset` url parameters][7] (see
+below)._
 
 #### API Specification {#clients-get-specification}
 
@@ -118,9 +124,9 @@ The `/clients` endpoint provides HTTP POST access to the [client registry][1].
 
 ### EXAMPLES {#clients-post-example}
 
-Writing to the `/clients` API via HTTP POST will cause the API to respond with
-a [201 (Created) HTTP response code][5], and a JSON Hash containing the client
-`name`.
+The following example demonstrates submitting an HTTP POST to the `/clients`
+API, resulting in a [201 (Created) HTTP response code][5] (i.e.
+`HTTP/1.1 201 Created`) and a JSON Hash containing the client `name`.
 
 ~~~ shell
 $ curl -s -i \
@@ -141,10 +147,6 @@ Server: thin
 
 {"name":"api-example"}
 ~~~
-
-_NOTE: this example uses the `curl` utility with the `-i` option, to **"include
-the HTTP-header in the output"** (for verbosity). The HTTP response code is
-included in this header as `HTTP/1.1 201 Created`._
 
 ### API Specification {#clients-post-specification}
 
@@ -320,7 +322,7 @@ Server: thin
 
 The `/clients/:client/history` API is being deprecated in favor of the [Sensu
 Results API][6]. This API predates the `/results` APIs and provides less
-functionality than the newer alternative. 
+functionality than the newer alternative.
 
 [1]:  clients#registration-and-registry
 [2]:  clients#client-keepalives
@@ -328,3 +330,4 @@ functionality than the newer alternative.
 [4]:  #clients-post
 [5]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 [6]:  api-results
+[7]:  #clients-get-specification
