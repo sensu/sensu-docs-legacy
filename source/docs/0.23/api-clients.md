@@ -174,7 +174,7 @@ Server: thin
     - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
 
-## The `/clients/:client` API Endpoint
+## The `/clients/:client` API Endpoint(s)
 
 The `/clients/:client` API endpoint provides read and delete access to specific
 Sensu client data in the [Sensu client registry][1], by client `name`.
