@@ -9,6 +9,7 @@ title: "Sensu on Mac OS X"
 - [Installing Sensu Core](#sensu-core)
   - [Download and install Sensu using the Sensu Universal .pkg file](#download-and-install-sensu-core)
 - [Configure Sensu](#configure-sensu)
+  - [Create the Sensu configuration directory](#create-the-sensu-configuration-directory)
   - [Example client configuration](#example-client-configuration)
   - [Example transport configuration](#example-transport-configuration)
   - [Configure the Sensu client `launchd` daemon](#configure-the-sensu-client-launchd-daemon)
@@ -60,6 +61,16 @@ The following Sensu configuration files are provided as examples. Please review
 the [Sensu configuration reference documentation][5] for additional information
 on how Sensu is configured.
 
+### Create the Sensu configuration directory
+
+In some cases, the default Sensu configuration directory (i.e.
+`/etc/sensu/conf.d/`) is not created by the Sensu installer, in which case it is
+necessary to create this directory manually.
+
+~~~ shell
+mkdir /etc/sensu/conf.d
+~~~
+
 ### Example client configuration
 
 1. Copy the following contents to a configuration file located at
@@ -100,11 +111,11 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 
 1. To configure the Sensu client service wrapper, copy the default service
    definition file entitled `org.sensuapp.sensu-client.plist` to
-   `/etc/sensu/org.sensuapp.sensu-client.plist` and edit it with your favorite
-   text editor.
+   `/Library/LaunchDaemons/org.sensuapp.sensu-client.plist` and edit it with
+   your favorite text editor.
 
    ~~~ shell
-   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /etc/sensu/org.sensuapp.sensu-client.plist
+   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
@@ -143,8 +154,8 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 Start or stop the Sensu client using the [`launchctl` utility][11]:
 
 ~~~ shell
-sudo launchctl load -w /etc/sensu/org.sensuapp.sensu-client.plist
-sudo launchctl unload -w /etc/sensu/org.sensuapp.sensu-client.plist
+sudo launchctl load -w /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
+sudo launchctl unload -w /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
 ~~~
 
 

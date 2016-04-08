@@ -17,6 +17,13 @@ next:
   - [Inclusive and exclusive filtering](#inclusive-and-exclusive-filtering)
   - [Filter attribute comparison](#filter-attribute-comparison)
   - [Filter attribute evaluation](#filter-attribute-evaluation)
+- [Filter attribute eval tokens](#filter-attribute-eval-tokens)
+  - [What are filter attribute eval tokens?](#what-are-filter-attribute-eval-tokens)
+  - [Example filter attribute eval token](#example-filter-attribute-eval-token)
+  - [Filter attribute eval token specification](#filter-attribute-eval-token-specification)
+    - [Eval token declaration syntax](#eval-token-declaration-syntax)
+    - [Eval token attributes](#eval-token-attributes)
+    - [Eval token default values](#eval-token-default-values)
 - [Filter configuration](#filter-configuration)
   - [Filter definition specification](#filter-definition-specification)
     - [Filter naming](#filter-naming)
@@ -173,6 +180,86 @@ has confused some users because filtering based on occurrences alone assumes
 some understanding of the relationship between `occurrences` and `interval`,
 which isn't always obvious._
 
+## Filter attribute eval tokens
+
+### What are filter attribute eval tokens?
+
+Sensu filters attributes may be [evaluated using Ruby expressions][10], which
+evaluations provide support for comparing a single event attribute variable
+against a basic logical statement (e.g. is `value` greater than `60`?). When
+additional variables are needed beyond the single `value` variable provided by
+`eval:`, tokens may be used. Eval tokens are filter attribute placeholders that
+can be replaced by [Sensu check definition attributes][6] and [client definition
+attributes][?] (including custom attributes).
+
+### Example filter attribute eval token
+
+The following is an example Sensu [filter definition][2], which is using a
+token (`:::check.occurrences|60:::`) as a secondary attribute in the Ruby eval
+expression. The token will be replaced by the [check definition attribute][6]
+named `occurrences` if it is defined, otherwise it will use the fallback value
+of `60`.
+
+~~~ json
+{
+  "filters": {
+    "occurrences": {
+      "negate": true,
+      "attributes": {
+        "occurrences": "eval: value > :::check.occurrences|60:::"
+      }
+    }
+  }
+}
+~~~
+
+This example would be useful for filtering events that don't exceed a minimum
+number of `occurrences` as configured in the check definition.
+
+### Filter attribute eval token specification
+
+Sensu filter attribute eval tokens provide access to Sensu [event data
+attributes][3] via “dot notation” (e.g. `check.occurrences`).
+
+#### Eval token declaration syntax
+
+Eval tokens are declared by wrapping event data attributes with "triple colons"
+(i.e. three colon characters before and after the attribute, i.e. `:::`).
+
+##### Examples
+
+- `:::occurrences:::` would be replaced with the [event `occurences` data][11]
+- `:::check.my_threshold:::` would be replaced with a [custom check definition
+  attribute][12] called `my_threshold`
+
+#### Eval token attributes
+
+Command token attributes are "dot notation" references to [Event data][3].
+
+##### Examples {#command-token-client-attributes-examples}
+
+- `:::occurrences:::` would be replaced with the [event `occurrences` data][11]
+- `:::check.my_threshold:::` would be replaced with a [custom check definition
+  attribute][12] called `my_threshold`
+
+#### Eval token default values
+
+Eval token default values can be used as a fallback in the event that an [eval
+token attribute][13] is not satisfied by [event data][3]. Eval token default
+values are separated by a pipe character (`|`), and can be used to provide a
+"fallback value" for events that are missing the declared token attribute.
+
+##### Examples {#command-token-default-values}
+
+- `:::check.occurrences|60:::` would be replaced with a [check definition
+  attribute][6] called `occurrences`. If `occurrences` is not defined in the
+  check definition, the default (or fallback) value of `60` will be used.
+
+_NOTE: if an eval token default value is not provided (i.e. as a fallback
+value), and the event data does not contain a matching [eval token
+attribute][13], an log entry indicating an error called `"filter eval unmatched
+tokens"` will be published to the Sensu server log._
+
 ## Filter configuration
 
 ### Example filter definition {#example-filter-definition}
@@ -253,3 +340,6 @@ attributes
 [8]:  clients#custom-definition-attributes
 [9]:  http://ruby-doc.org/core-2.2.0/Regexp.html
 [10]: #filter-attribute-comparison
+[11]: events#event-data-specification
+[12]: checks#custom-definition-attributes
+[13]: #eval-token-attributes
