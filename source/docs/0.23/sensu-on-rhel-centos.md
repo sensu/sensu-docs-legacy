@@ -89,13 +89,13 @@ API and web application).
 2. Create a YUM repository configuration file for the Sensu Enterprise
     repository at `/etc/yum.repos.d/sensu-enterprise.repo`:
 
-    ~~~ shell
-    echo "[sensu-enterprise]
-    name=sensu-enterprise
-    baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/noarch/
-    gpgcheck=0
-    enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise.repo
-    ~~~
+   ~~~ shell
+   echo "[sensu-enterprise]
+   name=sensu-enterprise
+   baseurl=http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/yum/noarch/
+   gpgcheck=0
+   enabled=1" | sudo tee /etc/yum.repos.d/sensu-enterprise.repo
+   ~~~
 
 3. Create a YUM repository configuration file for the Sensu Enterprise Dashboard
    repository at `/etc/yum.repos.d/sensu-enterprise-dashboard.repo`:
