@@ -81,7 +81,7 @@ reconnect_on_error
 
 Sensu currently supports the following Transports:
 
-- [RabbitMQ (default)](redis)
+- [RabbitMQ (default)](rabbitmq)
 - [Redis](redis)
 
 [transport-github]:           http://github.com/sensu/sensu-transport
