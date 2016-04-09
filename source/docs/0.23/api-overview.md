@@ -27,8 +27,7 @@ willingness to Google) industry standard RESTful API behaviors &ndash; including
 - [Results API](api-results)
 - [Aggregates API](api-aggregates)
 - [Stashes API](api-stashes)
-- [Health API](api-health)
-- [Info API](api-info)
+- [Health & Info API](api-health-and-info)
 - [API configuration](api-configuration)
 
 [1]:  clients#registration-and-registry
