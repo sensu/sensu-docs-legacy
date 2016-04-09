@@ -182,7 +182,7 @@ configuration.
    ~~~ json
    {
      "rabbitmq": {
-       "host": "localhost",
+       "host": "127.0.0.1",
        "port": 5672,
        "vhost": "/sensu",
        "user": "sensu",
