@@ -92,13 +92,13 @@ the [installation guide](2).
    ~~~ shell
    {
      "redis": {
-       "host": "localhost"
+       "host": "127.0.0.1"
      },
      "transport": {
        "name": "redis"
      },
      "api": {
-       "host": "localhost",
+       "host": "127.0.0.1",
        "port": 4567
      }
    }
@@ -118,7 +118,7 @@ the [installation guide](2).
    {
      "client": {
        "name": "client-01",
-       "address": "localhost",
+       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev"
@@ -146,7 +146,7 @@ the [installation guide](2).
      "sensu": [
        {
          "name": "sensu",
-         "host": "localhost",
+         "host": "127.0.0.1",
          "port": 4567
        }
      ],
@@ -185,13 +185,13 @@ the [installation guide](2).
     using the `curl` utility (and piping the result to the [`jq` utility][13]):
 
     ~~~ shell
-    curl -s http://localhost:4567/clients | jq .
+    curl -s http://127.0.0.1:4567/clients | jq .
     ~~~
 
     If the Sensu API returns a JSON array of Sensu clients similar to this:
 
     ~~~ shell
-    $ curl -s http://localhost:4567/clients | jq .
+    $ curl -s http://127.0.0.1:4567/clients | jq .
     [
       {
         "timestamp": 1458625739,
@@ -204,7 +204,7 @@ the [installation guide](2).
           "dev"
         ],
         "environment": "development",
-        "address": "localhost",
+        "address": "127.0.0.1",
         "name": "client-01"
       }
     ]

@@ -51,8 +51,7 @@ hide_toc: true
   * [Results API](api-results)
   * [Aggregates API](api-aggregates)
   * [Stashes API](api-stashes)
-  * [Health API](api-health)
-  * [Info API](api-info)
+  * [Health & Info API](api-health-and-info)
   * [API Configuration](api-configuration)
 
 * **Enterprise Docs**

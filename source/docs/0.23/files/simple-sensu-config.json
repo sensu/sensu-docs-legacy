@@ -1,12 +1,12 @@
 {
   "redis": {
-    "host": "localhost"
+    "host": "127.0.0.1"
   },
   "transport": {
     "name": "redis"
   },
   "api": {
-    "host": "localhost",
+    "host": "127.0.0.1",
     "port": 4567
   }
 }

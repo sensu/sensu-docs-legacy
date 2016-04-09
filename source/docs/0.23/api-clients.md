@@ -9,9 +9,61 @@ next:
 
 # Sensu Clients API
 
-List and delete client(s) information.
+## Reference Documentation
 
-## API Definition
+- [The `/clients` API endpoint](#the-clients-api-endpoint)
+  - [`/clients` (GET)](#clients-get)
+  - [`/clients` (POST)](#clients-post)
+- [The `/clients/:client` API endpoint(s)](#the-clientsclient-api-endpoints)
+  - [`/clients/:client` (GET)](#clientsclient-get)
+  - [`/clients/:client` (DELETE)](#clientsclient-delete)
+- [The `/clients/:client/history` API endpoint(s)](#the-clientsclienthistory-api-endpoints)
+
+--------------------------------------------------------------------------------
+
+## The `/clients` API Endpoint
+
+The `/clients` API endpoint provides HTTP GET and POST access to the [Sensu
+client registry][1].
+
+### `/clients` (GET)
+
+The `/clients` endpoint provides HTTP GET access to [client registry data][1] as
+published via [client keepalives][2], generated for a [proxy client][3], or
+created [via HTTP POST to the `/clients` API][4].
+
+#### EXAMPLES {#clients-get-example}
+
+The following example demonstrates a `/clients` API query which returns a JSON
+Array of JSON Hashes containing client data (i.e. the [Sensu client
+registry][1]).
+
+~~~ shell
+$ curl -s http://127.0.0.1:4567/clients | jq .
+[
+  {
+    "timestamp": 1458625739,
+    "version": "0.23.0",
+    "socket": {
+      "port": 3030,
+      "bind": "127.0.0.1"
+    },
+    "subscriptions": [
+      "dev"
+    ],
+    "environment": "development",
+    "address": "127.0.0.1",
+    "name": "client-01"
+  }
+]
+~~~
+
+_NOTE: for larger Sensu installations it may be undesirable to get the entire
+[client registry][1] in a single API request. The `/clients` API provides
+pagination controls via the [`limit` and `offset` url parameters][7] (see
+below)._
+
+#### API Specification {#clients-get-specification}
 
 `/clients` (GET)
 : desc.
@@ -21,15 +73,17 @@ List and delete client(s) information.
   : http://hostname:4567/clients
 
 : parameters
-  : - `limit`:
+  : - `limit`
       - **required**: false
       - **type**: Integer
       - **description**: The number of clients to return.
-    - `offset`:
+      - **example**: `http://hostname:4567/clients?limit=100`
+    - `offset`
       - **required**: false
       - **type**: Integer
       - **depends**: `limit`
       - **description**: The number of clients to offset before returning items.
+      - **example**: `http://hostname:4567/clients?limit=100&offset=100`
 
 : response type
   : Array
@@ -63,6 +117,118 @@ List and delete client(s) information.
     ]
     ~~~
 
+### `/clients` (POST)
+
+The `/clients` endpoint provides HTTP POST access to the [client registry][1].
+
+### EXAMPLES {#clients-post-example}
+
+The following example demonstrates submitting an HTTP POST to the `/clients`
+API, resulting in a [201 (Created) HTTP response code][5] (i.e.
+`HTTP/1.1 201 Created`) and a JSON Hash containing the client `name`.
+
+~~~ shell
+$ curl -s -i \
+-X POST \
+-H 'Content-Type: application/json' \
+-d '{"name": "api-example","address": "10.0.2.100","subscriptions":["default"],"environment":"production"}' \
+http://127.0.0.1:4567/clients
+
+HTTP/1.1 201 Created
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 22
+Connection: keep-alive
+Server: thin
+
+{"name":"api-example"}
+~~~
+
+### API Specification {#clients-post-specification}
+
+`/clients` (POST)
+: desc
+  : Create or update client data (e.g. [Sensu JIT clients](clients#jit-clients)).
+
+: example URL
+  : http://hostname:4567/clients
+
+: payload
+  : ~~~ json
+    {
+        "name": "gateway-router",
+        "address": "192.168.0.1",
+        "subscriptions": [
+            "network",
+            "snmp"
+        ],
+        "environment": "production"
+    }
+    ~~~
+
+: response codes
+  : - **Success**: 201 (Created)
+    - **Malformed**: 400 (Bad Request)
+    - **Error**: 500 (Internal Server Error)
+
+## The `/clients/:client` API Endpoint(s)
+
+The `/clients/:client` API endpoint provides read and delete access to specific
+Sensu client data in the [Sensu client registry][1], by client `name`.
+
+### `/clients/:client` (GET)
+
+The `/clients/:client` endpoint provides HTTP GET access to specific client
+definitions in the [client registry][1] as published via [client keepalives][2],
+generated for a [proxy  client][3], or created [via POST to the `/clients`
+API][4].
+
+### EXAMPLE {#clients-client-get-example}
+
+In the following example, querying the `/clients/:client` API returns a JSON
+Hash containing the requested `:client` data (i.e. for the client named
+`client-01`).
+
+~~~ shell
+$ curl -s http://127.0.0.1:4567/clients/client-01 | jq .
+{
+  "timestamp": 1458625739,
+  "version": "0.23.0",
+  "socket": {
+    "port": 3030,
+    "bind": "127.0.0.1"
+  },
+  "subscriptions": [
+    "dev"
+  ],
+  "environment": "development",
+  "address": "127.0.0.1",
+  "name": "client-01"
+}
+~~~
+
+The following example demonstrates a request for client data for a non-existent
+`:client` named `non-existent-client`, which results in a [404 (Not Found) HTTP
+response code][5] (i.e. `HTTP/1.1 404 Not Found`).
+
+~~~ shell
+$ curl -s -i http://127.0.0.1:4567/clients/non-existent-client
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 0
+Connection: keep-alive
+Server: thin
+~~~
+
+### API Specification {#clientsclient-get-specification}
+
 `/clients/:client` (GET)
 : desc.
   : Returns a client.
@@ -92,30 +258,52 @@ List and delete client(s) information.
     }
     ~~~
 
-`/clients` (POST)
-: desc
-  : Create or update client data (e.g. [Sensu JIT clients](clients#jit-clients)).
+### `/clients/:client` (DELETE)
 
-: example URL
-  : http://hostname:4567/clients
+The `/clients/:client` endpoint provides HTTP DELETE access to specific client
+definitions in the [client registry][1].
 
-: payload
-  : ~~~ json
-    {
-        "name": "gateway-router",
-        "address": "192.168.0.1",
-        "subscriptions": [
-            "network",
-            "snmp"
-        ],
-        "environment": "production"
-    }
-    ~~~
+#### EXAMPLE {#clientsclient-delete-example}
 
-: response codes
-  : - **Success**: 201 (Created)
-    - **Malformed**: 400 (Bad Request)
-    - **Error**: 500 (Internal Server Error)
+The following example demonstrates a request to delete a `:client` named
+`api-example`, resulting in a [202 (Accepted) HTTP response code][5] (i.e.
+`HTTP/1.1 202 Accepted`) and a JSON Hash containing an `issued` timestamp.
+
+~~~ shell
+$ curl -s -i -X DELETE http://127.0.0.1:4567/clients/api-example
+
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 21
+Connection: keep-alive
+Server: thin
+
+{"issued":1460136855}
+~~~
+
+The following example demonstrates a request to delete a non-existent `:client`
+named `non-existent-client`, resulting in a [404 (Not Found) HTTP response
+code][5] (i.e. `HTTP/1.1 404 Not Found`).
+
+~~~ shell
+$ curl -s -i -X DELETE http://127.0.0.1:4567/clients/non-existent-client
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 0
+Connection: keep-alive
+Server: thin
+~~~
+
+#### API Specification {#clientsclient-delete-specification}
 
 `/clients/:client` (DELETE)
 : desc.
@@ -129,65 +317,16 @@ List and delete client(s) information.
     - **Missing**: 404 (Not Found)
     - **Error**: 500 (Internal Server Error)
 
-`/clients/:client/history` (GET)
-: desc.
-  : Returns the history for a client.
+## The `/clients/:client/history` API Endpoint(s)
 
-: example url
-  : http://hostname:4567/clients/i-424242
+The `/clients/:client/history` API is being deprecated in favor of the [Sensu
+Results API][6]. This API predates the `/results` APIs and provides less
+functionality than the newer alternative.
 
-: response type
-  : Array
-
-: response codes
-  : - **Success**: 200 (OK)
-    - **Error**: 500 (Internal Server Error)
-
-: output
-  : ~~~ json
-    [
-        {
-            "check": "chef_client_process",
-            "history": [
-                0,
-                1
-            ],
-            "last_execution": 1370725352,
-            "last_status": 1,
-            "last_result": {
-                "name": "chef_client_process",
-                "command": "check-procs -p chef-client -W 1",
-                "subscribers": [
-                    "production"
-                ],
-                "interval": 60,
-                "issued": 1389374667,
-                "executed": 1389374667,
-                "output": "WARNING Found 0 matching processes\n",
-                "status": 1,
-                "duration": 0.005
-            }
-        },
-        {
-            "check": "keepalive",
-            "history": [
-                0,
-                0,
-                0
-            ],
-            "last_execution": 1389374665,
-            "last_status": 0,
-            "last_result": {
-                "name": "keepalive",
-                "thresholds": {
-                    "warning": 120,
-                    "critical": 180
-                },
-                "issued": 1389374665,
-                "executed": 1389374665,
-                "output": "Keepalive sent from client 11 seconds ago",
-                "status": 0
-            }
-        }
-    ]
-    ~~~
+[1]:  clients#registration-and-registry
+[2]:  clients#client-keepalives
+[3]:  clients#proxy-clients
+[4]:  #clients-post
+[5]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+[6]:  api-results
+[7]:  #clients-get-specification

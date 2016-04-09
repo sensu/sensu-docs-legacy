@@ -1,7 +1,7 @@
 {
   "client": {
     "name": "my-first-sensu-client",
-    "address": "localhost",
+    "address": "127.0.0.1",
     "environment": "development",
     "subscriptions": [
       "dev"

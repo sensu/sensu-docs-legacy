@@ -1,44 +1,10 @@
 ---
 version: 0.23
 category: "API Docs"
-title: "Health API"
-next:
-  url: "api-info"
-  text: "Info API"
+title: "Health API (moved)"
+info: "<strong>NOTE:</strong> This page has been moved. Please click <strong><a
+  href=api-health-and-info
+  >here</a></strong> if you're not automatically redirected. Have a nice day!"
 ---
 
-# Sensu Health API
-
-Check the status of the API's transport & Redis connections, and query the
-transport's status. (consumer and message counts)
-
-## API Definition
-
-`/health` (GET)
-: desc
-  : Returns health information on transport & Redis connections.
-
-: example url
-  : http://hostname:4567/health
-
-: parameters
-  : - `consumers`:
-      - **required**: true
-      - **type**: Integer
-      - **description**: The minimum number of transport consumers to be considered healthy.
-    - `messages`:
-      - **required**: true
-      - **type**: Integer
-      - **description**: The maximum ammount of transport queued messages to be considered healthy.
-
-: response type
-  : REPLACEME
-
-: response codes
-  : - **Success**: 204 (No Content)
-    - **Error**: 503 (Service Unavailable)
-
-: output
-  : ~~~ json
-    [ "REPLACEME" ]
-    ~~~
+<meta http-equiv="refresh" content="1;url=api-health-and-info">

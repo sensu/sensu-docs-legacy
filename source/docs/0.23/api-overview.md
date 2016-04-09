@@ -9,11 +9,17 @@ next:
 
 # Sensu API
 
-The Sensu API provides access to the data that Sensu servers collect, such as client information & current events. The API can be used to resolve events and request check executions, among other things.
+The Sensu API provides access to monitoring data collected by Sensu, such as
+a [client registry][1], [check results][2], and [event data][3]. The API can be
+used to request adhoc check executions, and resolve events, among other things.
 
-## Contents
+## RESTful JSON API
 
-The Sensu API documentation covers the following API endpoints & topics:
+The Sensu API is [JSON][4]-based [RESTful API][5]. Familiarity with (or
+willingness to Google) industry standard RESTful API behaviors &ndash; including
+[HTTP response codes][6] &ndash; are strongly recommended.
+
+## Reference Documentation
 
 - [Clients API](api-clients)
 - [Checks API](api-checks)
@@ -21,6 +27,12 @@ The Sensu API documentation covers the following API endpoints & topics:
 - [Results API](api-results)
 - [Aggregates API](api-aggregates)
 - [Stashes API](api-stashes)
-- [Health API](api-health)
-- [Info API](api-info)
-- [How to configure the Sensu API](api-configuration)
+- [Health & Info API](api-health-and-info)
+- [API configuration](api-configuration)
+
+[1]:  clients#registration-and-registry
+[2]:  checks#check-results
+[3]:  events#event-data
+[4]:  http://www.json.org/
+[5]:  https://en.wikipedia.org/wiki/Representational_state_transfer
+[6]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
