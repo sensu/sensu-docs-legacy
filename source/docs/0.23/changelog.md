@@ -39,9 +39,13 @@ available for immediate download. Please note the following improvements:
   ]
   ~~~
 
+  See the [Redis configuration documentation][3] for more information.
+
 - **NEW:** Added a CLI option/argument to cause the Sensu service to print
   (output to STDOUT) its compiled configuration settings and exit. The CLI
   option is `--print_config` or `-P`.
+
+  See the [Sensu CLI arguments][4] documentation for more information.
 
 - **NEW:** Added token substitution to filter eval attributes, providing
   access to event data.
@@ -65,20 +69,22 @@ available for immediate download. Please note the following improvements:
 
 - **NEW:** The pure Ruby EventMachine reactor is used when running on AIX.
 
-- **IMPROVEMENT:** The Sensu Transport API has changed. Transports are now a deferrable,
-  they must call `succeed()` once they have fully initialized. Sensu now waits
-  for its transport to fully initialize before taking other actions.
+- **IMPROVEMENT:** The Sensu Transport API has changed. Transports are now a
+  deferrable, they must call `succeed()` once they have fully initialized. Sensu
+  now waits for its transport to fully initialize before taking other actions.
 
-- **IMPROVEMENT:** performance improvements. Dropped MultiJson in favour of Sensu
-  JSON, a lighter weight JSON parser abstraction that supports platform
+- **IMPROVEMENT:** performance improvements. Dropped MultiJson in favour of
+  Sensu JSON, a lighter weight JSON parser abstraction that supports platform
   specific parsers for Sensu Core and Enterprise. The Oj JSON parser is
-  once again used for Sensu Core. Used [fast-ruby][3] and benchmarks as a guide
+  once again used for Sensu Core. Used [fast-ruby][5] and benchmarks as a guide
   to further changes.
 
 - **IMPROVEMENT:** Using EventMachine 1.2.0, which brings several changes and
-  improvements ([changelog][4]).
+  improvements ([changelog][6]).
 
 [1]:  https://www.ruby-lang.org/en/news/2015/12/25/ruby-2-3-0-released/
 [2]:  http://redis.io/topics/sentinel
-[3]:  https://github.com/JuanitoFatas/fast-ruby
-[4]:  https://github.com/eventmachine/eventmachine/blob/master/CHANGELOG.md#1201-march-15-2016
+[3]:  redis#configuring-sensu-for-ha-redis
+[4]:  configuration#sensu-service-cli-arguments
+[4]:  https://github.com/JuanitoFatas/fast-ruby
+[5]:  https://github.com/eventmachine/eventmachine/blob/master/CHANGELOG.md#1201-march-15-2016
