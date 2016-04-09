@@ -736,7 +736,19 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
   : Display the help documentation.
 : example
   : ~~~ shell
-    /opt/sensu/bin/sensu-server -h
+    $ /opt/sensu/bin/sensu-server -h
+    Usage: sensu-server [options]
+        -h, --help                       Display this message
+        -V, --version                    Display version
+        -c, --config FILE                Sensu JSON config FILE
+        -d, --config_dir DIR[,DIR]       DIR or comma-delimited DIR list for Sensu JSON config files
+        -P, --print_config               Print the compiled configuration and exit
+        -e, --extension_dir DIR          DIR for Sensu extensions
+        -l, --log FILE                   Log to a given FILE. Default: STDOUT
+        -L, --log_level LEVEL            Log severity LEVEL
+        -v, --verbose                    Enable verbose logging
+        -b, --background                 Fork into the background
+        -p, --pid_file FILE              Write the PID to a given FILE
     ~~~
 
 `-V` (`--version`)
@@ -744,7 +756,8 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
   : Display the Sensu version.
 : example
   : ~~~ shell
-    /opt/sensu/bin/sensu-client -V
+    $ /opt/sensu/bin/sensu-client -V
+    0.23.0
     ~~~
 
 `-c` (`--config FILE`)
@@ -755,7 +768,7 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
     /opt/sensu/bin/sensu-api -c /etc/sensu/config.json
     ~~~
 
-`-d` (`--directory DIR[,DIR]`)
+`-d` (`--config_dir DIR[,DIR]`)
 : description
   : Provide the path to the Sensu configuration `DIR`, or comma delimited `DIR`
     list. Configuration directories are loaded in the order provided.
@@ -763,6 +776,68 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
   : ~~~ shell
     /opt/sensu/bin/sensu-server -d /etc/sensu/conf.d,/path/to/more/configuration
     ~~~
+
+`-P` (`--print_config`)
+: description
+  : Load and print Sensu configuration to STDOUT.
+: dependencies
+  : Requires `-c` (`--config`) and `-d` (`--config_dir`) CLI arguments to be
+    provided so the Sensu service knows where to load configuration from.
+: example
+  : ~~~ shell
+    $ sudo -u sensu /opt/sensu/bin/sensu-client -P -c /etc/sensu/config.json -d /etc/sensu/conf.d/
+    {"timestamp":"2016-04-08T16:41:35.699200-0700","level":"warn","message":"loading config file","file":"/etc/sensu/config.json"}
+    {"timestamp":"2016-04-08T16:41:35.699411-0700","level":"warn","message":"loading config files from directory","directory":"/etc/sensu/conf.d/"}
+    {"timestamp":"2016-04-08T16:41:35.699456-0700","level":"warn","message":"loading config file","file":"/etc/sensu/conf.d/check-sensu-website.json"}
+    {"timestamp":"2016-04-08T16:41:35.699551-0700","level":"warn","message":"config file applied changes","file":"/etc/sensu/conf.d/check-sensu-website.json","changes":{"checks":{"sensu_website":[null,{"command":"check-http.rb -u https://sensuapp.org","subscribers":["production"],"interval":60,"publish":false}]}}}
+    {"timestamp":"2016-04-08T16:41:35.699597-0700","level":"warn","message":"loading config file","file":"/etc/sensu/conf.d/client.json"}
+    {"timestamp":"2016-04-08T16:41:35.699673-0700","level":"warn","message":"config file applied changes","file":"/etc/sensu/conf.d/client.json","changes":{"client":[null,{"name":"client-01","address":"127.0.0.1","environment":"development","subscriptions":["production"],"socket":{"bind":"127.0.0.1","port":3030}}]}}
+    {"timestamp":"2016-04-08T16:41:35.700246-0700","level":"warn","message":"outputting compiled configuration and exiting"}
+    {
+      "transport":{
+        "name":"redis",
+        "reconnect_on_error":true
+      },
+      "checks":{
+        "sensu_website":{
+          "command":"check-http.rb -u https://sensuapp.org",
+          "subscribers":[
+            "production"
+          ],
+          "interval":60,
+          "publish":false
+        }
+      },
+      "filters":{},
+      "mutators":{},
+      "handlers":{},
+      "redis":{
+        "host":"127.0.0.1"
+      },
+      "api":{
+        "host":"127.0.0.1",
+        "port":4567
+      },
+      "client":{
+        "name":"client-01",
+        "address":"127.0.0.1",
+        "environment":"development",
+        "subscriptions":[
+          "production"
+        ],
+        "socket":{
+          "bind":"127.0.0.1",
+          "port":3030
+        }
+      }
+    }
+    ~~~
+
+    _NOTE: this command needs to be run as the `sensu` user (or as a user with
+    elevated privileges) in order for Sensu to access its configuration files)._
+
+    _PRO TIP: to generate config output without log entries, try setting the
+    `-L` (`--log_level`) CLI argument to `error` or `fatal` (e.g. `-L fatal`)._
 
 `-e` (`--extensions_dir DIR`)
 : description
