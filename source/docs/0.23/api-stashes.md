@@ -110,7 +110,7 @@ response code][5] and a payload containing a JSON Hash confirming the stash
 
 ~~~ shell
 curl -s -i -X POST \
--H 'application/json' \
+-H 'Content-Type: application/json' \
 -d '{"path": "example/stash/path", "content": { "foo": "bar" }}' \
 http://localhost:4567/stashes
 
@@ -210,7 +210,7 @@ the stash can be accessed).
 
 ~~~ shell
 $ curl -s -i -X POST \
--H 'application/json' \
+-H 'Content-Type: application/json' \
 -d '{"message": "hello world"}' \
 http://localhost:4567/stashes/my/example/path
 

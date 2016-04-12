@@ -455,7 +455,7 @@ payload containing a JSON Hash with the resolve requests `issued` timestamp.
 
 ~~~ shell
 $ curl -s -i -X POST \
--H 'application/json' \
+-H 'Content-Type: application/json' \
 -d '{"client": "client-01", "check": "sensu_website"}' \
 http://localhost:4567/resolve
 
@@ -478,7 +478,7 @@ for a non-existent client named `non-existent-client` and a check named
 
 ~~~ shell
 curl -s -i -X POST \
--H 'application/json' \
+-H 'Content-Type: application/json' \
 -d '{"client": "non-existent-client", "check": "non-existent-check"}' \
 http://localhost:4567/resolve
 

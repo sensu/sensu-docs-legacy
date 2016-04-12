@@ -13,6 +13,7 @@ next:
 
 - [The `/results` API endpoint](#the-results-api-endpoint)
   - [`/results` (GET)](#results-get)
+  - [`/results` (POST)](#results-post)
 - [The `/results/:client` API endpoint](#the-resultsclient-api-endpoint)
   - [`/results/:client` (GET)](#resultsclient-get)
 - [The `/results/:client/:check` API endpoints](#the-resultsclientcheck-api-endpoints)
@@ -21,10 +22,13 @@ next:
 
 ## The `/results` API endpoint
 
+The `/results` API endpoint provides HTTP GET and HTTP POST access to current
+[check result data][1].
+
 ### `/results` (GET)
 
-The `/results` API endpoint provides HTTP GET access to current [check result
-data][1].
+The `/results` API endpoint provides HTTP GET access to fetch current [check
+result data][1].
 
 #### EXAMPLES {#results-get-examples}
 
@@ -106,6 +110,77 @@ $ curl -s http://localhost:4567/results | jq .
     ]
     ~~~
 
+### `/results` (POST)
+
+The `/results` API endpoint provides HTTP POST access to submit [check result
+data][1].
+
+#### EXAMPLES {#results-post-examples}
+
+The following example demonstrates submitting an HTTP POST to the `/results` API
+with JSON Hash payload containing [check result data][1], resulting in a [202
+(Accepted) HTTP response code] (i.e. `HTTP/1.1 202 Accepted`) and a JSON Hash
+containing an `issued` timestamp.
+
+~~~ shell
+$ curl -s -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{"source": "external_service", "name": "check_external", "output": "hello results API world", "status": 0}' \
+http://localhost:4567/results
+
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 21
+Connection: keep-alive
+Server: thin
+
+{"issued":1460326288}
+~~~
+
+#### API specification {#results-post-specification}
+
+`/results` (POST)
+: desc
+  : Accepts [Sensu check result data][4] via API.
+: example url
+  : http://hostname:4567/results
+: response type
+  : HTTP-header only (no output)
+: response codes
+  : - **Success**: 201 (Created)
+    - **Malformed**: 400 (Bad Request)
+    - **Error**: 500 (Internal Server Error)
+: example payload
+  : ~~~
+     {
+       "source": "docker_01",
+       "name": "index_app_01",
+       "output": "Indexing app is OK",
+       "status": 0
+     }
+    ~~~
+    _NOTE: the `/results` (POST) API only supports check `name`, `output`,
+    `status`, and `source` (used to create a [proxy client][4]). Please see the
+    [check definition specification][5] documentation for more information._
+: output
+  : ~~~ shell
+    HTTP/1.1 202 Accepted
+    Content-Type: application/json
+    Access-Control-Allow-Origin: *
+    Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+    Access-Control-Allow-Credentials: true
+    Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+    Content-Length: 21
+    Connection: keep-alive
+    Server: thin
+
+    {"issued":1460326288}
+    ~~~
+
 ## The `/results/:client` API endpoint
 
 ### `/results/:client` (GET)
@@ -161,17 +236,13 @@ $ curl -s http://localhost:4567/results/client-01 | jq .
 `/results/:client` (GET)
 : desc
   : Returns a list of current check results for a given client.
-
 : example url
   : http://hostname:4567/results/i-424242
-
 : response type
   : Array
-
 : response codes
   : - **Success**: 200 (OK)
     - **Error**: 500 (Internal Server Error)
-
 : output
   : ~~~ json
     [
@@ -310,3 +381,5 @@ Server: thin
 [1]:  checks#check-results
 [2]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 [3]:  https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+[4]:  clients#proxy-clients
+[5]:  checks#check-definition-specification
