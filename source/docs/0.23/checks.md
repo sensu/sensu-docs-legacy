@@ -44,8 +44,8 @@ next:
 
 ## What is a Sensu check?
 
-Sensu checks define commands run by the [Sensu client][1] which monitor a
-condition (e.g. is Nginx running?) or read measurements (e.g. how much disk
+Sensu checks are commands executed by the [Sensu client][1] which monitor a
+condition (e.g. is Nginx running?) or collect measurements (e.g. how much disk
 space do I have left?). Although the Sensu client will attempt to execute any
 command defined for a check, successful processing of check results requires
 adherence to a simple specification.
@@ -77,12 +77,14 @@ by the [event processor][5] (i.e. the [Sensu server][6].
 
 Each [Sensu check definition][7] defines a `command` and the interval at which
 it  should be executed. Check commands are literally executable commands which
-will be executed on the [Sensu client][1], run as the `sensu` user.
+will be executed on the [Sensu client][1], run as the `sensu` user. Most check
+commands are provided by [Sensu check plugins][8].
 
 ### Check command arguments
 
 Sensu check `command` attributes may include command line arguments for
-controlling the behavior of the command executable. Many [Sensu plugins][8]
+controlling the behavior of the command executable. Most [Sensu check
+plugins][8] provide support for command line arguments for reusability.
 
 ### How and where are check commands executed?
 
@@ -332,7 +334,7 @@ Every check definition is within the `"checks": {}` [definition scope][29].
 - Cannot contain special characters or spaces
 - Validated with [Ruby regex][30] `/^[\w\.-]+$/.match("check-name")`
 
-#### `check` attributes
+#### Check attributes
 
 type
 : description
@@ -805,7 +807,7 @@ name
 [5]:  architecture#event-processor
 [6]:  server
 [7]:  #check-configuration
-[8]:  plugins
+[8]:  plugins#check-plugins
 [9]:  https://en.wikipedia.org/wiki/PATH_(variable)
 [10]: clients#standalone-check-execution-scheduler
 [11]: https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
