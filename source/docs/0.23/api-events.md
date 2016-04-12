@@ -18,6 +18,8 @@ next:
 - [The `/events/:client/:check` API endpoints](#the-eventsclientcheck-api-endpoints)
   - [`/events/:client/:check` (GET)](#eventsclientcheck-get)
   - [`/events/:client/:check` (DELETE)](#eventsclientcheck-delete)
+- [The `/resolve` API endpoint](#the-resolve-api-endpoint)
+  - [`/resolve` (POST)](#resolve-post)
 
 ## The `/events` API endpoint
 
@@ -402,9 +404,9 @@ $ curl -s http://localhost:4567/events/client-01/sensu_website | jq .
 
 #### EXAMPLES {#eventsclientcheck-delete-examples}
 
-The following example demonstrates a request to the `/events/:client/:check` API
+The following example demonstrates a `/events/:client/:check` API request to
 to delete event data for a `:client` named `:client-01` and a `:check` named
-`sensu_website`, resulting in a `202 (Accepted) HTTP response code` (i.e.
+`sensu_website`, resulting in a [202 (Accepted) HTTP response code][2] (i.e.
 `HTTP/1.1 202 Accepted`) and a payload containing a JSON Hash with the delete
 request `issued` timestamp.
 
@@ -437,6 +439,62 @@ Server: thin
     - **Missing**: 404 (Not Found)
     - **Error**: 500 (Internal Server Error)
 
+## The `/resolve` API endpoint
+
+### `resolve` (POST)
+
+The `/resolve` API endpoint provides HTTP POST access to resolve current [Sensu
+events][3].
+
+#### EXAMPLES {#resolve-post-examples}
+
+The following example demonstrates a `/resolve` API request to resolve an event
+for a client named `client-01` and a check named `sensu_website`, which results
+in a [202 (Accepted) HTTP response code][2] (i.e. `HTTP/1.1 202 Accepted`) and a
+payload containing a JSON Hash with the resolve requests `issued` timestamp.
+
+~~~ shell
+$ curl -s -i -X POST \
+-H 'application/json' \
+-d '{"client": "client-01", "check": "sensu_website"}' \
+http://localhost:4567/resolve
+
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 21
+Connection: keep-alive
+Server: thin
+
+{"issued":1460311425}
+~~~
+
+The following example demonstrates a `/resolve` API request to resolve an event
+for a non-existent client named `non-existent-client` and a check named
+`non-existent-check`, resulting in a [404 (Not Found) HTTP response code][2].
+
+~~~ shell
+curl -s -i -X POST \
+-H 'application/json' \
+-d '{"client": "non-existent-client", "check": "non-existent-check"}' \
+http://localhost:4567/resolve
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Content-Length: 0
+Connection: keep-alive
+Server: thin
+~~~
+
+#### API specification {#resolve-post-specification}
+
 `/resolve` (POST)
 : desc.
   : Resolves an event. (delayed action)
@@ -460,3 +518,5 @@ Server: thin
 
 [?]:  #
 [1]:  events#event-data
+[2]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+[3]:  events
