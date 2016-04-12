@@ -125,7 +125,7 @@ access to stash `content` data:
 
    ~~~ shell
    $ curl -s -i -X POST \
-   -H 'application/json' \
+   -H 'Content-Type: application/json' \
    -d '{"path": "direct-access/example-1", "content":{"message":"hello world"}}' \
    http://localhost:4567/stashes
 
@@ -148,7 +148,7 @@ access to stash `content` data:
 
    ~~~ shell
    $ curl -s -i -X POST \
-   -H 'application/json' \
+   -H 'Content-Type: application/json' \
    -d '{"message": "hello world"}' \
    http://localhost:4567/stashes/direct-access/example-2
 
