@@ -50,39 +50,77 @@ The following is an example Sensu event. By default, event data is JSON
 formatted, making it language-independent and fairly human readable.
 
 ~~~ json
-{
-  "action": "create",
-  "occurrences": 1,
-  "client": {
-    "name": "i-424242",
-    "address": "8.8.8.8",
-    "subscriptions": [
-      "production",
-      "webserver",
-      "mysql"
-    ],
-    "timestamp": 1326390159
-  },
-  "check":{
-    "name": "frontend_http_check",
-    "issued": 1326390169,
-    "subscribers":[
-      "frontend"
-    ],
-    "interval": 60,
-    "command": "check_http -I 127.0.0.1 -u http://web.example.com/healthcheck.html -R 'pageok'",
-    "output": "HTTP CRITICAL: HTTP/1.1 503 Service Temporarily Unavailable",
-    "status": 2,
-    "handler": "slack",
-    "history": [
-      "0",
-      "2"
-    ]
+[
+  {
+    "timestamp": 1460172826,
+    "action": "create",
+    "occurrences": 2,
+    "check": {
+      "total_state_change": 11,
+      "history": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "2",
+        "2"
+      ],
+      "status": 2,
+      "output": "No keepalive sent from client for 230 seconds (>=180)",
+      "executed": 1460172826,
+      "issued": 1460172826,
+      "name": "keepalive",
+      "thresholds": {
+        "critical": 180,
+        "warning": 120
+      }
+    },
+    "client": {
+      "timestamp": 1460172596,
+      "version": "0.23.0",
+      "socket": {
+        "port": 3030,
+        "bind": "127.0.0.1"
+      },
+      "subscriptions": [
+        "production"
+      ],
+      "environment": "development",
+      "address": "127.0.0.1",
+      "name": "client-01"
+    },
+    "id": "ef6b87d2-1f89-439f-8bea-33881436ab90"
   }
-}
+]
 ~~~
 
 ### Event data specification
+
+timestamp
+: description
+  : The time the event occurred in [Epoch time][6] (generated via Ruby
+    `Time.now.to_i`)
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "timestamp": 1460172826
+    ~~~
 
 action
 : description
@@ -110,25 +148,6 @@ occurrences
     "occurrences": 3
     ~~~
 
-client
-: description
-  : Originating Sensu client data.
-: type
-  : Hash
-: example
-  : ~~~ shell
-    "client": {
-      "name": "i-424242",
-      "address": "8.8.8.8",
-      "subscriptions": [
-        "production",
-        "webserver",
-        "mysql"
-      ],
-      "timestamp": 1326390159
-    }
-    ~~~
-
 check
 : description
   : The corresponding check result data including the check history.
@@ -154,9 +173,41 @@ check
     }
     ~~~
 
+client
+: description
+  : Originating Sensu client data.
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "client": {
+      "name": "i-424242",
+      "address": "8.8.8.8",
+      "subscriptions": [
+        "production",
+        "webserver",
+        "mysql"
+      ],
+      "timestamp": 1326390159
+    }
+    ~~~
+
+id
+: description
+  : Unique id for the event occurrence
+: type
+  : String
+: possible values
+  : Any [Ruby `SecureRandom.uuid` value][7]
+: example
+  : ~~~ shell
+    "id": "66926524-da77-41a4-92bd-365498841079"
+    ~~~
 
 [1]:  handlers
 [2]:  #event-data
 [3]:  checks
 [4]:  checks#check-results
 [5]:  #event-data-specification
+[6]:  https://en.wikipedia.org/wiki/Unix_time
+[7]:  http://ruby-doc.org/stdlib-2.3.0/libdoc/securerandom/rdoc/SecureRandom.html
