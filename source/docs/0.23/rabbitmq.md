@@ -165,7 +165,7 @@ The following is an example RabbitMQ connection definition at `/etc/sensu/conf.d
 ~~~ json
 {
   "rabbitmq": {
-    "host": "57.43.53.42",
+    "host": "127.0.0.1",
     "port": 5671,
     "vhost": "/sensu",
     "user": "sensu",
@@ -259,7 +259,7 @@ _NOTE: the RabbitMQ nodes must first be successfully clustered in order for Sens
 {
   "rabbitmq": [
     {
-      "host": "57.43.53.42",
+      "host": "10.0.0.1",
       "port": 5671,
       "vhost": "/sensu",
       "user": "sensu",
@@ -272,7 +272,7 @@ _NOTE: the RabbitMQ nodes must first be successfully clustered in order for Sens
       }
     },
     {
-      "host": "57.43.53.43",
+      "host": "10.0.0.2",
       "port": 5671,
       "vhost": "/sensu",
       "user": "sensu",
@@ -285,7 +285,7 @@ _NOTE: the RabbitMQ nodes must first be successfully clustered in order for Sens
       }
     },
     {
-      "host": "57.43.53.44",
+      "host": "10.0.0.3",
       "port": 5671,
       "vhost": "/sensu",
       "user": "sensu",
