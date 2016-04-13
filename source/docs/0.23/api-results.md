@@ -119,7 +119,7 @@ data][1].
 
 The following example demonstrates submitting an HTTP POST to the `/results` API
 with JSON Hash payload containing [check result data][1], resulting in a [202
-(Accepted) HTTP response code] (i.e. `HTTP/1.1 202 Accepted`) and a JSON Hash
+(Accepted) HTTP response code][2] (i.e. `HTTP/1.1 202 Accepted`) and a JSON Hash
 containing an `issued` timestamp.
 
 ~~~ shell
