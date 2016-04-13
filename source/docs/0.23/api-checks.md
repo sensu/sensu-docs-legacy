@@ -191,8 +191,8 @@ Server: thin
 _PRO TIP: the `/request` API can be a powerful utility when combined with check
 definitions that are configured with `"publish": false` (i.e. checks which are
 not intended to run on a scheduled interval). Using `"publish": false` along
-with the `/request` API makes it possible to define and request adhoc check
-executions._
+with the `/request` API makes it possible to request predefined check executions
+on an as-needed basis._
 
 The following example demonstrates a request for a check execution for a
 non-existent check named `non_existent_check`, which results in a [404 (Not

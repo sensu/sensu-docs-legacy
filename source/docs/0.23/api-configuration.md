@@ -2,22 +2,21 @@
 version: 0.23
 category: "API Docs"
 title: "API Configuration"
+info: "<strong>NOTE:</strong> Please visit the <a href='enterprise-api'>Sensu
+Enterprise API reference documentation</a> for information on configuring the
+Sensu Enterprise API (including native SSL encryption)."
+
 ---
 
 # Sensu API Configuration
 
-The Sensu API provides several endpoints to access Sensu data for Checks,
-Clients, Events, Aggregates, Stashes, and more.
+## Reference documentation
 
-This reference document provides information to help you:
+- [API configuration](#api-configuration)
+  - [Example API definition](#example-api-definition)
+  - [API definition specification](#api-definition-specification)
 
-- [Configure the Sensu API](#anatomy-of-an-api-definition)
-
-_NOTE: Please visit the [Sensu Enterprise API](enterprise-api) reference
-documentation for information on configuring the Sensu Enterprise API (including
-native SSL encryption)._
-
-## Anatomy of an API definition
+## API configuration
 
 ### Example API definition
 
@@ -33,13 +32,18 @@ The following is an example API definition at `/etc/sensu/conf.d/api.json`.
 }
 ~~~
 
-### Definition attributes
+### API definition specification
 
 The API definition uses the `"api": {}` definition scope.
 
+#### `api` attributes
+
 host
 : description
-  : The hostname or IP address that is used when querying the API. This attribute does not configure the address that the API binds to (that's `bind`). This attribute is used by Sensu tooling to know how to query the Sensu API.
+  : The hostname or IP address that is used when querying the API.
+    _NOTE: this attribute does not configure the address that the API binds to
+    (that's `bind`). This attribute is used by the Sensu server and client to
+    know how/where to query the Sensu API._
 : required
   : false
 : type

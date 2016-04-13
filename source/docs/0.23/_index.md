@@ -36,6 +36,7 @@ hide_toc: true
   * [Handlers](handlers)
   * [Plugins](plugins)
   * [Extensions](extensions)
+  * [Stashes](stashes)
   * [Data Store](data-store)
   * [Transport](transport)
   * [Sensu Configuration](configuration)
