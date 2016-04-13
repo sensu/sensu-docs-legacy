@@ -3,8 +3,8 @@ version: 0.23
 category: "API Docs"
 title: "Events API"
 next:
-  url: "api-results"
-  text: "Results API"
+  url: "api-stashes"
+  text: "Stashes API"
 ---
 
 # Sensu Events API

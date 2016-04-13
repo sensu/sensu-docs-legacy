@@ -3,8 +3,8 @@ version: 0.23
 category: "API Docs"
 title: "Checks API"
 next:
-  url: "api-events"
-  text: "Events API"
+  url: "api-results"
+  text: "Results API"
 ---
 
 # Sensu Checks API

@@ -82,3 +82,35 @@ port
   : ~~~ shell
     "port": 4242
     ~~~
+
+user
+: description
+  : The username required to connect to the API.
+: required
+  : false
+: depends
+  : `password`
+: type
+  : String
+: default
+  : none
+: example
+  : ~~~ shell
+    "user": "sensu"
+    ~~~
+
+user
+: description
+  : The username required to connect to the API.
+: required
+  : false
+: depends
+  : `user`
+: type
+  : String
+: default
+  : none
+: example
+  : ~~~ shell
+    "password": "secret"
+    ~~~
