@@ -99,9 +99,9 @@ user
     "user": "sensu"
     ~~~
 
-user
+password
 : description
-  : The username required to connect to the API.
+  : The password required to connect to the API.
 : required
   : false
 : depends
