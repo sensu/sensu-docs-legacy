@@ -3,8 +3,8 @@ version: 0.23
 category: "API Docs"
 title: "Stashes API"
 next:
-  url: "api-health"
-  text: "Health API"
+  url: "api-health-and-info"
+  text: "Health & Info API"
 ---
 
 # Sensu Stashes API

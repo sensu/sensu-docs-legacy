@@ -3,8 +3,8 @@ version: 0.23
 category: "API Docs"
 title: "Aggregates API"
 next:
-  url: "api-stashes"
-  text: "Stashes API"
+  url: "api-events"
+  text: "Events API"
 ---
 
 # Sensu Aggregates API
@@ -243,5 +243,5 @@ $ curl -s http://localhost:4567/aggregates/ntp_process/1370738854
     ~~~
 
 [1]:  aggregates
-[2]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes 
+[2]:  https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 [3]:  https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html

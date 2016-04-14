@@ -23,9 +23,9 @@ willingness to Google) industry standard RESTful API behaviors &ndash; including
 
 - [Clients API](api-clients)
 - [Checks API](api-checks)
-- [Events API](api-events)
 - [Results API](api-results)
 - [Aggregates API](api-aggregates)
+- [Events API](api-events)
 - [Stashes API](api-stashes)
 - [Health & Info API](api-health-and-info)
 - [API configuration](api-configuration)

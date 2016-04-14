@@ -149,7 +149,7 @@ Server: thin
 : example url
   : http://hostname:4567/results
 : response type
-  : HTTP-header only (no output)
+  : [HTTP-header][3] only (no output)
 : response codes
   : - **Success**: 201 (Created)
     - **Malformed**: 400 (Bad Request)
