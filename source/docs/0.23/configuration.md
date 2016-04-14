@@ -734,7 +734,7 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
 `-h` (`--help`)
 : description
   : Display the help documentation.
-: example
+: examples
   : ~~~ shell
     $ /opt/sensu/bin/sensu-server -h
     Usage: sensu-server [options]
@@ -749,6 +749,14 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
         -v, --verbose                    Enable verbose logging
         -b, --background                 Fork into the background
         -p, --pid_file FILE              Write the PID to a given FILE
+
+    $ /opt/sensu/bin/sensu-install -h
+    Usage: sensu-install [options]
+    -h, --help                       Display this message
+    -v, --verbose                    Enable verbose logging
+    -p, --plugin PLUGIN              Install a Sensu PLUGIN
+    -P, --plugins PLUGIN[,PLUGIN]    PLUGIN or comma-delimited list of Sensu plugins to install
+    -s, --source SOURCE              Install Sensu plugins from a custom SOURCE
     ~~~
 
 `-V` (`--version`)
