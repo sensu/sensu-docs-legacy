@@ -12,6 +12,7 @@ next:
 - [Install Redis using APT](#install-redis-using-apt)
 - [Managing the Redis service/process](#manage-the-redis-service-process)
 - [Verify that Redis is working](#verify-that-redis-is-working)
+- [Set file descriptor limits](#set-file-descriptor-limits)
 - [Configure Sensu](#configure-sensu)
   - [Example Standalone Configuration](#example-standalone-configuration)
   - [Example Distributed Configuration](#example-distributed-configuration)
@@ -42,6 +43,58 @@ Once you have installed and started the Redis service, you should be able to
 confirm that Redis is ready to use by running the command:  <kbd>redis-cli
 ping</kbd>. If you get a `PONG` response, you are ready to move on to the next
 step in the guide.
+
+## Set file descriptor limits
+
+_NOTE: for the most part, Redis should "just work" without needing to tune linux
+file descriptor limits, however this configuration may become necessary in cases
+where Redis is being used as the [Sensu transport][3] or in other high
+performance environments._
+
+By default, most Linux operating systems will limit the maximum number of file
+handles a single process is allowed to have open to `1024`. We recommend
+adjusting this number to `65536` for running Redis in production systems, and at
+least `4096` for development environments.
+
+According to the Redis documentation on client handling, regarding the [maximum
+number of client connections allowed][6]:
+
+> In Redis 2.4 there was an hard-coded limit about the maximum number of clients
+  that was possible to handle simultaneously. In Redis 2.6 this limit is
+  dynamic: by default is set to 10000 clients, unless otherwise stated by the
+  `maxclients` directive in `/etc/redis/redis.conf`. However Redis checks with
+  the kernel what is the maximum number of file descriptors that we are able to
+  open (the soft limit is checked), if the limit is smaller than the maximum
+  number of clients we want to handle, plus 32 (that is the number of file
+  descriptors Redis reserves for internal uses), then the number of maximum
+  clients is modified by Redis to match the amount of clients we are _really
+  able to handle_ under the current operating system limit.
+>
+> When Redis is configured in order to handle a specific number of clients it is
+  a good idea to make sure that the operating system limit to the maximum number
+  of file descriptors per process is also set accordingly.
+
+To adjust this limit, please edit the configuration file found at
+`/etc/default/redis-server` by uncommenting the last line in the file, and
+adjusting the `ulimit` value accordingly.
+
+~~~ shell
+# redis-server configure options
+#
+# ULIMIT: Call ulimit -n with this argument prior to invoking Redis itself.
+# This may be required for high-concurrency environments. Redis itself cannot
+# alter its limits as it is not being run as root. (default: do not call
+# ulimit)
+#
+ULIMIT=65536
+~~~
+
+When the configured number of maximum clients can not be honored, the condition
+is logged at startup...
+
+~~~
+[41422] 23 Jan 11:28:33.179 # Unable to set the max number of files limit to 100032 (Invalid argument), setting the max clients configuration to 10112.
+~~~
 
 ## Configure Sensu
 
@@ -119,3 +172,4 @@ configuration][2] for more information on how Sensu loads configuration.
 [3]:  transport
 [4]:  installation-prerequisites#selecting-a-transport
 [5]:  https://en.wikipedia.org/wiki/IPv6_address#Local_addresses
+[6]:  http://redis.io/topics/clients#maximum-number-of-clients
