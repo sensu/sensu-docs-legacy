@@ -11,6 +11,8 @@ next:
 
 - [Install Redis from the EPEL repositories](#install-redis-from-the-epel-repositories)
 - [Managing the Redis service/process](#manage-the-redis-service-process)
+  - [Start/stop the Redis service](#startstop-the-redis-service)
+  - [Enable/disable Redis start on system boot](#enabledisable-redis-start-on-system-boot)
 - [Verify that Redis is working](#verify-that-redis-is-working)
 - [Set file descriptor limits](#set-file-descriptor-limits)
 - [Configure Sensu](#configure-sensu)
@@ -46,11 +48,22 @@ RHEL 7).
 
 ## Managing the Redis service/process
 
-Install the Redis init scripts using the [`chkconfig` utility][3]:
+### Start/stop Redis services
+
+Start and stop Redis using the `redis` init scripts:
+
+~~~ shell
+sudo /etc/init.d/redis start
+sudo /etc/init.d/redis stop
+~~~
+
+### Enable/disable Redis start on system boot
+
+Enable and disable the Redis init scripts using the [`chkconfig` utility][3]:
 
 ~~~ shell
 sudo /sbin/chkconfig redis on
-sudo /etc/init.d/redis start
+sudo /sbin/chkconfig redis off
 ~~~
 
 ## Verify that Redis is working
@@ -91,11 +104,11 @@ number of client connections allowed][9]:
   of file descriptors per process is also set accordingly.
 
 To adjust this limit, please edit the configuration file found at
-`/etc/default/redis-server` by uncommenting the last line in the file, and
+`/etc/default/redis` by uncommenting the last line in the file, and
 adjusting the `ulimit` value accordingly.
 
 ~~~ shell
-# redis-server configure options
+# redis configure options
 #
 # ULIMIT: Call ulimit -n with this argument prior to invoking Redis itself.
 # This may be required for high-concurrency environments. Redis itself cannot

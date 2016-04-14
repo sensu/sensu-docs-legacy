@@ -11,6 +11,8 @@ next:
 
 - [Install Redis using APT](#install-redis-using-apt)
 - [Managing the Redis service/process](#manage-the-redis-service-process)
+  - [Start/stop the Redis service](#startstop-the-redis-service)
+  - [Enable/disable Redis start on system boot](#enabledisable-redis-start-on-system-boot)
 - [Verify that Redis is working](#verify-that-redis-is-working)
 - [Set file descriptor limits](#set-file-descriptor-limits)
 - [Configure Sensu](#configure-sensu)
@@ -29,12 +31,23 @@ sudo apt-get -y install redis-server
 
 ## Managing the Redis service/process
 
-To enable the Redis service on boot and start it, you'll need to install its
-init scripts using the `update-rc.d` utility.
+### Start/stop the Redis service
+
+Start and stop the Redis service using the `redis-server` init scripts:
+
+~~~ shell
+sudo /etc/init.d/redis-server start
+sudo /etc/init.d/redis-server stop
+~~~
+
+### Enable/disable Redis start on system boot
+
+Enable or disable the Redis service to start on system boot using the
+`update-rc.d` utility:
 
 ~~~ shell
 sudo update-rc.d redis-server defaults
-sudo /etc/init.d/redis-server start
+sudo update-rc.d redis-server disable
 ~~~
 
 ## Verify that Redis is working
