@@ -14,7 +14,7 @@ title: "Sensu on Mac OS X"
   - [Example transport configuration](#example-transport-configuration)
   - [Configure the Sensu client `launchd` daemon](#configure-the-sensu-client-launchd-daemon)
 - [Operating Sensu](#operating-sensu)
-  - [Managing the Sensu client process](#service-management)
+  - [Managing the Sensu client process with `launchctl`](#service-management)
   - [Interacting with Sensu via CLI](#interacting-with-sensu-via-cli)
 
 ## Install Sensu Core {#sensu-core}
@@ -150,7 +150,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
 
 ## Operating Sensu
 
-### Managing the Sensu client process {#service-management}
+### Managing the Sensu client process with `launchctl` {#service-management}
 
 Start or stop the Sensu client using the [`launchctl` utility][11]:
 
