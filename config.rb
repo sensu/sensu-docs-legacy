@@ -102,12 +102,6 @@ set :css_dir, 'css'
 set :js_dir, 'js'
 set :images_dir, 'img'
 
-## Deploy to Github
-activate :deploy do |deploy|
-  deploy.method = :git
-  deploy.branch = "master"
-end
-
 activate :syntax
 set :markdown_engine, :kramdown
 set :markdown, :fenced_code_blocks => true, :smartypants => true, :autolink => true,
