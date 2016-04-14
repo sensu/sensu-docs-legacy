@@ -13,6 +13,7 @@ gem "builder"
 
 gem "susy"
 gem "kramdown"
+gem "tzinfo"
 
 # gem "coffee-filter"
 
