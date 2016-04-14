@@ -146,7 +146,7 @@ development environments.
   _Source: [rabbitmq.com][2]_
 
 To adjust this limit, please edit the configuration file found at
-`/etc/defaults/rabbitmq-server` by uncommenting the last line in the file, and
+`/etc/default/rabbitmq-server` by uncommenting the last line in the file, and
 adjusting the ulimit value to the recommendation corresponding to the
 environment where RabbitMQ is running.
 
