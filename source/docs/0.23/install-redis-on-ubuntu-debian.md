@@ -11,7 +11,7 @@ next:
 
 - [Install Redis using APT](#install-redis-using-apt)
 - [Managing the Redis service/process](#manage-the-redis-service-process)
-  - [Start/stop the Redis service](#startstop-the-redis-service)
+  - [Start/stop the Redis services](#startstop-the-redis-services)
   - [Enable/disable Redis start on system boot](#enabledisable-redis-start-on-system-boot)
 - [Verify that Redis is working](#verify-that-redis-is-working)
 - [Set file descriptor limits](#set-file-descriptor-limits)
@@ -31,7 +31,7 @@ sudo apt-get -y install redis-server
 
 ## Managing the Redis service/process
 
-### Start/stop the Redis service
+### Start/stop the Redis services
 
 Start and stop the Redis service using the `redis-server` init scripts:
 
@@ -39,6 +39,14 @@ Start and stop the Redis service using the `redis-server` init scripts:
 sudo /etc/init.d/redis-server start
 sudo /etc/init.d/redis-server stop
 ~~~
+
+~~~ shell
+sudo /etc/init.d/redis-sentinel start
+sudo /etc/init.d/redis-sentinel stop
+~~~
+
+_NOTE: `redis-sentinel` service scripts are not installed by default and should
+only be used with [highly available Redis configurations][7]._
 
 ### Enable/disable Redis start on system boot
 
@@ -49,6 +57,14 @@ Enable or disable the Redis service to start on system boot using the
 sudo update-rc.d redis-server defaults
 sudo update-rc.d redis-server disable
 ~~~
+
+~~~ shell
+sudo update-rc.d redis-sentinel defaults
+sudo update-rc.d redis-sentinel disable
+~~~
+
+_NOTE: `redis-sentinel` service scripts are not installed by default and should
+only be used with [highly available Redis configurations][7]._
 
 ## Verify that Redis is working
 
@@ -186,3 +202,4 @@ configuration][2] for more information on how Sensu loads configuration.
 [4]:  installation-prerequisites#selecting-a-transport
 [5]:  https://en.wikipedia.org/wiki/IPv6_address#Local_addresses
 [6]:  http://redis.io/topics/clients#maximum-number-of-clients
+[7]:  redis#redis-high-availability-configuration

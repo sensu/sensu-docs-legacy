@@ -11,7 +11,7 @@ next:
 
 - [Install Redis from the EPEL repositories](#install-redis-from-the-epel-repositories)
 - [Managing the Redis service/process](#manage-the-redis-service-process)
-  - [Start/stop the Redis service](#startstop-the-redis-service)
+  - [Start/stop the Redis services](#startstop-the-redis-services)
   - [Enable/disable Redis start on system boot](#enabledisable-redis-start-on-system-boot)
 - [Verify that Redis is working](#verify-that-redis-is-working)
 - [Set file descriptor limits](#set-file-descriptor-limits)
@@ -57,6 +57,14 @@ sudo /etc/init.d/redis start
 sudo /etc/init.d/redis stop
 ~~~
 
+~~~ shell
+sudo /etc/init.d/redis-sentinel start
+sudo /etc/init.d/redis-sentinel stop
+~~~
+
+_NOTE: `redis-sentinel` service scripts are not installed by default and should
+only be used with [highly available Redis configurations][10]._
+
 ### Enable/disable Redis start on system boot
 
 Enable and disable the Redis init scripts using the [`chkconfig` utility][3]:
@@ -65,6 +73,14 @@ Enable and disable the Redis init scripts using the [`chkconfig` utility][3]:
 sudo /sbin/chkconfig redis on
 sudo /sbin/chkconfig redis off
 ~~~
+
+~~~ shell
+sudo /sbin/chkconfig redis-sentinel on
+sudo /sbin/chkconfig redis-sentinel off
+~~~
+
+_NOTE: `redis-sentinel` service scripts are not installed by default and should
+only be used with [highly available Redis configurations][10]._
 
 ## Verify that Redis is working
 
@@ -205,3 +221,4 @@ configuration][5] for more information on how Sensu loads configuration.
 [7]:  installation-prerequisites#selecting-a-transport
 [8]:  https://en.wikipedia.org/wiki/IPv6_address#Local_addresses
 [9]:  http://redis.io/topics/clients#maximum-number-of-clients
+[10]: redis#redis-high-availability-configuration
