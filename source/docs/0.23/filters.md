@@ -146,7 +146,7 @@ calculation; i.e. calculating the remainder after dividing `occurrences` by 60).
         "check": {
           "interval": 60
         },
-        "occurrences": "eval: value != 1 || value % 60 != 0"
+        "occurrences": "eval: value != 1 && value % 60 != 0"
       }
     }
   }
@@ -165,7 +165,7 @@ checks with a 30 second `interval`.
         "check": {
           "interval": 30
         },
-        "occurrences": "eval: value != 1 || value % 120 != 0"
+        "occurrences": "eval: value != 1 && value % 120 != 0"
       }
     }
   }
