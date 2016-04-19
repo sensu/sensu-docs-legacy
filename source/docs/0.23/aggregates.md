@@ -31,9 +31,8 @@ result.
 Check aggregates are extremely useful in dynamic environments and/or
 environments that have a reasonable tolerance for failure. Check aggregates
 should be used when a service can be considered healthy as long as a minimum
-threshold (i.e. a minimum number of instances, or a minimum percentage of
-instances, etc) of the service is healthy (e.g. are at least 5 healthy web
-servers? are at least 70% of N processes healthy?).
+threshold is satisfied (e.g. are at least 5 healthy web servers? are at least
+70% of N processes healthy?).
 
 ## Aggregate configuration
 
@@ -59,7 +58,7 @@ located at `/etc/sensu/conf.d/check_aggregate_example.json`.
 _NOTE: aggregates are created via the `"aggregate": true` [Sensu `check`
 definition attribute][4]. The configuration example(s) provided above, and the
 "specification" provided here are for clarification and convenience only (i.e.
-this "specification" is just as subset of the [check definition
+this "specification" is just a subset of the [check definition
 specification][5], and not a definition of a distinct Sensu primitive)._
 
 #### Aggregate `check` attributes
