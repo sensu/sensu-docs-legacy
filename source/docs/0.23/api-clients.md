@@ -9,7 +9,7 @@ next:
 
 # Sensu Clients API
 
-## Reference Documentation
+## Reference documentation
 
 - [The `/clients` API endpoint](#the-clients-api-endpoint)
   - [`/clients` (GET)](#clients-get)

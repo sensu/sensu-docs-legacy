@@ -9,7 +9,7 @@ next:
 
 # Sensu Checks
 
-## Reference Documentation
+## Reference documentation
 
 - [What is a Sensu check?](#what-is-a-sensu-check)
   - [Sensu check specification](#sensu-check-specification)

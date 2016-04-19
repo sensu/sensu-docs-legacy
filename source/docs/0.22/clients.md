@@ -9,7 +9,7 @@ next:
 
 # Sensu Client
 
-## Reference Documentation
+## Reference documentation
 
 - [What is a Sensu client?](#what-is-a-sensu-client)
 - [Client keepalives](#client-keepalives)

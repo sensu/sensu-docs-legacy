@@ -19,7 +19,7 @@ The Sensu API is [JSON][4]-based [RESTful API][5]. Familiarity with (or
 willingness to Google) industry standard RESTful API behaviors &ndash; including
 [HTTP response codes][6] &ndash; are strongly recommended.
 
-## Reference Documentation
+## Reference documentation
 
 - [Clients API](api-clients)
 - [Checks API](api-checks)

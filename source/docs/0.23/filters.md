@@ -9,7 +9,7 @@ next:
 
 # Sensu Filters
 
-## Reference Documentation
+## Reference documentation
 
 - [What are Sensu Filters?](#what-are-sensu-filters)
   - [When to use a filter](#when-to-use-a-filter)
