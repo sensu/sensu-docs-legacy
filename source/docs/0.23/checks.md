@@ -826,7 +826,7 @@ name
 [24]: clients#custom-attributes
 [25]: #command-token-client-attributes
 [26]: clients#client-attributes
-[27]: https://sensuapp.org/plugins
+[27]: plugins
 [28]: https://github.com/sensu-plugins/sensu-plugins-http
 [29]: configuration#configuration-scopes
 [30]: http://ruby-doc.org/core-2.2.0/Regexp.html
