@@ -13,6 +13,7 @@ next:
 
 - [What is RabbitMQ?](#what-is-rabbitmq)
 - [How does Sensu use RabbitMQ?](#how-does-sensu-use-rabbitmq)
+- [Install RabbitMQ](#install-rabbitmq)
 - [Configure Sensu](#sensu-rabbitmq-configuration)
   - [Example configuraitons](#sensu-rabbitmq-configuration-examples)
   - [RabbitMQ definition specificaiton](#rabbitmq-definition-specification)
@@ -28,25 +29,30 @@ next:
     - [Configure a RabbitMQ cluster](#configure-a-rabbitmq-cluster)
     - [Configure Sensu to use the RabbitMQ cluster](#configure-sensu-to-use-the-rabbitmq-cluster)
 - [Securing RabbitMQ](#securing-rabbitmq)
-  - [RabbitMQ and SELinux](#rabbitmq-an-selinux)
-  - [RabbitMQ SSL and Erlang 18.3+](#rabbitmq-ssl-and-erlang)
+  - [RabbitMQ and SELinux](#rabbitmq-and-selinux)
+  - [RabbitMQ SSL](#rabbitmq-ssl)
+  - [RabbitMQ SSL and Erlang 18.3+](#rabbitmq-ssl-and-erlang-183)
 
 ## What is RabbitMQ?
 
-RabbitMQ is a message bus, which [describes
-itself](http://www.rabbitmq.com/features.html) as _"a messaging broker - an
-intermediary for messaging. It gives your applications a common platform to send
-and receive messages, and your messages a safe place to live until received"_.
+RabbitMQ is a message bus, which [describes itself][1] as _"a messaging broker -
+an intermediary for messaging. It gives your applications a common platform to
+send and receive messages, and your messages a safe place to live until
+received"_.
 
-You can visit the official RabbitMQ website to learn more:
-[rabbitmq.com](http://www.rabbitmq.com/)
+To learn more about RabbitmQ, please visit [the official RabbitMQ website][2].
 
 ## How does Sensu use RabbitMQ?
 
-Sensu services use RabbitMQ (the default Sensu [transport](/transport)) to
-communicate with one another. Every Sensu service requires access to the same
-instance of RabbitMQ or a RabbitMQ cluster to function. Sensu check requests and
-check results are sent over RabbitMQ to the approprate Sensu services.
+Sensu services use RabbitMQ (the default [Sensu transport][3]) to communicate
+with one another. Every Sensu service requires access to the same instance of
+RabbitMQ or a RabbitMQ cluster to function. Sensu check requests and check
+results are sent over RabbitMQ to the approprate Sensu services.
+
+## Install RabbitMQ
+
+For more information about installing RabbitMQ for use with Sensu, please visit
+the [RabbitMQ installation guide][5].
 
 ## Configure Sensu {#sensu-rabbitmq-configuration}
 
@@ -285,18 +291,18 @@ private_key_file
 ## Configure RabbitMQ
 
 To configure RabbitMQ, please refer to the [official RabbitMQ configuration
-documentation](https://www.rabbitmq.com/configure.html).
+documentation][4].
 
 ### Standalone configuration
 
 For standalone configurations, no additional configuration changes are required
-beyond what is documented in the [RabbitMQ installation guide][?].
+beyond what is documented in the [RabbitMQ installation guide][5].
 
 ### Distributed configuration
 
 For distributed configurations (e.g. where RabbitMQ is running on dedicated
 systems), RabbitMQ may need to be configure to listen for connections from
-external systems using the [`tcp_listeners` configuration directive][x].
+external systems using the [`tcp_listeners` configuration directive][6].
 
 To enable support for external connections, please ensure that your
 `/etc/rabbitmq/rabbitmq.config` file contains the following configuration
@@ -315,7 +321,7 @@ snippet:
 #### What is a RabbitMQ cluster?
 
 RabbitMQ supports grouping of several RabbitMQ servers into a cluster. [The
-official RabbitMQ documentation][y] describes clusters as follows:
+official RabbitMQ clustering documentation][7] describes clusters as follows:
 
 > A RabbitMQ broker is a logical grouping of one or several Erlang nodes, each
   running the RabbitMQ application and sharing users, virtual hosts, queues,
@@ -333,8 +339,9 @@ performance). When starting with a RabbitMQ cluster it is important to use
 systems with sufficient compute, memory, and network resources. Although it's
 challenging to provide "recommended hardware requirements" for every possible
 Sensu installation, we have found that starting with three nodes equivalent to
-[AWS EC2 m3.medium instances][m3] generally provides a solid baseline for
-monitoring 1000+ servers, each reporting 10-20 checks (& metrics) at a 10-second interval.
+[AWS EC2 m3.medium instances][8] generally provides a solid baseline for
+monitoring 1000+ servers, each reporting 10-20 checks (& metrics) at a 10-second
+interval.
 
 For the best results when configuring RabbitMQ for high availability
 applications, we recommend a three (3) node RabbitMQ cluster, as running fewer
@@ -344,16 +351,16 @@ or more nodes introduces additional failure modes.
 
 Before configuring a RabbitMQ cluster, RabbitMQ must be installed on all of the
 systems you will use to provide the RabbitMQ services. For RabbitMQ installation
-instructions, please refer to the [Sensu RabbitMQ installation guide][?]. Once
+instructions, please refer to the [Sensu RabbitMQ installation guide][5]. Once
 RabbitMQ has been installed and started, you may proceed to configure the
 RabbitMQ cluster.
 
 #### Configure a RabbitMQ cluster
 
 While much of the configuration for RabbitMQ lives in [a configuration file
-located at `/etc/rabbitmq/rabbitmq.config`][f], some things do not mesh well with
+located at `/etc/rabbitmq/rabbitmq.config`][9], some things do not mesh well with
 the use of a configuration file. RabbitMQ calls these items ["runtime parameters
-and policies"][p], which are defined using the [`rabbitmqctl`][r] utility.
+and policies"][10], which are defined using the [`rabbitmqctl`][11] utility.
 
 1. Stop the RabbitMQ service on all three RabbitMQ systems.
 
@@ -361,7 +368,7 @@ and policies"][p], which are defined using the [`rabbitmqctl`][r] utility.
    sudo /etc/init.d/rabbitmq-server stop
    ~~~
 
-2. Enable RabbitMQ [`pause_minority` network partition handling][xx]. Please
+2. Enable RabbitMQ [`pause_minority` network partition handling][12]. Please
    ensure that your `/etc/rabbitmq/rabbitmq.config` configuration file contains
    the following configuration snippet:
 
@@ -483,7 +490,7 @@ To configure Sensu to connect to a RabbitMQ cluster, the `"rabbitmq"`
 configuration Hash can be replaced with an Array of RabbitMQ connection
 configurations (i.e. `"rabbitmq": []` instead of `"rabbitmq": {}`).
 
-The following is an example [RabbitMQ definition][?] that configures Sensu to
+The following is an example [RabbitMQ definition][13] that configures Sensu to
 connect to a RabbitMQ cluster.
 
 _NOTE: the RabbitMQ nodes must first be successfully clustered in order for
@@ -565,6 +572,11 @@ socket and operate normally.
 sudo setsebool -P nis_enabled 1
 ~~~
 
+### RabbitMQ SSL
+
+For more information on configuring RabbitMQ to use SSL, please visit the [Sensu
+SSL documentation][14].
+
 ### RabbitMQ SSL and Erlang 18.3+
 
 As of Erlang version 18.3, the SSL implementation that RabbitMQ relies on
@@ -597,11 +609,17 @@ _WARNING: if you are seeing RabbitMQ log entries with messages like `Fatal
 error: insufficient security`, please confirm that the above stated
 configuration changes are in place._
 
-[?]:  #
-[x]:  https://www.rabbitmq.com/networking.html#interfaces
-[y]:  https://www.rabbitmq.com/clustering.html
-[m3]: http://aws.amazon.com/ec2/instance-types/#M3
-[xx]: https://www.rabbitmq.com/partitions.html#automatic-handling
-[p]:  https://www.rabbitmq.com/parameters.html
-[r]:  https://www.rabbitmq.com/man/rabbitmqctl.1.man.html
-[f]:  https://www.rabbitmq.com/configure.html#configuration-file
+[1]:  http://www.rabbitmq.com/features.html
+[2]:  http://www.rabbitmq.com/
+[3]:  transport
+[4]:  https://www.rabbitmq.com/configure.html
+[5]:  install-rabbitmq
+[6]:  https://www.rabbitmq.com/networking.html#interfaces
+[7]:  https://www.rabbitmq.com/clustering.html
+[8]:  http://aws.amazon.com/ec2/instance-types/#M3
+[9]:  https://www.rabbitmq.com/configure.html#configuration-file
+[10]: https://www.rabbitmq.com/parameters.html
+[11]: https://www.rabbitmq.com/man/rabbitmqctl.1.man.html
+[12]: https://www.rabbitmq.com/partitions.html#automatic-handling
+[13]: rabbitmq#rabbitmq-definition-specification
+[14]: ssl
