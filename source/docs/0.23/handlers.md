@@ -9,50 +9,197 @@ next:
 
 # Sensu Event Handlers
 
-This reference document provides information to help you:
+## Reference documentation
 
-- Understand what a Sensu event handler is
-- How a Sensu event handler works
-- Write a Sensu event handler definition
+- [What is a Sensu event handler?](#what-is-a-sensu-event-handler)
+  - [Handler types](#handler-types)
+- [Pipe handlers](#pipe-handlers)
+  - [Pipe handler commands](#pipe-handler-commands)
+    - [What is a pipe handler command?](#what-is-a-pipe-handler-command)
+    - [Pipe handler command arguments](#pipe-handler-command-arguments)
+    - [How and where are pipe handler commands executed?](#how-and-where-are-pipe-handler-commands-executed)
+- [TCP/UDP handlers](#tcpudp-handlers)
+- [Transport handlers](#transport-handlers)
+- [Handler sets](#handler-sets)
+- [Handler configuration](#handler-configuration)
+  - [Example handler definition](#example-handler-definition)
+  - [Handler definition specification](#handler-definition-specification)
+    - [Handler name(s)](#handler-names)
+    - [Handler attributes](#handler-attributes)
+    - [`socket` attributes (TCP/UDP handlers)](#socket-attributes)
+    - [`pipe` attributes (Transport handlers)](#pipe-attributes)
+    - [`subdue` attributes](#subdue-attributes)
 
-## What are Sensu event handlers? {#what-are-sensu-event-handlers}
+## What is a Sensu event handler?
 
-Sensu event handlers are for taking action on [events](events) (produced by check results), such as sending an email alert, creating or resolving a PagerDuty incident, or storing metrics in Graphite. There are several types of handlers: `pipe`, `tcp`, `udp`, `transport`, and `set`. Pipe handlers execute a command and pass the event data to the created process via `STDIN`. TCP and UDP handlers send the event data to a remote socket. Transport handlers publish the event data to the Sensu transport (message bus). Set handlers are used to group event handlers, making it easier to manage many event handlers.
+Sensu event handlers are actions executed by the [Sensu server][1] on
+[events][2], such as sending an email alert, creating or resolving an incident
+(e.g. in PagerDuty, ServiceNow, etc), or storing metrics in a time-series
+database (e.g. Graphite).
 
-### Example handler plugin {#example-handler-plugin}
+### Handler types
 
-The following is an example Sensu handler plugin, a script located at `/etc/sensu/plugins/event-file.rb`. This handler plugin reads the event data via `STDIN`, parses it, creates a file name using the parsed event data, and then writes the event data to the file. This handler plugin is written in Ruby, but Sensu plugins can be written in any language, e.g. Python, shell, etc.
+There are several types of handlers. The most common handler type is the `pipe`
+handler, which works very similarly to how [checks][3] work, enabling Sensu to
+interact with almost any computer program via [standard streams][4].
 
-~~~ ruby
-#!/usr/bin/env ruby
+- **Pipe handlers**. Pipe handlers pipe event data into arbitrary commands via
+  `STDIN`.
+- **TCP/UDP handlers**. TCP and UDP handlers send event data to a remote socket
+  (e.g. external API).
+- **Transport handlers**. Transport handlers publish event data to the [Sensu
+  transport][5].
+- **Handler sets**. Handler sets (also called "set handlers") are used to group
+  event handlers, making it easy to manage groups of actions that should be
+  executed for certain types of events.
 
-require 'rubygems'
-require 'json'
+## Pipe handlers
 
-# Read the JSON event data from STDIN.
-event = JSON.parse(STDIN.read, :symbolize_names => true)
+Pipe handlers are external commands that can consume [event data][6] via STDIN.
 
-# Write the event data to a file.
-# Using the client and check names in the file name.
-file_name = "/tmp/sensu_#{event[:client][:name]}_#{event[:check][:name]}.json"
+### Example pipe handler definition
 
-File.open(file_name, 'w') do |file|
-  file.write(JSON.pretty_generate(event))
-end
+~~~ json
+{
+  "handlers": {
+    "example_pipe_handler": {
+      "type": "pipe",
+      "command": "do_something_awesome.rb -o options"
+    }
+  }
+}
 ~~~
 
-## Handler definition
+### Pipe handler commands
 
-A Sensu handler definition is a JSON configuration file describing a Sensu handler. A definition declares how a Sensu handler is executed:
+#### What is a pipe handler command?
 
-- If there is a command to be run with event data provided via `STDIN`
-- If there is a socket to send event data to
-- If the event data is to be published to the Sensu transport (message bus)
-- If there is a set of handlers to be executed
+Pipe handler definitions include a `command` attribute which are literally
+executable commands which will be executed on a [Sensu server][1] as the `sensu`
+user.
 
-### Example handler definition {#example-handler-definition}
+#### Pipe handler command arguments
 
-The following is an example Sensu handler definition, a JSON configuration file located at `/etc/sensu/conf.d/mail_handler.json`. This handler definition uses the `mailx` unix command, to email the event data to `example@address.com`, with the email subject `sensu event`. The handler is named `mail`.
+Pipe handler `command` attributes may include command line arguments for
+controlling the behavior of the `command` executable. Most [Sensu handler
+plugins][11] provide support for command line arguments for reusability.
+
+#### How and where are pipe handler commands executed?
+
+As mentioned above, all pipe handlers are executed by a [Sensu server][1] as the
+`sensu` user. Commands must be executable files that are discoverable on the
+Sensu server system (i.e. installed in a system [`$PATH` directory][7]).
+
+_NOTE: By default, the Sensu installer packages will modify the system `$PATH`
+for the `sensu` user to include `/etc/sensu/plugins`. As a result, executable
+scripts (e.g. plugins) located in `/etc/sensu/plugins` will be valid commands.
+This allows `command` attributes to use "relative paths" for Sensu plugin
+commands; <br><br>e.g.: `"command": "handler-irc.rb"`_
+
+
+## TCP/UDP handlers
+
+TCP and UDP handlers enable Sensu to forward event data to arbitrary [TCP or UDP
+sockets][t] for external services to consume (e.g. third-party APIs).
+
+### Example TCP handler definition
+
+The following example TCP handler definition will forward [event data][6] to a
+[TCP socket][8] (i.e. `10.0.1.99:4444`) and will `timeout` if an acknowledgement
+(`ACK`) is not received within 30 seconds.
+
+~~~ json
+{
+  "handlers": {
+    "example_tcp_handler": {
+      "type": "tcp",
+      "timeout": 30,
+      "socket": {
+        "host": "10.0.1.99",
+        "port": 4444
+      }
+    }
+  }
+}
+~~~
+
+The following example UDP handler definition will forward [event data][6] to a
+UDP socket (i.e. `10.0.1.99:444`).
+
+~~~ json
+{
+  "handlers": {
+    "example_udp_handler": {
+      "type": "udp",
+      "socket": {
+        "host": "10.0.1.99",
+        "port": 4444
+      }
+    }
+  }
+}
+~~~
+
+## Transport handlers
+
+Transport handlers enable Sensu to publish event data to named queues on the
+[Sensu transport][5] for external services to consume.
+
+### Example transport handler definition
+
+The following example transport handler definition will publish [event data][6]
+to the Sensu transport on a pipe (e.g. a "queue" or "channel", etc) named
+`example_handler_queue`. One or more instances of an external process or
+third-party application would need to subscribe to the named pipe to process the
+events.
+
+~~~ json
+{
+  "handlers": {
+    "example_transport_handler": {
+      "type": "transport",
+      "pipe": {
+        "type": "direct",
+        "name": "example_handler_queue"
+      }
+    }
+  }
+}
+~~~
+
+## Handler sets
+
+Handler set definitions allow groups of handlers (i.e. individual collections of
+actions to take on event data) to be referenced via a single named handler set.
+
+### Example handler set definition
+
+The following example handler set definition will execute three handlers (i.e.
+`email`, `slack`, and `pagerduty`) for every event.
+
+~~~ json
+{
+  "handlers": {
+    "notify_all_the_things": {
+      "type": "set",
+      "handlers": [
+        "email",
+        "slack",
+        "pagerduty"
+      ]
+    }
+  }
+}
+~~~
+
+## Handler configuration
+
+### Example handler definition
+
+The following is an example Sensu handler definition, a JSON configuration file
+located at `/etc/sensu/conf.d/mail_handler.json`. This handler definition uses
+the `mailx` unix command, to email the event data to `example@address.com`, with
+the email subject `sensu event`. The handler is named `mail`.
 
 ~~~ json
 {
@@ -65,22 +212,22 @@ The following is an example Sensu handler definition, a JSON configuration file 
 }
 ~~~
 
-## Anatomy of a handler definition
+### Handler definition specification
 
-### Name
+#### Handler name(s)
 
-Each handler definition has a unique handler name, used for the definition key. Every handler definition is within the `"handlers": {}` definition scope.
+Each handler definition has a unique handler name, used for the definition key.
+Every handler definition is within the `"handlers": {}` [definition scope][9].
 
-- A unique string used to name/identify the handler
+- A unique string used to name/identify the check
 - Cannot contain special characters or spaces
-- Validated with `/^[\w\.-]+$/`
-- e.g. `"pagerduty": {}`
+- Validated with [Ruby regex][10] `/^[\w\.-]+$/.match("handler-name")`
 
-### Definition attributes
+#### Handler attributes
 
 type
 : description
-  : The handler type. Each handler type has its own set of definition attributes, e.g. [pipe](#pipe-handler-attributes).
+  : The handler type.
 : required
   : true
 : type
@@ -106,7 +253,8 @@ filter
 
 filters
 : description
-  : An array of Sensu event filters (names) to use when filtering events for the handler. Each array item must be a string.
+  : An array of Sensu event filters (names) to use when filtering events for the
+    handler. Each array item must be a string.
 : required
   : false
 : type
@@ -118,7 +266,8 @@ filters
 
 severities
 : description
-  : An array of check result severities the handler will handle. Event resolution bypasses this filtering.
+  : An array of check result severities the handler will handle.
+    _NOTE: event resolution bypasses this filtering._
 : required
   : false
 : type
@@ -144,11 +293,14 @@ mutator
 
 timeout
 : description
-  : The handler execution duration timeout in seconds (hard stop).
+  : The handler execution duration timeout in seconds (hard stop). Only used by
+    `pipe` and `tcp` handler types.
 : required
   : false
 : type
   : Integer
+: default
+  : `10`
 : example
   : ~~~ shell
     "timeout": 30
@@ -180,13 +332,14 @@ subdue
     "subdue": {}
     ~~~
 
-#### Pipe handler attributes
-
 command
 : description
-  : The handler command to be executed. The event data is passed to the process via `STDIN`.
+  : The handler command to be executed. The event data is passed to the process
+    via `STDIN`.
+    _NOTE: the `command` attribute is only supported for Pipe handlers (i.e.
+    handlers configured with `"type": "pipe"`)._
 : required
-  : true
+  : true (if `type` == `pipe`)
 : type
   : String
 : example
@@ -194,13 +347,13 @@ command
     "command": "/etc/sensu/plugins/pagerduty.rb"
     ~~~
 
-#### TCP & UDP handler attributes
-
 socket
 : description
   : A set of attributes that configure the TCP/UDP handler socket.
+  _NOTE: the `socket` attribute is only supported for TCP/UDP handlers (i.e.
+  handlers configured with `"type": "tcp"` or `"type": "udp"`)._
 : required
-  : true
+  : true (if `type` == `tcp` or `udp`)
 : type
   : Hash
 : example
@@ -208,7 +361,36 @@ socket
     "socket": {}
     ~~~
 
-##### Socket attributes
+pipe
+: description
+  : A set of attributes that configure the Sensu transport pipe.
+  _NOTE: the `pipe` attribute is only supported for Transport handlers (i.e.
+  handlers configured with `"type": "transport"`)._
+: required
+  : true (if `type` == `transport`)
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "pipe": {}
+    ~~~
+
+handlers
+: description
+  : An array of Sensu event handlers (names) to use for events using the handler
+    set. Each array item must be a string.
+    _NOTE: the `handlers` attribute is only supported for handler sets (i.e.
+    handlers configured with `"type": "set"`)._
+: required
+  : true (if `type` == `set`)
+: type
+  : Array
+: example
+  : ~~~ shell
+    "handlers": ["pagerduty", "email", "ec2"]
+    ~~~
+
+#### `socket` attributes
 
 host
 : description
@@ -234,21 +416,7 @@ port
     "port": 4242
     ~~~
 
-#### Transport handler attributes
-
-pipe
-: description
-  : A set of attributes that configure the Sensu transport pipe.
-: required
-  : true
-: type
-  : Hash
-: example
-  : ~~~ shell
-    "pipe": {}
-    ~~~
-
-##### Transport pipe attributes
+#### `pipe` attributes
 
 type
 : description
@@ -278,7 +446,8 @@ name
 
 options
 : description
-  : The Sensu transport pipe options. These options may be specific to the Sensu transport in use.
+  : The Sensu transport pipe options. These options may be specific to the Sensu
+    transport in use.
 : required
   : false
 : type
@@ -290,27 +459,15 @@ options
     "options": {"durable": true}
     ~~~
 
-#### Set handler attributes
+#### `subdue` attributes
 
-handlers
-: description
-  : An array of Sensu event handlers (names) to use for events using the handler set. Each array item must be a string.
-: required
-  : false
-: type
-  : Array
-: example
-  : ~~~ shell
-    "handlers": ["pagerduty", "email", "ec2"]
-    ~~~
-
-#### Subdue attributes
-
-The following attributes are configured within the `"subdue": {}` handler definition attribute scope.
+The following attributes are configured within the `"subdue": {}` handler
+definition attribute scope.
 
 days
 : description
-  : An array of days of the week the handler is subdued. Each array item must be a string and a valid day of the week.
+  : An array of days of the week the handler is subdued. Each array item must be
+    a string and a valid day of the week.
 : required
   : false
 : type
@@ -322,7 +479,8 @@ days
 
 begin
 : description
-  : Beginning of the time window when the handler is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+  : Beginning of the time window when the handler is subdued. Parsed by Ruby's
+    `Time.parse()`. Time may include a time zone.
 : required
   : true
 : type
@@ -334,7 +492,8 @@ begin
 
 end
 : description
-  : End of the time window when the handler is subdued. Parsed by Ruby's `Time.parse()`. Time may include a time zone.
+  : End of the time window when the handler is subdued. Parsed by Ruby's
+    `Time.parse()`. Time may include a time zone.
 : required
   : true
 : type
@@ -346,7 +505,9 @@ end
 
 exceptions
 : description
-  : Subdue time window (`begin`, `end`) exceptions. An array of time window exceptions. Each array item must be a hash containing valid `begin` and `end` times.
+  : Subdue time window (`begin`, `end`) exceptions. An array of time window
+    exceptions. Each array item must be a hash containing valid `begin` and
+    `end` times.
 : required
   : false
 : type
@@ -355,3 +516,16 @@ exceptions
   : ~~~ shell
     "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
     ~~~
+
+[?]:  #
+[1]:  server
+[2]:  events
+[3]:  checks
+[4]:  https://en.wikipedia.org/wiki/Standard_streams
+[5]:  transport
+[6]:  events#event-data
+[7]:  https://en.wikipedia.org/wiki/PATH_(variable)
+[8]:  https://en.wikipedia.org/wiki/Network_socket
+[9]:  configuration#configuration-scopes
+[10]: http://ruby-doc.org/core-2.2.0/Regexp.html
+[11]: plugins
