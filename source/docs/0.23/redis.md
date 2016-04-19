@@ -14,8 +14,8 @@ next:
 - [What is Redis?](#what-is-redis)
 - [How does Sensu use Redis?](#how-does-sensu-use-redis)
 - [Install Redis](#install-redis)
-- [Configure Sensu](#configure-sensu)
-  - [Example configurations](#sensu-redis-config-examples)
+- [Configure Sensu](#sensu-redis-configuration)
+  - [Example configurations](#sensu-redis-configuration-examples)
   - [Redis definition specification](#redis-definition-specification)
     - [`redis` attributes](#redis-attributes)
     - [`sentinels` attributes](#sentinels-attributes)
@@ -26,7 +26,7 @@ next:
     - [What is Redis master-slave replication?](#what-is-redis-master-slave-replication)
     - [What is Redis Sentinel?](#what-is-redis-sentinel)
     - [High availability hardware requirements](#high-availability-hardware-requirements)
-    - [Installing Redis](#install-redis-on-two-systems)
+    - [Install Redis](#install-redis)
     - [Redis master-slave configuration](#redis-master-slave-configuration)
       - [Configure the Redis master](#configure-the-redis-master)
       - [Configure the Redis slave](#configure-the-redis-slave)
@@ -58,14 +58,14 @@ where Sensu is installed).
 For more information about installing Redis for use with Sensu, please visit the
 [Redis installation guide][6].
 
-## Configure Sensu
+## Configure Sensu {#sensu-redis-config}
 
-### Example configurations {#sensu-redis-config-examples}
+### Example configurations {#sensu-redis-configuration-examples}
 
 The following are example Redis connection definitions at
 `/etc/sensu/conf.d/redis.json`.
 
-#### Example standalone configuration {#sensu-redis-config-examples-standalone}
+#### Example standalone configuration {#sensu-redis-configuration-examples-standalone}
 
 ~~~ json
 {
@@ -77,7 +77,7 @@ The following are example Redis connection definitions at
 }
 ~~~
 
-#### Example distributed configuration {#sensu-redis-config-examples-distributed}
+#### Example distributed configuration {#sensu-redis-configuration-examples-distributed}
 
 ~~~ json
 {
@@ -89,7 +89,7 @@ The following are example Redis connection definitions at
 }
 ~~~
 
-#### Example high-availability configuration {#sensu-redis-config-examples-high-availability}
+#### Example high-availability configuration {#sensu-redis-configuration-examples-high-availability}
 
 ~~~ json
 {
@@ -265,10 +265,29 @@ Redis configuration documentation][7]._
 
 ### Standalone configuration {#redis-standalone-configuration}
 
-For standalone configuration, no additional configuration is required beyond
-what is documented in the [Redis installation guide][6].
+For standalone configurations, no additional Redis configuration changes are
+required beyond what is documented in the [Redis installation guide][6].
 
 ### Distributed configuration {#redis-distributed-configuration}
+
+For distributed configurations (e.g. where Redis is running on dedicated
+systems), Redis may need to be configured to listen for connections from
+external systems via the `bind` configuration directive.
+
+To enable support for external connections, please ensure that your
+`/etc/redis/redis.conf` file contains the following configuration snippet:
+
+~~~ shell
+# By default Redis listens for connections from all the network interfaces
+# available on the server. It is possible to listen to just one or multiple
+# interfaces using the "bind" configuration directive, followed by one or
+# more IP addresses.
+#
+# Examples:
+#
+# bind 192.168.1.100 10.0.0.1
+bind 0.0.0.0
+~~~
 
 ### High-availability configuration {#redis-high-availability-configuration}
 
@@ -293,7 +312,7 @@ run on the same machines as Redis or on machines responsible for other services
 (preferred), such as RabbitMQ. Sentinel should be placed on machines that are
 believed to fail in an independent way. At least three instances of Redis
 Sentinel are required for a robust deployment. For more information about Redis
-Sentinel, please refer to the [official Sentinel documentation][?]. The
+Sentinel, please refer to the [official Sentinel documentation][9]. The
 following instructions will help you install and configure Redis Sentinel for
 Sensu's Redis connectivity.
 
@@ -311,18 +330,25 @@ this it can only utilize a single CPU, so the quality of processor is more
 important than the quantity. In most cases Redis will be network bound so
 providing it with good network connectivity is most important. The
 `redis-benchmark` utility can be used to test the capabilities of Redis on a
-machine, please refer to the [official redis-benchmark
-documentation](http://redis.io/topics/benchmarks) for more information. Redis is
-a fast in-memory key/value data store and given enough resources it is unlikely
-to become a bottleneck for your Sensu installation.
+machine, please refer to the [official redis-benchmark documentation][10] for
+more information. Redis is a fast in-memory key/value data store and given
+enough resources it is unlikely to become a bottleneck for your Sensu
+installation.
+
+For the best results when configuring Redis for high availability applications,
+we recommend using two (2) systems for [Redis master-slave replication][12],
+_and_ a minimum of three (3) [Redis Sentinels][13].
+
+_NOTE: running fewer or more Redis Sentinels introduces additional failure
+modes._
 
 #### Install Redis
 
-Before configuring Redis master-slave replication, Redis must first be installed
-on both servers. For Redis installation instructions, please refer to the [Sensu
-Redis installation guide](install-redis). Once Redis has been installed and
-started on both servers, you may proceed to configure Redis master-slave
-replication.
+Before configuring [Redis master-slave replication][12] and [Redis
+Sentinel][13], Redis must be installed on all of the systems you will use to
+provide the Redis services. For Redis installation instructions, please refer to
+the [Sensu Redis installation guide][11]. Once Redis has been installed and
+started, you may proceed to configure Redis master-slave replication.
 
 #### Redis master-slave configuration
 
@@ -588,4 +614,8 @@ documentation](http://redis.io/topics/security).
 [6]:  install-redis
 [7]:  http://redis.io/topics/config
 [8]:  http://redis.io/topics/replication
-[?]:  http://redis.io/topics/sentinel
+[9]:  http://redis.io/topics/sentinel
+[10]: http://redis.io/topics/benchmarks
+[11]: install-redis
+[12]: #what-is-redis-master-slave-replication
+[13]: #what-is-redis-sentinel
