@@ -360,7 +360,12 @@ RabbitMQ cluster.
 While much of the configuration for RabbitMQ lives in [a configuration file
 located at `/etc/rabbitmq/rabbitmq.config`][9], some things do not mesh well with
 the use of a configuration file. RabbitMQ calls these items ["runtime parameters
-and policies"][10], which are defined using the [`rabbitmqctl`][11] utility.
+and policies"][10], which are defined using the [`rabbitmqctl`][11] utility. For
+more information on configuring RabbitMQ, please visit the [official RabbitMQ
+configuration documentation][4].
+
+To configure your three node RabbitMQ cluster for use with Sensu, please note
+the following instructions:
 
 1. Stop the RabbitMQ service on all three RabbitMQ systems.
 
