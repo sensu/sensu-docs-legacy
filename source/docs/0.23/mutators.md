@@ -22,6 +22,8 @@ next:
 - [Mutator configuration](#mutator-configuration)
   - [Example mutator definition](#example-mutator-definition)
   - [Mutator definition specification](#mutator-definition-specification)
+    - [Mutator name(s)](#mutator-names)
+    - [Mutator attributes](#mutator-attributes)
 
 ## What is Sensu mutators? {#what-are-sensu-mutators}
 
@@ -119,7 +121,9 @@ data prior to handling the event.
 }
 ~~~
 
-### Mutator name(s)
+### Mutator definition specification
+
+#### Mutator name(s)
 
 Each mutator definition has a unique mutator name, used for the definition key.
 Every mutator definition is within the `"mutators": {}` definition scope.
@@ -128,7 +132,7 @@ Every mutator definition is within the `"mutators": {}` definition scope.
 - Cannot contain special characters or spaces
 - Validated with [Ruby regex][10] `/^[\w\.-]+$/.match("mutator-name")`
 
-### Mutator attributes
+#### Mutator attributes
 
 command
 : description
