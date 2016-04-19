@@ -9,13 +9,6 @@ next:
 
 # Sensu Extensions
 
-This reference document provides information to help you:
+## Reference documentation
 
-- Understand what a Sensu extension is
-- Understand how a Sensu extension works
-- Write a Sensu extension
-- Use a Sensu extension
-
-## What are Sensu extensions? {#what-are-sensu-extensions}
-
-This document is currently a WIP.
+Coming soon... 
