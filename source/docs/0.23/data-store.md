@@ -9,6 +9,12 @@ next:
 
 # Sensu Data Store
 
+## Reference documentation
+
+- [What is the Sensu data store?](#what-is-the-sensu-data-store)
+
+## What is the Sensu data store?
+
 Sensu services use a data store ([Redis](redis)) to persist monitoring data,
 including the Sensu client registry, check results, check execution history, and
 current event data. All Sensu Core server and API processes (i.e. `sensu-server`

@@ -9,7 +9,7 @@ next:
 
 # Sensu Filters
 
-## Reference Documentation
+## Reference documentation
 
 - [What are Sensu Filters?](#what-are-sensu-filters)
   - [When to use a filter](#when-to-use-a-filter)
@@ -21,8 +21,7 @@ next:
   - [What are filter attribute eval tokens?](#what-are-filter-attribute-eval-tokens)
   - [Example filter attribute eval token](#example-filter-attribute-eval-token)
   - [Filter attribute eval token specification](#filter-attribute-eval-token-specification)
-    - [Eval token declaration syntax](#eval-token-declaration-syntax)
-    - [Eval token attributes](#eval-token-attributes)
+    - [Eval token interpolation](#eval-token-interpolation)
     - [Eval token default values](#eval-token-default-values)
 - [Filter configuration](#filter-configuration)
   - [Filter definition specification](#filter-definition-specification)
@@ -218,27 +217,14 @@ number of `occurrences` as configured in the check definition.
 
 ### Filter attribute eval token specification
 
-Sensu filter attribute eval tokens provide access to Sensu [event data
-attributes][3] via “dot notation” (e.g. `check.occurrences`).
+#### Eval token interpolation
 
-#### Eval token declaration syntax
-
-Eval tokens are declared by wrapping event data attributes with "triple colons"
-(i.e. three colon characters before and after the attribute, i.e. `:::`).
-
-##### Examples
+Eval tokens are invoked by wrapping event data attributes with "triple colons"
+(i.e. three colon characters before and after the attribute, i.e. `:::`). Nested
+[event data attributes][3] may be accessed via "dot notation" (e.g.
+`check.occurrences`)
 
 - `:::occurrences:::` would be replaced with the [event `occurences` data][11]
-- `:::check.my_threshold:::` would be replaced with a [custom check definition
-  attribute][12] called `my_threshold`
-
-#### Eval token attributes
-
-Command token attributes are "dot notation" references to [Event data][3].
-
-##### Examples {#command-token-client-attributes-examples}
-
-- `:::occurrences:::` would be replaced with the [event `occurrences` data][11]
 - `:::check.my_threshold:::` would be replaced with a [custom check definition
   attribute][12] called `my_threshold`
 
@@ -248,8 +234,6 @@ Eval token default values can be used as a fallback in the event that an [eval
 token attribute][13] is not satisfied by [event data][3]. Eval token default
 values are separated by a pipe character (`|`), and can be used to provide a
 "fallback value" for events that are missing the declared token attribute.
-
-##### Examples {#command-token-default-values}
 
 - `:::check.occurrences|60:::` would be replaced with a [check definition
   attribute][6] called `occurrences`. If `occurrences` is not defined in the
@@ -342,4 +326,4 @@ attributes
 [10]: #filter-attribute-comparison
 [11]: events#event-data-specification
 [12]: checks#custom-definition-attributes
-[13]: #eval-token-attributes
+[13]: #eval-token-interpolation

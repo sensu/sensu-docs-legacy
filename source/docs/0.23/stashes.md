@@ -15,7 +15,7 @@ title: "Stashes"
   - [Stash definition specification](#stash-definition-specification)
     - [Stash attributes](#stash-attributes)
     - [`content` attributes](#content-attributes)
-      - [Direct access to `content` data](#direct-access-to-content-data)
+      - [Direct access to stash `content` data](#direct-access-to-stash-content-data)
 
 ## What is a Sensu stash?
 

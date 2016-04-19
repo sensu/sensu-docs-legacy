@@ -67,6 +67,12 @@ processes: `sensu-enterprise` (which provides the Sensu server and API from a
 single process), and `sensu-enterprise-dashboard` (which provides the dashboard
 API and web application).
 
+_WARNING: Sensu Enterprise is designed to be a drop-in replacement for the Sensu
+Core server and API, **only**. Sensu Enterprise uses the same `sensu-client`
+process provided by the Sensu Core installer packages (above). As a result,
+**Sensu Enterprise does not need to be installed on every system** being
+monitored by Sensu._
+
 ### Install the Sensu Enterprise repository {#install-sensu-enterprise-repository}
 
 1. Set access credentials as environment variables

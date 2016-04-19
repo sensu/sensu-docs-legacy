@@ -9,7 +9,7 @@ next:
 
 # Sensu Checks
 
-## Reference Documentation
+## Reference documentation
 
 - [What is a Sensu check?](#what-is-a-sensu-check)
   - [Sensu check specification](#sensu-check-specification)
@@ -28,9 +28,9 @@ next:
   - [What are check command tokens?](#what-are-check-command-tokens)
   - [Example check command tokens](#example-check-command-tokens)
   - [Check command token specification](#check-command-token-specification)
-    - [Command token declaration syntax](#command-token-declaration)
-    - [Command token client attributes](#command-token-client-attributes)
+    - [Command token interpolation](#command-token-interpolation)
     - [Command token default values](#command-token-default-values)
+    - [Unmatched values](#unmatched-values)
 - [Check configuration](#check-configuration)
   - [Example check definition](#example-check-definition)
   - [Check definition specification](#check-definition-specification)
@@ -93,7 +93,7 @@ As mentioned above, all check commands are executed by [Sensu clients][1] as the
 Sensu client system (i.e. installed in a system [`$PATH` directory][9]).
 
 _NOTE: By default, the Sensu installer packages will modify the system `$PATH`
-for the `sensu` user to include `/etc/sensu/plugins`. As a result, executable
+for the Sensu processes to include `/etc/sensu/plugins`. As a result, executable
 scripts (e.g. plugins) located in `/etc/sensu/plugins` will be valid commands.
 This allows `command` attributes to use "relative paths" for Sensu plugin
 commands; <br><br>e.g.: `"command": "check-http.rb -u https://sensuapp.org"`_
@@ -194,19 +194,18 @@ Sensu [check commands][22] may include [command line arguments][23] for
 controlling the behavior of the check command (e.g. a [Sensu plugin][8]). Sensu
 check command arguments can be used for configuring thresholds, file paths,
 URLs, and credentials. In some cases, the check command arguments may need to
-differ on a clieny-by-client basis in a Sensu [client subscription][15]. Sensu
-check command tokens are check command argument placeholders that can be
-replaced by [Sensu client definition attributes][16] (including [custom client
-definition attributes][24])).
+differ on a client-by-client basis. Sensu check command tokens are [check command
+argument][23] placeholders that will be replaced by Sensu with the corresponding
+[client definition attribute][16] values (including [custom attributes][24]).
 
-_NOTE: as Sensu check command tokens are also sometimes referred to as **"Sensu
+_NOTE: Sensu check command tokens are also sometimes referred to as **"Sensu
 client overrides"**; a reference to the fact that command tokens allow client
 attributes to "override" [check command arguments][23]._
 
 ### Example check command tokens
 
-The following is an example Sensu [check definition][17], which is using two
-check command tokens for [check command arguments][23]. In this example, the
+The following is an example Sensu [check definition][17] using two check command
+tokens for [check command arguments][23]. In this example, the
 `check-disk-usage.rb` command accepts `-w` (warning) and `-c` (critical)
 arguments to indicate the thresholds (as percentages) for creating warning or
 critical events. As configured, this check will create a warning event at 80%
@@ -253,50 +252,36 @@ above.
 
 ### Check command token specification
 
-Sensu check command tokens provide access to [Sensu client definition
-attributes][16] via "dot notation" (e.g. `disk.warning`).
+#### Command token interpolation
 
-#### Command token declaration syntax
-
-Command tokens are declared by wrapping [client attributes][25] with "triple
-colons" (i.e. three colon characters, i.e. `:::`).
-
-##### Examples {#command-token-declaration-examples}
+Command tokens are invoked by wrapping references to client attributes with
+"triple colons" (i.e. three colon characters, i.e. `:::`). Nested Sensu [client
+definition attributes][16] can be accessed via "dot notation" (e.g.
+`disk.warning`).
 
 - `:::address:::` would be replaced with the [client `address` attribute][26]
 - `:::url:::` would be replaced with a [custom attribute][24] called `url`
-
-#### Command token client attributes
-
-Command token attributes are "dot notation" references to [Sensu client
-definition attributes][16].
-
-##### Examples {#command-token-client-attributes-examples}
-
-- `:::address:::` would be replaced with the [client `address` attribute][26]
 - `:::disk.warning:::` would be replaced with a [custom attribute][24] called
   `warning` nested inside of a JSON hash called `disk`
 
 #### Command token default values
 
-Command token default values can be used as a fallback in the event that a
-[command token client attribute][25] is not provided by the [client
-definition][16]. Command token default values are separated by a pipe
-character (`|`), and can be used to provide a "fallback value" for clients that
-are missing the declared token attribute.
-
-##### Examples {#command-token-default-values}
+Command token default values can be used as a fallback in the event that an
+attribute is not provided by the [client definition][16]. Command token default
+values are separated by a pipe character (`|`), and can be used to provide a
+"fallback value" for clients that are missing the declared token attribute.
 
 - `:::url|https://sensuapp.org:::` would be replaced with a [custom
   attribute][24] called `url`. If no such attribute called `url` is included in
   the client definition, the default (or fallback) value of
   `https://sensuapp.org` will be used.
 
-_NOTE: if a command token default value is not provided (i.e. as a fallback
-value), and the Sensu client definition does not have a matching [command token
-client attribute][25], a [check result][4] indicating unmatched tokens will be
-published for the check execution (e.g.: `"Unmatched command tokens:
-disk.warning"`)_
+#### Unmatched tokens
+
+If a [command token default value][25] is not provided (i.e. as a fallback
+value), _and_ the Sensu client definition does not have a matching definition
+attribute, a [check result][4] indicating "unmatched tokens" will be published
+for the check execution (e.g.: `"Unmatched command tokens: disk.warning"`).
 
 ## Check configuration
 
@@ -824,9 +809,9 @@ name
 [22]: #check-commands
 [23]: #check-command-arguments
 [24]: clients#custom-attributes
-[25]: #command-token-client-attributes
+[25]: #command-token-default-values
 [26]: clients#client-attributes
-[27]: https://sensuapp.org/plugins
+[27]: plugins
 [28]: https://github.com/sensu-plugins/sensu-plugins-http
 [29]: configuration#configuration-scopes
 [30]: http://ruby-doc.org/core-2.2.0/Regexp.html

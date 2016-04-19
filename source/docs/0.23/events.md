@@ -9,7 +9,7 @@ next:
 
 # Sensu Events
 
-## Reference Documentation
+## Reference documentation
 
 - [What are Sensu events?](#what-are-sensu-events)
   - [How are Sensu events created?](#how-are-sensu-events-created)

@@ -9,7 +9,7 @@ next:
 
 # The Sensu Server
 
-## Reference Documentation
+## Reference documentation
 
 - [What is the Sensu server?](#what-is-the-sensu-server)
 - [Sensu Core vs Sensu Enterprise](#sensu-core-vs-sensu-enterprise)

@@ -9,24 +9,27 @@ next:
 
 # Sensu Configuration
 
-One of the most commonly asked questions when getting started with Sensu is
-"where do the config files go"? Because Sensu was designed to be used alongside
-configuration management solutions (e.g. [Chef](https://www.chef.io) and
-[Puppet](https://puppetlabs.com)) and other automation tools, the answer to this
-question has always been multifaceted.
+## Reference documentation
 
-This reference document provides information to help you:
+- [How does Sensu load configuration?](#how-does-sensu-load-configuration)
+  - [Sensu configuration sources](#sensu-configuration-sources)
+  - [Configuration load order](#configuration-load-order)
+  - [Configuration merging](#configuration-merging)
+  - [Configuration logging](#configuration-logging)
+  - [Configuration scopes](#configuration-scopes)
+    - [Configuration scopes are relative](#configuration-scopes-are-relative)
+    - [Configuration scope examples](#configuration-scope-examples)
+- [Sensu service init configuration](#sensu-service-init-configuration)
+  - [Sensu service init configuration variables](#sensu-service-init-configuration-variables)
+- [Sensu command line interfaces and arguments](#sensu-command-line-interfaces-and-arguments)
+- [Sensu environment variables](#sensu-environment-variables)
+- [Sensu configuration specification](#sensu-configuration-specification)
+  - [Example sensu configuration](#example-sensu-configuration)
+  - [Top-level configuration scopes](#top-level-configuration-scopes)
 
-- [Understand how the Sensu services are configured](#sensu-configuration-sources)
-- [Understand how configuration merging works](#how-configuration-merging-works)
-- [Understand configuration "scopes"](#configuration-scopes)
-- [Understand the anatomy of a Sensu configuration](#anatomy-of-a-sensu-configuration)
-- [Understand the Sensu service init](#sensu-service-init)
-- [Understand the Sensu configuration variables](#configuration-variables)
-- [Understand the order in which Sensu loads configuration](#configuration-load-order)
-- [Understand the Sensu service command line arguments](#sensu-service-cli-arguments)
+## How does Sensu load configuration?
 
-## Sensu configuration sources {#sensu-configuration-sources}
+### Sensu configuration sources
 
 By default, the main configuration file for the Sensu platform is located at
 `/etc/sensu/config.json`. However, Sensu also provides support for loading
@@ -37,7 +40,34 @@ configuration file, and configuration directories) into a single Hash. This type
 of Hash merging is often called "deep merging", and is probably the most
 important concept to understand when learning how to configure Sensu.
 
-### How configuration merging works {#how-configuration-merging-works}
+### Configuration load order
+
+As previously mentioned, Sensu configuration can be provided via three distinct
+sources: environment variables, a configuration file, and one or more
+directories containing configuration files. Sensu loads configuration from these
+sources in the following order:
+
+1. The Sensu init scripts provide [command line arguments][1] for starting the
+   Sensu services (e.g. the location of the configuration file (`-c`), the
+   location of configuration directories (`-d`), etc).  
+
+2. Sensu will load configuration from [environment variables][2].
+
+3. Sensu loads configuration from the configuration file (by default, this is
+   located at `/etc/sensu/config.json`).
+
+3. Sensu loads configuration snippets from configuration files located in a
+   Sensu configuration directory (by default, this is `/etc/sensu/conf.d/`,
+   however it is possible to configure Sensu to load from multiple configuration
+   directories; see: [command line arguments][1], below).
+
+   _NOTE: configuration file load order is dictated by a `*.json` glob of the
+   configuration directory; as such it is **strongly** recommended to avoid a
+   dependency on configuration directory file load order (e.g. if you're
+   attempting to name configuration files in the configuration directory to
+   control load order, you're doing it wrong)._
+
+### Configuration merging
 
 To explain how Sensu merges configuration parameters from the various disparate
 configuration sources, please note the following example scenario:
@@ -153,7 +183,7 @@ As configuration snippets are applied to the Sensu configuration Hash (i.e.
 during "deep merge"), all configuration changes are logged to the corresponding
 log file (e.g. the Sensu server, API, or Client logs).
 
-### Configuration scopes {#configuration-scopes}
+### Configuration scopes
 
 Because Sensu configuration can be provided in so many different sources, it is
 important to understand that &ndash; _regardless of the physical location of the
@@ -179,17 +209,18 @@ scope(s) for additional configuration settings (e.g. the `rabbitmq` attribute
 defined above provides the `rabbitmq` scope, a JSON Hash, for the actual RabbitMQ
 configuration settings).
 
-#### Configuration scopes are relative {#configuration-scopes-are-relative}
+#### Configuration scopes are relative
 
 Throughout the Sensu documentation whenever a configuration scope is mentioned,
 it is describing the named "level" that the corresponding configuration
 attributes should be defined within, **which may be _relative_ to any
 potentially related scopes**. Please note the following examples:
 
+#### Configuration scope examples
+
 ##### The client scope (`"client": {}`)
 
-In the [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
-it explains that:
+In the [Sensu Client reference documentation][3] it explains that:
 
 > _"The client definition uses the `"client": {}` definition scope."_
 
@@ -206,10 +237,9 @@ called `"client"`:
 
 ##### The client socket scope (`"socket": {}`)
 
-The [Sensu Client reference documentation](clients#anatomy-of-a-client-definition)
-continues to explain that Sensu clients may have a `"socket"` attribute, and
-that there are additional [Client Socket attributes](clients#socket-attributes)
-which should be defined within the `"socket"` scope:
+The [Sensu Client reference documentation][3] continues to explain that Sensu
+clients may have a `"socket"` attribute, and that there are additional [Client
+Socket attributes][4] which should be defined within the `"socket"` scope:
 
 > _"The following attributes are configured within the `"socket": {}` client
 definition attribute scope."_
@@ -246,211 +276,7 @@ loaded by Sensu).
 }
 ~~~
 
-## Anatomy of a Sensu configuration {#anatomy-of-a-sensu-configuration}
-
-### Example Sensu configuration {#example-sensu-configuration}
-
-The following is an example Sensu configuration, a JSON configuration file
-located at `/etc/sensu/config.json`. This Sensu configuration provides Sensu
-with information it needs to communicate with RabbitMQ and Redis:
-
-~~~json
-{
-  "rabbitmq": {
-    "host": "10.0.1.10",
-    "vhost": "/sensu",
-    "user": "sensu",
-    "password": "secret"
-  },
-  "redis": {
-    "host": "10.0.1.20",
-    "port": 6379,
-    "password": "secret"
-  },
-  "api": {
-    "host": "10.0.1.30",
-    "bind": "0.0.0.0",
-    "port": "4242"
-  }
-}
-~~~
-
-### Configuration attributes {#configuration-attributes}
-
-The Sensu configuration attributes defined at the top level scope are as follows
-(these attributes live at the top level of their respective JSON documents):
-
-rabbitmq
-: description
-  : The RabbitMQ definition scope (see:
-    [RabbitMQ Configuration](rabbitmq#anatomy-of-a-rabbitmq-definition))
-: required
-  : true
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "rabbitmq": {
-        "host": "10.0.1.10",
-        "vhost": "/sensu",
-        "user": "sensu",
-        "password": "secret"
-      }
-    }
-    ~~~
-
-redis
-: description
-  : The Redis definition scope (see:
-    [Redis Configuration](redis#anatomy-of-a-redis-definition))
-: required
-  : true
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "redis": {
-        "host": "10.0.1.20",
-        "port": 6379,
-        "password": "secret"
-      }
-    }
-    ~~~
-
-transport
-: description
-  : The Sensu Transport definition scope (see:
-    [Transport Configuration](transport)).
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "transport": {
-        "name": "rabbitmq"
-      }
-    }
-    ~~~
-
-api
-: description
-  : The Sensu API definition scope (see:
-    [API Configuration](api-configuration#anatomy-of-an-api-definition))
-: required
-  : true
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "api": {
-        "host": "10.0.1.30",
-        "bind": "0.0.0.0",
-        "port": 4242
-      }
-    }
-    ~~~
-
-client
-: description
-  : The Sensu Client definition scope (see:
-    [Clients](clients#anatomy-of-a-client-definition))
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "client": {
-        "name": "i-424242",
-        "address": "8.8.8.8",
-        "subscriptions": [
-          "production",
-          "webserver",
-          "mysql"
-        ]
-      }
-    }
-    ~~~
-
-checks
-: description
-  : The Sensu Checks definition scope (see:
-    [Checks](checks#anatomy-of-a-check-definition))
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "checks": {
-        "example_check": {},
-        "another_check": {}
-      }
-    }
-    ~~~
-
-handlers
-: description
-  : The Sensu Handlers definition scope (see:
-    [Handlers](handlers#anatomy-of-a-handler-definition))
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "handlers": {
-        "example_handler": {},
-        "another_handler": {}
-      }
-    }
-    ~~~
-
-filters
-: description
-  : The Sensu Filters definition scope (see:
-    [Filters](filters#anatomy-of-a-filter-definition))
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "filters": {
-        "example_filter": {},
-        "another_filter": {}
-      }
-    }
-    ~~~
-
-mutators
-: description
-  : The Sensu Mutators definition scope (see:
-    [Mutators](mutators#anatomy-of-a-mutator-definition))
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    {
-      "mutators": {
-        "example_mutator": {},
-        "another_mutator": {}
-      }
-    }
-    ~~~
-
-### Sensu service init {#sensu-service-init}
+## Sensu service init configuration
 
 The Sensu services are managed by init scripts that are provided in the Sensu
 packages. The Sensu init scripts are able to start/stop/restart the
@@ -459,8 +285,8 @@ corresponding Sensu services (e.g. the Sensu server, API, client, etc).
 The default Sensu init scripts and related configuration file(s) (containing
 configuration variables) are located as follows:
 
-- `/etc/default/sensu` (sourced by the init scripts to provide
-  [configuration variables](#configuration-variables))
+- `/etc/default/sensu` (sourced by the init scripts to provide [configuration
+  variables][5])
 - `/etc/init.d/sensu-service` (shared init script used by the Sensu service
   init scripts)
 - `/etc/init.d/sensu-server`
@@ -469,7 +295,7 @@ configuration variables) are located as follows:
 - `/etc/init.d/sensu-enterprise`
 - `/etc/init.d/sensu-enterprise-dashboard`
 
-#### Configuration variables {#configuration-variables}
+### Sensu service init configuration variables
 
 The following configuration variables can be set in the init script(s) for the
 platform.
@@ -481,7 +307,7 @@ EMBEDDED_RUBY
 : required
   : false
 : default
-  : `false` (for versions <0.21)
+  : `true` (for versions >0.21)
 : example
   : ~~~ shell
     EMBEDDED_RUBY=true
@@ -610,120 +436,7 @@ SERVICE_MAX_WAIT
     SERVICE_MAX_WAIT=10
     ~~~
 
-## Environment variables {#environment-variables}
-
-The Sensu services are aware of the following environment variables.
-Configuration provided via environment variables will only be used if no
-corresponding configuration is provided via the Sensu configuration file, or
-configuration directories. Providing configuration via environment variables is
-primarily beneficial in environments where configuration management tools (e.g.
-Chef or Puppet) are not used &ndash; for example, in container-based
-environments.
-
-SENSU_TRANSPORT_NAME
-: description
-  : The Sensu transport name, indicating the Sensu transport to load and use.
-    This value is used if a transport definition does not already define one.
-: required
-  : false
-: default
-  : `rabbitmq`
-: example
-  : ~~~ shell
-    SENSU_TRANSPORT_NAME="redis"
-    ~~~
-
-RABBITMQ_URL
-: description
-  : The RabbitMQ URL Sensu will use when connecting to RabbitMQ, used if a
-    RabbitMQ definition does not already define connection options. The RabbitMQ
-    URL uses the [AMQP URI spec](https://www.rabbitmq.com/uri-spec.html).
-: required
-  : false
-: example
-  : ~~~ shell
-    RABBITMQ_URL="amqp://user:password@hostname:5672/vhost"
-    ~~~
-
-REDIS_URL
-: description
-  : The Redis URL Sensu will use when connecting to Redis, used if a Redis
-    definition does not already define connection options.
-: required
-  : false
-: example
-  : ~~~ shell
-    REDIS_URL="redis://hostname:6379/0"
-    ~~~
-
-SENSU_CLIENT_ADDRESS
-: description
-  : The Sensu client address, used if a client definition does not already
-    define one.
-: required
-  : false
-: default
-  : `hostname`
-: example
-  : ~~~ shell
-    SENSU_CLIENT_ADDRESS="8.8.8.8"
-    ~~~
-
-SENSU_CLIENT_SUBSCRIPTIONS
-: description
-  : The Sensu client subscriptions, comma delimited, used if a client definition
-    does not already define them.
-: required
-  : false
-: default
-  : `[]`
-: example
-  : ~~~ shell
-    SENSU_CLIENT_SUBSCRIPTIONS="production,webserver,nginx,memcached,all"
-    ~~~
-
-SENSU_API_PORT
-: description
-  : The Sensu API TCP port to bind to and listen on, used if an API definition
-    does not already define one. This is only used by the Sensu API.
-: required
-  : false
-: default
-  : `4567`
-: example
-  : ~~~ shell
-    SENSU_API_PORT=8080
-    ~~~
-
-## Configuration load order {#configuration-load-order}
-
-Sensu configuration can be provided via three distinct sources: environment
-variables, a configuration file, and one or more directories containing
-configuration files. Sensu loads configuration from these sources in the
-following order:
-
-1. The Sensu init scripts provide [command line
-   arguments](#command-line-arguments) for starting the Sensu services (e.g. the
-   location of the configuration file (`-c`), the location of configuration
-   directories (`-d`), etc).  
-
-2. Sensu will load configuration from [environment variables](#environment-variables).
-
-3. Sensu loads configuration from the configuration file (by default, this is
-   located at `/etc/sensu/config.json`).
-
-3. Sensu loads configuration snippets from configuration files located in a
-   Sensu configuration directory (by default, this is `/etc/sensu/conf.d/`,
-   however it is possible to configure Sensu to load from multiple configuration
-   directories; see: [command line arguments](#command-line-arguments), below).
-
-   _NOTE: configuration file load order is dictated by a `*.json` glob of the
-   configuration directory; as such it is **strongly** recommended to avoid a
-   dependency on configuration directory file load order (e.g. if you're
-   attempting to name configuration files in the configuration directory to
-   control load order, you're doing it wrong)._
-
-## Sensu Service CLI arguments {#sensu-service-cli-arguments}
+## Sensu command line interfaces and arguments
 
 The Sensu services can be run from the command line with the following command
 line options:
@@ -734,7 +447,7 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
 `-h` (`--help`)
 : description
   : Display the help documentation.
-: example
+: examples
   : ~~~ shell
     $ /opt/sensu/bin/sensu-server -h
     Usage: sensu-server [options]
@@ -749,6 +462,14 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
         -v, --verbose                    Enable verbose logging
         -b, --background                 Fork into the background
         -p, --pid_file FILE              Write the PID to a given FILE
+
+    $ /opt/sensu/bin/sensu-install -h
+    Usage: sensu-install [options]
+    -h, --help                       Display this message
+    -v, --verbose                    Enable verbose logging
+    -p, --plugin PLUGIN              Install a Sensu PLUGIN
+    -P, --plugins PLUGIN[,PLUGIN]    PLUGIN or comma-delimited list of Sensu plugins to install
+    -s, --source SOURCE              Install Sensu plugins from a custom SOURCE
     ~~~
 
 `-V` (`--version`)
@@ -888,3 +609,299 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
   : ~~~ shell
     /opt/sensu/bin/sensu-server -p /var/run/sensu-server.pid
     ~~~
+
+
+## Sensu environment variables
+
+The Sensu services are aware of the following environment variables.
+Configuration provided via environment variables will only be used if no
+corresponding configuration is provided via the Sensu configuration file, or
+configuration directories. Providing configuration via environment variables is
+primarily beneficial in environments where configuration management tools (e.g.
+Chef or Puppet) are not used &ndash; for example, in container-based
+environments.
+
+SENSU_TRANSPORT_NAME
+: description
+  : The Sensu transport name, indicating the Sensu transport to load and use.
+    This value is used if a transport definition does not already define one.
+: required
+  : false
+: default
+  : `rabbitmq`
+: example
+  : ~~~ shell
+    SENSU_TRANSPORT_NAME="redis"
+    ~~~
+
+RABBITMQ_URL
+: description
+  : The RabbitMQ URL Sensu will use when connecting to RabbitMQ, used if a
+    RabbitMQ definition does not already define connection options. The RabbitMQ
+    URL uses the [AMQP URI spec][6].
+: required
+  : false
+: example
+  : ~~~ shell
+    RABBITMQ_URL="amqp://user:password@hostname:5672/vhost"
+    ~~~
+
+REDIS_URL
+: description
+  : The Redis URL Sensu will use when connecting to Redis, used if a Redis
+    definition does not already define connection options.
+: required
+  : false
+: example
+  : ~~~ shell
+    REDIS_URL="redis://hostname:6379/0"
+    ~~~
+
+SENSU_CLIENT_ADDRESS
+: description
+  : The Sensu client address, used if a client definition does not already
+    define one.
+: required
+  : false
+: default
+  : `hostname`
+: example
+  : ~~~ shell
+    SENSU_CLIENT_ADDRESS="8.8.8.8"
+    ~~~
+
+SENSU_CLIENT_SUBSCRIPTIONS
+: description
+  : The Sensu client subscriptions, comma delimited, used if a client definition
+    does not already define them.
+: required
+  : false
+: default
+  : `[]`
+: example
+  : ~~~ shell
+    SENSU_CLIENT_SUBSCRIPTIONS="production,webserver,nginx,memcached,all"
+    ~~~
+
+SENSU_API_PORT
+: description
+  : The Sensu API TCP port to bind to and listen on, used if an API definition
+    does not already define one. This is only used by the Sensu API.
+: required
+  : false
+: default
+  : `4567`
+: example
+  : ~~~ shell
+    SENSU_API_PORT=8080
+    ~~~
+
+## Sensu configuration specification
+
+### Example Sensu configuration
+
+The following is an example Sensu configuration, a JSON configuration file
+located at `/etc/sensu/config.json`. This Sensu configuration provides Sensu
+with information it needs to communicate with RabbitMQ and Redis:
+
+~~~json
+{
+  "rabbitmq": {
+    "host": "10.0.1.10",
+    "vhost": "/sensu",
+    "user": "sensu",
+    "password": "secret"
+  },
+  "redis": {
+    "host": "10.0.1.20",
+    "port": 6379,
+    "password": "secret"
+  },
+  "api": {
+    "host": "10.0.1.30",
+    "bind": "0.0.0.0",
+    "port": "4242"
+  }
+}
+~~~
+
+### Top-level configuration scopes
+
+The top-level Sensu configuration scopes are as follows (these attributes live
+at the top level of their respective JSON documents):
+
+rabbitmq
+: description
+  : The RabbitMQ definition scope (see: [RabbitMQ Configuration][7])
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "rabbitmq": {
+        "host": "10.0.1.10",
+        "vhost": "/sensu",
+        "user": "sensu",
+        "password": "secret"
+      }
+    }
+    ~~~
+
+redis
+: description
+  : The Redis definition scope (see: [Redis Configuration][8])
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "redis": {
+        "host": "10.0.1.20",
+        "port": 6379,
+        "password": "secret"
+      }
+    }
+    ~~~
+
+transport
+: description
+  : The Sensu Transport definition scope (see: [Transport Configuration][9]).
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "transport": {
+        "name": "rabbitmq"
+      }
+    }
+    ~~~
+
+api
+: description
+  : The Sensu API definition scope (see: [API Configuration][10])
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "api": {
+        "host": "10.0.1.30",
+        "bind": "0.0.0.0",
+        "port": 4242
+      }
+    }
+    ~~~
+
+client
+: description
+  : The Sensu Client definition scope (see: [Clients][3])
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "client": {
+        "name": "i-424242",
+        "address": "8.8.8.8",
+        "subscriptions": [
+          "production",
+          "webserver",
+          "mysql"
+        ]
+      }
+    }
+    ~~~
+
+checks
+: description
+  : The Sensu Checks definition scope (see: [Checks][11])
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "checks": {
+        "example_check": {},
+        "another_check": {}
+      }
+    }
+    ~~~
+
+handlers
+: description
+  : The Sensu Handlers definition scope (see: [Handlers][12])
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "handlers": {
+        "example_handler": {},
+        "another_handler": {}
+      }
+    }
+    ~~~
+
+filters
+: description
+  : The Sensu Filters definition scope (see: [Filters][13])
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "filters": {
+        "example_filter": {},
+        "another_filter": {}
+      }
+    }
+    ~~~
+
+mutators
+: description
+  : The Sensu Mutators definition scope (see: [Mutators][14])
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    {
+      "mutators": {
+        "example_mutator": {},
+        "another_mutator": {}
+      }
+    }
+    ~~~
+
+[1]:  #sensu-command-line-interfaces-and-arguments
+[2]:  #sensu-environment-variables
+[3]:  clients#client-definition-specification
+[4]:  clients#socket-attributes
+[5]:  #sensu-service-init-configuration-variables
+[6]:  https://www.rabbitmq.com/uri-spec.html
+[7]:  rabbitmq#rabbitmq-definition-specification
+[8]:  redis#redis-definition-specification
+[9]:  transport#transport-definition-specification
+[10]: api-configuration#api-definition-specification
+[11]: checks#check-definition-specification
+[12]: handlers#handler-definition-specification
+[13]: filters#filter-definition-specification
+[14]: mutators#mutator-definition-specification

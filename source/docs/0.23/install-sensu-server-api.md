@@ -2,6 +2,9 @@
 version: 0.23
 category: "Installation Guide"
 title: "Install the Sensu Server and API"
+next:
+  url: sensu-on-ubuntu-debian
+  text: "Install Sensu on Ubuntu/Debian"
 ---
 
 # Install the Sensu Server and API
@@ -26,8 +29,8 @@ Ubuntu/Debian systems), and YUM (for RHEL/CentOS). The Sensu Core packages
 installs several processes, including `sensu-server`, `sensu-api`, and
 `sensu-client`.
 
-- [Install the Sensu server & API on Ubuntu/Debian](sensu-on-ubuntu-debian)
-- [Install the Sensu server & API on RHEL/CentOS](sensu-on-rhel-centos)
+- [Install the Sensu Core server & API on Ubuntu/Debian](sensu-on-ubuntu-debian)
+- [Install the Sensu Core server & API on RHEL/CentOS](sensu-on-rhel-centos)
 
 _NOTE: although Sensu Core packages are available for a variety of platforms
 &ndash; thus making it technically possible to run the `sensu-server` and

@@ -20,7 +20,7 @@ hide_toc: true
   * [Summary & Next Steps](installation-summary)
 
 * **Getting Started Guide**
-  * [Getting Started with Sensu](getting-started-guide)
+  * [Getting Started w/ Sensu](getting-started-guide)
   * [Intro to Checks](getting-started-with-checks)
   * [Intro to Handlers](getting-started-with-handlers)
   * [Intro to Filters](getting-started-with-filters)
