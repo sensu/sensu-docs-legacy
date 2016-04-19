@@ -88,7 +88,7 @@ with the [Nagios plugin specification][17]; as a result, **Nagios plugins may be
 used with Sensu without any modification**. Sensu allows you to bring new life
 to the 50+ plugins in the official [Nagios Plugins project][18] (which [began
 life in 1999][19], making it a very mature source for monitoring plugins), and
-over 4000 plugins available in the [Nagios Exchange][20]. 
+over 4000 plugins available in the [Nagios Exchange][20].
 
 ### Write your own custom plugins
 
@@ -134,7 +134,7 @@ system `$PATH` directory), or they must be referenced with an absolute path
 (e.g. `/opt/path/to/my/plugin`).
 
 _NOTE: By default, the Sensu installer packages will modify the system `$PATH`
-for the `sensu` user to include `/etc/sensu/plugins`. As a result, executable
+for the Sensu processes to include `/etc/sensu/plugins`. As a result, executable
 scripts (e.g. plugins) located in `/etc/sensu/plugins` will be valid commands.
 This allows command attributes to use "relative paths" for Sensu plugin
 commands;<br><br>e.g.: `"command": "check-http.rb -u https://sensuapp.org"`_

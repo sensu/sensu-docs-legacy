@@ -91,7 +91,7 @@ As mentioned above, all pipe handlers are executed by a [Sensu server][1] as the
 Sensu server system (i.e. installed in a system [`$PATH` directory][7]).
 
 _NOTE: By default, the Sensu installer packages will modify the system `$PATH`
-for the `sensu` user to include `/etc/sensu/plugins`. As a result, executable
+for the Sensu processes to include `/etc/sensu/plugins`. As a result, executable
 scripts (e.g. plugins) located in `/etc/sensu/plugins` will be valid commands.
 This allows `command` attributes to use "relative paths" for Sensu plugin
 commands; <br><br>e.g.: `"command": "handler-irc.rb"`_
