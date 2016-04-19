@@ -37,10 +37,7 @@ data specification][3].
 - Output JSON data (the modified event data) to `STDOUT` or `STDERR`
 - Produce an exit status code to indicate state:
   - `0` indicates OK
-  - exit status codes other than `0` indicate a failure
-    _NOTE: if a mutator fails to execute (non-zero exit status code), the event
-    will not be handled, and an error will be logged in the [Sensu server][4]
-    log._
+  - exit status codes other than `0` indicates a failure
 
 ### When to use a mutator
 
