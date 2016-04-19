@@ -44,7 +44,7 @@ What will be covered in this guide:
   - [Standalone](installation-strategies#standalone)
   - [Distributed](installation-strategies#distributed)
   - [High Availability](installation-strategies#high-availability)
-2. [How to install and configure Sensu's prerequisites](install-prerequisites)
+2. [How to install and configure Sensu's prerequisites](installation-prerequisites)
   - [How to install and configure Redis](install-redis)
   - [How to install and configure RabbitMQ](install-rabbitmq)
 3. [How to install and configure the Sensu server and
