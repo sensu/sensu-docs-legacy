@@ -2,6 +2,9 @@
 version: 0.23
 category: "Installation Guide"
 title: "Install the Sensu Client"
+next:
+  url: "sensu-on-ubuntu-debian#sensu-core"
+  text: "Install a Sensu client on Ubuntu"
 ---
 
 # Install the Sensu Client
@@ -37,14 +40,14 @@ To continue with this guide, please refer to the **Install Sensu Core**,
 **Configure Sensu**, and **Operating Sensu** instructions corresponding to the
 platform(s) where you will run your Sensu client(s).
 
-- [Ubuntu/Debian](sensu-on-ubuntu-debian#install-sensu-core)
-- [RHEL/CentOS](sensu-on-rhel-centos#install-sensu-core)
-- [Microsoft Windows](sensu-on-microsoft-windows#install-sensu-core)
-- [Mac OS X](sensu-on-mac-os-x#install-sensu-core) (beta)
-- [FreeBSD](sensu-on-freebsd#install-sensu-core) (beta)
-- [IBM AIX](sensu-on-ibm-aix#install-sensu-core) (coming soon)
-- [Oracle Solaris](sensu-on-oracle-solaris#install-sensu-core) (coming soon)
-- [Raspberry Pi](sensu-on-raspberry-pi#install-sensu-core) (coming soon)
+- [Ubuntu/Debian](sensu-on-ubuntu-debian#sensu-core)
+- [RHEL/CentOS](sensu-on-rhel-centos#sensu-core)
+- [Microsoft Windows](sensu-on-microsoft-windows#sensu-core)
+- [Mac OS X](sensu-on-mac-os-x#sensu-core)
+- [FreeBSD](sensu-on-freebsd#sensu-core)
+- [IBM AIX](sensu-on-ibm-aix#sensu-core)
+- [Oracle Solaris](sensu-on-oracle-solaris#sensu-core)
+- [Raspberry Pi](sensu-on-raspberry-pi#sensu-core) (coming soon)
 
 
 [standalone]:       installation-strategies#standalone

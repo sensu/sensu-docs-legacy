@@ -2,6 +2,10 @@
 version: 0.23
 category: "Installation Guide"
 title: "Sensu on Mac OS X"
+info: "<strong>NOTE:</strong> this page contains reference documentation for
+  installing and operating Sensu on Mac OS X systems. For instructions on
+  installing or operating Sensu on other platforms, please visit the <a
+  class='alert-link' href=platforms>supported platforms</a> page."
 ---
 
 # Sensu on Mac OS X
@@ -32,7 +36,7 @@ notice._
 1. Download Sensu from the [Sensu Downloads][1] page, or via the `curl` utility
 
    ~~~ shell
-   curl -LO https://core.sensuapp.com/osx-unstable/sensu-0.23.0-1.pkg
+   curl -LO https://core.sensuapp.com/osx/sensu-0.23.1-1.pkg
    ~~~
 
    _NOTE: the Universal .pkg file supports OS X "Mavericks" (10.9) and newer.
@@ -41,8 +45,14 @@ notice._
 2. Install the package using the `installer` utility
 
    ~~~ shell
-   sudo installer -pkg sensu-0.23.0-1.pkg -target /
+   sudo installer -pkg sensu-0.23.1-1.pkg -target /
    ~~~
+
+3. Configure the Sensu client. **No "default" configuration is provided with
+   Sensu**, so the Sensu Client will not start without the corresponding
+   configuration. Please refer to the ["Configure Sensu" section][12] (below)
+   for more information on configuring Sensu. **At minimum, the Sensu client
+   will need a working [transport definition][13] and [client definition][14]**.
 
 ## Configure Sensu
 
@@ -81,7 +91,7 @@ mkdir /etc/sensu/conf.d
    {
      "client": {
        "name": "macosx",
-       "address": "localhost",
+       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
@@ -98,9 +108,27 @@ mkdir /etc/sensu/conf.d
 ### Example Transport Configuration
 
 At minimum, the Sensu client process requires configuration to tell it how to
-connect to the configured [Sensu Transport][6]. Please refer to the
-configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis][7], or [Install RabbitMQ][8]).
+connect to the configured [Sensu Transport][6].
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
+
+   ~~~ json
+   {
+     "transport": {
+       "name": "rabbitmq",
+       "reconnect_on_error": true
+     }
+   }
+   ~~~
+
+   _NOTE: if you are using Redis as your transport, please use `"name": "redis"`
+   for your transport configuration. For more information, please visit the
+   [transport definition specification][15]._
+
+2. Please refer to the configuration instructions for the corresponding
+   transport for configuration file examples (see [Redis][7], or [RabbitMQ][8]
+   reference documentation).
 
 ### Configure the Sensu client `launchd` daemon
 
@@ -116,7 +144,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
    your favorite text editor.
 
    ~~~ shell
-   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
+   sudo cp /opt/sensu/embedded/Cellar/sensu/0.23.1/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
@@ -169,13 +197,13 @@ is installed by the Sensu OS X installer package.
 
 ~~~ shell
 $ sudo -u _sensu /opt/sensu/bin/sensu-client -V
-0.23.0
+0.23.1
 ~~~
 
 
 [1]:  https://sensuapp.org/download
-[2]:  https://core.sensuapp.com/osx-unstable/
-[3]:  https://core.sensuapp.com/osx-unstable/sensu-0.23.0-1.mountainlion.pkg
+[2]:  https://core.sensuapp.com/osx/
+[3]:  https://core.sensuapp.com/osx/sensu-0.23.1-1.mountainlion.pkg
 [4]:  #configure-the-sensu-client-launchd-daemon
 [5]:  configuration
 [6]:  transport
@@ -184,3 +212,7 @@ $ sudo -u _sensu /opt/sensu/bin/sensu-client -V
 [9]:  https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man5/plist.5.html
 [10]: configuration#sensu-service-cli-arguments
 [11]: https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/launchctl.1.html
+[12]: #configure-sensu
+[13]: #example-transport-configuration
+[14]: #example-client-configuration
+[15]: transport#transport-definition-specification

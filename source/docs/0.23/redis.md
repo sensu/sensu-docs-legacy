@@ -14,12 +14,12 @@ next:
 - [What is Redis?](#what-is-redis)
 - [How does Sensu use Redis?](#how-does-sensu-use-redis)
 - [Install Redis](#install-redis)
-- [Configure Sensu](#sensu-redis-configuration)
+- [Configure Sensu](#configure-sensu)
   - [Example configurations](#sensu-redis-configuration-examples)
   - [Redis definition specification](#redis-definition-specification)
     - [`redis` attributes](#redis-attributes)
     - [`sentinels` attributes](#sentinels-attributes)
-- [Configure Redis](#configure-redis)
+- [Configure Redis](#sensu-redis-configuration)
   - [Standalone configuration](#redis-standalone-configuration)
   - [Distributed configuration](#redis-distributed-configuration)
   - [High Availability configuration](#redis-high-availability-configuration)
@@ -53,17 +53,24 @@ services in a cluster require access to the same instance (or cluster) of
 Redis** (consequently, Redis does not need to  be installed on every system
 where Sensu is installed).
 
+Sensu also provides support for using Redis as a [transport][14]. Please see the
+[Sensu transport reference documentation][14] for more information.
+
 ## Installing Redis
 
 For more information about installing Redis for use with Sensu, please visit the
 [Redis installation guide][6].
 
-## Configure Sensu {#sensu-redis-config}
+## Configure Sensu {#sensu-redis-configuration}
 
 ### Example configurations {#sensu-redis-configuration-examples}
 
-The following are example Redis connection definitions at
-`/etc/sensu/conf.d/redis.json`.
+The following are example Redis definitions at `/etc/sensu/conf.d/redis.json`.
+
+_NOTE: if you are using Redis as your [Sensu transport][14], additional
+configuration will need to be provided to tell Sensu to use Redis as the
+transport instead of RabbitMQ (default); please see [transport configuration][15]
+for more information._
 
 #### Example standalone configuration {#sensu-redis-configuration-examples-standalone}
 
@@ -619,3 +626,5 @@ documentation](http://redis.io/topics/security).
 [11]: install-redis
 [12]: #what-is-redis-master-slave-replication
 [13]: #what-is-redis-sentinel
+[14]: transport
+[15]: transport#transport-configuration

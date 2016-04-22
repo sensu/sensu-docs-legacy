@@ -12,7 +12,7 @@ next:
 ## Reference documentation
 
 - [What is the Sensu Transport?](#what-is-the-sensu-transport)
-- [Sensu transport options](#sensu-transport-options)
+- [Selecting a transport](#selecting-a-transport)
 - [Transport configuration](#transport-configuration)
   - [Example transport definition](#example-transport-definition)
   - [Transport definition specification](#transport-definition-specification)
@@ -29,12 +29,47 @@ function. Sensu check requests and check results are published as “messages”
 the Sensu Transport, and the corresponding Sensu services receive these messages
 by subscribing to the appropriate subscriptions.
 
-## Sensu Transport Options
+## Selecting a Transport
 
-Sensu currently supports the following Transports:
+The Sensu Transport library makes it possible to replace Sensu's recommended and
+default transport (RabbitMQ) with alternative solutions. There are currently
+two (2) transports provided with the sensu-transport library: RabbitMQ and
+Redis &mdash; each presenting unique performance and functional characteristics.
 
-- [RabbitMQ (default)](rabbitmq)
-- [Redis](redis)
+### The RabbitMQ Transport (recommended)
+
+The RabbitMQ Transport is the original Sensu transport, and continues to be the
+recommended solution for running Sensu in production environments.
+
+#### Pros {#rabbitmq-transport-pros}
+
+- Native SSL support
+- Pluggable authentication framework
+- Support for ACLs
+
+#### Cons {#rabbitmq-transport-cons}
+
+- Adds Erlang as a runtime dependency to the Sensu architecture (only on systems
+  where RabbitMQ is running)
+
+### The Redis Transport
+
+The Redis Transport was an obvious alternative to the original RabbitMQ
+Transport because Sensu already depends on Redis as a data store. Using Redis as
+a transport greatly simplifies Sensu's architecture by removing the need to
+install/configure RabbitMQ _and_ [Erlang](https://www.erlang.org/) (RabbitMQ's
+runtime).
+
+#### Pros {#redis-transport-pros}
+
+- Simplifies Sensu architecture by removing need for dedicated transport (by
+  using Redis as the data store _and_ transport)
+- Comparable or better throughput/performance than RabbitMQ
+
+#### Cons {#redis-transport-cons}
+
+- No native support for SSL
+- No support for transport "consumers" metrics (see [Health & Info API][4])
 
 ## Transport configuration
 
@@ -96,3 +131,4 @@ reconnect_on_error
 [1]:  rabbitmq
 [2]:  http://github.com/sensu/sensu-transport
 [3]:  configuration#configuration-scopes
+[4]:  api-health-and-info

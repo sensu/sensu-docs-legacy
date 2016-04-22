@@ -2,9 +2,15 @@
 version: 0.23
 category: "Installation Guide"
 title: "Install Sensu on Ubuntu/Debian"
+info: "<strong>NOTE:</strong> this page contains reference documentation for
+  installing and operating Sensu on Ubuntu and Debian systems. For instructions
+  installing or operating Sensu on other platforms, please visit the <a
+  class='alert-link' href=platforms>supported platforms</a> page."
 ---
 
 # Sensu on Ubuntu/Debian
+
+## Reference documentation
 
 - [Installing Sensu Core](#sensu-core)
   - [Install Sensu using APT](#install-sensu-core-repository)
@@ -37,25 +43,25 @@ Sensu Core package installs several processes including `sensu-server`,
 
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
-1. Install the GPG public key
+1. Install the GPG public key:
 
    ~~~ shell
    wget -q http://repositories.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
    ~~~
 
-2. Create an APT configuration file at `/etc/apt/sources.list.d/sensu.list`
+2. Create an APT configuration file at `/etc/apt/sources.list.d/sensu.list`:
 
    ~~~ shell
    echo "deb     http://repositories.sensuapp.org/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
    ~~~
 
-3. Update APT
+3. Update APT:
 
    ~~~ shell
    sudo apt-get update
    ~~~
 
-4. Install Sensu
+4. Install Sensu:
 
    ~~~ shell
    sudo apt-get install sensu
@@ -63,6 +69,15 @@ Sensu Core package installs several processes including `sensu-server`,
 
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
+
+5. Configure Sensu. **No "default" configuration is provided with Sensu**, so
+   none of the Sensu processes will run without the corresponding configuration.
+   Please refer to the ["Configure Sensu" section][11] (below), for more
+   information on configuring Sensu. **At minimum, all of the Sensu processes
+   will need a working [transport definition][12]**. The Sensu client will need
+   a [client definition][13], and both the `sensu-server` and `sensu-api` will
+   need a [data-store (Redis) definition][14] &mdash; all of which are explained
+   below.
 
 ## Install Sensu Enterprise {#sensu-enterprise}
 
@@ -82,7 +97,7 @@ monitored by Sensu._
 
 ### Install the Sensu Enterprise repository {#install-sensu-enterprise-repository}
 
-1. Set access credentials as environment variables
+1. Set access credentials as environment variables:
 
    ~~~ shell
    SE_USER=1234567890
@@ -100,29 +115,34 @@ monitored by Sensu._
    1234567890:PASSWORD
    ~~~
 
-2. Install the GPG public key
+2. Install the GPG public key:
 
    ~~~ shell
    wget -q http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt/pubkey.gpg -O- | sudo apt-key add -
    ~~~
 
-3. Create an APT configuration file at `/etc/apt/sources.list.d/sensu-enterprise.list`
+3. Create an APT configuration file at `/etc/apt/sources.list.d/sensu-enterprise.list`:
 
    ~~~ shell
    echo "deb     http://$SE_USER:$SE_PASS@enterprise.sensuapp.com/apt sensu-enterprise main" | sudo tee /etc/apt/sources.list.d/sensu-enterprise.list
    ~~~
 
-4. Update APT
+4. Update APT:
 
    ~~~ shell
    sudo apt-get update
    ~~~
 
-5. Install Sensu Enterprise
+5. Install Sensu Enterprise:
 
    ~~~ shell
    sudo apt-get install sensu-enterprise sensu-enterprise-dashboard
    ~~~
+
+6. Configure Sensu Enterprise. **No "default" configuration is provided with
+   Sensu Enterprise**, so Sensu Enterprise will run without the corresponding
+   configuration. Please refer to the ["Configure Sensu" section][11] (below)
+   for more information on configuring Sensu Enterprise.
 
 ## Configure Sensu
 
@@ -136,10 +156,6 @@ _NOTE: Additional or alternative configuration file and directory locations may
 be used by modifying Sensu's init scripts and/or by starting the Sensu services
 with the corresponding CLI arguments. For more information, please consult the
 [Sensu Configuration][3] reference documentation._
-
-The following Sensu configuration files are provided as examples. Please review
-the [Sensu configuration reference documentation][3] for additional information
-on how Sensu is configured.
 
 ### Create the Sensu configuration directory
 
@@ -160,7 +176,7 @@ sudo mkdir /etc/sensu/conf.d
    {
      "client": {
        "name": "ubuntu",
-       "address": "localhost",
+       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
@@ -177,16 +193,34 @@ sudo mkdir /etc/sensu/conf.d
 ### Example transport configuration
 
 At minimum, all of the Sensu processes require configuration to tell them how to
-connect to the configured [Sensu Transport][4]. Please refer to the
-configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis][5], or [Install RabbitMQ][6]).
+connect to the configured [Sensu Transport][4].
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
+
+   ~~~ json
+   {
+     "transport": {
+       "name": "rabbitmq",
+       "reconnect_on_error": true
+     }
+   }
+   ~~~
+
+   _NOTE: if you are using Redis as your transport, please use `"name": "redis"`
+   for your transport configuration. For more information, please visit the
+   [transport definition specification][10]._
+
+2. Please refer to the configuration instructions for the corresponding
+   transport for configuration file examples (see [Redis][5], or [RabbitMQ][6]
+   reference documentation).
 
 ### Example data store configuration
 
 The Sensu Core server and API processes, and the Sensu Enterprise process all
 require configuration to tell them how to connect to Redis (the Sensu data
-store). Please refer to the [Redis installation instructions][5] for
-configuration file examples.
+store). Please refer to the [Redis reference documentation][5] for configuration
+file examples.
 
 ### Example API configurations
 
@@ -210,7 +244,7 @@ configuration file examples.
 1. Obtain the IP address of the system where the Sensu API is installed. For the
    purpose of this guide, we will use `10.0.1.7` as our example IP address.
 
-1. Create a configuration file  with the following contents at
+2. Create a configuration file  with the following contents at
    `/etc/sensu/conf.d/api.json` on the Sensu server and API system(s):
 
    ~~~ json
@@ -273,7 +307,6 @@ configuration file examples.
    _NOTE: Multiple Sensu Enterprise Dashboard instances can be installed. When
    load balancing across multiple Dashboard instances, your load balancer should
    support "sticky sessions"._
-
 
 3. The Sensu Enterprise Dashboard process requires configuration to tell it how
    to connect to Redis (the Sensu data store). Please refer to the [Redis
@@ -400,13 +433,22 @@ To manually start and stop the Sensu services, use the provided init scripts:
   sudo /etc/init.d/sensu-enterprise-dashboard stop
   ~~~
 
+  Verify the Sensu Enterprise Dashboard is running by visiting view the
+  dashboard at http://localhost:3000 (replace `localhost` with the hostname or
+  IP address where the Sensu Enterprise Dashboard is running).
+
 
 [1]:  https://sensuapp.org/download
 [2]:  https://sensuapp.org/sensu-enterprise
 [3]:  configuration
 [4]:  transport
-[5]:  install-redis
-[6]:  install-rabbitmq
+[5]:  redis#sensu-redis-configuration
+[6]:  rabbitmq#sensu-rabbitmq-configuration
 [7]:  http://smarden.org/runit/
 [8]:  #disable-the-sensu-services-on-boot
 [9]:  http://manpages.ubuntu.com/manpages/precise/man8/update-rc.d.8.html
+[10]: transport#transport-definition-specification
+[11]: #configure-sensu
+[12]: #example-transport-configuration
+[13]: #example-client-configuration
+[14]: #example-data-store-configuration

@@ -2,9 +2,15 @@
 version: 0.23
 category: "Installation Guide"
 title: "Install Sensu on RHEL/CentOS"
+info: "<strong>NOTE:</strong> this page contains reference documentation for
+  installing and operating Sensu on Red Hat and CentOS systems. For instructions
+  on installing or operating Sensu on other platforms, please visit the <a
+  class='alert-link' href=platforms>supported platforms</a> page."
 ---
 
 # Sensu on RHEL/CentOS
+
+## Reference documentation
 
 - [Installing Sensu Core](#sensu-core)
   - [Install Sensu using YUM](#install-sensu-core-repository)
@@ -48,7 +54,7 @@ package installs several processes including `sensu-server`, `sensu-api`, and
    enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
    ~~~
 
-2. Install Sensu
+2. Install Sensu:
 
    ~~~ shell
    sudo yum install sensu
@@ -56,6 +62,15 @@ package installs several processes including `sensu-server`, `sensu-api`, and
 
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
+
+3. Configure Sensu. **No "default" configuration is provided with Sensu**, so
+   none of the Sensu processes will run without the corresponding configuration.
+   Please refer to the ["Configure Sensu" section][10] (below), for more
+   information on configuring Sensu. **At minimum, all of the Sensu processes
+   will need a working [transport definition][11]**. The Sensu client will need
+   a [client definition][12], and both the `sensu-server` and `sensu-api` will
+   need a [data-store (Redis) definition][13] &mdash; all of which are explained
+   below.
 
 ## Install Sensu Enterprise {#sensu-enterprise}
 
@@ -121,6 +136,11 @@ monitored by Sensu._
    sudo yum install sensu-enterprise sensu-enterprise-dashboard
    ~~~
 
+5. Configure Sensu Enterprise. **No "default" configuration is provided with
+   Sensu Enterprise**, so Sensu Enterprise will run without the corresponding
+   configuration. Please refer to the ["Configure Sensu" section][11] (below)
+   for more information on configuring Sensu Enterprise.
+
 ## Configure Sensu
 
 By default, all of the Sensu services on Ubuntu and Debian systems will load
@@ -133,10 +153,6 @@ _NOTE: Additional or alternative configuration file and directory locations may
 be used by modifying Sensu's init scripts and/or by starting the Sensu services
 with the corresponding CLI arguments. For more information, please consult the
 [Sensu Configuration][3] reference documentation._
-
-The following Sensu configuration files are provided as examples. Please review
-the [Sensu configuration reference documentation][3] for additional information
-on how Sensu is configured.
 
 ### Create the Sensu configuration directory
 
@@ -157,7 +173,7 @@ mkdir /etc/sensu/conf.d
    {
      "client": {
        "name": "rhel",
-       "address": "localhost",
+       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
@@ -174,16 +190,34 @@ mkdir /etc/sensu/conf.d
 ### Example transport configuration
 
 At minimum, all of the Sensu processes require configuration to tell them how to
-connect to the configured [Sensu Transport][4]. Please refer to the
-configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis][5], or [Install RabbitMQ][6]).
+connect to the configured [Sensu Transport][4].
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
+
+   ~~~ json
+   {
+     "transport": {
+       "name": "rabbitmq",
+       "reconnect_on_error": true
+     }
+   }
+   ~~~
+
+   _NOTE: if you are using Redis as your transport, please use `"name": "redis"`
+   for your transport configuration. For more information, please visit the
+   [transport definition specification][11]._
+
+2. Please refer to the configuration instructions for the corresponding
+   transport for configuration file examples (see [Redis][5], or [RabbitMQ][6]
+   reference documentation).
 
 ### Example data store configuration
 
 The Sensu Core server and API processes, and the Sensu Enterprise process all
 require configuration to tell them how to connect to Redis (the Sensu data
-store). Please refer to the [Redis installation instructions][5] for
-configuration file examples.
+store). Please refer to the [Redis reference documentation][5] for configuration
+file examples.
 
 ### Example API configurations
 
@@ -354,7 +388,7 @@ can also be accomplished using the [`chkconfig` utility][9].
   sudo chkconfig sensu-enterprise-dashboard remove
   ~~~
 
-## Operating Sensu {#operating-sensu}
+## Operating Sensu
 
 ### Managing the Sensu services/processes {#service-management}
 
@@ -404,8 +438,12 @@ To manually start and stop the Sensu services, use the provided init scripts:
 [2]:  https://sensuapp.org/sensu-enterprise
 [3]:  configuration
 [4]:  transport
-[5]:  install-redis
-[6]:  install-rabbitmq
+[5]:  redis#sensu-redis-configuration
+[6]:  redis#sensu-rabbitmq-configuration
 [7]:  http://smarden.org/runit/
 [8]:  #disable-the-sensu-services-on-boot
 [9]:  https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html
+[10]: #configure-sensu
+[11]: #example-transport-configuration
+[12]: #example-client-configuration
+[13]: #example-data-store-configuration
