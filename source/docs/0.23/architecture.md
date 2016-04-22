@@ -26,6 +26,10 @@ the following components:
 - [Event Processor](#event-processor)
 - [RESTful API](#restful-api)
 
+### Architectural Diagram
+
+![](img/sensu-diagram.gif)
+
 ### Secure Transport
 
 Sensu services use a message bus (e.g. [RabbitMQ][1]) to communicate with
