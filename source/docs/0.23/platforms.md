@@ -61,12 +61,12 @@ which provides [added-value][7] replacements for the Sensu Core server
 
 ### Sensu Enterprise Client
 
-As mentioned above, **Sensu Enterprise uses the same `sensu-client` process
-as Sensu Core**. By sharing the same open-source monitoring agent, upgrading to
-Sensu Enterprise from Sensu Core is simplified, as there's no need to install
-agents on thousands of systems &mdash; simply replace the server and API
-components. Consequently, **Sensu Enterprise does not need to be installed on
-every system being monitored by Sensu**.
+As mentioned above, **Sensu Enterprise uses the same `sensu-client` process as
+Sensu Core**. By sharing the same open-source monitoring agent, upgrading to
+Sensu Enterprise from Sensu Core is simplified, as there's no need to upgrade
+agents &mdash; simply replace the server and API components. Consequently,
+**Sensu Enterprise does not need to be installed on every system being monitored
+by Sensu**.
 
 [1]:  https://github.com/sensu
 [2]:  server
