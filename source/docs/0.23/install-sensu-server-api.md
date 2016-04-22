@@ -3,7 +3,7 @@ version: 0.23
 category: "Installation Guide"
 title: "Install the Sensu Server and API"
 next:
-  url: sensu-on-ubuntu-debian
+  url: sensu-on-ubuntu-debian#sensu-core
   text: "Install Sensu on Ubuntu/Debian"
 ---
 
