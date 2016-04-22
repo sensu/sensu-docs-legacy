@@ -25,13 +25,14 @@ and analyze metrics, and setup alerts.
 
 This guide will provide an introduction to the following building blocks:
 
-- [Intro to Checks][1] - used to monitor services or measure resources
-- [Intro to Handlers][2] - for taking action on Sensu events, which are produced by checks
-- [Intro to Filters][3] - for filtering (removing) events destined for one or more event handlers
-- [Intro to Mutators][4] - transform event data for handlers
+- [An introduction to adding clients][1]
+- [An introduction to checks][2]
+- [An introduction to handlers][3]
+- [An introduction to filters][4]
+- [An introduction to mutators][5]
 
-
-[1]:  getting-started-with-checks
-[2]:  getting-started-with-handlers
-[3]:  getting-started-with-filters
-[4]:  getting-started-with-mutators
+[1]:  adding-a-client
+[2]:  getting-started-with-checks
+[3]:  getting-started-with-handlers
+[4]:  getting-started-with-filters
+[5]:  getting-started-with-mutators

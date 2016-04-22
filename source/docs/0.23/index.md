@@ -23,6 +23,7 @@ hide_toc: true
 
 * **Getting Started Guide**
   * [Getting Started w/ Sensu](getting-started-guide)
+  * [Adding a client](adding-a-client)
   * [Intro to Checks](getting-started-with-checks)
   * [Intro to Handlers](getting-started-with-handlers)
   * [Intro to Filters](getting-started-with-filters)
