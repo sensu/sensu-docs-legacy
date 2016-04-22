@@ -2,6 +2,10 @@
 version: 0.23
 category: "Installation Guide"
 title: "Sensu on IBM AIX"
+info: "<strong>NOTE:</strong> this page contains reference documentation for
+  installing and operating Sensu on IBM AIX systems. For instructions on
+  installing or operating Sensu on other platforms, please visit the <a
+  class='alert-link' href=platforms>supported platforms</a> page."
 ---
 
 # Sensu on IBM AIX
@@ -15,7 +19,6 @@ title: "Sensu on IBM AIX"
 - [Operating Sensu](#operating-sensu)
   - [Managing the Sensu client process](#service-management)
 - [Known limitations](#known-limitations)
-  - [SSL](#ssl)
   - [Foreign Function Interface](#foreign-function-interface)
 
 ## Install Sensu Core {#sensu-core}
@@ -29,7 +32,7 @@ Downloads][1] page, and from [this repository][2].
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
    ~~~ shell
-   wget http://repositories.sensuapp.org/aix/sensu-0.23.0-1.powerpc.bff
+   wget https://repositories.sensuapp.org/aix/sensu-0.23.1-1.powerpc.bff
    ~~~
 
 2. The Sensu installer package for IBM AIX systems is provided in **backup file
@@ -37,7 +40,7 @@ Downloads][1] page, and from [this repository][2].
    "Fileset Name". Display the content using the `installp` utility.
 
    ~~~ shell
-   installp -ld sensu-0.23.0-1.powerpc.bff
+   installp -ld sensu-0.23.1-1.powerpc.bff
    ~~~
 
    Once you have collected the fileset name, you can optionally proceed to
@@ -45,18 +48,24 @@ Downloads][1] page, and from [this repository][2].
    flag.
 
    ~~~ shell
-   installp -apXY -d sensu-0.23.0-1.powerpc.bff sensu
+   installp -apXY -d sensu-0.23.1-1.powerpc.bff sensu
    ~~~
 
 3. Install Sensu using the `installp` utility.
 
    ~~~ shell
-   installp -aXY -d sensu-0.23.0-1.powerpc.bff sensu
+   installp -aXY -d sensu-0.23.1-1.powerpc.bff sensu
    ~~~
 
    _NOTE: this command uses the following `installp` utilty flags: `-a` to apply
    changes to the system, `-X` to extend the file system, and `-Y` to accept the
    [Sensu MIT License][4]._
+
+4. Configure the Sensu client. **No "default" configuration is provided with
+   Sensu**, so the Sensu Client will not start without the corresponding
+   configuration. Please refer to the ["Configure Sensu" section][10] (below)
+   for more information on configuring Sensu. **At minimum, the Sensu client
+   will need a working [transport definition][11] and [client definition][12]**.
 
 ## Configure Sensu
 
@@ -111,9 +120,27 @@ mkdir /etc/sensu/conf.d
 ### Example Transport Configuration
 
 At minimum, the Sensu client process requires configuration to tell it how to
-connect to the configured [Sensu Transport][6]. Please refer to the
-configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis][7], or [Install RabbitMQ][8]).
+connect to the configured [Sensu Transport][6].
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
+
+   ~~~ json
+   {
+     "transport": {
+       "name": "rabbitmq",
+       "reconnect_on_error": true
+     }
+   }
+   ~~~
+
+   _NOTE: if you are using Redis as your transport, please use `"name": "redis"`
+   for your transport configuration. For more information, please visit the
+   [transport definition specification][13]._
+
+2. Please refer to the configuration instructions for the corresponding
+   transport for configuration file examples (see [Redis][7], or [RabbitMQ][8]
+   reference documentation).
 
 ## Operating Sensu
 
@@ -133,13 +160,6 @@ Please note the following platform-specific limitations affecting Sensu on AIX
 at this time. Unless otherwise stated, all documented functions of the Sensu
 client are supported.
 
-### SSL
-
-Sensu on AIX does not currently support SSL as it's currently using the pure
-Ruby version of EventMachine. The C++ bindings for EventMachine do not successfully
-compile on AIX due to a bug in the xlC compiler. It is possible that SSL support
-may be possible in a future release.
-
 ### Foreign Function Interface
 
 [Foreign Function Interface (FFI)][9] calls on Sensu's embedded Ruby on AIX are
@@ -149,11 +169,14 @@ support will be enabled in a future release.
 
 [1]:  https://sensuapp.org/downloads
 [2]:  http://repositories.sensuapp.org/aix/
-[3]:  http://repositories.sensuapp.org/aix/sensu-0.23.0-1.powerpc.bff
+[3]:  http://repositories.sensuapp.org/aix/sensu-0.23.1-1.powerpc.bff
 [4]:  https://sensuapp.org/mit-license
 [5]:  configuration
 [6]:  transport
-[7]:  install-redis
-[8]:  install-rabbitmq
+[7]:  redis#sensu-redis-configuration
+[8]:  rabbitmq#sensu-rabbitmq-configuration
 [9]:  https://github.com/ffi/ffi
-[10]: #
+[10]: #configure-sensu
+[11]: #example-transport-configuration
+[12]: #example-client-configuration
+[13]: transport#transport-definition-specification

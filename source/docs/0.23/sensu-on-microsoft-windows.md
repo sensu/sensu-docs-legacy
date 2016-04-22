@@ -2,9 +2,15 @@
 version: 0.23
 category: "Installation Guide"
 title: "Install Sensu on Microsoft Windows"
+info: "<strong>NOTE:</strong> this page contains reference documentation for
+  installing and operating Sensu on Microsoft Windows systems. For instructions
+  on installing or operating Sensu on other platforms, please visit the <a
+  class='alert-link' href=platforms>supported platforms</a> page."
 ---
 
 # Sensu on Microsoft Windows
+
+## Reference documentation
 
 - [Installing Sensu Core](#sensu-core)
   - [Download and install Sensu using the Sensu MSI](#download-and-install-sensu-core)
@@ -27,14 +33,20 @@ installer package (i.e. a .msi file), which is available for download from the
 
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [https://core.sensuapp.com/msi/sensu-0.23.0-1.msi][3]
+   [https://core.sensuapp.com/msi/sensu-0.23.1-1.msi][3]
 
-2. Double-click the `sensu-0.23.0-1.msi` installer package to launch the
+2. Double-click the `sensu-0.23.1-1.msi` installer package to launch the
    installer, accept the Sensu Core [MIT License][4] and install Sensu using the
    default settings (e.g. install location, etc).
 
    _WARNING: changing the default installation path from `C:\opt` is strongly
    discouraged._
+
+3. Configure the Sensu client. **No "default" configuration is provided with
+   Sensu**, so the Sensu Client will not start without the corresponding
+   configuration. Please refer to the ["Configure Sensu" section][12] (below)
+   for more information on configuring Sensu. **At minimum, the Sensu client
+   will need a working [transport definition][13] and [client definition][14]**.
 
 ## Configure Sensu
 
@@ -75,7 +87,7 @@ mkdir C:\opt\sensu\conf.d\
    {
      "client": {
        "name": "windows",
-       "address": "localhost",
+       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
@@ -92,9 +104,27 @@ mkdir C:\opt\sensu\conf.d\
 ### Example Transport Configuration
 
 At minimum, the Sensu client process requires configuration to tell it how to
-connect to the configured [Sensu Transport][6]. Please refer to the
-configuration instructions for the corresponding transport for configuration
-file examples (see [Install Redis][7], or [Install RabbitMQ][8]).
+connect to the configured [Sensu Transport][6].
+
+1. Copy the following contents to a configuration file located at
+   `/etc/sensu/conf.d/transport.json`:
+
+   ~~~ json
+   {
+     "transport": {
+       "name": "rabbitmq",
+       "reconnect_on_error": true
+     }
+   }
+   ~~~
+
+   _NOTE: if you are using Redis as your transport, please use `"name": "redis"`
+   for your transport configuration. For more information, please visit the
+   [transport definition specification][15]._
+
+2. Please refer to the configuration instructions for the corresponding
+   transport for configuration file examples (see [Redis][7], or [RabbitMQ][8]
+   reference documentation).
 
 ### Configure the Sensu client Windows service wrapper
 
@@ -155,12 +185,16 @@ To manually start and stop the Sensu client Windows service, use the
 
 [1]:  https://sensuapp.org/download
 [2]:  https://core.sensuapp.com/msi/
-[3]:  https://core.sensuapp.com/msi/sensu-0.23.0-1.msi
+[3]:  https://core.sensuapp.com/msi/sensu-0.23.1-1.msi
 [4]:  https://sensuapp.org/mit-license
 [5]:  configuration
 [6]:  transport
-[7]:  install-redis
-[8]:  install-rabbitmq
+[7]:  redis#sensu-redis-configuration
+[8]:  rabbitmq#sensu-rabbitmq-configuration
 [9]:  configuration#sensu-service-cli-arguments
 [10]: https://technet.microsoft.com/en-us/library/bb490995.aspx
 [11]: https://technet.microsoft.com/en-us/library/cc755249.aspx
+[12]: #configure-sensu
+[13]: #example-transport-configuration
+[14]: #example-client-configuration
+[15]: transport#transport-definition-specification
