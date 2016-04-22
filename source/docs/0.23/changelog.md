@@ -84,7 +84,7 @@ available for immediate download. Please note the following improvements:
 
 [1]:  https://www.ruby-lang.org/en/news/2015/12/25/ruby-2-3-0-released/
 [2]:  http://redis.io/topics/sentinel
-[3]:  redis#configuring-sensu-for-ha-redis
-[4]:  configuration#sensu-service-cli-arguments
-[4]:  https://github.com/JuanitoFatas/fast-ruby
-[5]:  https://github.com/eventmachine/eventmachine/blob/master/CHANGELOG.md#1201-march-15-2016
+[3]:  redis#redis-high-availability-configuration
+[4]:  configuration#sensu-command-line-interfaces-and-arguments
+[5]:  https://github.com/JuanitoFatas/fast-ruby
+[6]:  https://github.com/eventmachine/eventmachine/blob/master/CHANGELOG.md#1201-march-15-2016
