@@ -450,7 +450,7 @@ timeout
 
 ### ServiceNow
 
-Create [ServiceNow][servicenow] configuration items upon [Sensu client registration][client-registration], and create/resolve [ServiceNow][servicenow] incidents for [Sensu events][events].
+Create [ServiceNow configuration items][servicenow-cmdb] upon [Sensu client registration][client-registration], and create/resolve ServiceNow incidents for [Sensu events][events].
 
 The following is an example global configuration for the `servicenow` enterprise event handler (integration).
 
@@ -467,7 +467,7 @@ The following is an example global configuration for the `servicenow` enterprise
 }
 ~~~
 
-When creating ServiceNow configuration items, by default, Sensu will use the client's name for the item name. Individual Sensu clients can override the name of their corresponding configuration item, using specific client definition attributes. In addition to specifying a item name, any valid CMDB table attributes (fields & values) may also be set, e.g. `os_version`.
+When creating [ServiceNow configuration items][servicenow-cmdb-assets], by default, Sensu will use the client's name for the item name. Individual Sensu clients can override the name of their corresponding configuration item, using specific client definition attributes. In addition to specifying a item name, any valid CMDB table attributes (fields & values) may also be set, e.g. `os_version`.
 
 The following is an example client definition, specifying its ServiceNow configuration item attributes.
 
@@ -1829,6 +1829,7 @@ timeout
     ~~~
 
 [?]: #
-[servicenow]: http://www.servicenow.com/
+[servicenow-cmdb]: http://www.servicenow.com/products/it-service-automation-applications/configuration-management.html
+[servicenow-cmdb-assets]: http://wiki.servicenow.com/index.php?title=Introduction_to_Assets_and_Configuration#gsc.tab=0
 [client-registration]: clients#registration-and-registry
 [events]: events
