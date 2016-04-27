@@ -17,6 +17,7 @@ Built-in event handlers:
 - [PagerDuty](#pagerduty) - create and resolve PagerDuty incidents for events
 - [VictorOps](#victorops) - create and resolve VictorOps messages for events
 - [OpsGenie](#opsgenie) - create and close OpsGenie alerts for events
+- [ServiceNow](#servicenow) - create ServiceNow CMDB configuration items and incidents
 - [IRC](#irc) - send notifications to an IRC channel for events
 - [Slack](#slack) - send notifications to a Slack channel for events
 - [HipChat](#hipchat) - send notifications to a HipChat room for events
@@ -431,6 +432,119 @@ overwrites_quiet_hours
 : example
   : ~~~ shell
     "overwrites_quiet_hours": true
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+### ServiceNow
+
+Create ServiceNow configuration items and create/resolve ServiceNow incidents.
+
+The following is an example global configuration for the `servicenow` enterprise event handler (integration).
+
+~~~ json
+{
+  "servicenow": {
+    "host": "dev42.service-now.com",
+    "user": "admin",
+    "password": "secret",
+    "create_cmdb_ci": true,
+    "cmdb_ci_table": "cmdb_ci_server",
+    "timeout": 10
+  }
+}
+~~~
+
+#### Definition attributes
+
+servicenow
+: description
+  : A set of attributes that configure the ServiceNow event handler.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "servicenow": {}
+    ~~~
+
+#### ServiceNow attributes
+
+host
+: description
+  : The ServiceNow host address.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "host": "dev42.service-now.com"
+    ~~~
+
+user
+: description
+  : The ServiceNow user used to authenticate.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "user": "admin"
+    ~~~
+
+password
+: description
+  : The ServiceNow user password.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "password": "secret"
+    ~~~
+
+create_cmdb_ci
+: description
+  : If ServiceNow CMDB configuration items should be automatically created for Sensu clients.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "create_cmdb_ci": false
+    ~~~
+
+cmdb_ci_table
+: description
+  : The ServiceNow CMDB table used for automated configuration item creation.
+: required
+  : false
+: type
+  : String
+: default
+  : `cmdb_ci_server`
+: example
+  : ~~~ shell
+    "cmdb_ci_table": "cmdb_ci_sensu_client"
     ~~~
 
 timeout
