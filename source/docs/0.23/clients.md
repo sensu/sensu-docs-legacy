@@ -36,6 +36,10 @@ next:
     - [`keepalive` attributes](#keepalive-attributes)
     - [`thresholds` attributes](#thresholds-attributes)
     - [`registration` attributes](#registration-attributes)
+    - [`ec2` attributes](#ec2-attributes)
+    - [`chef` attributes](#chef-attributes)
+    - [`puppet` attributes](#puppet-attributes)
+    - [`servicenow` attributes](#servicenow-attributes)
     - [Custom attributes](#custom-attributes)
 
 ## What is a Sensu client?
@@ -321,14 +325,18 @@ attribute is required in the definition, and must be unique.
       "production",
       "webserver",
       "mysql"
-    ]
+    ],
+    "socket": {
+      "bind": "127.0.0.1",
+      "port": 3030
+    }
   }
 }
 ~~~
 
 ### Client definition specification
 
-The client definition uses the `"client": {}` [definition scope][24].
+The client definition uses the `{ "client": {} }` [configuration scope][24].
 
 #### `client` attributes
 
@@ -409,12 +417,17 @@ redact
     ~~~
 : example
   : ~~~ shell
-    "redact": ["password", "ec2_access_key", "ec2_secret_key"]
+    "redact": [
+      "password",
+      "ec2_access_key",
+      "ec2_secret_key"
+    ]
     ~~~
 
 socket
 : description
-  : A set of attributes that configure the Sensu client socket.
+  : The [`socket` definition scope][16], used to configure the [Sensu client
+    socket][36].
 : required
   : false
 : type
@@ -426,7 +439,8 @@ socket
 
 keepalive
 : description
-  : A set of attributes that configure the Sensu client keepalives.
+  : The [`keepalive` definition scope][12], used to configure [Sensu client
+    keepalives][2] behavior (e.g. keepalive thresholds, etc).
 : required
   : false
 : type
@@ -438,7 +452,8 @@ keepalive
 
 registration
 : description
-  : A set of attributes for configuring Sensu registration event handlers.
+  : The [`registration` definition scope][31], used to configure [Sensu
+    registration event][37] handlers.
 : required
   : false
 : type
@@ -448,10 +463,94 @@ registration
     "registration": {}
     ~~~
 
+ec2
+: description
+  : The [`ec2` definition scope][38], used to configure the [Sensu Enterprise
+    AWS EC2 integration][39] ([Sensu Enterprise][40] users only).
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ json
+    {
+
+    }
+    ~~~
+
+chef
+: description
+  : The [`chef` definition scope][41], used to configure the [Sensu Enterprise
+    Chef integration][42] ([Sensu Enterprise][40] users only).
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ json
+    {
+
+    }
+    ~~~
+
+puppet
+: description
+  : The [`puppet` definition scope][43], used to configure the [Sensu Enterprise
+    Puppet integration][44] ([Sensu Enterprise][40] users only).
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ json
+    {
+
+    }
+    ~~~
+
+servicenow
+: description
+  : The [`servicenow` definition scope][45], used to configure the [Sensu
+    Enterprise ServiceNow integration][46] ([Sensu Enterprise][40] users only).
+: required
+  : false
+: type
+  : Hash
+: default
+  : ~~~ json
+    {
+      "name": "<client_name>"
+    }
+    ~~~
+: example
+  : ~~~ shell
+    {
+      "name": "webserver01.example.com",
+      "os_version": "14.04"
+    }
+    ~~~  
+
 #### `socket` attributes
 
-The following attributes are configured within the `"socket": {}` client
-definition attribute scope.
+The following attributes are configured within the `{ "client": { "socket": {} }
+}` [configuration scope][24].
+
+##### EXAMPLE {#socket-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "socket": {
+      "bind": "127.0.0.1",
+      "port": 3030
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#socket-attributes-specification}
 
 bind
 : description
@@ -483,8 +582,28 @@ port
 
 #### `keepalive` attributes
 
-The following attributes are configured within the `"keepalive": {}` client
-definition attribute scope.
+The following attributes are configured within the `{ "client": { "keepalive":
+{} } }` [configuration scope][24].
+
+##### EXAMPLE {#keepalive-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "keepalive": {
+      "handler": "pagerduty",
+      "thresholds": {
+        "warning": 40,
+        "critical": 60
+      }
+    }    
+  }
+}
+~~~
+
+##### ATTRIBUTES {#keepalive-attributes-specification}
 
 handler
 : description
@@ -525,6 +644,29 @@ thresholds
     ~~~
 
 #### `thresholds` attributes (for client keepalives) {#thresholds-attributes}
+
+The following attributes are configured within the `{ "client": { "keepalive": {
+"thresholds": {} } } }` [configuration scope][24].
+
+##### EXAMPLE {#thresholds-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "keepalive": {
+      "...": "...",
+      "thresholds": {
+        "warning": 40,
+        "critical": 60
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#thresholds-attributes-specification}
 
 warning
 : description
@@ -574,6 +716,25 @@ critical
 
 #### `registration` attributes
 
+The following attributes are configured within the `{ "client": {
+"registration": {} } }` [configuration scope][24].
+
+##### EXAMPLE {#registration-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "registration": {
+      "handler": "servicenow"
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#registration-attributes-specification}
+
 handler
 : description
   : The registration handler that should process the client registration event.
@@ -595,6 +756,417 @@ during client registration, so any [valid check definition attributes][14]
 &ndash; including [custom check definition attributes][29] &ndash; may be used
 as `registration` attributes. The following attributes are provided as
 recommendations for controlling client registration behavior._
+
+#### `ec2` attributes
+
+The following attributes are configured within the `{ "client": { "ec2": {} }
+}` [configuration scope][24].
+
+_PRO TIP: this configuration is provided for using the built-in [Sensu
+Enterprise AWS EC2 integration][39] (for [Sensu Enterprise][40] users only)._
+
+##### EXAMPLE {#ec2-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "ec2": {
+      "instance_id": "i-424242",
+      "allowed_instance_states": [
+        "running",
+        "rebooting"
+      ]
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#ec2-attributes-specification}
+
+instance_id
+: description
+  : The AWS EC2 instance "id" of the Sensu client system (if different than the
+    [client definition `name` attribute][15]), used to lookup instance status
+    information in the AWS EC2 API.
+: required
+  : false
+: type
+  : String
+: default
+  : defaults to the value of the [client definition `name` attribute][15].
+: example
+  : ~~~ shell
+    "instance_id": "i-424242"
+    ~~~
+
+allowed_instance_states
+: description
+  : The allowed operational states (e.g. `"running"`) for the instance. If a
+    client keepalive event is created and the EC2 API indicates that the
+    instance is _not_ in an allowed state (e.g. `"terminated"`), Sensu client
+    will be removed from the [client registry][37].
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `ec2` integration configuration][39], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : Array
+: allowed values
+  : `pending`, `running`, `rebooting`, `stopping`, `stopped`, `shutting-down`,
+    and `terminated`
+: default
+  : `running`
+: example
+  : ~~~ shell
+    "allowed_instance_states": [
+      "pending",
+      "running",
+      "rebooting"
+    ]
+    ~~~
+
+region
+: description
+  : The AWS EC2 region to query for EC2 instance state(s).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `ec2` integration configuration][39], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : String
+: allowed values
+  :
+: default
+  : `us-east-1`
+: example
+  : ~~~ shell
+    "region": "us-west-1"
+    ~~~
+
+access_key_id
+: description
+  : The AWS IAM user access key ID to use when querying the EC2 API.
+  _NOTE: this configuration can be provided to override the [built-in Sensu
+  Enterprise `ec2` integration configuration][39], for client-specific
+  overrides._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "access_key_id": "AlygD0X6Z4Xr2m3gl70J"
+    ~~~
+
+secret_access_key
+: description
+  : The AWS IAM user secret access key to use when querying the EC2 API.
+  _NOTE: this configuration can be provided to override the [built-in Sensu
+  Enterprise `ec2` integration configuration][39], for client-specific
+  overrides._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "secret_access_key": "y9Jt5OqNOqdy5NCFjhcUsHMb6YqSbReLAJsy4d6obSZIWySv"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+  _NOTE: this configuration can be provided to override the [built-in Sensu
+  Enterprise `ec2` integration configuration][39], for client-specific
+  overrides._
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+#### `chef` attributes
+
+The following attributes are configured within the `{ "client": { "chef": {} }
+}` [configuration scope][24].
+
+_PRO TIP: this configuration is provided for using the built-in [Sensu
+Enterprise Chef integration][42] (for [Sensu Enterprise][40] users only)._
+
+##### EXAMPLE {#chef-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "chef": {
+      "node_name": "webserver01"
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#chef-attributes-specification}
+
+node_name
+: description
+  : The Chef node name (if different than the [client definition `name`
+    attribute][15]), used to lookup node data in the Chef API.
+: required
+  : false
+: type
+  : String
+: default
+  : defaults to the value of the [client definition `name` attribute][15].
+: example
+  : ~~~ shell
+    "node_name": "webserver01"
+    ~~~
+
+endpoint
+: description
+  : The Chef Server API endpoint (URL).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "endpoint": "https://api.opscode.com/organizations/example"
+    ~~~
+
+flavor
+: description
+  : The Chef Server flavor (is it enterprise?).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : String
+: allowed values
+  : `enterprise`: for Hosted Chef and Enterprise Chef  
+    `open_source`: for Chef Zero and Open Source Chef Server
+: example
+  : ~~~ shell
+    "flavor": "enterprise"
+    ~~~
+
+client
+: description
+  : The Chef Client name to use when authenticating/querying the Chef Server
+    API.
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "client": "sensu-server"
+    ~~~
+
+key
+: description
+  : The Chef Client key to use when authenticating/querying the Chef Server API.
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "key": "/etc/chef/i-424242.pem"
+    ~~~
+
+ssl_pem_file
+: description
+  : The Chef SSL pem file use when querying the Chef Server API.
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "ssl_pem_file": "/etc/chef/ssl.pem"
+    ~~~
+
+ssl_verify
+: description
+  : If the SSL certificate will be verified when querying the Chef Server API.
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "ssl_verify": false
+    ~~~
+
+proxy_address
+: description
+  : The HTTP proxy address.
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "proxy_address": "proxy.example.com"
+    ~~~
+
+proxy_port
+: description
+  : The HTTP proxy port (if there is a proxy).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "proxy_port": 8080
+    ~~~
+
+proxy_username
+: description
+  : The HTTP proxy username (if there is a proxy).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "proxy_username": "chef"
+    ~~~
+
+proxy_password
+: description
+  : The HTTP proxy user password (if there is a proxy).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "proxy_password": "secret"
+    ~~~
+
+timeout
+: description
+  : The handler execution duration timeout in seconds (hard stop).
+    _NOTE: this configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration configuration][42], for client-specific
+    overrides._
+: required
+  : false
+: type
+  : Integer
+: default
+  : `10`
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+#### `puppet` attributes
+
+The following attributes are configured within the `{ "client": { "puppet": {} }
+}` [configuration scope][24].
+
+_PRO TIP: this configuration is provided for using the built-in [Sensu
+Enterprise Puppet integration][44] (for [Sensu Enterprise][40] users only)._
+
+##### EXAMPLE {#puppet-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "puppet": {
+
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#puppet-attributes-specification}
+
+#### `servicenow` attributes
+
+The following attributes are configured within the `{ "client": { "servicenow":
+{} } }` [configuration scope][24].
+
+_PRO TIP: this configuration is provided for using the built-in [Sensu
+Enterprise ServiceNow integration][46] (for [Sensu Enterprise][40] users only)._
+
+##### EXAMPLE {#servicenow-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "servicenow": {
+
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#servicenow-attributes-specification}
+
+name
+: description
+  : The [ServiceNow Configuration Item name][38] to be used for the system.
+: required
+  : false
+: type
+  : String
+: default
+  : defaults to the value of the [client definition `name` attribute][15].
+: example
+  : ~~~ shell
+    "name": "webserver01.example.com"
+    ~~~
 
 #### Custom attributes
 
@@ -654,7 +1226,7 @@ information for operations teams can be extremely valuable._
 [12]: #keepalive-attributes
 [13]: https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern
 [14]: checks#definition-attributes
-[15]: #definition-attributes
+[15]: #client-attributes
 [16]: #socket-attributes
 [17]: http://nc110.sourceforge.net/
 [18]: http://en.wikipedia.org/wiki/Dead_man%27s_switch
@@ -675,3 +1247,15 @@ information for operations teams can be extremely valuable._
 [33]: changelog#v0-22-0
 [34]: https://en.wikipedia.org/wiki/Configuration_management_database
 [35]: http://www.servicenow.com/solutions/it-operations-management.html
+[36]: #client-socket-input
+[37]: #registration-and-registry
+[38]: #ec2-attributes
+[39]: enterprise-built-in-handlers#ec2
+[40]: https://sensuapp.org/sensu-enterprise
+[41]: #chef-attributes
+[42]: enterprise-built-in-handlers#chef
+[43]: #puppet-attributes
+[44]: enterprise-built-in-handlers#puppet
+[45]: #servicenow-attributes
+[46]: enterprise-built-in-handlers#servicenow
+[47]: http://wiki.servicenow.com/index.php?title=Introduction_to_Assets_and_Configuration
