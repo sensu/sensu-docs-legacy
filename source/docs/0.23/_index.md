@@ -12,7 +12,7 @@ hide_toc: true
   * [Platforms](platforms)
   * [Release Notes](changelog)
 
-* **Installation Guide**
+* **Installation**
   * [Installation Overview](installation-guide)
   * [Installation Strategies](installation-strategies)
   * [Installation Prerequisites](installation-prerequisites)
@@ -21,7 +21,7 @@ hide_toc: true
   * [Install a Sensu Dashboard](install-a-dashboard)
   * [Summary & Next Steps](installation-summary)
 
-* **Getting Started Guide**
+* **Getting Started**
   * [Getting Started w/ Sensu](getting-started-guide)
   * [Adding a client](adding-a-client)
   * [Intro to Checks](getting-started-with-checks)
