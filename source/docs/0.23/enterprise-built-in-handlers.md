@@ -451,9 +451,12 @@ timeout
 
 ### ServiceNow
 
-Create [ServiceNow configuration items][servicenow-cmdb] upon [Sensu client registration][client-registration], and create/resolve ServiceNow incidents for [Sensu events][events].
+Create [ServiceNow configuration items][servicenow-cmdb] upon [Sensu client
+registration][client-registration], and create/resolve ServiceNow incidents for
+[Sensu events][events].
 
-The following is an example global configuration for the `servicenow` enterprise event handler (integration).
+The following is an example global configuration for the `servicenow` enterprise
+event handler (integration).
 
 ~~~ json
 {
@@ -468,9 +471,15 @@ The following is an example global configuration for the `servicenow` enterprise
 }
 ~~~
 
-When creating [ServiceNow configuration items][servicenow-cmdb-assets], by default, Sensu will use the client's name for the item name. Individual Sensu clients can override the name of their corresponding configuration item, using specific client definition attributes. In addition to specifying a item name, any valid CMDB table attributes (fields & values) may also be set, e.g. `os_version`.
+When creating [ServiceNow configuration items][servicenow-cmdb-assets], by
+default, Sensu will use the client's name for the item name. Individual Sensu
+clients can override the name of their corresponding configuration item, using
+specific client definition attributes. In addition to specifying a item name,
+any valid [CMDB table attributes][servicenow-cmdb-attributes] (fields & values)
+may also be set, e.g. `os_version`.
 
-The following is an example client definition, specifying its ServiceNow configuration item attributes.
+The following is an example [client definition][client-definition], specifying
+its ServiceNow configuration item attributes.
 
 ~~~ json
 {
@@ -1362,6 +1371,9 @@ flavor
   : false
 : type
   : String
+: allowed values
+  : `enterprise` (for Hosted Chef and Enterprise Chef) and `open_source` (for
+    Chef Zero and Open Source Chef Server)
 : example
   : ~~~ shell
     "flavor": "enterprise"
@@ -1376,7 +1388,7 @@ client
   : String
 : example
   : ~~~ shell
-    "client": "i-424242"
+    "client": "sensu-server"
     ~~~
 
 key
@@ -1979,5 +1991,7 @@ timeout
 [?]: #
 [servicenow-cmdb]: http://www.servicenow.com/products/it-service-automation-applications/configuration-management.html
 [servicenow-cmdb-assets]: http://wiki.servicenow.com/index.php?title=Introduction_to_Assets_and_Configuration#gsc.tab=0
+[servicenow-cmdb-attributes]: http://wiki.servicenow.com/index.php?title=CMDB_Classifications
 [client-registration]: clients#registration-and-registry
+[client-definition]: clients#client-definition-specification
 [events]: events
