@@ -52,34 +52,13 @@ formatted, making it language-independent and fairly human readable.
 ~~~ json
 [
   {
-    "timestamp": 1460172826,
+    "id": "ef6b87d2-1f89-439f-8bea-33881436ab90",
     "action": "create",
+    "timestamp": 1460172826,
     "occurrences": 2,
     "check": {
       "total_state_change": 11,
-      "history": [
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "1",
-        "1",
-        "2",
-        "2"
-      ],
+      "history": ["0", "0", "1", "1", "2", "2"],
       "status": 2,
       "output": "No keepalive sent from client for 230 seconds (>=180)",
       "executed": 1460172826,
@@ -103,8 +82,7 @@ formatted, making it language-independent and fairly human readable.
       "environment": "development",
       "address": "127.0.0.1",
       "name": "client-01"
-    },
-    "id": "ef6b87d2-1f89-439f-8bea-33881436ab90"
+    }
   }
 ]
 ~~~

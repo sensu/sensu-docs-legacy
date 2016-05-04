@@ -1182,6 +1182,10 @@ filter_metrics
 
 Deregister Sensu clients from the client registry, if they no longer have an associated EC2 instance in the allowed state(s). This enterprise handler (integration) will only work if Sensu clients are named using the EC2 instance ID, for the instance on which they reside. The `ec2` enterprise handler requires valid [AWS IAM user credentials](http://aws.amazon.com/iam/) with the EC2 describe instances action in a policy, e.g. `ec2:DescribeInstances`.
 
+_NOTE: the following integration definition attributes may be overwritten by
+the corresponding Sensu [client definition `ec2` attributes][1], which are
+included in [event data][2]._
+
 The following is an example global configuration for the `ec2` enterprise handler (integration).
 
 ~~~ json
@@ -1995,3 +1999,6 @@ timeout
 [client-registration]: clients#registration-and-registry
 [client-definition]: clients#client-definition-specification
 [events]: events
+
+[1]:  clients#ec2-attributes
+[2]:  events#event-data
