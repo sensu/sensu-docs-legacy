@@ -35,7 +35,7 @@ next:
   - [Example check definition](#example-check-definition)
   - [Check definition specification](#check-definition-specification)
     - [Check name(s)](#check-names)
-    - [`check` attributes](#check-attributes)
+    - [`CHECK` attributes](#check-attributes)
     - [`subdue` attributes](#subdue-attributes)
     - [Custom attributes](#custom-attributes)
   - [Check result specification](#check-result-specification)
@@ -313,13 +313,16 @@ seconds.
 #### Check names(s) {#check-names}
 
 Each check definition has a unique check name, used for the definition key.
-Every check definition is within the `"checks": {}` [definition scope][29].
+Every check definition is within the `"checks": {}` [configuration scope][29].
 
 - A unique string used to name/identify the check
 - Cannot contain special characters or spaces
 - Validated with [Ruby regex][30] `/^[\w\.-]+$/.match("check-name")`
 
-#### Check attributes
+#### `CHECK` attributes
+
+The following attributes are configured within the `{"checks": { "CHECK": {} }
+}` [configuration scope][29] (where `CHECK` is a valid [check name][41]).
 
 type
 : description
@@ -545,7 +548,8 @@ aggregate
 
 subdue
 : description
-  : A set of attributes that determine when a check is subdued.
+  : The [`subdue` definition scope][42], used to determine when a check is
+    subdued.
 : required
   : false
 : type
@@ -557,8 +561,42 @@ subdue
 
 #### `subdue` attributes
 
-The following attributes are configured within the `"subdue": {}` check
-definition attribute scope.
+The following attributes are configured within the `{"checks": { "CHECK": {
+"subdue": {} } } }` [configuration scope][29] (where `CHECK` is a valid [check
+name][41]).
+
+##### EXAMPLE {#subdue-attributes-example}
+
+~~~ json
+{
+  "checks": {
+    "example_check": {
+      "command": "do_something.rb -o options",
+      "...": "...",
+      "subdue": {
+        "at": "publisher",
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "begin": "12AM PT",
+        "end": "11:59:59PM PT",
+        "exceptions": [
+          {
+            "begin": "8AM PT",
+            "end": "6PM PT"
+          }
+        ]
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#subdue-attributes-specification}
 
 at
 : description
@@ -625,7 +663,10 @@ exceptions
   : Array
 : example
   : ~~~ shell
-    "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
+    "exceptions": [
+      {"begin": "6PM PT", "end": "11:59PM PT"},
+      {"begin": "12AM PT", "end": "8AM PT"}
+    ]
     ~~~
 
 #### Custom attributes
@@ -825,3 +866,5 @@ name
 [38]: #check-result-specification
 [39]: api-clients
 [40]: events#event-data
+[41]: #check-names
+[42]: #subdue-attributes

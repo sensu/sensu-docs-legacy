@@ -25,7 +25,7 @@ next:
   - [Example handler definition](#example-handler-definition)
   - [Handler definition specification](#handler-definition-specification)
     - [Handler name(s)](#handler-names)
-    - [Handler attributes](#handler-attributes)
+    - [`HANDLER` attributes](#handler-attributes)
     - [`socket` attributes (TCP/UDP handlers)](#socket-attributes)
     - [`pipe` attributes (Transport handlers)](#pipe-attributes)
     - [`subdue` attributes](#subdue-attributes)
@@ -217,13 +217,17 @@ the email subject `sensu event`. The handler is named `mail`.
 #### Handler name(s)
 
 Each handler definition has a unique handler name, used for the definition key.
-Every handler definition is within the `"handlers": {}` [definition scope][9].
+Every handler definition is within the `"handlers": {}` [configuration
+scope][9].
 
 - A unique string used to name/identify the check
 - Cannot contain special characters or spaces
 - Validated with [Ruby regex][10] `/^[\w\.-]+$/.match("handler-name")`
 
-#### Handler attributes
+#### `HANDLER` attributes
+
+The following attributes are configured within the `{"handlers": { "HANDLER": {}
+} }` [configuration scope][9] (where `HANDLER` is a valid [handler name][15]).
 
 type
 : description
@@ -322,7 +326,8 @@ handle_flapping
 
 subdue
 : description
-  : A set of attributes that determine when a handler is subdued.
+  : The [`subdue` definition scope][12], used to determine when a handler is
+    subdued.
 : required
   : false
 : type
@@ -349,9 +354,10 @@ command
 
 socket
 : description
-  : A set of attributes that configure the TCP/UDP handler socket.
-  _NOTE: the `socket` attribute is only supported for TCP/UDP handlers (i.e.
-  handlers configured with `"type": "tcp"` or `"type": "udp"`)._
+  : The [`socket` definition scope][13], used to configure the TCP/UDP handler
+    socket.
+    _NOTE: the `socket` attribute is only supported for TCP/UDP handlers (i.e.
+    handlers configured with `"type": "tcp"` or `"type": "udp"`)._
 : required
   : true (if `type` == `tcp` or `udp`)
 : type
@@ -363,9 +369,10 @@ socket
 
 pipe
 : description
-  : A set of attributes that configure the Sensu transport pipe.
-  _NOTE: the `pipe` attribute is only supported for Transport handlers (i.e.
-  handlers configured with `"type": "transport"`)._
+  : The [`pipe` definition scope][14], used to configure the Sensu transport
+    pipe.
+    _NOTE: the `pipe` attribute is only supported for Transport handlers (i.e.
+    handlers configured with `"type": "transport"`)._
 : required
   : true (if `type` == `transport`)
 : type
@@ -392,6 +399,31 @@ handlers
 
 #### `socket` attributes
 
+The following attributes are configured within the `{"handlers": { "HANDLER": {
+"socket": {} } } }` [configuration scope][9] (where `HANDLER` is a valid
+[handler name][15]).
+
+_NOTE: `socket` attributes are **only supported for TCP/UDP handlers** (i.e.
+handlers configured with `"type": "tcp"` or `"type": "udp"`)._
+
+##### EXAMPLE {#socket-attributes-example}
+
+~~~ json
+{
+  "handlers": {
+    "example_handler": {
+      "type": "tcp",
+      "socket": {
+        "host": "10.0.5.100",
+        "port": 8000
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#socket-attributes-specification}
+
 host
 : description
   : The socket host address (IP or hostname) to connect to.
@@ -417,6 +449,31 @@ port
     ~~~
 
 #### `pipe` attributes
+
+The following attributes are configured within the `{"handlers": { "HANDLER": {
+"pipe": {} } } }` [configuration scope][9] (where `HANDLER` is a valid [handler
+name][15]).
+
+_NOTE: `pipe` attributes are **only supported for Transport handlers** (i.e.
+handlers configured with `"type": "transport"`)._
+
+##### EXAMPLE {#pipe-attributes-example}
+
+~~~ json
+{
+  "handlers": {
+    "example_handler": {
+      "type": "transport",
+      "pipe": {
+        "type": "topic",
+        "name": "example_transport_handler"
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#pipe-attributes-specification}
 
 type
 : description
@@ -461,8 +518,43 @@ options
 
 #### `subdue` attributes
 
-The following attributes are configured within the `"subdue": {}` handler
-definition attribute scope.
+The following attributes are configured within the `{"handlers": { "HANDLER": {
+"subdue": {} } } }` [configuration scope][9] (where `HANDLER` is a valid
+[handler name][15]).
+
+##### EXAMPLE {#subdue-attributes-example}
+
+~~~ json
+{
+  "handlers": {
+    "example_handler": {
+      "type": "pipe",
+      "command": "do_something.rb -o option",
+      "...": "...",
+      "subdue": {
+        "at": "handler",
+        "days": [
+          "monday",
+          "tuesday",
+          "wednesday",
+          "thursday",
+          "friday"
+        ],
+        "begin": "12AM PT",
+        "end": "11:59:59PM PT",
+        "exceptions": [
+          {
+            "begin": "8AM PT",
+            "end": "6PM PT"
+          }
+        ]
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#subdue-attributes-specification}
 
 days
 : description
@@ -529,3 +621,7 @@ exceptions
 [9]:  configuration#configuration-scopes
 [10]: http://ruby-doc.org/core-2.2.0/Regexp.html
 [11]: plugins
+[12]: #subdue-attributes
+[13]: #socket-attributes
+[14]: #pipe-attributes
+[15]: #handler-names

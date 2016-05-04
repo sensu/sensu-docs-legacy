@@ -455,6 +455,10 @@ Create [ServiceNow configuration items][servicenow-cmdb] upon [Sensu client
 registration][client-registration], and create/resolve ServiceNow incidents for
 [Sensu events][events].
 
+_NOTE: the following integration definition attributes may be overwritten by
+the corresponding Sensu [client definition `servicenow` attributes][5], which 
+are included in [event data][2]._
+
 The following is an example global configuration for the `servicenow` enterprise
 event handler (integration).
 
@@ -1304,6 +1308,10 @@ timeout
 
 Deregister Sensu clients from the client registry, if they no longer have associated Chef node data. This integration can only work if Sensu clients are named using the Chef node name, for the machine on which they reside. The `chef` enterprise handler requires Chef Server API credentials, the local chef-client configuration can be used as a reference.
 
+_NOTE: the following integration definition attributes may be overwritten by
+the corresponding Sensu [client definition `chef` attributes][3], which are
+included in [event data][2]._
+
 The following is an example global configuration for the `chef` enterprise handler (integration).
 
 ~~~ json
@@ -1498,6 +1506,10 @@ timeout
 ### Puppet
 
 Deregister Sensu clients from the client registry, if they no longer have an associated Puppet node. The `puppet` enterprise handler requires access to a SSL truststore and keystore, containing a valid (and whitelisted) Puppet certificate, private key, and CA. The local Puppet agent certificate, private key, and CA can be used.
+
+_NOTE: the following integration definition attributes may be overwritten by
+the corresponding Sensu [client definition `puppet` attributes][4], which are
+included in [event data][2]._
 
 The following is an example global configuration for the `puppet` enterprise handler (integration).
 
@@ -2002,3 +2014,6 @@ timeout
 
 [1]:  clients#ec2-attributes
 [2]:  events#event-data
+[3]:  clients#chef-attributes
+[4]:  clients#puppet-attributes
+[5]:  clients#servicenow-attributes
