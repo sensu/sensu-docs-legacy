@@ -52,4 +52,15 @@ h6:hover .header-link {
 
 .alert {
   margin-top: 10px;
-}
+};
+
+.panel .panel-heading {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+};
+
+.panel .panel-body {
+  margin-bottom: 0px;
+  font-weight: normal !important;
+};

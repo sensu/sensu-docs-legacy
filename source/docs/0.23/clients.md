@@ -472,10 +472,8 @@ ec2
 : type
   : Hash
 : example
-  : ~~~ json
-    {
-
-    }
+  : ~~~ shell
+    "ec2": {}
     ~~~
 
 chef
@@ -487,10 +485,8 @@ chef
 : type
   : Hash
 : example
-  : ~~~ json
-    {
-
-    }
+  : ~~~ shell
+    "chef": {}
     ~~~
 
 puppet
@@ -502,10 +498,8 @@ puppet
 : type
   : Hash
 : example
-  : ~~~ json
-    {
-
-    }
+  : ~~~ shell
+    "puppet": {}
     ~~~
 
 servicenow
@@ -516,18 +510,9 @@ servicenow
   : false
 : type
   : Hash
-: default
-  : ~~~ json
-    {
-      "name": "<client_name>"
-    }
-    ~~~
 : example
   : ~~~ shell
-    {
-      "name": "webserver01.example.com",
-      "os_version": "14.04"
-    }
+    "servicenow": {}
     ~~~  
 
 #### `socket` attributes
@@ -762,8 +747,8 @@ recommendations for controlling client registration behavior._
 The following attributes are configured within the `{ "client": { "ec2": {} }
 }` [configuration scope][24].
 
-_PRO TIP: this configuration is provided for using the built-in [Sensu
-Enterprise AWS EC2 integration][39] (for [Sensu Enterprise][40] users only)._
+**ENTERPRISE: This configuration is provided for using the built-in [Sensu
+Enterprise AWS EC2 integration][39].**
 
 ##### EXAMPLE {#ec2-attributes-example}
 
@@ -787,9 +772,9 @@ Enterprise AWS EC2 integration][39] (for [Sensu Enterprise][40] users only)._
 
 instance_id
 : description
-  : The AWS EC2 instance "id" of the Sensu client system (if different than the
+  : The AWS EC2 instance ID of the Sensu client system (if different than the
     [client definition `name` attribute][15]), used to lookup instance status
-    information in the AWS EC2 API.
+    information with the AWS EC2 API.
 : required
   : false
 : type
@@ -806,10 +791,9 @@ allowed_instance_states
   : The allowed operational states (e.g. `"running"`) for the instance. If a
     client keepalive event is created and the EC2 API indicates that the
     instance is _not_ in an allowed state (e.g. `"terminated"`), Sensu client
-    will be removed from the [client registry][37].
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `ec2` integration configuration][39], for client-specific
-    overrides._
+    will be removed from the [client registry][37]. This configuration can be
+    provided to override the [built-in Sensu Enterprise `ec2` integration
+    `allowed_instance_states` configuration][39] for the client.
 : required
   : false
 : type
@@ -830,10 +814,9 @@ allowed_instance_states
 
 region
 : description
-  : The AWS EC2 region to query for EC2 instance state(s).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `ec2` integration configuration][39], for client-specific
-    overrides._
+  : The AWS EC2 region to query for the EC2 instance state(s). This
+    configuration can be provided to override the [built-in Sensu Enterprise
+    `ec2` integration `region` configuration][39] for the client.
 : required
   : false
 : type
@@ -849,10 +832,9 @@ region
 
 access_key_id
 : description
-  : The AWS IAM user access key ID to use when querying the EC2 API.
-  _NOTE: this configuration can be provided to override the [built-in Sensu
-  Enterprise `ec2` integration configuration][39], for client-specific
-  overrides._
+  : The AWS IAM user access key ID to use when querying the EC2 API. This
+    configuration can be provided to override the [built-in Sensu Enterprise
+    `ec2` integration `access_key_id` configuration][39] for the client.
 : required
   : true
 : type
@@ -864,10 +846,9 @@ access_key_id
 
 secret_access_key
 : description
-  : The AWS IAM user secret access key to use when querying the EC2 API.
-  _NOTE: this configuration can be provided to override the [built-in Sensu
-  Enterprise `ec2` integration configuration][39], for client-specific
-  overrides._
+  : The AWS IAM user secret access key to use when querying the EC2 API. This
+    configuration can be provided to override the [built-in Sensu Enterprise
+    `ec2` integration `secret_access_key` configuration][39] for the client.
 : required
   : true
 : type
@@ -879,10 +860,9 @@ secret_access_key
 
 timeout
 : description
-  : The handler execution duration timeout in seconds (hard stop).
-  _NOTE: this configuration can be provided to override the [built-in Sensu
-  Enterprise `ec2` integration configuration][39], for client-specific
-  overrides._
+  : The handler execution duration timeout in seconds (hard stop). This
+    configuration can be provided to override the [built-in Sensu Enterprise
+    `ec2` integration `timeout` configuration][39] for the client.
 : required
   : false
 : type
@@ -899,8 +879,8 @@ timeout
 The following attributes are configured within the `{ "client": { "chef": {} }
 }` [configuration scope][24].
 
-_PRO TIP: this configuration is provided for using the built-in [Sensu
-Enterprise Chef integration][42] (for [Sensu Enterprise][40] users only)._
+**ENTERPRISE: This configuration is provided for using the built-in [Sensu
+Enterprise Chef integration][42] (for [Sensu Enterprise][40] users only).**
 
 ##### EXAMPLE {#chef-attributes-example}
 
@@ -935,10 +915,9 @@ node_name
 
 endpoint
 : description
-  : The Chef Server API endpoint (URL).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The Chef Server API endpoint (URL). This configuration can be provided to
+    override the [built-in Sensu Enterprise `chef` integration `endpoint`
+    configuration][42] for the client.
 : required
   : true
 : type
@@ -950,10 +929,9 @@ endpoint
 
 flavor
 : description
-  : The Chef Server flavor (is it enterprise?).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The Chef Server flavor (is it enterprise?). This configuration can be
+    provided to override the [built-in Sensu Enterprise `chef` integration
+    `flavor` configuration][42] for the client.
 : required
   : false
 : type
@@ -969,10 +947,8 @@ flavor
 client
 : description
   : The Chef Client name to use when authenticating/querying the Chef Server
-    API.
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+    API. This configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration `client` configuration][42] for the client.
 : required
   : true
 : type
@@ -985,9 +961,8 @@ client
 key
 : description
   : The Chef Client key to use when authenticating/querying the Chef Server API.
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+    This configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration `key` configuration][42] for the client.
 : required
   : true
 : type
@@ -999,10 +974,9 @@ key
 
 ssl_pem_file
 : description
-  : The Chef SSL pem file use when querying the Chef Server API.
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The Chef SSL pem file use when querying the Chef Server API. This
+    configuration can be provided to override the [built-in Sensu Enterprise
+    `chef` integration `ssl_pem_file` configuration][42] for the client.
 : required
   : false
 : type
@@ -1015,9 +989,9 @@ ssl_pem_file
 ssl_verify
 : description
   : If the SSL certificate will be verified when querying the Chef Server API.
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+    This configuration can be provided to override the [built-in Sensu
+    Enterprise `chef` integration `ssl_verify` configuration][42] for the
+    client.
 : required
   : false
 : type
@@ -1031,10 +1005,9 @@ ssl_verify
 
 proxy_address
 : description
-  : The HTTP proxy address.
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The HTTP proxy address. This configuration can be provided to override the
+    [built-in Sensu Enterprise `chef` integration `proxy_address`
+    configuration][42] for the client.
 : required
   : false
 : type
@@ -1046,10 +1019,9 @@ proxy_address
 
 proxy_port
 : description
-  : The HTTP proxy port (if there is a proxy).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The HTTP proxy port (if there is a proxy). This configuration can be
+    provided to override the [built-in Sensu Enterprise `chef` integration
+    `proxy_port` configuration][42] for the client.
 : required
   : false
 : type
@@ -1061,10 +1033,9 @@ proxy_port
 
 proxy_username
 : description
-  : The HTTP proxy username (if there is a proxy).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The HTTP proxy username (if there is a proxy). This configuration can be
+    provided to override the [built-in Sensu Enterprise `chef` integration
+    `proxy_username` configuration][42] for the client.
 : required
   : false
 : type
@@ -1076,10 +1047,9 @@ proxy_username
 
 proxy_password
 : description
-  : The HTTP proxy user password (if there is a proxy).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The HTTP proxy user password (if there is a proxy). This configuration can
+    be provided to override the [built-in Sensu Enterprise `chef` integration
+    `proxy_password` configuration][42] for the client.
 : required
   : false
 : type
@@ -1091,10 +1061,9 @@ proxy_password
 
 timeout
 : description
-  : The handler execution duration timeout in seconds (hard stop).
-    _NOTE: this configuration can be provided to override the [built-in Sensu
-    Enterprise `chef` integration configuration][42], for client-specific
-    overrides._
+  : The handler execution duration timeout in seconds (hard stop). This
+    configuration can be provided to override the [built-in Sensu Enterprise
+    `chef` integration `timeout` configuration][42] for the client.
 : required
   : false
 : type
@@ -1111,8 +1080,8 @@ timeout
 The following attributes are configured within the `{ "client": { "puppet": {} }
 }` [configuration scope][24].
 
-_PRO TIP: this configuration is provided for using the built-in [Sensu
-Enterprise Puppet integration][44] (for [Sensu Enterprise][40] users only)._
+**ENTERPRISE: This configuration is provided for using the built-in [Sensu
+Enterprise Puppet integration][44].**
 
 ##### EXAMPLE {#puppet-attributes-example}
 
@@ -1122,7 +1091,7 @@ Enterprise Puppet integration][44] (for [Sensu Enterprise][40] users only)._
     "name": "1-424242",
     "...": "...",
     "puppet": {
-
+      "node_name": "webserver01"
     }
   }
 }
@@ -1130,13 +1099,28 @@ Enterprise Puppet integration][44] (for [Sensu Enterprise][40] users only)._
 
 ##### ATTRIBUTES {#puppet-attributes-specification}
 
+node_name
+: description
+  : The Puppet node name (if different than the [client definition `name`
+    attribute][15]), used to lookup node data in PuppetDB.
+: required
+  : false
+: type
+  : String
+: default
+  : defaults to the value of the [client definition `name` attribute][15].
+: example
+  : ~~~ shell
+    "node_name": "webserver01"
+    ~~~
+
 #### `servicenow` attributes
 
 The following attributes are configured within the `{ "client": { "servicenow":
 {} } }` [configuration scope][24].
 
-_PRO TIP: this configuration is provided for using the built-in [Sensu
-Enterprise ServiceNow integration][46] (for [Sensu Enterprise][40] users only)._
+**ENTERPRISE: this configuration is provided for using the built-in [Sensu
+Enterprise ServiceNow integration][46].**
 
 ##### EXAMPLE {#servicenow-attributes-example}
 
@@ -1146,7 +1130,9 @@ Enterprise ServiceNow integration][46] (for [Sensu Enterprise][40] users only)._
     "name": "1-424242",
     "...": "...",
     "servicenow": {
-
+      "configuration_item": {
+        "name": "webserver01"
+      }
     }
   }
 }
@@ -1154,9 +1140,52 @@ Enterprise ServiceNow integration][46] (for [Sensu Enterprise][40] users only)._
 
 ##### ATTRIBUTES {#servicenow-attributes-specification}
 
+configuration_item
+: description
+  : The [ServiceNow Configuration Item definition scope][?] used to configure
+    the ServiceNow CMDB Configuration Item for the client.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "configuration_item": {
+      "name": "webserver01"
+    }
+    ~~~
+
+#### `configuration_item` attributes
+
+The following attributes are configured within the `{ "client": { "servicenow":
+{ "configuration_item": {} } } }` [configuration scope][24].
+
+##### EXAMPLE {#configurationitem-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "servicenow": {
+      "configuration_item": {
+        "name": "webserver01",
+        "os_version": "14.04"
+      }
+    }
+  }
+}
+~~~
+
+_PRO TIP: ServiceNow users may provide custom Configuration Item (CI) field values
+via the `configuration_item` configuration scope. In this example, the CI field
+`os_version` is being set to `14.04`._
+
+##### ATTRIBUTES {#configurationitem-attributes-specification}
+
 name
 : description
-  : The [ServiceNow Configuration Item name][38] to be used for the system.
+  : The [ServiceNow Configuration Item name][47] to be used for the system.
 : required
   : false
 : type
