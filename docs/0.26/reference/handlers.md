@@ -11,7 +11,7 @@ weight: 8
 
 - [What is a Sensu event handler?](#what-is-a-sensu-event-handler)
   - [Handler types](#handler-types)
-  - [Default Handler](#default-handler)
+  - [The default handler](#the-default-handler)
 - [Pipe handlers](#pipe-handlers)
   - [Pipe handler commands](#pipe-handler-commands)
     - [What is a pipe handler command?](#what-is-a-pipe-handler-command)
@@ -52,10 +52,10 @@ interact with almost any computer program via [standard streams][4].
   event handlers, making it easy to manage groups of actions that should be
   executed for certain types of events.
 
-### Default handler
+### The default handler
 
 Sensu expects all [events][2] to have a corresponding handler. Event handler(s)
-may be configured in the [check definition][16], however if no `handler` or
+may be configured in [check definitions][16], however if no `handler` or
 `handlers` have been configured, Sensu will attempt to handle the event using a
 handler [named][15] `default`. The `default` handler is only a reference
 (i.e. Sensu does not provide a built-in `default` handler), so if no handler
