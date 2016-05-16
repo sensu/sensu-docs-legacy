@@ -35,12 +35,12 @@ notice._
 
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [https://core.sensuapp.com/freebsd/10.2/amd64/sensu-0.23.1_1.txz][3]
+   [https://core.sensuapp.com/freebsd/10.2/amd64/sensu-0.23.2_2.txz][3]
 
-2. Install the `sensu-0.23.1_1.txz` package using the `pkg` utility:
+2. Install the `sensu-0.23.2_2.txz` package using the `pkg` utility:
 
    ~~~ shell
-   sudo pkg add ./sensu-0.23.1_1.txz
+   sudo pkg add ./sensu-0.23.2_2.txz
    ~~~
 
 3. Configure the Sensu client. **No "default" configuration is provided with
@@ -126,7 +126,7 @@ Coming soon...
 
 [1]:  https://sensuapp.org/download
 [2]:  https://core.sensuapp.com/freebsd-unstable/10.0/amd64/
-[3]:  https://core.sensuapp.com/freebsd/10.2/amd64/sensu-0.23.1_1.txz
+[3]:  https://core.sensuapp.com/freebsd/10.2/amd64/sensu-0.23.2_2.txz
 [4]:  https://sensuapp.org/mit-license
 [5]:  configuration
 [6]:  transport
