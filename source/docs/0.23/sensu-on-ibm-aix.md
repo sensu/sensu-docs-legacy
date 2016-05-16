@@ -32,7 +32,7 @@ Downloads][1] page, and from [this repository][2].
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
    ~~~ shell
-   wget https://repositories.sensuapp.org/aix/sensu-0.23.1-1.powerpc.bff
+   wget https://repositories.sensuapp.org/aix/sensu-0.23.2-3.powerpc.bff
    ~~~
 
 2. The Sensu installer package for IBM AIX systems is provided in **backup file
@@ -40,7 +40,7 @@ Downloads][1] page, and from [this repository][2].
    "Fileset Name". Display the content using the `installp` utility.
 
    ~~~ shell
-   installp -ld sensu-0.23.1-1.powerpc.bff
+   installp -ld sensu-0.23.2-3.powerpc.bff
    ~~~
 
    Once you have collected the fileset name, you can optionally proceed to
@@ -48,13 +48,13 @@ Downloads][1] page, and from [this repository][2].
    flag.
 
    ~~~ shell
-   installp -apXY -d sensu-0.23.1-1.powerpc.bff sensu
+   installp -apXY -d sensu-0.23.2-3.powerpc.bff sensu
    ~~~
 
 3. Install Sensu using the `installp` utility.
 
    ~~~ shell
-   installp -aXY -d sensu-0.23.1-1.powerpc.bff sensu
+   installp -aXY -d sensu-0.23.2-3.powerpc.bff sensu
    ~~~
 
    _NOTE: this command uses the following `installp` utilty flags: `-a` to apply
@@ -169,7 +169,7 @@ support will be enabled in a future release.
 
 [1]:  https://sensuapp.org/downloads
 [2]:  http://repositories.sensuapp.org/aix/
-[3]:  http://repositories.sensuapp.org/aix/sensu-0.23.1-1.powerpc.bff
+[3]:  http://repositories.sensuapp.org/aix/sensu-0.23.2-3.powerpc.bff
 [4]:  https://sensuapp.org/mit-license
 [5]:  configuration
 [6]:  transport
