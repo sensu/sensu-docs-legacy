@@ -43,7 +43,7 @@ Ready? Let's get started!
 The following installation steps will help you get Sensu Core installed in a
 [standalone][4] on a system running [Ubuntu 14.04][5], only. For installation on
 other platforms, and/or alternative installation configurations, please consult
-the [installation guide](2).
+the [installation guide][2].
 
 1. Install the Sensu software repositories:
 
