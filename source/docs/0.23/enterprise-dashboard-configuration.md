@@ -869,6 +869,23 @@ bindpass
     "bindpass": "secret"
     ~~~
 
+debug
+: description
+  : Determines whether or not to output debug information about the LDAP
+    connection.
+    _NOTE: sensitive information, such as usernames and passwords, will be
+    sent to the log files if enabled._
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "debug": true
+    ~~~
+
 insecure
 : description
   : Determines whether or not to skip SSL certificate verification (e.g. for
