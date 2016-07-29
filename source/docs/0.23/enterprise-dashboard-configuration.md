@@ -869,6 +869,20 @@ bindpass
     "bindpass": "secret"
     ~~~
 
+dialect
+: description
+  : The dialect for LDAP to use.
+: required
+  : false
+: type
+  : String
+: allowed values
+  : `ad` or `openldap`
+: example
+  : ~~~ shell
+    "dialect": "ad"
+    ~~~
+
 insecure
 : description
   : Determines whether or not to skip SSL certificate verification (e.g. for
