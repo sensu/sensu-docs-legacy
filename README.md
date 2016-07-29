@@ -1,15 +1,19 @@
-![sensu docs](https://raw.github.com/sensu/sensu/master/sensu-logo.png)
+![](https://raw.github.com/sensu/sensu/master/sensu-logo.png)
 
-Documentation for the Sensu monitoring framework.
+# :warning: Notice :warning:
+
+**Due to changes in the Sensu website, this documentation repository is no longer updated. For current Sensu documentation please visit [https://sensuapp.org/docs/latest/](https://sensuapp.org/docs/latest/).**
 
 ## Overview
+
+This repository contains historical documentation for the Sensu monitoring framework.
 
 All documentation is written in [Markdown][markdown]. To preview the documentation in your browser run the following:
 
 ~~~ shell
 bundle install
 bundle exec middleman
-~~~ 
+~~~
 
 Then go view the docs at [http://localhost:4567](http://localhost:4567) (which redirects to [http://localhost:4567/docs/](http://localhost:4567/docs/)). Edits to the documentation source files should cause the `middleman` server to reload so you can see your changes update live.
 
