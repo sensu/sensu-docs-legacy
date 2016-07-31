@@ -175,6 +175,8 @@ subdue
   : false
 : type
   : Hash
+: allowed values
+ : `at`, `days`, `begin`, `end`, `exceptions`
 : example
   : ~~~ shell
     "subdue": {}
