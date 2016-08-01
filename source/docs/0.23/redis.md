@@ -162,6 +162,20 @@ port
     "port": 6380
     ~~~
 
+master
+: description
+  : The Redis master name.
+: required
+  : false
+: type
+  : String
+: default
+  : `"mymaster"`
+: example
+  : ~~~ shell
+    "master": "mymaster"
+    ~~~
+
 password
 : description
   : The Redis instance authentication password.
