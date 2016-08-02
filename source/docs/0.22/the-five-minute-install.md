@@ -16,12 +16,10 @@ the [complete installation guide][2] can help you get Sensu installed and
 configured for [a variety of operating environments][3], you might not actually
 care about any of that until you can get Sensu up and running in a development
 environment for testing purposes. This installation guide is intended to help
-you to **install Sensu Core in five minutes or less, <abbr title='all $0 of it
-you paid for that "free as in beer open source software :)"'>or we'll give you
-your money back</abbr>, guaranteed**.
+you to **install Sensu in five minutes or less**.
 
 After completing the steps in this guide, you will have a fully functional Sensu
-Core installation in a [standalone][4] configuration.
+installation in a [standalone][4] configuration.
 
 ## Installation Requirements
 

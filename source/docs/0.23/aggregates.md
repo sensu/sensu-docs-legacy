@@ -13,6 +13,8 @@ next:
 
 - [What is a Sensu check aggregate?](#what-is-a-check-aggregate)
   - [When should check aggregates be used?](#when-should-check-aggregates-be-used)
+- [How do check aggregates work?](#how-do-check-aggregates-work)
+  - [Example aggregated check result](#example-aggregated-check-result)
 - [Aggregate configuration](#aggregate-configuration)
   - [Example aggregate definition](#example-aggregate-definition)
   - [Aggregate definition specification](#aggregate-definition-specification)
@@ -33,6 +35,32 @@ environments that have a reasonable tolerance for failure. Check aggregates
 should be used when a service can be considered healthy as long as a minimum
 threshold is satisfied (e.g. are at least 5 healthy web servers? are at least
 70% of N processes healthy?).
+
+## How do check aggregates work?
+
+Check results are included in an aggregate when a check is configure to use the
+[`"aggregate": true` check definition attribute][5]. Check results with
+`"aggregate": true` are aggregated per check `name` and `issued` timestamp,
+effectively capturing the results (plural) of a single [check request][9] as a
+single aggregate.
+
+### Example aggregated check result
+
+Aggregated check results are available from the [Aggregates API][3], via the
+`/aggregates/:check/:issued` API endpoint. An aggregate check result provides a
+set of counters indicating the total number of results collected, with a
+breakdown of how many results were recorded per status (i.e. `ok`, `warning`,
+`critical`, and `unknown`).
+
+~~~ json
+{
+  "total": 5,
+  "unknown": 0,
+  "critical": 0,
+  "warning": 1,
+  "ok": 4
+}
+~~~
 
 ## Aggregate configuration
 
@@ -106,3 +134,4 @@ handle
 [6]:  checks#check-configuration
 [7]:  checks#standalone-checks
 [8]:  #when-should-check-aggregates-be-used
+[9]:  checks#how-are-checks-scheduled
