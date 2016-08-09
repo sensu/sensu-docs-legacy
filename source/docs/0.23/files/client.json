@@ -1,9 +1,0 @@
-{
-  "client": {
-    "name": "test",
-    "address": "localhost",
-    "subscriptions": [
-      "test"
-    ]
-  }
-}

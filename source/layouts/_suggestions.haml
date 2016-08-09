@@ -1,4 +1,0 @@
-%div.suggestions
-  = stylesheet_link_tag "suggestions"
-  - if current_resource.data.next
-    %a.button.btn.btn-large.btn-success.pull-right{ href: current_resource.data.next.url }= "Next: #{current_resource.data.next.text}"
