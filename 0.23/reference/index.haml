@@ -1,0 +1,12 @@
+---
+title: "Reference Docs"
+section: 5
+weight: 0
+version: 0.23
+layout: "docs"
+---
+
+%h2= "Reference Documentation"
+- current_resource.children.sort_by!{ |c| c.data[:weight] }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }
