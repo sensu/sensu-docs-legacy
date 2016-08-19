@@ -8,7 +8,7 @@ next:
 info: "<strong>TL;DR</strong>: if you are just getting started with Sensu and
   need a quick tutorial to learn how it works, you can skip the remainder of the
   instructions on this page, and <a class='alert-link'
-  href=../quick-start/learn-sensu-basics.html>Learn Sensu in 15 minutes</a>."
+  href=../../quick-start/learn-sensu-basics.html>Learn Sensu in 15 minutes</a>."
 ---
 
 # Getting Started Guide

@@ -95,7 +95,7 @@ the filter). Filters that return a true value will continue to be processed
 &mdash; via additional filters (if defined), mutators (if defined), and
 handlers.
 
-#### EXAMPLE
+#### Example: Filtering by custom "environment" attribute
 
 The following example filter definition, entitled `production_filter` will match
 [event data][3] with a [custom client definition attribute][5] `"environment":
@@ -126,13 +126,41 @@ The Ruby expression is evaluated in a "sandbox" and provided a single variable
 (`value`) which is equal to the event data attribute value being compared. If
 the evaluated expression returns true, the attribute is a match.
 
-#### EXAMPLE
+#### Example: Handling state change only
+
+Some teams migrating to Sensu have asked about reproducing the behavior of their
+old monitoring system which alerts only on state change. This
+`state_change_only` [inclusive][4] filter provides such.
+
+~~~ json
+{
+  "filters": {
+    "state_change_only": {
+      "negate": false,
+      "attributes": {
+        "occurrences": "eval: value == 1 || ':::action:::' == 'resolve'"
+      }
+    }
+  }
+}
+~~~
+
+This eval filter is effective because value of event `occurrences` is reset on each
+state change, except when the event `action` is `:resolve`. The resolve action
+is set on an event when its check result status is `0` following one or more prior
+non-zero statuses.
+
+
+#### Example: Handling repeated events
 
 The following example filter definition, entitled `filter_interval_60_hourly`,
 will match [event data][3] with a [check `interval`][6] of `60` seconds, _and_
 an `occurrences` value of `1` (i.e. the first occurrence) _-OR-_ any
 `occurrences` value that is evenly divisible by 60 (via a [modulo operator][7]
 calculation; i.e. calculating the remainder after dividing `occurrences` by 60).
+
+Note that negate is true, making this an [exclusive filter][4]; if evaluation
+returns false, the event will be handled.
 
 ~~~ json
 {
@@ -177,6 +205,25 @@ has confused some users because filtering based on occurrences alone assumes
 some understanding of the relationship between `occurrences` and `interval`,
 which isn't always obvious._
 
+#### Example: Handling events during "office hours" only
+
+This filter evaluates the event timestamp to determine if the event occurred
+between 9 AM and 5 PM on a weekday. Remember that `negate` defaults to false, so
+this is an inclusive filter. If evaluation returns false, the event will not be
+
+~~~ json
+{
+  "filters": {
+    "nine_to_fiver": {
+      "negate": false,
+      "attributes": {
+        "timestamp": "eval: [1,2,3,4,5].include?(Time.at(value).wday) && Time.at(value).hour.between?(9,17)"
+      }
+    }
+  }
+}
+~~~
+
 ## Filter attribute eval tokens
 
 ### What are filter attribute eval tokens?
@@ -189,7 +236,7 @@ additional variables are needed beyond the single `value` variable provided by
 can be replaced by [Sensu check definition attributes][6] and [client definition
 attributes][8] (including custom attributes).
 
-### Example filter attribute eval token
+### Example: filter attribute eval token
 
 The following is an example Sensu [filter definition][2], which is using a
 token (`:::check.occurrences|60:::`) as a secondary attribute in the Ruby eval
@@ -244,7 +291,7 @@ tokens"` will be published to the Sensu server log._
 
 ## Filter configuration
 
-### Example filter definition {#example-filter-definition}
+### Example: filter definition {#example-filter-definition}
 
 The following is an example Sensu filter definition, a JSON configuration file
 located at `/etc/sensu/conf.d/filter_production.json`. This is an inclusive

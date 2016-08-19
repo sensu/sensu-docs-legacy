@@ -31,7 +31,10 @@ result][4].
 
 ### How are Sensu events created?
 
-A Sensu Event is created when a check result indicates a change in state.
+A Sensu Event is created every time a [check result][10] is processed by the
+Sensu server, regardless of the status indicated by the check result. An Event
+is created by collating data from the check result, the [client registry][22]
+and additional context added at the time of processing.
 
 ### Event actions
 
@@ -467,3 +470,4 @@ which may be expected in an event data payload._
 [19]: clients.html#custom-attributes
 [20]: clients.html#client-keepalives
 [21]: ../api/clients-api.html#clients-post
+[22]: clients.html#registration-and-registry

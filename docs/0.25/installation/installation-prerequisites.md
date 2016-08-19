@@ -32,7 +32,7 @@ client registry and check results. Two Sensu Core services, the server and API
 require access to the same instance of Redis to function (i.e. the Sensu client
 does not communicate with Redis).
 
-## Transport {#sensu-transport}
+## Transport
 
 Sensu services use a message bus (e.g. [RabbitMQ][8]) for communication. This
 message bus communication is provided by the [Sensu Transport][9], which is a
@@ -51,5 +51,5 @@ subscribing to the appropriate subscriptions.
 [5]:  installation-strategies.html
 [6]:  http://redis.io
 [7]:  ../reference/data-store.html
-[8]:  ../rabbitmq.html
-[9]:  ../transport.html
+[8]:  ../reference/rabbitmq.html
+[9]:  ../reference/transport.html

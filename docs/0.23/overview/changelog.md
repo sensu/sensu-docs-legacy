@@ -8,6 +8,10 @@ weight: 5
 
 # Changelog
 
+_NOTE:	Although we endeavor to keep this combined changelog up-to-date,
+	the [official Sensu Core changelog][0] may describe changes not
+	yet documented here._
+
 ## Releases
 
 - [Sensu Enterprise version 1.12.3](#enterprise-v1-12-4)
@@ -178,10 +182,11 @@ available for immediate download. Please note the following improvements:
 - **IMPROVEMENT:** Using EventMachine 1.2.0, which brings several changes and
   improvements ([changelog][6]).
 
+[0]:  https://github.com/sensu/sensu/blob/master/CHANGELOG.md
 [1]:  https://www.ruby-lang.org/en/news/2015/12/25/ruby-2-3-0-released/
 [2]:  http://redis.io/topics/sentinel
-[3]:  ../reference/redis.html#redis-high-availability-configuration
-[4]:  ../reference/configuration.html#sensu-command-line-interfaces-and-arguments
+[3]:  redis.html#redis-high-availability-configuration
+[4]:  configuration.html#sensu-command-line-interfaces-and-arguments
 [5]:  https://github.com/JuanitoFatas/fast-ruby
 [6]:  https://github.com/eventmachine/eventmachine/blob/master/CHANGELOG.md#1201-march-15-2016
 [7]:  https://github.com/sensu/sensu/issues/1182

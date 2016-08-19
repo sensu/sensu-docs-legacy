@@ -202,6 +202,10 @@ tokens were also sometimes referred to as **"Sensu client overrides"**; a
 reference to the fact that command tokens allowed client attributes to
 "override" [check command arguments][23]._
 
+_NOTE: Check tokens are processed before check execution, therefore token
+substitution will not apply to check data delivered via the local TCP Sensu
+socket._
+
 ### Example check tokens
 
 The following is an example Sensu [check definition][17] using three check
@@ -466,7 +470,7 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
   : true
 : example
   : ~~~ shell
-    "handle": "false"
+    "handle": false
     ~~~
 
 `handler`
@@ -588,12 +592,12 @@ name][41]).
           "thursday",
           "friday"
         ],
-        "begin": "12AM PT",
-        "end": "11:59:59PM PT",
+        "begin": "12AM PST",
+        "end": "11:59:59PM PST",
         "exceptions": [
           {
-            "begin": "8AM PT",
-            "end": "6PM PT"
+            "begin": "8AM PST",
+            "end": "6PM PST"
           }
         ]
       }
@@ -670,8 +674,8 @@ name][41]).
 : example
   : ~~~ shell
     "exceptions": [
-      {"begin": "6PM PT", "end": "11:59PM PT"},
-      {"begin": "12AM PT", "end": "8AM PT"}
+      {"begin": "6PM PST", "end": "11:59PM PST"},
+      {"begin": "12AM PST", "end": "8AM PST"}
     ]
     ~~~
 

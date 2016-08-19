@@ -47,7 +47,7 @@ Sensu Enterprise is installed via native system installer packages for
 Linux-based operating systems, only (i.e. .deb and .rpm). The Sensu Enterprise
 installer packages are made available via the Sensu Enterprise software
 repositories, which requires access credentials to access. The Sensu Enterprise
-packages install two processes: `sensu-enterprise` (which provides the Sensu
+packages installs a single process: `sensu-enterprise` (which provides the Sensu
 server and API from a single process).
 
 - [Install Sensu Enterprise on Ubuntu/Debian](../platforms/sensu-on-ubuntu-debian.html#sensu-enterprise)

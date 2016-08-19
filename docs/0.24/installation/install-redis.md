@@ -19,9 +19,9 @@ and run Redis on almost any modern operating system, **all Sensu users are
 encouraged to install and run Redis on one of the following _supported_
 platforms**:
 
-- [Install Redis on Ubuntu/Debian](install-redis-on-ubuntu-debian) (recommended)
-- [Install Redis on RHEL/CentOS](install-redis-on-rhel-centos)
-- [Install Redis on AWS (ElastiCache)](install-redis-using-aws-elasticache)
+- [Install Redis on Ubuntu/Debian](install-redis-on-ubuntu-debian.html) (recommended)
+- [Install Redis on RHEL/CentOS](install-redis-on-rhel-centos.html)
+- [Install Redis on AWS (ElastiCache)](install-redis-using-aws-elasticache.html)
 
 _WARNING: [Sensu Support][3] is available for Redis installations on
 Ubuntu/Debian and RHEL/CentOS operating systems, and via [Amazon Web
