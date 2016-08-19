@@ -8,6 +8,10 @@ weight: 5
 
 # Changelog
 
+_NOTE:	Although we endeavor to keep this combined changelog up-to-date,
+	the [official Sensu Core changelog][0] may describe changes not
+	yet documented here._
+
 ## Releases
 
 - [Enterprise 1.13.0 Release Notes](#enterprise-v1-13-0)
@@ -162,6 +166,7 @@ This release includes potentially breaking, backwards-incompatible changes:
 
 
 [?]:  #
+[0]:  https://github.com/sensu/sensu/blob/master/CHANGELOG.md
 [1]:  https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0240---2016-06-06
 [2]:  /docs/0.24/reference/aggregates.html
 [3]:  https://uchiwa.io/

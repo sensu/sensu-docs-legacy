@@ -21,8 +21,8 @@ to install and run Redis on almost any modern operating system, **all Sensu
 users are encouraged to install and run RabbitMQ on one of the following
 supported platforms**
 
-- [Install RabbitMQ on Ubuntu/Debian](install-rabbitmq-on-ubuntu-debian) (recommended)
-- [Install RabbitMQ on RHEL/CentOS](install-rabbitmq-on-rhel-centos)
+- [Install RabbitMQ on Ubuntu/Debian](install-rabbitmq-on-ubuntu-debian.html) (recommended)
+- [Install RabbitMQ on RHEL/CentOS](install-rabbitmq-on-rhel-centos.html)
 
 _NOTE: please refer to the [Installation Prerequisites documentation][5]
 regarding selecting a [Transport][3] for your Sensu installation before

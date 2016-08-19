@@ -542,12 +542,12 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {
           "thursday",
           "friday"
         ],
-        "begin": "12AM PT",
-        "end": "11:59:59PM PT",
+        "begin": "12AM PST",
+        "end": "11:59:59PM PST",
         "exceptions": [
           {
-            "begin": "8AM PT",
-            "end": "6PM PT"
+            "begin": "8AM PST",
+            "end": "6PM PST"
           }
         ]
       }

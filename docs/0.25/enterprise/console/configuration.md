@@ -405,11 +405,11 @@ auth
 
 ### Auth attributes
 
-By default, temporary keys are generated a temporary key when Sensu Enterprise Console starts. These keys are later
-destroyed once the process is stopped or restarted. These keys are used for generating and validating the signatures
-of the JSON Web Tokens (JWT) for authentication. Specifying static keys is supported and is necessary when using
-Sensu Enterprise Console behind a load balancer. Static keys can be configured by using the `auth` attributes
-detailed below.
+By default, temporary keys are generated when Sensu Enterprise Console starts. These keys are later destroyed once
+the process is stopped or restarted. These keys are used for generating and validating the signatures of the JSON
+Web Tokens (JWT) for authentication. Specifying static keys is supported and is necessary when using Sensu Enterprise
+Console behind a load balancer. Static keys can be configured by using the `auth` attributes detailed below.
+
 
 privatekey
 : description

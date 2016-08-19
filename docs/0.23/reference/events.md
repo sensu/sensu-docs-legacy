@@ -26,7 +26,10 @@ result][4].
 
 ### How are Sensu events created?
 
-A Sensu Event is created when a check result indicates a change in state.
+A Sensu Event is created every time a [check result][8] is processed by the
+Sensu server, regardless of the status indicated by the check result. An Event
+is created by collating data from the check result, the [client registry][9] and
+additional context added at the time of processing.
 
 ### Event actions
 
@@ -186,3 +189,5 @@ formatted, making it language-independent and fairly human readable.
 [5]:  #event-data-specification
 [6]:  https://en.wikipedia.org/wiki/Unix_time
 [7]:  http://ruby-doc.org/stdlib-2.3.0/libdoc/securerandom/rdoc/SecureRandom.html
+[8]:  checks.html#check-results
+[9]:  clients.html#registration-and-registry
