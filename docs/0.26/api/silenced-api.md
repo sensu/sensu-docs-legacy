@@ -1,0 +1,399 @@
+---
+title: "Silenced API"
+version: 0.26
+weight: 7
+next:
+  url: ".html"
+  text: ""
+---
+
+# Sensu Silenced API
+
+## Reference documentation
+
+- [The `/silenced` API endpoints](#the-silenced-api-endpoints)
+  - [`/silenced` (GET)](#silenced-get)
+  - [`/silenced` (POST)](#silenced-post)
+  - [`/silenced/clear` (POST)](#silenced-clear-post)
+  - [`/silenced/subscriptions/:subscription` (GET)](#silenced-subscriptions-get)
+  - [`/silenced/checks/:check` (GET)](#silenced-checks-get)
+
+## The `/silenced` API endpoints
+
+The Silence API provides endpoint HTTP POST and GET access to create, query and
+clear (delete) a silencing override via the Sensu API.
+
+### `/silenced` (GET)
+
+#### Example: Querying for all silenced overrides
+
+~~~ shell
+$ curl -s -X GET http://localhost:4567/silenced |jq .
+[
+  {
+    "expire": 3530,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "check_haproxy",
+    "subscription": "load-balancer",
+    "id": "load-balancer:check_haproxy"
+  },
+  {
+    "expire": -1,
+    "expire_on_resolve": true,
+    "creator": "sysop@example.com",
+    "reason": "we ran out of time",
+    "check": "check_ntpd",
+    "subscription": "all",
+    "id": "all:check_ntpd"
+  }
+]
+~~~
+
+#### API specification {#silenced-get-specification}
+
+`/silenced` (GET)
+: desc
+  : Returns a list of silencing overrides.
+: example url
+  : http://hostname:4567/silenced
+: parameters
+  : - `limit`:
+      - **required**: false
+      - **type**: Integer
+      - **description**: The number of silencing overrides to return.
+    - `offset`:
+      - **required**: false
+      - **type**: Integer
+      - **depends**: `limit`
+      - **description**: The number of silencing overrides to offset before
+      returning items.
+: response type: Array
+: response codes
+  : - **Success**: 200 (OK)
+    - **Error**: 500 (Internal Server Error)
+: output
+  : ~~~ json
+    [
+      {
+        "expire": 3530,
+        "expire_on_resolve": false,
+        "creator": null,
+        "reason": null,
+        "check": "check_haproxy",
+        "subscription": "load-balancer",
+        "id": "load-balancer:check_haproxy"
+      },
+      {
+        "expire": -1,
+        "expire_on_resolve": true,
+        "creator": "sysop@example.com",
+        "reason": "we ran out of time",
+        "check": "check_ntpd",
+        "subscription": "all",
+        "id": "all:check_ntpd"
+      }
+    ]
+    ~~~
+
+### `/silenced` (POST)
+
+#### Example: Creating a silencing override {#silence-post-examples}
+
+The following example demonstrates a `/silenced` query, which creates a
+silencing override for the check "check_haproxy" on clients with the
+"load-balancer" subscription, with an expiration of 3600 seconds:
+
+~~~ shell
+$ curl -s -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{"subscription": "load-balancer", "check": "check_haproxy", "expires": 3600 }' \
+http://localhost:4567/silenced
+
+HTTP/1.1 201 Created
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Origin: *
+Connection: close
+Content-length: 0
+
+$ curl -s -X GET http://localhost:4567/silenced | jq .
+[
+  {
+    "expire": 3594,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "check_haproxy",
+    "subscription": "load-balancer",
+    "id": "load-balancer:check_haproxy"
+  }
+]
+~~~
+
+#### API specification {#silenced-post-specification}
+
+`/silenced` (POST)
+: desc
+  : Create a silencing override.
+: example URL
+  : http://hostname:4567/silenced
+: payload
+  : ~~~ json
+    {
+      "subscription": "load-balancer",
+      "expire": 3600,
+      "reason": "load-balancer maintenance window",
+      "creator": "sysop@example.com"
+    }
+    ~~~
+: payload parameters
+  : - `check`
+     - **required**: true, unless `subscription` is specified
+     - **type**: String
+     - **description**: Specifies the check which the silencing override applies to.
+     - **example**: "check_haproxy"
+  : - `creator`
+     - **required**: false
+     - **type**: String
+     - **description**: Specifies the entity responsible for this override.
+     - **example**: "you@yourdomain.com" or "Your Name Here"
+  : - `expire`
+      - **required**: false
+      - **type**: Integer
+      - **description**: If specified, the silencing override will be
+      automatically cleared after this number of seconds.
+      - **example**: 1800
+  : - `expire_on_resolve`
+      - **required**: false
+      - **type**: Boolean
+      - **description**: If specified as true, the silencing override will be
+      automatically cleared once the condition it is siliencing is resolved.
+      - **example**: true
+  : - `reason`
+      - **required**: false
+      - **type**: String
+      - **description**: If specified, this free-form string is used to provide context
+      or rationale for the reason this silencing override was created.
+      - **example**: "pre-arranged maintenenance window"
+  : - `subscription`: String, required if `check` not specified
+      - **required**: true, unless `client` is specified
+      - **type:** String
+      - **description**: Specifies the subscription which the silencing override applies to.
+: response codes
+  : - **Success**: 201 (Created)
+    - **Malformed**: 400 (Bad Request)
+    - **Error**: 500 (Internal Server Error)
+
+
+### `/silenced/clear` (POST)
+
+#### Example: Clearing a silencing override
+
+A silencing override can be deleted by its ID:
+
+~~~ shell
+$ curl -s -X GET http://localhost:4567/silenced | jq .
+[
+  {
+    "expire": 3594,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "check_haproxy",
+    "subscription": "load-balancer",
+    "id": "load-balancer:check_haproxy"
+  }
+]
+
+$ curl -s -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{ "id": "load-balancer:check_haproxy" } \
+http://localhost:4567/silenced/clear
+
+HTTP/1.1 204 No Content
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Origin: *
+Connection: close
+Content-length: 0
+
+$ curl -s -X GET http://localhost:4567/silenced | jq .
+[]
+~~~
+
+A silencing override can also be cleared by specifying the intersection of
+subscription and/or handler to which the override applies:
+
+~~~ shell
+$ curl -s -X GET http://localhost:4567/silenced | jq .
+[
+  {
+    "expire": null,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "check_ntpd",
+    "subscription": "all",
+    "id": "all:check_ntpd"
+  }
+]
+
+$ curl -s -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{ "subscription": "all", "check": "check_ntpd" } \
+http://localhost:4567/silenced/clear
+
+HTTP/1.1 204 No Content
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Origin: *
+Connection: close
+Content-length: 0
+
+$ curl -s -X GET http://localhost:4567/silenced | jq .
+[]
+~~~
+
+#### API specification {#silenced-clear-post-specification}
+
+`/silenced/clear` (POST)
+: desc
+  : Clear a silencing override.
+: example URL
+  : http://hostname:4567/silenced/clear
+: payload
+  : ~~~ json
+    {
+      "id": "load-balancer:ha_proxy"
+    }
+    ~~~
+: payload parameters
+  : - `check`
+      - **required**: true, unless `subscription` or `id` is specified
+      - **type**: String
+      - **description**: Specifies the name of the check for which the silencing
+      override should be cleared.
+      - **example**: "check_haproxy"
+  : - `subscription`:
+      - **required**: true, unless `client` is specified
+      - **type:** String
+      - **description**: Specifies the name of the subscription for which the silencing
+     override should be cleared.
+  : - `id`:
+      - **required**: true, unless `client` or is specified
+      - **type:** String
+      - **description**: Specifies the id (intersection of subscription and
+      check) of the subscription for which the silencing override should be cleared.
+: response codes
+  : - **Success**: 204 (No Content)
+    - **Malformed**: 400 (Bad Request)
+    - **Error**: 500 (Internal Server Error)
+
+### `/silended/subscriptions/:subscription` (GET)
+
+#### Example: Querying for silencing overrides via subscription name
+
+~~~ shell
+$ curl -s -X GET http://localhost:4567/silenced/subscriptions/load-balancer | jq .
+[
+  {
+    "expire": 3596,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "check_ntpd",
+    "subscription": "load-balancer",
+    "id": "load-balancer:check_ntpd"
+  }
+]
+~~~
+
+#### API specification {#silenced-subscriptions-get-specification}
+
+`/silenced/subscriptions/:subscription` (GET)
+: desc
+  : Returns a list of silencing overrides matching the specified subscription name.
+: example url
+  : http://hostname:4567/silenced/subscriptions/load-balancer
+
+: response type
+  : Array
+
+: parameters
+  : - `limit`
+      - **required**: false
+      - **type**: Integer
+      - **description**: The number of clients to return.
+      - **example**: `http://hostname:4567/subscriptions/load-balancer?limit=100`
+    - `offset`
+      - **required**: false
+      - **type**: Integer
+      - **depends**: `limit`
+      - **description**: The number of clients to offset before returning items.
+      - **example**: `http://hostname:4567/subscriptions/load-balancer?limit=100&offset=100`
+
+: response codes
+  : - **Success**: 200 (OK)
+    - **Error**: 500 (Internal Server Error)
+
+### `/silended/checks/:check` (GET)
+
+#### Example: Querying for silencing overrides via check name
+
+~~~ shell
+$ curl -s -X GET http://localhost:4567/silenced/checks/check_ntpd | jq .
+[
+  {
+    "expire": -1,
+    "expire_on_resolve": false,
+    "creator": "sysop@example.com",
+    "reason": "we ran out of time",
+    "check": "check_ntpd",
+    "subscription": "webserver",
+    "id": "webserver:check_ntpd"
+  },
+  {
+    "expire": -1,
+    "expire_on_resolve": false,
+    "creator": "sysop@example.com",
+    "reason": "we ran out of time",
+    "check": "check_ntpd",
+    "subscription": "load-balancer",
+    "id": "load-balancer:check_ntpd"
+  }
+]
+~~~
+
+#### API specification {#silenced-checks-get-specification}
+
+`/silenced/checks/:check` (GET)
+: desc
+  : Returns a list of silencing overrides matching the specified check name.
+
+: example url
+  : http://hostname:4567/silenced/checks/check_ntpd
+
+: response type
+  : Array
+
+: parameters
+  : - `limit`
+      - **required**: false
+      - **type**: Integer
+      - **description**: The number of silencing overrides to return.
+      - **example**: `http://hostname:4567/silenced/checks/check_ntpd?limit=100`
+    - `offset`
+      - **required**: false
+      - **type**: Integer
+      - **depends**: `limit`
+      - **description**: The number of clients to offset before returning items.
+      - **example**: `http://hostname:4567/silenced/checks/check_ntpd?limit=100&offset=100`
+
+: response codes
+  : - **Success**: 200 (OK)
+    - **Error**: 500 (Internal Server Error)
