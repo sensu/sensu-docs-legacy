@@ -311,7 +311,8 @@ seconds.
       "subscribers": [
         "production"
       ],
-      "interval": 60
+      "interval": 60,
+      "contact": "ops"
     }
   }
 }
@@ -543,7 +544,7 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
 : description
   : Create a named aggregate for the check. Check result data will be aggregated
     and exposed via the [Sensu Aggregates API][33].
-    _NOTE: named aggregates are new to [Sensu version 0.25][43], now being
+    _NOTE: named aggregates are new to [Sensu version 0.24][43], now being
     defined with a String data type rather than a Boolean (i.e. `true` or
     `false`). Legacy check definitions with `"aggregate": true` attributes will
     default to using the check name as the aggregate name._
@@ -567,6 +568,35 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
 : example
   : ~~~ shell
     "subdue": {}
+    ~~~
+
+`contact`
+: description
+  : A contact name to use for the check.
+    **ENTERPRISE: This configuration is provided for using [Contact
+    Routing][44].**
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "contact": "ops"
+    ~~~
+
+`contacts`
+: description
+  : An array of contact names to use for the check. Each array item (name) must
+    be a string.
+    **ENTERPRISE: This configuration is provided for using [Contact
+    Routing][44].**
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "contacts": ["ops"]
     ~~~
 
 #### `subdue` attributes
@@ -876,4 +906,5 @@ including an [example check result][37].
 [40]: events.html#event-data
 [41]: #check-names
 [42]: #subdue-attributes
-[43]: /docs/0.25/overview/changelog.html
+[43]: /docs/0.24/overview/changelog.html
+[44]: ../enterprise/contact-routing.html

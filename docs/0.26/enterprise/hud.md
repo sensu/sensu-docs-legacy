@@ -1,7 +1,7 @@
 ---
 title: "Heads-Up Display"
 version: 0.26
-weight: 5
+weight: 11
 next:
   url: "audit-logging.html"
   text: "Enterprise Audit Logging"

@@ -1,7 +1,7 @@
 ---
 title: "Built-in Handlers"
 version: 0.26
-weight: 2
+weight: 6
 next:
   url: "built-in-filters.html"
   text: "Enterprise Built-in Filters"
