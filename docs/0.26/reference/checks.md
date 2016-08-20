@@ -574,7 +574,7 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
 : description
   : A contact name to use for the check.
     **ENTERPRISE: This configuration is provided for using [Contact
-    Routing][?].**
+    Routing][44].**
 : required
   : false
 : type
@@ -589,7 +589,7 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
   : An array of contact names to use for the check. Each array item (name) must
     be a string.
     **ENTERPRISE: This configuration is provided for using [Contact
-    Routing][?].**
+    Routing][44].**
 : required
   : false
 : type
@@ -907,3 +907,4 @@ including an [example check result][37].
 [41]: #check-names
 [42]: #subdue-attributes
 [43]: /docs/0.24/overview/changelog.html
+[44]: ../enterprise/contact-routing.html
