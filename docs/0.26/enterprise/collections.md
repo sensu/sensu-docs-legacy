@@ -1,7 +1,7 @@
 ---
 title: "Collections"
 version: 0.26
-weight: 4
+weight: 12
 next:
   url: "hud.html"
   text: "Enterprise Console HUD"

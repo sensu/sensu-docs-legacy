@@ -1,7 +1,7 @@
 ---
 title: "Built-in Filters"
 version: 0.26
-weight: 3
+weight: 8
 next:
   url: "built-in-mutators.html"
   text: "Enterprise Built-in Mutators"

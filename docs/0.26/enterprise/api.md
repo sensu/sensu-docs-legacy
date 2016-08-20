@@ -1,7 +1,10 @@
 ---
 title: "Enterprise API"
 version: 0.26
-weight: 8
+weight: 4
+next:
+  url: "contact-routing.html"
+  text: "Contact Routing"
 ---
 
 # Sensu Enterprise API
