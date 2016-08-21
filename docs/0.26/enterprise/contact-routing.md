@@ -12,6 +12,7 @@ next:
 ## Reference documentation
 
 - [What is contact routing?](#what-is-contact-routing)
+- [How does contact routing work?](#how-does-contact-routing-work)
 - [Contact Routing configuration](#contact-routing-configuration)
   - [Example Contact Routing definition](#example-contact-routing-definition)
   - [Contact Routing definition specification](#contact-routing-definition-specification)
