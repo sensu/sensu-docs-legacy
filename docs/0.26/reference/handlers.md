@@ -11,6 +11,7 @@ weight: 8
 
 - [What is a Sensu event handler?](#what-is-a-sensu-event-handler)
   - [Handler types](#handler-types)
+  - [The default handler](#the-default-handler)
 - [Pipe handlers](#pipe-handlers)
   - [Pipe handler commands](#pipe-handler-commands)
     - [What is a pipe handler command?](#what-is-a-pipe-handler-command)
@@ -50,6 +51,19 @@ interact with almost any computer program via [standard streams][4].
 - **Handler sets**. Handler sets (also called "set handlers") are used to group
   event handlers, making it easy to manage groups of actions that should be
   executed for certain types of events.
+
+### The default handler
+
+Sensu expects all [events][2] to have a corresponding handler. Event handler(s)
+may be configured in [check definitions][16], however if no `handler` or
+`handlers` have been configured, Sensu will attempt to handle the event using a
+handler [named][15] `default`. The `default` handler is only a reference
+(i.e. Sensu does not provide a built-in `default` handler), so if no handler
+definition exists for a handler named `default`, Sensu will log an error
+indicating that the event was not handled because a `default` handler definition
+does not exist. To use one or more existing handlers as the `default`, you can
+create a [Set handler][17] called `default` and include the existing handler(s)
+in the set.
 
 ## Pipe handlers
 
@@ -627,3 +641,5 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {
 [13]: #socket-attributes
 [14]: #pipe-attributes
 [15]: #handler-names
+[16]: checks#check-definition-specification
+[17]: #handler-sets
