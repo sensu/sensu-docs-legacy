@@ -36,7 +36,7 @@ installer package (i.e. a .msi file), which is available for download from the
 
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [http://sensu.global.ssl.fastly.net/msi/sensu-0.23.1-1.msi][3]
+   [https://sensu.global.ssl.fastly.net/msi/sensu-0.23.1-1.msi][3]
 
 2. Double-click the `sensu-0.23.1-1.msi` installer package to launch the
    installer, accept the Sensu Core [MIT License][4] and install Sensu using the
@@ -187,8 +187,8 @@ To manually start and stop the Sensu client Windows service, use the
 
 
 [1]:  https://sensuapp.org/download
-[2]:  http://sensu.global.ssl.fastly.net/msi/
-[3]:  http://sensu.global.ssl.fastly.net/msi/sensu-0.23.1-1.msi
+[2]:  https://sensu.global.ssl.fastly.net/msi/
+[3]:  https://sensu.global.ssl.fastly.net/msi/sensu-0.23.1-1.msi
 [4]:  https://sensuapp.org/mit-license
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html

@@ -39,7 +39,7 @@ notice._
 1. Download Sensu from the [Sensu Downloads][1] page, or via the `curl` utility
 
    ~~~ shell
-   curl -LO http://sensu.global.ssl.fastly.net/osx/sensu-0.23.1-1.pkg
+   curl -LO https://sensu.global.ssl.fastly.net/osx/sensu-0.23.1-1.pkg
    ~~~
 
    _NOTE: the Universal .pkg file supports OS X "Mavericks" (10.9) and newer.
@@ -205,8 +205,8 @@ $ sudo -u _sensu /opt/sensu/bin/sensu-client -V
 
 
 [1]:  https://sensuapp.org/download
-[2]:  http://sensu.global.ssl.fastly.net/osx/
-[3]:  http://sensu.global.ssl.fastly.net/osx/sensu-0.23.1-1.mountainlion.pkg
+[2]:  https://sensu.global.ssl.fastly.net/osx/
+[3]:  https://sensu.global.ssl.fastly.net/osx/sensu-0.23.1-1.mountainlion.pkg
 [4]:  #configure-the-sensu-client-launchd-daemon
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html

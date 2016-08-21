@@ -52,7 +52,7 @@ package installs several processes including `sensu-server`, `sensu-api`, and
    ~~~ shell
    echo '[sensu]
    name=sensu
-   baseurl=http://sensu.global.ssl.fastly.net/yum/$basearch/
+   baseurl=https://sensu.global.ssl.fastly.net/yum/$basearch/
    gpgcheck=0
    enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
    ~~~

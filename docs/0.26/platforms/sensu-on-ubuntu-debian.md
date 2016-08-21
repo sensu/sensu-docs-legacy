@@ -49,13 +49,13 @@ Sensu Core package installs several processes including `sensu-server`,
 1. Install the GPG public key:
 
    ~~~ shell
-   wget -q http://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
+   wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
    ~~~
 
 2. Create an APT configuration file at `/etc/apt/sources.list.d/sensu.list`:
 
    ~~~ shell
-   echo "deb     http://sensu.global.ssl.fastly.net/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
+   echo "deb     https://sensu.global.ssl.fastly.net/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
    ~~~
 
 3. Update APT:
