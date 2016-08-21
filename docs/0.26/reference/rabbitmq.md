@@ -86,7 +86,7 @@ The following are an example RabbitMQ connection definitions, each located at
 {
   "rabbitmq": {
     "host": "10.0.1.6",
-    "port": 5672,
+    "port": 5671,
     "vhost": "/sensu",
     "user": "sensu",
     "password": "secret",
