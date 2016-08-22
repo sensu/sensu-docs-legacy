@@ -38,7 +38,7 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
    utility:
 
    ~~~ shell
-   wget http://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.23.2-1.i386.pkg
+   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.23.2-1.i386.pkg
    ~~~
 
 2. Install the `sensu-0.23.2-1.i386.pkg` package using the `pkgadd` utility:
@@ -66,7 +66,7 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
    utility:
 
    ~~~ shell
-   wget http://sensu.global.ssl.fastly.net/solaris/ips/sensu-0.23.2-2.p5p
+   wget https://sensu.global.ssl.fastly.net/solaris/ips/sensu-0.23.2-2.p5p
    ~~~
 
 2. Install the `sensu-0.23.2-2.p5p` package using the `pkg` utility:
@@ -187,8 +187,8 @@ $ svcadm restart sensu-client
 
 [?]:  #
 [1]:  https://sensuapp.org/download
-[2]:  http://sensu.global.ssl.fastly.net/solaris/pkg/
-[3]:  http://sensu.global.ssl.fastly.net/solaris/ips/
+[2]:  https://sensu.global.ssl.fastly.net/solaris/pkg/
+[3]:  https://sensu.global.ssl.fastly.net/solaris/ips/
 [4]:  https://sensuapp.org/mit-license
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html

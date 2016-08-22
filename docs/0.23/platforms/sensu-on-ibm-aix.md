@@ -36,7 +36,7 @@ Downloads][1] page, and from [this repository][2].
    utility:
 
    ~~~ shell
-   wget http://sensu.global.ssl.fastly.net/aix/sensu-0.23.1-1.powerpc.bff
+   wget https://sensu.global.ssl.fastly.net/aix/sensu-0.23.1-1.powerpc.bff
    ~~~
 
 2. The Sensu installer package for IBM AIX systems is provided in **backup file
@@ -172,8 +172,8 @@ not work (however all other plugins should work). It is possible that FFI
 support will be enabled in a future release.
 
 [1]:  https://sensuapp.org/downloads
-[2]:  http://sensu.global.ssl.fastly.net/aix/
-[3]:  http://sensu.global.ssl.fastly.net/aix/sensu-0.23.1-1.powerpc.bff
+[2]:  https://sensu.global.ssl.fastly.net/aix/
+[3]:  https://sensu.global.ssl.fastly.net/aix/sensu-0.23.1-1.powerpc.bff
 [4]:  https://sensuapp.org/mit-license
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html
