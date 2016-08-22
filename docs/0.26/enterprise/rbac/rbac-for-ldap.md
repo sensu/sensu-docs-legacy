@@ -109,6 +109,20 @@ compatible with any standards-compliant LDAP provider.
     "port": 389
     ~~~
 
+`dialect`
+: description
+  : Which LDAP dialect to use (Microsoft Active Directory, or OpenLDAP).
+: required
+  : false
+: type
+  : String
+: allowed values
+  : `ad`, `openldap`
+: example
+  : ~~~ shell
+    "dialect": "ad"
+    ~~~
+
 `basedn`
 : description
   : Tells which part of the directory tree to search. For example,
@@ -297,6 +311,25 @@ compatible with any standards-compliant LDAP provider.
       }
     ]
     ~~~
+
+`debug`
+: description
+  : Determines whether or not to output debug information about the LDAP
+    connection.
+    _WARNING: not recommended for production use. Sensitive information
+    including usernames and passwords may be sent to the log files when
+    enabled._
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "debug": true
+    ~~~
+
 
 #### `roles` attributes
 
