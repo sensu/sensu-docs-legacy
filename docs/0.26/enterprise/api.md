@@ -12,6 +12,7 @@ next:
 ## Reference documentation
 
 - [What is the Sensu Enterprise API?](#what-is-the-sensu-enterprise-api)
+- [What is the Sensu Enterprise Console?](#what-is-the-sensu-enterprise-console)
 - [Enterprise API Configuration](#enterprise-api-configuration)
   - [Example(s)](#examples)
   - [API specification](#api-specification)
@@ -31,6 +32,22 @@ The Sensu Enterprise API has the functionality of the Core API with the addition
 of several endpoints to provide access to data for generating reports,
 visualizing internal metrics, and more. The Enterprise API also supports native
 SSL, for end-to-end SSL, eliminating the need for a proxy to terminate SSL.
+
+## What is the Sensu Enterprise Console?
+
+The Sensu Enterprise Console is a federated API endpoint provided by the [Sensu
+Enterprise Dashboard][4] for API access to multiple [Sensu datacenters][5]
+(available in Sensu Enterprise Dashboard version 1.10 and newer). 
+
+_NOTE: the Sensu Enterprise Dashboard is comprised of two components: a backend
+service (API) for aggregating monitoring data from one or more [Sensu
+datacenters][5], and a web application for displaying this information. As of
+Sensu Enterprise Dashboard version 1.10, this Sensu Enterprise Dashboard backend
+has been updated so that it provides the same API endpoints as the [Sensu
+API][1]. Prior to version 1.10, the Sensu Enterprise Dashboard backend used
+different API routes for accessing data from specific datacenters; for example,
+client data was accessible via `/clients/us-west-1/:client` instead of
+`/clients/:client?dc=us-west-1`._
 
 ## Enterprise API Configuration
 
@@ -287,3 +304,4 @@ sudo /etc/init.d/sensu-enterprise reload
 [1]:  ../api/overview.html
 [2]:  ../reference/configuration.html#configuration-scopes
 [3]:  #create-an-ssl-keystore
+[4]:  dashboard.html

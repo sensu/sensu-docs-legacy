@@ -215,6 +215,23 @@ common across all RBAC drivers.
     ]
     ~~~
 
+`accessToken`
+: description
+  : An unique token for authenticating against the [Sensu Enterprise
+    Console API][14] as a member of that role.
+: required
+  : false
+: type
+  : String
+: allowed values
+  : any length string that only contains URL-friendly characters.
+    _PROTIP: we recommend using a random string generator for access tokens;
+    e.g. `openssl rand -base64 40 |  tr -- '+=/' '-_~'`._
+: example
+  : ~~~shell
+    "accessToken": "OrIXC7ezuq0AZKoRHhf~oIl-98dX5B23hf8KudfcqJt5eTeQjDDGDQ__"
+    ~~~
+
 `readonly`
 : description
   : Used to restrict "write" access (i.e. preventing members of the role from
@@ -245,3 +262,4 @@ common across all RBAC drivers.
 [11]: https://github.com/orgs/sensu/teams/docs
 [12]: https://gitlab.com/groups/heavywater
 [13]: ../dashboard.html#sensu-attributes
+[14]: ../api.html#what-is-the-sensu-enterprise-console
