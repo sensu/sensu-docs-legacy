@@ -21,7 +21,7 @@ next:
 ## The `/silenced` API endpoints
 
 The Silence API provides endpoint HTTP POST and GET access to create, query and
-clear (delete) a silencing override via the Sensu API.
+clear (delete) a silence entry via the Sensu API.
 
 ### `/silenced` (GET)
 
@@ -108,7 +108,7 @@ silence entry for the check "check_haproxy" on clients with the
 ~~~ shell
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{"subscription": "load-balancer", "check": "check_haproxy", "expires": 3600 }' \
+-d '{"subscription": "load-balancer", "check": "check_haproxy", "expire": 3600 }' \
 http://localhost:4567/silenced
 
 HTTP/1.1 201 Created
@@ -158,7 +158,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   : - `creator`
      - **required**: false
      - **type**: String
-     - **description**: Specifies the entity responsible for this override.
+     - **description**: Specifies the entity responsible for this entry.
      - **example**: "you@yourdomain.com" or "Your Name Here"
   : - `expire`
       - **required**: false
@@ -226,7 +226,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 ~~~
 
 A silence entry can also be cleared by specifying the intersection of
-subscription and/or handler to which the override applies:
+subscription and/or handler to which the entry applies:
 
 ~~~ shell
 $ curl -s -X GET http://localhost:4567/silenced | jq .
@@ -276,14 +276,14 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   : - `check`
       - **required**: true, unless `subscription` or `id` is specified
       - **type**: String
-      - **description**: Specifies the name of the check for which the silencing
-      override should be cleared.
+      - **description**: Specifies the name of the check for which the silence
+      entry should be cleared.
       - **example**: "check_haproxy"
   : - `subscription`:
       - **required**: true, unless `client` is specified
       - **type:** String
-      - **description**: Specifies the name of the subscription for which the silencing
-     override should be cleared.
+      - **description**: Specifies the name of the subscription for which the silence
+     entry should be cleared.
   : - `id`:
       - **required**: true, unless `client` or is specified
       - **type:** String
