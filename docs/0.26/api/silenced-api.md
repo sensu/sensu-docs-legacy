@@ -192,7 +192,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 #### Example: Clearing a silence entry
 
-A silence entry can be deleted by its ID:
+A silence entry can be cleared (deleted) by its ID:
 
 ~~~ shell
 $ curl -s -X GET http://localhost:4567/silenced | jq .
