@@ -151,6 +151,18 @@ document:
     "occurrences": 3
     ~~~
 
+`occurrences_watermark`
+: description
+  : The "high water mark" tracking number of occurrences at the current severity.
+: type
+  : Integer
+: default
+  : `1`
+: example
+  : ~~~ shell
+    "occurrences_watermark": 3
+    ~~~
+
 `check`
 : description
   : The check result [check attributes][8].
@@ -194,6 +206,21 @@ document:
       ],
       "timestamp": 1326390159
     }
+    ~~~
+
+`silenced`
+: description
+: type
+: example
+
+`silenced_by`
+: description
+  : List of silence entry IDs which match this event
+: type
+  : Array
+: example
+  : ~~~ json
+    [ "load-balancer:check_ntp" ]
     ~~~
 
 #### `check` attributes
