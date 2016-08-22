@@ -23,11 +23,10 @@ next:
 ## What are Role Based Access Controls for Sensu Enterprise? {#what-are-role-based-access-controls}
 
 Role-based access controls (RBAC) are a system for restricting access to
-authorized users according to a role, or job function. RBAC provides a simple
-abstraction the "who" (authentication) and the "what" (access). RBAC for Sensu
-Enterprise enables administrators to grant the correct level access to many
-different development and operations teams, without requiring them to maintain
-yet another user registry.
+authorized users according to a role, or job function. RBAC for Sensu Enterprise
+enables administrators to grant the correct level access to many different
+development and operations teams, without requiring them to maintain yet another
+user registry.
 
 ### How does Sensu provide RBAC?
 
