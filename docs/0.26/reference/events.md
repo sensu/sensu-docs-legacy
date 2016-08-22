@@ -215,7 +215,7 @@ document:
 
 `silenced_by`
 : description
-  : List of silencing override IDs which match this event
+  : List of silence entry IDs which match this event
 : type
   : Array
 : example

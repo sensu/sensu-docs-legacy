@@ -55,19 +55,19 @@ $ curl -s -X GET http://localhost:4567/silenced |jq .
 
 `/silenced` (GET)
 : desc
-  : Returns a list of silencing overrides.
+  : Returns a list of silence entries.
 : example url
   : http://hostname:4567/silenced
 : parameters
   : - `limit`:
       - **required**: false
       - **type**: Integer
-      - **description**: The number of silencing overrides to return.
+      - **description**: The number of silence entries to return.
     - `offset`:
       - **required**: false
       - **type**: Integer
       - **depends**: `limit`
-      - **description**: The number of silencing overrides to offset before
+      - **description**: The number of silence entries to offset before
       returning items.
 : response type: Array
 : response codes
@@ -99,10 +99,10 @@ $ curl -s -X GET http://localhost:4567/silenced |jq .
 
 ### `/silenced` (POST)
 
-#### Example: Creating a silencing override {#silence-post-examples}
+#### Example: Creating a silence entry {#silence-post-examples}
 
 The following example demonstrates a `/silenced` query, which creates a
-silencing override for the check "check_haproxy" on clients with the
+silence entry for the check "check_haproxy" on clients with the
 "load-balancer" subscription, with an expiration of 3600 seconds:
 
 ~~~ shell
@@ -137,7 +137,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 `/silenced` (POST)
 : desc
-  : Create a silencing override.
+  : Create a silence entry.
 : example URL
   : http://hostname:4567/silenced
 : payload
@@ -153,7 +153,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   : - `check`
      - **required**: true, unless `subscription` is specified
      - **type**: String
-     - **description**: Specifies the check which the silencing override applies to.
+     - **description**: Specifies the check which the silence entry applies to.
      - **example**: "check_haproxy"
   : - `creator`
      - **required**: false
@@ -163,25 +163,25 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   : - `expire`
       - **required**: false
       - **type**: Integer
-      - **description**: If specified, the silencing override will be
+      - **description**: If specified, the silence entry will be
       automatically cleared after this number of seconds.
       - **example**: 1800
   : - `expire_on_resolve`
       - **required**: false
       - **type**: Boolean
-      - **description**: If specified as true, the silencing override will be
+      - **description**: If specified as true, the silence entry will be
       automatically cleared once the condition it is siliencing is resolved.
       - **example**: true
   : - `reason`
       - **required**: false
       - **type**: String
       - **description**: If specified, this free-form string is used to provide context
-      or rationale for the reason this silencing override was created.
+      or rationale for the reason this silence entry was created.
       - **example**: "pre-arranged maintenenance window"
   : - `subscription`: String, required if `check` not specified
       - **required**: true, unless `client` is specified
       - **type:** String
-      - **description**: Specifies the subscription which the silencing override applies to.
+      - **description**: Specifies the subscription which the silence entry applies to.
 : response codes
   : - **Success**: 201 (Created)
     - **Malformed**: 400 (Bad Request)
@@ -190,9 +190,9 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 ### `/silenced/clear` (POST)
 
-#### Example: Clearing a silencing override
+#### Example: Clearing a silence entry
 
-A silencing override can be deleted by its ID:
+A silence entry can be deleted by its ID:
 
 ~~~ shell
 $ curl -s -X GET http://localhost:4567/silenced | jq .
@@ -225,7 +225,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 []
 ~~~
 
-A silencing override can also be cleared by specifying the intersection of
+A silence entry can also be cleared by specifying the intersection of
 subscription and/or handler to which the override applies:
 
 ~~~ shell
@@ -263,7 +263,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 `/silenced/clear` (POST)
 : desc
-  : Clear a silencing override.
+  : Clear a silence entry.
 : example URL
   : http://hostname:4567/silenced/clear
 : payload
@@ -288,7 +288,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
       - **required**: true, unless `client` or is specified
       - **type:** String
       - **description**: Specifies the id (intersection of subscription and
-      check) of the subscription for which the silencing override should be cleared.
+      check) of the subscription for which the silence entry should be cleared.
 : response codes
   : - **Success**: 204 (No Content)
     - **Malformed**: 400 (Bad Request)
@@ -296,7 +296,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 ### `/silended/subscriptions/:subscription` (GET)
 
-#### Example: Querying for silencing overrides via subscription name
+#### Example: Querying for silence entries via subscription name
 
 ~~~ shell
 $ curl -s -X GET http://localhost:4567/silenced/subscriptions/load-balancer | jq .
@@ -317,7 +317,7 @@ $ curl -s -X GET http://localhost:4567/silenced/subscriptions/load-balancer | jq
 
 `/silenced/subscriptions/:subscription` (GET)
 : desc
-  : Returns a list of silencing overrides matching the specified subscription name.
+  : Returns a list of silence entries matching the specified subscription name.
 : example url
   : http://hostname:4567/silenced/subscriptions/load-balancer
 
@@ -343,7 +343,7 @@ $ curl -s -X GET http://localhost:4567/silenced/subscriptions/load-balancer | jq
 
 ### `/silended/checks/:check` (GET)
 
-#### Example: Querying for silencing overrides via check name
+#### Example: Querying for silence entries via check name
 
 ~~~ shell
 $ curl -s -X GET http://localhost:4567/silenced/checks/check_ntpd | jq .
@@ -373,7 +373,7 @@ $ curl -s -X GET http://localhost:4567/silenced/checks/check_ntpd | jq .
 
 `/silenced/checks/:check` (GET)
 : desc
-  : Returns a list of silencing overrides matching the specified check name.
+  : Returns a list of silence entries matching the specified check name.
 
 : example url
   : http://hostname:4567/silenced/checks/check_ntpd
@@ -385,7 +385,7 @@ $ curl -s -X GET http://localhost:4567/silenced/checks/check_ntpd | jq .
   : - `limit`
       - **required**: false
       - **type**: Integer
-      - **description**: The number of silencing overrides to return.
+      - **description**: The number of silence entries to return.
       - **example**: `http://hostname:4567/silenced/checks/check_ntpd?limit=100`
     - `offset`
       - **required**: false

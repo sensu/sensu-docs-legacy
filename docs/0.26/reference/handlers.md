@@ -314,7 +314,7 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {}
 
 `handle_silenced`
 : description
-  : If events matching a silencing override should be handled.
+  : If events matching one or more silence entries should be handled.
 : required
   : false
 : type
