@@ -25,7 +25,7 @@ clear (delete) a silencing override via the Sensu API.
 
 ### `/silenced` (GET)
 
-#### Example: Querying for all silenced overrides
+#### Example: Querying for all silence entries
 
 ~~~ shell
 $ curl -s -X GET http://localhost:4567/silenced |jq .
