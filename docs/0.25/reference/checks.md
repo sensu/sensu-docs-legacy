@@ -472,7 +472,7 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
   : false
 : type
   : Boolean
-:default
+: default
   : true
 : example
   : ~~~ shell
@@ -481,14 +481,14 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
 
 `force_resolve`
 : description
-  : Setting `force_resolve` to `true` on a check result ensures that the current
-  event is resolved and  removed from the registry, regardless of the current
-  event action. This attribute is used internally by the [Sensu `/resolve` API][45].
+  : Setting `force_resolve` to `true` on a check result ensures that the event
+  is resolved and  removed from the registry, regardless of the current event
+  action. This attribute is used internally by the [Sensu `/resolve` API][45].
 : required
   : false
 : type
   : Boolean
-:default
+: default
   : false
 : example
   : ~~~ shell
