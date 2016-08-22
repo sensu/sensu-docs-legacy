@@ -142,7 +142,7 @@ mapping.
 Sensu checks which are defined on a [Sensu client][1] with the [check definition
 attribute][17] `standalone` set to `true` are called "standalone checks". The
 Sensu client provides its own [scheduler][10] for scheduling standalone checks
-which ensures <abbr title='typically withing 500ms'>scheduling
+which ensures <abbr title='typically within 500ms'>scheduling
 consistency</abbr> between Sensu clients with identical check definitions
 (assuming that system clocks are synchronized via [NTP][18]).
 
