@@ -312,6 +312,20 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {}
     "timeout": 30
     ~~~
 
+`handle_silenced`
+: description
+  : If events matching a silencing override should be handled.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "handle_silenced": true
+    ~~~
+
 `handle_flapping`
 : description
   : If events in the flapping state should be handled.
