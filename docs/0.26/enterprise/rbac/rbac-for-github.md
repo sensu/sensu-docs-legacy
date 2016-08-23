@@ -6,6 +6,9 @@ version: 0.26
 weight: 3
 ---
 
+**ENTERPRISE: Role based access controls are available for [Sensu Enterprise][6]
+users only.**
+
 ## RBAC for GitHub (driver)
 
 ### Reference Documentation
@@ -187,3 +190,4 @@ register an OAuth application for Sensu Enterprise:
 [3]:  #register-an-oauth-application-in-github
 [4]:  #roles-attributes
 [5]:  overview.html#roles-attributes
+[6]:  /enterprise

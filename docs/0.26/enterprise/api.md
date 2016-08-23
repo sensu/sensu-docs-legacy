@@ -287,3 +287,4 @@ sudo /etc/init.d/sensu-enterprise reload
 [1]:  ../api/overview.html
 [2]:  ../reference/configuration.html#configuration-scopes
 [3]:  #create-an-ssl-keystore
+[4]:  dashboard.html

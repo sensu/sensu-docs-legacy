@@ -6,6 +6,9 @@ version: 0.26
 weight: 4
 ---
 
+**ENTERPRISE: Role based access controls are available for [Sensu Enterprise][5]
+users only.**
+
 ## RBAC for GitLab (driver)
 
 ### Reference Documentation
@@ -195,3 +198,4 @@ Dashboard as a GitLab "application". Please note the following instructions:
 [2]:  #register-an-oauth-application-in-gitlab
 [3]:  #roles-attributes
 [4]:  overview.html#roles-attributes
+[5]:  /enterprise
