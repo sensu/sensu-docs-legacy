@@ -52,13 +52,13 @@ RBAC:
 ## RBAC for the Sensu Enterprise Console API
 
 As of Sensu Enterprise Dashboard version 1.12, RBAC configurations may be
-applied to the [Sensu Enterprise Console API][?]. Access to the Sensu Enterprise
-Console API is controlled by access tokens, which correspond to a role
-definition (see the [`roles` specification `accessToken` attribute, below][15]).
-RBAC for the Console API provides granular controls for restricting a access to
-specific API endpoints and HTTP methods (e.g. it is possible to allow HTTP `GET`
-access to the [Clients API][16], but not `DELETE` access; see the [`roles`
-specification `methods` attribute, below][15]).
+applied to the [Sensu Enterprise Console API][14]. Access to the Sensu
+Enterprise Console API is controlled by access tokens, which correspond to a
+role definition (see the [`roles` specification `accessToken` attribute,
+below][15]). RBAC for the Console API provides granular controls for restricting
+a access to specific API endpoints and HTTP methods (e.g. it is possible to
+allow HTTP `GET` access to the [Clients API][16], but not `DELETE` access; see
+the [`roles` specification `methods` attribute, below][15]).
 
 ## RBAC configuration
 
