@@ -56,9 +56,9 @@ applied to the [Sensu Enterprise Console API][14]. Access to the Sensu
 Enterprise Console API is controlled by access tokens, which correspond to a
 role definition (see the [`roles` specification `accessToken` attribute,
 below][15]). RBAC for the Console API provides granular controls for restricting
-a access to specific API endpoints and HTTP methods (e.g. it is possible to
-allow HTTP `GET` access to the [Clients API][16], but not `DELETE` access; see
-the [`roles` specification `methods` attribute, below][15]).
+access to specific API endpoints and HTTP methods (e.g. it is possible to allow
+HTTP `GET` access to the [Clients API][16], but not `DELETE` access; see the
+[`roles` specification `methods` attribute, below][15]).
 
 ## RBAC configuration
 
@@ -228,23 +228,6 @@ specification is common across all RBAC drivers.
     ]
     ~~~
 
-`accessToken`
-: description
-  : An unique token for authenticating against the [Sensu Enterprise
-    Console API][14] as a member of that role.
-: required
-  : false
-: type
-  : String
-: allowed values
-  : any length string that only contains URL-friendly characters.
-    _PROTIP: we recommend using a random string generator for access tokens;
-    e.g. `openssl rand -base64 40 |  tr -- '+=/' '-_~'`._
-: example
-  : ~~~shell
-    "accessToken": "OrIXC7ezuq0AZKoRHhf~oIl-98dX5B23hf8KudfcqJt5eTeQjDDGDQ__"
-    ~~~
-
 `readonly`
 : description
   : Used to restrict "write" access (i.e. preventing members of the role from
@@ -260,9 +243,28 @@ specification is common across all RBAC drivers.
     "readonly": true
     ~~~
 
+`accessToken`
+: description
+  : A unique token for authenticating against the [Sensu Enterprise
+    Console API][14] as a member of that role.
+: required
+  : false
+: type
+  : String
+: allowed values
+  : any length string that only contains URL-friendly characters.
+    _PRO TIP: we recommend using a random string generator for access tokens;
+    e.g.: <br>
+    `openssl rand -base64 40 |  tr -- '+=/' '-_~'`._
+: example
+  : ~~~shell
+    "accessToken": "OrIXC7ezuq0AZKoRHhf~oIl-98dX5B23hf8KudfcqJt5eTeQjDDGDQ__"
+    ~~~
+
 `methods`
 : description
-  : Used to configure access to the [Sensu Enterprise Console API][14].
+  : The [`methods` definition scope][18], used to configure access to the [Sensu
+    Enterprise Console API][14].
 : required
   : false
 : type
@@ -324,9 +326,9 @@ Sensu Enterprise Console API access controls may be fine tuned using the
 
 ##### SPECIFICATION {#methods-attributes-specification}
 
-`post`
+`get`
 : description
-  : Used to configure HTTP `POST` access to one or more [Sensu Enterprise
+  : Used to configure HTTP `GET` access to one or more [Sensu Enterprise
     Console API][14] endpoints.
 : required
   : false
@@ -340,7 +342,7 @@ Sensu Enterprise Console API access controls may be fine tuned using the
 : example
   : ~~~ shell
     "methods": {
-      "post": [
+      "get": [
         "clients",
         "checks",
         "events"
@@ -440,3 +442,4 @@ Sensu Enterprise Console API access controls may be fine tuned using the
 [15]: #roles-attributes
 [16]: ../../api/clients-api.html
 [17]: ../../reference/configuration.html#configuration-scopes
+[18]: #methods-attributes 
