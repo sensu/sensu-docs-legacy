@@ -7,6 +7,9 @@ next:
   text: "RBAC for LDAP"
 ---
 
+**ENTERPRISE: Role based access controls are available for [Sensu Enterprise][0]
+users only.**
+
 # Role Based Access Controls
 
 ## Reference Documentation
@@ -425,6 +428,7 @@ Sensu Enterprise Console API access controls may be fine tuned using the
 
 
 [?]:  #
+[0]:  /enterprise
 [1]:  https://github.com
 [2]:  https://enterprise.github.com/home
 [3]:  https://gitlab.com
@@ -442,4 +446,4 @@ Sensu Enterprise Console API access controls may be fine tuned using the
 [15]: #roles-attributes
 [16]: ../../api/clients-api.html
 [17]: ../../reference/configuration.html#configuration-scopes
-[18]: #methods-attributes 
+[18]: #methods-attributes

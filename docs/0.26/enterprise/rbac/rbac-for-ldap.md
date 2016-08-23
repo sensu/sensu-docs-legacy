@@ -6,6 +6,9 @@ version: 0.26
 weight: 2
 ---
 
+**ENTERPRISE: Role based access controls are available for [Sensu Enterprise][5]
+users only.**
+
 ## RBAC for LDAP (driver)
 
 ### Reference Documentation
@@ -342,3 +345,4 @@ configure RBAC roles.
 [2]:  http://www.openldap.org/
 [3]:  #roles-attributes
 [4]:  overview.html#roles-attributes
+[5]:  /enterprise 
