@@ -37,9 +37,9 @@ This release includes potentially breaking, backwards-incompatible changes:
   [Deprecating Event Filtering in sensu-plugin][?] blog post for more
   information._  
 
-- Handler `subdue` definitions are no longer supported. Time-based filtering is
-  now supported by the new [filter `when` attribute][?]. Please update your
-  handler definitions accordingly.
+- The handler definition `subdue` attribute is no longer supported. Time-based
+  filtering is now supported by the new [filter `when` attribute][?]. Please
+  update your handler definitions accordingly.
 
 - Check `subdue` definitions no longer support the `"at": "handler"`
   configuration setting.
@@ -219,3 +219,4 @@ This release includes potentially breaking, backwards-incompatible changes:
 
 [?]:  #
 [1]:  https://github.com/sensu/sensu/blob/master/CHANGELOG.md
+[2]:  
