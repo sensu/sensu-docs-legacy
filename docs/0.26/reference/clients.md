@@ -372,7 +372,9 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
   : A unique name for the client. The name cannot contain special characters or
     spaces.
 : required
-  : true
+  : false
+: default
+  : System hostname as determined by Ruby `Socket.gethostname`
 : type
   : String
 : validation
@@ -387,7 +389,9 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
   : An address to help identify and reach the client. This is only
     informational, usually an IP address or hostname.
 : required
-  : true
+  : false
+: default
+  : Non-loopback IPv4 address as determined by `Socket.ip_address_list`
 : type
   : String
 : example
@@ -579,7 +583,7 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
 : example
   : ~~~ shell
     "servicenow": {}
-    ~~~  
+    ~~~
 
 #### `socket` attributes
 
@@ -649,7 +653,7 @@ The following attributes are configured within the `{ "client": { "keepalive":
         "warning": 40,
         "critical": 60
       }
-    }    
+    }
   }
 }
 ~~~
@@ -1050,7 +1054,7 @@ Enterprise Chef integration][42].**
 : type
   : String
 : allowed values
-  : `enterprise`: for Hosted Chef and Enterprise Chef  
+  : `enterprise`: for Hosted Chef and Enterprise Chef
     `open_source`: for Chef Zero and Open Source Chef Server
 : example
   : ~~~ shell
