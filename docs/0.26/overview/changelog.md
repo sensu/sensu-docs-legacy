@@ -72,16 +72,24 @@ This release includes potentially breaking, backwards-incompatible changes:
   this check outside of 9-5, M-F" rule.
 
   ~~~ json
-  {                                                                                                                                 
-    "begin": "12:00:00 AM",
-    "end": "11:59:00 PM",
-    "days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
-    "exceptions": [
-      {
-        "begin": "9:00:00 AM",
-        "end": "5:00:00 PM"
+  {
+    "checks": {
+      "example_check": {
+        "command": "check_something.rb",
+        "...": "...",
+        "subdue": {
+          "begin": "12:00:00 AM",
+          "end": "11:59:00 PM",
+          "days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+          "exceptions": [
+            {
+              "begin": "9:00:00 AM",
+              "end": "5:00:00 PM"
+            }
+          ]
+        }
       }
-    ]
+    }
   }
   ~~~
 
@@ -91,69 +99,77 @@ This release includes potentially breaking, backwards-incompatible changes:
 
   ~~~ json
   {
-    "days": {
-      "monday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "9:00:00 AM PST"
-        },
-        {
-          "begin": "5:00:00 PM PST",
-          "end": "11:59:59 PM PST"
+    "checks": {
+      "example_check": {
+        "command": "check_something.rb",
+        "...": "...",
+        "subdue": {
+          "days": {
+            "monday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "9:00:00 AM PST"
+              },
+              {
+                "begin": "5:00:00 PM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ],
+            "tuesday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "9:00:00 AM PST"
+              },
+              {
+                "begin": "5:00:00 PM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ],
+            "wednesday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "9:00:00 AM PST"
+              },
+              {
+                "begin": "5:00:00 PM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ],
+            "thursday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "9:00:00 AM PST"
+              },
+              {
+                "begin": "5:00:00 PM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ],
+            "friday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "9:00:00 AM PST"
+              },
+              {
+                "begin": "5:00:00 PM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ],
+            "saturday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ],
+            "sunday": [
+              {
+                "begin": "12:00:00 AM PST",
+                "end": "11:59:59 PM PST"
+              }
+            ]
+          }
         }
-      ],
-      "tuesday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "9:00:00 AM PST"
-        },
-        {
-          "begin": "5:00:00 PM PST",
-          "end": "11:59:59 PM PST"
-        }
-      ],
-      "wednesday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "9:00:00 AM PST"
-        },
-        {
-          "begin": "5:00:00 PM PST",
-          "end": "11:59:59 PM PST"
-        }
-      ],
-      "thursday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "9:00:00 AM PST"
-        },
-        {
-          "begin": "5:00:00 PM PST",
-          "end": "11:59:59 PM PST"
-        }
-      ],
-      "friday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "9:00:00 AM PST"
-        },
-        {
-          "begin": "5:00:00 PM PST",
-          "end": "11:59:59 PM PST"
-        }
-      ],
-      "saturday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "11:59:59 PM PST"
-        }
-      ],
-      "sunday": [
-        {
-          "begin": "12:00:00 AM PST",
-          "end": "11:59:59 PM PST"
-        }
-      ]
+      }
     }
   }
   ~~~
