@@ -14,11 +14,13 @@ next:
 - [What are Role Based Access Controls for Sensu Enterprise?](#what-are-role-based-access-controls)
   - [How does Sensu provide RBAC?](#how-does-sensu-provide-rbac)
   - [Supported RBAC drivers](#supported-rbac-drivers)
+- [RBAC for the Sensu Enterprise Console API](#rbac-for-the-sensu-enterprise-console-api)
 - [RBAC configuration](#rbac-configuration)
   - [Example RBAC definition](#example-rbac-definition)
   - [RBAC definition specification](#rbac-definition-specification)
     - [`DRIVER` attributes](#driver-attributes)
     - [`roles` attributes](#roles-attributes)
+    - [`methods` attributes](#methods-attributes)
 
 ## What are Role Based Access Controls for Sensu Enterprise? {#what-are-role-based-access-controls}
 
@@ -46,6 +48,17 @@ RBAC:
 * [LDAP](rbac-for-ldap.html)
 * [GitHub](rbac-for-github.html)
 * [GitLab](rbac-for-gitlab.html)
+
+## RBAC for the Sensu Enterprise Console API
+
+As of Sensu Enterprise Dashboard version 1.12, RBAC configurations may be
+applied to the [Sensu Enterprise Console API][?]. Access to the Sensu Enterprise
+Console API is controlled by access tokens, which correspond to a role
+definition (see the [`roles` specification `accessToken` attribute, below][15]).
+RBAC for the Console API provides granular controls for restricting a access to
+specific API endpoints and HTTP methods (e.g. it is possible to allow HTTP `GET`
+access to the [Clients API][16], but not `DELETE` access; see the [`roles`
+specification `methods` attribute, below][15]).
 
 ## RBAC configuration
 
@@ -111,10 +124,10 @@ of the following:
 #### `roles` attributes
 
 Role attributes are defined within the corresponding [RBAC `DRIVER`][10]
-configuration scope; e.g.: `{ "dashboard": { "DRIVER": { "roles": [] } } }`. The
-`roles` attribute is always a JSON array (i.e. `"roles": []`), containing JSON
-hashes of role definitions. The following role definition specification is
-common across all RBAC drivers.
+[configuration scope][17]; e.g.: `{ "dashboard": { "DRIVER": { "roles": [] } }
+}`. The `roles` attribute is always a JSON array (i.e. `"roles": []`),
+containing JSON hashes of role definitions. The following role definition
+specification is common across all RBAC drivers.
 
 ##### EXAMPLE {#roles-attributes-example}
 
@@ -247,6 +260,167 @@ common across all RBAC drivers.
     "readonly": true
     ~~~
 
+`methods`
+: description
+  : Used to configure access to the [Sensu Enterprise Console API][14].
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "methods": {
+      "head": [
+        "none"
+      ],
+      "get": [],
+      "post": [
+        "results",
+        "stashes"
+      ],
+      "delete": [
+        "stashes"
+      ]
+    }
+    ~~~
+
+#### `methods` attributes
+
+Sensu Enterprise Console API access controls may be fine tuned using the
+`{ "dashboard": { "DRIVER": { "roles": [ { "methods": {} } ] } } }`
+[configuration scope][17].
+
+##### EXAMPLE {#methods-attributes-example}
+
+~~~ json
+{
+  "dashboard": {
+    "...": "...",
+    "ldap": {
+      "...": "...",
+      "roles": [
+        {
+          "name": "example_role",
+          "members": ["example_group"],
+          "datacenters": [],
+          "subscriptions": ["example_application"],
+          "accessToken": "j3sJ8itFn9d9ooFYdN9erW3ZN6i8C9V3",
+          "methods": {
+            "get": [],
+            "post": [
+              "clients",
+              "stashes"
+            ],
+            "delete": [
+              "none"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+~~~
+
+##### SPECIFICATION {#methods-attributes-specification}
+
+`post`
+: description
+  : Used to configure HTTP `POST` access to one or more [Sensu Enterprise
+    Console API][14] endpoints.
+: required
+  : false
+: type
+  : Array of Strings
+: allowed values
+  : `aggregates`, `checks`, `clients`, `events`, `results`, `stashes`,
+    `subscriptions`, and `datacenters`.
+: default
+  : `[]` (an empty array, which is equivalent to "allow all")
+: example
+  : ~~~ shell
+    "methods": {
+      "post": [
+        "clients",
+        "checks",
+        "events"
+      ]
+    }
+    ~~~
+
+`post`
+: description
+  : Used to configure HTTP `POST` access to one or more [Sensu Enterprise
+    Console API][14] endpoints.
+: required
+  : false
+: type
+  : Array of Strings
+: allowed values
+  : `aggregates`, `checks`, `clients`, `events`, `results`, `stashes`,
+    `subscriptions`, and `datacenters`.
+: default
+  : `[]` (an empty array, which is equivalent to "allow all")
+: example
+  : ~~~ shell
+    "methods": {
+      "post": [
+        "clients",
+        "checks",
+        "events"
+      ]
+    }
+    ~~~
+
+`delete`
+: description
+  : Used to configure HTTP `DELETE` access to one or more [Sensu Enterprise
+    Console API][14] endpoints.
+: required
+  : false
+: type
+  : Array of Strings
+: allowed values
+  : `aggregates`, `checks`, `clients`, `events`, `results`, `stashes`,
+    `subscriptions`, and `datacenters`.
+: default
+  : `[]` (an empty array, which is equivalent to "allow all")
+: example
+  : ~~~ shell
+    "methods": {
+      "delete": [
+        "clients",
+        "checks",
+        "events"
+      ]
+    }
+    ~~~
+
+`head`
+: description
+  : Used to configure HTTP `HEAD` access to one or more [Sensu Enterprise
+    Console API][14] endpoints.
+: required
+  : false
+: type
+  : Array of Strings
+: allowed values
+  : `aggregates`, `checks`, `clients`, `events`, `results`, `stashes`,
+    `subscriptions`, and `datacenters`.
+: default
+  : `[]` (an empty array, which is equivalent to "allow all")
+: example
+  : ~~~ shell
+    "methods": {
+      "head": [
+        "clients",
+        "checks",
+        "events"
+      ]
+    }
+    ~~~
+
+
 
 [?]:  #
 [1]:  https://github.com
@@ -262,4 +436,7 @@ common across all RBAC drivers.
 [11]: https://github.com/orgs/sensu/teams/docs
 [12]: https://gitlab.com/groups/heavywater
 [13]: ../dashboard.html#sensu-attributes
-[14]: ../api.html#what-is-the-sensu-enterprise-console
+[14]: ../dashboard.html#what-is-the-sensu-enterprise-console
+[15]: #roles-attributes
+[16]: ../../api/clients-api.html
+[17]: ../../reference/configuration.html#configuration-scopes
