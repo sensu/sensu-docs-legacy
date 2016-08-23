@@ -255,6 +255,12 @@ subscription.
 To configure Sensu client subscriptions for a client, please refer to [the
 client `subscriptions` attribute reference documentation][15].
 
+In addition to the subscriptions defined in the client configuration, Sensu
+clients also subscribe automatically to a subscription matching their client
+name.  For example, a client named `i-424242` will subscribe to check requests
+for the subscription `client:i-424242`. This makes it possible to generate
+ad-hoc check requests targeting specific clients via the [`/request` API][49].
+
 ## Client socket input
 
 ### What is the Sensu client socket?
@@ -1406,3 +1412,4 @@ information for operations teams can be extremely valuable._
 [46]: ../enterprise/integrations/servicenow.html
 [47]: http://wiki.servicenow.com/index.php?title=Introduction_to_Assets_and_Configuration
 [48]: #deregistration-attributes
+[49]: ../api/checks-api.html#the-request-api-endpoint
