@@ -60,7 +60,7 @@ This release includes potentially breaking, backwards-incompatible changes:
 - **NEW**: Every Sensu client now creates and subscribes to a unique client
   subscription (e.g. `client:i-424242`). Unique client subscriptions allow Sensu
   checks to target a single client (host) and enable silencing events for a
-  single client.
+  single client. **Fixes: [#1327][?]**.
 
 - **NEW**: Introducing **Subdue 2.0**! Sensu `subdue` rules have a brand new
   configuration syntax, adding support for a broader number of applications, and
