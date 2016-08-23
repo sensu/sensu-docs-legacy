@@ -592,6 +592,18 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
     "aggregate": "proxy_servers"
     ~~~
 
+`aggregates`
+: description
+  : An array of strings defininng one or more named aggregates (described above).
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~ shell
+    "aggregates": [ "webservers", "production" ]
+    ~~~
+
 `subdue`
 : description
   : The [`subdue` definition scope][42], used to determine when a check is
