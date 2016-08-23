@@ -165,7 +165,7 @@ This release includes potentially breaking, backwards-incompatible changes:
   [handler definition `subdue` attribute][?] (i.e. `"at": "handler"`).
   Time-based filtering for handlers is now provided by Sensu filters (see
   below). Please refer to the new [`subdue` reference documentation][?] for more
-  information._ **See [#1415][?]**. 
+  information._ **See: [#1415][?]**.
 
 - **NEW**: Event filters now support time-based rules, via a new `"when": {}`
   filter definition attribute. The filter `when` specification uses the same
@@ -177,33 +177,43 @@ This release includes potentially breaking, backwards-incompatible changes:
   via configuration! The `sensu-install` has also added support for installing
   Sensu Extensions (e.g. `sensu-install -e system-profile`). Extensions gems
   must be enabled via configuration, please refer to the [Sensu extension
-  reference documentation][?] for more information. **See [#1394][?]**.
+  reference documentation][?] for more information. **See: [#1394][?]**.
 
 - **NEW**: A check can now be a member of more than one [named aggregate][?],
-  via a new check definition `"aggregates": []` attribute. **See [#1379][?],
+  via a new check definition `"aggregates": []` attribute. **See: [#1379][?];
   fixes [#1342][?]**.
 
 - **NEW**: Added support for setting Redis Sentinel configuration via a new
-  `REDIS_SENTINEL_URLS` environment variable. **See [#1411][?], fixes
-  [#1361][?].
+  `REDIS_SENTINEL_URLS` environment variable. Please refer to the [Sensu
+  environment variables reference documentation][?] for more information. **See
+  [#1411][?]; fixes [#1361][?].
+
+- **NEW**: Added support for automatically discovering and setting client `name`
+  and `address` attributes (two of the few required attributes for a valid
+  Sensu client definition). **See: [#1379][?]; fixes [#1362][?]**.
+
+- **IMPROVEMENT**: Added support for a new `occurrences_watermark` attribute,
+  which is used by the built-in [sensu-occurrences-extension][?] filter to
+  prevent sending resolve notifications for events that were not handled due to
+  occurrence filtering. **See: [#1419][?] and [#1427][?]**.
 
 - **IMPROVEMENT**: Only attempt to schedule standalone checks that have an
-  interval. **See [#1384][?], fixes [#1286][?]**.
+  interval. **See: [#1384][?]; fixes [#1286][?]**.
 
 - **IMPROVEMENT**: Locally configured standalone checks (e.g. on a Sensu server)
-  are no longer accessible via the Sensu API `/checks` endpoint. **See
-  [#1417][?], fixes [#1416][?]**.
+  are no longer accessible via the Sensu API `/checks` endpoint. **See:
+  [#1417][?]; fixes [#1416][?]**.
 
 - **IMPROVEMENT**: Check TTL events are no longer created if the associated
-  Sensu client has a current keepalive event. **See [#1428][?], fixes [#861][?]
+  Sensu client has a current keepalive event. **See [#1428][?]; fixes [#861][?]
   and [#1282][?]**.
 
 - **IMPROVEMENT**: Increased the maximum number of EventMachine timers from 100k
   to 200k, to accommodate very large Sensu installations that execute over 100k
-  checks. **See [#1370][?], fixes [#1368][?]**.
+  checks. **See [#1370][?]; fixes [#1368][?]**.
 
 - **BUGFIX**: Fixed a Sensu API `/results` endpoint race condition that
-  caused incomplete response content. **See [#1372][?], fixes [#1356][?]**.
+  caused incomplete response content. **See [#1372][?]; fixes [#1356][?]**.
 
 
 
