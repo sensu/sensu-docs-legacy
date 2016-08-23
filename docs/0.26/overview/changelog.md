@@ -28,7 +28,7 @@ This release includes potentially breaking, backwards-incompatible changes:
   provided by Sensu Plugin handlers that are based on the `sensu-plugin` gem. A
   new `"handle_silenced": true` attribute/override is available to disable this
   new built-in silencing functionality, which should be added to handler
-  definitions for handlers that rely on "silence stashes". 
+  definitions for handlers that rely on "silence stashes".
 
   _NOTE: Event filtering is moving out of the Sensu Plugins project and into
   Sensu Core. Though "silence stashes" are still supported in the `sensu-plugin`
@@ -165,22 +165,27 @@ This release includes potentially breaking, backwards-incompatible changes:
   [handler definition `subdue` attribute][?] (i.e. `"at": "handler"`).
   Time-based filtering for handlers is now provided by Sensu filters (see
   below). Please refer to the new [`subdue` reference documentation][?] for more
-  information._
+  information._ **See [#1415][?]**. 
 
 - **NEW**: Event filters now support time-based rules, via a new `"when": {}`
   filter definition attribute. The filter `when` specification uses the same
   syntax as the new Subdue 2.0 specification, simplifying time-based event
   filtering. Please refer to the [filer `when` reference documentation][?] for
-  more information.
+  more information. *See [#1415][?]**.
 
 - **NEW**: Sensu Extensions can now be loaded from Rubygems and enabled/disabled
   via configuration! The `sensu-install` has also added support for installing
   Sensu Extensions (e.g. `sensu-install -e system-profile`). Extensions gems
   must be enabled via configuration, please refer to the [Sensu extension
-  reference documentation][?] for more information.
+  reference documentation][?] for more information. **See [#1394][?]**.
 
 - **NEW**: A check can now be a member of more than one [named aggregate][?],
-  via a new check definition `"aggregates": []` attribute.
+  via a new check definition `"aggregates": []` attribute. **See [#1379][?],
+  fixes [#1342][?]**.
+
+- **NEW**: Added support for setting Redis Sentinel configuration via a new
+  `REDIS_SENTINEL_URLS` environment variable. **See [#1411][?], fixes
+  [#1361][?].
 
 - **IMPROVEMENT**: Only attempt to schedule standalone checks that have an
   interval. **See [#1384][?], fixes [#1286][?]**.
