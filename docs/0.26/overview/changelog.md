@@ -32,10 +32,14 @@ This release includes potentially breaking, backwards-incompatible changes:
 
   _NOTE: Event filtering is moving out of the Sensu Plugins project and into
   Sensu Core. Though "silence stashes" are still supported in the `sensu-plugin`
-  gem version 1.4, this functionality will be deprecated in an upcoming release
-  (along with all built-in filters in `sensu-plugin`). Please refer to the
-  [Deprecating Event Filtering in sensu-plugin][?] blog post for more
-  information._  
+  gem version 1.4.2 (included in Sensu Core 0.26), this functionality will be
+  deprecated in an upcoming release, along with all built-in filtering in the
+  `sensu-plugin` gem. In the interim, the Sensu embedded Ruby environment in
+  versions 0.26.x will includes versions of the `sensu-plugin` library that will
+  print deprecation warnings by default. Set the check attribute
+  `enable_deprecated_filtering: false` to disable the deprecated filtering 
+  behavior. Please refer to the [Deprecating Event Filtering in sensu-plugin][?]
+  blog post for more information._
 
 - The handler definition `subdue` attribute is no longer supported. Time-based
   filtering is now supported by the new [filter `when` attribute][?]. Please
