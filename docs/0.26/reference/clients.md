@@ -397,7 +397,7 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
 : required
   : false
 : default
-  : Non-loopback IPv4 address as determined by `Socket.ip_address_list`
+  : Non-loopback IPv4 address as determined by Ruby `Socket.ip_address_list`
 : type
   : String
 : example
