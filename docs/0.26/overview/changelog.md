@@ -23,7 +23,7 @@ available for immediate download. Please note the following improvements:
 
 This release includes potentially breaking, backwards-incompatible changes:
 
-- Event silencing is now built-in to Sensu Core, and a new `/silenced` API is
+- Event silencing is now built into Sensu Core, and a new `/silenced` API is
   now available, which may conflict with the legacy "silence stash" filtering
   provided by Sensu Plugin handlers that are based on the `sensu-plugin` gem. A
   new `"handle_silenced": true` attribute/override is available to disable this
@@ -38,11 +38,11 @@ This release includes potentially breaking, backwards-incompatible changes:
   versions 0.26.x will includes versions of the `sensu-plugin` library that will
   print deprecation warnings by default. Set the check attribute
   `enable_deprecated_filtering: false` to disable the deprecated filtering
-  behavior. Please refer to the [Deprecating Event Filtering in sensu-plugin][?]
+  behavior. Please refer to the [Deprecating Event Filtering in sensu-plugin][10]
   blog post for more information._
 
 - The handler definition `subdue` attribute is no longer supported. Time-based
-  filtering is now supported by the new [filter `when` attribute][?]. Please
+  filtering is now supported by the new [filter `when` attribute][5]. Please
   update your handler definitions accordingly.
 
 - Check `subdue` definitions no longer support the `"at": "handler"`
@@ -51,7 +51,7 @@ This release includes potentially breaking, backwards-incompatible changes:
 ### CHANGES {#core-v0-26-0-changes}
 
 - **NEW**: Event silencing is now built into Sensu Core! The Sensu API now
-  provides a set of [`/silenced` endpoints][?], for silencing one or more
+  provides a set of [`/silenced` endpoints][11], for silencing one or more
   checks and/or subscriptions (including the NEW client-specific subscriptions,
   below). Silencing applies to all event handlers by default, however a new
   `handle_silenced` handler definition attribute can be used to disable this
@@ -59,12 +59,12 @@ This release includes potentially breaking, backwards-incompatible changes:
 
   _NOTE: this improvement is very closely related to the impending deprecation
   of event filtering in the `sensu-plugin` gem. See the recent [Deprecating
-  Event Filtering in sensu-plugin][?] blog post for more information._
+  Event Filtering in sensu-plugin][10] blog post for more information._
 
 - **NEW**: Every Sensu client now creates and subscribes to a unique client
   subscription (e.g. `client:i-424242`). Unique client subscriptions allow Sensu
   checks to target a single client (host) and enable silencing events for a
-  single client. **Fixes: [#1327][?]**.
+  single client. **Fixes: [#1327][1327]**.
 
 - **NEW**: Introducing **Subdue 2.0**! Sensu `subdue` rules have a brand new
   configuration syntax, adding support for a broader number of applications, and
@@ -235,19 +235,21 @@ This release includes potentially breaking, backwards-incompatible changes:
 - **BUGFIX**: Fixed a Sensu API `/results` endpoint race condition that
   caused incomplete response content. **See [#1372][1372]; fixes [#1356][1356]**.
 
-[?]: #
-[1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
-[2]: ../../0.25/reference/checks.html#subdue-attributes
-[3]: ../../0.25/reference/handlers.html#subdue-attributes
-[4]: ../reference/checks.html#subdue-attributes
-[5]: ../reference/filters.html#when-attributes
-[6]: ../reference/extensions.html
-[7]: ../reference/aggregates.html
-[8]: ../reference/configuration.html#sensu-environment-variables
-[9]: https://github.com/sensu-extensions/sensu-extensions-occurrences/
+[1]:    https://github.com/sensu/sensu/blob/master/CHANGELOG.md
+[2]:    ../../0.25/reference/checks.html#subdue-attributes
+[3]:    ../../0.25/reference/handlers.html#subdue-attributes
+[4]:    ../reference/checks.html#subdue-attributes
+[5]:    ../reference/filters.html#when-attributes
+[6]:    ../reference/extensions.html
+[7]:    ../reference/aggregates.html
+[8]:    ../reference/configuration.html#sensu-environment-variables
+[9]:    https://github.com/sensu-extensions/sensu-extensions-occurrences/
+[10]:   https://sensuapp.org/blog/2016/07/07/sensu-plugin-filter-deprecation.html
+[11]:   ../api/silenced-api.html
 [861]:  https://github.com/sensu/sensu/issues/861
 [1282]: https://github.com/sensu/sensu/issues/1282
 [1286]: https://github.com/sensu/sensu/issues/1286
+[1327]: https://github.com/sensu/sensu/issues/1327
 [1342]: https://github.com/sensu/sensu/issues/1342
 [1356]: https://github.com/sensu/sensu/issues/1356
 [1361]: https://github.com/sensu/sensu/issues/1361
