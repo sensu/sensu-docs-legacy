@@ -255,6 +255,12 @@ subscription.
 To configure Sensu client subscriptions for a client, please refer to [the
 client `subscriptions` attribute reference documentation][15].
 
+In addition to the subscriptions defined in the client configuration, Sensu
+clients also subscribe automatically to a subscription matching their client
+name.  For example, a client named `i-424242` will subscribe to check requests
+for the subscription `client:i-424242`. This makes it possible to generate
+ad-hoc check requests targeting specific clients via the [`/request` API][49].
+
 ## Client socket input
 
 ### What is the Sensu client socket?
@@ -372,7 +378,9 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
   : A unique name for the client. The name cannot contain special characters or
     spaces.
 : required
-  : true
+  : false
+: default
+  : System hostname as determined by Ruby `Socket.gethostname`
 : type
   : String
 : validation
@@ -387,7 +395,9 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
   : An address to help identify and reach the client. This is only
     informational, usually an IP address or hostname.
 : required
-  : true
+  : false
+: default
+  : Non-loopback IPv4 address as determined by Ruby `Socket.ip_address_list`
 : type
   : String
 : example
@@ -579,7 +589,7 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
 : example
   : ~~~ shell
     "servicenow": {}
-    ~~~  
+    ~~~
 
 #### `socket` attributes
 
@@ -649,7 +659,7 @@ The following attributes are configured within the `{ "client": { "keepalive":
         "warning": 40,
         "critical": 60
       }
-    }    
+    }
   }
 }
 ~~~
@@ -1050,7 +1060,7 @@ Enterprise Chef integration][42].**
 : type
   : String
 : allowed values
-  : `enterprise`: for Hosted Chef and Enterprise Chef  
+  : `enterprise`: for Hosted Chef and Enterprise Chef
     `open_source`: for Chef Zero and Open Source Chef Server
 : example
   : ~~~ shell
@@ -1402,3 +1412,4 @@ information for operations teams can be extremely valuable._
 [46]: ../enterprise/integrations/servicenow.html
 [47]: http://wiki.servicenow.com/index.php?title=Introduction_to_Assets_and_Configuration
 [48]: #deregistration-attributes
+[49]: ../api/checks-api.html#the-request-api-endpoint
