@@ -25,6 +25,7 @@ weight: 6
   - [Filter definition specification](#filter-definition-specification)
     - [Filter naming](#filter-naming)
     - [Filter attributes](#filter-attributes)
+    - [`when` attributes](#when-attributes)
 
 ## What are Sensu filters?
 
@@ -486,4 +487,4 @@ name][15]).
 [12]: checks.html#custom-attributes
 [13]: #eval-token-interpolation
 [14]: #when-attributes
-[15]: #filter-names
+[15]: #filter-naming
