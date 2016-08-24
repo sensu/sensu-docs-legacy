@@ -26,7 +26,7 @@ This release includes potentially breaking, backwards-incompatible changes:
 - Event silencing is now built into Sensu Core, and a new `/silenced` API is
   now available, which may conflict with the legacy "silence stash" filtering
   provided by Sensu Plugin handlers that are based on the `sensu-plugin` gem. A
-  new `"handle_silenced": true` attribute/override is available to disable this
+  new [`"handle_silenced": true` attribute][12] is available to disable this
   new built-in silencing functionality, which should be added to handler
   definitions for handlers that rely on "silence stashes".
 
@@ -246,6 +246,7 @@ This release includes potentially breaking, backwards-incompatible changes:
 [9]:    https://github.com/sensu-extensions/sensu-extensions-occurrences/
 [10]:   https://sensuapp.org/blog/2016/07/07/sensu-plugin-filter-deprecation.html
 [11]:   ../api/silenced-api.html
+[12]:   ../reference/handlers.html#handler-attributes
 [861]:  https://github.com/sensu/sensu/issues/861
 [1282]: https://github.com/sensu/sensu/issues/1282
 [1286]: https://github.com/sensu/sensu/issues/1286
