@@ -32,7 +32,7 @@ weight: 3
 - [Check configuration](#check-configuration)
   - [Example check definition](#example-check-definition)
   - [Check definition specification](#check-definition-specification)
-    - [Check name(s)](#check-names)
+    - [Check naming](#check-names)
     - [`CHECK` attributes](#check-attributes)
     - [`subdue` attributes](#subdue-attributes)
     - [Custom attributes](#custom-attributes)
@@ -320,7 +320,7 @@ seconds.
 
 ### Check definition specification
 
-#### Check names(s) {#check-names}
+#### Check naming {#check-names}
 
 Each check definition has a unique check name, used for the definition key.
 Every check definition is within the `"checks": {}` [configuration scope][29].
