@@ -652,13 +652,13 @@ The following attributes are configured within the `{"checks": { "CHECK": {
 "subdue": {} } } }` [configuration scope][29] (where `CHECK` is a valid [check
 name][41]).
 
-##### EXAMPLE {#subude-attributes-example}
+##### EXAMPLE {#subdue-attributes-example}
 
 ~~~ json
 {
   "checks": {
     "check-printer": {
-      "...", "...",
+      "...": "...",
       "subdue": {
         "days": {
           "all": [
