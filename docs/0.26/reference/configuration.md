@@ -48,7 +48,7 @@ sources in the following order:
 
 1. The Sensu init scripts provide [command line arguments][1] for starting the
    Sensu services (e.g. the location of the configuration file (`-c`), the
-   location of configuration directories (`-d`), etc).  
+   location of configuration directories (`-d`), etc).
 
 2. Sensu will load configuration from [environment variables][2].
 
@@ -230,7 +230,7 @@ called `"client"`:
 
 ~~~json
 {
-  "client": {}  
+  "client": {}
 }
 ~~~
 
@@ -569,7 +569,7 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
     provided so the Sensu service knows where to load configuration from.
 : example
   : ~~~ shell
-    $ sudo -u sensu /opt/sensu/bin/sensu-client --validate_config -c /etc/sensu/config.json -d /etc/sensu/conf.d/  
+    $ sudo -u sensu /opt/sensu/bin/sensu-client --validate_config -c /etc/sensu/config.json -d /etc/sensu/conf.d/
     configuration is valid
     ~~~
 
@@ -717,6 +717,20 @@ environments.
 : example
   : ~~~ shell
     REDIS_URL="redis://hostname:6379/0"
+    ~~~
+
+`REDIS_SENTINEL_URLS`
+: description
+  : A comma-separated list of Redis Sentinel URLs Sensu will use when connecting
+  to Redis; this is used if a Redis definition does not already define Sentinel
+  connection options.
+: type
+  : String
+: required
+  : false
+: example
+  : ~~~ shell
+    REDIS_SENTINEL_URLS="redis://sentinel1:26379,redis://sentinel2:26379,redis://sentinel3:26379/"
     ~~~
 
 `SENSU_API_PORT`
