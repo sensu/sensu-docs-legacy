@@ -652,31 +652,22 @@ The following attributes are configured within the `{"checks": { "CHECK": {
 "subdue": {} } } }` [configuration scope][29] (where `CHECK` is a valid [check
 name][41]).
 
-##### EXAMPLE {#subdue-attributes-example}
+##### EXAMPLE {#subude-attributes-example}
 
 ~~~ json
 {
   "checks": {
-    "example_check": {
-      "command": "do_something.rb -o options",
-      "...": "...",
+    "check-printer": {
+      "...", "...",
       "subdue": {
-        "at": "publisher",
-        "days": [
-          "monday",
-          "tuesday",
-          "wednesday",
-          "thursday",
-          "friday"
-        ],
-        "begin": "12AM PST",
-        "end": "11:59:59PM PST",
-        "exceptions": [
-          {
-            "begin": "8AM PST",
-            "end": "6PM PST"
-          }
-        ]
+        "days": {
+          "all": [
+            {
+              "begin": "5:00 PM",
+              "end": "8:00 AM"
+            }
+          ]
+        }
       }
     }
   }
@@ -685,75 +676,31 @@ name][41]).
 
 ##### ATTRIBUTES {#subdue-attributes-specification}
 
-`at`
-: description
-  : Where the check is subdued, either `publisher` or `handler`, at the check
-    request publisher or event handler.
-: required
-  : false
-: type
-  : String
-: allowed values
-  : `publisher`, `handler`
-: example
-  : ~~~ shell
-    "at": "handler"
-    ~~~
-
 `days`
 : description
-  : An array of days of the week the check is subdued. Each array item must be a
-    string and a valid day of the week.
+  : A hash of days of the week or 'all', each day specified must
+  define one or more time windows in which the check is scheduled to
+  be executed (at its interval).
 : required
-  : false
+  : false (unless `subdue` is configured)
 : type
-  : Array
+  : Hash
 : example
   : ~~~ shell
-    "days": ["monday", "wednesday"]
-    ~~~
-
-`begin`
-: description
-  : Beginning of the time window when the check is subdued. Parsed by Ruby's
-    `Time.parse()`. Time may include a time zone.
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "begin": "5PM PST"
-    ~~~
-
-`end`
-: description
-  : End of the time window when the check is subdued. Parsed by Ruby's
-    `Time.parse()`. Time may include a time zone.
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "end": "9AM PST"
-    ~~~
-
-`exceptions`
-: description
-  : Subdue time window (`begin`, `end`) exceptions. An array of time window
-    exceptions. Each array item must be a hash containing valid `begin` and
-    `end` times.
-: required
-  : false
-: type
-  : Array
-: example
-  : ~~~ shell
-    "exceptions": [
-      {"begin": "6PM PST", "end": "11:59PM PST"},
-      {"begin": "12AM PST", "end": "8AM PST"}
-    ]
+    "days": {
+      "all": [
+        {
+          "begin": "5:00 PM",
+          "end": "8:00 AM"
+        }
+      ],
+      "friday": [
+        {
+          "begin": "12:00 PM",
+          "end": "5:00 PM"
+        }
+      ]
+    }
     ~~~
 
 #### Custom attributes
