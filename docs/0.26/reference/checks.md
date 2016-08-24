@@ -320,7 +320,7 @@ seconds.
 
 ### Check definition specification
 
-#### Check names(s) {#check-names}
+#### Check naming {#check-names}
 
 Each check definition has a unique check name, used for the definition key.
 Every check definition is within the `"checks": {}` [configuration scope][29].

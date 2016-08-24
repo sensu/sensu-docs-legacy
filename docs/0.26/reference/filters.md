@@ -390,6 +390,88 @@ filter definition is within the `"filters": {}` definition scope.
     }
     ~~~
 
+`when`
+: description
+  : The [`when` definition scope][14], used to determine when a
+  filter is applied (time windows).
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "when": {
+      "days": {
+        "all": [
+          {
+            "begin": "5:00 PM",
+            "end": "8:00 AM"
+          }
+        ]
+      }
+    }
+    ~~~
+
+#### `when` attributes
+
+The following attributes are configured within the `{"filters": { "FILTER": {
+"when": {} } } }` [configuration scope][14] (where `FILTER` is a valid [filter
+name][15]).
+
+##### EXAMPLE {#when-attributes-example}
+
+~~~ json
+{
+  "filters": {
+    "offhours": {
+      "attributes": {
+        "client": {
+          "environment": "production"
+        }
+      },
+      "when": {
+        "days": {
+          "all": [
+            {
+              "begin": "5:00 PM",
+              "end": "8:00 AM"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#when-attributes-specification}
+
+`days`
+: description
+  : A hash of days of the week or 'all', each day specified defines
+  one or more time windows in which the filter is applied.
+: required
+  : false (unless `when` is configured)
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "days": {
+      "all": [
+        {
+          "begin": "5:00 PM",
+          "end": "8:00 AM"
+        }
+      ],
+      "friday": [
+        {
+          "begin": "12:00 PM",
+          "end": "5:00 PM"
+        }
+      ]
+    }
+    ~~~
+
 [1]:  handlers.html
 [2]:  #filter-definition-specification
 [3]:  events.html#event-data
@@ -403,3 +485,5 @@ filter definition is within the `"filters": {}` definition scope.
 [11]: events.html#event-data-specification
 [12]: checks.html#custom-attributes
 [13]: #eval-token-interpolation
+[14]: #when-attributes
+[15]: #filter-names
