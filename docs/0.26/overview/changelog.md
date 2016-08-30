@@ -41,6 +41,11 @@ This release includes potentially breaking, backwards-incompatible changes:
   behavior. Please refer to the [Deprecating Event Filtering in sensu-plugin][10]
   blog post for more information._
 
+- Sensu Core version 0.26 requires Uchiwa version 0.18 or newer, which adds
+  support for the new event silencing features. Older versions of Uchiwa will
+  not silence events in Sensu Core version 0.26 and may result in unexpected
+  behaviors. 
+
 - The handler definition `subdue` attribute is no longer supported. Time-based
   filtering is now supported by the new [filter `when` attribute][5]. Please
   update your handler definitions accordingly.
