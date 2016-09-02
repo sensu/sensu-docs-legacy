@@ -426,7 +426,7 @@ privatekey
     }
     ~~~
 
-public
+publickey
 : description
   : Path to a public RSA key used for generating and validating the signatures of the JSON Web Tokens (JWT) for
     authentication.
