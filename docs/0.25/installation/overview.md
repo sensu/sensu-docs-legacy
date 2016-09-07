@@ -87,7 +87,7 @@ Ready? Let's get started with selecting an installation strategy!
 [3]:  https://puppetlabs.com
 [4]:  https://www.ansible.com
 [5]:  ../overview/architecture.html
-[6]:  ../overview/summary.html.html
+[6]:  ../installation/summary.html
 [7]:  ../reference/clients.html#client-keepalives
 [8]:  ../guides/getting-started/overview.html
 [9]:  https://sensuapp.org/enterprise
