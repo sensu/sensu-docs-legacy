@@ -23,28 +23,27 @@ available for immediate download. Please note the following improvements:
 
 This release includes potentially breaking, backwards-incompatible changes:
 
-- Event silencing is now built into Sensu Core, and a new `/silenced` API is
-  now available, which may conflict with the legacy "silence stash" filtering
-  provided by Sensu Plugin handlers that are based on the `sensu-plugin` gem. A
-  new [`"handle_silenced": true` attribute][12] is available to disable this
-  new built-in silencing functionality, which should be added to handler
-  definitions for handlers that rely on "silence stashes".
+- Event silencing is now built into Sensu Core, and a new `/silenced` API
+  is now available. A new [`"handle_silenced": true` attribute][12] is
+  available to opt-out of this new built-in silencing functionality on a
+  per-handler basis.
 
-  _NOTE: Event filtering is moving out of the Sensu Plugins project and into
-  Sensu Core. Though "silence stashes" are still supported in the `sensu-plugin`
-  gem version 1.4.2 (included in Sensu Core 0.26), this functionality will be
-  deprecated in an upcoming release, along with all built-in filtering in the
-  `sensu-plugin` gem. In the interim, the Sensu embedded Ruby environment in
-  versions 0.26.x will includes versions of the `sensu-plugin` library that will
-  print deprecation warnings by default. Set the check attribute
-  `enable_deprecated_filtering: false` to disable the deprecated filtering
-  behavior. Please refer to the [Deprecating Event Filtering in sensu-plugin][10]
-  blog post for more information._
+- Sensu Core version 0.26 requires Uchiwa version 0.18 or newer in order
+  to make use of the new `/silenced` API feature. Prior versions of Uchiwa
+  silence events using the "silence stashes" pattern, which will be honored by
+  existing handlers until the now-deprecated event filtering is removed
+  from a future version of sensu-plugin.
 
-- Sensu Core version 0.26 requires Uchiwa version 0.18 or newer, which adds
-  support for the new event silencing features. Older versions of Uchiwa will
-  not silence events in Sensu Core version 0.26 and may result in unexpected
-  behaviors. 
+  _NOTE: The new `/silenced` API and native event silencing features are
+  intended to replace the "silence stash" pattern implemented in the
+  `sensu-plugin` library and widely used by existing handlers. This
+  "silence stashes" pattern is considered deprecated. Sensu 0.26 includes
+  version 1.4.2 of the `sensu-plugin` library which continues to
+  apply this pattern by default, but will log deprecation warnings as
+  well.	Set the check attribute `enable_deprecated_filtering: false` to
+  disable the deprecated filtering behavior. Please refer to the
+  [Deprecating Event Filtering in sensu-plugin][10] blog post for more
+  information._
 
 - The handler definition `subdue` attribute is no longer supported. Time-based
   filtering is now supported by the new [filter `when` attribute][5]. Please
@@ -62,7 +61,7 @@ This release includes potentially breaking, backwards-incompatible changes:
   `handle_silenced` handler definition attribute can be used to disable this
   functionality. Metric check events (OK) bypass event silencing.
 
-  _NOTE: this improvement is very closely related to the impending deprecation
+  _NOTE: this improvement is very closely related to the impending removal
   of event filtering in the `sensu-plugin` gem. See the recent [Deprecating
   Event Filtering in sensu-plugin][10] blog post for more information._
 
