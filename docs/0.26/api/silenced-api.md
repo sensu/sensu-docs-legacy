@@ -244,7 +244,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{ "subscription": "all", "check": "check_ntpd" } \
+-d '{ "subscription": "all", "check": "check_ntpd" }' \
 http://localhost:4567/silenced/clear
 
 HTTP/1.1 204 No Content
