@@ -26,8 +26,7 @@ weight: 8
     - [Handler name(s)](#handler-names)
     - [`HANDLER` attributes](#handler-attributes)
     - [`socket` attributes (TCP/UDP handlers)](#socket-attributes)
-    - [`pipe` attributes (Transport handlers)](#pipe-attributes)
-    - [`subdue` attributes](#subdue-attributes)
+    - [`pipe` attributes (Transport handlers)](#pipe-attributes)s
 
 ## What is a Sensu event handler?
 
@@ -185,8 +184,8 @@ Handler set definitions allow groups of handlers (i.e. individual collections of
 actions to take on event data) to be referenced via a single named handler set.
 
 _NOTE: Attributes defined on handler sets do not apply to the handlers they
-include. For example, `subdue`, `filter`, `filters`, and `mutator` attributes
-defined in a handler set will have no effect._
+include. For example, `filter`, `filters`, and `mutator` attributes defined 
+in a handler set will have no effect._
 
 ### Example handler set definition
 
@@ -352,19 +351,6 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {}
 : example
   : ~~~ shell
     "handle_flapping": true
-    ~~~
-
-`subdue`
-: description
-  : The [`subdue` definition scope][12], used to determine when a handler is
-    subdued.
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~ shell
-    "subdue": {}
     ~~~
 
 `command`
@@ -546,98 +532,7 @@ handlers configured with `"type": "transport"`)._
     "options": {"durable": true}
     ~~~
 
-#### `subdue` attributes
 
-The following attributes are configured within the `{"handlers": { "HANDLER": {
-"subdue": {} } } }` [configuration scope][9] (where `HANDLER` is a valid
-[handler name][15]).
-
-##### EXAMPLE {#subdue-attributes-example}
-
-~~~ json
-{
-  "handlers": {
-    "example_handler": {
-      "type": "pipe",
-      "command": "do_something.rb -o option",
-      "...": "...",
-      "subdue": {
-        "at": "handler",
-        "days": [
-          "monday",
-          "tuesday",
-          "wednesday",
-          "thursday",
-          "friday"
-        ],
-        "begin": "12AM PT",
-        "end": "11:59:59PM PT",
-        "exceptions": [
-          {
-            "begin": "8AM PT",
-            "end": "6PM PT"
-          }
-        ]
-      }
-    }
-  }
-}
-~~~
-
-##### ATTRIBUTES {#subdue-attributes-specification}
-
-`days`
-: description
-  : An array of days of the week the handler is subdued. Each array item must be
-    a string and a valid day of the week.
-: required
-  : false
-: type
-  : Array
-: example
-  : ~~~ shell
-    "days": ["monday", "wednesday"]
-    ~~~
-
-`begin`
-: description
-  : Beginning of the time window when the handler is subdued. Parsed by Ruby's
-    `Time.parse()`. Time may include a time zone.
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "begin": "5PM PST"
-    ~~~
-
-`end`
-: description
-  : End of the time window when the handler is subdued. Parsed by Ruby's
-    `Time.parse()`. Time may include a time zone.
-: required
-  : true
-: type
-  : String
-: example
-  : ~~~ shell
-    "end": "9AM PST"
-    ~~~
-
-`exceptions`
-: description
-  : Subdue time window (`begin`, `end`) exceptions. An array of time window
-    exceptions. Each array item must be a hash containing valid `begin` and
-    `end` times.
-: required
-  : false
-: type
-  : Array
-: example
-  : ~~~ shell
-    "exceptions": [{"begin": "8PM PST", "end": "10PM PST"}]
-    ~~~
 
 [?]:  #
 [1]:  server.html
@@ -651,7 +546,6 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {
 [9]:  configuration.html#configuration-scopes
 [10]: http://ruby-doc.org/core-2.2.0/Regexp.html
 [11]: plugins.html
-[12]: #subdue-attributes
 [13]: #socket-attributes
 [14]: #pipe-attributes
 [15]: #handler-names
