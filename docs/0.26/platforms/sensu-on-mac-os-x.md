@@ -147,7 +147,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
    your favorite text editor.
 
    ~~~ shell
-   sudo cp /opt/sensu/embedded/Cellar/sensu/0.26.3/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
+   sudo cp /opt/sensu/embedded/Cellar/sensu/0.26.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
