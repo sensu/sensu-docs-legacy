@@ -17,10 +17,10 @@ next:
 - [The `/aggregates/:name` API endpoints](#the-aggregatesname-api-endpoints)
   - [`/aggregates/:name` (GET)](#aggregatesname-get)
   - [`/aggregates/:name` (DELETE)](#aggregatesname-delete)
-- [The `/aggregates/:name/:clients` API endpoint](#the-aggregatesnameclients-api-endpoint)
-  - [`/aggregates/:name/:clients` (GET)](#aggregatesnameclients-get)
-- [The `/aggregates/:name/:checks` API endpoint](#the-aggregatesnamechecks-api-endpoint)
-  - [`/aggregates/:name/:checks` (GET)](#aggregatesnamechecks-get)
+- [The `/aggregates/:name/clients` API endpoint](#the-aggregatesnameclients-api-endpoint)
+  - [`/aggregates/:name/clients` (GET)](#aggregatesnameclients-get)
+- [The `/aggregates/:name/checks` API endpoint](#the-aggregatesnamechecks-api-endpoint)
+  - [`/aggregates/:name/checks` (GET)](#aggregatesnamechecks-get)
 - [The `/aggregates/:name/results/:severity` API endpoint](#the-aggregatesnameresultsseverity-api-endpoint)
   - [`/aggregates/:name/results/:severity` (GET)](#aggregatesnameresultsseverity-get)
 
@@ -48,7 +48,7 @@ $ curl -s http://localhost:4567/aggregates | jq .
 
 #### API specification {#aggregates-get-specification}
 
-`/aggregates` (GET)  
+`/aggregates` (GET)
 : desc
   : Returns the list of named aggregates.
 : example url
@@ -177,16 +177,16 @@ Server: thin
     Server: thin
     ~~~
 
-## The `/aggregates/:name/:clients` API endpoint
+## The `/aggregates/:name/clients` API endpoint
 
-The `/aggregates/:name/:clients` API endpoint provides HTTP GET access to the
+The `/aggregates/:name/clients` API endpoint provides HTTP GET access to the
 Sensu client members of a [named aggregate][1].
 
-### `/aggregates/:name/:clients` (GET)
+### `/aggregates/:name/clients` (GET)
 
 #### EXAMPLES {#aggregatesnameclients-get-examples}
 
-The following example demonstrates a `/aggregates/:name/:clients` API query for
+The following example demonstrates a `/aggregates/:name/clients` API query for
 the client members of an aggregate named `elasticsearch`.
 
 ~~~ shell
@@ -206,11 +206,11 @@ $ curl -s http://localhost:4567/aggregates/elasticsearch/clients | jq .
     ]
   },
 ]
-~~~  
+~~~
 
 #### API specification {#aggregatesnameclients-get-specification}
 
-`/aggregates/:name/:clients` (GET)
+`/aggregates/:name/clients` (GET)
 : desc
   : Returns the client members of a named aggregate.
 : example URL
@@ -240,16 +240,16 @@ $ curl -s http://localhost:4567/aggregates/elasticsearch/clients | jq .
     ]
     ~~~
 
-## The `/aggregates/:name/:checks` API endpoint
+## The `/aggregates/:name/checks` API endpoint
 
-The `/aggregates/:name/:checks` API endpoint provides HTTP GET access to the
+The `/aggregates/:name/checks` API endpoint provides HTTP GET access to the
 Sensu check members of a [named aggregate][1].
 
-### `/aggregates/:name/:checks` (GET)
+### `/aggregates/:name/checks` (GET)
 
 #### EXAMPLES {#aggregatesnamechecks-get-examples}
 
-The following example demonstrates a `/aggregates/:name/:checks` API query for
+The following example demonstrates a `/aggregates/:name/checks` API query for
 the check members of an aggregate named `elasticsearch`.
 
 ~~~ shell
@@ -269,11 +269,11 @@ $ curl -s http://localhost:4567/aggregates/elasticsearch/checks | jq .
     ]
   }
 ]
-~~~  
+~~~
 
 #### API specification {#aggregatesnamechecks-get-specification}
 
-`/aggregates/:name/:checks` (GET)
+`/aggregates/:name/checks` (GET)
 : desc
   : Returns the check members of a named aggregate.
 : example URL
@@ -329,7 +329,7 @@ $ curl -s http://localhost:4567/aggregates/elasticsearch/results/critical | jq .
     ]
   }
 ]
-~~~  
+~~~
 
 #### API specification {#aggregatesnameresultsseverity-get-specification}
 
