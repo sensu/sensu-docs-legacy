@@ -170,14 +170,14 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
       - **required**: false
       - **type**: Boolean
       - **description**: If specified as true, the silence entry will be
-      automatically cleared once the condition it is siliencing is resolved.
+      automatically cleared once the condition it is silencing is resolved.
       - **example**: true
   : - `reason`
       - **required**: false
       - **type**: String
       - **description**: If specified, this free-form string is used to provide context
       or rationale for the reason this silence entry was created.
-      - **example**: "pre-arranged maintenenance window"
+      - **example**: "pre-arranged maintenance window"
   : - `subscription`: String, required if `check` not specified
       - **required**: true, unless `client` is specified
       - **type:** String
@@ -294,7 +294,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
     - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
 
-### `/silended/subscriptions/:subscription` (GET)
+### `/silenced/subscriptions/:subscription` (GET)
 
 #### Example: Querying for silence entries via subscription name
 
@@ -341,7 +341,7 @@ $ curl -s -X GET http://localhost:4567/silenced/subscriptions/load-balancer | jq
   : - **Success**: 200 (OK)
     - **Error**: 500 (Internal Server Error)
 
-### `/silended/checks/:check` (GET)
+### `/silenced/checks/:check` (GET)
 
 #### Example: Querying for silence entries via check name
 
