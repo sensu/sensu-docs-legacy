@@ -38,15 +38,15 @@ notice._
 
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [https://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-0.26.3_1.txz][3]
+   [https://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-0.26.1_1.txz][3]
 
    _NOTE: FreeBSD packages are available for FreeBSD 10.0, 10.1, and 10.2.
    Please visit the [Sensu Downloads][1] page for more information._
 
-2. Install the `sensu-0.26.3_1.txz` package using the `pkg` utility:
+2. Install the `sensu-0.26.1_1.txz` package using the `pkg` utility:
 
    ~~~ shell
-   sudo pkg add ./sensu-0.26.3_1.txz
+   sudo pkg add ./sensu-0.26.1_1.txz
    ~~~
 
 3. Configure the Sensu client. **No "default" configuration is provided with
@@ -132,7 +132,7 @@ Coming soon...
 
 [1]:  https://sensuapp.org/download
 [2]:  https://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/
-[3]:  https://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-0.26.3_1.txz
+[3]:  https://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-0.26.1_1.txz
 [4]:  https://sensuapp.org/mit-license
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html
