@@ -10,7 +10,61 @@ weight: 5
 
 ## Releases
 
+- [Core 0.26.3 Release Notes](#core-v0-26-3)
+- [Core 0.26.2 Release Notes](#core-v0-26-2)
+- [Core 0.26.1 Release Notes](#core-v0-26-1)
 - [Core 0.26.0 Release Notes](#core-v0-26-0)
+
+## Core 0.26.3 Release Notes {#core-v0-26-3}
+
+Source: [GitHub.com][1]
+
+**September 23, 2016** &mdash; Sensu Core version 0.26.3 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v0-26-3-changes}
+
+- **BUGFIX**: Fixed a condition where /silenced API would fail to retrieve
+	entries for subscriptions containing a mix of colons and hyphens,
+	e.g. `client:foo-bar-baz`.
+
+## Core 0.26.2 Release Notes {#core-v0-26-2}
+
+Source: [GitHub.com][1]
+
+**September 21, 2016** &mdash; Sensu Core version 0.26.2 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v0-26-2-changes}
+
+- **BUGFIX**: Fixed a condition where events could not be successfully
+	deleted when they originate from a client configured with a
+	signature
+
+- **BUGFIX**: Fixed a condition where check results with an invalid
+	signature would never complete processing. This often resulted in
+	Sensu Server failing to shut down cleanly.
+
+- **BUGFIX**: Fixed a condition where /silenced API would fail to retrieve
+	entries for subscriptions containing colons, e.g. `client:foo`.
+
+- **BUGFIX**: Made a change to ensure that new proxy clients are created
+	with a per-client subscription just like regular clients.
+
+## Core 0.26.1 Release Notes {#core-v0-26-1}
+
+Source: [GitHub.com][1]
+
+**September 7, 2016** &mdash; Sensu Core version 0.26.1 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v0-26-1-changes}
+
+- **BUGFIX**: Fixed a condition where Sensu Server would fail to start
+	without a `client` configuration definition.
 
 ## Core 0.26.0 Release Notes {#core-v0-26-0}
 
