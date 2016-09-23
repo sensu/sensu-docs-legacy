@@ -7,7 +7,7 @@ weight: 17
 **ENTERPRISE: Built-in integrations are available for [Sensu Enterprise][1]
 users only.**
 
-# OpenTSDB Integration
+# InfluxDB Integration
 
 - [Overview](#overview)
 - [Configuration](#configuration)
