@@ -481,7 +481,7 @@ handlers configured with `"type": "transport"`)._
     "example_handler": {
       "type": "transport",
       "pipe": {
-        "type": "topic",
+        "type": "direct",
         "name": "example_transport_handler"
       }
     }
@@ -499,7 +499,7 @@ handlers configured with `"type": "transport"`)._
 : type
   : String
 : allowed values
-  : `direct`, `fanout`, `topic`
+  : `direct`, `fanout`
 : example
   : ~~~ shell
     "type": "direct"
