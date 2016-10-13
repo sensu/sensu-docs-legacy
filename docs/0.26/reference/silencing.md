@@ -12,6 +12,7 @@ weight: 6
 - [What is Sensu Silencing?](#what-is-sensu-silencing)
   - [When to use silencing](#when-to-use-silencing)
   - [Advantages over deprecated stash-based silencing](#advantages-over-deprecated-stash-based-silencing)
+  - [Migrating from stash-based silencing](#migrating-from-stash-based-silencing)
 - [How does silencing work?](#how-does-silencing-work)
 - [Silencing entry specification](#silencing-entry-specification)
   - [Silencing entry attributes](#silencing-entry-attributes)
@@ -24,8 +25,8 @@ weight: 6
 
 ## What is Sensu Silencing?
 
-Silencing is the means to suppress the execution of [handlers][1] on an ad-hoc
-basis. By creating entries in the `silenced` registry using the [Silenced
+Silencing is the means to suppress the execution of [event handlers][1] on an
+ad-hoc basis. By creating entries in the `silenced` registry using the [Silenced
 API][2], either manually or via a dashboard, Sensu operators and on-call
 personnel can mute notifications on-the-fly.
 
@@ -63,21 +64,47 @@ In addition to the above combinations, silencing entries support
 ### Advantages over deprecated stash-based silencing
 
 Prior to Sensu 0.26, silencing capability was implemented in external libraries
-like [sensu-plugin][1] using [Sensu Stashes][0]. Although silencing via stashes
-has not been removed from sensu-plugin, it is effectively deprecated by the
-introduction of native silencing as described in this document.
+like [sensu-plugin][6] using specially crafted [Sensu Stashes][7]. Although
+silencing via stashes has not been removed from sensu-plugin, it is effectively
+deprecated by the introduction of native silencing as described in this document.
 
-Native silencing offers the following advantages over the stash-based silencing
-model which preceded it:
+Sensu's new built-in or "native" silencing offers the following advantages over
+the stash-based silencing model which preceded it:
 
-* Lower overhead - does not require forking a handler process to access the API
-* Works for any handler regardless of language; no dependency on sensu-plugin
+* Works for any type of handler: pipe, TCP, UDP, transport, etc.
+* Works for any pipe handler regardless of language; no dependency on sensu-plugin
 or similar libraries.
 * Handlers can opt out of silencing via configuration ([see `handle_silenced` attribute][5].).
 * Silencing can be applied to clients not yet registered with the system by
 targeting subscriptions instead of client names.
 * Silencing entries can be automatically removed once the corresponding check
 returns OK
+* Lower overhead - does not require forking a handler process to access the API
+
+### Migrating from stash-based silencing
+
+Most Sensu operators are likely familiar with silencing alerts via a
+browser-based dashboard like Uchiwa or the Sensu Enterprise Dashboard. As of
+Uchiwa 0.18 and Sensu Enterprise Console 2.0, these dashboards now use the
+`/silenced` API in lieu of the `/stashes` API.
+
+Even after upgrading both Sensu and the dashboard to take advantage of the /silenced
+API, handler plugins will continue to query the `/stashes` API and honor stashes
+under the `silence` path.
+
+As a result, we recommend that:
+
+* Sensu API and Server be updated prior to upgrading Uchiwa or Sensu Enterprise
+Console
+* Any existing entries under `/stashes/silence` be recreated via the
+`/silenced` API prior to upgrading Uchiwa or Sensu Enterprise Console
+* All entries in `/stashes/silence` be deleted via the `/stashes` API before
+upgrading Uchiwa or Sensu Enterprise Console.
+
+_NOTE: We recommend that any custom tooling which uses `/stashes/silence` be
+upgraded to use the new `/silenced` API, and that all stashes under
+`/stashes/silence` be deleted before upgrading to Uchiwa 0.18+ or Sensu
+Enterprise Console 2.0+_
 
 ## How does silencing work?
 
@@ -408,3 +435,5 @@ successful, meaning the silencing entry has been cleared (deleted) from the
 [3]: checks.html
 [4]: clients.html#client-subscriptions
 [5]: handlers.html#handler-attributes
+[6]: http://github.com/sensu-plugins/sensu-plugin
+[7]: stashes.html
