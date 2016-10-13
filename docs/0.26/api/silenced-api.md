@@ -187,7 +187,6 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
     - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
 
-
 ### `/silenced/clear` (POST)
 
 #### Example: Clearing a silence entry
