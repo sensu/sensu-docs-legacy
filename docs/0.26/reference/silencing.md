@@ -122,7 +122,10 @@ entry will be marked as silenced, regardless of the check name.
   : null
 : example
   : ~~~ json
-    { "check": "haproxy_status", "subscription": "load_balancer" }
+    {
+      "check": "haproxy_status",
+      "subscription": "load_balancer"
+    }
     ~~~
 
 `subscription`
@@ -176,7 +179,11 @@ entry will be marked as silenced, regardless of the check name.
   : -1
 : example
   : ~~~ json
-    { "expire": 3600, "check": "disk_utilization", "subscription": "client:i-424242" }
+    {
+      "expire": 3600,
+      "check": "disk_utilization",
+      "subscription": "client:i-424242"
+    }
     ~~~
 
 `expire_on_resolve`
@@ -191,7 +198,10 @@ entry will be marked as silenced, regardless of the check name.
   : false
 : example
   : ~~~ json
-    { "expire_on_resolve": true, "check": "mysql_status" }
+    {
+      "expire_on_resolve": true,
+      "check": "mysql_status"
+    }
     ~~~
 
 `creator`
