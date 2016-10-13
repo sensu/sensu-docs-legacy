@@ -30,11 +30,11 @@ API][2], either manually or via a dashboard, Sensu operators and on-call
 personnel can mute notifications on-the-fly.
 
 Entries in the `silenced` registry (or "silencing entries") describe a
-combination of check name and subscription. When the check name and subscription
-described in a silencing entry match an event which would otherwise be passed to
-a handler, the handler will not be executed and an informational message will be
-logged. Individual handlers may opt-out of silencing by configuring the
-[`handle_silenced` attribute][3].
+combination of check name and subscription. When the [check name][3] and/or
+[subscription][4] described in a silencing entry match an event which would
+otherwise be passed to a handler, the handler will not be executed and an
+informational message will be logged. Individual handlers may opt-out of
+silencing by configuring the [`handle_silenced` attribute][5].
 
 _NOTE: Silencing described in this reference document is implemented in Sensu
 version 0.26 or later and Sensu Enterprise 2.0 or later._
@@ -73,7 +73,7 @@ model which preceded it:
 * Lower overhead - does not require forking a handler process to access the API
 * Works for any handler regardless of language; no dependency on sensu-plugin
 or similar libraries.
-* Handlers can opt out of silencing via configuration (`"handle_silenced": true`).
+* Handlers can opt out of silencing via configuration ([see `handle_silenced` attribute][5].).
 * Silencing can be applied to clients not yet registered with the system by
 targeting subscriptions instead of client names.
 * Silencing entries can be automatically removed once the corresponding check
@@ -405,5 +405,6 @@ successful, meaning the silencing entry has been cleared (deleted) from the
 
 [1]: handlers.html
 [2]: ../api/silenced-api.html
-[3]: handlers.html#handler-attributes
+[3]: checks.html
 [4]: clients.html#client-subscriptions
+[5]: handlers.html#handler-attributes
