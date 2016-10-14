@@ -19,7 +19,7 @@ weight: 6
   - [Silence a specific check on a specific client](#silence-a-specific-check-on-a-specific-client)
   - [Silence all checks on clients with a specific subscription](#silence-all-checks-on-clients-with-a-specific-subscription)
   - [Silence a specific check on clients with a specific subscription](#silence-a-specific-check-on-clients-with-a-specific-subscription)
-  - [Deleting (clearing) silencing entries](#deleting-clearing-silencing-entries)
+  - [Deleting silencing entries](#deleting-silencing-entries)
 - [Appendix: Deprecated stash-based silencing](#appendix-deprecated-stash-based-silencing)
   - [Comparing stash-based and native silencing](#comparing-stash-based-and-native-silencing)
   - [Migrating from stash-based silencing](#migrating-from-stash-based-silencing)
@@ -33,7 +33,7 @@ to improve overall signal-to-noise ratio, there are many scenarios in which
 operators receiving notifications from Sensu require an on-demand means to
 suppress alerts. Sensu's built-in silencing provides the means to suppress
 execution of event handlers on an ad-hoc basis. By using a dashboard or other
-tool to interact with the [Silenced API][2], operators can mute notifications
+tool to interact with the [`/silenced` API][2], operators can mute notifications
 on-the-fly.
 
 The /silenced API manipulates silencing entries in the Sensu data store. These
@@ -69,11 +69,13 @@ In addition to the above combinations, silencing entries support
 
 ## How does silencing work?
 
-Silencing entries are created on an ad-hoc basis via the [Silenced API][2]
+Silencing entries are created on an ad-hoc basis via the [`/silenced` API][2]
 endpoint. When silencing entries are successfully created via the API, they
 are assigned an ID in the format `$SUBSCRIPTION:$CHECK`, where `$SUBSCRIPTION`
 is the name of a Sensu client subscription and `$CHECK` is the name of a Sensu
-check.
+check. Silencing entries can be used to silence checks on specific clients by
+by taking advantage of [per-client subscriptions][4] added in Sensu 0.26, e.g.
+`client:$CLIENT_NAME`.
 
 These silencing entries are persisted to the `silenced` registry in the [Sensu
 data store][10]. When the Sensu server process subsequent check results, it consults
@@ -95,7 +97,20 @@ ID with an asterisk in the `$CHECK` position. This indicates that any event wher
 the originating client's subscriptions match the subscription specified in the
 entry will be marked as silenced, regardless of the check name.
 
+_NOTE: Starting with version 0.26, Sensu clients automatically add a
+subscription containing their client name prefixed with the string `client:`.
+For example, client `i-424242` will automatically add subscription
+`client:i-424242`. Silencing checks at the individual client level requires
+clients to run Sensu 0.26+, or be manually configured with a `client:`
+subscription._
+
 ## Silencing entry specification
+
+Silencing entries are composed as a JSON document containing at least one of the
+required `subscription` or `check` attributes, and additional optional
+attributes as desired. Silencing entries are created, updated and deleted by
+submitting JSON documents to endpoints on the [`/silenced` API][2] via HTTP POST
+as shown in the examples below.
 
 ### Silencing entry attributes
 
@@ -108,6 +123,12 @@ entry will be marked as silenced, regardless of the check name.
   : String
 : default
   : null
+: example
+  : ~~~ json
+    {
+      "check": "haproxy_status",
+    }
+    ~~~
 : example
   : ~~~ json
     {
@@ -127,7 +148,16 @@ entry will be marked as silenced, regardless of the check name.
   : null
 : example
   : ~~~ json
-    { "subscription": "client:i-424242" }
+    {
+      "subscription": "client:i-424242"
+    }
+    ~~~
+: example
+  : ~~~ json
+    {
+      "subscription": "client:i-424242",
+      "check": "haproxy_status"
+    }
     ~~~
 
 `id`
@@ -299,7 +329,7 @@ client "i-424242":
 ~~~ shell
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{"subscription": "client:i-424242", "check": "check_ntp"}'
+-d '{"subscription": "client:i-424242", "check": "check_ntp"}' \
 http://localhost:4567/silenced
 
 HTTP/1.1 201 Created
@@ -311,7 +341,7 @@ resolved the underlying condition it is reporting on:
 ~~~ shell
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{"subscription": "client:i-424242", "check": "check_ntp", "expire_on_resolve": true}'
+-d '{"subscription": "client:i-424242", "check": "check_ntp", "expire_on_resolve": true}' \
 http://localhost:4567/silenced
 
 HTTP/1.1 201 Created
@@ -335,7 +365,7 @@ create a silencing entry specifying only the applicable subscription:
 ~~~ shell
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{"subscription": "appserver"}'
+-d '{"subscription": "appserver"}' \
 http://localhost:4567/silenced
 
 HTTP/1.1 201 Created
@@ -373,15 +403,15 @@ $ curl -s -X GET localhost:4567/silenced | jq .
 ]
 ~~~
 
-### Deleting (clearing) silencing entries
+### Deleting silencing entries
 
-Assuming we know the ID of a silencing entry, we delete it by via HTTP POST as
-well:
+Assuming we know the ID of a silencing entry, we can delete or clear it by via
+HTTP POST on the `/silenced/clear` endpoint:
 
 ~~~ shell
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{"id": "appserver:mysql_status"}'
+-d '{"id": "appserver:mysql_status"}' \
 http://localhost:4567/silenced/clear
 
 HTTP/1.1 204 No Content
@@ -395,16 +425,18 @@ successful, meaning the silencing entry has been cleared (deleted) from the
 
 ### Comparing stash-based and native silencing
 
-Prior to Sensu 0.26, the ability to silence notifications was implemented in
-external libraries like [sensu-plugin][6] using specially crafted [Sensu
-Stashes][7]. Although silencing via stashes has not yet been removed from sensu-plugin, it is
+Prior to Sensu 0.26 the ability to silence notifications was implemented in
+external libraries like [sensu-plugin][6], using specially crafted [stashes][7].
+
+
+Although silencing via stashes has not yet been removed from sensu-plugin, it is
 deprecated by both the native silencing described in this document, and
-[planned][8] [changes][9]  in sensu-plugin itself.
+[planned][8] [changes][9] in sensu-plugin itself.
 
 Sensu's new built-in or "native" silencing offers the following advantages over
 the stash-based silencing model which preceded it:
 
-* Works for any type of handler: pipe, TCP, UDP, transport, etc.
+* Works for any type of handler (e.g. pipe, TCP, transport) or Sensu Enterprise integration.
 * Works for any pipe handler regardless of language; no dependency on sensu-plugin
 or similar libraries.
 * Handlers can opt out of silencing via configuration ([see `handle_silenced` attribute][5].).
@@ -427,6 +459,9 @@ under the `silence` path.
 
 As a result, we recommend that:
 
+* Sensu Client should be upgraded so that clients will add "client:$CLIENT_NAME"
+to their subscriptions.
+  * This is required for native silencing to work on individual clients.
 * Sensu API and Server be updated prior to upgrading Uchiwa or Sensu Enterprise
 Console
 * Any existing entries under `/stashes/silence` be recreated via the
