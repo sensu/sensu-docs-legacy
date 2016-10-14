@@ -49,9 +49,9 @@ version 0.26 or later and Sensu Enterprise 2.0 or later._
 ### When to use silencing
 
 Silencing is used to prevent handlers from being triggered based on the check
-name, subscription or client name present in a check result. This can be
-desirable in many scenarios, giving operators the ability to quiet incoming
-alerts while coordinating their response.
+name present in a check result or the subscriptions associated with the client
+that published the check result. This can be desirable in many scenarios, giving
+operators the ability to quiet incoming alerts while coordinating their response.
 
 Sensu silencing entries make it possible to:
 
@@ -60,12 +60,12 @@ Sensu silencing entries make it possible to:
 * [Silence all checks on clients with a specific subscription](#silence-all-checks-on-clients-with-a-specific-subscription)
 * [Silence a specific check on clients with a specific subscription](#silence-a-specific-check-on-clients-with-a-specific-subscription)
 
-In addition to the above combinations, silencing entries support
+In addition to the above combinations, silencing entries support:
 
-* Expire after a specified number of seconds
-* Expire after check returns to OK state
-* Describe the "reason" or rationale
-* Describe the "creator" or entity responsible for an entry
+* Expiration after a specified number of seconds
+* Expiration after check returns to OK state (resolves)
+* Describing the "reason" or rationale
+* Describing the "creator" or entity responsible for an entry
 
 ## How does silencing work?
 
@@ -207,7 +207,7 @@ as shown in the examples below.
 `expire_on_resolve`
 : description
   : If the entry should be automatically deleted when a matching check begins
-  returning OK status.
+  returning OK status (resolves).
 : required
   : false
 : type
@@ -426,7 +426,8 @@ successful, meaning the silencing entry has been cleared (deleted) from the
 ### Comparing stash-based and native silencing
 
 Prior to Sensu 0.26 the ability to silence notifications was implemented in
-external libraries like [sensu-plugin][6], using specially crafted [stashes][7].
+external libraries like [sensu-plugin][6], using specially crafted Sensu API
+[stashes][7].
 
 
 Although silencing via stashes has not yet been removed from sensu-plugin, it is
