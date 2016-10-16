@@ -181,8 +181,8 @@ To manually start and stop the Sensu client Windows service, use the
 - Start or stop the Sensu client
 
   ~~~ shell
-  sc sensu-client start
-  sc sensu-client stop
+  sc start sensu-client
+  sc stop sensu-client
   ~~~
 
 
