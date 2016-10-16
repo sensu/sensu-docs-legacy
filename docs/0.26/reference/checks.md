@@ -679,8 +679,8 @@ name][41]).
 `days`
 : description
   : A hash of days of the week or 'all', each day specified must
-  define one or more time windows in which the check is scheduled to
-  be executed (at its interval).
+  define one or more time windows in which the check is not scheduled to
+  be executed.
 : required
   : false (unless `subdue` is configured)
 : type
