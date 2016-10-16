@@ -158,18 +158,14 @@ file path to `C:\opt\sensu\config.json`, the Sensu configuration directory to
 
 ### Install the Sensu client Windows service
 
-1. Obtain the hostname or IP address of the Windows system where the Sensu
-   client is installed. For the purpose of this example, we will assume
-   `10.0.1.100` is our IP address.
+Open a Command Prompt and use the [Windows SC][10] utility to create the Windows
+service for the Sensu client:
 
-2. Open a Command Prompt and use the [Windows SC][10] utility to create the
-   Windows service for the Sensu client:
+~~~ cmd
+sc create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
+~~~
 
-   ~~~ cmd
-   sc \\10.0.1.100 create sensu-client start= delayed-auto binPath= c:\opt\sensu\bin\sensu-client.exe DisplayName= "Sensu Client"
-   ~~~
-
-   _NOTE: the space between the equals (=) and the values is required._
+_NOTE: the space between the equals (=) and the values is required._
 
 ## Operating Sensu
 
