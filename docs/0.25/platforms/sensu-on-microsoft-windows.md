@@ -57,7 +57,7 @@ By default, all of the Sensu services on Microsoft Windows systems will load
 configuration from the following locations:
 
 - `C:\opt\sensu\config.json`
-- `C:\ops\sensu\conf.d\`
+- `C:\opt\sensu\conf.d\`
 
 _NOTE: in general, where references to configuration file locations found
 elsewhere in the Sensu documentation suggest paths beginning with `/etc/sensu`,
