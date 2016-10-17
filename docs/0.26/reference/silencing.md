@@ -458,23 +458,20 @@ Even after upgrading both Sensu and the dashboard to take advantage of the /sile
 API, handler plugins will continue to query the `/stashes` API and honor stashes
 under the `silence` path.
 
-As a result, we recommend that:
+As a result, we recommend the following steps as part of any migration effort:
 
-* Sensu Client should be upgraded so that clients will add "client:$CLIENT_NAME"
+* Sensu Client should be upgraded so that clients will add `client:$CLIENT_NAME`
 to their subscriptions.
-  * This is required for native silencing to work on individual clients.
-* Sensu API and Server be updated prior to upgrading Uchiwa or Sensu Enterprise
-Console
-* Any existing entries under `/stashes/silence` be recreated via the
-`/silenced` API prior to upgrading Uchiwa or Sensu Enterprise Console
+  _NOTE: The `client:$CLIENT_NAME` subscription is required for native silencing
+  to work at the individual client level._
+* Sensu API and Server should be updated prior to upgrading Uchiwa or Sensu
+Enterprise Console.
+* Any existing entries under `/stashes/silence` should be recreated via the
+`/silenced` API prior to upgrading Uchiwa or Sensu Enterprise Console.
+* Any custom tooling which uses the `/stashes/silence` pattern should be updated
+to use the new `/silenced` API.
 * All entries in `/stashes/silence` be deleted via the `/stashes` API before
-upgrading Uchiwa or Sensu Enterprise Console.
-
-_NOTE: We recommend that any custom tooling which uses `/stashes/silence` be
-upgraded to use the new `/silenced` API, and that all stashes under
-`/stashes/silence` be deleted before upgrading to Uchiwa 0.18+ or Sensu
-Enterprise Console 2.0+_
-
+upgrading Uchiwa 0.18+ or Sensu Enterprise Console 2.0+.
 
 [0]: checks.html#check-results
 [1]: handlers.html
