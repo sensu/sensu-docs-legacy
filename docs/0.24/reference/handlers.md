@@ -491,6 +491,10 @@ handlers configured with `"type": "transport"`)._
     "type": "direct"
     ~~~
 
+_NOTE: types `direct`, `fanout` and `topic` are supported by the default
+RabbitMQ transport. Redis and other transports may only implement a subset of
+these._
+
 `name`
 : description
   : The Sensu transport pipe name.
