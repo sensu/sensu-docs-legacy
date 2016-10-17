@@ -182,7 +182,7 @@ client name the result was submitted from, and the `output` of the check.
 ~~~
 
 _NOTE: please refer to the [check result specification][38] (below) for more
-information about about check results._
+information about check results._
 
 ## Check token substitution
 
