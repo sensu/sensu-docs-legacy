@@ -78,11 +78,11 @@ by taking advantage of [per-client subscriptions][4] added in Sensu 0.26, e.g.
 `client:$CLIENT_NAME`.
 
 These silencing entries are persisted to the `silenced` registry in the [Sensu
-data store][10]. When the Sensu server process subsequent check results, it consults
-this registry to determine whether or not a matching silencing entry exists. If
-one or more matching entries exist in the registry, the event context for the
-check result is updated to indicate that the event is silenced and the ID of the
-entries which the check result matched.
+data store][10]. When the Sensu server processes subsequent check results, it
+consults this registry to determine whether or not a matching silencing entry
+exists. If one or more matching entries exist in the registry, the event context
+for the check result is updated to indicate that the event is silenced and the
+ID of the entries which the check result matched.
 
 When creating a silencing entry, a combination of check and subscription can
 be specified, but only one or the other is strictly required.
