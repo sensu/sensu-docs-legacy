@@ -172,7 +172,7 @@ as shown in the examples below.
   : N/A
 : example
   : ~~~ shell
-    $ curl -s -X GET localhost:4567/silenced | jq .
+    $ curl -s -X GET 127.0.0.1:4567/silenced | jq .
     [
       {
         "expire": -1,
@@ -269,7 +269,7 @@ do this by taking advantage of [per-client subscriptions][4]:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -278,7 +278,7 @@ The `HTTP/1.1 201 Created` response indicates our POST was successful, so we
 should be able to use GET to see the resulting entry:
 
 ~~~ shell
-curl -s -X GET localhost:4567/silenced | jq .
+curl -s -X GET 127.0.0.1:4567/silenced | jq .
 [
   {
     "expire": -1,
@@ -298,7 +298,7 @@ Now, imagine that we'd like to make this entry expire in 3600 seconds:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242", "expire": 3600 }' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -307,7 +307,7 @@ If we query the list of silenced entries again, we can see the value of
 `"expire"` has changed from -1 to a value which decrements as time passes:
 
 ~~~ shell
-curl -s -X GET localhost:4567/silenced | jq .
+curl -s -X GET 127.0.0.1:4567/silenced | jq .
 [
   {
     "expire": 3557,
@@ -330,7 +330,7 @@ client "i-424242":
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242", "check": "check_ntp"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -342,7 +342,7 @@ resolved the underlying condition it is reporting on:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242", "check": "check_ntp", "expire_on_resolve": true}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -366,7 +366,7 @@ create a silencing entry specifying only the applicable subscription:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "appserver"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -380,7 +380,7 @@ clients with the subscription "appserver":
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "appserver", "check": "mysql_status"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -389,7 +389,7 @@ The `HTTP/1.1 201 Created` response indicates our POST was successful, so we
 should be able to use GET to see the resulting entry:
 
 ~~~ shell
-$ curl -s -X GET localhost:4567/silenced | jq .
+$ curl -s -X GET 127.0.0.1:4567/silenced | jq .
 [
   {
     "expire": -1,
@@ -412,7 +412,7 @@ HTTP POST on the `/silenced/clear` endpoint:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"id": "appserver:mysql_status"}' \
-http://localhost:4567/silenced/clear
+http://127.0.0.1:4567/silenced/clear
 
 HTTP/1.1 204 No Content
 ~~~
