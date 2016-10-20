@@ -19,6 +19,7 @@ weight: 6
   - [Silence a specific check on a specific client](#silence-a-specific-check-on-a-specific-client)
   - [Silence all checks on clients with a specific subscription](#silence-all-checks-on-clients-with-a-specific-subscription)
   - [Silence a specific check on clients with a specific subscription](#silence-a-specific-check-on-clients-with-a-specific-subscription)
+  - [Silence a specific check on every client regardless of subscriptions](#silence-a-specific-check-on-every-client)
   - [Deleting silencing entries](#deleting-silencing-entries)
 - [Appendix: Deprecated stash-based silencing](#appendix-deprecated-stash-based-silencing)
   - [Comparing stash-based and native silencing](#comparing-stash-based-and-native-silencing)
@@ -59,6 +60,7 @@ Sensu silencing entries make it possible to:
 * [Silence a specific check on a specific client](#silence-a-specific-check-on-a-specific-client)
 * [Silence all checks on clients with a specific subscription](#silence-all-checks-on-clients-with-a-specific-subscription)
 * [Silence a specific check on clients with a specific subscription](#silence-a-specific-check-on-clients-with-a-specific-subscription)
+* [Silence a specific check on every client regardless of subscriptions](#silence-a-specific-check-on-every-client)
 
 In addition to the above combinations, silencing entries support:
 
@@ -78,11 +80,11 @@ by taking advantage of [per-client subscriptions][4] added in Sensu 0.26, e.g.
 `client:$CLIENT_NAME`.
 
 These silencing entries are persisted to the `silenced` registry in the [Sensu
-data store][10]. When the Sensu server process subsequent check results, it consults
-this registry to determine whether or not a matching silencing entry exists. If
-one or more matching entries exist in the registry, the event context for the
-check result is updated to indicate that the event is silenced and the ID of the
-entries which the check result matched.
+data store][10]. When the Sensu server processes subsequent check results, it
+consults this registry to determine whether or not a matching silencing entry
+exists. If one or more matching entries exist in the registry, the event context
+for the check result is updated to indicate that the event is silenced and the
+ID of the entries which the check result matched.
 
 When creating a silencing entry, a combination of check and subscription can
 be specified, but only one or the other is strictly required.
@@ -172,7 +174,7 @@ as shown in the examples below.
   : N/A
 : example
   : ~~~ shell
-    $ curl -s -X GET localhost:4567/silenced | jq .
+    $ curl -s -X GET 127.0.0.1:4567/silenced | jq .
     [
       {
         "expire": -1,
@@ -269,7 +271,7 @@ do this by taking advantage of [per-client subscriptions][4]:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -278,7 +280,7 @@ The `HTTP/1.1 201 Created` response indicates our POST was successful, so we
 should be able to use GET to see the resulting entry:
 
 ~~~ shell
-curl -s -X GET localhost:4567/silenced | jq .
+curl -s -X GET 127.0.0.1:4567/silenced | jq .
 [
   {
     "expire": -1,
@@ -298,7 +300,7 @@ Now, imagine that we'd like to make this entry expire in 3600 seconds:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242", "expire": 3600 }' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -307,7 +309,7 @@ If we query the list of silenced entries again, we can see the value of
 `"expire"` has changed from -1 to a value which decrements as time passes:
 
 ~~~ shell
-curl -s -X GET localhost:4567/silenced | jq .
+curl -s -X GET 127.0.0.1:4567/silenced | jq .
 [
   {
     "expire": 3557,
@@ -330,7 +332,7 @@ client "i-424242":
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242", "check": "check_ntp"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -342,7 +344,7 @@ resolved the underlying condition it is reporting on:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "client:i-424242", "check": "check_ntp", "expire_on_resolve": true}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -366,7 +368,7 @@ create a silencing entry specifying only the applicable subscription:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "appserver"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -380,7 +382,7 @@ clients with the subscription "appserver":
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"subscription": "appserver", "check": "mysql_status"}' \
-http://localhost:4567/silenced
+http://127.0.0.1:4567/silenced
 
 HTTP/1.1 201 Created
 ~~~
@@ -389,7 +391,39 @@ The `HTTP/1.1 201 Created` response indicates our POST was successful, so we
 should be able to use GET to see the resulting entry:
 
 ~~~ shell
-$ curl -s -X GET localhost:4567/silenced | jq .
+$ curl -s -X GET 127.0.0.1:4567/silenced | jq .
+[
+  {
+    "expire": -1,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "mysql_status",
+    "subscription": "appserver",
+    "id": "appserver:mysql_status"
+  }
+]
+~~~
+
+### Silence a specific check on every client
+
+Assume we'd like to silence the "mysql_status" check on every client in our
+infrastructure, regardless of their subscriptions:
+
+~~~ shell
+$ curl -s -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{"check": "mysql_status"}' \
+http://127.0.0.1:4567/silenced
+
+HTTP/1.1 201 Created
+~~~
+
+The `HTTP/1.1 201 Created` response indicates our POST was successful, so we
+should be able to use GET to see the resulting entry:
+
+~~~ shell
+$ curl -s -X GET 127.0.0.1:4567/silenced | jq .
 [
   {
     "expire": -1,
@@ -398,7 +432,7 @@ $ curl -s -X GET localhost:4567/silenced | jq .
     "reason": null,
     "check": "mysql_status",
     "subscription": null,
-    "id": "appserver:mysql_status"
+    "id": "*:mysql_status"
   }
 ]
 ~~~
@@ -412,7 +446,7 @@ HTTP POST on the `/silenced/clear` endpoint:
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
 -d '{"id": "appserver:mysql_status"}' \
-http://localhost:4567/silenced/clear
+http://127.0.0.1:4567/silenced/clear
 
 HTTP/1.1 204 No Content
 ~~~
@@ -458,23 +492,20 @@ Even after upgrading both Sensu and the dashboard to take advantage of the /sile
 API, handler plugins will continue to query the `/stashes` API and honor stashes
 under the `silence` path.
 
-As a result, we recommend that:
+As a result, we recommend the following steps as part of any migration effort:
 
-* Sensu Client should be upgraded so that clients will add "client:$CLIENT_NAME"
+* Sensu Client should be upgraded so that clients will add `client:$CLIENT_NAME`
 to their subscriptions.
-  * This is required for native silencing to work on individual clients.
-* Sensu API and Server be updated prior to upgrading Uchiwa or Sensu Enterprise
-Console
-* Any existing entries under `/stashes/silence` be recreated via the
-`/silenced` API prior to upgrading Uchiwa or Sensu Enterprise Console
+  _NOTE: The `client:$CLIENT_NAME` subscription is required for native silencing
+  to work at the individual client level._
+* Sensu API and Server should be updated prior to upgrading Uchiwa or Sensu
+Enterprise Console.
+* Any existing entries under `/stashes/silence` should be recreated via the
+`/silenced` API prior to upgrading Uchiwa or Sensu Enterprise Console.
+* Any custom tooling which uses the `/stashes/silence` pattern should be updated
+to use the new `/silenced` API.
 * All entries in `/stashes/silence` be deleted via the `/stashes` API before
-upgrading Uchiwa or Sensu Enterprise Console.
-
-_NOTE: We recommend that any custom tooling which uses `/stashes/silence` be
-upgraded to use the new `/silenced` API, and that all stashes under
-`/stashes/silence` be deleted before upgrading to Uchiwa 0.18+ or Sensu
-Enterprise Console 2.0+_
-
+upgrading Uchiwa 0.18+ or Sensu Enterprise Console 2.0+.
 
 [0]: checks.html#check-results
 [1]: handlers.html
