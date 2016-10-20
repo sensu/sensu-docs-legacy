@@ -19,6 +19,7 @@ weight: 6
   - [Silence a specific check on a specific client](#silence-a-specific-check-on-a-specific-client)
   - [Silence all checks on clients with a specific subscription](#silence-all-checks-on-clients-with-a-specific-subscription)
   - [Silence a specific check on clients with a specific subscription](#silence-a-specific-check-on-clients-with-a-specific-subscription)
+  - [Silence a specific check on every client regardless of subscriptions](#silence-a-specific-check-on-every-client)
   - [Deleting silencing entries](#deleting-silencing-entries)
 - [Appendix: Deprecated stash-based silencing](#appendix-deprecated-stash-based-silencing)
   - [Comparing stash-based and native silencing](#comparing-stash-based-and-native-silencing)
@@ -59,6 +60,7 @@ Sensu silencing entries make it possible to:
 * [Silence a specific check on a specific client](#silence-a-specific-check-on-a-specific-client)
 * [Silence all checks on clients with a specific subscription](#silence-all-checks-on-clients-with-a-specific-subscription)
 * [Silence a specific check on clients with a specific subscription](#silence-a-specific-check-on-clients-with-a-specific-subscription)
+* [Silence a specific check on every client regardless of subscriptions](#silence-a-specific-check-on-every-client)
 
 In addition to the above combinations, silencing entries support:
 
@@ -397,8 +399,40 @@ $ curl -s -X GET 127.0.0.1:4567/silenced | jq .
     "creator": null,
     "reason": null,
     "check": "mysql_status",
-    "subscription": null,
+    "subscription": "appserver",
     "id": "appserver:mysql_status"
+  }
+]
+~~~
+
+### Silence a specific check on every client
+
+Assume we'd like to silence the "mysql_status" check on every client in our
+infrastructure, regardless of their subscriptions:
+
+~~~ shell
+$ curl -s -i -X POST \
+-H 'Content-Type: application/json' \
+-d '{"check": "mysql_status"}' \
+http://127.0.0.1:4567/silenced
+
+HTTP/1.1 201 Created
+~~~
+
+The `HTTP/1.1 201 Created` response indicates our POST was successful, so we
+should be able to use GET to see the resulting entry:
+
+~~~ shell
+$ curl -s -X GET 127.0.0.1:4567/silenced | jq .
+[
+  {
+    "expire": -1,
+    "expire_on_resolve": false,
+    "creator": null,
+    "reason": null,
+    "check": "mysql_status",
+    "subscription": null,
+    "id": "*:mysql_status"
   }
 ]
 ~~~
