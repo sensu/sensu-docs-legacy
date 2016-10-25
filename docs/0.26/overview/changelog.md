@@ -20,7 +20,7 @@ weight: 5
 
 ## Enterprise 2.0.0 Release Notes {#enterprise-v2-0-0}
 
-**October 16, 2016** &mdash; Sensu Enterprise version 2.0.0 has been
+**October 25, 2016** &mdash; Sensu Enterprise version 2.0.0 has been
 	released and is available for immediate download. Please note the
 	following improvements:
 
