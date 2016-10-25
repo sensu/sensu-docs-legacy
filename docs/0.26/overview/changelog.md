@@ -27,9 +27,9 @@ weight: 5
 ### IMPORTANT {#enterprise-v2-0-0-important}
 
 This Enterprise release is built upon [Sensu Core 0.26](#core-v0-26-0),
-which includes includes potentially breaking, backwards-incompatible
-changes. For more information, please refer to the [Sensu Core 0.26.0
-Important Changes](core-v0-26-0-important).
+which includes potentially breaking, backwards-incompatible changes. For
+more information, please refer to the [Sensu Core 0.26.0 Important
+Changes](core-v0-26-0-important).
 
 ### CHANGES {#enterprise-v2-0-0-changes}
 
@@ -59,7 +59,7 @@ Source: [GitHub.com][1]
 
 ### CHANGES {#core-v0-26-4-changes}
 
-- **BUGFIX**: Fixed in progress check extension execution tracking. The
+- **BUGFIX**: Fixed in progress check extension execution tracking, the
 	Sensu client now guards against multiple concurrent executions of
 	the same check extension.
 
