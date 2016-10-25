@@ -29,7 +29,7 @@ weight: 5
 This Enterprise release is built upon [Sensu Core 0.26](#core-v0-26-0),
 which includes potentially breaking, backwards-incompatible changes. For
 more information, please refer to the [Sensu Core 0.26.0 Important
-Changes](core-v0-26-0-important).
+Changes](#core-v0-26-0-important).
 
 ### CHANGES {#enterprise-v2-0-0-changes}
 
