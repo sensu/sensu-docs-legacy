@@ -10,14 +10,62 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.0.0 Release Notes](#enterprise-v2-0-0)
+- [Core 0.26.5 Release Notes](#core-v0-26-5)
+- [Core 0.26.4 Release Notes](#core-v0-26-4)
 - [Core 0.26.3 Release Notes](#core-v0-26-3)
 - [Core 0.26.2 Release Notes](#core-v0-26-2)
 - [Core 0.26.1 Release Notes](#core-v0-26-1)
 - [Core 0.26.0 Release Notes](#core-v0-26-0)
 
+## Enterprise 2.0.0 Release Notes {#enterprise-v2-0-0}
+
+**October 16, 2016** &mdash; Sensu Enterprise version 2.0.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### IMPORTANT {#enterprise-v2-0-0-important}
+
+This Enterprise release is built upon [Sensu Core 0.26](#core-v0-26-0),
+which includes potentially breaking, backwards-incompatible changes. For
+more information, please refer to the [Sensu Core 0.26.0 Important
+Changes](#core-v0-26-0-important).
+
+### CHANGES {#enterprise-v2-0-0-changes}
+
+- **NEW**: Built on [Sensu Core version 0.26.5](#core-v0-26-5).
+
+## Core 0.26.5 Release Notes {#core-v0-26-5}
+
+Source: [GitHub.com][18]
+
+**October 12, 2016** &mdash; Sensu Core version 0.26.5 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v0-26-5-changes}
+
+- **BUGFIX**: Fixed Sensu client configuration validation when the
+	automatic per-client subscription is the client's only
+	subscription.
+
+## Core 0.26.4 Release Notes {#core-v0-26-4}
+
+Source: [GitHub.com][17]
+
+**October 5, 2016** &mdash; Sensu Core version 0.26.4 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v0-26-4-changes}
+
+- **BUGFIX**: Fixed in progress check extension execution tracking, the
+	Sensu client now guards against multiple concurrent executions of
+	the same check extension.
+
 ## Core 0.26.3 Release Notes {#core-v0-26-3}
 
-Source: [GitHub.com][1]
+Source: [GitHub.com][16]
 
 **September 23, 2016** &mdash; Sensu Core version 0.26.3 has been released
 	and is available for immediate download. Please note the following
@@ -31,7 +79,7 @@ Source: [GitHub.com][1]
 
 ## Core 0.26.2 Release Notes {#core-v0-26-2}
 
-Source: [GitHub.com][1]
+Source: [GitHub.com][15]
 
 **September 21, 2016** &mdash; Sensu Core version 0.26.2 has been released
 	and is available for immediate download. Please note the following
@@ -55,7 +103,7 @@ Source: [GitHub.com][1]
 
 ## Core 0.26.1 Release Notes {#core-v0-26-1}
 
-Source: [GitHub.com][1]
+Source: [GitHub.com][14]
 
 **September 7, 2016** &mdash; Sensu Core version 0.26.1 has been released
 	and is available for immediate download. Please note the following
@@ -68,7 +116,7 @@ Source: [GitHub.com][1]
 
 ## Core 0.26.0 Release Notes {#core-v0-26-0}
 
-Source: [GitHub.com][1]
+Source: [GitHub.com][13]
 
 **August 24, 2016** &mdash; Sensu Core version 0.26.0 has been released and is
 available for immediate download. Please note the following improvements:
@@ -305,6 +353,12 @@ This release includes potentially breaking, backwards-incompatible changes:
 [10]:   https://sensuapp.org/blog/2016/07/07/sensu-plugin-filter-deprecation.html
 [11]:   ../api/silenced-api.html
 [12]:   ../reference/handlers.html#handler-attributes
+[13]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0260---2016-09-06
+[14]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0261---2016-09-07
+[15]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0262---2016-09-20
+[16]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0263---2016-09-21
+[17]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0264---2016-10-05
+[18]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0265---2016-10-12
 [861]:  https://github.com/sensu/sensu/issues/861
 [1282]: https://github.com/sensu/sensu/issues/1282
 [1286]: https://github.com/sensu/sensu/issues/1286
