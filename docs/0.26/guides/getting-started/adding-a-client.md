@@ -91,7 +91,7 @@ note the following steps that are required to add a remote Sensu client:
    }
    ~~~
 
-3. **Tell the client how to connect to the tranpsort**. Create a transport
+3. **Tell the client how to connect to the transport**. Create a transport
    definition at `/etc/sensu/conf.d/rabbitmq.json` (or
    `/etc/sensu/conf.d/redis.json` if you are using the Redis transport).
 
