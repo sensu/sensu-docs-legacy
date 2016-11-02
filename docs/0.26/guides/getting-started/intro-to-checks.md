@@ -217,7 +217,7 @@ A metric analysis check analyzes metric data which may or may not have been
 collected by a [metrics collection check][11]. By querying external metric
 stores (e.g. Graphite) to perform data evaluations, metric analysis checks allow
 you to perform powerful analytics based on trends in metric data rather than a
-single data point. For example, where monitoring and alerting on on a single CPU
+single data point. For example, where monitoring and alerting on a single CPU
 utilization data point can result in false positive events based on momentary
 spikes, monitoring and alerting on CPU utilization data over a specified period
 of time will improve alerting accuracy.
