@@ -71,9 +71,9 @@ note the following steps that are required to add a remote Sensu client:
        "subscriptions": [
          "default",
          "webserver"
-       ]       
+       ]
      }
-   }   
+   }
    ~~~
 
 2. **Tell the client which transport to use**. Create a transport definition at
