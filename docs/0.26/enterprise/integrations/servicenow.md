@@ -157,7 +157,7 @@ The following attributes are configured within the `{"servicenow": {} }`
   : `incident`
 : example
   : ~~~ shell
-    "incident_table": "events"
+    "incident_table": "em_event"
     ~~~
 
 `timeout`
