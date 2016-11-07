@@ -1,7 +1,7 @@
 ---
 title: "Handlers"
 description: "Reference documentation for Sensu Handlers."
-version: 0.26
+version: 0.27
 weight: 8
 ---
 

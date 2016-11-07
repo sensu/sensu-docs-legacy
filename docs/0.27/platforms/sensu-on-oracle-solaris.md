@@ -2,7 +2,7 @@
 title: "Solaris"
 description: "User documentation for installing and operating Sensu on Solaris
   systems."
-version: 0.26
+version: 0.27
 weight: 7
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Oracle Solaris systems. For instructions on
@@ -38,20 +38,20 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
    utility:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.26.1-1.i386.pkg
+   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.27.1-1.i386.pkg
    ~~~
 
    Alternatively, for SPARC packages:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.26.1-1.sparc.pkg
+   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.27.1-1.sparc.pkg
    ~~~
 
-2. Install the `sensu-0.26.1-1.i386.pkg` package using the `pkgadd` utility:
+2. Install the `sensu-0.27.1-1.i386.pkg` package using the `pkgadd` utility:
 
    ~~~ shell
    $ su
-   $ pkgadd -d sensu-0.26.1-1.i386.pkg
+   $ pkgadd -d sensu-0.27.1-1.i386.pkg
    ~~~
 
 3. Install the Sensu service init script(s) using the `svccfg` utility:
@@ -72,19 +72,19 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
    utility:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/ips/sensu-0.26.1-1.p5p
+   wget https://sensu.global.ssl.fastly.net/solaris/ips/sensu-0.27.1-1.p5p
    ~~~
 
-2. Install the `sensu-0.26.1-1.p5p` package using the `pkg` utility:
+2. Install the `sensu-0.27.1-1.p5p` package using the `pkg` utility:
 
    ~~~ shell
-   $ sudo pkg install -g sensu-0.26.1-1.p5p developer/versioning/sensu
+   $ sudo pkg install -g sensu-0.27.1-1.p5p developer/versioning/sensu
    ~~~
 
 3. Download and run the Sensu [post-install script][12]:
 
    ~~~ shell
-   $ wget https://sensuapp.org/docs/0.26/files/postinst.sh
+   $ wget https://sensuapp.org/docs/0.27/files/postinst.sh
    $ chmod +x postinst.sh
    $ sudo ./postinst.sh
    ~~~
@@ -203,5 +203,5 @@ $ svcadm restart sensu-client
 [9]:  #configure-sensu
 [10]: #example-transport-configuration
 [11]: #example-client-configuration
-[12]: /docs/0.26/files/postinst.sh
+[12]: /docs/0.27/files/postinst.sh
 [13]: http://www.oracle.com/technetwork/server-storage/solaris11/technologies/ips-323421.html

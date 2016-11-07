@@ -1,7 +1,7 @@
 ---
 title: "Aggregates API"
 description: "Sensu Aggregates API reference documentation."
-version: 0.26
+version: 0.27
 weight: 5
 next:
   url: "events-api.html"

@@ -1,7 +1,7 @@
 ---
 title: "OpenTSDB"
 description: "Send metrics to OpenTSDB using the telnet protocol."
-version: 0.26
+version: 0.27
 weight: 19
 ---
 

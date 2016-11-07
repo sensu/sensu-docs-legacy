@@ -2,7 +2,7 @@
 title: "RHEL/CentOS"
 description: "User documentation for installing and operating Sensu on Red Hat
   Enterprise Linux and CentOS Linux systems."
-version: 0.26
+version: 0.27
 weight: 2
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Red Hat and CentOS systems. For instructions

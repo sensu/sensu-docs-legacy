@@ -1,6 +1,6 @@
 ---
 layout: "docs"
-version: 0.26
+version: 0.27
 weight: 4
 category: "Architecture"
 title: "Supported Platforms"

@@ -1,6 +1,6 @@
 ---
 title: "Health & Info APIs"
-version: 0.26
+version: 0.27
 weight: 8
 next:
   url: "configuration.html"
@@ -153,7 +153,7 @@ $ curl -s http://127.0.0.1:4567/info | jq .
     }
   },
   "sensu": {
-    "version": "0.26.0"
+    "version": "0.27.0"
   }
 }
 ~~~
@@ -192,7 +192,7 @@ $ curl -s http://127.0.0.1:4567/info | jq .
         }
       },
       "sensu": {
-        "version": "0.26.0"
+        "version": "0.27.0"
       }
     }
     ~~~

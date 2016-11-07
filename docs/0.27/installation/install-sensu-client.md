@@ -1,7 +1,7 @@
 ---
 title: "Sensu Client"
 description: "The complete Sensu installation guide."
-version: 0.26
+version: 0.27
 weight: 5
 next:
   url: "../platforms/sensu-on-ubuntu-debian.html#sensu-core"

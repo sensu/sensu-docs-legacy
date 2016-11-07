@@ -1,6 +1,6 @@
 ---
 title: "Overview"
-version: 0.26
+version: 0.27
 weight: 1
 next:
   url: "adding-a-client.html"

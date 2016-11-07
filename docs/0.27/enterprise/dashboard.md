@@ -1,6 +1,6 @@
 ---
 title: "Sensu Dashboard"
-version: 0.26
+version: 0.27
 weight: 2
 next:
   url: "rbac/overview.html"

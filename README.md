@@ -90,7 +90,7 @@ following commands are an example of how this can be done.
 
 ~~~ shell
 cp -r docs/0.26 docs/0.27
-find docs/0.27 -type f -exec sed -i '' 's/0\.26/0\.27/g' '{}' \;
+find docs/0.27 -type f -exec sed -i 's/0\.26/0\.27/g' '{}' \;
 ~~~
 
 ## License

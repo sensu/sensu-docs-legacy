@@ -1,6 +1,6 @@
 ---
 title: "Sensu Enterprise"
-version: 0.26
+version: 0.27
 weight: 1
 next:
   url: "dashboard.html"

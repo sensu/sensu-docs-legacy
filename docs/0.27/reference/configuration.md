@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Reference documentation for Sensu Configuration, including service
   init scripts, command line arguments, and environment variables."
-version: 0.26
+version: 0.27
 weight: 14
 ---
 
@@ -477,7 +477,7 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
 : example
   : ~~~ shell
     $ /opt/sensu/bin/sensu-client -V
-    0.26.0
+    0.27.0
     ~~~
 
 `-c` (`--config FILE`)
