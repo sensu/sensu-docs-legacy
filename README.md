@@ -89,8 +89,8 @@ directory, and find and replace any occurrence of the previous release. The
 following commands are an example of how this can be done.
 
 ~~~ shell
-cp -r source/docs/0.25 source/docs/0.26
-find source/docs/0.26 -type f -exec sed -i '' 's/0\.25/0\.26/g' '{}' \;
+cp -r docs/0.26 docs/0.27
+find docs/0.27 -type f -exec sed -i '' 's/0\.26/0\.27/g' '{}' \;
 ~~~
 
 ## License
