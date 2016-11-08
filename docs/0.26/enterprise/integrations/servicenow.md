@@ -146,6 +146,20 @@ The following attributes are configured within the `{"servicenow": {} }`
     "cmdb_ci_table": "cmdb_ci_sensu_client"
     ~~~
 
+`incident_table`
+: description
+  : The ServiceNow table used for creating/resolving incidents corresponding to Sensu events.
+: required
+  : false
+: type
+  : String
+: default
+  : `incident`
+: example
+  : ~~~ shell
+    "incident_table": "incident"
+    ~~~
+
 `timeout`
 : description
   : The handler execution duration timeout in seconds (hard stop).
