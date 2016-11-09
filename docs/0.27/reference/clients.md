@@ -31,6 +31,7 @@ weight: 2
   - [Client definition specification](#client-definition-specification)
     - [`client` attributes](#client-attributes)
     - [`socket` attributes](#socket-attributes)
+    - [`http-socket` attributes](#http-socket-attributes)
     - [`keepalive` attributes](#keepalive-attributes)
     - [`thresholds` attributes](#thresholds-attributes)
     - [`registration` attributes](#registration-attributes)
@@ -273,16 +274,57 @@ ad-hoc check requests targeting specific clients via the [`/request` API][49].
 
 ### What is the Sensu client socket?
 
-Every Sensu client has a TCP & UDP socket listening for external check result
-input. The Sensu client socket(s) listen on `localhost` port `3030` by default
-and expect JSON formatted check results, allowing external sources (e.g. your
-web application, backup scripts, etc.) to push check results without needing to
-know anything about Sensu's internal implementation. An excellent client socket
-use case example is a web application pushing check results to indicate database
-connectivity issues.
+Every Sensu client has a TCP, UDP and HTTP socket listening for external check result
+input. The Sensu client socket(s) listen by default on `localhost` port `3030` for TCP/UDP and
+3031 for HTTP and expect JSON formatted check results, allowing external sources (e.g.
+your web application, backup scripts, etc.) to push check results without needing to know
+anything about Sensu's internal implementation. An excellent client socket use case example
+is a web application pushing check results to indicate database connectivity issues.
 
 To configure the Sensu client socket for a client, please refer to [the client
 socket attributes][16].
+
+
+### HTTP Socket
+
+The HTTP socket, just like the TCP and UDP sockets, accepts check results, but it
+requires a well-formed HTTP request and exposes other functionality that is not
+possible with the raw TCP/UDP sockets. In exchange for a bit more complexity, the
+HTTP socket interface has the advantage of being more expressive than a raw TCP/UDP
+socket, both in the requests that it accepts and how it responds, and so exposes
+more functionality.  The following endpoints are available for the HTTP socket:
+
+`GET /info`
+
+This endpoint returns 200 OK with some basic Sensu information like the version
+and transport metrics.
+
+`POST /results`
+This endpoint expects an application/json body with a check result
+
+`GET /settings`
+
+This endpoint responds with 200 OK and the sensu configuration. Due to the possible
+sensitive nature of the client settings (e.g passwords might be in the config) this
+endpoint is protected using HTTP basic authentication and by default the information
+returned is redacted (e.g common config keys like 'password' have their values replaced
+by 'REDACTED'). See the 'redact' configuration option if you need control over what is
+redacted. This endpoint accepts the optional query string ?redacted=false to disable
+redaction.
+
+Refer to [the http client socket attributes][50] for details on configuring the HTTP basic
+authentication details that this endpoint requires.
+
+`GET /brew`
+
+This endpoint gets you some fresh coffee. Try it!
+
+Any requests for unknown endpoints will get a 404 with some help information in the body.
+
+At the moment only unsecure HTTP (no HTTPS) is supported.
+
+To configure the Sensu HTTP client socket, please refer to [the http client
+socket attributes][50].
 
 ### Example client socket usage
 
@@ -299,6 +341,13 @@ echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' >
 ~~~ shell
 echo '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
 ~~~
+
+You can do the same using the HTTP socket:
+
+~~~ shell
+curl -v -H "Content-Type: application/json" -X POST -d '{"name": "app_01", "output": "could not connect to mysql", "status": 1}' localhost 3031
+~~~
+
 
 #### Creating a "dead man's switch"
 
@@ -646,7 +695,83 @@ The following attributes are configured within the `{ "client": { "socket": {} }
   : `3030`
 : example
   : ~~~ shell
-    "port": 3031
+    "port": 3032
+    ~~~
+
+#### `http socket` attributes
+
+The following attributes are configured within the `{ "client": { "http_socket": {} }
+}` [configuration scope][24].
+
+##### EXAMPLE {#http-socket-attributes-example}
+
+~~~ json
+{
+  "client": {
+    "name": "1-424242",
+    "...": "...",
+    "http_socket": {
+      "bind": "127.0.0.1",
+      "port": 3031,
+      "user": "http-auth-user-name",
+      "password": "use-somethign-secure-here"
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#http-socket-attributes-specification}
+
+`bind`
+: description
+  : The address to bind the Sensu client socket to.
+: required
+  : false
+: type
+  : String
+: default
+  : `127.0.0.1`
+: example
+  : ~~~ shell
+    "bind": "0.0.0.0"
+    ~~~
+
+`port`
+: description
+  : The port the HTTP Sensu client socket listens on.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `3031`
+: example
+  : ~~~ shell
+    "port": 8000
+    ~~~
+
+`user`
+: description
+  : The user name to enforce HTTP authentication on endpoints that require it
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "user": "sensu"
+    ~~~
+
+`password`
+: description
+  : The password to enforce HTTP authentication on endpoints that require it
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "password": "F76639PML6c7sk5nI46N"
     ~~~
 
 #### `keepalive` attributes
@@ -1421,3 +1546,4 @@ information for operations teams can be extremely valuable._
 [47]: http://wiki.servicenow.com/index.php?title=Introduction_to_Assets_and_Configuration
 [48]: #deregistration-attributes
 [49]: ../api/checks-api.html#the-request-api-endpoint
+[50]: #http-socket-attributes
