@@ -88,7 +88,7 @@ be a reason to upgrade RabbitMQ versions frequently._
    the `update-rc.d` utility:
 
    ~~~ shell
-   sudo update-rc.d rabbitmq-server defaults
+   sudo update-rc.d rabbitmq-server enable
    ~~~
 
 2. Start and stop the RabbitMQ service using the installed init scripts:

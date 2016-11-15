@@ -56,12 +56,12 @@ Enable or disable the Redis service to start on system boot using the
 `update-rc.d` utility:
 
 ~~~ shell
-sudo update-rc.d redis-server defaults
+sudo update-rc.d redis-server enable
 sudo update-rc.d redis-server disable
 ~~~
 
 ~~~ shell
-sudo update-rc.d redis-sentinel defaults
+sudo update-rc.d redis-sentinel enable
 sudo update-rc.d redis-sentinel disable
 ~~~
 

@@ -325,7 +325,7 @@ boot, use the `update-rc.d` utility.
 - Enable the Sensu client on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-client defaults
+  sudo update-rc.d sensu-client enable
   ~~~
 
 - Enable the Sensu server and API to start on system boot
@@ -333,14 +333,14 @@ boot, use the `update-rc.d` utility.
   - For Sensu Core users (i.e. `sensu-server` and `sensu-api`)
 
     ~~~ shell
-    sudo update-rc.d sensu-server defaults
-    sudo update-rc.d sensu-api defaults
+    sudo update-rc.d sensu-server enable
+    sudo update-rc.d sensu-api enable
     ~~~
 
   - For Sensu Enterprise users
 
     ~~~ shell
-    sudo update-rc.d sensu-enterprise defaults
+    sudo update-rc.d sensu-enterprise enable
     ~~~
 
     _WARNING: the `sensu-enterprise` process is intended to be a drop-in
@@ -351,7 +351,7 @@ boot, use the `update-rc.d` utility.
 - Enable Sensu Enterprise Dashboard on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-enterprise-dashboard defaults
+  sudo update-rc.d sensu-enterprise-dashboard enable
   ~~~
 
   _WARNING: the `sensu-enterprise-dashboard` process is intended to be a drop-in

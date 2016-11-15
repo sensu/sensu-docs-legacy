@@ -63,7 +63,7 @@ the [installation guide](2).
    Redis:
 
    ~~~ shell
-   sudo update-rc.d redis-server defaults
+   sudo update-rc.d redis-server enable
    sudo service redis-server start
    ~~~
 
