@@ -280,7 +280,7 @@ The following is an example API definition at `/etc/sensu/conf.d/api.json`.
 Be sure to reload Sensu Enterprise to pick up the configuration changes.
 
 ~~~ shell
-sudo /etc/init.d/sensu-enterprise reload
+sudo service sensu-enterprise reload
 ~~~
 
 [?]:  #

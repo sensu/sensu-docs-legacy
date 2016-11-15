@@ -369,7 +369,7 @@ the following instructions:
 1. Stop the RabbitMQ service on all three RabbitMQ systems.
 
    ~~~ shell
-   sudo /etc/init.d/rabbitmq-server stop
+   sudo service rabbitmq-server stop
    ~~~
 
 2. Enable RabbitMQ [`pause_minority` network partition handling][12]. Please
@@ -405,7 +405,7 @@ the following instructions:
 4. Start RabbitMQ on all three RabbitMQ systems.
 
    ~~~ shell
-   sudo /etc/init.d/rabbitmq-server start
+   sudo service rabbitmq-server start
    ~~~
 
 5. Reset the RabbitMQ nodes on all 3 selected instances in preparation for

@@ -94,8 +94,8 @@ be a reason to upgrade RabbitMQ versions frequently._
 2. Start and stop the RabbitMQ service using the installed init scripts:
 
    ~~~ shell
-   sudo /etc/init.d/rabbitmq-server start
-   sudo /etc/init.d/rabbitmq-server stop
+   sudo service rabbitmq-server start
+   sudo service rabbitmq-server stop
    ~~~
 
    Alternatively, it is also possible to use the `service` command to start and
@@ -153,7 +153,7 @@ adjusting the ulimit value to the recommendation corresponding to the
 environment where RabbitMQ is running.
 
 ~~~ shell
-# This file is sourced by /etc/init.d/rabbitmq-server. Its primary
+# This file is sourced by the rabbitmq-server service script. Its primary
 # reason for existing is to allow adjustment of system limits for the
 # rabbitmq-server process.
 #
