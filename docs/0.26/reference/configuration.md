@@ -18,8 +18,8 @@ weight: 14
   - [Configuration scopes](#configuration-scopes)
     - [Configuration scopes are relative](#configuration-scopes-are-relative)
     - [Configuration scope examples](#configuration-scope-examples)
-- [Sensu service init configuration](#sensu-service-init-configuration)
-  - [Sensu service init configuration variables](#sensu-service-init-configuration-variables)
+- [Sensu service init configuration](#sensu-service-script-configuration)
+  - [Sensu service init configuration variables](#sensu-service-script-configuration-variables)
 - [Sensu command line interfaces and arguments](#sensu-command-line-interfaces-and-arguments)
 - [Sensu environment variables](#sensu-environment-variables)
 - [Sensu configuration specification](#sensu-configuration-specification)
@@ -46,7 +46,7 @@ sources: environment variables, a configuration file, and one or more
 directories containing configuration files. Sensu loads configuration from these
 sources in the following order:
 
-1. The Sensu init scripts provide [command line arguments][1] for starting the
+1. The Sensu service scripts provide [command line arguments][1] for starting the
    Sensu services (e.g. the location of the configuration file (`-c`), the
    location of configuration directories (`-d`), etc).
 
@@ -275,13 +275,13 @@ loaded by Sensu).
 }
 ~~~
 
-## Sensu service init configuration
+## Sensu service service configuration
 
-The Sensu services are managed by init scripts that are provided in the Sensu
-packages. The Sensu init scripts are able to start/stop/restart the
+The Sensu services are managed by service scripts that are provided in the Sensu
+packages. The Sensu service scripts are able to start/stop/restart the
 corresponding Sensu services (e.g. the Sensu server, API, client, etc).
 
-The default Sensu init scripts and related configuration file(s) (containing
+The default Sensu service scripts and related configuration file(s) (containing
 configuration variables) are located as follows:
 
 - `/etc/default/sensu` (sourced by the init scripts to provide [configuration
@@ -294,9 +294,9 @@ configuration variables) are located as follows:
 - `/etc/init.d/sensu-enterprise`
 - `/etc/init.d/sensu-enterprise-dashboard`
 
-### Sensu service init configuration variables
+### Sensu service script configuration variables
 
-The following configuration variables can be set in the init script(s) for the
+The following configuration variables can be set in the service script(s) for the
 platform.
 
 `EMBEDDED_RUBY`
@@ -947,7 +947,7 @@ at the top level of their respective JSON documents):
 [2]:  #sensu-environment-variables
 [3]:  clients.html#client-definition-specification
 [4]:  clients.html#socket-attributes
-[5]:  #sensu-service-init-configuration-variables
+[5]:  #sensu-service-script-configuration-variables
 [6]:  https://www.rabbitmq.com/uri-spec.html
 [7]:  rabbitmq.html#rabbitmq-definition-specification
 [8]:  redis.html#redis-definition-specification

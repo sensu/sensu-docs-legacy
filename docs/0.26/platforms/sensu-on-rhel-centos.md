@@ -153,9 +153,9 @@ configuration from the following locations:
 - `/etc/sensu/conf.d/`
 
 _NOTE: Additional or alternative configuration file and directory locations may
-be used by modifying Sensu's init scripts and/or by starting the Sensu services
-with the corresponding CLI arguments. For more information, please consult the
-[Sensu Configuration][3] reference documentation._
+be used by modifying Sensu's service scripts and/or by starting the Sensu
+services with the corresponding CLI arguments. For more information, please
+consult the [Sensu Configuration][3] reference documentation._
 
 ### Create the Sensu configuration directory
 
@@ -395,41 +395,41 @@ can also be accomplished using the [`chkconfig` utility][9].
 
 ### Managing the Sensu services/processes {#service-management}
 
-To manually start and stop the Sensu services, use the provided init scripts:
+To manually start and stop the Sensu services, use the following commands:
 
 - Start or stop the Sensu client
 
   ~~~ shell
-  sudo /etc/init.d/sensu-client start
-  sudo /etc/init.d/sensu-client stop
+  sudo service sensu-client start
+  sudo service sensu-client stop
   ~~~
 
 - Start or stop the Sensu Core server
 
   ~~~ shell
-  sudo /etc/init.d/sensu-server start
-  sudo /etc/init.d/sensu-server stop
+  sudo service sensu-server start
+  sudo service sensu-server stop
   ~~~
 
 - Start or stop the Sensu Core API
 
   ~~~ shell
-  sudo /etc/init.d/sensu-api start
-  sudo /etc/init.d/sensu-api stop
+  sudo service sensu-api start
+  sudo service sensu-api stop
   ~~~
 
 - Start or stop Sensu Enterprise
 
   ~~~ shell
-  sudo /etc/init.d/sensu-enterprise start
-  sudo /etc/init.d/sensu-enterprise stop
+  sudo service sensu-enterprise start
+  sudo service sensu-enterprise stop
   ~~~
 
 - Start or stop the Sensu Enterprise Dashboard
 
   ~~~ shell
-  sudo /etc/init.d/sensu-enterprise-dashboard start
-  sudo /etc/init.d/sensu-enterprise-dashboard stop
+  sudo service sensu-enterprise-dashboard start
+  sudo service sensu-enterprise-dashboard stop
   ~~~
 
   Verify the Sensu Enterprise Dashboard is running by visiting view the
