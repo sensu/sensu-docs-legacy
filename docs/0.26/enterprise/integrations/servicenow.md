@@ -1,7 +1,8 @@
 ---
 title: "ServiceNow"
 description: "Create ServiceNow configuration items upon Sensu client
-  registration, and create/resolve ServiceNow incidents for Sensu events."
+  registration, create/resolve ServiceNow incidents, and/or create
+  ServiceNow events for Sensu events."
 version: 0.26
 weight: 3
 ---
@@ -20,7 +21,8 @@ users only.**
 ## Overview
 
 Create [ServiceNow][2] [configuration items][3] upon [Sensu client
-registration][4], and create/resolve ServiceNow incidents for [Sensu events][5].
+registration][4], create/resolve ServiceNow incidents, and/or create
+ServiceNow events for [Sensu events][5].
 
 ## Configuration
 
@@ -37,6 +39,8 @@ event handler (integration).
     "password": "secret",
     "create_cmdb_ci": true,
     "cmdb_ci_table": "cmdb_ci_server",
+    "incident_management": true,
+    "incident_table": "incident",
     "timeout": 10
   }
 }
@@ -146,6 +150,20 @@ The following attributes are configured within the `{"servicenow": {} }`
     "cmdb_ci_table": "cmdb_ci_sensu_client"
     ~~~
 
+`incident_management`
+: description
+  : If ServiceNow incidents should be created and resolved for Sensu events.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "incident_management": false
+    ~~~
+
 `incident_table`
 : description
   : The ServiceNow table used for creating/resolving incidents corresponding to Sensu events.
@@ -158,6 +176,34 @@ The following attributes are configured within the `{"servicenow": {} }`
 : example
   : ~~~ shell
     "incident_table": "incident"
+    ~~~
+
+`incident_management`
+: description
+  : If ServiceNow events should be created for Sensu events.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "event_management": true
+    ~~~
+
+`event_table`
+: description
+  : The ServiceNow table used for creating ServiceNow events corresponding to Sensu events.
+: required
+  : false
+: type
+  : String
+: default
+  : `em_event`
+: example
+  : ~~~ shell
+    "event_table": "em_event"
     ~~~
 
 `timeout`
