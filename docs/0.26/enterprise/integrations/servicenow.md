@@ -178,7 +178,7 @@ The following attributes are configured within the `{"servicenow": {} }`
     "incident_table": "incident"
     ~~~
 
-`incident_management`
+`event_management`
 : description
   : If ServiceNow events should be created for Sensu events.
 : required
