@@ -165,6 +165,14 @@ The Sensu API can be used to update proxy client data in the client registry. To
 update proxy client data, please refer to the [Client API reference
 documentation][9].
 
+##### Proxy client via the client socket example
+
+The following is an example of how to sent a proxy client payload via the [Client socket input](#client-socket-input):
+
+~~~ shell
+echo '{"source": "mysql01", "name": "app_01", "output": "could not connect to mysql", "status": 1}' | nc localhost 3030
+~~~
+
 ### How are keepalive events created? {#keepalive-events}
 
 Sensu servers (including Sensu Enterprise) monitor the Sensu client registry for
