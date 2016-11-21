@@ -224,6 +224,22 @@ The RabbitMQ definition uses the `"rabbitmq": {}` definition scope.
     "password": "secret"
     ~~~
 
+`heartbeat`
+: description
+  : The RabbitMQ AMQP connection heartbeat in seconds.  Enabling can help in
+    early detection of disrupted TCP connections causing the RabbitMQ client to
+    attempt re-connection to the server much earlier than if left disabled.
+    _NOTE: if this setting is not defined or set to 0 then RabbitMQ client
+    heartbeats are disabled.
+: required
+  : false
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "heartbeat": 30
+    ~~~
+
 `prefetch`
 : description
   : The RabbitMQ AMQP consumer prefetch value, setting the number of
