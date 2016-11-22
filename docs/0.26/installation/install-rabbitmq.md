@@ -16,10 +16,8 @@ messaging broker - an intermediary for messaging. It gives your applications a
 common platform to send and receive messages, and your messages a safe place to
 live until received"_. RabbitMQ is also the default [Sensu Transport][3]. When
 using RabbitMQ as the Sensu Transport, all Sensu services require access to the
-same instance (or cluster) of RabbitMQ to function. Although it is possible
-to install and run Redis on almost any modern operating system, **all Sensu
-users are encouraged to install and run RabbitMQ on one of the following
-supported platforms**
+same instance (or cluster) of RabbitMQ to function. **All Sensu users are
+encouraged to install and run RabbitMQ on one of the following supported platforms:**
 
 - [Install RabbitMQ on Ubuntu/Debian](install-rabbitmq-on-ubuntu-debian.html) (recommended)
 - [Install RabbitMQ on RHEL/CentOS](install-rabbitmq-on-rhel-centos.html)
