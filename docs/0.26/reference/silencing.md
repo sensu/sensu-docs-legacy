@@ -128,7 +128,7 @@ as shown in the examples below.
 : example
   : ~~~ json
     {
-      "check": "haproxy_status",
+      "check": "haproxy_status"
     }
     ~~~
 : example
