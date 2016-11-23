@@ -1,0 +1,155 @@
+SENSU-ENTERPRISE-NOTIFY-MIB DEFINITIONS ::= BEGIN
+  IMPORTS
+    MODULE-IDENTITY, OBJECT-TYPE, NOTIFICATION-TYPE,
+    Integer32
+      FROM SNMPv2-SMI
+    sensuEnterprise, EventAction, CheckSeverity
+      FROM SENSU-ENTERPRISE-ROOT-MIB;
+
+sensuEnterpriseNotify MODULE-IDENTITY
+  LAST-UPDATED "201512170000Z" -- December 17, 2015
+  ORGANIZATION "Sensu Enterprise"
+  CONTACT-INFO
+    "Sean Porter
+
+    Telephone: 1-855-99-SENSU
+    Email: helpdesk@sensuapp.com
+
+    Sensu Enterprise Information:
+      http://www.sensuapp.org/enterprise
+    "
+  DESCRIPTION
+    "Added client address object"
+  REVISION "201512170000Z" -- December 17, 2015
+  DESCRIPTION
+    "Objects for the Sensu Enterprise SNMP integration."
+  REVISION "201508170000Z" -- August 17, 2015
+  DESCRIPTION
+    "Added check output object, changing several OIDs"
+  REVISION "201504200000Z" -- April 20, 2015
+  DESCRIPTION
+    "Initial Version"
+  ::= { sensuEnterprise 1 }
+
+sensuEnterpriseEventTable OBJECT-TYPE
+  SYNTAX      SEQUENCE OF SensuEnterpriseEventEntry
+  MAX-ACCESS  not-accessible
+  STATUS      current
+  DESCRIPTION
+    "Table of Sensu Enterprise events."
+  ::= { sensuEnterpriseNotify 1 }
+
+SensuEnterpriseEventEntry ::= SEQUENCE {
+  sensuEventID          OCTET STRING,
+  sensuNotification     OCTET STRING,
+  sensuClientName       OCTET STRING,
+  sensuCheckName        OCTET STRING,
+  sensuCheckSeverity    CheckSeverity,
+  sensuCheckOutput      OCTET STRING,
+  sensuEventAction      EventAction,
+  sensuEventTimestamp   Integer32,
+  sensuEventOccurrences Integer32
+  }
+
+sensuEnterpriseEventEntry OBJECT-TYPE
+  SYNTAX      SensuEnterpriseEventEntry
+  MAX-ACCESS  not-accessible
+  STATUS      current
+  DESCRIPTION
+    "A Sensu Enterprise event entry."
+  INDEX { sensuEventID }
+  ::= { sensuEnterpriseEventTable 1 }
+
+sensuEventID OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+   "This object uniquely identifies this event entry."
+  ::= { sensuEnterpriseEventEntry 1 }
+
+sensuNotification OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Event notification message."
+  ::= { sensuEnterpriseEventEntry 2 }
+
+sensuClientName OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu client name."
+  ::= { sensuEnterpriseEventEntry 3 }
+
+sensuCheckName OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu check name."
+  ::= { sensuEnterpriseEventEntry 4 }
+
+sensuCheckSeverity OBJECT-TYPE
+  SYNTAX      CheckSeverity
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "A number that corresponds to the current check status severity:
+    0=OK, 1=WARNING, 2=CRITICAL, 3=UNKNOWN."
+  ::= { sensuEnterpriseEventEntry 5 }
+
+sensuCheckOutput OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu check output."
+  ::= { sensuEnterpriseEventEntry 6 }
+
+sensuEventAction OBJECT-TYPE
+  SYNTAX      EventAction
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "A string identifying the current event action (CREATE, RESOLVE,
+    FLAPPING)."
+  ::= { sensuEnterpriseEventEntry 7 }
+
+sensuEventTimestamp OBJECT-TYPE
+  SYNTAX      Integer32
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+   "The event timestamp (seconds since the UNIX epoch)."
+  ::= { sensuEnterpriseEventEntry 8 }
+
+sensuEventOccurrences OBJECT-TYPE
+  SYNTAX      Integer32
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+   "The event occurrence count."
+  ::= { sensuEnterpriseEventEntry 9 }
+
+sensuClientAddress OBJECT-TYPE
+  SYNTAX      OCTET STRING
+  MAX-ACCESS  read-only
+  STATUS      current
+  DESCRIPTION
+    "Sensu client address."
+  ::= { sensuEnterpriseEventEntry 10 }
+
+sensuEnterpriseEventTrap NOTIFICATION-TYPE
+  OBJECTS { sensuEventID, sensuNotification, sensuClientName,
+            sensuCheckName, sensuCheckSeverity, sensuCheckOutput,
+            sensuEventAction, sensuEventTimestamp,
+            sensuEventOccurrences, sensuClientAddress }
+  STATUS  current
+  DESCRIPTION
+    "The SNMP trap that is sent from Sensu Enterprise for an event."
+  ::= { sensuEnterpriseNotify 0 }
+
+END
