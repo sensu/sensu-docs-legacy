@@ -384,6 +384,9 @@ the following instructions:
 
 1. Stop the RabbitMQ service on all three RabbitMQ systems.
 
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server stop`_
+
    ~~~ shell
    sudo service rabbitmq-server stop
    ~~~
@@ -419,6 +422,9 @@ the following instructions:
    stopped before making configuration changes._
 
 4. Start RabbitMQ on all three RabbitMQ systems.
+
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server start`_
 
    ~~~ shell
    sudo service rabbitmq-server start
