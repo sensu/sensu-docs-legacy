@@ -36,7 +36,7 @@ handler (integration).
   "graphite": {
     "host": "graphite.example.com",
     "port": 2003,
-    "prefix_client_name": false,
+    "prefix_source": false,
     "prefix": "production"
   }
 }
@@ -78,9 +78,9 @@ The following attributes are configured within the `{"graphite": {} }`
     "port": 3003
     ~~~
 
-`prefix_client_name`
+`prefix_source`
 : description
-  : If the Sensu client name should prefix (added to) the metric names.
+  : If the Sensu source (client name) should prefix (added to) the metric names.
 : required
   : false
 : type
@@ -89,7 +89,7 @@ The following attributes are configured within the `{"graphite": {} }`
   : `false`
 : example
   : ~~~ shell
-    "prefix_client_name": true
+    "prefix_source": true
     ~~~
 
 `prefix`
