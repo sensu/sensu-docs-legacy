@@ -86,6 +86,15 @@ configuration indicates that Redis should be used as the Sensu transport.
 }
 ~~~
 
+### Transport DNS resolution {#transport-dns}
+
+The Sensu Transport will resolve provided hostnames before making
+connection attempts to the selected transport (i.e RabbitMQ).
+Resolving DNS hostnames prior to connecting allows Sensu to properly
+handle resolution failures, log them, and make further attempts to
+connect to the transport. This also allows Sensu to use DNS as a
+transport failover mechanism.
+
 ### Transport definition specification
 
 The Sensu Transport uses the `"transport": {}` [definition scope][3].
