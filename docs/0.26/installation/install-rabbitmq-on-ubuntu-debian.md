@@ -91,15 +91,10 @@ be a reason to upgrade RabbitMQ versions frequently._
    sudo update-rc.d rabbitmq-server enable
    ~~~
 
-2. Start and stop the RabbitMQ service using the installed init scripts:
+2. Start and stop the RabbitMQ service using the `service` command:
 
-   ~~~ shell
-   sudo service rabbitmq-server start
-   sudo service rabbitmq-server stop
-   ~~~
-
-   Alternatively, it is also possible to use the `service` command to start and
-   stop the RabbitMQ service:
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server start`_
 
    ~~~ shell
    sudo service rabbitmq-server start
