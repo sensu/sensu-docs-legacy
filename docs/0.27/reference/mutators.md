@@ -1,7 +1,7 @@
 ---
 title: "Mutators"
 description: "Reference documentation for Sensu Mutators."
-version: 0.26
+version: 0.27
 weight: 7
 ---
 

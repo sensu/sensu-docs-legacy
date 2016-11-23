@@ -1,7 +1,7 @@
 ---
 title: "Data Store"
 description: "Reference documentation for the Sensu Data Store."
-version: 0.26
+version: 0.27
 weight: 12
 ---
 

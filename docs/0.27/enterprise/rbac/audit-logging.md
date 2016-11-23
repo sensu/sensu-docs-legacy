@@ -1,6 +1,6 @@
 ---
 title: "Audit Logging"
-version: 0.26
+version: 0.27
 weight: 5
 ---
 

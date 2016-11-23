@@ -2,7 +2,7 @@
 title: "check_dependencies"
 description: "The check_dependencies Enterprise filter is used to filter events
   when an event already exists for a defined check dependency."
-version: 0.26
+version: 0.27
 weight: 1
 ---
 

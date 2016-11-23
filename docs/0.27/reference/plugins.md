@@ -1,7 +1,7 @@
 ---
 title: "Plugins"
 description: "Reference documentation for Sensu Plugins."
-version: 0.26
+version: 0.27
 weight: 9
 ---
 

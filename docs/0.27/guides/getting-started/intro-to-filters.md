@@ -1,6 +1,6 @@
 ---
 title: "Intro to Filters"
-version: 0.26
+version: 0.27
 weight: 5
 next:
   url: "intro-to-mutators.html"

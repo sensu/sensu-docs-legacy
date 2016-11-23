@@ -1,8 +1,8 @@
 ---
-title: "0.26 changelog"
+title: "0.27 changelog"
 description: "Release notes for Sensu Core and Sensu Enterprise releases based
-  on Sensu Core version 0.26.x"
-version: 0.26
+  on Sensu Core version 0.27.x"
+version: 0.27
 weight: 5
 ---
 
@@ -12,12 +12,12 @@ weight: 5
 
 - [Enterprise 2.1.0 Release Notes](#enterprise-v2-1-0)
 - [Enterprise 2.0.0 Release Notes](#enterprise-v2-0-0)
-- [Core 0.26.5 Release Notes](#core-v0-26-5)
-- [Core 0.26.4 Release Notes](#core-v0-26-4)
-- [Core 0.26.3 Release Notes](#core-v0-26-3)
-- [Core 0.26.2 Release Notes](#core-v0-26-2)
-- [Core 0.26.1 Release Notes](#core-v0-26-1)
-- [Core 0.26.0 Release Notes](#core-v0-26-0)
+- [Core 0.27.5 Release Notes](#core-v0-26-5)
+- [Core 0.27.4 Release Notes](#core-v0-26-4)
+- [Core 0.27.3 Release Notes](#core-v0-26-3)
+- [Core 0.27.2 Release Notes](#core-v0-26-2)
+- [Core 0.27.1 Release Notes](#core-v0-26-1)
+- [Core 0.27.0 Release Notes](#core-v0-26-0)
 
 ## Enterprise 2.1.0 Release Notes {#enterprise-v2-1-0}
 
@@ -38,20 +38,20 @@ weight: 5
 
 ### IMPORTANT {#enterprise-v2-0-0-important}
 
-This Enterprise release is built upon [Sensu Core 0.26](#core-v0-26-0),
+This Enterprise release is built upon [Sensu Core 0.27](#core-v0-26-0),
 which includes potentially breaking, backwards-incompatible changes. For
-more information, please refer to the [Sensu Core 0.26.0 Important
+more information, please refer to the [Sensu Core 0.27.0 Important
 Changes](#core-v0-26-0-important).
 
 ### CHANGES {#enterprise-v2-0-0-changes}
 
-- **NEW**: Built on [Sensu Core version 0.26.5](#core-v0-26-5).
+- **NEW**: Built on [Sensu Core version 0.27.5](#core-v0-26-5).
 
-## Core 0.26.5 Release Notes {#core-v0-26-5}
+## Core 0.27.5 Release Notes {#core-v0-26-5}
 
 Source: [GitHub.com][18]
 
-**October 12, 2016** &mdash; Sensu Core version 0.26.5 has been released
+**October 12, 2016** &mdash; Sensu Core version 0.27.5 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -61,11 +61,11 @@ Source: [GitHub.com][18]
 	automatic per-client subscription is the client's only
 	subscription.
 
-## Core 0.26.4 Release Notes {#core-v0-26-4}
+## Core 0.27.4 Release Notes {#core-v0-26-4}
 
 Source: [GitHub.com][17]
 
-**October 5, 2016** &mdash; Sensu Core version 0.26.4 has been released
+**October 5, 2016** &mdash; Sensu Core version 0.27.4 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -75,11 +75,11 @@ Source: [GitHub.com][17]
 	Sensu client now guards against multiple concurrent executions of
 	the same check extension.
 
-## Core 0.26.3 Release Notes {#core-v0-26-3}
+## Core 0.27.3 Release Notes {#core-v0-26-3}
 
 Source: [GitHub.com][16]
 
-**September 23, 2016** &mdash; Sensu Core version 0.26.3 has been released
+**September 23, 2016** &mdash; Sensu Core version 0.27.3 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -89,11 +89,11 @@ Source: [GitHub.com][16]
 	entries for subscriptions containing a mix of colons and hyphens,
 	e.g. `client:foo-bar-baz`.
 
-## Core 0.26.2 Release Notes {#core-v0-26-2}
+## Core 0.27.2 Release Notes {#core-v0-26-2}
 
 Source: [GitHub.com][15]
 
-**September 21, 2016** &mdash; Sensu Core version 0.26.2 has been released
+**September 21, 2016** &mdash; Sensu Core version 0.27.2 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -113,11 +113,11 @@ Source: [GitHub.com][15]
 - **BUGFIX**: Made a change to ensure that new proxy clients are created
 	with a per-client subscription just like regular clients.
 
-## Core 0.26.1 Release Notes {#core-v0-26-1}
+## Core 0.27.1 Release Notes {#core-v0-26-1}
 
 Source: [GitHub.com][14]
 
-**September 7, 2016** &mdash; Sensu Core version 0.26.1 has been released
+**September 7, 2016** &mdash; Sensu Core version 0.27.1 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -126,11 +126,11 @@ Source: [GitHub.com][14]
 - **BUGFIX**: Fixed a condition where Sensu Server would fail to start
 	without a `client` configuration definition.
 
-## Core 0.26.0 Release Notes {#core-v0-26-0}
+## Core 0.27.0 Release Notes {#core-v0-26-0}
 
 Source: [GitHub.com][13]
 
-**August 24, 2016** &mdash; Sensu Core version 0.26.0 has been released and is
+**August 24, 2016** &mdash; Sensu Core version 0.27.0 has been released and is
 available for immediate download. Please note the following improvements:
 
 ### IMPORTANT {#core-v0-26-0-important}
@@ -142,7 +142,7 @@ This release includes potentially breaking, backwards-incompatible changes:
   available to opt-out of this new built-in silencing functionality on a
   per-handler basis.
 
-- Sensu Core version 0.26 requires Uchiwa version 0.18 or newer in order
+- Sensu Core version 0.27 requires Uchiwa version 0.18 or newer in order
   to make use of the new `/silenced` API feature. Prior versions of Uchiwa
   silence events using the "silence stashes" pattern, which will be honored by
   existing handlers until the now-deprecated event filtering is removed
@@ -151,7 +151,7 @@ This release includes potentially breaking, backwards-incompatible changes:
   _NOTE: The new `/silenced` API and native event silencing features are
   intended to replace the "silence stash" pattern implemented in the
   `sensu-plugin` library and widely used by existing handlers. This
-  "silence stashes" pattern is considered deprecated. Sensu 0.26 includes
+  "silence stashes" pattern is considered deprecated. Sensu 0.27 includes
   version 1.4.2 of the `sensu-plugin` library which continues to
   apply this pattern by default, but will log deprecation warnings as
   well.	Set the check attribute `enable_deprecated_filtering: false` to
