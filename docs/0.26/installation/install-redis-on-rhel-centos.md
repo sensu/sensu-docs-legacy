@@ -53,6 +53,9 @@ RHEL 7).
 
 Start and stop Redis using the `redis` init scripts:
 
+_NOTE: The `service` command will not work on CentOS 5, the sysvinit
+script must be used, e.g. `sudo /etc/init.d/redis start`_
+
 ~~~ shell
 sudo service redis start
 sudo service redis stop

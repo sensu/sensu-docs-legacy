@@ -115,6 +115,9 @@ SSL documentation][2] for a detailed guide on configuring RabbitMQ with SSL.
 
 1. Stop RabbitMQ
 
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server stop`_
+
    ~~~ shell
    sudo service rabbitmq-server stop
    ~~~
@@ -150,6 +153,9 @@ SSL documentation][2] for a detailed guide on configuring RabbitMQ with SSL.
    ~~~
 
 3. Start RabbitMQ
+
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server start`_
 
    ~~~ shell
    sudo service rabbitmq-server start

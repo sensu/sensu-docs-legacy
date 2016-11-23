@@ -279,6 +279,9 @@ The following is an example API definition at `/etc/sensu/conf.d/api.json`.
 
 Be sure to reload Sensu Enterprise to pick up the configuration changes.
 
+_NOTE: The `service` command will not work on CentOS 5, the sysvinit
+script must be used, e.g. `sudo /etc/init.d/sensu-enterprise start`_
+
 ~~~ shell
 sudo service sensu-enterprise reload
 ~~~
