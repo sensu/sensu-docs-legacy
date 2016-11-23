@@ -122,6 +122,15 @@ for more information._
 }
 ~~~
 
+### Redis DNS resolution {#redis-dns}
+
+The Sensu Redis client will resolve the provided hostname before
+making a connection attempt to the Redis host. Resolving the DNS
+hostname prior to connecting allows Sensu to properly handle
+resolution failures, log them, and make further attempts to connect to
+the Redis host. This also allows Sensu to use Amazon AWS ElastiCache
+multi-az automatic failover.
+
 ### Redis definition specification
 
 The Redis definition uses the `"redis": {}` definition scope.
