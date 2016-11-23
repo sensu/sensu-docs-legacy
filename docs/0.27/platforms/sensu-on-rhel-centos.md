@@ -397,6 +397,9 @@ can also be accomplished using the [`chkconfig` utility][9].
 
 To manually start and stop the Sensu services, use the following commands:
 
+_NOTE: The `service` command will not work on CentOS 5, the sysvinit
+script must be used, e.g. `sudo /etc/init.d/sensu-client start`_
+
 - Start or stop the Sensu client
 
   ~~~ shell
