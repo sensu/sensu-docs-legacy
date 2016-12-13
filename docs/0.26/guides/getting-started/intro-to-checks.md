@@ -54,10 +54,10 @@ Sensu check definition in order to monitor the Cron service.
 The `check-process.rb` script provided by the [Sensu Process Checks Plugin][2]
 can reliably detect if a service such as Cron is running or not. The following
 instructions will install the [Sensu Process Checks Plugin][2] (version
-0.0.6) using Sensu's embedded Ruby, providing the `check-process.rb` script.
+1.0.0) using Sensu's embedded Ruby, providing the `check-process.rb` script.
 
 ~~~ shell
-sudo sensu-install -p process-checks:0.0.6
+sudo sensu-install -p process-checks:1.0.0
 ~~~
 
 #### Create the check definition for Cron
