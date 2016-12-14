@@ -703,7 +703,7 @@ environments.
   : false
 : example
   : ~~~ shell
-    RABBITMQ_URL="amqp://user:password@hostname:5672/vhost"
+    RABBITMQ_URL="amqp://user:password@hostname:5672/%2Fvhost"
     ~~~
 
 `REDIS_URL`
