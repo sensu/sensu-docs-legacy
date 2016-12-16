@@ -167,7 +167,7 @@ instructions will install the [Sensu CPU Checks Plugin][8] (version 0.0.3) using
 Sensu's embedded Ruby, providing the `metrics-cpu.rb` script.
 
 ~~~ shell
-sudo sensu-install -p cpu-checks:0.0.3
+sudo sensu-install -p cpu-checks:1.0.0
 ~~~
 
 #### Create the check definition for CPU metrics
