@@ -329,7 +329,7 @@ github
   : A hash of [GitHub authentication attributes](#github-authentication-attributes) to enable
     GitHub authentication via OAuth. Overrides simple authentication.
     _NOTE: GitHub authentication is only available in the Sensu Enterprise
-    Dashbaord, not Uchiwa._
+    Dashboard, not Uchiwa._
 : required
   : false
 : type
