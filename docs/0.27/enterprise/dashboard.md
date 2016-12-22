@@ -107,7 +107,7 @@ more Sensu API endpoints (i.e. [datacenters][1]), and the `{ "dashboard": {} }`
 configuration scope is used to configure the behavior of the dashboard itself.
 
 _NOTE: by default, the Sensu Enterprise Dashboard will load configuration from
-`/etc/sensu/dashbaord.json` and/or from JSON configuration files located in
+`/etc/sensu/dashboard.json` and/or from JSON configuration files located in
 `/etc/sensu/dashboard.d/**.json`, with the same configuration merging behavior
 as described [here][10]._
 
