@@ -1037,7 +1037,7 @@ Enterprise Chef integration][42].**
   : String
 : example
   : ~~~ shell
-    "endpoint": "https://api.opscode.com/organizations/example"
+    "endpoint": "https://api.chef.io/organizations/example"
     ~~~
 
 `flavor`
