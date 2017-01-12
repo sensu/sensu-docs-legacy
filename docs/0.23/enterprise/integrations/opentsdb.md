@@ -40,22 +40,10 @@ handler (integration).
 
 ### Integration Specification
 
+#### `opentsdb` attributes
+
 The following attributes are configured within the `{"opentsdb": {} }`
 [configuration scope][3].
-
-`opentsdb`
-: description
-  : A set of attributes that configure the OpenTSDB event handler.
-: required
-  : true
-: type
-  : Hash
-: example
-  : ~~~ shell
-    "opentsdb": {}
-    ~~~
-
-#### OpenTSDB attributes
 
 `host`
 : description
