@@ -206,6 +206,19 @@ The following attributes are configured within the `{"servicenow": {} }`
     "event_table": "em_event"
     ~~~
 
+`root_url`
+: description
+  : The ServiceNow API root URL. When set, this option overrides the
+  `host` option, most commonly used when a service proxy is in use.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "root_url": "https://services.example.com/proxy/servicenow/api"
+    ~~~
+
 `timeout`
 : description
   : The handler execution duration timeout in seconds (hard stop).

@@ -73,7 +73,7 @@ The following attributes are configured within the `{"pagerduty": {} }`
     ~~~
 
 [?]:  #
-[1]:  https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service
+[1]:  /enterprise
 [2]:  https://www.pagerduty.com?ref=sensu-enterprise
 [3]:  https://support.pagerduty.com/hc/en-us/articles/202830340-Creating-a-Generic-API-Service?ref=sensu-enterprise
 [4]:  ../../reference/configuration.html#configuration-scopes
