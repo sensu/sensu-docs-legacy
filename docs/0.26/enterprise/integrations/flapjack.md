@@ -48,6 +48,8 @@ integration.
 
 ### Integration Specification
 
+#### `flapjack` attributes 
+
 The following attributes are configured within the `{"flapjack": {} }`
 [configuration scope][3].
 

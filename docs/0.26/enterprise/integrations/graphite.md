@@ -44,11 +44,10 @@ handler (integration).
 
 ### Integration Specification
 
+#### `graphite` attributes
+
 The following attributes are configured within the `{"graphite": {} }`
 [configuration scope][4].
-
-
-#### `graphite` attributes
 
 `host`
 : description
