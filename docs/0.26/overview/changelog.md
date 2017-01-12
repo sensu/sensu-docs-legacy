@@ -37,14 +37,14 @@ weight: 5
 - **NEW**: The Slack integration now adds a "notification" field to
 	attachments when one is provided in the event check definition.
 
-- **NEW**: Metric integration metric format mutation performance
+- **IMPROVEMENT**: Metric integration metric format mutation performance
 	improvements.
+
+- **IMPROVEMENT**: Opsgenie integration now uses a different/improved HTTP
+	client.
 
 - **BUGFIX**: Opsgenie integration now uses a string for alert tags,
 	multiple tags are comma delimited.
-
-- **BUGFIX**: Opsgenie integration now uses a different/improved HTTP
-	client.
 
 ## Enterprise 2.1.0 Release Notes {#enterprise-v2-1-0}
 
