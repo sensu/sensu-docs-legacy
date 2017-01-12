@@ -37,12 +37,12 @@ event handler (integration).
 }
 ~~~
 
+### Integration Specification
+
 #### `rollbar` attributes
 
 The following attributes are configured within the `{"rollbar": {} }`
 [configuration scope][4].
-
-##### ATTRIBUTES {#rollbar-attributes}
 
 `access_token_read`
 : description

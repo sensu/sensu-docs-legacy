@@ -10,6 +10,7 @@ users only.**
 # SNMP Integration
 
 - [Overview](#overview)
+  - [Sensu Enterprise MIBs](#sensu-enterprise-mibs)
 - [Configuration](#configuration)
   - [Example(s)](#examples)
   - [Integration Specification](#integration-specification)
