@@ -10,6 +10,7 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.2.0 Release Notes](#enterprise-v2-2-0)
 - [Enterprise 2.1.0 Release Notes](#enterprise-v2-1-0)
 - [Enterprise 2.0.0 Release Notes](#enterprise-v2-0-0)
 - [Core 0.26.5 Release Notes](#core-v0-26-5)
@@ -18,6 +19,32 @@ weight: 5
 - [Core 0.26.2 Release Notes](#core-v0-26-2)
 - [Core 0.26.1 Release Notes](#core-v0-26-1)
 - [Core 0.26.0 Release Notes](#core-v0-26-0)
+
+## Enterprise 2.2.0 Release Notes {#enterprise-v2-2-0}
+
+**January 12, 2017** &mdash; Sensu Enterprise version 2.2.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-2-0-changes}
+
+- **NEW**: Added JIRA integration, create and resolve issues for Sensu
+	events.
+
+- **NEW**: Added Rollbar integration, create and resolve messages/items
+	for Sensu events.
+
+- **NEW**: The Slack integration now adds a "notification" field to
+	attachments when one is provided in the event check definition.
+
+- **NEW**: Metric integration metric format mutation performance
+	improvements.
+
+- **BUGFIX**: Opsgenie integration now uses a string for alert tags,
+	multiple tags are comma delimited.
+
+- **BUGFIX**: Opsgenie integration now uses a different/improved HTTP
+	client.
 
 ## Enterprise 2.1.0 Release Notes {#enterprise-v2-1-0}
 
