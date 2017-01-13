@@ -15,8 +15,8 @@ users only.**
 - [Configuration](#configuration)
   - [Example(s)](#examples)
   - [Integration Specification](#integration-specification)
-  - [`puppet` attributes](#puppet-attributes)
-  - [`ssl` attributes](#ssl-attributes)
+    - [`puppet` attributes](#puppet-attributes)
+    - [`ssl` attributes](#ssl-attributes)
 
 ## Overview
 

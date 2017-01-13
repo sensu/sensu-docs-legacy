@@ -3,7 +3,7 @@ title: "Heads-Up Display"
 version: 0.26
 weight: 11
 next:
-  url: "audit-logging.html"
+  url: "rbac/audit-logging.html"
   text: "Enterprise Audit Logging"
 ---
 
@@ -13,7 +13,7 @@ As of version 1.3, a new Heads Up Display (HUD) has been added to the Sensu
 Enterprise Dashboard, which provides an at-a-glance view into the overall health
 of your infrastructure via a set of built-in graphs and status widgets.
 
-![heads-up display screenshot](../../img/enterprise-dashboard-hud.png)
+![heads-up display screenshot](../img/enterprise-dashboard-hud.png)
 
 ## HUD RBAC Support
 

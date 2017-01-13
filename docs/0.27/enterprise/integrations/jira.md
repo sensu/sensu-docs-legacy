@@ -38,12 +38,12 @@ event handler (integration).
 }
 ~~~
 
+### Integration Specification
+
 #### `jira` attributes
 
 The following attributes are configured within the `{"jira": {} }`
 [configuration scope][4].
-
-##### ATTRIBUTES {#jira-attributes}
 
 `host`
 : description

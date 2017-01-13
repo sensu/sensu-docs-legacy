@@ -42,10 +42,6 @@ event handler (integration).
 The following attributes are configured within the `{"pagerduty": {} }`
 [configuration scope][4].
 
-##### EXAMPLE {#pagerduty-attributes-example}
-
-##### ATTRIBUTES {#pagerduty-attributes-specification}
-
 `service_key`
 : description
   : The PagerDuty service key to use when creating and resolving incidents.
