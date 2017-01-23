@@ -52,10 +52,19 @@ Sensu Core package installs several processes including `sensu-server`,
    wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
    ~~~
 
-2. Create an APT configuration file at `/etc/apt/sources.list.d/sensu.list`:
+2. Determine the codename of the Ubuntu/Debian release on your system:
 
    ~~~ shell
-   echo "deb     https://sensu.global.ssl.fastly.net/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
+   . /etc/os-release && echo $VERSION
+   "14.04.4 LTS, Trusty Tahr" # codename for this system is "trusty"
+   ~~~
+
+2. Create an APT configuration file at
+   `/etc/apt/sources.list.d/sensu.list`:
+
+   ~~~ shell
+   export CODENAME=your_release_codename_here # e.g. "trusty"
+   echo "deb     https://sensu.global.ssl.fastly.net/apt $CODENAME main" | sudo tee /etc/apt/sources.list.d/sensu.list
    ~~~
 
 3. Update APT:
