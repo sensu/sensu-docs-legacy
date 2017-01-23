@@ -34,6 +34,11 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
 
 ### Download and install Sensu on Solaris 10 {#download-and-install-sensu-core-on-solaris-10}
 
+_NOTE: As of Sensu version 0.27, package repository URLs have changed.
+To install or upgrade to the latest version of Sensu, please ensure
+you have updated existing configurations to follow the repository URL
+format specified below._
+
 1. Download Sensu from the [Sensu Downloads][1] page, or by using the `wget`
    utility:
 

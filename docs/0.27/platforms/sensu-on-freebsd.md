@@ -36,6 +36,11 @@ notice._
 
 ### Download and install Sensu using the Sensu Universal .txz file {#download-and-install-sensu-core}
 
+_NOTE: As of Sensu version 0.27 package repository URLs have changed.
+To install or upgrade to the latest version of Sensu, please ensure
+you have updated existing configurations to follow the repository URL
+format specified below._
+
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
    [https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:10:amd64/sensu/sensu-0.27.0_1.txz][3]

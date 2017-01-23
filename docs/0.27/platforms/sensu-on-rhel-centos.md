@@ -46,6 +46,12 @@ package installs several processes including `sensu-server`, `sensu-api`, and
 
 ### Install Sensu using YUM (recommended) {#install-sensu-core-repository}
 
+_NOTE: As of Sensu version 0.27, the yum repository URL has changed to
+include the `$releasever` variable. To install or upgrade to the
+latest version of Sensu, please ensure you have updated existing
+repository configurations._
+
+
 1. Create the YUM repository configuration file for the Sensu Core repository at
    `/etc/yum.repos.d/sensu.repo`:
 

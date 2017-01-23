@@ -34,6 +34,11 @@ installer package (i.e. a .msi file), which is available for download from the
 
 ### Download and install Sensu using the Sensu MSI {#download-and-install-sensu-core}
 
+_NOTE: As of Sensu version 0.27 repository URLs have changed.  To
+install or upgrade to the latest version of Sensu, please ensure you
+have updated existing configurations to follow the repository URL
+format specified below._
+
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
    [https://sensu.global.ssl.fastly.net/msi/2012r2/sensu-0.27.0-1-x64.msi][3]
