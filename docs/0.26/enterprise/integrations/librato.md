@@ -2,7 +2,7 @@
 title: "Librato"
 description: "Send metrics to Librato using the Librato HTTP API."
 version: 0.26
-weight: 17
+weight: 19
 ---
 
 **ENTERPRISE: Built-in integrations are available for [Sensu Enterprise][1]

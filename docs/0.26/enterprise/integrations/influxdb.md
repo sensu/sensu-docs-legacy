@@ -1,7 +1,7 @@
 ---
 title: "InfluxDB"
 version: 0.26
-weight: 18
+weight: 16
 ---
 
 **ENTERPRISE: Built-in integrations are available for [Sensu Enterprise][1]
