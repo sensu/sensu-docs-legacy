@@ -31,9 +31,15 @@ portability.
 The `output_format` enterprise mutator extracts metrics from check result
 output. Users can specify an output format per check, enabling the use of
 various check plugins (Nagios plugins, etc.) and data sources. The
-`output_format` mutator currently supports several mainstream specifications:
-[Graphite Plaintext][3], [Nagios PerfData][4], [OpenTSDB][5], [Metrics 2.0 as a
-wire format][6], and [Wizardvan JSON][7].
+`output_format` mutator currently supports several popular specifications:
+
+- [InfluxDB line protocol][8]
+- [Graphite Plaintext][3]
+- [Nagios PerfData][4]
+- [OpenTSDB][5]
+- [Wavefront Data Format][9]
+- [Metrics 2.0 as a wire format][6]
+- [Wizardvan JSON][7]
 
 #### Example output_format filter configuration
 
@@ -72,8 +78,8 @@ output_format
 : type
   : String
 : allowed values
-  : `graphite_plaintext`, `nagios_perfdata`, `opentsdb`, `metrics20_wire`,
-    `wizardvan_json`
+  : `influxdb_line`, `graphite_plaintext`, `nagios_perfdata`, `opentsdb`,
+    `wavefront`, `metrics20_wire`, `wizardvan_json`
 : default
   : `graphite_plaintext`
 : example
@@ -89,3 +95,5 @@ output_format
 [5]:  http://opentsdb.net/docs/build/html/user_guide/writing.html
 [6]:  http://metrics20.org/spec/#wire_format
 [7]:  https://github.com/opower/sensu-metrics-relay#json-metric-format
+[8]:  https://docs.influxdata.com/influxdb/v1.1/write_protocols/line_protocol_tutorial/
+[9]:  https://community.wavefront.com/docs/DOC-1031
