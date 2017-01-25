@@ -113,6 +113,23 @@ The following attributes are configured within the `{"hipchat": {} }`
     "room": "Search"
     ~~~
 
+`notify`
+: description
+  : Configures whether notifications sent from Sensu Enterprise to HipChat
+    should trigger a user notification (change the tab color, play a sound,
+    notify mobile phones, etc). Each recipient's notification preferences are
+    taken into account.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "notify": true
+    ~~~
+
 `timeout`
 : description
   : The handler execution duration timeout in seconds (hard stop).

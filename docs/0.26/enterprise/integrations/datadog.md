@@ -2,7 +2,7 @@
 title: "DataDog"
 description: "Create DataDog events for Sensu events."
 version: 0.26
-weight: 20
+weight: 21
 ---
 
 **ENTERPRISE: Built-in integrations are available for [Sensu Enterprise][1]

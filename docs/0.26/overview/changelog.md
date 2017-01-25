@@ -10,6 +10,7 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.3.0 Release Notes](#enterprise-v2-3-0)
 - [Enterprise 2.2.0 Release Notes](#enterprise-v2-2-0)
 - [Enterprise 2.1.0 Release Notes](#enterprise-v2-1-0)
 - [Enterprise 2.0.0 Release Notes](#enterprise-v2-0-0)
@@ -19,6 +20,30 @@ weight: 5
 - [Core 0.26.2 Release Notes](#core-v0-26-2)
 - [Core 0.26.1 Release Notes](#core-v0-26-1)
 - [Core 0.26.0 Release Notes](#core-v0-26-0)
+
+## Enterprise 2.3.0 Release Notes {#enterprise-v2-3-0}
+
+**January 25, 2017** &mdash; Sensu Enterprise version 2.3.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-3-0-changes}
+
+- **NEW**: Added Wavefront integration, send metrics to Wavefront in the
+  Wavefront Data Format.
+
+- **NEW**: The Hipchat integration now adds a "notify" attribute to trigger
+  HipChat user notifications.
+
+- **NEW**: The Email integration now supports custom templates for email subject
+  and body.
+
+- **NEW**: The Sensu Enterprise `output_format` mutator now supports two
+  additional metric formats: InfluxDB Line Protocol, and the Wavefront Data
+  Format.
+
+- **IMPROVEMENT**: Now using JRuby 9.1.7.0 for bugfixes and improved
+  performance.
 
 ## Enterprise 2.2.0 Release Notes {#enterprise-v2-2-0}
 

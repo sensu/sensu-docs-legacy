@@ -12,15 +12,53 @@ users only.**
 # Email Integration
 
 - [Overview](#overview)
+- [Custom email templates](#custom-email-templates)
+  - [Example(s)](#custom-email-templates-example)
 - [Configuration](#configuration)
   - [Example(s)](#examples)
   - [Integration Specification](#integration-specification)
     - [`email` attributes](#email-attributes)
     - [`smtp` attributes](#smtp-attributes)
+    - [`templates` attributes](#templates-attributes)
 
 ## Overview
 
 Send email notifications for events, using SMTP.
+
+## Custom email templates
+
+As of Sensu Enterprise version 2.3, the Sensu Enterprise email integration
+provides support for creating custom email templates using ERB (a templating
+language based on Ruby). Sensu Enterprise make an `@event` variable available to
+the ERB template containing the complete [event data payload][4].
+
+_NOTE: the Puppet reference documentation provides a helpful [introduction to
+ERB templating syntax][5]._
+
+### Example(s) {#custom-email-templates-example}
+
+The following example demonstrates how to access the Sensu `@event` variable from
+a custom ERB template.
+
+~~~erb
+Hi there,
+
+Sensu has detected a <%= @event[:check][:name] %> monitoring event.
+Please note the following details:
+
+Client: <%= @event[:client][:name] %>
+
+Check: <%= @event[:check][:name] %>
+
+Output: <%= @event[:check][:output] %>
+
+For more information, please consult the Sensu Enterprise dashboard:
+
+https://sensu.example.com/#/client/<%= @event[:client][:datacenter] %>/<%= @event[:client][:name] %>?check=<%= @event[:check][:name] %>
+
+#monitoringlove,
+Team Sensu
+~~~
 
 ## Configuration
 
@@ -109,6 +147,21 @@ The following attributes are configured within the `{"email": {} }`
 : example
   : ~~~ shell
     "from": "noreply@example.com"
+    ~~~
+
+`templates`
+: description
+  : A set of attributes that provides email [`templates` configuration][3].
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "templates": {
+      "subject": "/etc/sensu/email/subject_template.erb",
+      "body": "/etc/sensu/email/body_template.erb"
+    }
     ~~~
 
 `timeout`
@@ -276,7 +329,44 @@ The following attributes are configured within the `{"email": { "smtp": {} } }`
     "authentication": "plain"
     ~~~
 
+#### `templates` attributes
+
+The following attributes are configured within the `{"email": { "templates": {}
+} }` [configuration scope][2].
+
+`subject`
+: description
+  : Path to the email subject [ERB][5] template file, which must be accessible
+    by the `sensu` system user. If an email subject template is not provided, a
+    built-in default template will be used.
+: type
+  : String
+: required
+  : false
+: example
+  : ~~~ shell
+    "subject": "/etc/sensu/email/subject_template.erb"
+    ~~~
+
+`body`
+: description
+  : Path to the email body [ERB][5] template file, which must be accessible
+    by the `sensu` system user. If an email body template is not provided, a
+    built-in default template will be used.
+: type
+  : String
+: required
+  : false
+: example
+  : ~~~ shell
+    "body": "/etc/sensu/email/body_template.erb"
+    ~~~
+
+
 
 [?]:  #
 [1]:  /enterprise
 [2]:  ../../reference/configuration.html#configuration-scopes
+[3]:  #templates-attributes
+[4]:  ../../reference/events.html#event-data
+[5]:  https://docs.puppet.com/puppet/latest/lang_template_erb.html
