@@ -23,8 +23,10 @@ available for immediate download. Please note the following improvements:
 
 This release includes potentially breaking, backwards-incompatible changes:
 
-- **NEW**: Sensu packages are now built individually for each supported
-	platform. See the [supported platforms matrix] for more
+- **NEW**: Sensu is now packaged specifically for each supported platform
+	version and architecture; previously, single packages were built
+	for each platform and architecture using the oldest supported
+	platform version. See the [supported platforms matrix] for more
 	information.
 
 - **NEW**: Sensu now packages systemd unit files instead of sysv init
