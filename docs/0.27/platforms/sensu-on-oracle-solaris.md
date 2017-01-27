@@ -34,24 +34,29 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
 
 ### Download and install Sensu on Solaris 10 {#download-and-install-sensu-core-on-solaris-10}
 
+_NOTE: As of Sensu version 0.27, package repository URLs have changed.
+To install or upgrade to the latest version of Sensu, please ensure
+you have updated existing configurations to follow the repository URL
+format specified below._
+
 1. Download Sensu from the [Sensu Downloads][1] page, or by using the `wget`
    utility:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.27.1-1.i386.pkg
+   wget https://sensu.global.ssl.fastly.net/solaris/pkg/5.10/sensu-0.27.0-1.i386.solaris
    ~~~
 
    Alternatively, for SPARC packages:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/pkg/sensu-0.27.1-1.sparc.pkg
+   wget https://sensu.global.ssl.fastly.net/solaris/pkg/5.10/sensu-0.26.3-1.sparc.solaris
    ~~~
 
-2. Install the `sensu-0.27.1-1.i386.pkg` package using the `pkgadd` utility:
+2. Install the `sensu-0.27.0-1.i386.pkg` package using the `pkgadd` utility:
 
    ~~~ shell
    $ su
-   $ pkgadd -d sensu-0.27.1-1.i386.pkg
+   $ pkgadd -d sensu-0.27.0-1.i386.pkg
    ~~~
 
 3. Install the Sensu service init script(s) using the `svccfg` utility:
@@ -72,13 +77,13 @@ the [Sensu Downloads][1] page, and from these repositories: [Solaris 10
    utility:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/ips/sensu-0.27.1-1.p5p
+   wget https://sensu.global.ssl.fastly.net/solaris/ips/5.11/sensu-0.27.0-1.i386.p5p
    ~~~
 
-2. Install the `sensu-0.27.1-1.p5p` package using the `pkg` utility:
+2. Install the `sensu-0.27.0-1.i386.p5p` package using the `pkg` utility:
 
    ~~~ shell
-   $ sudo pkg install -g sensu-0.27.1-1.p5p developer/versioning/sensu
+   $ sudo pkg install -g sensu-0.27.0-1.i386.p5p developer/versioning/sensu
    ~~~
 
 3. Download and run the Sensu [post-install script][12]:

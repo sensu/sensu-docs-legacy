@@ -32,11 +32,16 @@ Downloads][1] page, and from [this repository][2].
 
 ### Download and install Sensu using the Sensu .bff package {#download-and-install-sensu-core}
 
+_NOTE: As of Sensu version 0.27 repository URLs have changed.  To
+install or upgrade to the latest version of Sensu, please ensure you
+have updated existing configurations to follow the repository URL
+format specified below._
+
 1. Download Sensu from the [Sensu Downloads][1] page, or using the `wget`
    utility:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/aix/sensu-0.27.1-1.powerpc.bff
+   wget https://sensu.global.ssl.fastly.net/aix/6.1/sensu-0.27.0-1.powerpc.bff
    ~~~
 
 2. The Sensu installer package for IBM AIX systems is provided in **backup file
@@ -44,7 +49,7 @@ Downloads][1] page, and from [this repository][2].
    "Fileset Name". Display the content using the `installp` utility.
 
    ~~~ shell
-   installp -ld sensu-0.27.1-1.powerpc.bff
+   installp -ld sensu-0.27.0-1.powerpc.bff
    ~~~
 
    Once you have collected the fileset name, you can optionally proceed to
@@ -52,13 +57,13 @@ Downloads][1] page, and from [this repository][2].
    flag.
 
    ~~~ shell
-   installp -apXY -d sensu-0.27.1-1.powerpc.bff sensu
+   installp -apXY -d sensu-0.27.0-1.powerpc.bff sensu
    ~~~
 
 3. Install Sensu using the `installp` utility.
 
    ~~~ shell
-   installp -aXY -d sensu-0.27.1-1.powerpc.bff sensu
+   installp -aXY -d sensu-0.27.0-1.powerpc.bff sensu
    ~~~
 
    _NOTE: this command uses the following `installp` utilty flags: `-a` to apply
@@ -173,7 +178,7 @@ support will be enabled in a future release.
 
 [1]:  https://sensuapp.org/downloads
 [2]:  https://sensu.global.ssl.fastly.net/aix/
-[3]:  https://sensu.global.ssl.fastly.net/aix/sensu-0.27.1-1.powerpc.bff
+[3]:  https://sensu.global.ssl.fastly.net/aix/6.1/sensu-0.27.0-1.powerpc.bff
 [4]:  https://sensuapp.org/mit-license
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html
