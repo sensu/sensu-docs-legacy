@@ -23,7 +23,32 @@ available for immediate download. Please note the following improvements:
 
 This release includes potentially breaking, backwards-incompatible changes:
 
-PACKAGING AND SERVICE MANAGEMENT NOTES HERE.
+- **NEW**: Sensu packages are now built individually for each supported
+	platform. See the [supported platforms matrix] for more
+	information.
+
+- **NEW**: Sensu now packages systemd unit files instead of sysv init
+	scripts for platforms where systemd is the default init. See the
+	[supported platforms matrix] for more information.
+
+- **CHANGED**: The package repository structure has changed to support
+	per-platform-version packages. Please see our [installation
+	instructions] for up-to-date details.
+
+- **REMOVED**: The embedded runit service supervisor is no longer included
+	in Sensu packages for Linux platforms.
+
+- **REPLACED**: The [sensu-omnibus project] has superseded sensu-build as
+	the tool chain for building official Sensu packages. This project
+	uses [Travis CI] to automate package builds using a combination of
+	[Test Kitchen], [Chef] and [Omnibus] tools.
+
+- **IMPROVED**: Sensu packages for Windows now include Ruby 2.3.0,
+	upgraded from Ruby 2.0.0 in prior versions of Sensu.
+
+- **IMPROVED**: Sensu packages for Windows now include winsw 2.0.1,
+	upgraded from winsw 1.16. This version includes a number of changes
+	which should help to address issues around orphaned processes.
 
 ### CHANGES {#core-v0-27-0-changes}
 
@@ -40,7 +65,7 @@ PACKAGING AND SERVICE MANAGEMENT NOTES HERE.
 - **NEW**: Added check attribute `ttl_status`, allowing checks to set a
 	different TTL event check status (default is `1` warning).
 
-- **NEW**: Added client deregistration attribute status, allowing clients
+- **NEW**: Added client deregistration attribute `status`, allowing clients
 	to set a different event check status for their deregistration
 	events (default is `1` warning).
 
