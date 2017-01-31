@@ -10,6 +10,7 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.3.1 Release Notes](#enterprise-v2-3-1)
 - [Enterprise 2.3.0 Release Notes](#enterprise-v2-3-0)
 - [Enterprise 2.2.0 Release Notes](#enterprise-v2-2-0)
 - [Enterprise 2.1.0 Release Notes](#enterprise-v2-1-0)
@@ -20,6 +21,17 @@ weight: 5
 - [Core 0.26.2 Release Notes](#core-v0-26-2)
 - [Core 0.26.1 Release Notes](#core-v0-26-1)
 - [Core 0.26.0 Release Notes](#core-v0-26-0)
+
+## Enterprise 2.3.1 Release Notes {#enterprise-v2-3-1}
+
+**January 31, 2017** &mdash; Sensu Enterprise version 2.3.1 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-3-1-changes}
+
+- **IMPROVEMENT**: The Slack integration now supports messages with up to
+	8,000 characters.
 
 ## Enterprise 2.3.0 Release Notes {#enterprise-v2-3-0}
 
