@@ -26,24 +26,20 @@ This release includes potentially breaking, backwards-incompatible changes:
 - **NEW**: Sensu is now packaged specifically for each supported platform
 	version and architecture; previously, single packages were built
 	for each platform and architecture using the oldest supported
-	platform version. See the [supported platforms matrix] for more
-	information.
+	platform version. Accordingly, package repository structures have
+	changed to support per-platform-version packages. See the
+	[platforms page][3] for links to updated installation instructions.
 
-- **NEW**: Sensu now packages systemd unit files instead of sysv init
-	scripts for platforms where systemd is the default init. See the
-	[supported platforms matrix] for more information.
-
-- **CHANGED**: The package repository structure has changed to support
-	per-platform-version packages. Please see our [installation
-	instructions] for up-to-date details.
+- **NEW**: On platforms where systemd is the default init, Sensu now
+	packages systemd unit files instead of sysv init scripts.
 
 - **REMOVED**: The embedded runit service supervisor is no longer included
 	in Sensu packages for Linux platforms.
 
-- **REPLACED**: The [sensu-omnibus project] has superseded sensu-build as
+- **REPLACED**: The [sensu-omnibus project][4] has superseded sensu-build as
 	the tool chain for building official Sensu packages. This project
-	uses [Travis CI] to automate package builds using a combination of
-	[Test Kitchen], [Chef] and [Omnibus] tools.
+	uses [Travis CI][5] to automate package builds using a combination of
+	[Test Kitchen][6], [Chef][7] and [Omnibus][8] tools.
 
 - **IMPROVED**: Sensu packages for Windows now include Ruby 2.3.0,
 	upgraded from Ruby 2.0.0 in prior versions of Sensu.
@@ -94,5 +90,11 @@ This release includes potentially breaking, backwards-incompatible changes:
 - **BUGFIX**: Silenced resolution events with silencing
 	`"expire_on_resolve": true` are now handled.
 
-[1]:    https://github.com/sensu/sensu/blob/master/CHANGELOG.md
-[2]:	https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0270---2017-01-26
+[1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
+[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0270---2017-01-26
+[3]: ../platforms
+[4]: https://github.com/sensu/sensu-omnibus
+[5]: https://travis-ci.org
+[6]: https://github.com/test-kitchen/test-kitchen
+[7]: https://github.com/chef/chef
+[8]: https://github.com/chef/omnibus
