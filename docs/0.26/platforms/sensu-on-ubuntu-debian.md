@@ -46,25 +46,39 @@ Sensu Core package installs several processes including `sensu-server`,
 
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
+_NOTE: As of January 2017, apt repository configuration has
+changed to include the "codename" of the Ubuntu/Debian release. To
+install or upgrade to the latest version of Sensu, please ensure you
+have updated existing repository configurations._
+
 1. Install the GPG public key:
 
    ~~~ shell
    wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
    ~~~
 
-2. Create an APT configuration file at `/etc/apt/sources.list.d/sensu.list`:
+2. Determine the codename of the Ubuntu/Debian release on your system:
 
    ~~~ shell
-   echo "deb     https://sensu.global.ssl.fastly.net/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
+   . /etc/os-release && echo $VERSION
+   "14.04.4 LTS, Trusty Tahr" # codename for this system is "trusty"
    ~~~
 
-3. Update APT:
+3. Create an APT configuration file at
+   `/etc/apt/sources.list.d/sensu.list`:
+
+   ~~~ shell
+   export CODENAME=your_release_codename_here # e.g. "trusty"
+   echo "deb     https://sensu.global.ssl.fastly.net/apt $CODENAME main" | sudo tee /etc/apt/sources.list.d/sensu.list
+   ~~~
+
+4. Update APT:
 
    ~~~ shell
    sudo apt-get update
    ~~~
 
-4. Install Sensu:
+5. Install Sensu:
 
    ~~~ shell
    sudo apt-get install sensu
@@ -73,7 +87,7 @@ Sensu Core package installs several processes including `sensu-server`,
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
 
-5. Configure Sensu. **No "default" configuration is provided with Sensu**, so
+6. Configure Sensu. **No "default" configuration is provided with Sensu**, so
    none of the Sensu processes will run without the corresponding configuration.
    Please refer to the ["Configure Sensu" section][11] (below), for more
    information on configuring Sensu. **At minimum, all of the Sensu processes
