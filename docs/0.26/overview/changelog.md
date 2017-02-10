@@ -206,6 +206,11 @@ This release includes potentially breaking, backwards-incompatible changes:
   available to opt-out of this new built-in silencing functionality on a
   per-handler basis.
 
+- **NEW**: Every Sensu client now creates and subscribes to a unique client
+  subscription (e.g. `client:i-424242`). Unique client subscriptions are
+  required for silencing one or more checks on a single client (host)
+  **Fixes: [#1327][1327]**.
+
 - Sensu Core version 0.26 requires Uchiwa version 0.18 or newer in order
   to make use of the new `/silenced` API feature. Prior versions of Uchiwa
   silence events using the "silence stashes" pattern, which will be honored by
@@ -235,18 +240,13 @@ This release includes potentially breaking, backwards-incompatible changes:
 - **NEW**: Event silencing is now built into Sensu Core! The Sensu API now
   provides a set of [`/silenced` endpoints][11], for silencing one or more
   checks and/or subscriptions (including the NEW client-specific subscriptions,
-  below). Silencing applies to all event handlers by default, however a new
+  above). Silencing applies to all event handlers by default, however a new
   `handle_silenced` handler definition attribute can be used to disable this
   functionality. Metric check events (OK) bypass event silencing.
 
   _NOTE: this improvement is very closely related to the impending removal
   of event filtering in the `sensu-plugin` gem. See the recent [Deprecating
   Event Filtering in sensu-plugin][10] blog post for more information._
-
-- **NEW**: Every Sensu client now creates and subscribes to a unique client
-  subscription (e.g. `client:i-424242`). Unique client subscriptions allow Sensu
-  checks to target a single client (host) and enable silencing events for a
-  single client. **Fixes: [#1327][1327]**.
 
 - **NEW**: Introducing **Subdue 2.0**! Sensu `subdue` rules have a brand new
   configuration syntax, adding support for a broader number of applications, and
