@@ -64,7 +64,7 @@ have updated existing repository configurations._
    "14.04.4 LTS, Trusty Tahr" # codename for this system is "trusty"
    ~~~
 
-2. Create an APT configuration file at
+3. Create an APT configuration file at
    `/etc/apt/sources.list.d/sensu.list`:
 
    ~~~ shell
@@ -72,13 +72,13 @@ have updated existing repository configurations._
    echo "deb     https://sensu.global.ssl.fastly.net/apt $CODENAME main" | sudo tee /etc/apt/sources.list.d/sensu.list
    ~~~
 
-3. Update APT:
+4. Update APT:
 
    ~~~ shell
    sudo apt-get update
    ~~~
 
-4. Install Sensu:
+5. Install Sensu:
 
    ~~~ shell
    sudo apt-get install sensu
@@ -87,7 +87,7 @@ have updated existing repository configurations._
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
 
-5. Configure Sensu. **No "default" configuration is provided with Sensu**, so
+6. Configure Sensu. **No "default" configuration is provided with Sensu**, so
    none of the Sensu processes will run without the corresponding configuration.
    Please refer to the ["Configure Sensu" section][11] (below), for more
    information on configuring Sensu. **At minimum, all of the Sensu processes
