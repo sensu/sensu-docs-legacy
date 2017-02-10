@@ -14,6 +14,7 @@ next:
 - [The `/silenced` API endpoints](#the-silenced-api-endpoints)
   - [`/silenced` (GET)](#silenced-get)
   - [`/silenced` (POST)](#silenced-post)
+  - [`/silenced/ids/:id` (GET)](#silencedidsid-get)
   - [`/silenced/clear` (POST)](#silenced-clear-post)
   - [`/silenced/subscriptions/:subscription` (GET)](#silenced-subscriptions-get)
   - [`/silenced/checks/:check` (GET)](#silenced-checks-get)
@@ -186,6 +187,48 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   : - **Success**: 201 (Created)
     - **Malformed**: 400 (Bad Request)
     - **Error**: 500 (Internal Server Error)
+
+### `/silenced/ids/:id` (GET)
+
+#### Example: Querying for a specific silence entry
+
+~~~ shell
+$ curl -s -X GET http://localhost:4567/silenced/ids/load-balancer:check_haproxy |jq .
+{
+  "id": "load-balancer:check_haproxy",
+  "subscription": "load-balancer",
+  "check": "check_haproxy",
+  "reason": null,
+  "creator": null,
+  "expire_on_resolve": false,
+  "expire": 3529
+}
+~~~
+
+#### API specification {#silencedids-get-specification}
+
+`/silenced/ids/:id` (GET)
+: desc
+  : Returns a specific silenced override by it's ID.
+: example url
+  : http://hostname:4567/silenced/webserver:check_nginx
+: response type: Hash
+: response codes
+  : - **Success**: 200 (OK)
+    - **Missing**: 404 (Not Found)
+    - **Error**: 500 (Internal Server Error)
+: output
+  : ~~~ json
+    {
+      "id": "webserver:check_nginx",
+      "subscription": "webserver",
+      "check": "check_nginx",
+      "reason": null,
+      "creator": null,
+      "expire_on_resolve": false,
+      "expire": -1
+    }
+    ~~~
 
 ### `/silenced/clear` (POST)
 
