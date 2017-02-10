@@ -58,7 +58,7 @@ repository configurations._
    ~~~ shell
    echo '[sensu]
    name=sensu
-   baseurl=http://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
+   baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
    gpgcheck=0
    enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
    ~~~
