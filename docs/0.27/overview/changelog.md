@@ -10,7 +10,43 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.4.0 Release Notes](#enterprise-v2-4-0)
+- [Core 0.27.1 Release Notes](#core-v0-27-1)
 - [Core 0.27.0 Release Notes](#core-v0-27-0)
+
+## Enterprise 2.4.0 Release Notes {#enterprise-v2-4-0}
+
+**February 17, 2017** &mdash; Sensu Enterprise version 2.4.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-4-0-changes}
+
+- **IMPROVEMENT**: Built on Sensu Core 0.27.1.
+
+## Core 0.27.1 Release Notes {#core-v0-27-1}
+
+Source: [GitHub.com][9]
+
+**February 17, 2017** &mdash; Sensu Core version 0.27.1 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v0-27-1-changes}
+
+- **IMPROVED**: Failed pipe handler executions are now logged with the
+	error log level.
+
+- **IMPROVED**: Sensu server now adds a unique per-client subscription to
+	client keepalives when missing. This is to enable built-in event
+	silencing for older Sensu clients (< 0.26).
+
+- **BUGFIX**: Check subdue and filter when time windows now account for
+	GMT offsets.
+
+- **BUGFIX**: Non UTF-8 characters in check tokens are now removed.
+
+- **BUGFIX**: Fixed filter name logging when an event is filtered.
 
 ## Core 0.27.0 Release Notes {#core-v0-27-0}
 
@@ -98,3 +134,4 @@ This release includes potentially breaking, backwards-incompatible changes:
 [6]: https://github.com/test-kitchen/test-kitchen
 [7]: https://github.com/chef/chef
 [8]: https://github.com/chef/omnibus
+[9]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0271---2017-02-17
