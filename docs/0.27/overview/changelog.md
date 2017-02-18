@@ -34,10 +34,10 @@ Source: [GitHub.com][9]
 
 ### CHANGES {#core-v0-27-1-changes}
 
-- **IMPROVED**: Failed pipe handler executions are now logged with the
+- **IMPROVEMENT**: Failed pipe handler executions are now logged with the
 	error log level.
 
-- **IMPROVED**: Sensu server now adds a unique per-client subscription to
+- **IMPROVEMENT**: Sensu server now adds a unique per-client subscription to
 	client keepalives when missing. This is to enable built-in event
 	silencing for older Sensu clients (< 0.26).
 
@@ -77,10 +77,10 @@ This release includes potentially breaking, backwards-incompatible changes:
 	uses [Travis CI][5] to automate package builds using a combination of
 	[Test Kitchen][6], [Chef][7] and [Omnibus][8] tools.
 
-- **IMPROVED**: Sensu packages for Windows now include Ruby 2.3.0,
+- **IMPROVEMENT**: Sensu packages for Windows now include Ruby 2.3.0,
 	upgraded from Ruby 2.0.0 in prior versions of Sensu.
 
-- **IMPROVED**: Sensu packages for Windows now include winsw 2.0.1,
+- **IMPROVEMENT**: Sensu packages for Windows now include winsw 2.0.1,
 	upgraded from winsw 1.16. This version includes a number of changes
 	which should help to address issues around orphaned processes.
 
