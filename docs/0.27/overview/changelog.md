@@ -67,7 +67,12 @@ This release includes potentially breaking, backwards-incompatible changes:
 	[platforms page][3] for links to updated installation instructions.
 
 - **NEW**: On platforms where systemd is the default init, Sensu now
-	packages systemd unit files instead of sysv init scripts.
+	provides systemd unit files instead of sysv init scripts.
+
+- **NOTE**: The transition of service management from sysv to systemd may
+	initially cause an error when restarting Sensu services. To
+	avoid this, please be sure to stop Sensu services before
+	upgrading to Sensu 0.27 and starting them again.
 
 - **REMOVED**: The embedded runit service supervisor is no longer included
 	in Sensu packages for Linux platforms.
