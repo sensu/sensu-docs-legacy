@@ -202,6 +202,10 @@ tokens were also sometimes referred to as **"Sensu client overrides"**; a
 reference to the fact that command tokens allowed client attributes to
 "override" [check command arguments][23]._
 
+_NOTE: Check tokens are processed before check execution, therefore token
+substitution will not apply to check data delivered via the local [client
+socket input][46]._
+
 ### Example check tokens
 
 The following is an example Sensu [check definition][17] using three check
@@ -749,6 +753,10 @@ thus able to be included in event notifications (e.g. email).
 See [check results][4] (above) for more information about check results,
 including an [example check result][37].
 
+Required attributes below are the minimum for check results submitted
+via the [client socket input][46]. Additional attributes are
+automatically added by the client to build a complete check result.
+
 #### `check` attributes {#check-result-check-attributes}
 
 `status`
@@ -757,6 +765,8 @@ including an [example check result][37].
     indicates `OK`, `1` indicates `WARNING`, and `2` indicates `CRITICAL`; exit
     status codes other than `0`, `1`, or `2` indicate an `UNKNOWN` or custom
     status.
+: required
+  : true
 : type
   : Integer
 : example
@@ -767,6 +777,8 @@ including an [example check result][37].
 `command`
 : description
   : The command as [provided by the check definition][17].
+: required
+  : false
 : type
   : String
 : example
@@ -777,6 +789,8 @@ including an [example check result][37].
 `subscribers`
 : description
   : The check subscribers as [provided by the check definition][17].
+: required
+  : false
 : type
   : Array
 : example
@@ -787,6 +801,8 @@ including an [example check result][37].
 `interval`
 : description
   : The check interval in seconds, as [provided by the check definition][17]
+: required
+  : false
 : type
   : Integer
 : example
@@ -797,6 +813,8 @@ including an [example check result][37].
 `name`
 : description
   : The check name, as [provided by the check definition][17]
+: required
+  : true
 : type
   : String
 : example
@@ -808,6 +826,8 @@ including an [example check result][37].
 : description
   : The time the check request was issued (by the [Sensu server][6] or
     [client][1]), stored as an integer (i.e. `Time.now.to_i`)
+: required
+  : false
 : type
   : Integer
 : example
@@ -819,6 +839,8 @@ including an [example check result][37].
 : description
   : The time the check request was executed by the [Sensu client][1], stored as
     and integer (i.e. `Time.now.to_i`).
+: required
+  : false
 : type
   : Integer
 : example
@@ -830,6 +852,8 @@ including an [example check result][37].
 : description
   : The amount of time (in seconds) it took for the [Sensu client][1] to execute
     the check.
+: required
+  : false
 : type
   : Float
 : example
@@ -840,6 +864,8 @@ including an [example check result][37].
 `output`
 : description
   : The output produced by the check `command`.
+: required
+  : true
 : type
   : String
 : example
@@ -909,3 +935,4 @@ including an [example check result][37].
 [42]: #subdue-attributes
 [43]: /docs/0.24/overview/changelog.html
 [44]: ../api/events-api.html#the-resolve-api-endpoint
+[46]: clients.html#client-socket-input
