@@ -127,19 +127,24 @@ Sensu servers which may be registered and processing check results._
 
 ### `/info` (GET)
 
-The `/info` API endpoint provides HTTP GET access to status information about
-the monitoring system, including [data store][1] and [transport][2]
-connectivity, and API version.
+The `/info` API endpoint provides HTTP GET access to status
+information about the Sensu installation, including the API version,
+[data store][1] and [transport][2] connectivity, and the running Sensu
+servers.
 
 #### EXAMPLE {#info-get-example}
 
 ~~~ shell
 $ curl -s http://127.0.0.1:4567/info | jq .
 {
+  "sensu": {
+    "version": "0.28.0"
+  },
   "redis": {
     "connected": true
   },
   "transport": {
+    "name": "rabbitmq",
     "connected": true,
     "results": {
       "consumers": 0,
@@ -150,9 +155,21 @@ $ curl -s http://127.0.0.1:4567/info | jq .
       "messages": 0
     }
   },
-  "sensu": {
-    "version": "0.28.0"
-  }
+  "servers": [
+    {
+      "id": "ee193524-ef98-4477-817a-6a1c8d822c82",
+      "hostname": "example",
+      "address": "192.168.0.2",
+      "is_leader": true,
+      "metrics": {
+        "cpu": {
+          "user": 45.52,
+          "system": 0.95
+        }
+      },
+      "timestamp": 1488240896
+    }
+  ]
 }
 ~~~
 
@@ -160,7 +177,7 @@ $ curl -s http://127.0.0.1:4567/info | jq .
 
 `/info` (GET)
 : desc
-  : Returns information on the API.
+  : Returns information on the Sensu installation.
 
 : example url
   : http://hostname:4567/info
@@ -174,11 +191,16 @@ $ curl -s http://127.0.0.1:4567/info | jq .
 
 : output
   : ~~~ json
+
     {
+      "sensu": {
+        "version": "0.28.0"
+      },
       "redis": {
         "connected": true
       },
       "transport": {
+        "name": "rabbitmq",
         "connected": true,
         "results": {
           "consumers": 0,
@@ -189,9 +211,21 @@ $ curl -s http://127.0.0.1:4567/info | jq .
           "messages": 0
         }
       },
-      "sensu": {
-        "version": "0.28.0"
-      }
+      "servers": [
+        {
+          "id": "ee193524-ef98-4477-817a-6a1c8d822c82",
+          "hostname": "example",
+          "address": "192.168.0.2",
+          "is_leader": true,
+          "metrics": {
+            "cpu": {
+              "user": 45.52,
+              "system": 0.95
+            }
+          },
+          "timestamp": 1488240896
+        }
+      ]
     }
     ~~~
 
