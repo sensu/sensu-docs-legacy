@@ -658,6 +658,18 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
     "contacts": ["ops"]
     ~~~
 
+`proxy_requests`
+: description
+  : The [`proxy_requests` definition scope][48], used to create proxy check requests.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "proxy_requests": {}
+    ~~~
+
 #### `subdue` attributes
 
 The following attributes are configured within the `{"checks": { "CHECK": {
@@ -712,6 +724,62 @@ name][41]).
           "end": "5:00 PM"
         }
       ]
+    }
+    ~~~
+
+#### `proxy_requests` attributes {#proxy-requests-attributes}
+
+The following attributes are configured within the `{"checks": {
+"CHECK": { "proxy_requests": {} } } }` [configuration scope][29]
+(where `CHECK` is a valid [check name][41]).
+
+##### EXAMPLE {#proxy-requests-attributes-example}
+
+Publish a check request to the configured `subscribers` (e.g.
+`["round-robin:snmp_pollers"]`) for every Sensu client in the registry
+that matches the configured client attributes in `client_attributes`
+on the configured `interval` (e.g. `60`). Client tokens in the check
+definition (e.g. `"check-snmp-if.rb -h :::address::: -i eth0"`) are
+substituted prior to publishing the check request. The check request
+check `source` is set to the client `name`.
+
+~~~ json
+{
+  "checks": {
+    "check_arista_eth0": {
+      "command": "check-snmp-if.rb -h :::address::: -i eth0",
+      "subscribers": [
+        "round-robin:snmp_pollers"
+      ],
+      "interval": 60,
+      "proxy_requests": {
+        "client_attributes": {
+          "keepalive": false,
+          "device_type": "router",
+          "device_manufacturer": "arista"
+        }
+      }
+    }
+  }
+}
+~~~
+
+##### ATTRIBUTES {#proxy-requests-attributes-specification}
+
+`client_attributes`
+: description
+  : Sensu client attributes to match clients in the registry.
+: required
+  : true
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "client_attributes": {
+      "keepalive": false,
+      "device_type": "router",
+      "device_manufacturer": "arista",
+      "subscriptions": "eval: value.include?('dc-01')"
     }
     ~~~
 
@@ -939,3 +1007,4 @@ automatically added by the client to build a complete check result.
 [45]: ../api/events-api.html#the-resolve-api-endpoint
 [46]: clients.html#client-socket-input
 [47]: https://en.wikipedia.org/wiki/Cron#CRON_expression
+[48]: #proxy-requests-attributes
