@@ -231,14 +231,21 @@ Server: thin
       "check": "chef_client_process",
       "subscribers": [
         "production"
-      ]
+      ],
+      "creator": "sysop@example.com",
+      "reason": "triggered application deployment"
     }
     ~~~
 
     _NOTE: the `subscribers` attribute is not required for requesting a check
     execution, however it may be provided to override the `subscribers` [check
-    definition attribute][2]. No other check definition attribute overrides are
-    supported via the `/request` API._
+    definition attribute][2]._
+
+    _NOTE: the `creator` and `reason` attributes are not required for
+    requesting a check execution, however they may be provided to add
+    more context to the check request and in turn the check result(s).
+    The check request `creator` and `reason` are added to the check
+    request payload under `api_requested`._
 
 : response codes
   : - **Success**: 202 (Accepted)
