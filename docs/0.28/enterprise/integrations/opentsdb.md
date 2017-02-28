@@ -89,6 +89,32 @@ The following attributes are configured within the `{"opentsdb": {} }`
     "tag_host": false
     ~~~
 
+`prefix_source`
+: description
+  : If the Sensu source (client name) should prefix (added to) the metric names.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "prefix_source": true
+    ~~~
+
+`prefix`
+: description
+  : A custom metric name prefix.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "prefix": "production"
+    ~~~
+
 [1]:  /enterprise
 [2]:  http://opentsdb.net?ref=sensu-enterprise
 [3]:  ../../reference/configuration.html#configuration-scopes
