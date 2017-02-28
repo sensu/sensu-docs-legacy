@@ -13,7 +13,7 @@ weight: 5
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
 - [Core 0.28.0 Release Notes](#core-v0-28-0)
 
-## Enterprise 2.4.0 Release Notes {#enterprise-v2-4-0}
+## Enterprise 2.5.0 Release Notes {#enterprise-v2-5-0}
 
 **February 24, 2017** &mdash; Sensu Enterprise version 2.5.0 has been
 	released and is available for immediate download. Please note the
