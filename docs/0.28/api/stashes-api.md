@@ -1,6 +1,6 @@
 ---
 title: "Stashes API"
-version: 0.27
+version: 0.28
 weight: 7
 next:
   url: "health-and-info-api.html"

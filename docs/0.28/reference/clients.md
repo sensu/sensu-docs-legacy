@@ -1,7 +1,7 @@
 ---
 title: "Client"
 description: "Reference documentation for Sensu Clients."
-version: 0.27
+version: 0.28
 weight: 2
 ---
 

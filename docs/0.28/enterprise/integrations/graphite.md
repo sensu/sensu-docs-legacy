@@ -2,7 +2,7 @@
 title: "Graphite"
 description: "Send metrics to the Graphite time-series database using the
   plaintext protocol."
-version: 0.27
+version: 0.28
 weight: 17
 ---
 

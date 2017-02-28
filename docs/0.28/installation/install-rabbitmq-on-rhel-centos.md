@@ -1,7 +1,7 @@
 ---
 title: "Install RabbitMQ on RHEL/CentOS"
 description: "The complete Sensu installation guide."
-version: 0.27
+version: 0.28
 weight: 0
 hidden: true
 next:

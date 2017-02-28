@@ -1,7 +1,7 @@
 ---
 title: "Wavefront"
 description: "Send metrics to Wavefront using the Wavefront Data Format."
-version: 0.27
+version: 0.28
 weight: 18
 ---
 

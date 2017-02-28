@@ -2,7 +2,7 @@
 title: "RBAC for GitLab"
 description: "Reference documentation for the Sensu Enterprise Dashboard Role
   Based Access Controls (RBAC) for GitLab"
-version: 0.27
+version: 0.28
 weight: 4
 ---
 

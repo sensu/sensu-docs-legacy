@@ -1,6 +1,6 @@
 ---
 title: "Heads-Up Display"
-version: 0.27
+version: 0.28
 weight: 11
 next:
   url: "rbac/audit-logging.html"

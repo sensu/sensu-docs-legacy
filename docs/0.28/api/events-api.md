@@ -1,6 +1,6 @@
 ---
 title: "Events API"
-version: 0.27
+version: 0.28
 weight: 6
 next:
   url: "stashes-api.html"
@@ -75,11 +75,11 @@ $ curl -s http://localhost:4567/events | jq .
       "name": "sensu_website",
       "issued": 1460303502,
       "executed": 1460303502,
-      "duration": 0.271
+      "duration": 0.281
     },
     "client": {
       "timestamp": 1460303501,
-      "version": "0.27.0",
+      "version": "0.28.0",
       "website": "http://google.com",
       "socket": {
         "port": 3030,
@@ -203,11 +203,11 @@ $ curl -s http://localhost:4567/events/client-01 | jq .
       "name": "sensu_website",
       "issued": 1460303742,
       "executed": 1460303742,
-      "duration": 0.27
+      "duration": 0.28
     },
     "client": {
       "timestamp": 1460303741,
-      "version": "0.27.0",
+      "version": "0.28.0",
       "website": "http://google.com",
       "socket": {
         "port": 3030,
@@ -330,11 +330,11 @@ $ curl -s http://localhost:4567/events/client-01/sensu_website | jq .
     "name": "sensu_website",
     "issued": 1460304102,
     "executed": 1460304102,
-    "duration": 0.279
+    "duration": 0.289
   },
   "client": {
     "timestamp": 1460304101,
-    "version": "0.27.0",
+    "version": "0.28.0",
     "website": "http://google.com",
     "socket": {
       "port": 3030,
