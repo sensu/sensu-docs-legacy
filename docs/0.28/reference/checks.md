@@ -422,12 +422,24 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
 : description
   : The frequency in seconds the check is executed.
 : required
-  : true (unless `publish` is `false`)
+  : true (unless `publish` is `false` or `cron` is configured)
 : type
   : Integer
 : example
   : ~~~ shell
     "interval": 60
+    ~~~
+
+`cron`
+: description
+  : When the check should be executed, using the [Cron syntax][47].
+: required
+  : true (unless `publish` is `false` or `interval` is configured)
+: type
+  : String
+: example
+  : ~~~ shell
+    "cron": "0 0 * * *"
     ~~~
 
 `timeout`
@@ -926,3 +938,4 @@ automatically added by the client to build a complete check result.
 [44]: ../enterprise/contact-routing.html
 [45]: ../api/events-api.html#the-resolve-api-endpoint
 [46]: clients.html#client-socket-input
+[47]: https://en.wikipedia.org/wiki/Cron#CRON_expression
