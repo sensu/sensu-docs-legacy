@@ -33,8 +33,9 @@ weight: 5
 
 Source: [GitHub.com][2]
 
-**January 26, 2017** &mdash; Sensu Core version 0.28.0 has been released and is
-available for immediate download. Please note the following improvements:
+**February 23, 2017** &mdash; Sensu Core version 0.28.0 has been released
+	and is available for immediate download. Please note the following
+	improvements:
 
 ### CHANGES {#core-v0-28-0-changes}
 
