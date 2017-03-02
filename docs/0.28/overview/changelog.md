@@ -11,6 +11,7 @@ weight: 5
 ## Releases
 
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
+- [Core 0.28.1 Release Notes](#core-v0-28-0)
 - [Core 0.28.0 Release Notes](#core-v0-28-0)
 
 ## Enterprise 2.5.0 Release Notes {#enterprise-v2-5-0}
@@ -28,6 +29,20 @@ weight: 5
 
 - **BUGFIX**: Contact routing array values now properly override the
 	configured default/global integration values.
+
+## Core 0.28.1 Release Notes {#core-v0-28-1}
+
+**March 2, 2017** &mdash; Sensu Core version 0.28.1 has been released
+  and is available for immediate download. Please note the following
+  changes:
+
+- **BUGFIX**: Check requests with proxy_requests attributes are no
+  longer overridden by local check definitions.
+
+- **IMPROVEMENT**: Updated [Oj][3] (used by the sensu-json library) to the
+  latest release (2.18.1) for Ruby 2.4 compatibility.
+
+- **IMPROVEMENT**: Updated embedded OpenSSL from [1.0.2j to 1.0.2k][4].
 
 ## Core 0.28.0 Release Notes {#core-v0-28-0}
 
@@ -75,3 +90,5 @@ Source: [GitHub.com][2]
 
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
 [2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0280---2017-02-23
+[3]: https://github.com/ohler55/oj
+[4]: https://www.openssl.org/news/openssl-1.0.2-notes.html
