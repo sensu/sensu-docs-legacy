@@ -11,7 +11,8 @@ weight: 5
 ## Releases
 
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
-- [Core 0.28.1 Release Notes](#core-v0-28-0)
+- [Core 0.28.2 Release Notes](#core-v0-28-2)
+- [Core 0.28.1 Release Notes](#core-v0-28-1)
 - [Core 0.28.0 Release Notes](#core-v0-28-0)
 
 ## Enterprise 2.5.0 Release Notes {#enterprise-v2-5-0}
@@ -29,6 +30,16 @@ weight: 5
 
 - **BUGFIX**: Contact routing array values now properly override the
 	configured default/global integration values.
+
+## Core 0.28.2 Release Notes {#core-v0-28-2}
+
+**March 6, 2017** &mdash; Sensu Core version 0.28.2 has been released
+  and is available for immediate download. Please note the following
+  changes:
+
+- **BUGFIX**: Clients created via /clients API endpoint now have a
+  per-client subscription added automatically, ensuring they can be
+  silenced.
 
 ## Core 0.28.1 Release Notes {#core-v0-28-1}
 
