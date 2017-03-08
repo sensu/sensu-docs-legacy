@@ -178,7 +178,7 @@ Usage: sensu-install [options]
     -p, --plugin PLUGIN              Install a Sensu PLUGIN
     -P, --plugins PLUGIN[,PLUGIN]    PLUGIN or comma-delimited list of Sensu plugins to install
     -s, --source SOURCE              Install Sensu plugins from a custom SOURCE
-    -x, --proxy PROXY                Install plugins via a PROXY url
+    -x, --proxy PROXY                Install Sensu plugins and extensions via a PROXY URL
 ~~~
 
 _NOTE: `sensu-install` is only available in Sensu Core >= `0.21.0`._
