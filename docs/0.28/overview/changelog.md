@@ -10,10 +10,23 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.5.1 Release Notes](#enterprise-v2-5-1)
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
+- [Core 0.28.4 Release Notes](#core-v0-28-4)
+- [Core 0.28.3 Release Notes](#core-v0-28-3)
 - [Core 0.28.2 Release Notes](#core-v0-28-2)
 - [Core 0.28.1 Release Notes](#core-v0-28-1)
 - [Core 0.28.0 Release Notes](#core-v0-28-0)
+
+## Enterprise 2.5.1 Release Notes {#enterprise-v2-5-1}
+
+**March 13, 2017** &mdash; Sensu Enterprise version 2.5.1 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-5-1-changes}
+
+- **IMPROVEMENT**: Built on Sensu Core 0.28.4.
 
 ## Enterprise 2.5.0 Release Notes {#enterprise-v2-5-0}
 
@@ -30,6 +43,27 @@ weight: 5
 
 - **BUGFIX**: Contact routing array values now properly override the
 	configured default/global integration values.
+
+## Core 0.28.4 Release Notes {#core-v0-28-4}
+
+**March 10, 2017** &mdash; Sensu Core version 0.28.4 has been released and
+	is available for immediate download. Please note the following
+	changes:
+
+- **BUGFIX**: In the interest of addressing a regression causing duplicate
+	check execution requests, code added in 0.28.0 to account for task
+	scheduling drift has been removed.
+
+## Core 0.28.3 Release Notes {#core-v0-28-3}
+
+**March 9, 2017** &mdash; Sensu Core version 0.28.3 has been released and
+	is available for immediate download. Please note the following
+	changes:
+
+- **BUGFIX**: The Sensu client now includes check source when tracking in
+	progress check executions. These changes are necessary to allow
+	the Sensu client to execute on several concurrent proxy check
+	requests.
 
 ## Core 0.28.2 Release Notes {#core-v0-28-2}
 
