@@ -179,7 +179,7 @@ the [installation guide][2].
    sudo /etc/init.d/sensu-enterprise start
    sudo /etc/init.d/sensu-enterprise-dashboard start
    sudo /etc/init.d/sensu-client start
-   ~~~   
+   ~~~
 
 10. Verify that your installation is ready to use by querying the Sensu API
     using the `curl` utility (and piping the result to the [`jq` utility][13]):
@@ -224,7 +224,7 @@ the [installation guide][2].
 [1]:  architecture
 [2]:  installation-guide
 [3]:  installation-strategies
-[4]:  installation-strategies#standalone
+[4]:  installation-guide
 [5]:  http://releases.ubuntu.com/14.04/
 [6]:  http://github.com/sensu/sensu-bash
 [7]:  sensu-on-ubuntu-debian#install-sensu-core-repository
