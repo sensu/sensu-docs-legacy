@@ -179,8 +179,8 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
       - **description**: If specified, this free-form string is used to provide context
       or rationale for the reason this silence entry was created.
       - **example**: "pre-arranged maintenance window"
-  : - `subscription`: String, required if `check` not specified
-      - **required**: true, unless `client` is specified
+  : - `subscription`
+      - **required**: true, unless `check` is specified
       - **type:** String
       - **description**: Specifies the subscription which the silence entry applies to.
 : response codes
