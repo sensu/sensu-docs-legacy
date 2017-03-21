@@ -22,9 +22,10 @@ next:
     - [`dashboard` attributes](#dashboard-attributes)
     - [`auth` attributes](#auth-attributes)
     - [`audit` attributes](#audit-attributes)
-    - [`ldap` attributes](#ldap-attributes)
     - [`github` attributes](#github-attributes)
     - [`gitlab` attributes](#gitlab-attributes)
+    - [`ldap` attributes](#ldap-attributes)
+    - [`oidc` attributes](#oidc-attributes)
 
 ## What is the Sensu Enterprise Dashboard?
 
@@ -350,53 +351,6 @@ audit
     }
     ~~~
 
-ldap
-: description
-  : The [`ldap` configuration scope][13], used to configure [Role Based Access
-    Controls][3] with the [RBAC for LDAP driver][4]. Overrides simple
-    authentication.
-: required
-  : false
-: type
-  : Hash
-: example
-  : ~~~shell
-    "ldap": {
-      "server": "localhost",
-      "port": 389,
-      "basedn": "cn=users,dc=domain,dc=tld",
-      "binduser": "cn=binder,cn=users,dc=domain,dc=tld",
-      "bindpass": "secret",
-      "roles": [
-        {
-          "name": "guests",
-          "members": [
-            "guests_group"
-          ],
-          "datacenters": [
-            "us-west-1"
-          ],
-          "subscriptions": [
-            "webserver"
-          ],
-          "readonly": true
-        },
-        {
-          "name": "operators",
-          "members": [
-            "operators_group"
-          ],
-          "datacenters": [],
-          "subscriptions": [],
-          "readonly": false
-        }
-      ],
-      "insecure": false,
-      "security": "none",
-      "userattribute": "sAMAccountName"
-    }
-    ~~~
-
 github
 : description
   : The [`github` definition scope][14], used to configure [Role Based Access
@@ -481,6 +435,96 @@ gitlab
     }
     ~~~
 
+ldap
+: description
+  : The [`ldap` configuration scope][13], used to configure [Role Based Access
+    Controls][3] with the [RBAC for LDAP driver][4]. Overrides simple
+    authentication.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~shell
+    "ldap": {
+      "server": "localhost",
+      "port": 389,
+      "basedn": "cn=users,dc=domain,dc=tld",
+      "binduser": "cn=binder,cn=users,dc=domain,dc=tld",
+      "bindpass": "secret",
+      "roles": [
+        {
+          "name": "guests",
+          "members": [
+            "guests_group"
+          ],
+          "datacenters": [
+            "us-west-1"
+          ],
+          "subscriptions": [
+            "webserver"
+          ],
+          "readonly": true
+        },
+        {
+          "name": "operators",
+          "members": [
+            "operators_group"
+          ],
+          "datacenters": [],
+          "subscriptions": [],
+          "readonly": false
+        }
+      ],
+      "insecure": false,
+      "security": "none",
+      "userattribute": "sAMAccountName"
+    }
+    ~~~
+
+oidc
+: description
+  : The [`oidc` definition scope][18], used to configure [Role Based Access
+    Controls][3] with the [RBAC for OpenID Connect (OIDC) driver][17]. Overrides simple
+    authentication.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "oidc": {
+      "clientId": "a8e43af034e7f2608780",
+      "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216",
+      "insecure": false,
+      "server": "https://localhost:9031",
+      "roles": [
+        {
+          "name": "guests",
+          "members": [
+            "myorganization/devs"
+          ],
+          "datacenters": [
+            "us-west-1"
+          ],
+          "subscriptions": [
+            "webserver"
+          ],
+          "readonly": true
+        },
+        {
+          "name": "operators",
+          "members": [
+            "myorganization/owners"
+          ],
+          "datacenters": [],
+          "subscriptions": [],
+          "readonly": false
+        }
+      ]
+    }
+    ~~~
+
 #### `auth` attributes
 
 _NOTE: By default, temporary keys are generated when the Sensu Enterprise
@@ -527,11 +571,6 @@ Please see the [Sensu Enterprise Dashboard Audit Logging reference
 documentation][7] for information on how to configure the dashboard for audit
 logging purposes.
 
-#### `ldap` attributes
-
-Please see the [RBAC for LDAP reference documentation][4] for information on how
-to configure the dashboard for RBAC with LDAP.
-
 #### `github` attributes
 
 Please see the [RBAC for GitHub reference documentation][5] for information on
@@ -542,6 +581,15 @@ how to configure the dashboard for RBAC with GitHub.com or GitHub Enterprise.
 Please see the [RBAC for GitLab reference documentation][6] for information on
 how to configure the dashboard for RBAC with GitLab.
 
+#### `ldap` attributes
+
+Please see the [RBAC for LDAP reference documentation][4] for information on how
+to configure the dashboard for RBAC with LDAP.
+
+#### `oidc` attributes
+
+Please see the [RBAC for OIDC reference documentation][4] for information on how
+to configure the dashboard for RBAC with OpenID Connect (OIDC).
 
 [?]:  #
 [1]:  #what-is-a-sensu-datacenter
@@ -560,3 +608,5 @@ how to configure the dashboard for RBAC with GitLab.
 [14]: #github-attributes
 [15]: #gitlab-attributes
 [16]: rbac/overview.html#rbac-for-the-sensu-enterprise-console-api
+[17]: rbac/rbac-for-oidc.html
+[18]: #oidc-attributes
