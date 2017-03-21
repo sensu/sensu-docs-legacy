@@ -13,6 +13,8 @@ checks, deleting clients, deleting stashes). Optionally, it is also possible to
 log all `HTTP GET` requests (i.e. every view requested by the user, and every
 search query performed by the user).
 
+_NOTE: Audit Logging requires authentication to be enabled._
+
 ### Example configuration
 
 ~~~ shell
