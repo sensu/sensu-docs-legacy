@@ -252,7 +252,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
 
 $ curl -s -i -X POST \
 -H 'Content-Type: application/json' \
--d '{ "id": "load-balancer:check_haproxy" } \
+-d '{ "id": "load-balancer:check_haproxy" }' \
 http://localhost:4567/silenced/clear
 
 HTTP/1.1 204 No Content
