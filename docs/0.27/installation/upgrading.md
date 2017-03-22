@@ -27,8 +27,8 @@ with the upgrade process.
 For example:
 
 ~~~ shell
-sudo /etc/init.d/sensu-server stop
-sudo /etc/init.d/sensu-api stop
+sudo service sensu-server stop
+sudo service sensu-api stop
 ~~~
 
 Stopping services prior to upgrading from a Sensu version < `0.27`

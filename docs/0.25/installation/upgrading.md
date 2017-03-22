@@ -19,8 +19,8 @@ The first step when upgrading Sensu from a release prior to 0.17 is stopping the
 For example:
 
 ~~~ shell
-sudo /etc/init.d/sensu-server stop
-sudo /etc/init.d/sensu-api stop
+sudo service sensu-server stop
+sudo service sensu-api stop
 ~~~
 
 ### Flush Redis
