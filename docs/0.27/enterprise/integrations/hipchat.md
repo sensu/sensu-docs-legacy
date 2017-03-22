@@ -144,6 +144,20 @@ The following attributes are configured within the `{"hipchat": {} }`
     "timeout": 30
     ~~~
 
+`notify`
+: description
+  : Enable HipChat notifications for messages sent to HipChat.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "notify": true
+    ~~~
+
 
 
 [?]:  #
