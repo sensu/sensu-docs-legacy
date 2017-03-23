@@ -12,6 +12,7 @@ weight: 5
 
 - [Enterprise 2.5.1 Release Notes](#enterprise-v2-5-1)
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
+- [Core 0.28.5 Release Notes](#core-v0-28-5)
 - [Core 0.28.4 Release Notes](#core-v0-28-4)
 - [Core 0.28.3 Release Notes](#core-v0-28-3)
 - [Core 0.28.2 Release Notes](#core-v0-28-2)
@@ -43,6 +44,15 @@ weight: 5
 
 - **BUGFIX**: Contact routing array values now properly override the
 	configured default/global integration values.
+
+## Core 0.28.5 Release Notes {#core-v0-28-5}
+
+**March 23, 2017** &mdash; Sensu Core version 0.28.5 has been released and
+	is available for immediate download. Please note the following
+	changes:
+
+- **BUGFIX**: Fixed check `subdue` and filter `when` features when a time
+	window spans over `00:00:00`, crossing the day boundary.
 
 ## Core 0.28.4 Release Notes {#core-v0-28-4}
 
