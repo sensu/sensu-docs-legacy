@@ -58,6 +58,8 @@ format specified below._
 
 ## Configure Sensu
 
+_WARNING: Sensu configuration requires a character encoding of UTF-8; if you are generating JSON programmatically, make sure that you either emit UTF-8 or convert your configuration to UTF-8 before starting or reloading Sensu._
+
 By default, all of the Sensu services on Microsoft Windows systems will load
 configuration from the following locations:
 
