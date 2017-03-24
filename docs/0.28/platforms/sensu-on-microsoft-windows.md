@@ -205,5 +205,5 @@ To manually start and stop the Sensu client Windows service, use the
 [13]: #example-transport-configuration
 [14]: #example-client-configuration
 [15]: ../reference/transport.html#transport-definition-specification
-[16]: http://stackoverflow.com/questions/2223882/whats-different-between-utf-8-and-utf-8-without-bomhttp://stackoverflow.com/questions/2223882/whats-different-between-utf-8-and-utf-8-without-bom
+[16]: http://stackoverflow.com/questions/2223882/whats-different-between-utf-8-and-utf-8-without-bom
 [17]: http://stackoverflow.com/questions/5596982/using-powershell-to-write-a-file-in-utf-8-without-the-bom
