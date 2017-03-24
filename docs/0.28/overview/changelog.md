@@ -10,6 +10,7 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.5.2 Release Notes](#enterprise-v2-5-2)
 - [Enterprise 2.5.1 Release Notes](#enterprise-v2-5-1)
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
 - [Core 0.28.5 Release Notes](#core-v0-28-5)
@@ -18,6 +19,19 @@ weight: 5
 - [Core 0.28.2 Release Notes](#core-v0-28-2)
 - [Core 0.28.1 Release Notes](#core-v0-28-1)
 - [Core 0.28.0 Release Notes](#core-v0-28-0)
+
+## Enterprise 2.5.2 Release Notes {#enterprise-v2-5-2}
+
+**March 24, 2017** &mdash; Sensu Enterprise version 2.5.2 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-5-2-changes}
+
+- **IMPROVEMENT**: Built on Sensu Core 0.28.5.
+
+- **IMPROVEMENT**: Improved OpsGenie integration API request debug
+	logging.
 
 ## Enterprise 2.5.1 Release Notes {#enterprise-v2-5-1}
 
