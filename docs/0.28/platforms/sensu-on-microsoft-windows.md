@@ -58,6 +58,9 @@ format specified below._
 
 ## Configure Sensu
 
+_DANGER: Many text editors on Windows, including Notepad, save text in a format that is not suitable for Sensu configuration. While we require UTF-8, there are similar-looking character sets that are not actually 'UTF-8', such as 'UTF-8 BOM'. A more modern text editor, such as Atom or Notepad++, will allow you to do this easily, fortunately. For more about editor encodings, see [this discussion on StackOverflow][16]. If you're automating JSON creation with e.g. PowerShell, make sure that you're speaking UTF-8 in your shell, too! See [here][17] for more details._
+
+
 By default, all of the Sensu services on Microsoft Windows systems will load
 configuration from the following locations:
 
@@ -202,3 +205,5 @@ To manually start and stop the Sensu client Windows service, use the
 [13]: #example-transport-configuration
 [14]: #example-client-configuration
 [15]: ../reference/transport.html#transport-definition-specification
+[16]: http://stackoverflow.com/questions/2223882/whats-different-between-utf-8-and-utf-8-without-bom
+[17]: http://stackoverflow.com/questions/5596982/using-powershell-to-write-a-file-in-utf-8-without-the-bom
