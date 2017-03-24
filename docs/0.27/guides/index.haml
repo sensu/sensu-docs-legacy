@@ -7,6 +7,6 @@ layout: "docs"
 ---
 
 %h2= "Guides"
-- current_resource.children.sort_by!{ |c| c.data[:weight] }.each do |page|
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
   %ul
     = partial "toc-helper", locals: { content: page }
