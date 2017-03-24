@@ -1,6 +1,6 @@
 ---
 title: "Sensu Dashboards"
-version: 0.28
+version: 0.29
 weight: 6
 next:
   url: "summary.html"

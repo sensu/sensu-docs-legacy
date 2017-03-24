@@ -2,7 +2,7 @@
 title: "Microsoft Windows"
 description: "User documentation for installing and operating Sensu on Microsoft
   Windows."
-version: 0.28
+version: 0.29
 weight: 3
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Microsoft Windows systems. For instructions
@@ -34,16 +34,16 @@ installer package (i.e. a .msi file), which is available for download from the
 
 ### Download and install Sensu using the Sensu MSI {#download-and-install-sensu-core}
 
-_NOTE: As of Sensu version 0.28 repository URLs have changed.  To
+_NOTE: As of Sensu version 0.29 repository URLs have changed.  To
 install or upgrade to the latest version of Sensu, please ensure you
 have updated existing configurations to follow the repository URL
 format specified below._
 
 1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
 
-   [https://sensu.global.ssl.fastly.net/msi/2012r2/sensu-0.28.0-1-x64.msi][3]
+   [https://sensu.global.ssl.fastly.net/msi/2012r2/sensu-0.29.0-1-x64.msi][3]
 
-2. Double-click the `sensu-0.28.0-1-x64.msi` installer package to launch the
+2. Double-click the `sensu-0.29.0-1-x64.msi` installer package to launch the
    installer, accept the Sensu Core [MIT License][4] and install Sensu using the
    default settings (e.g. install location, etc).
 
@@ -192,7 +192,7 @@ To manually start and stop the Sensu client Windows service, use the
 
 [1]:  https://sensuapp.org/download
 [2]:  https://sensu.global.ssl.fastly.net/msi/
-[3]:  https://sensu.global.ssl.fastly.net/msi/2012r2/sensu-0.28.0-1-x64.msi
+[3]:  https://sensu.global.ssl.fastly.net/msi/2012r2/sensu-0.29.0-1-x64.msi
 [4]:  https://sensuapp.org/mit-license
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html

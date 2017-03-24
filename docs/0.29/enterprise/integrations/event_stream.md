@@ -2,7 +2,7 @@
 title: "Event Stream"
 description: "Send Sensu events to a remote TCP socket for complex event
   processing and/or long-term storage."
-version: 0.28
+version: 0.29
 weight: 15
 ---
 

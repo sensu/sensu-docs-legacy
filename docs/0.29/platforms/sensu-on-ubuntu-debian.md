@@ -2,7 +2,7 @@
 title: "Ubuntu/Debian"
 description: "User documentation for installing and operating Sensu on Ubuntu
   and Debian Linux systems."
-version: 0.28
+version: 0.29
 weight: 1
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Ubuntu and Debian systems. For instructions
@@ -46,7 +46,7 @@ Sensu Core package installs several processes including `sensu-server`,
 
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
-_NOTE: As of Sensu version 0.28, apt repository configuration has
+_NOTE: As of Sensu version 0.29, apt repository configuration has
 changed to include the "codename" of the Ubuntu/Debian release. To
 install or upgrade to the latest version of Sensu, please ensure you
 have updated existing repository configurations._

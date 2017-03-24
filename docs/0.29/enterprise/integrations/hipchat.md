@@ -1,7 +1,7 @@
 ---
 title: "HipChat"
 description: "Send notification to a HipChat room for Sensu events."
-version: 0.28
+version: 0.29
 weight: 7
 ---
 

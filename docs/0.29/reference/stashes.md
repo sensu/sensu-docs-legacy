@@ -1,7 +1,7 @@
 ---
 title: "Stashes"
 description: "Reference documentation for Sensu Stashes."
-version: 0.28
+version: 0.29
 weight: 11
 ---
 

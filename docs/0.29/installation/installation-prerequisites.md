@@ -1,7 +1,7 @@
 ---
 title: "Prerequisites"
 description: "The complete Sensu installation guide."
-version: 0.28
+version: 0.29
 weight: 3
 next:
   url: "install-redis.html"
