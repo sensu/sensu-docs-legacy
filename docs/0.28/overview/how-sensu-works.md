@@ -20,7 +20,7 @@ next:
 - **Service Checks** emit status information and telemetry data as **Check
   Results**
 - **Check Results** are considered to be associated with either the **Sensu Client** executing the check or the **Proxy Client** of the check
-- Those **Check Results** are published by the **Source** to the **Sensu Transport**
+- Those **Check Results** are published by the **Sensu Client** to the **Sensu Transport**, sometimes on behalf of another client
 - The **Sensu Server** processes **Check Results**, persisting a copy of the
   latest result in the **Data Store** and creating a corresponding to **Event**
 - The **Sensu Server** processes the **Event** by executing one or more **Event
