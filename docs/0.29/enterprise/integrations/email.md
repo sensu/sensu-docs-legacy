@@ -2,7 +2,7 @@
 title: "Email"
 description: "User documentation for the built-in email integration in Sensu
   Enterprise. Send email notifications for events via SMTP."
-version: 0.28
+version: 0.29
 weight: 1
 ---
 

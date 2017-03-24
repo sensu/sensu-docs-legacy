@@ -1,6 +1,6 @@
 ---
 title: "The Five Minute Install"
-version: 0.28
+version: 0.29
 weight: 1
 next:
   url: "learn-sensu-basics.html"
@@ -83,7 +83,7 @@ the [installation guide](2).
 5. Configure Sensu by downloading this [example configuration file][10]:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/config.json https://sensuapp.org/docs/0.28/files/simple-sensu-config.json
+   sudo wget -O /etc/sensu/config.json https://sensuapp.org/docs/0.29/files/simple-sensu-config.json
    ~~~
 
    Alternatively, please copy the following example configuration file contents
@@ -108,7 +108,7 @@ the [installation guide](2).
    file][11]:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/conf.d/client.json https://sensuapp.org/docs/0.28/files/simple-client-config.json
+   sudo wget -O /etc/sensu/conf.d/client.json https://sensuapp.org/docs/0.29/files/simple-client-config.json
    ~~~
 
    Alternatively, please copy the following example configuration file contents
@@ -135,7 +135,7 @@ the [installation guide](2).
    file][12]:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/dashboard.json https://sensuapp.org/docs/0.28/files/simple-dashboard-config.json
+   sudo wget -O /etc/sensu/dashboard.json https://sensuapp.org/docs/0.29/files/simple-dashboard-config.json
    ~~~
 
    Alternatively, please copy the following example configuration file contents
@@ -195,7 +195,7 @@ the [installation guide](2).
     [
       {
         "timestamp": 1458625739,
-        "version": "0.28.0",
+        "version": "0.29.0",
         "socket": {
           "port": 3030,
           "bind": "127.0.0.1"
@@ -230,7 +230,7 @@ the [installation guide](2).
 [7]:  ../platforms/sensu-on-ubuntu-debian.html#install-sensu-core-repository
 [8]:  https://www.youtube.com/watch?v=J2D1XF40-ok
 [9]:  https://sensuapp.org/enterprise
-[10]: /docs/0.28/files/simple-sensu-config.json
-[11]: /docs/0.28/files/simple-client-config.json
-[12]: /docs/0.28/files/simple-dashboard-config.json
+[10]: /docs/0.29/files/simple-sensu-config.json
+[11]: /docs/0.29/files/simple-client-config.json
+[12]: /docs/0.29/files/simple-dashboard-config.json
 [13]: https://stedolan.github.io/jq/

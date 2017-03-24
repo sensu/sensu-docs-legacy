@@ -1,6 +1,6 @@
 ---
 title: "Intro to Handlers"
-version: 0.28
+version: 0.29
 weight: 4
 next:
   url: "intro-to-filters.html"
@@ -54,7 +54,7 @@ parsed event data, and then writes the event data to the file (e.g.
 `/tmp/client_name/check_name.json`).
 
 ~~~ shell
-sudo wget -O /etc/sensu/plugins/event-file.rb http://sensuapp.org/docs/0.28/files/event-file.rb
+sudo wget -O /etc/sensu/plugins/event-file.rb http://sensuapp.org/docs/0.29/files/event-file.rb
 sudo chmod +x /etc/sensu/plugins/event-file.rb
 ~~~
 

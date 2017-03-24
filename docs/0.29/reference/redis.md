@@ -1,7 +1,7 @@
 ---
 title: "Redis Configuration"
 description: "Reference documentation for configuring Redis for use with Sensu."
-version: 0.28
+version: 0.29
 weight: 16
 next:
   url: "ssl"
@@ -518,7 +518,7 @@ deployment._
 1. Download the Sensu Redis Sentinel configuraiton file.
 
    ~~~ shell
-   sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/0.28/files/sentinel.conf
+   sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/0.29/files/sentinel.conf
    ~~~
 
 2. Sentinel not only reads its configuration from `/etc/redis/sentinel.conf`, but
@@ -555,7 +555,7 @@ deployment._
    following command to download a working Redis Sentinel init script.
 
    ~~~ shell
-   sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/0.28/files/redis-sentinel
+   sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/0.29/files/redis-sentinel
    ~~~
 
    The Redis Sentinel init script file needs to be executable.

@@ -1,6 +1,6 @@
 ---
 layout: "docs"
-version: 0.28
+version: 0.29
 weight: 1
 title: "What is Sensu?"
 next:

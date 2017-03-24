@@ -1,6 +1,6 @@
 ---
 title: "EC2"
-version: 0.28
+version: 0.29
 weight: 14
 ---
 

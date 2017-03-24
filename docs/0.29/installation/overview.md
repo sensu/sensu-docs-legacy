@@ -1,7 +1,7 @@
 ---
 title: "Overview"
 description: "The complete Sensu installation guide."
-version: 0.28
+version: 0.29
 weight: 1
 next:
   url: "installation-strategies.html"

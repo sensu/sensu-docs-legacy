@@ -1,8 +1,8 @@
 ---
-title: "0.28 changelog"
+title: "0.29 changelog"
 description: "Release notes for Sensu Core and Sensu Enterprise releases based
-  on Sensu Core version 0.28.x"
-version: 0.28
+  on Sensu Core version 0.29.x"
+version: 0.29
 weight: 5
 ---
 
@@ -12,12 +12,12 @@ weight: 5
 
 - [Enterprise 2.5.1 Release Notes](#enterprise-v2-5-1)
 - [Enterprise 2.5.0 Release Notes](#enterprise-v2-5-0)
-- [Core 0.28.5 Release Notes](#core-v0-28-5)
-- [Core 0.28.4 Release Notes](#core-v0-28-4)
-- [Core 0.28.3 Release Notes](#core-v0-28-3)
-- [Core 0.28.2 Release Notes](#core-v0-28-2)
-- [Core 0.28.1 Release Notes](#core-v0-28-1)
-- [Core 0.28.0 Release Notes](#core-v0-28-0)
+- [Core 0.29.5 Release Notes](#core-v0-28-5)
+- [Core 0.29.4 Release Notes](#core-v0-28-4)
+- [Core 0.29.3 Release Notes](#core-v0-28-3)
+- [Core 0.29.2 Release Notes](#core-v0-28-2)
+- [Core 0.29.1 Release Notes](#core-v0-28-1)
+- [Core 0.29.0 Release Notes](#core-v0-28-0)
 
 ## Enterprise 2.5.1 Release Notes {#enterprise-v2-5-1}
 
@@ -27,7 +27,7 @@ weight: 5
 
 ### CHANGES {#enterprise-v2-5-1-changes}
 
-- **IMPROVEMENT**: Built on Sensu Core 0.28.4.
+- **IMPROVEMENT**: Built on Sensu Core 0.29.4.
 
 ## Enterprise 2.5.0 Release Notes {#enterprise-v2-5-0}
 
@@ -37,7 +37,7 @@ weight: 5
 
 ### CHANGES {#enterprise-v2-5-0-changes}
 
-- **IMPROVEMENT**: Built on Sensu Core 0.28.0.
+- **IMPROVEMENT**: Built on Sensu Core 0.29.0.
 
 - **IMPROVEMENT**: Added OpenTSDB integration `prefix_source` and `prefix`
 	options.
@@ -45,28 +45,28 @@ weight: 5
 - **BUGFIX**: Contact routing array values now properly override the
 	configured default/global integration values.
 
-## Core 0.28.5 Release Notes {#core-v0-28-5}
+## Core 0.29.5 Release Notes {#core-v0-28-5}
 
-**March 23, 2017** &mdash; Sensu Core version 0.28.5 has been released and
+**March 23, 2017** &mdash; Sensu Core version 0.29.5 has been released and
 	is available for immediate download. Please note the following
 	changes:
 
 - **BUGFIX**: Fixed check `subdue` and filter `when` features when a time
 	window spans over `00:00:00`, crossing the day boundary.
 
-## Core 0.28.4 Release Notes {#core-v0-28-4}
+## Core 0.29.4 Release Notes {#core-v0-28-4}
 
-**March 10, 2017** &mdash; Sensu Core version 0.28.4 has been released and
+**March 10, 2017** &mdash; Sensu Core version 0.29.4 has been released and
 	is available for immediate download. Please note the following
 	changes:
 
 - **BUGFIX**: In the interest of addressing a regression causing duplicate
-	check execution requests, code added in 0.28.0 to account for task
+	check execution requests, code added in 0.29.0 to account for task
 	scheduling drift has been removed.
 
-## Core 0.28.3 Release Notes {#core-v0-28-3}
+## Core 0.29.3 Release Notes {#core-v0-28-3}
 
-**March 9, 2017** &mdash; Sensu Core version 0.28.3 has been released and
+**March 9, 2017** &mdash; Sensu Core version 0.29.3 has been released and
 	is available for immediate download. Please note the following
 	changes:
 
@@ -75,9 +75,9 @@ weight: 5
 	the Sensu client to execute on several concurrent proxy check
 	requests.
 
-## Core 0.28.2 Release Notes {#core-v0-28-2}
+## Core 0.29.2 Release Notes {#core-v0-28-2}
 
-**March 6, 2017** &mdash; Sensu Core version 0.28.2 has been released
+**March 6, 2017** &mdash; Sensu Core version 0.29.2 has been released
   and is available for immediate download. Please note the following
   changes:
 
@@ -85,9 +85,9 @@ weight: 5
   per-client subscription added automatically, ensuring they can be
   silenced.
 
-## Core 0.28.1 Release Notes {#core-v0-28-1}
+## Core 0.29.1 Release Notes {#core-v0-28-1}
 
-**March 2, 2017** &mdash; Sensu Core version 0.28.1 has been released
+**March 2, 2017** &mdash; Sensu Core version 0.29.1 has been released
   and is available for immediate download. Please note the following
   changes:
 
@@ -99,11 +99,11 @@ weight: 5
 
 - **IMPROVEMENT**: Updated embedded OpenSSL from [1.0.2j to 1.0.2k][4].
 
-## Core 0.28.0 Release Notes {#core-v0-28-0}
+## Core 0.29.0 Release Notes {#core-v0-28-0}
 
 Source: [GitHub.com][2]
 
-**February 23, 2017** &mdash; Sensu Core version 0.28.0 has been released
+**February 23, 2017** &mdash; Sensu Core version 0.29.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 

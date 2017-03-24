@@ -1,6 +1,6 @@
 ---
 title: "Collections"
-version: 0.28
+version: 0.29
 weight: 12
 next:
   url: "hud.html"
