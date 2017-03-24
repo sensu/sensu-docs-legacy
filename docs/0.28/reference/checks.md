@@ -783,6 +783,8 @@ check `source` is set to the client `name`.
     }
     ~~~
 
+    You can, as above, also use `eval` to perform more complicated filtering with Ruby on the available `value`, such as finding clients with particular subscriptions.
+
 #### Custom attributes
 
 Because Sensu configuration is just JSON data, it is possible to define
