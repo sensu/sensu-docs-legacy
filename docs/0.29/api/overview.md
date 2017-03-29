@@ -30,6 +30,18 @@ willingness to Google) industry standard RESTful API behaviors &ndash; including
 - [Health & Info API](health-and-info-api.html)
 - [API configuration](configuration.html)
 
+## Response Content Filtering
+
+Sensu API endpoints that support the `GET` HTTP method, support HTTP
+response content filtering, using one or more filter attributes. To
+use response content filtering, construct the URL for your API request
+using a dot notation query string parameter beginning with `filter.`,
+e.g. `/events?filter.client.environment=production`. The Sensu API will
+only return response content objects that match the specified response
+content filter attributes. Multiple attributes may be specified for a
+request, e.g.
+`/events?filter.client.environment=production&filter.check.contact=ops`.
+
 [1]:  ../reference/clients.html#registration-and-registry
 [2]:  ../reference/checks.html#check-results
 [3]:  ../reference/events.html#event-data
