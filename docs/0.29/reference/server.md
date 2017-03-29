@@ -97,15 +97,16 @@ please see [Scaling Sensu][13] (below).
 
 ## Automated task election
 
-The Sensu server processes (i.e. `sensu-server` and `sensu-enterprise`) are
-designed to [scale horizontally][14] (i.e. by adding systems). No additional
-configuration is required to run a cluster of Sensu servers, other than the
-location of the [transport][15] and [data store][16]. When Sensu
-servers start, they will automatically elect Sensu servers to be
-responsible for certain tasks. A Sensu server may be elected for more
-than one task. A server task can only run on one Sensu server at a
-time and will automatically failover to another Sensu server in the
-event of a service failure or restart.
+The Sensu server processes (i.e. `sensu-server` and
+`sensu-enterprise`) are designed to [scale horizontally][14] (i.e. by
+adding systems). No additional configuration is required to run a
+cluster of Sensu servers, other than the location of the
+[transport][15] and [data store][16]. When Sensu servers start, they
+participate in an election process to automatically distribute tasks.
+A Sensu server may be elected for more than one task. A server task
+can only run on one Sensu server at a time and will automatically
+failover to another Sensu server in the event of a service failure or
+restart.
 
 All Sensu servers in a Sensu cluster monitor the state of task
 execution on a 10-second interval, automatically electing a new Sensu
