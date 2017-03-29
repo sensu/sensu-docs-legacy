@@ -177,7 +177,11 @@ Usage: sensu-install [options]
     -v, --verbose                    Enable verbose logging
     -p, --plugin PLUGIN              Install a Sensu PLUGIN
     -P, --plugins PLUGIN[,PLUGIN]    PLUGIN or comma-delimited list of Sensu plugins to install
-    -s, --source SOURCE              Install Sensu plugins from a custom SOURCE
+    -e, --extension EXTENSION        Install a Sensu EXTENSION
+    -E, --extensions EXTENSION[,EXT] EXTENSION or comma-delimited list of Sensu extensions to install
+    -s, --source SOURCE              Install Sensu plugins and extensions from a custom SOURCE
+    -c, --clean                      Clean up (remove) other installed versions of the plugin(s) and/or extension(s)
+    -x, --proxy PROXY                Install Sensu plugins and extensions via a PROXY URL
 ~~~
 
 _NOTE: `sensu-install` is only available in Sensu Core >= `0.21.0`._
