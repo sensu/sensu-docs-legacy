@@ -71,7 +71,7 @@ Sensu extensions can be installed using the `sensu-install` executable:
 sensu-install -e sensu-extensions-system-profile
 ~~~
 
-Or `sensu-install` can prepend `sensu-extensions-` automatically):
+Or `sensu-install` can prepend `sensu-extensions-` automatically:
 
 ~~~ shell
 sensu-install -e system-profile
