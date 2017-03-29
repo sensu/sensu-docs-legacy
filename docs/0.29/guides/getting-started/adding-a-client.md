@@ -7,6 +7,10 @@ next:
   text: "An intro to checks"
 ---
 
+**Sensu clients** are pieces of infrastructure that Sensu monitors for you. The **Sensu client software** allows you to register a running instance of itself as capable of running any **checks** they might be eligible for.
+
+Infrastructure sometimes includes hardware or services that don't necessarily support running the **Sensu client software** but still needs to be monitored. For those cases, [**proxy clients**](#proxy-clients) let you monitor anything you can tell Sensu about.
+
 # Adding a Sensu Client
 
 One of the first challenges new Sensu users often encounter is learning what
@@ -110,6 +114,12 @@ note the following steps that are required to add a remote Sensu client:
    sudo service sensu-client start
    ~~~
 
+## Proxy Clients
+
+Sometimes, a logical piece of infrastructure isn't a device we can run Sensu on. Fundamentally, Sensu gives you the flexibility to separate **how** checks run from **where** they run, which lets you monitor arbitrary, named 'black box' devices or services.
+
+For example, you may have a router that you can't run Sensu on but publishes interesting information over SNMP that you want to gather metrics from. Or maybe your monitor which other datacenters are visible/online to you, or have any number of creative use cases. You can create a [**proxy client**][16] that can have attributes for use in check execution, allowing you to use the **client registry** naturally for 'managed' an 'unmanaged' infrastructure. See [the reference for creating proxy clients][16] or [details on writing checks against them][17] for more.
+
 ## Troubleshooting
 
 
@@ -129,3 +139,5 @@ note the following steps that are required to add a remote Sensu client:
 [13]: ../../reference/redis.html
 [14]: ../../reference/clients.html#client-keepalives
 [15]: ../../reference/checks.html#check-results
+[16]: ../../reference/clients.html#proxy-clients
+[17]: intro-to-checks.html#proxy-clients
