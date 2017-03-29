@@ -114,10 +114,12 @@ more than 30 seconds.
 
 ### Server tasks
 
-In a Sensu server cluster, there are a few tasks that are distributed
-amongst the Sensu servers in the cluster. The following tasks only run
-on one Sensu server at a time and will automatically failover to
-another Sensu server in the event of a service failure or restart:
+In a Sensu server cluster, responsibility for a distinct set of tasks
+is distributed amongst members of the cluster. The tasks only run on
+one Sensu server at a time and will automatically failover to another
+Sensu server in the event of a service failure or restart. When adding
+Sensu servers to a cluster, restarting the existing Sensu servers in
+the cluster will force a redistribution of tasks.
 
 - **Check request publisher**. The Sensu server is responsible for
   publishing check requests to the transport for all configured
