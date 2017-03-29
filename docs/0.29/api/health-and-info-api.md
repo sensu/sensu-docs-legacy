@@ -129,8 +129,8 @@ Sensu servers which may be registered and processing check results._
 
 The `/info` API endpoint provides HTTP GET access to status
 information about the Sensu installation, including the API version,
-[data store][1] and [transport][2] connectivity, and the running Sensu
-servers.
+Sensu settings hexdigest, [data store][1] and [transport][2]
+connectivity, and the running Sensu servers.
 
 #### EXAMPLE {#info-get-example}
 
@@ -138,7 +138,10 @@ servers.
 $ curl -s http://127.0.0.1:4567/info | jq .
 {
   "sensu": {
-    "version": "0.29.0"
+    "version": "0.29.0",
+    "settings": {
+      "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
+    }
   },
   "redis": {
     "connected": true
@@ -160,11 +163,21 @@ $ curl -s http://127.0.0.1:4567/info | jq .
       "id": "ee193524-ef98-4477-817a-6a1c8d822c82",
       "hostname": "example",
       "address": "192.168.0.2",
-      "is_leader": true,
+      "tasks": [
+        "check_request_publisher",
+        "client_monitor",
+        "check_result_monitor"
+      ],
       "metrics": {
         "cpu": {
           "user": 45.52,
           "system": 0.95
+        }
+      },
+      "sensu": {
+        "version": "0.29.0",
+        "settings": {
+          "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
         }
       },
       "timestamp": 1488240896
@@ -191,10 +204,12 @@ $ curl -s http://127.0.0.1:4567/info | jq .
 
 : output
   : ~~~ json
-
     {
       "sensu": {
-        "version": "0.29.0"
+        "version": "0.29.0",
+        "settings": {
+          "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
+        }
       },
       "redis": {
         "connected": true
@@ -216,11 +231,21 @@ $ curl -s http://127.0.0.1:4567/info | jq .
           "id": "ee193524-ef98-4477-817a-6a1c8d822c82",
           "hostname": "example",
           "address": "192.168.0.2",
-          "is_leader": true,
+          "tasks": [
+            "check_request_publisher",
+            "client_monitor",
+            "check_result_monitor"
+          ],
           "metrics": {
             "cpu": {
               "user": 45.52,
               "system": 0.95
+            }
+          },
+          "sensu": {
+            "version": "0.29.0",
+            "settings": {
+              "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
             }
           },
           "timestamp": 1488240896
