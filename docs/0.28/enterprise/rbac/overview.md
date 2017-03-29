@@ -51,6 +51,7 @@ RBAC:
 * [LDAP](rbac-for-ldap.html)
 * [GitHub](rbac-for-github.html)
 * [GitLab](rbac-for-gitlab.html)
+* [OIDC](rbac-for-oidc.html)
 
 ## RBAC for the Sensu Enterprise Console API
 
@@ -62,6 +63,20 @@ below][15]). RBAC for the Console API provides granular controls for restricting
 access to specific API endpoints and HTTP methods (e.g. it is possible to allow
 HTTP `GET` access to the [Clients API][16], but not `DELETE` access; see the
 [`roles` specification `methods` attribute, below][15]).
+
+### Providing an access token
+
+In a header:
+
+~~~ shell
+$ curl -H "Authorization: token TOKEN" https://localhost:3000/events
+~~~
+
+As a parameter:
+
+~~~ shell
+$ curl https://localhost:3000/events?token=TOKEN
+~~~
 
 ## RBAC configuration
 
@@ -248,7 +263,7 @@ specification is common across all RBAC drivers.
 
 `accessToken`
 : description
-  : A unique token for authenticating against the [Sensu Enterprise
+  : A unique token for [authenticating][19] against the [Sensu Enterprise
     Console API][14] as a member of that role.
 : required
   : false
@@ -447,3 +462,4 @@ Sensu Enterprise Console API access controls may be fine tuned using the
 [16]: ../../api/clients-api.html
 [17]: ../../reference/configuration.html#configuration-scopes
 [18]: #methods-attributes
+[19]: #providing-an-access-token
