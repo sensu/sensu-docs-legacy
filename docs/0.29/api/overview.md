@@ -34,9 +34,9 @@ willingness to Google) industry standard RESTful API behaviors &ndash; including
 
 Sensu API endpoints that support the `GET` HTTP method, support HTTP
 response content filtering, using one or more filter attributes. To
-specify a response content filter attribute, use a dot notation URL
-parameter, beginning with `filter.`, e.g.
-`/events?filter.client.environment=production`. The Sensu API will
+use response content filtering, construct the URL for your API request
+using a dot notation query string parameter beginning with `filter.`,
+e.g. `/events?filter.client.environment=production`. The Sensu API will
 only return response content objects that match the specified response
 content filter attributes. Multiple attributes may be specified for a
 request, e.g.
