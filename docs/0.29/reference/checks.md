@@ -783,6 +783,10 @@ check `source` is set to the client `name`.
     }
     ~~~
 
+You can, as above, also use `eval` to perform more complicated filtering with Ruby on the available `value`, such as finding clients with particular subscriptions.
+
+For a more general introduction to using this style of check, check out the [guide on using proxy checks][49] or the [guide on adding a proxy client][50].
+
 #### Custom attributes
 
 Because Sensu configuration is just JSON data, it is possible to define
@@ -1008,3 +1012,5 @@ automatically added by the client to build a complete check result.
 [46]: clients.html#client-socket-input
 [47]: https://en.wikipedia.org/wiki/Cron#CRON_expression
 [48]: #proxy-requests-attributes
+[49]: ../guides/getting-started/intro-to-checks.html#proxy-clients
+[50]: ../guides/getting-started/adding-a-client.html#proxy-clients
