@@ -14,8 +14,8 @@ weight: 1
 - [Check execution scheduling](#check-execution-scheduling)
   - [Check scheduling algorithm & synchronization](#check-scheduling-algorithm--synchronization)
 - [Event processing](#event-processing)
-- [Automated leader election](#automated-leader-election)
-  - [Leadership duties](#leadership-duties)
+- [Automated Sensu server task election](#automated-task-election)
+  - [Sensu server tasks](#server-tasks)
 - [Scaling Sensu](#scaling-sensu)
 
 ## What is the Sensu server?
@@ -47,11 +47,12 @@ ports, etc._
 
 ## Check execution scheduling
 
-Check execution scheduling is performed by the Sensu server (or the [Sensu
-server leader][8]). Checks are scheduled by querying Sensu's
-configuration for defined checks &ndash; excluding check with the attributes
-`"standalone": true` or `"publish": false` &ndash; and calculating when
-executions should occur based on their defined `interval`s.
+Check execution scheduling is performed by a Sensu server (see [Sensu
+server task election][8]). Checks are scheduled by querying Sensu's
+configuration for defined checks &ndash; excluding check with the
+attributes `"standalone": true` or `"publish": false` &ndash; and
+calculating when executions should occur based on their defined
+`interval`s.
 
 ### Check scheduling algorithm & synchronization
 
@@ -63,9 +64,9 @@ means that &ndash; assuming system clocks are in sync between disparate Sensu
 servers &ndash; check requests for a given check (based on the check name) will
 be published at the <abbr title="typically accurate within 500ms">exact same
 time</abbr>. The also means that in the event of a Sensu server restart and/or
-Sensu leader re-election (i.e. if a new Sensu server leader is elected to
-replace an unresponsive leader), check execution scheduling intervals should
-remain consistent.
+Sensu server task re-election (i.e. if a new Sensu server is elected
+to become reponsible for check execution scheduling), check execution
+scheduling intervals will remain consistent.
 
 In fact, because this algorithm is also shared by the Sensu client &ndash; which
 provides decentralized check execution scheduling in the form of [standalone
@@ -94,35 +95,45 @@ Sensu's event processing capabilities can be distributed among multiple Sensu
 servers in a Sensu cluster. For more information on configuring a Sensu cluster,
 please see [Scaling Sensu][13] (below).
 
-## Automated leader election
+## Automated task election
 
 The Sensu server processes (i.e. `sensu-server` and `sensu-enterprise`) are
 designed to [scale horizontally][14] (i.e. by adding systems). No additional
 configuration is required to run a cluster of Sensu servers, other than the
 location of the [transport][15] and [data store][16]. When Sensu
-servers start, they will automatically identify or elect a "leader", which
-leader will fulfill certain [leadership duties][17].
+servers start, they will automatically elect Sensu servers to be
+responsible for certain tasks. A Sensu server may be elected for more
+than one task. A server task can only run on one Sensu server at a
+time and will automatically failover to another Sensu server in the
+event of a service failure or restart.
 
-All Sensu servers in a Sensu cluster monitor the state of cluster leadership on
-a 10-second interval, automatically electing a new leader if the current leader
-hasn't confirmed leadership in more than 30 seconds.
+All Sensu servers in a Sensu cluster monitor the state of task
+execution on a 10-second interval, automatically electing a new Sensu
+server for a task if the current one hasn't confirmed execution in
+more than 30 seconds.
 
-### Leadership duties
+### Server tasks
 
-In a Sensu server cluster, there are a few duties which are not distributed to
-all of the Sensu servers in the cluster. The following duties are only provided
-by the Sensu server leader:
+In a Sensu server cluster, there are a few tasks that are distributed
+amongst the Sensu servers in the cluster. The following tasks only run
+on one Sensu server at a time and will automatically failover to
+another Sensu server in the event of a service failure or restart:
 
-- **Check request publisher**. The Sensu server leader is responsible for
-  publishing check requests to the transport for all configured checks. See
-  [check execution scheduling][18] for more information.
-- **Client monitor**. The Sensu server leader is responsible for monitoring the
-  [client registry][19] and creating [client keepalive events][20] for stale clients.
-- **Check result monitor**. The Sensu server leader is responsible for
-  monitoring check results and creating TTL events for check results with
-  expired [check TTLs][21]
-- **Check result aggregation pruning**. The Sensu server leader is responsible
-  for monitoring check aggregates and pruning stale aggregate results.
+- **Check request publisher**. The Sensu server is responsible for
+  publishing check requests to the transport for all configured
+  checks. See [check execution scheduling][18] for more information.
+- **Client monitor**. The Sensu server is responsible for monitoring
+  the [client registry][19] and creating [client keepalive events][20]
+  for stale clients.
+- **Check result monitor**. The Sensu server is responsible for
+  monitoring check results and creating TTL events for check results
+  with expired [check TTLs][21]
+- **Check result aggregation pruning**. The Sensu server is
+  responsible for monitoring check aggregates and pruning stale
+  aggregate results.
+
+To observe which Sensu server is currently reponsible for one or more
+tasks, see [API /info][23].
 
 ## Scaling Sensu
 
@@ -136,7 +147,7 @@ Coming soon...
 [5]:  https://sensuapp.org/
 [6]:  https://sensuapp.org/enterprise
 [7]:  https://sensuapp.org/#compare
-[8]:  #leadership-duties
+[8]:  #automated-task-election
 [9]:  checks.html#check-results
 [10]: filters.html
 [11]: mutators.html
@@ -145,9 +156,9 @@ Coming soon...
 [14]: https://en.wikipedia.org/wiki/Scalability#Horizontal_and_vertical_scaling
 [15]: transport.html
 [16]: data-store.html
-[17]: #leadership-duties
 [18]: #check-execution-scheduling
 [19]: clients.html#registration-and-registry
 [20]: clients.html#keepalive-events
 [21]: checks.html#check-ttls
 [22]: checks.html#standalone-checks
+[23]: api/health-and-info-api.md
