@@ -312,6 +312,23 @@ Server: thin
 : example url
   : http://hostname:4567/clients/i-424242
 
+: parameters
+  : - `invalidate`
+      - **required**: false
+      - **type**: Boolean
+      - **description**: If the Sensu client should be invalidated,
+        disallowing further client keepalives and check results until
+        the client is successfully removed from the client registry.
+      - **example**: `http://hostname:4567/clients/i-424242?invalidate=true`
+    - `invalidate_expire`
+      - **required**: false
+      - **type**: Integer
+      - **description**: If the Sensu client should be invalidated for
+        a specified amount of time (in seconds), disallowing further
+        client keepalives and check results even after the client is
+        successfully removed from the client registry.
+      - **example**: `http://hostname:4567/clients/i-424242?invalidate=true&invalidate_expire=3600`
+
 : response codes
   : - **Success**: 202 (Accepted)
     - **Missing**: 404 (Not Found)
