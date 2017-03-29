@@ -96,7 +96,7 @@ takes action. Sensu's event processing capabilities include:
 Sensu's event processor is designed to scale along with the applications and
 infrastructure it is monitoring. Although Event Handlers are executed locally by
 the Sensu server, multiple instances of the Sensu server can be run without any
-additional configuration. Sensu provides built-in leader election to avoid
+additional configuration. Sensu provides built-in task election to avoid
 scheduling conflicts between Sensu servers, and the Sensu [transport][14]
 distributes (via round-robin) check results between Sensu servers for
 processing, which provides load-balancing.
