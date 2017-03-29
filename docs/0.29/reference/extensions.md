@@ -40,12 +40,41 @@ As of version 0.29, Sensu supports loading extensions from properly packaged
 gems. This approach takes advantage of the existing RubyGems infrastructure and
 tools to make publishing and installing Sensu extensions easy.
 
+#### Use `sensu-install` to install Sensu Extensions
+
+The Sensu Core package provides a tool called `sensu-install` (a simple wrapper
+around the Ruby `gem` utility). The Sensu Install tool (`sensu-install`)
+simplifies installation of Ruby-based extensions. The `sensu-install` tool can be
+run with one or more arguments that determine the action(s) to take.
+
+~~~ shell
+$ sensu-install -h
+Usage: sensu-install [options]
+    -h, --help                       Display this message
+    -v, --verbose                    Enable verbose logging
+    -p, --plugin PLUGIN              Install a Sensu PLUGIN
+    -P, --plugins PLUGIN[,PLUGIN]    PLUGIN or comma-delimited list of Sensu plugins to install
+    -e, --extension EXTENSION        Install a Sensu EXTENSION
+    -E, --extensions EXTENSION[,EXT] EXTENSION or comma-delimited list of Sensu extensions to install
+    -s, --source SOURCE              Install Sensu plugins and extensions from a custom SOURCE
+    -c, --clean                      Clean up (remove) other installed versions of the plugin(s) and/or extension(s)
+    -x, --proxy PROXY                Install Sensu plugins and extensions via a PROXY URL
+~~~
+
+_NOTE: `sensu-install` is only available in Sensu Core >= `0.21.0`._
+
 Sensu extensions can be installed using the `sensu-install` executable:
 
 #### EXAMPLE {#installing-sensu-extensions-from-gems-example}
 
 ~~~ shell
 sensu-install -e sensu-extensions-system-profile
+~~~
+
+Or `sensu-install` can prepend `sensu-extensions-` automatically):
+
+~~~ shell
+sensu-install -e system-profile
 ~~~
 
 ### Configuring Sensu to load extensions
