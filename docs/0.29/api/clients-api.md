@@ -324,8 +324,9 @@ Server: thin
       - **required**: false
       - **type**: Integer
       - **description**: If the Sensu client should be invalidated for
-        a specified amount of time (in seconds), instead of on removal
-        from the client registry.
+        a specified amount of time (in seconds), disallowing further
+        client keepalives and check results even after the client is
+        successfully removed from the client registry.
       - **example**: `http://hostname:4567/clients/i-424242?invalidate=true&invalidate_expire=3600`
 
 : response codes
