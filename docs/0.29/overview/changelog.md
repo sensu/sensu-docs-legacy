@@ -16,7 +16,7 @@ weight: 5
 
 Source: [GitHub.com][2]
 
-**TBD, 2017** &mdash; Sensu Core version 0.29.0 has been released
+**March 29, 2017** &mdash; Sensu Core version 0.29.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -86,4 +86,4 @@ Source: [GitHub.com][2]
 	users make the mistake of using a string.
 
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
-[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0290---TBD
+[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0290---2017-03-29
