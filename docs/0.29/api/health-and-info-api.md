@@ -3,8 +3,8 @@ title: "Health & Info APIs"
 version: 0.29
 weight: 8
 next:
-  url: "configuration.html"
-  text: "API Configuration"
+  url: "settings-api.html"
+  text: "Settings API"
 ---
 
 # Sensu Health & Info APIs
