@@ -1,6 +1,6 @@
 ---
 title: "Learn Sensu"
-version: 0.28
+version: 0.27
 weight: 2
 ---
 

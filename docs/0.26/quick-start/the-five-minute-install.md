@@ -1,6 +1,6 @@
 ---
 title: "The Five Minute Install on CentOS"
-version: 0.28
+version: 0.26
 weight: 2 
 next:
   url: "learn-sensu-basics.html"
