@@ -14,15 +14,6 @@ baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
 gpgcheck=0
 enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 
-# Add the official RabbitMQ packagecloud repo
-curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash
-
-# Make sure we have a good Erlang for RabbitMQ
-sudo yum install erlang -y
-
-# Install our RabbitMQ transport
-sudo yum install rabbitmq-server -y
-
 # Install our Redis data store
 sudo yum install redis -y
 
