@@ -1,5 +1,5 @@
 ---
-title: "The Five Minute Install"
+title: "The Five Minute Install on Ubuntu"
 version: 0.28
 weight: 1
 next:
