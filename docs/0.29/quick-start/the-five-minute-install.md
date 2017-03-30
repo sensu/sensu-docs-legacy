@@ -1,7 +1,7 @@
 ---
-title: "The Five Minute Install"
-version: 0.29
-weight: 1
+title: "The Five Minute Install on CentOS"
+version: 0.28
+weight: 2 
 next:
   url: "learn-sensu-basics.html"
   text: "Learn Sensu in 15 minutes"
@@ -28,7 +28,7 @@ Core installation in a [standalone][4] configuration.
 What will you need to complete this guide?
 
 - A virtual machine, or physical computer running 64-bit
-  [Ubuntu 14.04][5] with a minimum of 2GB of memory (4GB recommended)
+  [CentOS 7][5] with a minimum of 2GB of memory (4GB recommended)
 - Familiarity with a <abbr title='do you even pipe to grep?!'>command-line
   interface</abbr>
 - Willingness to run a [shell script downloaded from the internet][6]
@@ -41,59 +41,57 @@ Ready? Let's get started!
 ## Install Sensu in 5-minutes or less {#install-sensu}
 
 The following installation steps will help you get Sensu Core installed in a
-[standalone][4] on a system running [Ubuntu 14.04][5], only. For installation on
+[standalone][4] on a system running [CentOS 7][5], only. For installation on
 other platforms, and/or alternative installation configurations, please consult
 the [installation guide](2).
 
-1. Install the Sensu software repositories:
-
+1.5. Install EPEL (if not already done)
    ~~~ shell
-   wget https://sensuapp.org/install.sh
-   sudo bash install.sh
-   sudo apt-get update
+   sudo yum install epel-release -y
    ~~~
 
-2. Install Redis (>= 1.3.14) from the distribution repository:
+1. Create the YUM repository configuration file for the Sensu Core repository at
+   `/etc/yum.repos.d/sensu.repo` or see [Sensu Enterprise repository instructions][9]:
 
    ~~~ shell
-   sudo apt-get -y install redis-server curl jq
+   echo '[sensu]
+   name=sensu
+   baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
+   gpgcheck=0
+   enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
    ~~~
 
-3. Set Redis to start on boot using the `update-rc.d` utility, and start
-   Redis:
+2. Install Redis (>= 1.3.14) from EPEL:
 
    ~~~ shell
-   sudo update-rc.d redis-server enable
-   sudo service redis-server start
+   sudo yum install redis -y
    ~~~
 
-4. Install Sensu
+3. Make sure Redis is started:
 
    ~~~ shell
-   sudo apt-get install sensu
+   sudo systemctl start redis.service
+   ~~~
+
+4. Install Sensu & Dashbard
+
+   ~~~ shell
+   sudo yum install sensu uchiwa -y
    ~~~
 
    ...and if you're using [Sensu Enterprise][9], let's go ahead and install
    Sensu Enterprise as well:
 
    ~~~ shell
-   sudo apt-get install sensu-enterprise sensu-enterprise-dashboard
+   sudo yum install sensu-enterprise sensu-enterprise-dashboard -y
    ~~~
 
-5. Configure Sensu by downloading this [example configuration file][10]:
+5. Configure Sensu server:
+
+  Run the following to set up a minimal client config:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/config.json https://sensuapp.org/docs/0.29/files/simple-sensu-config.json
-   ~~~
-
-   Alternatively, please copy the following example configuration file contents
-   to `/etc/sensu/config.json`:
-
-   ~~~ shell
-   {
-     "redis": {
-       "host": "127.0.0.1"
-     },
+   echo '{
      "transport": {
        "name": "redis"
      },
@@ -101,48 +99,30 @@ the [installation guide](2).
        "host": "127.0.0.1",
        "port": 4567
      }
-   }
+   }' | sudo tee /etc/sensu/config.json
    ~~~
 
-6. Configure the Sensu client by downloading this [example configuration
-   file][11]:
+6. Configure the Sensu client
+
+  Run the following to set up a minimal client config:
 
    ~~~ shell
-   sudo wget -O /etc/sensu/conf.d/client.json https://sensuapp.org/docs/0.29/files/simple-client-config.json
-   ~~~
-
-   Alternatively, please copy the following example configuration file contents
-   to `/etc/sensu/conf.d/client.json`:
-
-   ~~~ shell
-   {
+   echo '{
      "client": {
-       "name": "client-01",
-       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev"
-       ],
-       "socket": {
-         "bind": "127.0.0.1",
-         "port": 3030
-       }
+       ]
      }
-   }
+   }' |sudo tee /etc/sensu/conf.d/client.json
    ~~~
 
-7. Configure a Sensu dashboard by downloading this [example configuration
-   file][12]:
+7. Configure a Sensu dashboard
 
-   ~~~ shell
-   sudo wget -O /etc/sensu/dashboard.json https://sensuapp.org/docs/0.29/files/simple-dashboard-config.json
-   ~~~
-
-   Alternatively, please copy the following example configuration file contents
-   to `/etc/sensu/dashboard.json`:
+   Run the following to set up a minimal dashboard config:
 
    ~~~
-   {
+   echo '{
      "sensu": [
        {
          "name": "sensu",
@@ -154,7 +134,7 @@ the [installation guide](2).
        "host": "0.0.0.0",
        "port": 3000
      }
-   }
+   }' |sudo tee /etc/sensu/dashboard.json
    ~~~
 
 8. Make sure that the `sensu` user owns all of the Sensu configuration files:
@@ -168,23 +148,24 @@ the [installation guide](2).
    Sensu Core users:
 
    ~~~ shell
-   sudo service sensu-server start
-   sudo service sensu-api start
-   sudo service sensu-client start
+   sudo systemctl start sensu-server.service
+   sudo systemctl start sensu-api.service
+   sudo systemctl start sensu-client.service
    ~~~
 
    Sensu Enterprise users:
 
    ~~~ shell
-   sudo service sensu-enterprise start
-   sudo service sensu-enterprise-dashboard start
-   sudo service sensu-client start
+   sudo systemctl start sensu-enterprise.service
+   sudo systemctl start sensu-enterprise-dashboard.service
+   sudo systemctl start sensu-client.service
    ~~~
 
 10. Verify that your installation is ready to use by querying the Sensu API
-    using the `curl` utility (and piping the result to the [`jq` utility][13]):
+    using the `curl` utility (and piping the result to the [`jq` utility][10]):
 
     ~~~ shell
+    sudo yum install jq curl -y
     curl -s http://127.0.0.1:4567/clients | jq .
     ~~~
 
@@ -195,7 +176,7 @@ the [installation guide](2).
     [
       {
         "timestamp": 1458625739,
-        "version": "0.29.0",
+        "version": "0.28.0",
         "socket": {
           "port": 3030,
           "bind": "127.0.0.1"
@@ -225,12 +206,9 @@ the [installation guide](2).
 [2]:  ../installation/overview.html
 [3]:  ../installation/installation-strategies.html
 [4]:  ../installation/installation-strategies.html#standalone
-[5]:  http://releases.ubuntu.com/14.04/
+[5]:  https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7
 [6]:  http://github.com/sensu/sensu-bash
-[7]:  ../platforms/sensu-on-ubuntu-debian.html#install-sensu-core-repository
+[7]:  ../platforms/sensu-on-rhel-centos.html#install-sensu-core-repository
 [8]:  https://www.youtube.com/watch?v=J2D1XF40-ok
-[9]:  https://sensuapp.org/enterprise
-[10]: /docs/0.29/files/simple-sensu-config.json
-[11]: /docs/0.29/files/simple-client-config.json
-[12]: /docs/0.29/files/simple-dashboard-config.json
-[13]: https://stedolan.github.io/jq/
+[9]:  ../platforms/sensu-on-rhel-centos.html#install-sensu-enterprise-repository
+[10]: https://stedolan.github.io/jq/
