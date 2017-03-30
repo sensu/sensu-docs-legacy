@@ -86,20 +86,12 @@ the [installation guide](2).
    sudo yum install sensu-enterprise sensu-enterprise-dashboard
    ~~~
 
-5. Configure Sensu by downloading this [example configuration file][10]:
+5. Configure Sensu server:
+
+  Run the following to set up a minimal client config:
 
    ~~~ shell
-   sudo curl -o /etc/sensu/config.json https://sensuapp.org/docs/0.28/files/simple-sensu-config.json
-   ~~~
-
-   Alternatively, please copy the following example configuration file contents
-   to `/etc/sensu/config.json`:
-
-   ~~~ shell
-   {
-     "redis": {
-       "host": "127.0.0.1"
-     },
+   echo '{
      "transport": {
        "name": "redis"
      },
@@ -107,21 +99,15 @@ the [installation guide](2).
        "host": "127.0.0.1",
        "port": 4567
      }
-   }
+   }' | sudo tee /etc/sensu/config.json
    ~~~
 
-6. Configure the Sensu client by downloading this [example configuration
-   file][11]:
+6. Configure the Sensu client
+
+  Run the following to set up a minimal client config:
 
    ~~~ shell
-   sudo curl -o /etc/sensu/conf.d/client.json https://sensuapp.org/docs/0.28/files/simple-client-config.json
-   ~~~
-
-   Alternatively, please copy the following example configuration file contents
-   to `/etc/sensu/conf.d/client.json`:
-
-   ~~~ shell
-   {
+   echo '{
      "client": {
        "name": "client-01",
        "address": "127.0.0.1",
@@ -134,21 +120,15 @@ the [installation guide](2).
          "port": 3030
        }
      }
-   }
+   }' |sudo tee /etc/sensu/conf.d/client.json
    ~~~
 
-7. Configure a Sensu dashboard by downloading this [example configuration
-   file][12]:
+7. Configure a Sensu dashboard
 
-   ~~~ shell
-   sudo curl -o /etc/sensu/dashboard.json https://sensuapp.org/docs/0.28/files/simple-dashboard-config.json
-   ~~~
-
-   Alternatively, please copy the following example configuration file contents
-   to `/etc/sensu/dashboard.json`:
+   Run the following to set up a minimal dashboard config:
 
    ~~~
-   {
+   echo '{
      "sensu": [
        {
          "name": "sensu",
@@ -160,7 +140,7 @@ the [installation guide](2).
        "host": "0.0.0.0",
        "port": 3000
      }
-   }
+   }' |sudo tee /etc/sensu/dashboard.json
    ~~~
 
 8. Make sure that the `sensu` user owns all of the Sensu configuration files:
@@ -188,10 +168,10 @@ the [installation guide](2).
    ~~~
 
 10. Verify that your installation is ready to use by querying the Sensu API
-    using the `curl` utility (and piping the result to the [`jq` utility][13]):
+    using the `curl` utility (and piping the result to the [`jq` utility][10]):
 
     ~~~ shell
-    sudo yum install jq -y
+    sudo yum install jq curl -y
     curl -s http://127.0.0.1:4567/clients | jq .
     ~~~
 
@@ -237,7 +217,4 @@ the [installation guide](2).
 [7]:  ../platforms/sensu-on-rhel-centos.html#install-sensu-core-repository
 [8]:  https://www.youtube.com/watch?v=J2D1XF40-ok
 [9]:  ../platforms/sensu-on-rhel-centos.html#install-sensu-enterprise-repository
-[10]: /docs/0.28/files/simple-sensu-config.json
-[11]: /docs/0.28/files/simple-client-config.json
-[12]: /docs/0.28/files/simple-dashboard-config.json
-[13]: https://stedolan.github.io/jq/
+[10]: https://stedolan.github.io/jq/
