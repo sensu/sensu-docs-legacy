@@ -109,16 +109,10 @@ the [installation guide](2).
    ~~~ shell
    echo '{
      "client": {
-       "name": "client-01",
-       "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev"
-       ],
-       "socket": {
-         "bind": "127.0.0.1",
-         "port": 3030
-       }
+       ]
      }
    }' |sudo tee /etc/sensu/conf.d/client.json
    ~~~
