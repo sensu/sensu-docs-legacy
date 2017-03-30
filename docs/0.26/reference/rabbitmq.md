@@ -224,6 +224,22 @@ The RabbitMQ definition uses the `"rabbitmq": {}` definition scope.
     "password": "secret"
     ~~~
 
+`heartbeat`
+: description
+  : The RabbitMQ AMQP connection heartbeat in seconds.  Enabling can help in
+    early detection of disrupted TCP connections causing the RabbitMQ client to
+    attempt re-connection to the server much earlier than if left disabled.
+    _NOTE: if this setting is not defined or set to 0 then RabbitMQ client
+    heartbeats are disabled.
+: required
+  : false
+: type
+  : Integer
+: example
+  : ~~~ shell
+    "heartbeat": 30
+    ~~~
+
 `prefetch`
 : description
   : The RabbitMQ AMQP consumer prefetch value, setting the number of
@@ -368,8 +384,11 @@ the following instructions:
 
 1. Stop the RabbitMQ service on all three RabbitMQ systems.
 
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server stop`_
+
    ~~~ shell
-   sudo /etc/init.d/rabbitmq-server stop
+   sudo service rabbitmq-server stop
    ~~~
 
 2. Enable RabbitMQ [`pause_minority` network partition handling][12]. Please
@@ -404,8 +423,11 @@ the following instructions:
 
 4. Start RabbitMQ on all three RabbitMQ systems.
 
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server start`_
+
    ~~~ shell
-   sudo /etc/init.d/rabbitmq-server start
+   sudo service rabbitmq-server start
    ~~~
 
 5. Reset the RabbitMQ nodes on all 3 selected instances in preparation for

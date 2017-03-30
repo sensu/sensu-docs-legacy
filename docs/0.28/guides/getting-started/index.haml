@@ -1,0 +1,10 @@
+---
+title: "Getting Started"
+weight: 0
+version: 0.28
+---
+
+%h2= "Getting Started Guide"
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }

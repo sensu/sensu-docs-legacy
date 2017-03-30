@@ -1,0 +1,11 @@
+---
+title: "Quick Start"
+section: 2
+weight: 0
+version: 0.28
+---
+
+%h2= "Sensu Installation Documentation"
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }

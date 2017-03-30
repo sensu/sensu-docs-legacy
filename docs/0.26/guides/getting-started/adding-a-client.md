@@ -103,6 +103,9 @@ note the following steps that are required to add a remote Sensu client:
    Start the Sensu client and verify connectivity by consulting the Sensu client
    log file:
 
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/sensu-client start`_
+
    ~~~ shell
    sudo service sensu-client start
    ~~~

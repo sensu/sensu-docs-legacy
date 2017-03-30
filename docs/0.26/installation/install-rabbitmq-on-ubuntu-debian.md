@@ -88,18 +88,10 @@ be a reason to upgrade RabbitMQ versions frequently._
    the `update-rc.d` utility:
 
    ~~~ shell
-   sudo update-rc.d rabbitmq-server defaults
+   sudo update-rc.d rabbitmq-server enable
    ~~~
 
-2. Start and stop the RabbitMQ service using the installed init scripts:
-
-   ~~~ shell
-   sudo /etc/init.d/rabbitmq-server start
-   sudo /etc/init.d/rabbitmq-server stop
-   ~~~
-
-   Alternatively, it is also possible to use the `service` command to start and
-   stop the RabbitMQ service:
+2. Start and stop the RabbitMQ service using the `service` command:
 
    ~~~ shell
    sudo service rabbitmq-server start
@@ -153,7 +145,7 @@ adjusting the ulimit value to the recommendation corresponding to the
 environment where RabbitMQ is running.
 
 ~~~ shell
-# This file is sourced by /etc/init.d/rabbitmq-server. Its primary
+# This file is sourced by the rabbitmq-server service script. Its primary
 # reason for existing is to allow adjustment of system limits for the
 # rabbitmq-server process.
 #

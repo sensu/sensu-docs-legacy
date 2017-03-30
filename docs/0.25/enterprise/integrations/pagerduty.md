@@ -37,14 +37,12 @@ event handler (integration).
 }
 ~~~
 
+### Integration Specification
+
 #### `pagerduty` attributes
 
 The following attributes are configured within the `{"pagerduty": {} }`
 [configuration scope][4].
-
-##### EXAMPLE {#pagerduty-attributes-example}
-
-##### ATTRIBUTES {#pagerduty-attributes-specification}
 
 `service_key`
 : description

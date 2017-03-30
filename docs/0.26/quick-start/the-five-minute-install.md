@@ -59,12 +59,12 @@ the [installation guide](2).
    sudo apt-get -y install redis-server curl jq
    ~~~
 
-3. Install the Redis init scripts using the `update-rc.d` utility, and start
+3. Set Redis to start on boot using the `update-rc.d` utility, and start
    Redis:
 
    ~~~ shell
-   sudo update-rc.d redis-server defaults
-   sudo /etc/init.d/redis-server start
+   sudo update-rc.d redis-server enable
+   sudo service redis-server start
    ~~~
 
 4. Install Sensu
@@ -168,18 +168,18 @@ the [installation guide](2).
    Sensu Core users:
 
    ~~~ shell
-   sudo /etc/init.d/sensu-server start
-   sudo /etc/init.d/sensu-api start
-   sudo /etc/init.d/sensu-client start
+   sudo service sensu-server start
+   sudo service sensu-api start
+   sudo service sensu-client start
    ~~~
 
    Sensu Enterprise users:
 
    ~~~ shell
-   sudo /etc/init.d/sensu-enterprise start
-   sudo /etc/init.d/sensu-enterprise-dashboard start
-   sudo /etc/init.d/sensu-client start
-   ~~~   
+   sudo service sensu-enterprise start
+   sudo service sensu-enterprise-dashboard start
+   sudo service sensu-client start
+   ~~~
 
 10. Verify that your installation is ready to use by querying the Sensu API
     using the `curl` utility (and piping the result to the [`jq` utility][13]):
@@ -222,9 +222,9 @@ the [installation guide](2).
 
 
 [1]:  ../overview/architecture.html
-[2]:  ../guides/installation-guide/overview.html
-[3]:  ../guides/installation-guide/installation-strategies.html
-[4]:  ../guides/installation-guide/installation-strategies.html#standalone
+[2]:  ../installation/overview.html
+[3]:  ../installation/installation-strategies.html
+[4]:  ../installation/installation-strategies.html#standalone
 [5]:  http://releases.ubuntu.com/14.04/
 [6]:  http://github.com/sensu/sensu-bash
 [7]:  ../platforms/sensu-on-ubuntu-debian.html#install-sensu-core-repository

@@ -30,7 +30,7 @@ info: "<strong>NOTE:</strong> this page contains reference documentation for
     - [Distributed configuration](#api-distributed-configuration)
   - [Example Sensu Enterprise Dashboard configurations](#example-sensu-enterprise-dashboard-configurations)
     - [Standalone configuration](#dashboard-standalone-configuration)
-    - [Distributed configuration](#dashboard-distributed-configuration)  
+    - [Distributed configuration](#dashboard-distributed-configuration)
   - [Enable the Sensu services to start on boot](#enable-the-sensu-services-to-start-on-boot)
   - [Disable the Sensu services on boot](#disable-the-sensu-services-on-boot)
 - [Operating Sensu](#operating-sensu)
@@ -46,25 +46,39 @@ Sensu Core package installs several processes including `sensu-server`,
 
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
+_NOTE: As of January 2017, apt repository configuration has
+changed to include the "codename" of the Ubuntu/Debian release. To
+install or upgrade to the latest version of Sensu, please ensure you
+have updated existing repository configurations._
+
 1. Install the GPG public key:
 
    ~~~ shell
    wget -q https://sensu.global.ssl.fastly.net/apt/pubkey.gpg -O- | sudo apt-key add -
    ~~~
 
-2. Create an APT configuration file at `/etc/apt/sources.list.d/sensu.list`:
+2. Determine the codename of the Ubuntu/Debian release on your system:
 
    ~~~ shell
-   echo "deb     https://sensu.global.ssl.fastly.net/apt sensu main" | sudo tee /etc/apt/sources.list.d/sensu.list
+   . /etc/os-release && echo $VERSION
+   "14.04.4 LTS, Trusty Tahr" # codename for this system is "trusty"
    ~~~
 
-3. Update APT:
+3. Create an APT configuration file at
+   `/etc/apt/sources.list.d/sensu.list`:
+
+   ~~~ shell
+   export CODENAME=your_release_codename_here # e.g. "trusty"
+   echo "deb     https://sensu.global.ssl.fastly.net/apt $CODENAME main" | sudo tee /etc/apt/sources.list.d/sensu.list
+   ~~~
+
+4. Update APT:
 
    ~~~ shell
    sudo apt-get update
    ~~~
 
-4. Install Sensu:
+5. Install Sensu:
 
    ~~~ shell
    sudo apt-get install sensu
@@ -73,7 +87,7 @@ Sensu Core package installs several processes including `sensu-server`,
    _NOTE: as mentioned above, the `sensu` package installs all of the Sensu Core
    processes, including `sensu-client`, `sensu-server`, and `sensu-api`._
 
-5. Configure Sensu. **No "default" configuration is provided with Sensu**, so
+6. Configure Sensu. **No "default" configuration is provided with Sensu**, so
    none of the Sensu processes will run without the corresponding configuration.
    Please refer to the ["Configure Sensu" section][11] (below), for more
    information on configuring Sensu. **At minimum, all of the Sensu processes
@@ -156,9 +170,9 @@ configuration from the following locations:
 - `/etc/sensu/conf.d/`
 
 _NOTE: Additional or alternative configuration file and directory locations may
-be used by modifying Sensu's init scripts and/or by starting the Sensu services
-with the corresponding CLI arguments. For more information, please consult the
-[Sensu Configuration][3] reference documentation._
+be used by modifying Sensu's service scripts and/or by starting the Sensu
+services with the corresponding CLI arguments. For more information, please
+consult the [Sensu Configuration][3] reference documentation._
 
 ### Create the Sensu configuration directory
 
@@ -325,7 +339,7 @@ boot, use the `update-rc.d` utility.
 - Enable the Sensu client on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-client defaults
+  sudo update-rc.d sensu-client enable
   ~~~
 
 - Enable the Sensu server and API to start on system boot
@@ -333,14 +347,14 @@ boot, use the `update-rc.d` utility.
   - For Sensu Core users (i.e. `sensu-server` and `sensu-api`)
 
     ~~~ shell
-    sudo update-rc.d sensu-server defaults
-    sudo update-rc.d sensu-api defaults
+    sudo update-rc.d sensu-server enable
+    sudo update-rc.d sensu-api enable
     ~~~
 
   - For Sensu Enterprise users
 
     ~~~ shell
-    sudo update-rc.d sensu-enterprise defaults
+    sudo update-rc.d sensu-enterprise enable
     ~~~
 
     _WARNING: the `sensu-enterprise` process is intended to be a drop-in
@@ -351,7 +365,7 @@ boot, use the `update-rc.d` utility.
 - Enable Sensu Enterprise Dashboard on system boot
 
   ~~~ shell
-  sudo update-rc.d sensu-enterprise-dashboard defaults
+  sudo update-rc.d sensu-enterprise-dashboard enable
   ~~~
 
   _WARNING: the `sensu-enterprise-dashboard` process is intended to be a drop-in
@@ -399,41 +413,41 @@ can also be accomplished using the [`update-rc.d` utility][9].
 
 ### Managing the Sensu services/processes {#service-management}
 
-To manually start and stop the Sensu services, use the provided init scripts:
+To manually start and stop the Sensu services, use the following commands:
 
 - Start or stop the Sensu client
 
   ~~~ shell
-  sudo /etc/init.d/sensu-client start
-  sudo /etc/init.d/sensu-client stop
+  sudo service sensu-client start
+  sudo service sensu-client stop
   ~~~
 
 - Start or stop the Sensu Core server
 
   ~~~ shell
-  sudo /etc/init.d/sensu-server start
-  sudo /etc/init.d/sensu-server stop
+  sudo service sensu-server start
+  sudo service sensu-server stop
   ~~~
 
 - Start or stop the Sensu Core API
 
   ~~~ shell
-  sudo /etc/init.d/sensu-api start
-  sudo /etc/init.d/sensu-api stop
+  sudo service sensu-api start
+  sudo service sensu-api stop
   ~~~
 
 - Start or stop Sensu Enterprise
 
   ~~~ shell
-  sudo /etc/init.d/sensu-enterprise start
-  sudo /etc/init.d/sensu-enterprise stop
+  sudo service sensu-enterprise start
+  sudo service sensu-enterprise stop
   ~~~
 
 - Start or stop the Sensu Enterprise Dashboard
 
   ~~~ shell
-  sudo /etc/init.d/sensu-enterprise-dashboard start
-  sudo /etc/init.d/sensu-enterprise-dashboard stop
+  sudo service sensu-enterprise-dashboard start
+  sudo service sensu-enterprise-dashboard stop
   ~~~
 
   Verify the Sensu Enterprise Dashboard is running by visiting view the

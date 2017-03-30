@@ -10,6 +10,10 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.3.1 Release Notes](#enterprise-v2-3-1)
+- [Enterprise 2.3.0 Release Notes](#enterprise-v2-3-0)
+- [Enterprise 2.2.0 Release Notes](#enterprise-v2-2-0)
+- [Enterprise 2.1.0 Release Notes](#enterprise-v2-1-0)
 - [Enterprise 2.0.0 Release Notes](#enterprise-v2-0-0)
 - [Core 0.26.5 Release Notes](#core-v0-26-5)
 - [Core 0.26.4 Release Notes](#core-v0-26-4)
@@ -17,6 +21,78 @@ weight: 5
 - [Core 0.26.2 Release Notes](#core-v0-26-2)
 - [Core 0.26.1 Release Notes](#core-v0-26-1)
 - [Core 0.26.0 Release Notes](#core-v0-26-0)
+
+## Enterprise 2.3.1 Release Notes {#enterprise-v2-3-1}
+
+**January 31, 2017** &mdash; Sensu Enterprise version 2.3.1 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-3-1-changes}
+
+- **IMPROVEMENT**: The Slack integration now supports messages with up to
+	8,000 characters.
+
+## Enterprise 2.3.0 Release Notes {#enterprise-v2-3-0}
+
+**January 25, 2017** &mdash; Sensu Enterprise version 2.3.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-3-0-changes}
+
+- **NEW**: Added Wavefront integration, send metrics to Wavefront in the
+  Wavefront Data Format.
+
+- **NEW**: The Hipchat integration now adds a "notify" attribute to trigger
+  HipChat user notifications.
+
+- **NEW**: The Email integration now supports custom templates for email subject
+  and body.
+
+- **NEW**: The Sensu Enterprise `output_format` mutator now supports two
+  additional metric formats: InfluxDB Line Protocol, and the Wavefront Data
+  Format.
+
+- **IMPROVEMENT**: Now using JRuby 9.1.7.0 for bugfixes and improved
+  performance.
+
+## Enterprise 2.2.0 Release Notes {#enterprise-v2-2-0}
+
+**January 12, 2017** &mdash; Sensu Enterprise version 2.2.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-2-0-changes}
+
+- **NEW**: Added JIRA integration, create and resolve issues for Sensu
+	events.
+
+- **NEW**: Added Rollbar integration, create and resolve messages/items
+	for Sensu events.
+
+- **NEW**: The Slack integration now adds a "notification" field to
+	attachments when one is provided in the event check definition.
+
+- **IMPROVEMENT**: Metric integration metric format mutation performance
+	improvements.
+
+- **IMPROVEMENT**: Opsgenie integration now uses a different/improved HTTP
+	client.
+
+- **BUGFIX**: Opsgenie integration now uses a string for alert tags,
+	multiple tags are comma delimited.
+
+## Enterprise 2.1.0 Release Notes {#enterprise-v2-1-0}
+
+**November 17, 2016** &mdash; Sensu Enterprise version 2.1.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-1-0-changes}
+
+- **NEW**: ServiceNow Event Management support, create ServiceNow events
+	for Sensu events.
 
 ## Enterprise 2.0.0 Release Notes {#enterprise-v2-0-0}
 
@@ -130,6 +206,11 @@ This release includes potentially breaking, backwards-incompatible changes:
   available to opt-out of this new built-in silencing functionality on a
   per-handler basis.
 
+- **NEW**: Every Sensu client now creates and subscribes to a unique client
+  subscription (e.g. `client:i-424242`). Unique client subscriptions are
+  required for silencing one or more checks on a single client (host)
+  **Fixes: [#1327][1327]**.
+
 - Sensu Core version 0.26 requires Uchiwa version 0.18 or newer in order
   to make use of the new `/silenced` API feature. Prior versions of Uchiwa
   silence events using the "silence stashes" pattern, which will be honored by
@@ -159,18 +240,13 @@ This release includes potentially breaking, backwards-incompatible changes:
 - **NEW**: Event silencing is now built into Sensu Core! The Sensu API now
   provides a set of [`/silenced` endpoints][11], for silencing one or more
   checks and/or subscriptions (including the NEW client-specific subscriptions,
-  below). Silencing applies to all event handlers by default, however a new
+  above). Silencing applies to all event handlers by default, however a new
   `handle_silenced` handler definition attribute can be used to disable this
   functionality. Metric check events (OK) bypass event silencing.
 
   _NOTE: this improvement is very closely related to the impending removal
   of event filtering in the `sensu-plugin` gem. See the recent [Deprecating
   Event Filtering in sensu-plugin][10] blog post for more information._
-
-- **NEW**: Every Sensu client now creates and subscribes to a unique client
-  subscription (e.g. `client:i-424242`). Unique client subscriptions allow Sensu
-  checks to target a single client (host) and enable silencing events for a
-  single client. **Fixes: [#1327][1327]**.
 
 - **NEW**: Introducing **Subdue 2.0**! Sensu `subdue` rules have a brand new
   configuration syntax, adding support for a broader number of applications, and

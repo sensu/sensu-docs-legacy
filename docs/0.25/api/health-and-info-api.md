@@ -54,25 +54,24 @@ In the following example, querying the `/health` API with the [`consumers`][6]
 URL parameter will return an [HTTP response code][7] to indicate if the expected
 number of consumers (i.e. [Sensu servers][3]) are processing check results. In
 this example we are expecting at least two (2) consumers to be running at all
-times (i.e. at least two Sensu servers processing check results). The [503
-(Service Unavailable) HTTP response code][7] indicates that the requested number
+times (i.e. at least two Sensu servers processing check results). The [412
+(Precondition Failed) HTTP response code][7] indicates that the requested number
 of consumers are not registered.
 
 ~~~ shell
 curl -s -i http://127.0.0.1:4567/health?consumers=2
-HTTP/1.1 503 Service Unavailable
+HTTP/1.1 412 Precondition Failed
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
 Connection: close
-Server: thin
 ~~~
 
-_NOTE: the ["503 (Service Unavailable)" HTTP response code][7] does **not** mean
+_NOTE: the ["412 (Precondition Failed)" HTTP response code][7] does **not** mean
 that the API itself is unavailable, but rather, it is the equivalent of a
 "false" response to the API query (i.e. if you want to know if there are "at
-least two Sensu servers processing check results?", a 503 response code would
+least two Sensu servers processing check results?", a 412 response code would
 mean "no")._
 
 _WARNING: transport "consumers" are a native concept in [pubsub technology][8]
@@ -80,7 +79,7 @@ _WARNING: transport "consumers" are a native concept in [pubsub technology][8]
 transport library][2] supports transports which are not actual message queues
 (e.g. [Redis][10]), some transports do not support the Health API `consumers`
 check, because they don't support the concept of "consumers"; i.e. this means
-that `/health?consumers=1` will always fail (returning a 503 response code) for
+that `/health?consumers=1` will always fail (returning a 412 response code) for
 Sensu installations using Redis as the transport, regardless of the number of
 Sensu servers which may be registered and processing check results._
 
@@ -112,17 +111,16 @@ Sensu servers which may be registered and processing check results._
 
 : response codes
   : - **Success**: 204 (No Content)
-    - **Error**: 503 (Service Unavailable)
+    - **Error**: 412 (Precondition Failed)
 
 : output
   : ~~~ shell
-    HTTP/1.1 503 Service Unavailable
+    HTTP/1.1 412 Precondition Failed
     Access-Control-Allow-Origin: *
     Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
     Access-Control-Allow-Credentials: true
     Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization
     Connection: close
-    Server: thin
     ~~~
 
 ## The `/info` API endpoint

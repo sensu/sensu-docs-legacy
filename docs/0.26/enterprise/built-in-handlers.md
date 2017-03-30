@@ -85,6 +85,7 @@ Built-in event handlers:
 - [Email](integrations/email.html) - send email notifications for events
 - [PagerDuty](integrations/pagerduty.html) - create and resolve PagerDuty incidents for events
 - [ServiceNow](integrations/servicenow.html) - create ServiceNow CMDB configuration items and incidents
+- [JIRA](integrations/jira.html) - create and resolve JIRA issues for Sensu events
 - [VictorOps](integrations/victorops.html) - create and resolve VictorOps messages for events
 - [OpsGenie](integrations/opsgenie.html) - create and close OpsGenie alerts for events
 - [Slack](integrations/slack.html) - send notifications to a Slack channel for events
@@ -97,10 +98,11 @@ Built-in event handlers:
 - [Chef](integrations/chef.html) - deregister Sensu clients without an associated Chef node
 - [EC2](integrations/ec2.html) - deregister Sensu clients without an allowed EC2 instance state
 - [Event Stream](integrations/event_stream.html) - send all Sensu events to a remote TCP socket
+- [InfluxDB](integrations/influxdb.html) - send metrics to InfluxDB
 - [Graphite](integrations/graphite.html) - send metrics to Graphite
+- [Wavefront](integrations/wavefront.html) - send metrics to Wavefront
 - [Librato](integrations/librato.html) - send metrics to Librato Metrics
 - [OpenTSDB](integrations/opentsdb.html) - send metrics to OpenTSDB
-- [InfluxDB](integrations/influxdb.html) - send metrics to InfluxDB
 - [DataDog](integrations/datadog.html) - create Datadog events
 
 [?]:  #

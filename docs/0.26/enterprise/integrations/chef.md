@@ -35,7 +35,7 @@ handler (integration).
 ~~~ json
 {
   "chef": {
-    "endpoint": "https://api.opscode.com/organizations/example",
+    "endpoint": "https://api.chef.io/organizations/example",
     "flavor": "enterprise",
     "client": "i-424242",
     "key": "/etc/chef/i-424242.pem",
@@ -70,7 +70,7 @@ The following attributes are configured within the `{"chef": {} }`
   : String
 : example
   : ~~~ shell
-    "endpoint": "https://api.opscode.com/organizations/example"
+    "endpoint": "https://api.chef.io/organizations/example"
     ~~~
 
 `flavor`

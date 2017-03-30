@@ -1,0 +1,12 @@
+---
+title: "API"
+section: 6
+weight: 0
+version: 0.28
+layout: "docs"
+---
+
+%h2= "API Reference Documentation"
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }

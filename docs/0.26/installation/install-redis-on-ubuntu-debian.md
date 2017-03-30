@@ -38,13 +38,13 @@ sudo apt-get -y install redis-server
 Start and stop the Redis service using the `redis-server` init scripts:
 
 ~~~ shell
-sudo /etc/init.d/redis-server start
-sudo /etc/init.d/redis-server stop
+sudo service redis-server start
+sudo service redis-server stop
 ~~~
 
 ~~~ shell
-sudo /etc/init.d/redis-sentinel start
-sudo /etc/init.d/redis-sentinel stop
+sudo service redis-sentinel start
+sudo service redis-sentinel stop
 ~~~
 
 _NOTE: `redis-sentinel` service scripts are not installed by default and should
@@ -56,12 +56,12 @@ Enable or disable the Redis service to start on system boot using the
 `update-rc.d` utility:
 
 ~~~ shell
-sudo update-rc.d redis-server defaults
+sudo update-rc.d redis-server enable
 sudo update-rc.d redis-server disable
 ~~~
 
 ~~~ shell
-sudo update-rc.d redis-sentinel defaults
+sudo update-rc.d redis-sentinel enable
 sudo update-rc.d redis-sentinel disable
 ~~~
 

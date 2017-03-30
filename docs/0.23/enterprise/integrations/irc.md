@@ -46,7 +46,6 @@ handler (integration).
 The following attributes are configured within the `{"irc": {} }` [configuration
 scope][2].
 
-
 `uri`
 : description
   : The IRC URI; including the nick, password, address, port, and channel.
