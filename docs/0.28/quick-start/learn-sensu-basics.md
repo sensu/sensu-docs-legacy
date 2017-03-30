@@ -1,7 +1,7 @@
 ---
 title: "Learn Sensu"
 version: 0.28
-weight: 2
+weight: 1
 ---
 
 # Learn Sensu in 15 Minutes

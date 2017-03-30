@@ -1,7 +1,7 @@
 ---
 title: "The Five Minute Install on Ubuntu"
 version: 0.28
-weight: 1
+weight: 2 
 next:
   url: "learn-sensu-basics.html"
   text: "Learn Sensu in 15 minutes"
