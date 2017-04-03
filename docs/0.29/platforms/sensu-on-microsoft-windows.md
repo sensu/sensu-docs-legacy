@@ -97,12 +97,12 @@ mkdir C:\opt\sensu\conf.d\
    ~~~ json
    {
      "client": {
-       "name": "windows",
+       "name": "windows-client",
        "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "windows"
+         "windows-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",
