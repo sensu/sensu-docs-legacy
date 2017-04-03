@@ -144,12 +144,12 @@ mkdir /etc/sensu/conf.d
    ~~~ json
    {
      "client": {
-       "name": "solaris",
+       "name": "solaris-client",
        "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "solaris"
+         "solaris-nodes"
        ],
        "socket": {
          "bind": "127.0.0.1",
