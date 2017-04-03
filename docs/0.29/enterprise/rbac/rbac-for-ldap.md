@@ -19,6 +19,7 @@ users only.**
   - [Example RBAC for LDAP definition](#example-rbac-for-ldap-definition)
   - [RBAC for LDAP definition specification](#rbac-for-ldap-definition-specification)
     - [`ldap` attributes](#ldap-attributes)
+    - [`servers` attributes](#servers-attributes)
     - [`roles` attributes](#roles-attributes)
 
 ## What is RBAC for LDAP?
@@ -46,14 +47,19 @@ compatible with any standards-compliant LDAP provider.
     "port": 3000,
     "...": "",
     "ldap": {
-      "server": "localhost",
-      "port": 389,
-      "basedn": "cn=users,dc=domain,dc=tld",
-      "binduser": "cn=binder,cn=users,dc=domain,dc=tld",
-      "bindpass": "secret",
-      "insecure": false,
-      "security": "starttls",
-      "userattribute": "sAMAccountName",
+      "debug": false,
+      "servers": [
+        {
+          "server": "localhost",
+          "port": 389,
+          "basedn": "cn=users,dc=domain,dc=tld",
+          "binduser": "cn=binder,cn=users,dc=domain,dc=tld",
+          "bindpass": "secret",
+          "insecure": false,
+          "security": "starttls",
+          "userattribute": "sAMAccountName"
+        }
+      ],
       "roles": [
         {
           "name": "guests",
@@ -86,6 +92,87 @@ compatible with any standards-compliant LDAP provider.
 ### RBAC for LDAP definition specification
 
 #### `ldap` attributes
+
+`debug`
+: description
+  : Determines whether or not to output debug information about the LDAP
+    connection.
+    _WARNING: not recommended for production use. Sensitive information
+    including usernames and passwords may be sent to the log files when
+    enabled._
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "debug": true
+    ~~~
+
+`servers`
+: description
+  : An array of [LDAP servers][6] that each represent a LDAP directory or a
+    Microsoft Active Directory domain controller.
+    _NOTE: each LDAP server will be tried in sequence until one of them
+    authenticates the username and password provided or the end of the array._
+: required
+  : yes
+: type
+  : Array
+: example
+  : ~~~ shell
+    "servers": [
+      {
+        "server": "localhost",
+        "port": 389,
+        "basedn": "cn=users,dc=domain,dc=tld",
+        "binduser": "cn=binder,cn=users,dc=domain,dc=tld",
+        "bindpass": "secret",
+        "insecure": false,
+        "security": "starttls",
+        "userattribute": "sAMAccountName"
+      }
+    ]
+    ~~~
+
+`roles`
+: description
+  : An array of [Role definitions][3] for LDAP groups.
+: required
+  : true
+: type
+  : Array
+: example
+  : ~~~shell
+    "roles": [
+      {
+        "name": "guests",
+        "members": [
+          "guests_group"
+        ],
+        "datacenters": [
+          "us-west-1"
+        ],
+        "subscriptions": [
+          "webserver"
+        ],
+        "readonly": true
+      },
+      {
+        "name": "operators",
+        "members": [
+          "operators_group"
+        ],
+        "datacenters": [],
+        "subscriptions": [],
+        "readonly": false
+      }
+    ]
+    ~~~
+
+#### `servers` attributes
 
 `server`
 : description
@@ -280,60 +367,6 @@ compatible with any standards-compliant LDAP provider.
     "groupobjectclass": "posixGroup"
     ~~~
 
-`roles`
-: description
-  : An array of [Role definitions][3] for LDAP groups.
-: required
-  : true
-: type
-  : Array
-: example
-  : ~~~shell
-    "roles": [
-      {
-        "name": "guests",
-        "members": [
-          "guests_group"
-        ],
-        "datacenters": [
-          "us-west-1"
-        ],
-        "subscriptions": [
-          "webserver"
-        ],
-        "readonly": true
-      },
-      {
-        "name": "operators",
-        "members": [
-          "operators_group"
-        ],
-        "datacenters": [],
-        "subscriptions": [],
-        "readonly": false
-      }
-    ]
-    ~~~
-
-`debug`
-: description
-  : Determines whether or not to output debug information about the LDAP
-    connection.
-    _WARNING: not recommended for production use. Sensitive information
-    including usernames and passwords may be sent to the log files when
-    enabled._
-: required
-  : false
-: type
-  : Boolean
-: default
-  : false
-: example
-  : ~~~ shell
-    "debug": true
-    ~~~
-
-
 #### `roles` attributes
 
 Please see the [RBAC definition specification][4] for information on how to
@@ -345,4 +378,5 @@ configure RBAC roles.
 [2]:  http://www.openldap.org/
 [3]:  #roles-attributes
 [4]:  overview.html#roles-attributes
-[5]:  /enterprise 
+[5]:  /enterprise
+[6]:  #servers-attributes
