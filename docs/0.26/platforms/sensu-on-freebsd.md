@@ -86,12 +86,12 @@ mkdir /usr/local/etc/sensu/conf.d
    ~~~ json
    {
      "client": {
-       "name": "freebsd",
+       "name": "freebsd-client",
        "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "freebsd"
+         "freebsd-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",

@@ -181,12 +181,12 @@ mkdir /etc/sensu/conf.d
    ~~~ json
    {
      "client": {
-       "name": "rhel",
+       "name": "rhel-client",
        "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "rhel"
+         "rhel-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",

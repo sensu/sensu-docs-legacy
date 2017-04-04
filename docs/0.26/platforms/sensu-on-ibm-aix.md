@@ -106,12 +106,12 @@ mkdir /etc/sensu/conf.d
    ~~~ json
    {
      "client": {
-       "name": "aix",
+       "name": "aix-client",
        "address": "localhost",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "aix"
+         "aix-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",

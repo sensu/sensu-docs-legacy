@@ -93,12 +93,12 @@ mkdir /etc/sensu/conf.d
    ~~~ json
    {
      "client": {
-       "name": "macosx",
+       "name": "macosx-client",
        "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "macosx"
+         "macosx-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",

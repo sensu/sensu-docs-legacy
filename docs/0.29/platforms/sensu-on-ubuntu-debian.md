@@ -192,12 +192,12 @@ sudo mkdir /etc/sensu/conf.d
    ~~~ json
    {
      "client": {
-       "name": "ubuntu",
+       "name": "ubuntu-client",
        "address": "127.0.0.1",
        "environment": "development",
        "subscriptions": [
          "dev",
-         "ubuntu"
+         "ubuntu-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",
