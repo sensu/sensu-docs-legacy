@@ -185,7 +185,7 @@ mkdir /etc/sensu/conf.d
        "environment": "development",
        "subscriptions": [
          "dev",
-         "rhel-nodes"
+         "rhel-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",

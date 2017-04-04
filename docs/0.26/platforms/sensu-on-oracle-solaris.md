@@ -144,7 +144,7 @@ mkdir /etc/sensu/conf.d
        "environment": "development",
        "subscriptions": [
          "dev",
-         "solaris-nodes"
+         "solaris-hosts"
        ],
        "socket": {
          "bind": "127.0.0.1",
