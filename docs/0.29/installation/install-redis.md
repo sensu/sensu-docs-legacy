@@ -21,7 +21,12 @@ platforms**:
 
 - [Install Redis on Ubuntu/Debian](install-redis-on-ubuntu-debian.html) (recommended)
 - [Install Redis on RHEL/CentOS](install-redis-on-rhel-centos.html)
-- [Install Redis on AWS (ElastiCache)](install-redis-using-aws-elasticache.html)
+
+Amazon Web Services [ElastiCache][5] with Redis 2.8.x may be used to
+provide Redis service for Sensu. See Amazon's
+[Getting Started with Amazon ElastiCache guide][6] for details on
+provisioning ElastiCache in AWS. Once provisioned in AWS, Sensu can be
+configured to use the ElastiCache endpoint address and port.
 
 _WARNING: [Sensu Support][3] is available for Redis installations on
 Ubuntu/Debian and RHEL/CentOS operating systems, and via [Amazon Web
@@ -32,3 +37,4 @@ Services][4] [ElastiCache][5], **only**._
 [3]:  https://sensuapp.org/support
 [4]:  http://aws.amazon.com/
 [5]:  https://aws.amazon.com/elasticache/
+[6]:  http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/GettingStarted.html
