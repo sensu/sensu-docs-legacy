@@ -16,11 +16,15 @@ weight: 5
 
 Source: [GitHub.com][2]
 
-**March 29, 2017** &mdash; Sensu Core version 0.29.0 has been released
+**April 7, 2017** &mdash; Sensu Core version 0.29.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
 ### CHANGES {#core-v0-29-0-changes}
+
+- **IMPORTANT**: Sensu packages now include Ruby 2.4.1. Upgrading
+  from prior versions of Sensu will require any plugin or extension
+  gems to be re-installed under the new Ruby environment.
 
 - **IMPROVEMENT**: Sensu server tasks, replacing the Sensu server leader
 	functionality, distributing certain server responsibilities
