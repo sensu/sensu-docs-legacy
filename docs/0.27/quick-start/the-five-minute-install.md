@@ -45,7 +45,8 @@ The following installation steps will help you get Sensu Core installed in a
 other platforms, and/or alternative installation configurations, please consult
 the [installation guide](2).
 
-1.5. Install EPEL (if not already done)
+0. Install EPEL (if not already done)
+
    ~~~ shell
    sudo yum install epel-release -y
    ~~~
@@ -73,7 +74,7 @@ the [installation guide](2).
    sudo systemctl start redis.service
    ~~~
 
-4. Install Sensu & Dashbard
+4. Install Sensu & Dashboard
 
    ~~~ shell
    sudo yum install sensu uchiwa -y
@@ -88,7 +89,7 @@ the [installation guide](2).
 
 5. Configure Sensu server:
 
-  Run the following to set up a minimal client config:
+   Run the following to set up a minimal client config:
 
    ~~~ shell
    echo '{
@@ -104,7 +105,7 @@ the [installation guide](2).
 
 6. Configure the Sensu client
 
-  Run the following to set up a minimal client config:
+   Run the following to set up a minimal client config:
 
    ~~~ shell
    echo '{
@@ -121,7 +122,7 @@ the [installation guide](2).
 
    Run the following to set up a minimal dashboard config:
 
-   ~~~
+   ~~~ shell
    echo '{
      "sensu": [
        {
