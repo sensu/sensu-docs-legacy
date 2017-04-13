@@ -747,15 +747,14 @@ name][41]).
 
 #### Custom attributes
 
-Because Sensu configuration is just JSON data, it is possible to define
+Because Sensu configuration is simply JSON data, it is possible to define
 configuration attributes that are not part of the Sensu [check definition
-specification][17]. Custom check definition attributes may be defined to provide
-context about the check, or to control or modify check `command` or `handler`
-behaviors. Custom check definition attributes will be included in [check
-results][4] and [event data][40]. Some great example use cases for custom check
-definition attributes are links to playbook documentation (i.e. "here's a link
-to some instructions for how to fix this if it's broken"), [contact
-routing][36], and metric graph image URLs.
+specification][17]. These custom check attributes are included in
+[check results][4] and [event data][40], providing additional context
+about the check. Some great example use cases for custom check
+definition attributes are links to playbook documentation
+(i.e. "here's a link to some instructions for how to fix this if it's
+broken"), [contact routing][36], and metric graph image URLs.
 
 ##### EXAMPLE
 
