@@ -41,14 +41,14 @@ RabbitMQ, you'll need to install Erlang.
 2. Add the Erlang Solutions YUM repository:
 
    ~~~ shell
-   sudo wget http://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+   sudo wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
    sudo rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
    ~~~
 
 3. Install Erlang:
 
    ~~~
-   sudo yum install -y erlang-19.0
+   sudo yum install -y erlang-19.3
    ~~~
 
 ## Install RabbitMQ
@@ -69,12 +69,18 @@ Erlang version R16B03 or newer][4]).
 
 ### Download and install RabbitMQ using `rpm`
 
-1. Download the signing key for the RabbitMQ YUM repository, and then download
-   and install RabbitMQ 3.6.3 using the `rpm` utility:
+1. Install the `socat` package, required by RabbitMQ rpm:
 
    ~~~ shell
-   sudo rpm --import http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-   sudo rpm -Uvh http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.3/rabbitmq-server-3.6.3-1.noarch.rpm
+   sudo yum install -y socat
+   ~~~
+
+2. Download the signing key for the RabbitMQ YUM repository, and then download
+   and install RabbitMQ 3.6.9 using the `rpm` utility:
+
+   ~~~ shell
+   sudo rpm --import https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+   sudo rpm -Uvh https://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server-3.6.9-1.el6.noarch.rpm
    ~~~
 
 ### Install RabbitMQ using YUM
@@ -97,9 +103,12 @@ be a reason to upgrade RabbitMQ versions frequently._
 
 2. Start and stop the RabbitMQ service using the installed init scripts:
 
+   _NOTE: The `service` command will not work on CentOS 5, the
+   sysvinit script must be used, e.g. `sudo /etc/init.d/rabbitmq-server start`_
+
    ~~~ shell
-   sudo /etc/init.d/rabbitmq-server start
-   sudo /etc/init.d/rabbitmq-server stop
+   sudo service rabbitmq-server start
+   sudo service rabbitmq-server stop
    ~~~
 
 ## Configure RabbitMQ access controls
@@ -149,7 +158,7 @@ adjusting the ulimit value to the recommendation corresponding to the
 environment where RabbitMQ is running.
 
 ~~~ shell
-# This file is sourced by /etc/init.d/rabbitmq-server. Its primary
+# This file is sourced by the rabbitmq-server service script. Its primary
 # reason for existing is to allow adjustment of system limits for the
 # rabbitmq-server process.
 #

@@ -38,7 +38,7 @@ RabbitMQ, you'll need to install Erlang.
 2. Install Erlang
 
    ~~~ shell
-   sudo apt-get -y install socat erlang-nox=1:19.0-1
+   sudo apt-get -y install socat erlang-nox=1:19.3-1
    ~~~
 
 ## Install RabbitMQ
@@ -59,17 +59,17 @@ Erlang version R16B03 or newer][4]).
 
 ### Download and install RabbitMQ using `dpkg`
 
-1. Download the official RabbitMQ 3.6.3 .deb installer package, as suggested in
+1. Download the official RabbitMQ 3.6.9 .deb installer package, as suggested in
    the [official RabbitMQ installation guide][2]:
 
    ~~~ shell
-   sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.3/rabbitmq-server_3.6.3-1_all.deb
+   sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server_3.6.9-1_all.deb
    ~~~
 
 2. Install the package using `dpkg`
 
    ~~~ shell
-   sudo dpkg -i rabbitmq-server_3.6.3-1_all.deb
+   sudo dpkg -i rabbitmq-server_3.6.9-1_all.deb
    ~~~
 
 ### Install RabbitMQ using APT
@@ -88,18 +88,10 @@ be a reason to upgrade RabbitMQ versions frequently._
    the `update-rc.d` utility:
 
    ~~~ shell
-   sudo update-rc.d rabbitmq-server defaults
+   sudo update-rc.d rabbitmq-server enable
    ~~~
 
-2. Start and stop the RabbitMQ service using the installed init scripts:
-
-   ~~~ shell
-   sudo /etc/init.d/rabbitmq-server start
-   sudo /etc/init.d/rabbitmq-server stop
-   ~~~
-
-   Alternatively, it is also possible to use the `service` command to start and
-   stop the RabbitMQ service:
+2. Start and stop the RabbitMQ service using the `service` command:
 
    ~~~ shell
    sudo service rabbitmq-server start
@@ -153,7 +145,7 @@ adjusting the ulimit value to the recommendation corresponding to the
 environment where RabbitMQ is running.
 
 ~~~ shell
-# This file is sourced by /etc/init.d/rabbitmq-server. Its primary
+# This file is sourced by the rabbitmq-server service script. Its primary
 # reason for existing is to allow adjustment of system limits for the
 # rabbitmq-server process.
 #
