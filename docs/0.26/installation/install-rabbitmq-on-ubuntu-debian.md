@@ -38,7 +38,7 @@ RabbitMQ, you'll need to install Erlang.
 2. Install Erlang
 
    ~~~ shell
-   sudo apt-get -y install socat erlang-nox=1:19.0-1
+   sudo apt-get -y install socat erlang-nox=1:19.3-1
    ~~~
 
 ## Install RabbitMQ
@@ -59,17 +59,17 @@ Erlang version R16B03 or newer][4]).
 
 ### Download and install RabbitMQ using `dpkg`
 
-1. Download the official RabbitMQ 3.6.3 .deb installer package, as suggested in
+1. Download the official RabbitMQ 3.6.9 .deb installer package, as suggested in
    the [official RabbitMQ installation guide][2]:
 
    ~~~ shell
-   sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.3/rabbitmq-server_3.6.3-1_all.deb
+   sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.9/rabbitmq-server_3.6.9-1_all.deb
    ~~~
 
 2. Install the package using `dpkg`
 
    ~~~ shell
-   sudo dpkg -i rabbitmq-server_3.6.3-1_all.deb
+   sudo dpkg -i rabbitmq-server_3.6.9-1_all.deb
    ~~~
 
 ### Install RabbitMQ using APT
