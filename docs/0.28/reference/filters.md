@@ -127,37 +127,6 @@ The Ruby expression is evaluated in a "sandbox" and provided a single variable
 (`value`) which is equal to the event data attribute value being compared. If
 the evaluated expression returns true, the attribute is a match.
 
-#### Example: Filtering by custom "environment" attribute
-
-The following example filter definition, entitled `production_filter` will match
-[event data][3] with a [custom client definition attribute][5] `"environment":
-"production"`.
-
-~~~ json
-{
-  "filters": {
-    "production_filter": {
-      "negate": false,
-      "attributes": {
-        "client": {
-          "environment": "production"
-        }
-      }
-    }
-  }
-}
-~~~
-
-### Filter attribute evaluation
-
-When more complex conditional logic is needed than [direct filter attribute
-comparison][10], Sensu filters provide support for
-attribute evaluation using Ruby expressions. When a Filter attribute value is a
-string beginning with `eval:`, the remainder is evaluated as a Ruby expression.
-The Ruby expression is evaluated in a "sandbox" and provided a single variable
-(`value`) which is equal to the event data attribute value being compared. If
-the evaluated expression returns true, the attribute is a match.
-
 #### Example: Handling state change only
 
 Some teams migrating to Sensu have asked about reproducing the behavior of their
