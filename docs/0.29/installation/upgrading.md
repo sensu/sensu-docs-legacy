@@ -6,6 +6,11 @@ title: "Upgrading Sensu"
 
 # Upgrading Sensu
 
+_WARNING: Note that the biggest change in this release that may affect your
+deployment deals with our internal update to a newer Ruby. This means
+that plugins will have to be re-installed - and any old plugins will
+continue to persist on your filesystem._
+ 
 Upgrading Sensu is usually a straightforward process. In most cases,
 upgrading Sensu and/or Sensu Enterprise only requires upgrading to the
 latest package. Certain versions of Sensu may include changes that are
