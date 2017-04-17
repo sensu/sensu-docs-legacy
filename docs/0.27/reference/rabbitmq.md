@@ -283,7 +283,7 @@ definition attribute scope.
   : The file path for the chain of X509 SSL certificates in the PEM format for
     the SSL connection.
 : required
-  : true
+  : false
 : type
   : String
 : example
@@ -295,7 +295,7 @@ definition attribute scope.
 : description
   : The file path for the SSL private key in the PEM format.
 : required
-  : true
+  : false
 : type
   : String
 : example
