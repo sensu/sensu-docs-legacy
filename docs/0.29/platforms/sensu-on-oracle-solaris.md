@@ -39,18 +39,7 @@ To install or upgrade to the latest version of Sensu, please ensure
 you have updated existing configurations to follow the repository URL
 format specified below._
 
-1. Download Sensu from the [Sensu Downloads][1] page, or by using the `wget`
-   utility:
-
-   ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/pkg/5.10/sensu-0.29.0-1.i386.solaris
-   ~~~
-
-   Alternatively, for SPARC packages:
-
-   ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/pkg/5.10/sensu-0.26.3-1.sparc.solaris
-   ~~~
+1. Download Sensu from the [Sensu Downloads][1] page
 
 2. Install the `sensu-0.29.0-1.i386.pkg` package using the `pkgadd` utility:
 

@@ -36,11 +36,7 @@ notice._
 
 ### Download and install Sensu using the Sensu Universal .pkg file {#download-and-install-sensu-core}
 
-1. Download Sensu from the [Sensu Downloads][1] page, or via the `curl` utility
-
-   ~~~ shell
-   curl -LO https://sensu.global.ssl.fastly.net/osx/sensu-0.28.1-1.pkg
-   ~~~
+1. Download Sensu from the [Sensu Downloads][1] page.
 
    _NOTE: the Universal .pkg file supports OS X "Mavericks" (10.9) and newer.
    Mountain Lion users: please use [this installer][3]._

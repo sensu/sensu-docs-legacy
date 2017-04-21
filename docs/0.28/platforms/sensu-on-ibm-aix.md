@@ -37,12 +37,7 @@ install or upgrade to the latest version of Sensu, please ensure you
 have updated existing configurations to follow the repository URL
 format specified below._
 
-1. Download Sensu from the [Sensu Downloads][1] page, or using the `wget`
-   utility:
-
-   ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/aix/6.1/sensu-0.28.0-1.powerpc.bff
-   ~~~
+1. Download Sensu from the [Sensu Downloads][1] page.
 
 2. The Sensu installer package for IBM AIX systems is provided in **backup file
    format** (.bff). In order to install the content, you will need to know the
