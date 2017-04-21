@@ -39,9 +39,7 @@ install or upgrade to the latest version of Sensu, please ensure you
 have updated existing configurations to follow the repository URL
 format specified below._
 
-1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
-
-   [https://sensu.global.ssl.fastly.net/msi/2012r2/sensu-0.29.0-1-x64.msi][3]
+1. Download Sensu from the [Sensu Downloads][1] page.
 
 2. Double-click the `sensu-0.29.0-1-x64.msi` installer package to launch the
    installer, accept the Sensu Core [MIT License][4] and install Sensu using the

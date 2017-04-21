@@ -41,9 +41,7 @@ To install or upgrade to the latest version of Sensu, please ensure
 you have updated existing configurations to follow the repository URL
 format specified below._
 
-1. Download Sensu from the [Sensu Downloads][1] page, or by using this link:
-
-   [https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:10:amd64/sensu/sensu-0.29.0_1.txz][3]
+1. Download Sensu from the [Sensu Downloads][1] page.
 
    _NOTE: FreeBSD packages are available for FreeBSD 10 and 11.
    Please visit the [Sensu Downloads][1] page for more information._
