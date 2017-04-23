@@ -36,9 +36,6 @@ Source: [GitHub.com][2]
 	"check_dependencies"]`. These filters can now be used with Sensu
 	event handlers that do not use the sensu-plugin library (or Ruby).
 
-  from prior versions of Sensu will require any plugin or extension
-  gems to be re-installed under the new Ruby environment.
-
 - **IMPROVEMENT**: Sensu server tasks, replacing the Sensu server leader
 	functionality, distributing certain server responsibilities
 	amongst the running Sensu servers. A server task can only run on
