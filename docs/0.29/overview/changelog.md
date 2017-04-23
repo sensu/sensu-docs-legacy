@@ -27,7 +27,7 @@ Source: [GitHub.com][2]
 	to be re-installed under the new Ruby environment.
 
 - **IMPORTANT**: Sensu packages now include [sensu-plugin 2.0.0][3], which
-	disables the deprecated filter methods by default, i.e.
+	disables its deprecated filter methods by default, i.e.
 	occurrences. Sensu 0.29 includes built-in filters that provide the
 	same functionality with several improvements. The built-in filters
 	are "occurrences" and "check_dependencies". To use the built-in
