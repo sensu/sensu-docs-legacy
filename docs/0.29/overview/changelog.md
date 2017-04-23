@@ -30,9 +30,9 @@ Source: [GitHub.com][2]
 	disables its deprecated filter methods by default, i.e.
 	occurrences. Sensu 0.29 includes built-in filters that provide the
 	same functionality with several improvements. The built-in filters
-	are "occurrences" and "check_dependencies". To use the built-in
-	filters, apply them to Sensu event handlers via their definition
-	`"filters"` attribute, e.g. `"filters": ["occurrences",
+	are ["occurrences"][4] and ["check_dependencies"][5]. To use the
+	built-in filters, apply them to Sensu event handlers via their
+	definition `"filters"` attribute, e.g. `"filters": ["occurrences",
 	"check_dependencies"]`. These filters can now be used with Sensu
 	event handlers that do not use the sensu-plugin library (or Ruby).
 
@@ -102,3 +102,5 @@ Source: [GitHub.com][2]
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
 [2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0290---2017-03-29
 [3]: https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v200---2017-03-29
+[4]: https://github.com/sensu-extensions/sensu-extensions-occurrences
+[5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
