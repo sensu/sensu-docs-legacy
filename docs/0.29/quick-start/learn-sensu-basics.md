@@ -248,16 +248,16 @@ this execution will be handled by the Sensu server.
 4. As we've added a new check definition, let's restart Sensu server
    and API services to update their configuration:
 
-    ~~~ shell
-    sudo systemctl restart sensu-{server,api}
-    ~~~
+   ~~~ shell
+   sudo systemctl restart sensu-{server,api}
+   ~~~
 
-    With these services restarted we should be able to observe via the
-    API that the new check definition has been loaded:
+   With these services restarted we should be able to observe via the
+   API that the new check definition has been loaded:
 
-    ~~~ shell
-    $ curl -s 127.0.0.1:4567/checks | jq .
-    [
+   ~~~ shell
+   $ curl -s 127.0.0.1:4567/checks | jq .
+   [
       {
         "command": "/usr/lib64/nagios/plugins/check_http -H 127.0.0.1",
         "interval": 10,
@@ -266,8 +266,8 @@ this execution will be handled by the Sensu server.
         ],
         "name": "check_http"
       }
-    ]
-    ~~~
+   ]
+   ~~~
 
    Now that the API reports this check has been loaded, the Sensu server
    should be scheduling execution of this check. We can verify this by
