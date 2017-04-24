@@ -182,9 +182,9 @@ this execution will be handled by the Sensu server.
 
 1. Install nagios-plugins-http package to provide the check plugin
 
-  ~~~ shell
-  sudo yum install -y nagios-plugins-http
-  ~~~
+   ~~~ shell
+   sudo yum install -y nagios-plugins-http
+   ~~~
 
   You may be wondering, "why are we installing a Nagios plugin in a
   Sensu tutorial?"
@@ -197,28 +197,28 @@ this execution will be handled by the Sensu server.
 
 2. Let's execute the check plugin manually and see what happens:
 
-  ~~~ shell
-  $ /usr/lib64/nagios/plugins/check_http -I 127.0.0.1
-  connect to address 127.0.0.1 and port 80: Connection refused
-  HTTP CRITICAL - Unable to open TCP socket
-  ~~~
+   ~~~ shell
+   $ /usr/lib64/nagios/plugins/check_http -I 127.0.0.1
+   connect to address 127.0.0.1 and port 80: Connection refused
+   HTTP CRITICAL - Unable to open TCP socket
+   ~~~
 
-  Here we can see that the check plugin output reflects failure to
-  connect to port 80 on 127.0.0.1 (the localhost address).
+   Here we can see that the check plugin output reflects failure to
+   connect to port 80 on 127.0.0.1 (the localhost address).
 
-  Beyond the human-readable output of the check plugin, the exit
-  status code returned by the command (`$?`) is used by Sensu to
-  determine if the check execution is indicative of an OK, WARNING or
-  CRITICAL state.
+   Beyond the human-readable output of the check plugin, the exit
+   status code returned by the command (`$?`) is used by Sensu to
+   determine if the check execution is indicative of an OK, WARNING or
+   CRITICAL state.
 
-  ~~~
-  $ echo $?
-  2
-  ~~~
+   ~~~
+   $ echo $?
+   2
+   ~~~
 
-  In this case the plugin has returned an exit status of `2`, indicating
-  a critical state. This aligns with the text output from the
-  plugin. So far so good!
+   In this case the plugin has returned an exit status of `2`, indicating
+   a critical state. This aligns with the text output from the
+   plugin. So far so good!
 
 3. Now let's write a check definition which describes how and when to
    run this check plugin.
@@ -248,16 +248,16 @@ this execution will be handled by the Sensu server.
 4. As we've added a new check definition, let's restart Sensu server
    and API services to update their configuration:
 
-    ~~~ shell
-    sudo systemctl restart sensu-{server,api}
-    ~~~
+   ~~~ shell
+   sudo systemctl restart sensu-{server,api}
+   ~~~
 
-    With these services restarted we should be able to observe via the
-    API that the new check definition has been loaded:
+   With these services restarted we should be able to observe via the
+   API that the new check definition has been loaded:
 
-    ~~~ shell
-    $ curl -s 127.0.0.1:4567/checks | jq .
-    [
+   ~~~ shell
+   $ curl -s 127.0.0.1:4567/checks | jq .
+   [
       {
         "command": "/usr/lib64/nagios/plugins/check_http -H 127.0.0.1",
         "interval": 10,
@@ -266,8 +266,8 @@ this execution will be handled by the Sensu server.
         ],
         "name": "check_http"
       }
-    ]
-    ~~~
+   ]
+   ~~~
 
    Now that the API reports this check has been loaded, the Sensu server
    should be scheduling execution of this check. We can verify this by
@@ -342,12 +342,12 @@ to a handler named "default".
    `sensu-install` to install the `mailer` handler so we can receive
    alerts via email:
 
-    ~~~ shell
-    sudo sensu-install -p mailer
-    ~~~
+   ~~~ shell
+   sudo sensu-install -p mailer
+   ~~~
 
-    With this plugin package installed, the `handler-mailer.rb`
-    executable is now available at `/opt/sensu/embedded/bin/handler-mailer.rb`.
+   With this plugin package installed, the `handler-mailer.rb`
+   executable is now available at `/opt/sensu/embedded/bin/handler-mailer.rb`.
 
 3. Similar to the check definition we wrote above, we will now need a
    definition to describe execution of the mailer handler.
