@@ -23,7 +23,7 @@ weight: 7
     - [Mutator name(s)](#mutator-names)
     - [Mutator attributes](#mutator-attributes)
 
-## What is Sensu mutators? {#what-are-sensu-mutators}
+## What are Sensu mutators? {#what-are-sensu-mutators}
 
 Sensu mutators are executable scripts or other programs that modify [event
 data][1] for [Sensu event handlers][2] which may expect additional or modified
