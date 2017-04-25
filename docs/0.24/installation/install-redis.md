@@ -21,14 +21,11 @@ platforms**:
 
 - [Install Redis on Ubuntu/Debian](install-redis-on-ubuntu-debian.html) (recommended)
 - [Install Redis on RHEL/CentOS](install-redis-on-rhel-centos.html)
-- [Install Redis on AWS (ElastiCache)](install-redis-using-aws-elasticache.html)
 
 _WARNING: [Sensu Support][3] is available for Redis installations on
-Ubuntu/Debian and RHEL/CentOS operating systems, and via [Amazon Web
-Services][4] [ElastiCache][5], **only**._
+Ubuntu/Debian and RHEL/CentOS operating systems.
 
 [1]:  http://redis.io/
 [2]:  http://redis.io/topics/introduction
 [3]:  https://sensuapp.org/support
 [4]:  http://aws.amazon.com/
-[5]:  https://aws.amazon.com/elasticache/
