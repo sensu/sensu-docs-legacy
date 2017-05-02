@@ -952,7 +952,7 @@ at the top level of their respective JSON documents):
 [7]:  rabbitmq.html#rabbitmq-definition-specification
 [8]:  redis.html#redis-definition-specification
 [9]:  transport.html#transport-definition-specification
-[10]: api-configuration.html#api-definition-specification
+[10]: ../api/configuration.html#api-definition-specification
 [11]: checks.html#check-definition-specification
 [12]: handlers.html#handler-definition-specification
 [13]: filters.html#filter-definition-specification
