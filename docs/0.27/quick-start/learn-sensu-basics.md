@@ -255,7 +255,7 @@ this execution will be handled by the Sensu server.
    With these services restarted we should be able to observe via the
    API that the new check definition has been loaded:
 
-   ~~~ shell
+   ~~~ json
    $ curl -s 127.0.0.1:4567/checks | jq .
    [
       {
@@ -273,7 +273,7 @@ this execution will be handled by the Sensu server.
    should be scheduling execution of this check. We can verify this by
    watching the sensu-server log file:
 
-   ~~~ shell
+   ~~~ json
    $ tail -f /var/log/sensu/sensu-server.log | grep check_http
    {"timestamp":"2017-03-16T17:36:46.947925+0000","level":"info","message":"publishing
    check request","payload":{"command":"/usr/lib64/nagios/plugins/check_http
@@ -356,7 +356,7 @@ to a handler named "default".
    `/etc/sensu/conf.d/handler_default.json` with the following
    content:
 
-   ~~~ javascript
+   ~~~ json
    {
      "handlers": {
        "default": {
@@ -377,7 +377,7 @@ to a handler named "default".
    Using the editor of your choice, create a JSON file at
    `/etc/sensu/conf.d/mailer.json` using the following as a guide:
 
-   ~~~ javascript
+   ~~~ json
    {
        "mailer": {
            "mail_from": "alerts@example.com",
