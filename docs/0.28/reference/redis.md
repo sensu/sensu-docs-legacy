@@ -515,7 +515,7 @@ provided as a downloadable configuration file.
 _NOTE: At least three instances of Redis Sentinel are required for a robust
 deployment._
 
-1. Download the Sensu Redis Sentinel configuraiton file.
+1. Download the Sensu Redis Sentinel configuration file.
 
    ~~~ shell
    sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/0.28/files/sentinel.conf
@@ -552,9 +552,12 @@ deployment._
    ~~~
 
 6. The Redis package does not provide an init script for Sentinel. Run the
-   following command to download a working Redis Sentinel init script.
+   following command to install prereqs and download a working Redis Sentinel init script.
+
+   Note that you may, on some RedHat variants, also need the `redhat-lsb` package to use this init script.
 
    ~~~ shell
+   sudo yum install initscripts
    sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/0.28/files/redis-sentinel
    ~~~
 
