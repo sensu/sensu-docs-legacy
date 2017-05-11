@@ -754,7 +754,7 @@ check `source` is set to the client `name`.
       "interval": 60,
       "proxy_requests": {
         "client_attributes": {
-          "keepalive": false,
+          "keepalives": false,
           "device_type": "router",
           "device_manufacturer": "arista"
         }
