@@ -736,7 +736,7 @@ The following attributes are configured within the `{"checks": {
 ##### EXAMPLE {#proxy-requests-attributes-example}
 
 Publish a check request to the configured `subscribers` (e.g.
-`["round-robin:snmp_pollers"]`) for every Sensu client in the registry
+`["roundrobin:snmp_pollers"]`) for every Sensu client in the registry
 that matches the configured client attributes in `client_attributes`
 on the configured `interval` (e.g. `60`). Client tokens in the check
 definition (e.g. `"check-snmp-if.rb -h :::address::: -i eth0"`) are
@@ -749,12 +749,12 @@ check `source` is set to the client `name`.
     "check_arista_eth0": {
       "command": "check-snmp-if.rb -h :::address::: -i eth0",
       "subscribers": [
-        "round-robin:snmp_pollers"
+        "roundrobin:snmp_pollers"
       ],
       "interval": 60,
       "proxy_requests": {
         "client_attributes": {
-          "keepalive": false,
+          "keepalives": false,
           "device_type": "router",
           "device_manufacturer": "arista"
         }
