@@ -281,7 +281,7 @@ Sensu supports running checks where the results are considered to be for a **cli
 
 Checks are scheduled normally, but by specifying a [**Proxy Request**][13] in your check, clients that match certain definitions (their `client_attributes`) cause the check to run for each one. The attributes supplied must normally match *exactly* as stated- no variables or directives have any special meaning, but you can still use `eval` to perform more complicated filtering with Ruby on the available `value`, such as finding clients with particular subscriptions (given that we're dealing with arrays):
 
-```json
+~~~ json
   "proxy_requests"{
     "client_attributes": {
       "user_variable": "some_value",
@@ -289,7 +289,7 @@ Checks are scheduled normally, but by specifying a [**Proxy Request**][13] in yo
         "eval: value.include?('a_subscription')"
     }
   }
-```
+~~~
 
 [1]:  ../../reference/checks.html
 [2]:  https://github.com/sensu-plugins/sensu-plugins-process-checks
