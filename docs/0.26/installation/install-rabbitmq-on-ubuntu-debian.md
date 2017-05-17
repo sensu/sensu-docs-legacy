@@ -139,8 +139,13 @@ development environments.
 
   _Source: [rabbitmq.com][2]_
 
-To adjust this limit, please edit the configuration file found at
-`/etc/default/rabbitmq-server` by uncommenting the last line in the file, and
+To adjust this limit first check if you are booted with systemd by running.
+~~~
+systemctl is-system-running
+~~~
+If it complains that the command is not found or the ouput is not "running",
+then please edit the configuration file found at `/etc/default/rabbitmq-server`
+by uncommenting the last line in the file, and
 adjusting the ulimit value to the recommendation corresponding to the
 environment where RabbitMQ is running.
 
@@ -155,6 +160,20 @@ environment where RabbitMQ is running.
 #
 ulimit -n 65536
 ~~~
+else run
+~~~
+systemctl edit rabbitmq-server
+~~~
+and edit the (empty) file by inputing the following and then saving:
+~~~
+[Service]
+LimitNOFILE=65535
+~~~
+Finally run:
+~~~
+systemctl daemon-reload
+~~~
+to pick-up the changes.
 
 ### Verifying the Limit
 
