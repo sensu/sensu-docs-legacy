@@ -1,7 +1,7 @@
 ---
 title: "API Configuration"
 version: 0.29
-weight: 9
+weight: 10
 info: "<strong>NOTE:</strong> Please visit the <a href='../enterprise/api.html'>
   Sensu Enterprise API reference documentation</a> for information on
   configuring the Sensu Enterprise API (including native SSL encryption)."
