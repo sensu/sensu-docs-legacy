@@ -594,7 +594,7 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
 
 `aggregates`
 : description
-  : An array of strings defininng one or more named aggregates (described above).
+  : An array of strings defining one or more named aggregates (described above).
 : required
   : false
 : type
