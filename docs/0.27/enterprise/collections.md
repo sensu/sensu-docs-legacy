@@ -47,7 +47,7 @@ For example, `dc:ira+` matches the datacenters **iran** and **iraq**, but not
 For example, `dc:oc?o` matches the datacenter **cameroon**, but not **morocco**.
 
 `^` - Matches beginning of input.
-For example, `dc:^por` matches the datacenter **portgual**, but not
+For example, `dc:^por` matches the datacenter **portugal**, but not
 **singapore**.
 
 `$` - Matches end of input.
