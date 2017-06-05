@@ -278,7 +278,7 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {}
 : type
   : Array
 : allowed values
-  : `ok`, `warning`, `critical`, `unknown`
+  : `warning`, `critical`, `unknown`
 : example
   : ~~~ shell
     "severities": ["critical", "unknown"]
