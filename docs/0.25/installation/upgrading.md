@@ -2,6 +2,7 @@
 version: 0.25
 category: "Upgrading Guide"
 title: "Upgrading Sensu"
+weight: 8
 ---
 
 # Upgrading Sensu
