@@ -28,6 +28,7 @@ willingness to Google) industry standard RESTful API behaviors &ndash; including
 - [Events API](events-api.html)
 - [Stashes API](stashes-api.html)
 - [Health & Info API](health-and-info-api.html)
+- [Settings API](settings-api.html)
 - [API configuration](configuration.html)
 
 ## Response Content Filtering
