@@ -222,10 +222,10 @@ The Redis definition uses the `"redis": {}` definition scope.
 : type
   : Boolean
 : default
-  : `false`
+  : `true`
 : example
   : ~~~ shell
-    "reconnect_on_error": true
+    "reconnect_on_error": false
     ~~~
 
 `master`
