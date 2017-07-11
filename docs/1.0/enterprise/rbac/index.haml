@@ -1,0 +1,10 @@
+---
+title: "RBAC"
+weight: 3
+version: 1.0
+---
+
+%h2= "Role Based Access Controls"
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }

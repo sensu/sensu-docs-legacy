@@ -1,0 +1,11 @@
+---
+title: "Integrations"
+description: "Index of built-in third-party integrations in Sensu Enterprise."
+weight: 10
+version: 1.0
+---
+
+%h2= "Sensu Enterprise Integrations"
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }
