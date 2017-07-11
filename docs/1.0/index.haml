@@ -1,0 +1,17 @@
+---
+title: "0.29"
+version: 0.29
+section: 0
+weight: 0
+layout: "docs"
+---
+
+-# %h2= "Sensu Documentation (version 0.29)"
+-# - current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+-#   %ul
+-#     = partial "toc", locals: { version: current_resource.data.version }
+
+%h2= "Sensu Documentation (version 0.29)"
+- current_resource.children.sort_by!{ |c| c.data.fetch(:weight, 1) }.each do |page|
+  %ul
+    = partial "toc-helper", locals: { content: page }
