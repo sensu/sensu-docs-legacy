@@ -32,7 +32,7 @@ Downloads][1] page, and from [this repository][2].
 
 ### Download and install Sensu using the Sensu .bff package {#download-and-install-sensu-core}
 
-_NOTE: As of Sensu version 1.0 repository URLs have changed.  To
+_NOTE: As of Sensu version 0.27 repository URLs have changed.  To
 install or upgrade to the latest version of Sensu, please ensure you
 have updated existing configurations to follow the repository URL
 format specified below._

@@ -36,7 +36,7 @@ implications of blocking the reactor][2]._
 
 ### Installing Sensu extensions
 
-As of version 1.0, Sensu supports loading extensions from properly packaged
+As of version 0.26, Sensu supports loading extensions from properly packaged
 gems. This approach takes advantage of the existing RubyGems infrastructure and
 tools to make publishing and installing Sensu extensions easy.
 

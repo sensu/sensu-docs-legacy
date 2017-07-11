@@ -45,7 +45,7 @@ Individual handlers may opt-out of silencing by configuring the
 [`handle_silenced` attribute][5].
 
 _NOTE: Silencing described in this reference document is implemented in Sensu
-version 1.0 or later and Sensu Enterprise 2.0 or later._
+version 0.26 or later and Sensu Enterprise 2.0 or later._
 
 ### When to use silencing
 

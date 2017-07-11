@@ -46,7 +46,7 @@ Sensu Core package installs several processes including `sensu-server`,
 
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
-_NOTE: As of Sensu version 1.0, apt repository configuration has
+_NOTE: As of Sensu version 0.27, apt repository configuration has
 changed to include the "codename" of the Ubuntu/Debian release. To
 install or upgrade to the latest version of Sensu, please ensure you
 have updated existing repository configurations._

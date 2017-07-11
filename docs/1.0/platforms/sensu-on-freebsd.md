@@ -36,7 +36,7 @@ notice._
 
 ### Download and install Sensu using the Sensu Universal .txz file {#download-and-install-sensu-core}
 
-_NOTE: As of Sensu version 1.0 package repository URLs have changed.
+_NOTE: As of Sensu version 0.27 package repository URLs have changed.
 To install or upgrade to the latest version of Sensu, please ensure
 you have updated existing configurations to follow the repository URL
 format specified below._
