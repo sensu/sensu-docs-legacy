@@ -10,17 +10,17 @@ weight: 5
 
 ## Releases
 
-- [Core 1.0.0 Release Notes](#core-v0-29-0)
+- [Core 1.0.0 Release Notes](#core-v1-0-0)
 
-## Core 1.0.0 Release Notes {#core-v0-29-0}
+## Core 1.0.0 Release Notes {#core-v1-0-0}
 
 Source: [GitHub.com][2]
 
-**April 7, 2017** &mdash; Sensu Core version 1.0.0 has been released
+**July 11, 2017** &mdash; Sensu Core version 1.0.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
-### CHANGES {#core-v0-29-0-changes}
+### CHANGES {#core-v1-0-0-changes}
 
 - **IMPORTANT**: Sensu packages now include Ruby 2.4.1. Upgrading from
 	prior versions of Sensu will require any plugin or extension gems
@@ -36,71 +36,32 @@ Source: [GitHub.com][2]
 	"check_dependencies"]`. These filters can now be used with Sensu
 	event handlers that do not use the sensu-plugin library (or Ruby).
 
-- **IMPROVEMENT**: Sensu server tasks, replacing the Sensu server leader
-	functionality, distributing certain server responsibilities
-	amongst the running Sensu servers. A server task can only run on
-	one Sensu server at a time. Sensu servers partake in an election
-	process to become responsible for one or more tasks. A task can
-	failover to another Sensu server.
+- **NEW**: Added Sensu API event endpoint alias "incidents", e.g.
+	/incidents, /incidents/:client/:check.
 
-- **IMPROVEMENT**: Sensu API response object filtering for any GET
-	request. Filtering is done with one or more dot notation query
-	parameters, beginning with `filter.`, to specify object attributes
-	to filter by, e.g.
-	`/events?filter.client.environment=production&filter.check.contact=ops`.
+- **IMPROVEMENT**: Improved Sensu client keepalive configuration
+	validation, now including coverage for check low/high flap
+	thresholds etc.
 
-- **NEW**: Added API endpoint GET `/settings` to provided the APIs
-	running configuration. Sensitive setting values are redacted by
-	default, unless	the query parameter `redacted` is set to `false`,
-	e.g. `/settings?redacted=false`.
+- **IMPROVEMENT**: Improved Sensu client socket check result validation,
+	now including coverage for check low/high flap thresholds etc.
 
-- **IMPROVEMENT**: Added support for invalidating a Sensu client when
-	deleting it via the Sensu API DELETE `/clients/:name` endpoint,
-	disallowing further client keepalives and check results until the
-	client is either successfully removed from the client registry or
-	for a specified duration of time. To invalidate a Sensu client
-	until it is deleted, the query parameter `invalidate` must be set
-	to `true`, e.g. `/clients/app01.example.com?invalidate=true`. To
-	invalidate the client for a certain amount of time (in seconds),
-	the query parameter `invalidate_expire` must be set as well, e.g.
-	`/clients/app01.example.com?invalidate=true&invalidate_expire=300`.
+- **IMPROVEMENT**: The sensu-install tool now notifies users when it is
+	unable to successfully install an extension, when the environment
+	variable EMBEDDED_RUBY is set to false.
 
-- **IMPROVEMENT**: Added a Sensu settings hexdigest, exposed via the Sensu
-	API GET `/info`	endpoint, providing a means to determine if a
-	Sensu server's configuration differs from the rest.
+- **IMPROVEMENT**: Added the Sensu RELEASE_INFO constant, containing
+	information about the Sensu release, used by the API /info
+	endpoint and Server registration.
 
-- **IMPROVEMENT**: Added a proxy argument to `sensu-install`. To use a
-	proxy for Sensu plugin and extension installation with
-	`sensu-install`, use the `-x` or `--proxy` argument, e.g.
-	`sensu-install -e statsd --proxy http://proxy.example.com:8080`.
+- **BUGFIX**: Sensu handler severities filtering now accounts for flapping
+	events.
 
-- **IMPROVEMENT**: Added support for issuing proxy check requests via the
-	Sensu API POST `/request` endpoint.
-
-- **IMPROVEMENT**: The Sensu API now logs response times.
-
-- **IMPROVEMENT**: The Sensu API now returns a 405 (Method Not Allowed)
-	when an API endpoint does not support a HTTP request method, e.g.
-	`PUT`, and sets the HTTP header "Allow" to indicate which HTTP
-	request methods are supported by the requested endpoint.
-
-- **IMPROVEMENT**: Added a built-in filter for check dependencies,
-	`check_dependencies`, which implements the check dependency
-	filtering logic in the Sensu Plugin library.
-
-- **IMPROVEMENT**: Added default values for Sensu CLI options
-	`config_file` (`"/etc/sensu/config.json"`) and `config_dirs`
-	(`["/etc/sensu/conf.d"]`). These defaults are only applied when
-	the associated file and/or directory exist.
-
-- **BUGFIX**: The built-in filter `occurrences` now supports `refresh` for
-	flapping events (action `flapping`).
-
-- **BUGFIX**: Force the configured Redis port to be an integer, as some
-	users make the mistake of using a string.
+- **BUGFIX**: Fixed Sensu Redis connection on error reconnect, no longer
+	reusing the existing EventMachine connection handler.
 
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
-[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#0290---2017-03-29
+[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#100---2017-07-11
 [3]: https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v200---2017-03-29
 [4]: https://github.com/sensu-extensions/sensu-extensions-occurrences
 [5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
