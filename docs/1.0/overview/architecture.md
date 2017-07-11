@@ -1,6 +1,6 @@
 ---
 layout: "docs"
-version: 0.29
+version: 1.0
 weight: 3
 title: "Sensu Architecture"
 next:
@@ -29,7 +29,7 @@ the following components:
 
 ### Architectural Diagram
 
-![](/docs/0.29/img/sensu-diagram.gif)
+![](/docs/1.0/img/sensu-diagram.gif)
 
 ### Secure Transport
 

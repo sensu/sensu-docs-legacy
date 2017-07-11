@@ -2,7 +2,7 @@
 title: "Events"
 description: "Reference documentation for Sensu Events, including the Event
   Data specification."
-version: 0.29
+version: 1.0
 weight: 5
 ---
 
@@ -77,7 +77,7 @@ formatted, making it language-independent and fairly human readable.
     },
     "client": {
       "timestamp": 1460172596,
-      "version": "0.29.0",
+      "version": "1.0.0",
       "socket": {
         "port": 3030,
         "bind": "127.0.0.1"

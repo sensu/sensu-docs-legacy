@@ -1,6 +1,6 @@
 ---
 title: "Checks API"
-version: 0.29
+version: 1.0
 weight: 3
 next:
   url: "results-api.html"

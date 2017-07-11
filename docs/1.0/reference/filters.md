@@ -1,7 +1,7 @@
 ---
 title: "Filters"
 description: "Reference documentation for Sensu Filters."
-version: 0.29
+version: 1.0
 weight: 6
 ---
 

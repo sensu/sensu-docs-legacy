@@ -1,6 +1,6 @@
 ---
 title: "Install Redis on RHEL/CentOS"
-version: 0.29
+version: 1.0
 weight: 0
 hidden: true
 next:

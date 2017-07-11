@@ -1,7 +1,7 @@
 ---
 title: "Server"
 description: "Reference documentation for the Sensu Server."
-version: 0.29
+version: 1.0
 weight: 1
 ---
 

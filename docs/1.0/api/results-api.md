@@ -1,6 +1,6 @@
 ---
 title: "Results API"
-version: 0.29
+version: 1.0
 weight: 4
 next:
   url: "aggregates-api.html"
@@ -51,7 +51,7 @@ $ curl -s http://localhost:4567/results | jq .
       "name": "sensu_website",
       "issued": 1460312322,
       "executed": 1460312322,
-      "duration": 0.299
+      "duration": 1.09
     },
     "client": "client-01"
   },
@@ -210,7 +210,7 @@ $ curl -s http://localhost:4567/results/client-01 | jq .
       "name": "sensu_website",
       "issued": 1460312322,
       "executed": 1460312322,
-      "duration": 0.299
+      "duration": 1.09
     },
     "client": "client-01"
   },
@@ -293,7 +293,7 @@ $ curl -s http://localhost:4567/results/client-01/sensu_website | jq .
     "name": "sensu_website",
     "issued": 1460312622,
     "executed": 1460312622,
-    "duration": 0.29
+    "duration": 1.0
   },
   "client": "client-01"
 }

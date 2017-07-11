@@ -3,7 +3,7 @@ title: "ServiceNow"
 description: "Create ServiceNow configuration items upon Sensu client
   registration, create/resolve ServiceNow incidents, and/or create
   ServiceNow events for Sensu events."
-version: 0.29
+version: 1.0
 weight: 3
 ---
 

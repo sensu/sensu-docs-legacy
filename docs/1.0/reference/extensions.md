@@ -1,7 +1,7 @@
 ---
 title: "Extensions"
 description: "Reference documentation for Sensu Extensions."
-version: 0.29
+version: 1.0
 weight: 10
 ---
 
@@ -36,7 +36,7 @@ implications of blocking the reactor][2]._
 
 ### Installing Sensu extensions
 
-As of version 0.29, Sensu supports loading extensions from properly packaged
+As of version 1.0, Sensu supports loading extensions from properly packaged
 gems. This approach takes advantage of the existing RubyGems infrastructure and
 tools to make publishing and installing Sensu extensions easy.
 

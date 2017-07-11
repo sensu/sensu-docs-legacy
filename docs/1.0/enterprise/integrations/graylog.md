@@ -2,7 +2,7 @@
 title: "Graylog"
 description: "Send Sensu events to Graylog via the Graylog Raw/Plaintext TCP
   input."
-version: 0.29
+version: 1.0
 weight: 10
 ---
 

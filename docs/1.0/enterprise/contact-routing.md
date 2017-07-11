@@ -1,6 +1,6 @@
 ---
 title: "Contact Routing"
-version: 0.29
+version: 1.0
 weight: 5
 next:
   url: "built-in-handlers.html"

@@ -2,7 +2,7 @@
 title: "silence_stashes"
 description: "The silence_stashes Enterprise filter is used to filter events
   when specific Sensu API stashes exist."
-version: 0.29
+version: 1.0
 weight: 1
 ---
 

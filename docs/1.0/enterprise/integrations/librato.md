@@ -1,7 +1,7 @@
 ---
 title: "Librato"
 description: "Send metrics to Librato using the Librato HTTP API."
-version: 0.29
+version: 1.0
 weight: 20
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Checks"
 description: "Reference documentation for Sensu Checks."
-version: 0.29
+version: 1.0
 weight: 3
 ---
 

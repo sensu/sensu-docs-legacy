@@ -2,7 +2,7 @@
 title: "RBAC for LDAP"
 description: "Reference documentation for the Sensu Enterprise Dashboard Role
   Based Access Controls (RBAC) for LDAP"
-version: 0.29
+version: 1.0
 weight: 2
 ---
 

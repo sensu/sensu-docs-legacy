@@ -1,7 +1,7 @@
 ---
 title: "Sensu Server and API"
 description: "The complete Sensu installation guide."
-version: 0.29
+version: 1.0
 weight: 4
 next:
   url: ../platforms/sensu-on-ubuntu-debian.html#sensu-core

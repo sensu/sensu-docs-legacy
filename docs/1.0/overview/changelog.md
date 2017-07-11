@@ -1,8 +1,8 @@
 ---
-title: "0.29 changelog"
+title: "1.0 changelog"
 description: "Release notes for Sensu Core and Sensu Enterprise releases based
-  on Sensu Core version 0.29.x"
-version: 0.29
+  on Sensu Core version 1.0.x"
+version: 1.0
 weight: 5
 ---
 
@@ -10,13 +10,13 @@ weight: 5
 
 ## Releases
 
-- [Core 0.29.0 Release Notes](#core-v0-29-0)
+- [Core 1.0.0 Release Notes](#core-v0-29-0)
 
-## Core 0.29.0 Release Notes {#core-v0-29-0}
+## Core 1.0.0 Release Notes {#core-v0-29-0}
 
 Source: [GitHub.com][2]
 
-**April 7, 2017** &mdash; Sensu Core version 0.29.0 has been released
+**April 7, 2017** &mdash; Sensu Core version 1.0.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -28,7 +28,7 @@ Source: [GitHub.com][2]
 
 - **IMPORTANT**: Sensu packages now include [sensu-plugin 2.0.0][3], which
 	disables its deprecated filter methods by default, i.e.
-	occurrences. Sensu 0.29 includes built-in filters that provide the
+	occurrences. Sensu 1.0 includes built-in filters that provide the
 	same functionality with several improvements. The built-in filters
 	are ["occurrences"][4] and ["check_dependencies"][5]. To use the
 	built-in filters, apply them to Sensu event handlers via their

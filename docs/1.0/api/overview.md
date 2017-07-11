@@ -1,6 +1,6 @@
 ---
 title: "Overview"
-version: 0.29
+version: 1.0
 weight: 1
 next:
   url: "clients-api.html"

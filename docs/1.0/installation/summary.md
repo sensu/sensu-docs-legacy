@@ -1,6 +1,6 @@
 ---
 title: "Summary"
-version: 0.29
+version: 1.0
 weight: 7
 next:
   url: "getting-started"
