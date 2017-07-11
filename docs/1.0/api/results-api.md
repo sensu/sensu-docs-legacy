@@ -51,7 +51,7 @@ $ curl -s http://localhost:4567/results | jq .
       "name": "sensu_website",
       "issued": 1460312322,
       "executed": 1460312322,
-      "duration": 1.09
+      "duration": 0.032
     },
     "client": "client-01"
   },
@@ -104,7 +104,7 @@ $ curl -s http://localhost:4567/results | jq .
                 "executed": 1389374667,
                 "output": "WARNING Found 0 matching processes\n",
                 "status": 1,
-                "duration": 0.005
+                "duration": 0.032
             }
         }
     ]
@@ -210,7 +210,7 @@ $ curl -s http://localhost:4567/results/client-01 | jq .
       "name": "sensu_website",
       "issued": 1460312322,
       "executed": 1460312322,
-      "duration": 1.09
+      "duration": 0.032
     },
     "client": "client-01"
   },
@@ -259,7 +259,7 @@ $ curl -s http://localhost:4567/results/client-01 | jq .
                 "executed": 1389374667,
                 "output": "WARNING Found 0 matching processes\n",
                 "status": 1,
-                "duration": 0.005
+                "duration": 0.032
             }
         }
     ]
@@ -293,7 +293,7 @@ $ curl -s http://localhost:4567/results/client-01/sensu_website | jq .
     "name": "sensu_website",
     "issued": 1460312622,
     "executed": 1460312622,
-    "duration": 1.0
+    "duration": 0.032
   },
   "client": "client-01"
 }
@@ -327,7 +327,7 @@ $ curl -s http://localhost:4567/results/client-01/sensu_website | jq .
             "executed": 1389374667,
             "output": "WARNING Found 0 matching processes\n",
             "status": 1,
-            "duration": 0.005
+            "duration": 0.032
         }
     }
     ~~~

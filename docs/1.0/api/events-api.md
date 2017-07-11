@@ -75,7 +75,7 @@ $ curl -s http://localhost:4567/events | jq .
       "name": "sensu_website",
       "issued": 1460303502,
       "executed": 1460303502,
-      "duration": 1.01
+      "duration": 0.032
     },
     "client": {
       "timestamp": 1460303501,
@@ -134,7 +134,7 @@ $ curl -s http://localhost:4567/events | jq .
                 "executed": 1389374667,
                 "output": "WARNING Found 0 matching processes\n",
                 "status": 1,
-                "duration": 0.005,
+                "duration": 0.032,
                 "history": [
                     "0",
                     "1",
@@ -203,7 +203,7 @@ $ curl -s http://localhost:4567/events/client-01 | jq .
       "name": "sensu_website",
       "issued": 1460303742,
       "executed": 1460303742,
-      "duration": 1.0
+      "duration": 0.032
     },
     "client": {
       "timestamp": 1460303741,
@@ -262,7 +262,7 @@ $ curl -s http://localhost:4567/events/client-01 | jq .
                 "executed": 1389374667,
                 "output": "WARNING Found 0 matching processes\n",
                 "status": 1,
-                "duration": 0.005,
+                "duration": 0.032,
                 "history": [
                     "0",
                     "1",
@@ -330,7 +330,7 @@ $ curl -s http://localhost:4567/events/client-01/sensu_website | jq .
     "name": "sensu_website",
     "issued": 1460304102,
     "executed": 1460304102,
-    "duration": 1.09
+    "duration": 0.032
   },
   "client": {
     "timestamp": 1460304101,
@@ -388,7 +388,7 @@ $ curl -s http://localhost:4567/events/client-01/sensu_website | jq .
             "executed": 1389374667,
             "output": "WARNING Found 0 matching processes\n",
             "status": 1,
-            "duration": 0.005,
+            "duration": 0.032,
             "history": [
                 "0",
                 "1",
