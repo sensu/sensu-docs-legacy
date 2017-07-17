@@ -65,6 +65,9 @@ filter analysis flow performs these steps:
 - As soon as a Filter removes an Event (i.e. filters it out), no further
   analysis is performed and the Event Handler will not be executed
 
+_NOTE: Filters specified in a [handler set][16] definition have no effect.
+Filters must be specified in individual handler definitions._
+
 ### Inclusive and Exclusive Filtering
 
 Filters can be _inclusive_ (`"negate": false`) or _exclusive_  (`"negate":
@@ -457,3 +460,4 @@ name][15]).
 [13]: #eval-token-interpolation
 [14]: #when-attributes
 [15]: #filter-naming
+[16]: handlers.html#handler-sets
