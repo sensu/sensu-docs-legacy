@@ -324,7 +324,7 @@ platform.
     CONFIG_FILE=/etc/sensu/config.json
     ~~~
 
-`CONFIG_DIR`
+`CONFD_DIR`
 : description
   : The configuration snippet directory path.
 : required
@@ -333,7 +333,7 @@ platform.
   : `/etc/sensu/conf.d`
 : example
   : ~~~ shell
-    CONFIG_DIR=/etc/sensu/conf.d
+    CONFD_DIR=/etc/sensu/conf.d
     ~~~
 
 `EXTENSION_DIR`
