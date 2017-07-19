@@ -19,7 +19,7 @@ using RabbitMQ as the Sensu Transport, all Sensu services require access to the
 same instance (or cluster) of RabbitMQ to function. **All Sensu users are
 encouraged to install and run RabbitMQ on one of the following supported platforms:**
 
-- [Install RabbitMQ on Ubuntu/Debian](install-rabbitmq-on-ubuntu-debian.html) (recommended)
+- [Install RabbitMQ on Ubuntu/Debian](install-rabbitmq-on-ubuntu-debian.html)
 - [Install RabbitMQ on RHEL/CentOS](install-rabbitmq-on-rhel-centos.html)
 
 _NOTE: please refer to the [Installation Prerequisites documentation][5]
