@@ -1,5 +1,5 @@
 ---
-version: 0.28
+version: 0.27
 category: "Upgrading Guide"
 title: "Upgrading Sensu"
 weight: 8
@@ -36,6 +36,20 @@ Stopping services prior to upgrading from a Sensu version < `0.27`
 helps to avoid service management errors related to the transition
 from sysv init scripts to systemd unit files on platforms like Debian
 8, Ubuntu 16.04 and Centos 7 or newer.
+
+### Update environment variables
+
+As of Sensu 0.27 and later, the `CONFIG_DIR` environment variable has been
+renamed to `CONFD_DIR`.
+
+If you have customized your Sensu installation using this environment variable,
+you may need to update one or more of the following files to reflect the change:
+
+  *  `/etc/default/sensu`
+  *  `/etc/default/sensu-server`
+  *  `/etc/default/sensu-client`
+  *  `/etc/default/sensu-api`
+  *  `/etc/default/sensu-enterprise`
 
 ## Upgrading from Sensu < 0.17
 

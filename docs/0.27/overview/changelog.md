@@ -89,6 +89,14 @@ This release includes potentially breaking, backwards-incompatible changes:
 	upgraded from winsw 1.16. This version includes a number of changes
 	which should help to address issues around orphaned processes.
 
+- **CHANGED**: The CONFIG_DIR environment variable has been renamed to
+            CONFD_DIR. This environment varible is used to specify the
+            directory path where Sensu processes will load any JSON
+            config files for deep merging. If you are using
+            /etc/default/sensu to specify a custom value for
+            `CONFIG_DIR`, please update it to the new `CONFD_DIR`
+            variable name.
+
 ### CHANGES {#core-v0-27-0-changes}
 
 - **NEW**: Added a Sensu client HTTP socket for check result input and
