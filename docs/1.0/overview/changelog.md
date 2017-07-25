@@ -10,7 +10,26 @@ weight: 5
 
 ## Releases
 
+- [Core 1.0.1 Release Notes](#core-v1-0-1)
 - [Core 1.0.0 Release Notes](#core-v1-0-0)
+
+## Core 1.0.1 Release Notes {#core-v1-0-1}
+
+Source: [GitHub.com][2]
+
+**July 24, 2017** &mdash; Sensu Core version 1.0.1 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v1-0-1-changes}
+
+- **BUGFIX**: Fixed Sensu configuration validation, it is now being
+	applied. There was a bug that allowed invalid Sensu configuration
+	definitions to be loaded, causing unexpected behaviours.
+
+- **BUGFIX**: Now excluding certain file system directories from the Sensu
+	RPM package spec, as they could cause conflicts with other RPM
+	packages.
 
 ## Core 1.0.0 Release Notes {#core-v1-0-0}
 
