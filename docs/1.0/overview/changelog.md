@@ -10,9 +10,37 @@ weight: 5
 
 ## Releases
 
+- [Enterprise 2.6.0 Release Notes](#enterprise-v2-6-0)
 - [Core 1.0.2 Release Notes](#core-v1-0-2)
 - [Core 1.0.1 Release Notes](#core-v1-0-1)
 - [Core 1.0.0 Release Notes](#core-v1-0-0)
+
+## Enterprise 2.6.0 Release Notes {#enterprise-v2-6-0}
+
+**July 27, 2017** &mdash; Sensu Enterprise version 2.6.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-0-changes}
+
+- **IMPROVEMENT**: Built on Sensu Core 1.0.2.
+
+- **IMPROVEMENT**: Added support for contact routing to every metric
+	integration (e.g. InfluxDB, Graphite, OpenTSDB, etc.).
+
+- **IMPROVEMENT**: Sensu Enterprise now loads configuration and validates
+	it prior to reloading (SIGHUP). If configuration is determined to
+	be invalid prior to reloading, Sensu will report invalid
+	configuration definitions, and it will continue to run with its
+	existing working configuration.
+
+- **IMPROVEMENT**: Using JRuby 9.1.12.0, for performance enhancements and
+	bug fixes.
+
+- **IMPROVEMENT**: Wavefront integration `prefix` option, supporting a
+	custom metric name prefix.
+
+- **IMPROVEMENT**: Added Enterprise version to API /info.
 
 ## Core 1.0.2 Release Notes {#core-v1-0-2}
 
