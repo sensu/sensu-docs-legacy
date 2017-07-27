@@ -10,12 +10,30 @@ weight: 5
 
 ## Releases
 
+- [Core 1.0.2 Release Notes](#core-v1-0-2)
 - [Core 1.0.1 Release Notes](#core-v1-0-1)
 - [Core 1.0.0 Release Notes](#core-v1-0-0)
 
+## Core 1.0.2 Release Notes {#core-v1-0-2}
+
+Source: [GitHub.com][7]
+
+**July 27, 2017** &mdash; Sensu Core version 1.0.2 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v1-0-2-changes}
+
+- **BUGFIX**: Addressed an issue with client keepalive transport
+	acknowledgments. We discovered a situation where poor Redis
+	performance could negatively impact client keepalive processing,
+	potentially triggering a compounding failure that the Sensu server
+	is unable to recover from. Moving acknowledgments to the next tick
+	of the EventMachine reactor avoids the situation entirely.
+
 ## Core 1.0.1 Release Notes {#core-v1-0-1}
 
-Source: [GitHub.com][2]
+Source: [GitHub.com][6]
 
 **July 24, 2017** &mdash; Sensu Core version 1.0.1 has been released
 	and is available for immediate download. Please note the following
@@ -84,3 +102,5 @@ Source: [GitHub.com][2]
 [3]: https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v200---2017-03-29
 [4]: https://github.com/sensu-extensions/sensu-extensions-occurrences
 [5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
+[6]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#101---2017-07-24
+[7]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#102---2017-07-27
