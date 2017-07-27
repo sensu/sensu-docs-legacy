@@ -25,8 +25,8 @@ weight: 5
 
 - **IMPROVEMENT**: Built on Sensu Core 1.0.2.
 
-- **IMPROVEMENT**: Added support for contact routing to every Enterprise
-	Metric integration (e.g. InfluxDB, Graphite, etc.).
+- **IMPROVEMENT**: Added support for contact routing to every metric
+	integration (e.g. InfluxDB, Graphite, OpenTSDB, etc.).
 
 - **IMPROVEMENT**: Sensu Enterprise now loads configuration and validates
 	it prior to reloading (SIGHUP). If configuration is determined to
