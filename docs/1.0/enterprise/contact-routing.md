@@ -24,7 +24,7 @@ Every incident or outage has an ideal first responder, a team or individual with
 the knowledge to triage and address the issue. Sensu Enterprise contact routing
 makes it possible to assign checks to specific teams and/or individuals,
 reducing mean time to response and recovery (MTTR). Contact routing works with
-all of the Sensu Enterprise third-party notification integrations.
+all of the Sensu Enterprise third-party notification and metric integrations.
 
 ## How does contact routing work?
 
