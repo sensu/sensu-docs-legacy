@@ -17,6 +17,7 @@ weight: 2
     - [Proxy clients](#proxy-clients)
   - [How are keepalive events created?](#keepalive-events)
   - [Client keepalive configuration](#client-keepalive-configuration)
+- [Client signature](#client-signature)
 - [Client subscriptions](#client-subscriptions)
   - [What is a client subscription?](#what-is-a-sensu-subscription)
   - [Round-robin client subscriptions](#round-robin-client-subscriptions)
@@ -188,6 +189,22 @@ handler named `keepalive` if defined, or the `default` handler will be used.
 
 To configure the keepalive check for a Sensu client, please refer to [the client
 `keepalive` attributes reference documentation][12].
+
+## Client signature
+
+Sensu client definitions may specify a unique string identifier as their
+signature, which is included in each keepalive message.
+
+Once a client advertises a signature via keepalives, the server will expect that
+signature to be present in any keepalives or check results originating from the
+client. Any keepalives or check results which do not contain a matching
+signature will be dropped with an "invalid client signature" warning in the log.
+
+A client can begin to use a signature if one was not previously configured, but
+removing a client signature requires deleting the client.
+
+Providing a unique client signature prevents other clients from accidentally or
+maliciously submitting keepalives or check results using the same client name.
 
 ## Client subscriptions
 
@@ -501,6 +518,18 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
 : example
   : ~~~ shell
     "registration": {}
+    ~~~
+
+`signature`
+: description
+  : Unique string used to authenticate check results from the client in question.
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~ shell
+    "signature": "yVNxtPbRGwCYFYEr3V"
     ~~~
 
 `ec2`
