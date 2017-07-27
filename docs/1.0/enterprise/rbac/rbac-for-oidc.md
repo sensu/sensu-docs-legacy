@@ -215,6 +215,7 @@ register an OIDC application for Sensu Enterprise based on your OIDC provider:
 #### Requirements
 
 - Access to the Okta Administrator Dashboard
+- Sensu Enterprise Dashboard 2.9.0 or later
 
 #### Create an Okta Application
 
