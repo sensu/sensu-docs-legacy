@@ -20,6 +20,7 @@ users only.**
     - [`oidc` attributes](#oidc-attributes)
     - [`roles` attributes](#roles-attributes)
 - [Register an OIDC Application](#register-an-oidc-application)
+  - [Okta](#okta)
   - [PingFederate](#pingfederate)
 
 ## What is RBAC for OIDC?
@@ -41,9 +42,11 @@ protocol for RBAC authentication.
     "port": 3000,
     "...": "",
     "oidc": {
+      "additionalScopes": [ "groups" ],
       "clientId": "a8e43af034e7f2608780",
       "clientSecret": "b63968394be6ed2edb61c93847ee792f31bf6216",
       "insecure": false,
+      "redirectURL": "http://127.0.0.1:4000/login/callback",
       "server": "https://localhost:9031",
       "roles": [
         {
@@ -77,6 +80,20 @@ protocol for RBAC authentication.
 ### RBAC for OIDC definition specification
 
 #### `oidc` attributes
+
+additionalScopes
+: description
+  : Scopes to include in the claims, in addition to the default `email`,
+  `openid` and `profile` scopes.
+  _NOTE: only required for certain OIDC providers, such as Okta._
+: required
+  : false
+: type
+  : Array
+: example
+  : ~~~shell
+    "additionalScopes": [ "groups" ]
+    ~~~
 
 clientId
 : description
@@ -117,6 +134,19 @@ insecure
 : example
   : ~~~ shell
     "insecure": true
+    ~~~
+
+redirectURL
+: description
+  : Redirect URL to provide to the OIDC provider.
+  _NOTE: only required for certain OIDC providers, such as Okta._
+: required
+  : false
+: type
+  : String
+: example
+  : ~~~shell
+    "redirectURL": "http://localhost:4000/login/callback"
     ~~~
 
 server
@@ -176,6 +206,48 @@ configure RBAC roles.
 To use OIDC for authentication requires registration of your Sensu Enterprise
 Dashboard as an "application". Please note the following instructions to
 register an OIDC application for Sensu Enterprise based on your OIDC provider:
+
+- [Okta](#okta)
+- [PingFederate](#pingfederate)
+
+### Okta
+
+#### Requirements
+
+- Access to the Okta Administrator Dashboard
+- Sensu Enterprise Dashboard 2.9.0 or later
+
+#### Create an Okta Application
+
+1. From the Administrator Dashboard, select `Applications > Add Application >
+Create New App` to start the wizard.
+2. Select the `Web` platform and `OpenID Connect` sign in method.
+3. In General Settings enter an app name and (optionally) upload a logo.
+4. In Configure OpenID Connect, add the following Redirect URI, without
+  forgetting to replace DASHBOARD_URL with the URL to your dashboard:
+  `{DASHBOARD_URL}/login/callback`
+5. Click Save.
+6. Head over to the Sign On page and click on the Edit button of the OpenID
+Connect ID Token section.
+7. Enter the following information for the Groups claim attribute
+- First field: `groups`
+- Dropdown menu: `Regex`
+- Second field: `.*`
+8. Click Save
+9. Make sure to assign people and/or groups in the Assignments page
+
+#### OIDC Driver Configuration
+
+1. Add the `additionalScopes` configuration attribute in the [OIDC scope][5]
+  and set the value to `[ "groups" ]`, just like this:
+
+    >  `"additionalScopes": [ "groups" ]`
+
+2. Add the `redirectURL` configuration attribute in the [OIDC scope][5] and set
+  the value to the Redirect URI configured at step 4 of
+  [Create an Okta Application](#create-an-okta-application), just like this:
+
+    > `"redirectURL": "{DASHBOARD_URL}/login/callback"`
 
 ### PingFederate
 
@@ -278,7 +350,8 @@ and within the `CLIENTS` section, click on `Create New`.
 - Click `Generate Secret` and copy the secret returned; you will need it in your
 Sensu Enterprise Dashboard configuration
 - Set **NAME** to `Sensu Enterprise Client`
-- Add the following **REDIRECT URI** and click `Add`: `{HOSTNAME}/login/callback`
+- Add the following **REDIRECT URI** and click `Add`:
+  `{DASHBOARD_URL}/login/callback`
   _NOTE: this URL does not need to be publicly accessible - as long as a user
   has network access to **both** PingFederate **and** the callback URL, s/he will
   be able to authenticate; for example, this will allow users to authenticate
