@@ -25,6 +25,12 @@ accessible via the [Stashes API][1]. The most common use of the Sensu Stashes
 are via Sensu handlers, which may access the Stashes API to create and/or read
 "state" information that persists between handler executions.
 
+_NOTE: Prior to Sensu 0.26, the ability to silence notifications was
+implemented in external libraries like sensu-plugin using specially
+crafted stashes. Silencing via stashes is deprecated in favor of new
+native silencing. Please see the [silencing reference documentation][7] for
+more details._
+
 ### The Sensu key/value store
 
 The [Stashes API][1] provides a [key/value store][1] for Sensu, where arbitrary
@@ -203,3 +209,4 @@ access to stash `content` data:
 [4]:  #the-sensu-keyvalue-store
 [5]:  ../api/stashes-api.html#stashes-post
 [6]:  ../api/stashes-api.html#stashespath-post
+[7]:  silencing.html

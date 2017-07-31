@@ -76,7 +76,7 @@ endpoint. When silencing entries are successfully created via the API, they
 are assigned an ID in the format `$SUBSCRIPTION:$CHECK`, where `$SUBSCRIPTION`
 is the name of a Sensu client subscription and `$CHECK` is the name of a Sensu
 check. Silencing entries can be used to silence checks on specific clients by
-by taking advantage of [per-client subscriptions][4] added in Sensu 1.0, e.g.
+by taking advantage of [per-client subscriptions][4] added in Sensu 0.26, e.g.
 `client:$CLIENT_NAME`.
 
 These silencing entries are persisted to the `silenced` registry in the [Sensu
@@ -99,11 +99,11 @@ ID with an asterisk in the `$CHECK` position. This indicates that any event wher
 the originating client's subscriptions match the subscription specified in the
 entry will be marked as silenced, regardless of the check name.
 
-_NOTE: Starting with version 1.0, Sensu clients automatically add a
+_NOTE: Starting with version 0.26, Sensu clients automatically add a
 subscription containing their client name prefixed with the string `client:`.
 For example, client `i-424242` will automatically add subscription
 `client:i-424242`. Silencing checks at the individual client level requires
-clients to run Sensu 1.0+, or be manually configured with a `client:`
+clients to run Sensu 0.26+, or be manually configured with a `client:`
 subscription._
 
 ## Silencing entry specification
@@ -459,7 +459,7 @@ successful, meaning the silencing entry has been cleared (deleted) from the
 
 ### Comparing stash-based and native silencing
 
-Prior to Sensu 1.0 the ability to silence notifications was implemented in
+Prior to Sensu 0.26 the ability to silence notifications was implemented in
 external libraries like [sensu-plugin][6], using specially crafted Sensu API
 [stashes][7].
 
