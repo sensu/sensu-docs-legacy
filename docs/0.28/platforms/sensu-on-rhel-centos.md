@@ -46,11 +46,22 @@ package installs several processes including `sensu-server`, `sensu-api`, and
 
 ### Install Sensu using YUM (recommended) {#install-sensu-core-repository}
 
-_NOTE: As of Sensu version 0.28, the yum repository URL has changed to
+Sensu packages for Red Hat target currently supported versions of Red Hat
+Enterprise Linux and their Centos equivalents. These packages are generally
+expected to be compatible with Red Hat derivatives like SuSE, Amazon or
+Scientific Linux, but packages are not tested on these platforms.
+
+The following instructions describe configuring package repository definitions
+using [Yum variables][14] as components of the baseurl. On Red Hat derivative
+platforms the value of the `$releasever` variable will not typically align with
+the RHEL release versions (e.g. `6` or `7`) advertised in the Sensu Yum
+repository. Please use `6` or `7` in lieu of `$releasever` on RHEL derivatives,
+depending on whether they use sysv init or systemd, respectively.
+
+_NOTE: As of Sensu version 0.27, the yum repository URL has changed to
 include the `$releasever` variable. To install or upgrade to the
 latest version of Sensu, please ensure you have updated existing
 repository configurations._
-
 
 1. Create the YUM repository configuration file for the Sensu Core repository at
    `/etc/yum.repos.d/sensu.repo`:
@@ -459,3 +470,4 @@ script must be used, e.g. `sudo /etc/init.d/sensu-client start`_
 [11]: #example-transport-configuration
 [12]: #example-client-configuration
 [13]: #example-data-store-configuration
+[14]: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/sec-Using_Yum_Variables.html

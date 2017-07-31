@@ -44,9 +44,18 @@ installer package (i.e. a .deb file), which is available for download from the
 Sensu Core package installs several processes including `sensu-server`,
 `sensu-api`, and `sensu-client`.
 
+Sensu packages for Debian target current [`stable` and `oldstable`
+releases][15].
+
+Sensu packages for Ubuntu target current [Long Term Support (LTS) releases][16].
+
+If you wish to install Sensu packages on newer Debian or Ubuntu releases, please
+try installing a package built for the most recent Debian `stable` or
+Ubuntu LTS release.
+
 ### Install Sensu using APT (recommended) {#install-sensu-core-repository}
 
-_NOTE: As of Sensu version 0.29, apt repository configuration has
+_NOTE: As of Sensu version 0.27, apt repository configuration has
 changed to include the "codename" of the Ubuntu/Debian release. To
 install or upgrade to the latest version of Sensu, please ensure you
 have updated existing repository configurations._
@@ -469,3 +478,5 @@ To manually start and stop the Sensu services, use the following commands:
 [12]: #example-transport-configuration
 [13]: #example-client-configuration
 [14]: #example-data-store-configuration
+[15]: https://wiki.debian.org/DebianReleases
+[16]: https://wiki.ubuntu.com/LTS
