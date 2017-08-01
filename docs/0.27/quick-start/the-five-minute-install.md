@@ -68,13 +68,31 @@ the [installation guide](2).
    sudo yum install redis -y
    ~~~
 
-3. Make sure Redis is started:
+3. Disable Redis protected mode:
+
+   When using Redis 3.2.0 or later, you will need to edit `/etc/redis.conf` in
+   order to disable [protected mode][redis-security].
+
+   Look for a line that reads:
 
    ~~~ shell
-   sudo systemctl start redis.service
+   protected-mode yes
    ~~~
 
-4. Install Sensu:
+   and change it to:
+
+   ~~~ shell
+   protected-mode no
+   ~~~
+
+4. Enable and start Redis:
+
+   ~~~ shell
+   sudo systemctl enable redis
+   sudo systemctl start redis
+   ~~~
+
+5. Install Sensu:
 
    ~~~ shell
    sudo yum install sensu -y
@@ -87,7 +105,7 @@ the [installation guide](2).
    sudo yum install sensu-enterprise sensu-enterprise-dashboard -y
    ~~~
 
-5. Configure Sensu server:
+6. Configure Sensu server:
 
    Run the following to set up a minimal client config:
 
@@ -103,7 +121,7 @@ the [installation guide](2).
    }' | sudo tee /etc/sensu/config.json
    ~~~
 
-6. Configure the Sensu client
+7. Configure the Sensu client
 
    Run the following to set up a minimal client config:
 
@@ -118,7 +136,7 @@ the [installation guide](2).
    }' |sudo tee /etc/sensu/conf.d/client.json
    ~~~
 
-7. Configure a Sensu dashboard
+8. Configure a Sensu dashboard
 
    Run the following to set up a minimal dashboard config:
 
@@ -138,31 +156,29 @@ the [installation guide](2).
    }' |sudo tee /etc/sensu/dashboard.json
    ~~~
 
-8. Make sure that the `sensu` user owns all of the Sensu configuration files:
+9. Make sure that the `sensu` user owns all of the Sensu configuration files:
 
    ~~~ shell
    sudo chown -R sensu:sensu /etc/sensu
    ~~~
 
-9. Start the Sensu services
+10. Start the Sensu services
 
    Sensu Core users:
 
    ~~~ shell
-   sudo systemctl start sensu-server.service
-   sudo systemctl start sensu-api.service
-   sudo systemctl start sensu-client.service
+   sudo systemctl enable sensu-{server,api,client}
+   sudo systemctl start sensu-{server,api,client}
    ~~~
 
    Sensu Enterprise users:
 
    ~~~ shell
-   sudo systemctl start sensu-enterprise.service
-   sudo systemctl start sensu-enterprise-dashboard.service
-   sudo systemctl start sensu-client.service
+   sudo systemctl enable sensu-{enterprise,enterprise-dashboard,client}
+   sudo systemctl start sensu-{enterprise,enterprise-dashboard,client}
    ~~~
 
-10. Verify that your installation is ready to use by querying the Sensu API
+11. Verify that your installation is ready to use by querying the Sensu API
     using the `curl` utility (and piping the result to the [`jq` utility][10]):
 
     ~~~ shell
@@ -213,3 +229,4 @@ the [installation guide](2).
 [8]:  https://www.youtube.com/watch?v=J2D1XF40-ok
 [9]:  ../platforms/sensu-on-rhel-centos.html#install-sensu-enterprise-repository
 [10]: https://stedolan.github.io/jq/
+[redis-security]: https://redis.io/topics/security
