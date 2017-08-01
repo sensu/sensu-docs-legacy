@@ -4,6 +4,9 @@ description: "Release notes for Sensu Core and Sensu Enterprise releases based
   on Sensu Core version 1.0.x"
 version: 1.0
 weight: 5
+next:
+  url: "faq.html"
+  text: "Sensu FAQ"
 ---
 
 # Changelog
