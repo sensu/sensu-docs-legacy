@@ -34,7 +34,7 @@ running the `sensu-server` and `sensu-api` processes._
 
 ### Sensu Server & API
 
-- [Ubuntu/Debian](../platforms/sensu-on-ubuntu-debian.html#sensu-core) (recommended)
+- [Ubuntu/Debian](../platforms/sensu-on-ubuntu-debian.html#sensu-core)
 - [RHEL/CentOS](../platforms/sensu-on-rhel-centos.html#sensu-core)
 
 ### Sensu Client
@@ -57,7 +57,7 @@ which provides [added-value][7] replacements for the Sensu Core server
 
 ### Sensu Enterprise Server & API
 
-- [Ubuntu/Debian](sensu-on-ubuntu-debian#sensu-enterprise) (recommended)
+- [Ubuntu/Debian](sensu-on-ubuntu-debian#sensu-enterprise)
 - [RHEL/CentOS](sensu-on-rhel-centos#sensu-enterprise)
 
 ### Sensu Enterprise Client
