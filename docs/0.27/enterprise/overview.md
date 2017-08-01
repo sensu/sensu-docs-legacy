@@ -3,8 +3,8 @@ title: "Sensu Enterprise"
 version: 0.27
 weight: 1
 next:
-  url: "dashboard.html"
-  text: "Sensu Enterprise Dashboard"
+  url: "configuration.html"
+  text: "Sensu Enterprise Configuration"
 ---
 
 # Sensu Enterprise
@@ -47,6 +47,7 @@ information.
 
 ## Reference documentation
 
+- [Sensu Enterprise Configuration](configuration.html)
 - [Sensu Enterprise Dashboard](dashboard.html)
   - [Role-based access controls](rbac/overview.html)
     - [RBAC for LDAP](rbac/rbac-for-ldap.html)
