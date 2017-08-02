@@ -14,8 +14,8 @@ Enterprise](https://sensuapp.org/get-started/) a try.
 
 > Do I need RabbitMQ to be installed on every system I wish to monitor?
 
-**No.** Sensu uses [RabbitMQ](/reference/rabbitmq/) as a
-[Transport](/reference/transport/). Sensu services require access to a shared
+**No.** Sensu uses [RabbitMQ](../reference/rabbitmq.html) as a
+[Transport](../reference/transport.html). Sensu services require access to a shared
 instance of the defined Sensu Transport (e.g. a RabbitMQ cluster) to function.
 Sensu check requests and check results are published as "messages" to the Sensu
 Transport, and the corresponding Sensu services receive these messages by
@@ -23,7 +23,7 @@ subscribing to the appropriate subscription topics.
 
 > Does Redis need to be installed on every system I wish to monitor?
 
-**No.** Sensu uses [Redis](/reference/redis/) as a data store,
+**No.** Sensu uses [Redis](../reference/redis.html) as a data store,
 and the Sensu server services (i.e. `sensu-server` & `sensu-api` for
 Sensu Core; `sensu-enterprise` for Sensu Enterprise) require access to
 the same Redis instance (or cluster) to store and access the Sensu
@@ -50,7 +50,7 @@ executables are installed via `sensu-install`.
 A standalone check is a check definition that is installed on and executed by
 the Sensu client without being scheduled by the Sensu server. Standalone checks
 defer [Check execution scheduling
-responsibilities](/overview/architecture/#check-execution-scheduler) to
+responsibilities](/overview/architecture.html#check-execution-scheduler) to
 Sensu clients, enabling decentralized management of monitoring checks and
 distribution of scheduling responsibilities. Standalone checks may be used in
 conjunction with pubsub checks, and are distinguished from pubsub checks by
@@ -62,7 +62,7 @@ inclusion of the `"standalone": true` configuration parameter.
 When a check request is published for a check defined on the Sensu server, the
 Sensu client will look for a local definition matching the check `name` prior to
 executing the check. If a local definition exists, it is
-[merged](/reference/configuration/#configuration-merging) with the
+[merged](../reference/configuration.html#configuration-merging) with the
 definition provided by the server, with any local definition attributes
 overriding the definition provided by the Sensu server.
 
@@ -78,7 +78,7 @@ attribute.
 **Yes.** Sensu is designed to be scaled horizontally (i.e. by
 adding additional Sensu servers). It supports fully automated leader
 election (ensuring that a single Sensu server acts as a centralized
-[Check Execution Scheduler](/overview/architecture/#check-execution-scheduler)),
+[Check Execution Scheduler](../overview/architecture.html#check-execution-scheduler)),
 automated failover (automatically electing a new leader
 if the previous leader is unexpectedly unavailable), and distributed
 event processing (check results are distributed across all Sensu servers
@@ -89,9 +89,9 @@ highly recommended for performance and availability.
 
 **Automatically.** Sensu clients register themselves when they
 start up. The Sensu client process requires access to the [Sensu
-Transport](/reference/transport/) (by default, this is
-[RabbitMQ](/reference/rabbitmq/); see [Sensu
-Configuration](/reference/configuration/#top-level-configuration-scopes)), and
+Transport](../reference/transport.html) (by default, this is
+[RabbitMQ](../reference/rabbitmq.html); see [Sensu
+Configuration](../reference/configuration.html#top-level-configuration-scopes)), and
 some minimal client configuration (e.g. a `name`, `address`, and one or more
 `subscriptions`) in order to start. When the Sensu client process starts, it
 begins sending "keepalives" &ndash; a special type of check result containing
@@ -112,7 +112,7 @@ be facilitated with [NTP](http://www.ntp.org/).
 
 > Is Sensu Enterprise available as a hosted / SaaS solution?
 
-**No.** Like Sensu Core, [Sensu Enterprise](/enterprise/overview/) is
+**No.** Like Sensu Core, [Sensu Enterprise](../enterprise/overview.html) is
 installed on your organization's infrastructure alongside other applications and
 services. Sensu Enterprise packages are available for major Linux distributions
 including RHEL, CentOS, Debian and Ubuntu.
@@ -122,7 +122,7 @@ including RHEL, CentOS, Debian and Ubuntu.
 **Yes.** An MSI installer package is available on the
 [Downloads] page. Please visit the Sensu documentation for
 more information on [configuring Sensu on
-Windows](/platforms/sensu-on-microsoft-windows/).
+Windows](../platforms/sensu-on-microsoft-windows.html).
 
 > How do I increase log verbosity?
 
