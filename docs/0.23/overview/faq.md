@@ -32,28 +32,32 @@ event data.
 
 > Do check definitions need to exist on every system I wish to monitor?
 
-**No.** Regardless of where checks are defined, the actual check
-executables need to exist on the filesystem for the Sensu client
-to execute them. In a centralized configuration model the actual
-[check _definition_](/reference/checks/#check-configuration)
-(the configuration parameters that define the check behavior) only need
-to be defined on the Sensu server(s). If checks with the same name are
-defined on both the server and client, the two configurations will be
-[merged](/reference/configuration/#configuration-merging),
-with the locally defined client configuration overriding the
-configuration provided by the server (which can be useful for overriding
-specific check definition attributes on a client-by-client basis).
+**No.**  Check definitions can be written as publish/subscribe (pubsub) or standalone.
+Pubsub checks, which specify a list of subscribers, need only be configured on
+the Sensu server. Standalone checks, which are scheduled and executed by the
+Sensu client, need only be configured on the client(s) where they should be run.
+
+> Where should check plugin executables be installed?
+
+Regardless of where checks are defined, the actual check executables need to
+exist on the filesystem for the Sensu client to execute them. Check plugin
+executables can be installed in `/etc/sensu/plugins` or
+`/opt/sensu/embedded/bin`, the latter being the location where plugin
+executables are installed via `sensu-install`.
 
 > What is a standalone check?
 
-A standalone check is a check definition that is installed on a Sensu client and
-not on the Sensu server. Standalone checks defer [Check execution scheduling
-responsibilities](/overview/architecture/#check-execution-scheduler) to the
+A standalone check is a check definition that is installed on and executed by
+the Sensu client without being scheduled by the Sensu server. Standalone checks
+defer [Check execution scheduling
+responsibilities](/overview/architecture/#check-execution-scheduler) to
 Sensu clients, enabling decentralized management of monitoring checks and
 distribution of scheduling responsibilities. Standalone checks may be used in
-conjunction with traditional subscription-based checks (i.e. pubsub checks).
+conjunction with pubsub checks, and are distinguished from pubsub checks by
+inclusion of the `"standalone": true` configuration parameter.
 
-> What happens if a check is defined on the Sensu server <em>and</em> client?
+> What happens if a single check is defined on both the Sensu server
+<em>and</em> client?
 
 When a check request is published for a check defined on the Sensu server, the
 Sensu client will look for a local definition matching the check `name` prior to
