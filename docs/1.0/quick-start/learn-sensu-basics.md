@@ -117,7 +117,7 @@ starts up for the first time.
    The Sensu API should respond with an empty JSON array (i.e. `[]`), indicating
    that there are no clients currently registered with Sensu. If you still have
    one or more Sensu clients in your client registry, please repeat step 1 until
-   there are no client registered with Sensu.
+   there are no clients registered with Sensu.
 
 3. Now let's start the `sensu-client` again
 
@@ -152,7 +152,7 @@ starts up for the first time.
 
 #### SUMMARY {#exercise-1-summary}
 
-**How does client registration work?** In practice, client registrations happens
+**How does client registration work?** In practice, client registrations happen
 when the Sensu server processes a client `keepalive` for a client that is not
 already registered in the Sensu client registry (based on the configured client
 `name` or `source` attribute).
@@ -192,7 +192,7 @@ this execution will be handled by the Sensu server.
   Good question! Sensu shares Nagios' check plugin specification,
   meaning existing check plugins compatible with Nagios can be used by
   Sensu without modification. In this case the check_http plugin is
-  provided as a package by the Centos default distribution. Once
+  provided as a package by the CentOS default distribution. Once
   installed, the plugin is available as `/usr/lib64/nagios/plugins/check_http`.
 
 2. Let's execute the check plugin manually and see what happens:
@@ -227,7 +227,7 @@ this execution will be handled by the Sensu server.
    /etc/sensu/conf.d named "check_http.json" with the following
    content:
 
-   ~~~ javascript
+   ~~~ json
    {
      "checks": {
        "check_http": {
@@ -255,7 +255,7 @@ this execution will be handled by the Sensu server.
    With these services restarted we should be able to observe via the
    API that the new check definition has been loaded:
 
-   ~~~ json
+   ~~~ shell
    $ curl -s 127.0.0.1:4567/checks | jq .
    [
       {
@@ -273,7 +273,7 @@ this execution will be handled by the Sensu server.
    should be scheduling execution of this check. We can verify this by
    watching the sensu-server log file:
 
-   ~~~ json
+   ~~~ shell
    $ tail -f /var/log/sensu/sensu-server.log | grep check_http
    {"timestamp":"2017-03-16T17:36:46.947925+0000","level":"info","message":"publishing
    check request","payload":{"command":"/usr/lib64/nagios/plugins/check_http
@@ -391,12 +391,12 @@ to a handler named "default".
    }
    ~~~
 
-   _NOTE_: The above is representative of configuration using Google's Gmail
+   _NOTE: The above is representative of configuration using Google's Gmail
    as the SMTP server. In place of the example values above, you must
    provide a valid values for `mail_from`, `mail_to`, `smtp_username`
    and `smtp_password`. If you are not a Gmail user, you may also need
    to adjust the `smtp_address`, `smtp_port` and `smtp_use_tls`
-   values as appropriate for your SMTP host.
+   values as appropriate for your SMTP host._
 
    At this point we have installed the `handler-mailer.rb` handler
    plugin, provided configuration for both the handler definition
