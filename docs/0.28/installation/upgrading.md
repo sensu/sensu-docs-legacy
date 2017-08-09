@@ -51,6 +51,26 @@ you may need to update one or more of the following files to reflect the change:
   *  `/etc/default/sensu-api`
   *  `/etc/default/sensu-enterprise`
 
+### TLS/SSL changes
+
+When upgrading to Sensu 0.27 or later, please note that the OpenSSL libraries
+included in Sensu's embedded Ruby environment have been upgraded from 1.0.1t to
+1.0.2k. OpenSSL team ended support for 1.0.1 at the end of 2016, and plans to
+support 1.0.2 through 2019. See OpenSSL's published [release
+strategy][openssl-release-strat] for more detail.
+
+Although this OpenSSL version change appears minor, it has been reported by some
+that upgraded Sensu processes are unable negotiate secure connections with their
+RabbitMQ brokers after upgrading. In many cases we find this is due to RabbitMQ
+running on old versions of Erlang (e.g. R16B03) which have known issues around
+TLS/SSL negotiation.
+
+When upgrading from Sensu < 0.27 to 0.27 or later, please review the [RabbitMQ
+"Which Erlang?" guidelines][which-erlang] and compare these recommendations to
+your deployed RabbitMQ infrastructure. In brief, these guidelines specify Erlang
+17 or newer for reliable TLS/SSL operation, and recommend Erlang 19.2 where
+possible.
+
 ## Upgrading from Sensu < 0.17
 
 The following documentation provides steps necessary when upgrading
@@ -142,3 +162,6 @@ sudo apt-get -y install sensu-enterprise-dashboard
 ~~~ shell
 sudo yum install sensu-enterprise-dashboard
 ~~~
+
+[openssl-release-strat]: https://www.openssl.org/policies/releasestrat.html
+[which-erlang]: https://www.rabbitmq.com/which-erlang.html
