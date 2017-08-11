@@ -463,7 +463,7 @@ The client definition uses the `{ "client": {} }` [configuration scope][24].
 `redact`
 : description
   : Client definition attributes to redact (values) when logging and sending
-    client keepalives.
+    client keepalives. When configuring this array, the default values will be overwritten, requiring them to be re-added to your array.
 : required
   : false
 : type
