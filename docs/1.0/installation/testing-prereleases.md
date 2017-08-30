@@ -13,15 +13,19 @@ discover an issue, you probably do not want to use a prerelease in
 production._
 
 Testing and using a Sensu prerelease is straightforward, it simply
-involves using a different package repository. Below are the
-per-platform prerelease repository installation instructions. We are
-slowly adding prerelease repositories for additional platforms.
+involves using a different package repository. You should only be
+using prereleases if you already have experience installing and
+managing a Sensu installation. Below are the per-platform prerelease
+repository installation instructions. We are slowly adding prerelease
+repositories for other platforms.
 
 _NOTE: The Sensu prerelease repository instructions replace the
 existing Sensu repository configuration files, you will need to revert
 these changes in order to return to using stable releases._
 
-## Ubuntu/Debian
+## Install Prerelease Repository
+
+### Ubuntu/Debian
 
 1. Install the GPG public key:
 
@@ -50,7 +54,7 @@ these changes in order to return to using stable releases._
    sudo apt-get update
    ~~~
 
-## RHEL/CentOS
+### RHEL/CentOS
 
 1. Create the YUM repository configuration file for the Sensu Core repository at
    `/etc/yum.repos.d/sensu.repo`:
@@ -62,3 +66,11 @@ these changes in order to return to using stable releases._
    gpgcheck=0
    enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
    ~~~
+
+## Reporting issues
+
+If you encounter an issue while installing or using a Sensu
+prerelease, please create a [Sensu Core GitHub issues][1] if one does
+not already exist for it.
+
+[1]:  https://github.com/sensu/sensu/issues
