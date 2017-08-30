@@ -70,7 +70,7 @@ these changes in order to return to using stable releases._
 ## Reporting issues
 
 If you encounter an issue while installing or using a Sensu
-prerelease, please create a [Sensu Core GitHub issues][1] if one does
+prerelease, please create a [Sensu Core GitHub issue][1] if one does
 not already exist for it.
 
 [1]:  https://github.com/sensu/sensu/issues
