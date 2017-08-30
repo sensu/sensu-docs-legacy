@@ -14,9 +14,24 @@ next:
 ## Releases
 
 - [Enterprise 2.6.0 Release Notes](#enterprise-v2-6-0)
+- [Core 1.0.3 Release Notes](#core-v1-0-3)
 - [Core 1.0.2 Release Notes](#core-v1-0-2)
 - [Core 1.0.1 Release Notes](#core-v1-0-1)
 - [Core 1.0.0 Release Notes](#core-v1-0-0)
+
+## Core 1.0.3 Release Notes {#core-v1-0-3}
+
+Source: [GitHub.com][7]
+
+**August 25, 2017** &mdash; Sensu Core version 1.0.3 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v1-0-3-changes}
+
+- **BUGFIX**: Now using EventMachine version 1.2.5 in order to support
+	larger EM timer intervals. EM timers are used by the Sensu check
+	scheduler and many other Sensu components.
 
 ## Enterprise 2.6.0 Release Notes {#enterprise-v2-6-0}
 
