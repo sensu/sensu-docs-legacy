@@ -13,10 +13,47 @@ next:
 
 ## Releases
 
+- [Enterprise 2.6.2 Release Notes](#enterprise-v2-6-2)
+- [Enterprise 2.6.1 Release Notes](#enterprise-v2-6-1)
 - [Enterprise 2.6.0 Release Notes](#enterprise-v2-6-0)
 - [Core 1.0.2 Release Notes](#core-v1-0-2)
 - [Core 1.0.1 Release Notes](#core-v1-0-1)
 - [Core 1.0.0 Release Notes](#core-v1-0-0)
+
+## Enterprise 2.6.2 Release Notes {#enterprise-v2-6-2}
+
+**September 20, 2017** &mdash; Sensu Enterprise version 2.6.2 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-2-changes}
+
+- **IMPROVEMENT**: Now using JRuby 9.1.13.0 for bug fixes and performance
+	improvements.
+
+- **IMPROVEMENT**: The SNMP integration trap varbind value trim length is
+	now configurable, via the SNMP integration definition attribute
+	`"varbind_trim"`, e.g. `"varbind_trim": 300`. The default value is
+	still `100` characters. The network(s) UDP MTU dictates the
+	maximum trap payload size.
+
+## Enterprise 2.6.1 Release Notes {#enterprise-v2-6-1}
+
+**September 12, 2017** &mdash; Sensu Enterprise version 2.6.1 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-1-changes}
+
+- **IMPROVEMENT**: The Hipchat integration can now send notifications
+	directly to a user. To send notifications to a specific user,
+	instead of a room, use the hipchat definition attribute `"user"`,
+	e.g. `"user": "portertech"`.
+
+- **IMPROVEMENT**: Contact routing now supports disabling specific
+	integrations per contact, disabling the global configuration
+	fallback. To disable an integration for a contact, set its value
+	to `false`, e.g. `{"contacts": {"ops": {"email": false}}}`.
 
 ## Enterprise 2.6.0 Release Notes {#enterprise-v2-6-0}
 
