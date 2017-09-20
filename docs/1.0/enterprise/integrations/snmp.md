@@ -56,7 +56,8 @@ handler (integration).
     "host": "8.8.8.8",
     "port": 162,
     "community": "public",
-    "version": 2
+    "version": 2,
+    "varbind_trim": 200
   }
 }
 ~~~
@@ -110,7 +111,21 @@ The following attributes are configured within the `{"snmp": {} }`
     "community": "private"
     ~~~
 
-
+`varbind_trim`
+: description
+  : The SNMP trap varbind value trim length. The network(s) UDP MTU
+  dictates how large the trap payloads can be, trimming varbind values
+  keeps the payloads within limits.
+: required
+  : false
+: type
+  : Integer
+: default
+  : `100`
+: example
+  : ~~~ shell
+    "varbind_trim": 300
+    ~~~
 
 [?]:  #
 [1]:  /enterprise
