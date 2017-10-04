@@ -13,162 +13,91 @@ next:
 
 ## Releases
 
-- [Enterprise 2.6.2 Release Notes](#enterprise-v2-6-2)
-- [Enterprise 2.6.1 Release Notes](#enterprise-v2-6-1)
-- [Enterprise 2.6.0 Release Notes](#enterprise-v2-6-0)
-- [Core 1.1.2 Release Notes](#core-v1-0-2)
-- [Core 1.1.1 Release Notes](#core-v1-0-1)
-- [Core 1.1.0 Release Notes](#core-v1-0-0)
+- [Core 1.1.0 Release Notes](#core-v1-1-0)
 
-## Enterprise 2.6.2 Release Notes {#enterprise-v2-6-2}
-
-**September 20, 2017** &mdash; Sensu Enterprise version 2.6.2 has been
-	released and is available for immediate download. Please note the
-	following improvements:
-
-### CHANGES {#enterprise-v2-6-2-changes}
-
-- **IMPROVEMENT**: Now using JRuby 9.1.13.0 for bug fixes and performance
-	improvements.
-
-- **IMPROVEMENT**: The SNMP integration trap varbind value trim length is
-	now configurable, via the SNMP integration definition attribute
-	`"varbind_trim"`, e.g. `"varbind_trim": 300`. The default value is
-	still `100` characters. The network(s) UDP MTU dictates the
-	maximum trap payload size.
-
-## Enterprise 2.6.1 Release Notes {#enterprise-v2-6-1}
-
-**September 12, 2017** &mdash; Sensu Enterprise version 2.6.1 has been
-	released and is available for immediate download. Please note the
-	following improvements:
-
-### CHANGES {#enterprise-v2-6-1-changes}
-
-- **IMPROVEMENT**: The Hipchat integration can now send notifications
-	directly to a user. To send notifications to a specific user,
-	instead of a room, use the hipchat definition attribute `"user"`,
-	e.g. `"user": "portertech"`.
-
-- **IMPROVEMENT**: Contact routing now supports disabling specific
-	integrations per contact, disabling the global configuration
-	fallback. To disable an integration for a contact, set its value
-	to `false`, e.g. `{"contacts": {"ops": {"email": false}}}`.
-
-## Enterprise 2.6.0 Release Notes {#enterprise-v2-6-0}
-
-**July 27, 2017** &mdash; Sensu Enterprise version 2.6.0 has been
-	released and is available for immediate download. Please note the
-	following improvements:
-
-### CHANGES {#enterprise-v2-6-0-changes}
-
-- **IMPROVEMENT**: Built on Sensu Core 1.1.2.
-
-- **IMPROVEMENT**: Added support for contact routing to every metric
-	integration (e.g. InfluxDB, Graphite, OpenTSDB, etc.).
-
-- **IMPROVEMENT**: Sensu Enterprise now loads configuration and validates
-	it prior to reloading (SIGHUP). If configuration is determined to
-	be invalid prior to reloading, Sensu will report invalid
-	configuration definitions, and it will continue to run with its
-	existing working configuration.
-
-- **IMPROVEMENT**: Using JRuby 9.1.12.0, for performance enhancements and
-	bug fixes.
-
-- **IMPROVEMENT**: Wavefront integration `prefix` option, supporting a
-	custom metric name prefix.
-
-- **IMPROVEMENT**: Added Enterprise version to API /info.
-
-## Core 1.1.2 Release Notes {#core-v1-0-2}
-
-Source: [GitHub.com][7]
-
-**July 27, 2017** &mdash; Sensu Core version 1.1.2 has been released
-	and is available for immediate download. Please note the following
-	improvements:
-
-### CHANGES {#core-v1-0-2-changes}
-
-- **BUGFIX**: Addressed an issue with client keepalive transport
-	acknowledgments. We discovered a situation where poor Redis
-	performance could negatively impact client keepalive processing,
-	potentially triggering a compounding failure that the Sensu server
-	is unable to recover from. Moving acknowledgments to the next tick
-	of the EventMachine reactor avoids the situation entirely.
-
-## Core 1.1.1 Release Notes {#core-v1-0-1}
-
-Source: [GitHub.com][6]
-
-**July 24, 2017** &mdash; Sensu Core version 1.1.1 has been released
-	and is available for immediate download. Please note the following
-	improvements:
-
-### CHANGES {#core-v1-0-1-changes}
-
-- **BUGFIX**: Fixed Sensu configuration validation, it is now being
-	applied. There was a bug that allowed invalid Sensu configuration
-	definitions to be loaded, causing unexpected behaviours.
-
-- **BUGFIX**: Now excluding certain file system directories from the Sensu
-	RPM package spec, as they could cause conflicts with other RPM
-	packages.
-
-## Core 1.1.0 Release Notes {#core-v1-0-0}
+## Core 1.1.0 Release Notes {#core-v1-1-0}
 
 Source: [GitHub.com][2]
 
-**July 11, 2017** &mdash; Sensu Core version 1.1.0 has been released
+**September 27, 2017** &mdash; Sensu Core version 1.1.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
-### CHANGES {#core-v1-0-0-changes}
+### CHANGES {#core-v1-1-0-changes}
 
-- **IMPORTANT**: Sensu packages now include Ruby 2.4.1. Upgrading from
-	prior versions of Sensu will require any plugin or extension gems
-	to be re-installed under the new Ruby environment.
+- **IMPORTANT**: Sensu packages include Ruby 2.4.1. Upgrading from
+	releases of Sensu prior to 1.0.0 will require all plugin or
+	extension gems to be re-installed under the new Ruby environment.
 
-- **IMPORTANT**: Sensu packages now include [sensu-plugin 2.0.0][3], which
+- **IMPORTANT**: Sensu packages include [sensu-plugin 2.0.0][3], which
 	disables its deprecated filter methods by default, i.e.
-	occurrences. Sensu 1.1 includes built-in filters that provide the
-	same functionality with several improvements. The built-in filters
-	are ["occurrences"][4] and ["check_dependencies"][5]. To use the
-	built-in filters, apply them to Sensu event handlers via their
-	definition `"filters"` attribute, e.g. `"filters": ["occurrences",
+	occurrences. Sensu releases since 1.0.0 include built-in filters
+	that provide the same functionality with several improvements. The
+	built-in filters are ["occurrences"][4] and
+	["check_dependencies"][5]. To use the built-in filters, apply them
+	to Sensu event handlers via their definition `"filters"`
+	attribute, e.g. `"filters": ["occurrences",
 	"check_dependencies"]`. These filters can now be used with Sensu
 	event handlers that do not use the sensu-plugin library (or Ruby).
 
-- **NEW**: Added Sensu API event endpoint alias "incidents", e.g.
-	/incidents, /incidents/:client/:check.
+- **NEW**: Check hooks, commands run by the Sensu client in response to
+	the result of the check command execution. The Sensu client will
+	execute the appropriate configured hook command, depending on the
+	check execution status (e.g. 1). Valid hook names include (in
+	order of precedence): "1"-"255", "ok", "warning", "critical",
+	"unknown", and "non-zero". The check hook command output, status,
+	executed timestamp, and duration are captured and published in the
+	check result. Check hook commands can optionally receive JSON
+	serialized Sensu client and check definition data via STDIN.
 
-- **IMPROVEMENT**: Improved Sensu client keepalive configuration
-	validation, now including coverage for check low/high flap
-	thresholds etc.
+- **NEW**: Check STDIN. A boolean check definition attribute, "stdin",
+	when set to true instructs the Sensu client to write JSON
+	serialized Sensu client and check definition data to the check
+	command process STDIN. This attribute cannot be used with existing
+	Sensu check plugins, nor Nagios plugins etc, as the Sensu client
+	will wait indefinitely for the check process to read and close
+	STDIN.
 
-- **IMPROVEMENT**: Improved Sensu client socket check result validation,
-	now including coverage for check low/high flap thresholds etc.
+- **IMPROVEMENT**: Splayed proxy check request publishing. Users can now
+	splay proxy check requests (optional), evenly, over a window of
+	time, determined by the check interval and a configurable splay
+	coverage percentage. For example, if a check has an interval of
+	60s and a configured splay coverage of 90%, its proxy check
+	requests would be splayed evenly over a time window of 60s * 90%,
+	54s, leaving 6s for the last proxy check execution before the the
+	next round of proxy check requests for the same check. Proxy check
+	request splayed publishing can be configured with two new check
+	definition attributes, within the proxy_requests scope, splay
+	(boolean) to enable it and splay_coverage (integer percentage,
+	defaults to 90).
 
-- **IMPROVEMENT**: The sensu-install tool now notifies users when it is
-	unable to successfully install an extension, when the environment
-	variable EMBEDDED_RUBY is set to false.
+- **IMPROVEMENT**: Configurable check output truncation (for storage in
+	Redis). Check output truncation can be manually enabled/disabled
+	with the check definition attribute "truncate_output",
+	e.g."truncate_output": false. The output truncation length can be
+	configured with the check definition attribute
+	"truncate_output_length", e.g. "truncate_output_length": 1024.
+	Check output truncation is still enabled by default for metric
+	checks, with "type": "metric".
 
-- **IMPROVEMENT**: Added the Sensu RELEASE_INFO constant, containing
-	information about the Sensu release, used by the API /info
-	endpoint and Server registration.
+- **IMPROVEMENT**: Sensu client HTTP socket basic authentication can how
+	be applied to all endpoints (not just /settings), via the client
+	definition http_socket attribute "protect_all_endpoints", e.g.
+	"protect_all_endpoints": true.
 
-- **BUGFIX**: Sensu handler severities filtering now accounts for flapping
-	events.
+- **IMPROVEMENT**: Improved check TTL monitoring performance.
 
-- **BUGFIX**: Fixed Sensu Redis connection on error reconnect, no longer
-	reusing the existing EventMachine connection handler.
+- **IMRPOVEMENT**: The Sensu extension run log event log level is now set
+	to debug (instead of info) when the run output is empty and the
+	status is 0.
+
+- **BUGFIX**: Added initial timestamp to proxy client definitions. The
+	Uchiwa and Sensu dashboards will no longer display "Invalid Date".
+
+- **BUGFIX**: Deleting check history when deleting an associated check result.
 
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
-[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#100---2017-07-11
+[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#110---2017-09-27
 [3]: https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v200---2017-03-29
 [4]: https://github.com/sensu-extensions/sensu-extensions-occurrences
 [5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
-[6]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#101---2017-07-24
-[7]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#102---2017-07-27
