@@ -1,6 +1,6 @@
 ---
 title: "Settings API"
-version: 1.0
+version: 1.1
 weight: 9
 next:
   url: "configuration.html"

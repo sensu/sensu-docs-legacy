@@ -1,7 +1,7 @@
 ---
 title: "Extensions"
 description: "Reference documentation for Sensu Extensions."
-version: 1.0
+version: 1.1
 weight: 10
 ---
 
@@ -61,7 +61,7 @@ Usage: sensu-install [options]
     -x, --proxy PROXY                Install Sensu plugins and extensions via a PROXY URL
 ~~~
 
-_NOTE: `sensu-install` is only available in Sensu Core >= `0.21.0`._
+_NOTE: `sensu-install` is only available in Sensu Core >= `0.20.1`._
 
 Sensu extensions can be installed using the `sensu-install` executable:
 

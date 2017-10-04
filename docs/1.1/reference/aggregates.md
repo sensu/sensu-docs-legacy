@@ -1,7 +1,7 @@
 ---
 title: "Aggregates"
 description: "Reference documentation for Sensu Named Aggregates."
-version: 1.0
+version: 1.1
 weight: 4
 ---
 

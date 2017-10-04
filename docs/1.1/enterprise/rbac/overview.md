@@ -1,6 +1,6 @@
 ---
 title: "Role Based Access Controls"
-version: 1.0
+version: 1.1
 weight: 1
 next:
   url: "rbac-for-ldap.html"

@@ -1,6 +1,6 @@
 ---
 title: "Built-in Handlers"
-version: 1.0
+version: 1.1
 weight: 6
 next:
   url: "built-in-filters.html"

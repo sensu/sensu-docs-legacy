@@ -1,6 +1,6 @@
 ---
 title: "Intro to Checks"
-version: 1.0
+version: 1.1
 weight: 3
 next:
   url: "intro-to-handlers.html"

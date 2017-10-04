@@ -2,7 +2,7 @@
 title: "Puppet"
 description: "Deregister Sensu clients from the client registry if they no
   longer have an associated Puppet node."
-version: 1.0
+version: 1.1
 weight: 12
 ---
 

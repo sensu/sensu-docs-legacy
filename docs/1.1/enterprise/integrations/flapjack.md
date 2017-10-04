@@ -2,7 +2,7 @@
 title: "Flapjack"
 description: "Relay Sensu results to Flapjack for notification routing and event
   processing."
-version: 1.0
+version: 1.1
 weight: 11
 ---
 

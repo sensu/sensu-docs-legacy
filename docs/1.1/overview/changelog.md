@@ -1,8 +1,8 @@
 ---
-title: "1.0 changelog"
+title: "1.1 changelog"
 description: "Release notes for Sensu Core and Sensu Enterprise releases based
-  on Sensu Core version 1.0.x"
-version: 1.0
+  on Sensu Core version 1.1.x"
+version: 1.1
 weight: 5
 next:
   url: "faq.html"
@@ -16,9 +16,9 @@ next:
 - [Enterprise 2.6.2 Release Notes](#enterprise-v2-6-2)
 - [Enterprise 2.6.1 Release Notes](#enterprise-v2-6-1)
 - [Enterprise 2.6.0 Release Notes](#enterprise-v2-6-0)
-- [Core 1.0.2 Release Notes](#core-v1-0-2)
-- [Core 1.0.1 Release Notes](#core-v1-0-1)
-- [Core 1.0.0 Release Notes](#core-v1-0-0)
+- [Core 1.1.2 Release Notes](#core-v1-0-2)
+- [Core 1.1.1 Release Notes](#core-v1-0-1)
+- [Core 1.1.0 Release Notes](#core-v1-0-0)
 
 ## Enterprise 2.6.2 Release Notes {#enterprise-v2-6-2}
 
@@ -63,7 +63,7 @@ next:
 
 ### CHANGES {#enterprise-v2-6-0-changes}
 
-- **IMPROVEMENT**: Built on Sensu Core 1.0.2.
+- **IMPROVEMENT**: Built on Sensu Core 1.1.2.
 
 - **IMPROVEMENT**: Added support for contact routing to every metric
 	integration (e.g. InfluxDB, Graphite, OpenTSDB, etc.).
@@ -82,11 +82,11 @@ next:
 
 - **IMPROVEMENT**: Added Enterprise version to API /info.
 
-## Core 1.0.2 Release Notes {#core-v1-0-2}
+## Core 1.1.2 Release Notes {#core-v1-0-2}
 
 Source: [GitHub.com][7]
 
-**July 27, 2017** &mdash; Sensu Core version 1.0.2 has been released
+**July 27, 2017** &mdash; Sensu Core version 1.1.2 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -99,11 +99,11 @@ Source: [GitHub.com][7]
 	is unable to recover from. Moving acknowledgments to the next tick
 	of the EventMachine reactor avoids the situation entirely.
 
-## Core 1.0.1 Release Notes {#core-v1-0-1}
+## Core 1.1.1 Release Notes {#core-v1-0-1}
 
 Source: [GitHub.com][6]
 
-**July 24, 2017** &mdash; Sensu Core version 1.0.1 has been released
+**July 24, 2017** &mdash; Sensu Core version 1.1.1 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -117,11 +117,11 @@ Source: [GitHub.com][6]
 	RPM package spec, as they could cause conflicts with other RPM
 	packages.
 
-## Core 1.0.0 Release Notes {#core-v1-0-0}
+## Core 1.1.0 Release Notes {#core-v1-0-0}
 
 Source: [GitHub.com][2]
 
-**July 11, 2017** &mdash; Sensu Core version 1.0.0 has been released
+**July 11, 2017** &mdash; Sensu Core version 1.1.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 
@@ -133,7 +133,7 @@ Source: [GitHub.com][2]
 
 - **IMPORTANT**: Sensu packages now include [sensu-plugin 2.0.0][3], which
 	disables its deprecated filter methods by default, i.e.
-	occurrences. Sensu 1.0 includes built-in filters that provide the
+	occurrences. Sensu 1.1 includes built-in filters that provide the
 	same functionality with several improvements. The built-in filters
 	are ["occurrences"][4] and ["check_dependencies"][5]. To use the
 	built-in filters, apply them to Sensu event handlers via their

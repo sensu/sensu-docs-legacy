@@ -1,6 +1,6 @@
 ---
 title: "Enterprise Configuration"
-version: 1.0
+version: 1.1
 weight: 2
 next:
   url: "dashboard.html"

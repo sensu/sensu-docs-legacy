@@ -2,7 +2,7 @@
 title: "handle_when"
 description: "The handle_when Enterprise filter is used to reduce notification
   noise."
-version: 1.0
+version: 1.1
 weight: 1
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "API Configuration"
-version: 1.0
+version: 1.1
 weight: 10
 info: "<strong>NOTE:</strong> Please visit the <a href='../enterprise/api.html'>
   Sensu Enterprise API reference documentation</a> for information on

@@ -1,6 +1,6 @@
 ---
 title: "Adding a Client"
-version: 1.0
+version: 1.1
 weight: 2
 next:
   url: "intro-to-checks.html"

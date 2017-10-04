@@ -1,7 +1,7 @@
 ---
 title: "Plugins"
 description: "Reference documentation for Sensu Plugins."
-version: 1.0
+version: 1.1
 weight: 9
 ---
 
@@ -156,7 +156,7 @@ a system Ruby is installed, Sensu will run on its own Ruby). This "vendored"
 Ruby runtime can be accessed by Ruby-based plugins by setting [Sensu's
 `EMBEDDED_RUBY` configuration variable][26] to `true`.
 
-_NOTE: in Sensu versions `>0.21.0`, all init/service scripts provided by the
+_NOTE: in Sensu versions `>0.20.1`, all init/service scripts provided by the
 Sensu Core installer packages are setting Sensu's `EMBEDDED_RUBY` environment
 variable to `true`, making the use of Sensu's embedded Ruby the default behavior
 in modern Sensu releases._
@@ -184,7 +184,7 @@ Usage: sensu-install [options]
     -x, --proxy PROXY                Install Sensu plugins and extensions via a PROXY URL
 ~~~
 
-_NOTE: `sensu-install` is only available in Sensu Core >= `0.21.0`._
+_NOTE: `sensu-install` is only available in Sensu Core >= `0.20.1`._
 
 #### EXAMPLE {#sensu-install-example}
 

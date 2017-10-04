@@ -1,7 +1,7 @@
 ---
 title: "DataDog"
 description: "Create DataDog events for Sensu events."
-version: 1.0
+version: 1.1
 weight: 21
 ---
 

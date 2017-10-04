@@ -2,7 +2,7 @@
 title: "Solaris"
 description: "User documentation for installing and operating Sensu on Solaris
   systems."
-version: 1.0
+version: 1.1
 weight: 7
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Oracle Solaris systems. For instructions on
@@ -41,11 +41,11 @@ format specified below._
 
 1. Download Sensu from the [Sensu Downloads][1] page
 
-2. Install the `sensu-1.0.0-1.i386.pkg` package using the `pkgadd` utility:
+2. Install the `sensu-1.1.0-1.i386.pkg` package using the `pkgadd` utility:
 
    ~~~ shell
    $ su
-   $ pkgadd -d sensu-1.0.0-1.i386.pkg
+   $ pkgadd -d sensu-1.1.0-1.i386.pkg
    ~~~
 
 3. Install the Sensu service init script(s) using the `svccfg` utility:
@@ -66,19 +66,19 @@ format specified below._
    utility:
 
    ~~~ shell
-   wget https://sensu.global.ssl.fastly.net/solaris/ips/5.11/sensu-1.0.0-1.i386.p5p
+   wget https://sensu.global.ssl.fastly.net/solaris/ips/5.11/sensu-1.1.0-1.i386.p5p
    ~~~
 
-2. Install the `sensu-1.0.0-1.i386.p5p` package using the `pkg` utility:
+2. Install the `sensu-1.1.0-1.i386.p5p` package using the `pkg` utility:
 
    ~~~ shell
-   $ sudo pkg install -g sensu-1.0.0-1.i386.p5p developer/versioning/sensu
+   $ sudo pkg install -g sensu-1.1.0-1.i386.p5p developer/versioning/sensu
    ~~~
 
 3. Download and run the Sensu [post-install script][12]:
 
    ~~~ shell
-   $ wget https://sensuapp.org/docs/1.0/files/postinst.sh
+   $ wget https://sensuapp.org/docs/1.1/files/postinst.sh
    $ chmod +x postinst.sh
    $ sudo ./postinst.sh
    ~~~
@@ -197,5 +197,5 @@ $ svcadm restart sensu-client
 [9]:  #configure-sensu
 [10]: #example-transport-configuration
 [11]: #example-client-configuration
-[12]: /docs/1.0/files/postinst.sh
+[12]: /docs/1.1/files/postinst.sh
 [13]: http://www.oracle.com/technetwork/server-storage/solaris11/technologies/ips-323421.html

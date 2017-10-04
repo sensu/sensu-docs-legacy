@@ -1,7 +1,7 @@
 ---
 title: "Install RabbitMQ"
 description: "The complete Sensu installation guide."
-version: 1.0
+version: 1.1
 weight: 0
 hidden: true
 next:
