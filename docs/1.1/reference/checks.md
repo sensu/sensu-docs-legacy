@@ -668,6 +668,36 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
     "source": "switch-dc-01"
     ~~~
 
+`truncate_output`
+: description
+  : If check output will be truncated for storage. Output truncation
+  is automatically set to `true` for checks with `type` set to
+  `"metric"` unless configured to `false`.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "truncate_output": true
+    ~~~
+
+`truncate_output_length`
+: description
+  : The output truncation length, the maximum number of characters.
+: required
+  : false
+: type
+  : Integer
+: default
+  : 255
+: example
+  : ~~~ shell
+    "truncate_output_length": 1024
+    ~~~
+
 `aggregate`
 : description
   : Create a named aggregate for the check. Check result data will be aggregated
