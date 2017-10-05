@@ -803,6 +803,21 @@ The following attributes are configured within the `{ "client": { "http_socket":
     "password": "F76639PML6c7sk5nI46N"
     ~~~
 
+`protect_all_endpoints`
+: description
+  : If all client HTTP endpoints are protected by HTTP authentication.
+  By default, only the `/settings` endpoint requires authentication.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "protect_all_endpoints": true
+    ~~~
+
 #### `keepalive` attributes
 
 The following attributes are configured within the `{ "client": { "keepalive":
