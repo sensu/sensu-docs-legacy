@@ -29,12 +29,17 @@ weight: 3
     - [Token substitution syntax](#token-substitution-syntax)
     - [Token substitution default values](#token-substitution-default-values)
     - [Unmatched tokens](#unmatched-tokens)
+- [Check hooks](#check-hooks)
+  - [What are check hooks?](#what-are-check-hooks)
+  - [Example check hooks](#example-check-hooks)
 - [Check configuration](#check-configuration)
   - [Example check definition](#example-check-definition)
   - [Check definition specification](#check-definition-specification)
     - [Check naming](#check-names)
     - [`CHECK` attributes](#check-attributes)
     - [`subdue` attributes](#subdue-attributes)
+    - [`hooks` attributes](#hooks-attributes)
+    - [`proxy_requests` attributes](#proxy-requests-attributes)
     - [Custom attributes](#custom-attributes)
   - [Check result specification](#check-result-specification)
     - [`check` attributes](#check-result-check-attributes)
@@ -291,6 +296,63 @@ If a [token substitution default value][25] is not provided (i.e. as a fallback
 value), _and_ the Sensu client definition does not have a matching definition
 attribute, a [check result][4] indicating "unmatched tokens" will be published
 for the check execution (e.g.: `"Unmatched check token(s): disk.warning"`).
+
+## Check hooks
+
+### What are check hooks?
+
+Check hooks are commands run by the Sensu client in response to the
+result of check command execution. The Sensu client will execute the
+appropriate configured hook command, depending on the check execution
+status (e.g. 1). Valid hook names include (in order of precedence):
+"1"-"255", "ok", "warning", "critical", "unknown", and "non-zero". The
+check hook command output, status, executed timestamp, and duration
+are captured and published in the check result. Check hook commands
+can optionally receive JSON serialized Sensu client and check
+definition data via STDIN.
+
+### Example check hooks
+
+Check hooks can be used for automated data gathering for incident
+triage, for example, a check hook could be used to capture the process
+tree when a process has been determined to be not running etc.
+
+```json
+{
+  "checks": {
+    "nginx_process": {
+      "command": "check-process.rb -p nginx",
+      "subscribers": [
+        "proxy"
+      ],
+      "interval": 60,
+      "hooks": {
+        "non-zero": {"command": "ps aux"}
+      }
+    }
+  }
+}
+```
+
+Check hooks can also be used for rudimentary auto-remediation tasks,
+for example, starting a process that is no longer running.
+
+```json
+{
+  "checks": {
+    "nginx_process": {
+      "command": "check-process.rb -p nginx",
+      "subscribers": [
+        "proxy"
+      ],
+      "interval": 60,
+      "hooks": {
+        "critical": {"command": "sudo systemctl start nginx"}
+      }
+    }
+  }
+}
+```
 
 ## Check configuration
 
@@ -629,6 +691,19 @@ The following attributes are configured within the `{"checks": { "CHECK": {} }
     "subdue": {}
     ~~~
 
+`hooks`
+: description
+  : The [`hooks` definition scope][51], commands run by the Sensu
+  client in response to the result of the check command execution.
+: required
+  : false
+: type
+  : Hash
+: example
+  : ~~~ shell
+    "hooks": {}
+    ~~~
+
 `contact`
 : description
   : A contact name to use for the check.
@@ -725,6 +800,92 @@ name][41]).
         }
       ]
     }
+    ~~~
+
+#### `hooks` attributes
+
+The following attributes are configured within the `{"checks": { "CHECK": {
+"hooks": {} } } }` [configuration scope][29] (where `CHECK` is a valid [check
+name][41]).
+
+##### Hook naming {#hook-names}
+
+Each check hook has a unique hook name. Valid hook names include (in
+order of precedence): "1"-"255", "ok", "warning", "critical",
+"unknown", and "non-zero". The check hook name is used to determine
+the appropriate hook command to execute, depending on the check
+execution status (e.g. 1).
+
+##### EXAMPLE {#hooks-attributes-example}
+
+~~~ json
+{
+  "checks": {
+    "nginx_process": {
+      "command": "check-process.rb -p nginx",
+      "subscribers": [
+        "proxy"
+      ],
+      "interval": 60,
+      "hooks": {
+        "non-zero": {
+          "command": "ps aux",
+          "timeout": 10
+        }
+      }
+    }
+  }
+}
+~~~
+
+#### `HOOK` attributes
+
+The following attributes are configured within the `{"checks": { "CHECK": {
+"hooks": { "HOOK": {}} } } }` [configuration scope][29] (where `CHECK`
+is a valid [check name][41] and `HOOK` is a valid [hook name][52]).
+
+##### ATTRIBUTES {#hook-attributes-specification}
+
+`command`
+: description
+  : The hook command to be executed.
+: required
+  : true
+: type
+  : String
+: example
+  : ~~~ shell
+    "command": "ps aux"
+    ~~~
+
+`timeout`
+: description
+  : The hook command execution duration timeout in seconds (hard stop).
+: required
+  : false
+: type
+  : Integer
+: default
+  : 60
+: example
+  : ~~~ shell
+    "timeout": 30
+    ~~~
+
+`stdin`
+: description
+  : If the Sensu client writes JSON serialized Sensu client and check
+  data to the hook command process' STDIN. The hook command must
+  expect the JSON data via STDIN, read it, and close STDIN.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "stdin": true
     ~~~
 
 #### `proxy_requests` attributes {#proxy-requests-attributes}
@@ -1013,3 +1174,5 @@ automatically added by the client to build a complete check result.
 [48]: #proxy-requests-attributes
 [49]: ../guides/getting-started/intro-to-checks.html#proxy-clients
 [50]: ../guides/getting-started/adding-a-client.html#proxy-clients
+[51]: #hooks-attributes
+[52]: #hook-names
