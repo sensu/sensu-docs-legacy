@@ -317,7 +317,7 @@ Check hooks can be used for automated data gathering for incident
 triage, for example, a check hook could be used to capture the process
 tree when a process has been determined to be not running etc.
 
-```json
+~~~ json
 {
   "checks": {
     "nginx_process": {
@@ -332,12 +332,12 @@ tree when a process has been determined to be not running etc.
     }
   }
 }
-```
+~~~
 
 Check hooks can also be used for rudimentary auto-remediation tasks,
 for example, starting a process that is no longer running.
 
-```json
+~~~ json
 {
   "checks": {
     "nginx_process": {
@@ -352,7 +352,7 @@ for example, starting a process that is no longer running.
     }
   }
 }
-```
+~~~
 
 ## Check configuration
 

@@ -9,7 +9,9 @@ layout: "docs"
 
 ### Recent Releases
 
-##### [Version 1.0](/docs/1.0/) ([changelog](/docs/1.0/overview/changelog.html)) (latest)
+##### [Version 1.1](/docs/1.1/) ([changelog](/docs/1.1/overview/changelog.html)) (latest)
+
+##### [Version 1.0](/docs/1.0/) ([changelog](/docs/1.0/overview/changelog.html))
 
 ##### [Version 0.29](/docs/0.29/) ([changelog](/docs/0.29/overview/changelog.html))
 
