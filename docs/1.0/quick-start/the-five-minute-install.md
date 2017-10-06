@@ -162,7 +162,7 @@ the [installation guide](2).
    sudo chown -R sensu:sensu /etc/sensu
    ~~~
 
-10. Start the Sensu services
+1. Start the Sensu services
 
    Sensu Core users:
 
@@ -178,45 +178,45 @@ the [installation guide](2).
    sudo systemctl start sensu-{enterprise,enterprise-dashboard,client}
    ~~~
 
-11. Verify that your installation is ready to use by querying the Sensu API
-    using the `curl` utility (and piping the result to the [`jq` utility][10]):
+1. Verify that your installation is ready to use by querying the Sensu API
+   using the `curl` utility (and piping the result to the [`jq` utility][10]):
 
-    ~~~ shell
-    sudo yum install jq curl -y
-    curl -s http://127.0.0.1:4567/clients | jq .
-    ~~~
+   ~~~ shell
+   sudo yum install jq curl -y
+   curl -s http://127.0.0.1:4567/clients | jq .
+   ~~~
 
-    If the Sensu API returns a JSON array of Sensu clients similar to this:
+   If the Sensu API returns a JSON array of Sensu clients similar to this:
 
-    ~~~ shell
-    $ curl -s http://127.0.0.1:4567/clients | jq .
-    [
-      {
-        "timestamp": 1458625739,
-        "version": "0.28.0",
-        "socket": {
-          "port": 3030,
-          "bind": "127.0.0.1"
-        },
-        "subscriptions": [
-          "dev"
-        ],
-        "environment": "development",
-        "address": "127.0.0.1",
-        "name": "client-01"
-      }
-    ]
-    ~~~
+   ~~~ shell
+   $ curl -s http://127.0.0.1:4567/clients | jq .
+   [
+     {
+       "timestamp": 1458625739,
+       "version": "0.28.0",
+       "socket": {
+         "port": 3030,
+         "bind": "127.0.0.1"
+       },
+       "subscriptions": [
+         "dev"
+       ],
+       "environment": "development",
+       "address": "127.0.0.1",
+       "name": "client-01"
+     }
+   ]
+   ~~~
 
-    ...you have successfully installed and configured Sensu!
+   ...you have successfully installed and configured Sensu!
 
-    If you you're using Sensu Enterprise, you should also be able to load the
-    Sensu Enterprise Dashboard in your browser by visiting
-    [http://hostname:3000](http://hostname:3000) (replacing `hostname` with the
-    hostname or IP address of the system where the dashboard is installed).
+   If you you're using Sensu Enterprise, you should also be able to load the
+   Sensu Enterprise Dashboard in your browser by visiting
+   [http://hostname:3000](http://hostname:3000) (replacing `hostname` with the
+   hostname or IP address of the system where the dashboard is installed).
 
-    ![](../img/five-minute-dashboard-1.png)
-    ![](../img/five-minute-dashboard-2.png)
+   ![](../img/five-minute-dashboard-1.png)
+   ![](../img/five-minute-dashboard-2.png)
 
 
 [1]:  ../overview/architecture.html
