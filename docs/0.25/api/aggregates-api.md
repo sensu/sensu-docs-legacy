@@ -345,7 +345,7 @@ $ curl -s http://localhost:4567/aggregates/elasticsearch/results/critical | jq .
       - **type**: Integer
       - **description**: the maximum age of results to include, in seconds.
 : allowed values
-  : `warning`, `critical`, `unknown`
+  : `ok`, `warning`, `critical`, `unknown`
 : response codes
   : - **Success**: 200 (OK)
     - **Missing**: 404 (Not Found)

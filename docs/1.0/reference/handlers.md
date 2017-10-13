@@ -287,12 +287,13 @@ The following attributes are configured within the `{"handlers": { "HANDLER": {}
 : description
   : An array of check result severities the handler will handle.
     _NOTE: event resolution bypasses this filtering._
+    _NOTE: specifying "ok" in handler severities will not cause the handler to recieve "ok" results from standard checks._
 : required
   : false
 : type
   : Array
 : allowed values
-  : `warning`, `critical`, `unknown`
+  : `ok`, `warning`, `critical`, `unknown`
 : example
   : ~~~ shell
     "severities": ["critical", "unknown"]
