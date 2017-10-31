@@ -163,9 +163,11 @@ Server: thin
        "status": 0
      }
     ~~~
-    _NOTE: the `/results` (POST) API only supports check `name`, `output`,
-    `status`, and `source` (used to create a [proxy client][4]). Please see the
-    [check definition specification][5] documentation for more information._
+    _NOTE: the `/results` (POST) API *requires* the following four fields: `name`, `output`,
+    `status`, and `source` (the fields used to create a [proxy client][4]). You can optionally 
+    add other fields supported in check results, such as `handler` to specify a handler of 
+    your choosing. Please see the [check definition specification][5] documentation for more 
+    information._
 : output
   : ~~~ shell
     HTTP/1.1 202 Accepted
