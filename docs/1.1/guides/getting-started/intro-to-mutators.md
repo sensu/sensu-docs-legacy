@@ -39,5 +39,5 @@ Coming soon. Please see the [Mutators][1] reference documentation. If you have
 questions about event data mutators, please contact [Sensu Support][2].
 
 
-[1]:  ../reference/mutators.html
+[1]:  ../../reference/mutators.html
 [2]:  http://helpdesk.sensuapp.com
