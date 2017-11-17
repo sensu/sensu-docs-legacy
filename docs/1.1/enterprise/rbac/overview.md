@@ -188,7 +188,7 @@ specification is common across all RBAC drivers.
   : An array of the LDAP groups, GitHub Teams, or GitLab Groups that should be
     included as members of the role.
 : required
-  : true
+  : true (unless `fallback` is `true`)
 : type
   : Array
 : allowed values
@@ -206,6 +206,24 @@ specification is common across all RBAC drivers.
       "myorganization/devs",
       "myorganization/ops"
     ]
+    ~~~
+
+`fallback`
+: description
+  : Sets the role as a fallback role, which is assigned to users that are
+    successfully authenticated but not authorized by any other role.
+    _NOTE: Only a single fallback role can be defined._
+    _NOTE: The `fallback` attribute can't be used in conjunction with the
+    the `members` attribute._
+: required
+  : true (unless `members` is defined)
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "fallback": true
     ~~~
 
 `datacenters`

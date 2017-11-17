@@ -367,6 +367,20 @@ compatible with any standards-compliant LDAP provider.
     "groupobjectclass": "posixGroup"
     ~~~
 
+`disablenestedgroups`
+: description
+  : Disables support for nested groups, in order to avoid recursive queries.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : false
+: example
+  : ~~~ shell
+    "disablenestedgroups": true
+    ~~~
+
 #### `roles` attributes
 
 Please see the [RBAC definition specification][4] for information on how to
