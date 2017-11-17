@@ -81,6 +81,20 @@ The following attributes are configured within the `{"jira": {} }`
     "password": "secret"
     ~~~
 
+`issue_type`
+:description
+  : The JIRA issue type
+: required
+  : false
+: type
+  : String
+: default
+  : `Incident`
+: example
+  : ~~~ shell
+    "issue_type": "Problem"
+    ~~~"
+
 `project`
 : description
   : The JIRA project to use for issues.
