@@ -93,7 +93,7 @@ The following attributes are configured within the `{"jira": {} }`
 : example
   : ~~~ shell
     "issue_type": "Problem"
-    ~~~"
+    ~~~
 
 `project`
 : description
