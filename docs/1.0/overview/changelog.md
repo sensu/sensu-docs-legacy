@@ -13,12 +13,65 @@ next:
 
 ## Releases
 
+- [Enterprise 2.6.6 Release Notes](#enterprise-v2-6-6)
+- [Enterprise 2.6.5 Release Notes](#enterprise-v2-6-5)
+- [Enterprise 2.6.4 Release Notes](#enterprise-v2-6-4)
+- [Enterprise 2.6.3 Release Notes](#enterprise-v2-6-3)
 - [Enterprise 2.6.2 Release Notes](#enterprise-v2-6-2)
 - [Enterprise 2.6.1 Release Notes](#enterprise-v2-6-1)
 - [Enterprise 2.6.0 Release Notes](#enterprise-v2-6-0)
+- [Core 1.0.4 Release Notes](#core-v1-0-4)
+- [Core 1.0.3 Release Notes](#core-v1-0-3)
 - [Core 1.0.2 Release Notes](#core-v1-0-2)
 - [Core 1.0.1 Release Notes](#core-v1-0-1)
 - [Core 1.0.0 Release Notes](#core-v1-0-0)
+
+
+## Enterprise 2.6.6 Release Notes {#enterprise-v2-6-6}
+
+**October 27, 2017** &mdash; Sensu Enterprise version 2.6.6 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-6-changes}
+
+- **BUGFIX**: API /metrics endpoint no longer returns a 404 for
+    missing metrics, instead responding with an empty set.
+
+## Enterprise 2.6.5 Release Notes {#enterprise-v2-6-5}
+
+**October 17, 2017** &mdash; Sensu Enterprise version 2.6.5 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-5-changes}
+
+- **IMPROVEMENT**: Now built on Sensu Core 1.0.4
+
+- **IMPROVEMENT**: Service scripts now honor `SENSU_OPTS` environment
+    variable for appending Sensu command line arguments when running
+    Sensu Enterprise.
+
+## Enterprise 2.6.4 Release Notes {#enterprise-v2-6-4}
+
+**October 15, 2017** &mdash; Sensu Enterprise version 2.6.4 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-4-changes}
+
+- **IMPROVEMENT**: General perfomance improvements.
+
+## Enterprise 2.6.3 Release Notes {#enterprise-v2-6-3}
+
+**September 29, 2017** &mdash; Sensu Enterprise version 2.6.3 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-6-3-changes}
+
+- **IMPROVEMENT**: JIRA issue type is now configurable. See [JIRA
+    integration documentation][9] for details.
 
 ## Enterprise 2.6.2 Release Notes {#enterprise-v2-6-2}
 
@@ -81,6 +134,33 @@ next:
 	custom metric name prefix.
 
 - **IMPROVEMENT**: Added Enterprise version to API /info.
+
+## Core 1.0.4 Release Notes {#core-v1-0-4}
+
+**October, 17  2017** &mdash; Sensu Core version 1.0.4 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v1-0-4-changes}
+
+- **DEBUG**: Added HTTP response body to sensu-api debug-level log
+    messages. This is a temporary change, not included in
+    future releases.
+
+## Core 1.0.3 Release Notes {#core-v1-0-3}
+
+Source: [GitHub.com][8]
+
+**August 25, 2017** &mdash; Sensu Core version 1.0.3 has been released
+	and is available for immediate download. Please note the following
+	improvements:
+
+### CHANGES {#core-v1-0-3-changes}
+
+- **BUGFIX**: Now using EventMachine version 1.2.5 in order to support larger EM timer
+intervals. EM timers are used by the Sensu check scheduler and many other
+Sensu components.
+
 
 ## Core 1.0.2 Release Notes {#core-v1-0-2}
 
@@ -172,3 +252,5 @@ Source: [GitHub.com][2]
 [5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
 [6]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#101---2017-07-24
 [7]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#102---2017-07-27
+[8]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#103---2017-08-25
+[9]: ../enterprise/integrations/jira.html
