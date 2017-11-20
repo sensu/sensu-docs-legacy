@@ -60,7 +60,7 @@ next:
 
 ### CHANGES {#enterprise-v2-6-4-changes}
 
-- **IMPROVEMENT**: General perfomance improvements.
+- **IMPROVEMENT**: General performance improvements.
 
 ## Enterprise 2.6.3 Release Notes {#enterprise-v2-6-3}
 
