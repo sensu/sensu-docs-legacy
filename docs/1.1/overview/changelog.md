@@ -13,7 +13,23 @@ next:
 
 ## Releases
 
+- [Enterprise 2.7.0 Release Notes](#enterprise-v2-7-0)
 - [Core 1.1.0 Release Notes](#core-v1-1-0)
+
+## Enterprise 2.7.0 Release Notes {#enterprise-v2-7-0}
+
+**November 20, 2017** &mdash; Sensu Enterprise version 2.7.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-7-7-changes}
+
+- **IMPROVEMENT**: Now built on Sensu Core 1.1.0
+
+- **IMPROVEMENT**: Integrations now include event data in logged error messages.
+
+- **BUGFIX**: Integrations now use the configured value for
+  `api.bind` setting when using the API.
 
 ## Core 1.1.0 Release Notes {#core-v1-1-0}
 
