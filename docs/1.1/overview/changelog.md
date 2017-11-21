@@ -24,12 +24,39 @@ next:
 
 ### CHANGES {#enterprise-v2-7-7-changes}
 
-- **IMPROVEMENT**: Now built on Sensu Core 1.1.0
+- **IMPROVEMENT**: Now built on Sensu Core 1.1.2
 
 - **IMPROVEMENT**: Integrations now include event data in logged error messages.
 
 - **BUGFIX**: Integrations now use the configured value for
   `api.bind` setting when using the API.
+
+## Core 1.1.2 Release Notes {#core-v1-1-2}
+
+Source: [GitHub.com][7]
+
+### CHANGES {#core-v1-1-2-changes}
+
+- **BUGFIX**: Fixed a bug in the Sensu client HTTP socket that caused
+    the Sensu client to crash when the the local client definition did
+    not specify `"http_socket"` settings and the `/info` or `/results`
+    endpoints were accessed.
+
+- **BUGFIX**: Fixed a bug in the Sensu client HTTP socket that caused
+    the Sensu client to consider an HTTP content-type that included
+    media-type information as invalid, discarding possibly valid
+    content.
+
+## Core 1.1.1 Release Notes {#core-v1-1-1}
+
+Source: [GitHub.com][6]
+
+### CHANGES {#core-v1-1-1-changes}
+
+- **BUGFIX**: Fixed a bug in check TTL monitoring that caused the
+    Sensu server to crash. Check TTL member deletion, following the
+    deletion of the associated check result, would produce an uncaught
+    error.
 
 ## Core 1.1.0 Release Notes {#core-v1-1-0}
 
@@ -117,3 +144,5 @@ Source: [GitHub.com][2]
 [3]: https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v200---2017-03-29
 [4]: https://github.com/sensu-extensions/sensu-extensions-occurrences
 [5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
+[6]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#111---2017-10-10
+[7]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#112---2017-10-27
