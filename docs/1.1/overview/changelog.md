@@ -22,7 +22,7 @@ next:
 	released and is available for immediate download. Please note the
 	following improvements:
 
-### CHANGES {#enterprise-v2-7-7-changes}
+### CHANGES {#enterprise-v2-7-0-changes}
 
 - **IMPROVEMENT**: Now built on Sensu Core 1.1.2
 
