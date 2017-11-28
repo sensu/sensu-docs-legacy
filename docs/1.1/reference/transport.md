@@ -34,7 +34,7 @@ default transport (RabbitMQ) with alternative solutions. There are currently
 two (2) transports provided with the sensu-transport library: RabbitMQ and
 Redis &mdash; each presenting unique performance and functional characteristics.
 
-### The RabbitMQ Transport (recommended)
+### The RabbitMQ Transport (recommended for production and local development)
 
 The RabbitMQ Transport is the original Sensu transport, and continues to be the
 recommended solution for running Sensu in production environments.
@@ -50,13 +50,13 @@ recommended solution for running Sensu in production environments.
 - Adds Erlang as a runtime dependency to the Sensu architecture (only on systems
   where RabbitMQ is running)
 
-### The Redis Transport
+### The Redis Transport (local development only)
 
-The Redis Transport was an obvious alternative to the original RabbitMQ
+The Redis Transport was an interesting alternative for local development to the original RabbitMQ
 Transport because Sensu already depends on Redis as a data store. Using Redis as
 a transport greatly simplifies Sensu's architecture by removing the need to
 install/configure RabbitMQ _and_ [Erlang](https://www.erlang.org/) (RabbitMQ's
-runtime).
+runtime). Do not use this in production!
 
 #### Pros {#redis-transport-pros}
 
@@ -66,8 +66,12 @@ runtime).
 
 #### Cons {#redis-transport-cons}
 
-- No native support for SSL
+- No native support for SSL, MITM could be used to schedule code to be run on any instance that is a sensu client. This is super scary!
 - No support for transport "consumers" metrics (see [Health & Info API][4])
+- No community or maintainer support
+- Not Battle tested: there are many bugs and unless you want to help sensu invest in making this better with in depth troubleshooting as well as the much of the investigation being done yourself this is a bad idea.
+- It's not actually a queue and will likely perform very poorly during and after maintenance periods.
+
 
 ## Transport configuration
 
