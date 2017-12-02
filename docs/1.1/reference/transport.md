@@ -34,7 +34,11 @@ default transport (RabbitMQ) with alternative solutions. There are currently
 two (2) transports provided with the sensu-transport library: RabbitMQ and
 Redis &mdash; each presenting unique performance and functional characteristics.
 
-### The RabbitMQ Transport (recommended for production and local development)
+_NOTE: While multiple transports are usable, RabbitMQ is strongly recommended
+for production use. Both Sensu, Inc. and the Sensu Community maintainers
+encourage using using it._
+
+### The RabbitMQ Transport (recommended)
 
 The RabbitMQ Transport is the original Sensu transport, and continues to be the
 recommended solution for running Sensu in production environments.
@@ -50,13 +54,13 @@ recommended solution for running Sensu in production environments.
 - Adds Erlang as a runtime dependency to the Sensu architecture (only on systems
   where RabbitMQ is running)
 
-### The Redis Transport (local development only)
+### The Redis Transport (not recommended for production)
 
-The Redis Transport was an interesting alternative for local development to the original RabbitMQ
-Transport because Sensu already depends on Redis as a data store. Using Redis as
-a transport greatly simplifies Sensu's architecture by removing the need to
+The Redis Transport is a convenient alternative to RabbitMQ for Transport local
+development because Sensu already depends on Redis as a data store. Using Redis
+as a transport greatly simplifies Sensu's architecture by removing the need to
 install/configure RabbitMQ _and_ [Erlang](https://www.erlang.org/) (RabbitMQ's
-runtime). Do not use this in production!
+runtime). That said, do not use this in production!
 
 #### Pros {#redis-transport-pros}
 
