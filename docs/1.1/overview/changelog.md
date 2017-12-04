@@ -14,6 +14,9 @@ next:
 ## Releases
 
 - [Enterprise 2.7.0 Release Notes](#enterprise-v2-7-0)
+- [Core 1.1.3 Release Notes](#core-v1-1-3)
+- [Core 1.1.2 Release Notes](#core-v1-1-2)
+- [Core 1.1.1 Release Notes](#core-v1-1-1)
 - [Core 1.1.0 Release Notes](#core-v1-1-0)
 
 ## Enterprise 2.7.0 Release Notes {#enterprise-v2-7-0}
@@ -30,6 +33,17 @@ next:
 
 - **BUGFIX**: Integrations now use the configured value for
   `api.bind` setting when using the API.
+
+## Core 1.1.3 Release Notes {#core-v1-1-3}
+
+Source: [GitHub.com][8]
+
+### CHANGES {#core-v1-1-3-changes}
+
+- **BUGFIX**: Fixed a bug in the Sensu client that broke check hooks
+    named after numeric statuses (e.g. "2") and "non-zero", they were
+    never executed unless the client had a local check definition.
+    (#1773)
 
 ## Core 1.1.2 Release Notes {#core-v1-1-2}
 
@@ -146,3 +160,4 @@ Source: [GitHub.com][2]
 [5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
 [6]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#111---2017-10-10
 [7]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#112---2017-10-27
+[8]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#113---2017-11-24
