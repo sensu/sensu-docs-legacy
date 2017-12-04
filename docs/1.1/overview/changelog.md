@@ -45,6 +45,19 @@ Source: [GitHub.com][8]
     never executed unless the client had a local check definition.
     (#1773)
 
+- **BUGFIX**: systemd units now stored in /lib/systemd instead of
+    /usr/lib/systemd on Debian and Ubuntu systems. (sensu-omnibus
+    #240)
+
+- **BUGFIX**: Sensu processes once again honor service-specific
+    defaults in /etc/default or /etc/sysconfig (sensu-omnibus #226)
+
+- **BUGFIX**: Package scripts now use `getent` for user/group
+    verification (sensu-omnibus #237)
+
+- **BUGFIX**: Removing AIX package no longer fails when sensu-client
+    isn't running. (sensu-omnibus #243)
+
 ## Core 1.1.2 Release Notes {#core-v1-1-2}
 
 Source: [GitHub.com][7]
