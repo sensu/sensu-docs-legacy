@@ -44,6 +44,10 @@ $ curl -s http://127.0.0.1:4567/checks | jq .
 ]
 ~~~
 
+_NOTE: The `/checks` API reads check configuration from disk; as such
+check definitions must exist on your API servers to be displayed by the API.
+Due to this standalone checks **will not** be displayed by the `/checks` API._
+
 #### API Specification {#checks-get-specification}
 
 `/checks` (GET)
