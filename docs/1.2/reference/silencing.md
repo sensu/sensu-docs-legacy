@@ -188,6 +188,24 @@ as shown in the examples below.
     ]
     ~~~
 
+`begin`
+: description
+  : The epoch timestamp at which the silence entry is applied and
+  becomes effective. Silence a check and/or client subscriptions at a
+  predetermined time (e.g. maintenance window).
+: required
+  : false
+: type
+  : Integer
+: example
+  : ~~~ json
+    {
+      "begin": 1512512023,
+      "check": "disk_utilization",
+      "subscription": "client:i-424242"
+    }
+    ~~~
+
 `expire`
 : description
   : Number of seconds until this entry should be automatically deleted.
