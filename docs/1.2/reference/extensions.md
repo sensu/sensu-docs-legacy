@@ -1,7 +1,7 @@
 ---
 title: "Extensions"
 description: "Reference documentation for Sensu Extensions."
-version: 1.1
+version: 1.2
 weight: 10
 ---
 

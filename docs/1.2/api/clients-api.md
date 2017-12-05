@@ -1,6 +1,6 @@
 ---
 title: "Clients API"
-version: 1.1
+version: 1.2
 weight: 2
 next:
   url: "checks-api.html"
@@ -43,7 +43,7 @@ $ curl -s http://127.0.0.1:4567/clients | jq .
 [
   {
     "timestamp": 1458625739,
-    "version": "1.1.0",
+    "version": "1.2.0",
     "socket": {
       "port": 3030,
       "bind": "127.0.0.1"
@@ -196,7 +196,7 @@ Hash containing the requested `:client` data (i.e. for the client named
 $ curl -s http://127.0.0.1:4567/clients/client-01 | jq .
 {
   "timestamp": 1458625739,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "socket": {
     "port": 3030,
     "bind": "127.0.0.1"

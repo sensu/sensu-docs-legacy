@@ -1,8 +1,8 @@
 ---
-title: "1.1 changelog"
+title: "1.2 changelog"
 description: "Release notes for Sensu Core and Sensu Enterprise releases based
-  on Sensu Core version 1.1.x"
-version: 1.1
+  on Sensu Core version 1.2.x"
+version: 1.2
 weight: 5
 next:
   url: "faq.html"
@@ -14,10 +14,10 @@ next:
 ## Releases
 
 - [Enterprise 2.7.0 Release Notes](#enterprise-v2-7-0)
-- [Core 1.1.3 Release Notes](#core-v1-1-3)
-- [Core 1.1.2 Release Notes](#core-v1-1-2)
-- [Core 1.1.1 Release Notes](#core-v1-1-1)
-- [Core 1.1.0 Release Notes](#core-v1-1-0)
+- [Core 1.2.3 Release Notes](#core-v1-1-3)
+- [Core 1.2.2 Release Notes](#core-v1-1-2)
+- [Core 1.2.1 Release Notes](#core-v1-1-1)
+- [Core 1.2.0 Release Notes](#core-v1-1-0)
 
 ## Enterprise 2.7.0 Release Notes {#enterprise-v2-7-0}
 
@@ -27,14 +27,14 @@ next:
 
 ### CHANGES {#enterprise-v2-7-0-changes}
 
-- **IMPROVEMENT**: Now built on Sensu Core 1.1.2
+- **IMPROVEMENT**: Now built on Sensu Core 1.2.2
 
 - **IMPROVEMENT**: Integrations now include event data in logged error messages.
 
 - **BUGFIX**: Integrations now use the configured value for
   `api.bind` setting when using the API.
 
-## Core 1.1.3 Release Notes {#core-v1-1-3}
+## Core 1.2.3 Release Notes {#core-v1-1-3}
 
 Source: [GitHub.com][8]
 
@@ -58,7 +58,7 @@ Source: [GitHub.com][8]
 - **BUGFIX**: Removing AIX package no longer fails when sensu-client
     isn't running. (sensu-omnibus #243)
 
-## Core 1.1.2 Release Notes {#core-v1-1-2}
+## Core 1.2.2 Release Notes {#core-v1-1-2}
 
 Source: [GitHub.com][7]
 
@@ -74,7 +74,7 @@ Source: [GitHub.com][7]
     media-type information as invalid, discarding possibly valid
     content.
 
-## Core 1.1.1 Release Notes {#core-v1-1-1}
+## Core 1.2.1 Release Notes {#core-v1-1-1}
 
 Source: [GitHub.com][6]
 
@@ -85,11 +85,11 @@ Source: [GitHub.com][6]
     deletion of the associated check result, would produce an uncaught
     error.
 
-## Core 1.1.0 Release Notes {#core-v1-1-0}
+## Core 1.2.0 Release Notes {#core-v1-1-0}
 
 Source: [GitHub.com][2]
 
-**September 27, 2017** &mdash; Sensu Core version 1.1.0 has been released
+**September 27, 2017** &mdash; Sensu Core version 1.2.0 has been released
 	and is available for immediate download. Please note the following
 	improvements:
 

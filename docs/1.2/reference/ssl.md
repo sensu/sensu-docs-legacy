@@ -1,7 +1,7 @@
 ---
 title: "SSL Configuration"
 description: "Reference documentation for using Sensu with SSL."
-version: 1.1
+version: 1.2
 weight: 17
 ---
 
@@ -63,7 +63,7 @@ SSL documentation][2] for a detailed guide on configuring RabbitMQ with SSL.
 2. Download the Sensu SSL tool
 
    ~~~ shell
-   wget http://sensuapp.org/docs/1.1/files/sensu_ssl_tool.tar
+   wget http://sensuapp.org/docs/1.2/files/sensu_ssl_tool.tar
    tar -xvf sensu_ssl_tool.tar
    ~~~
 

@@ -1,6 +1,6 @@
 ---
 title: "Built-in Filters"
-version: 1.1
+version: 1.2
 weight: 8
 next:
   url: "built-in-mutators.html"

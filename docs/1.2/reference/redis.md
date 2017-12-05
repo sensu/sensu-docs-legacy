@@ -1,7 +1,7 @@
 ---
 title: "Redis Configuration"
 description: "Reference documentation for configuring Redis for use with Sensu."
-version: 1.1
+version: 1.2
 weight: 16
 next:
   url: "ssl"
@@ -322,7 +322,7 @@ To enable support for external connections, please ensure that your
 #
 # Examples:
 #
-# bind 192.168.1.100 10.0.0.1
+# bind 192.168.1.200 10.0.0.1
 bind 0.0.0.0
 ~~~
 
@@ -518,7 +518,7 @@ deployment._
 1. Download the Sensu Redis Sentinel configuration file.
 
    ~~~ shell
-   sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/1.1/files/sentinel.conf
+   sudo wget -O /etc/redis/sentinel.conf http://sensuapp.org/docs/1.2/files/sentinel.conf
    ~~~
 
 2. Sentinel not only reads its configuration from `/etc/redis/sentinel.conf`, but
@@ -558,7 +558,7 @@ deployment._
 
    ~~~ shell
    sudo yum install initscripts
-   sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/1.1/files/redis-sentinel
+   sudo wget -O /etc/init.d/redis-sentinel http://sensuapp.org/docs/1.2/files/redis-sentinel
    ~~~
 
    The Redis Sentinel init script file needs to be executable.

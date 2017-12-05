@@ -1,5 +1,5 @@
 ---
-version: 1.1
+version: 1.2
 category: "Testing Prereleases"
 title: "Testing Prereleases"
 weight: 9

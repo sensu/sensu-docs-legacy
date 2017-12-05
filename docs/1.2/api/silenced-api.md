@@ -1,6 +1,6 @@
 ---
 title: "Silenced API"
-version: 1.1
+version: 1.2
 weight: 7
 next:
   url: ".html"

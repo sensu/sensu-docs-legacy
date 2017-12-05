@@ -2,7 +2,7 @@
 title: "Configuration"
 description: "Reference documentation for Sensu Configuration, including service
   init scripts, command line arguments, and environment variables."
-version: 1.1
+version: 1.2
 weight: 14
 ---
 
@@ -96,7 +96,7 @@ configuration sources, please note the following example scenario:
    ~~~json
    {
      "rabbitmq": {
-       "host": "10.0.1.10",
+       "host": "10.0.1.20",
        "vhost": "/sensu",
        "user": "sensu",
        "password": "secret"
@@ -138,7 +138,7 @@ configuration sources, please note the following example scenario:
    ~~~json
    {
      "rabbitmq": {
-       "host": "10.0.1.10",
+       "host": "10.0.1.20",
        "user": "sensu01",
        "password": "newsecret"
      }
@@ -156,7 +156,7 @@ configuration sources, please note the following example scenario:
    ~~~json
    {
      "rabbitmq": {
-       "host": "10.0.1.10",
+       "host": "10.0.1.20",
        "vhost": "/sensu",
        "user": "sensu01",
        "password": "newsecret"
@@ -477,7 +477,7 @@ _NOTE: these options will work with ALL of the Sensu services (`sensu-server`,
 : example
   : ~~~ shell
     $ /opt/sensu/bin/sensu-client -V
-    1.1.0
+    1.2.0
     ~~~
 
 `-c` (`--config FILE`)
@@ -759,7 +759,7 @@ with information it needs to communicate with RabbitMQ and Redis:
 ~~~json
 {
   "rabbitmq": {
-    "host": "10.0.1.10",
+    "host": "10.0.1.20",
     "vhost": "/sensu",
     "user": "sensu",
     "password": "secret"
@@ -793,7 +793,7 @@ at the top level of their respective JSON documents):
   : ~~~ shell
     {
       "rabbitmq": {
-        "host": "10.0.1.10",
+        "host": "10.0.1.20",
         "vhost": "/sensu",
         "user": "sensu",
         "password": "secret"

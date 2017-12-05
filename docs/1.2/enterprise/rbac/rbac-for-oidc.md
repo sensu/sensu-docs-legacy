@@ -2,7 +2,7 @@
 title: "RBAC for OpenID Connect (OIDC)"
 description: "Reference documentation for the Sensu Enterprise Dashboard Role
   Based Access Controls (RBAC) for OpenID Connect (OIDC)"
-version: 1.1
+version: 1.2
 weight: 3
 ---
 

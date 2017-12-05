@@ -1,6 +1,6 @@
 ---
 title: "Events API"
-version: 1.1
+version: 1.2
 weight: 6
 next:
   url: "stashes-api.html"
@@ -79,7 +79,7 @@ $ curl -s http://localhost:4567/events | jq .
     },
     "client": {
       "timestamp": 1460303501,
-      "version": "1.1.0",
+      "version": "1.2.0",
       "website": "http://google.com",
       "socket": {
         "port": 3030,
@@ -207,7 +207,7 @@ $ curl -s http://localhost:4567/events/client-01 | jq .
     },
     "client": {
       "timestamp": 1460303741,
-      "version": "1.1.0",
+      "version": "1.2.0",
       "website": "http://google.com",
       "socket": {
         "port": 3030,
@@ -334,7 +334,7 @@ $ curl -s http://localhost:4567/events/client-01/sensu_website | jq .
   },
   "client": {
     "timestamp": 1460304101,
-    "version": "1.1.0",
+    "version": "1.2.0",
     "website": "http://google.com",
     "socket": {
       "port": 3030,

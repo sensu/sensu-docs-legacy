@@ -1,6 +1,6 @@
 ---
 layout: "docs"
-version: 1.1
+version: 1.2
 weight: 2
 title: "Monitoring Flow"
 next:
@@ -32,4 +32,4 @@ next:
 - The **Sensu Server** executes the **Event Handler** (assuming the event was
   not filtered out)
 
-![](/docs/1.1/img/sensu-diagram.gif)
+![](/docs/1.2/img/sensu-diagram.gif)

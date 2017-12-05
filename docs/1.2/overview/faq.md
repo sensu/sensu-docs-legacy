@@ -1,7 +1,7 @@
 ---
 title: "Frequently Asked Questions"
 description: "Sensu Frequently Asked Questions"
-version: 1.1
+version: 1.2
 weight: 6
 ---
 

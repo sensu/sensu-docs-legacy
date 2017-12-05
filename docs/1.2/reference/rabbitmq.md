@@ -2,7 +2,7 @@
 title: "RabbitMQ Configuration"
 description: "Reference documentation for configuring RabbitMQ for use with
   Sensu."
-version: 1.1
+version: 1.2
 weight: 15
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Silencing"
 description: "Reference documentation for Sensu Event Silencing."
-version: 1.1
+version: 1.2
 weight: 6
 ---
 

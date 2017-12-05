@@ -1,6 +1,6 @@
 ---
 title: "SNMP"
-version: 1.1
+version: 1.2
 weight: 9
 ---
 

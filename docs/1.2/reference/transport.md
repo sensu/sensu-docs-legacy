@@ -1,7 +1,7 @@
 ---
 title: "Sensu Transport"
 description: "Reference documentation for the Sensu Transport."
-version: 1.1
+version: 1.2
 weight: 13
 ---
 

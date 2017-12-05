@@ -2,7 +2,7 @@
 title: "Puppet"
 description: "Deregister Sensu clients from the client registry if they no
   longer have an associated Puppet node."
-version: 1.1
+version: 1.2
 weight: 12
 ---
 
@@ -36,7 +36,7 @@ handler (integration).
 ~~~ json
 {
   "puppet": {
-    "endpoint": "https://10.0.1.12:8081/pdb/query/v4/nodes/",
+    "endpoint": "https://10.0.1.22:8081/pdb/query/v4/nodes/",
     "ssl": {
       "keystore_file": "/etc/sensu/ssl/puppet/keystore.jks",
       "keystore_password": "secret",
@@ -108,7 +108,7 @@ The following attributes are configured within the `{"puppet": {} }`
   : String
 : example
   : ~~~ shell
-    "endpoint": "https://10.0.1.12:8081/pdb/query/v4/nodes/"
+    "endpoint": "https://10.0.1.22:8081/pdb/query/v4/nodes/"
     ~~~
 
 `ssl`
@@ -133,7 +133,7 @@ The following attributes are configured within the `{"puppet": { "ssl": {} } }`
 ~~~ json
 {
   "puppet": {
-    "endpoint": "https://10.0.1.12:8081/pdb/query/v4/nodes/",
+    "endpoint": "https://10.0.1.22:8081/pdb/query/v4/nodes/",
     "...": "...",
     "ssl": {
       "keystore_file": "/etc/sensu/ssl/puppet/keystore.jks",

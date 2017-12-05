@@ -1,7 +1,7 @@
 ---
 title: "OpsGenie"
 description: "Create and close OpsGenie alerts for Sensu events."
-version: 1.1
+version: 1.2
 weight: 5
 ---
 

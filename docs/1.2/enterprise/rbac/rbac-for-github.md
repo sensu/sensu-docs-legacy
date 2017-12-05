@@ -2,7 +2,7 @@
 title: "RBAC for GitHub"
 description: "Reference documentation for the Sensu Enterprise Dashboard Role
   Based Access Controls (RBAC) for GitHub"
-version: 1.1
+version: 1.2
 weight: 3
 ---
 

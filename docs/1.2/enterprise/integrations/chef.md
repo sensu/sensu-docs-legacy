@@ -2,7 +2,7 @@
 title: "Chef"
 description: "Deregister Sensu clients from the client registry, if they no
   longer have associated Chef node data."
-version: 1.1
+version: 1.2
 weight: 13
 ---
 

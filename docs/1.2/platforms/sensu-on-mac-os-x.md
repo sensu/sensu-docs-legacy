@@ -2,7 +2,7 @@
 title: "Mac OS X"
 description: "User documentation for installing and operating Sensu on Mac OS X
   systems."
-version: 1.1
+version: 1.2
 weight: 4
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Mac OS X systems. For instructions on
@@ -44,7 +44,7 @@ notice._
 2. Install the package using the `installer` utility
 
    ~~~ shell
-   sudo installer -pkg sensu-1.1.0-1.pkg -target /
+   sudo installer -pkg sensu-1.2.0-1.pkg -target /
    ~~~
 
 3. Configure the Sensu client. **No "default" configuration is provided with
@@ -143,7 +143,7 @@ configuration file) to configure the `sensu-client` daemon run arguments (e.g.
    your favorite text editor.
 
    ~~~ shell
-   sudo cp /opt/sensu/embedded/Cellar/sensu/1.1.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
+   sudo cp /opt/sensu/embedded/Cellar/sensu/1.2.0/Library/LaunchDaemons/org.sensuapp.sensu-client.plist /Library/LaunchDaemons/org.sensuapp.sensu-client.plist
    ~~~
 
 2. This XML configuration file allows you to set Sensu client [CLI
@@ -196,13 +196,13 @@ is installed by the Sensu OS X installer package.
 
 ~~~ shell
 $ sudo -u _sensu /opt/sensu/bin/sensu-client -V
-1.1.0
+1.2.0
 ~~~
 
 
 [1]:  https://sensuapp.org/download
 [2]:  https://sensu.global.ssl.fastly.net/osx/
-[3]:  https://sensu.global.ssl.fastly.net/osx/sensu-1.1.0-1.mountainlion.pkg
+[3]:  https://sensu.global.ssl.fastly.net/osx/sensu-1.2.0-1.mountainlion.pkg
 [4]:  #configure-the-sensu-client-launchd-daemon
 [5]:  ../reference/configuration.html
 [6]:  ../reference/transport.html

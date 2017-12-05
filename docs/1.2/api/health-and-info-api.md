@@ -1,6 +1,6 @@
 ---
 title: "Health & Info APIs"
-version: 1.1
+version: 1.2
 weight: 8
 next:
   url: "settings-api.html"
@@ -138,7 +138,7 @@ connectivity, and the running Sensu servers.
 $ curl -s http://127.0.0.1:4567/info | jq .
 {
   "sensu": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "settings": {
       "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
     }
@@ -175,7 +175,7 @@ $ curl -s http://127.0.0.1:4567/info | jq .
         }
       },
       "sensu": {
-        "version": "1.1.0",
+        "version": "1.2.0",
         "settings": {
           "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
         }
@@ -206,7 +206,7 @@ $ curl -s http://127.0.0.1:4567/info | jq .
   : ~~~ json
     {
       "sensu": {
-        "version": "1.1.0",
+        "version": "1.2.0",
         "settings": {
           "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
         }
@@ -243,7 +243,7 @@ $ curl -s http://127.0.0.1:4567/info | jq .
             }
           },
           "sensu": {
-            "version": "1.1.0",
+            "version": "1.2.0",
             "settings": {
               "hexdigest": "4041dcf9b87d3dc8523a79d944c68f99fe10f99b379989afd617201c91d75411"
             }

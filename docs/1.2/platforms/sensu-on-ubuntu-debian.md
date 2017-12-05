@@ -2,7 +2,7 @@
 title: "Ubuntu/Debian"
 description: "User documentation for installing and operating Sensu on Ubuntu
   and Debian Linux systems."
-version: 1.1
+version: 1.2
 weight: 1
 info: "<strong>NOTE:</strong> this page contains reference documentation for
   installing and operating Sensu on Ubuntu and Debian systems. For instructions

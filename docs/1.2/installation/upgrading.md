@@ -1,5 +1,5 @@
 ---
-version: 1.1
+version: 1.2
 category: "Upgrading Guide"
 title: "Upgrading Sensu"
 weight: 8
