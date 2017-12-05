@@ -13,164 +13,34 @@ next:
 
 ## Releases
 
-- [Enterprise 2.7.0 Release Notes](#enterprise-v2-7-0)
-- [Core 1.2.3 Release Notes](#core-v1-1-3)
-- [Core 1.2.2 Release Notes](#core-v1-1-2)
-- [Core 1.2.1 Release Notes](#core-v1-1-1)
-- [Core 1.2.0 Release Notes](#core-v1-1-0)
+- [Core 1.2.0 Release Notes](#core-v1-2-0)
 
-## Enterprise 2.7.0 Release Notes {#enterprise-v2-7-0}
-
-**November 20, 2017** &mdash; Sensu Enterprise version 2.7.0 has been
-	released and is available for immediate download. Please note the
-	following improvements:
-
-### CHANGES {#enterprise-v2-7-0-changes}
-
-- **IMPROVEMENT**: Now built on Sensu Core 1.2.2
-
-- **IMPROVEMENT**: Integrations now include event data in logged error messages.
-
-- **BUGFIX**: Integrations now use the configured value for
-  `api.bind` setting when using the API.
-
-## Core 1.2.3 Release Notes {#core-v1-1-3}
-
-Source: [GitHub.com][8]
-
-### CHANGES {#core-v1-1-3-changes}
-
-- **BUGFIX**: Fixed a bug in the Sensu client that broke check hooks
-    named after numeric statuses (e.g. "2") and "non-zero", they were
-    never executed unless the client had a local check definition.
-    (#1773)
-
-- **BUGFIX**: systemd units now stored in /lib/systemd instead of
-    /usr/lib/systemd on Debian and Ubuntu systems. (sensu-omnibus
-    #240)
-
-- **BUGFIX**: Sensu processes once again honor service-specific
-    defaults in /etc/default or /etc/sysconfig (sensu-omnibus #226)
-
-- **BUGFIX**: Package scripts now use `getent` for user/group
-    verification (sensu-omnibus #237)
-
-- **BUGFIX**: Removing AIX package no longer fails when sensu-client
-    isn't running. (sensu-omnibus #243)
-
-## Core 1.2.2 Release Notes {#core-v1-1-2}
-
-Source: [GitHub.com][7]
-
-### CHANGES {#core-v1-1-2-changes}
-
-- **BUGFIX**: Fixed a bug in the Sensu client HTTP socket that caused
-    the Sensu client to crash when the the local client definition did
-    not specify `"http_socket"` settings and the `/info` or `/results`
-    endpoints were accessed.
-
-- **BUGFIX**: Fixed a bug in the Sensu client HTTP socket that caused
-    the Sensu client to consider an HTTP content-type that included
-    media-type information as invalid, discarding possibly valid
-    content.
-
-## Core 1.2.1 Release Notes {#core-v1-1-1}
-
-Source: [GitHub.com][6]
-
-### CHANGES {#core-v1-1-1-changes}
-
-- **BUGFIX**: Fixed a bug in check TTL monitoring that caused the
-    Sensu server to crash. Check TTL member deletion, following the
-    deletion of the associated check result, would produce an uncaught
-    error.
-
-## Core 1.2.0 Release Notes {#core-v1-1-0}
+## Core 1.2.0 Release Notes {#core-v1-2-0}
 
 Source: [GitHub.com][2]
 
-**September 27, 2017** &mdash; Sensu Core version 1.2.0 has been released
-	and is available for immediate download. Please note the following
-	improvements:
+**December 5, 2017** &mdash; Sensu Core version 1.2.0 has been
+	released and is available for immediate download. Please note
+	the following improvements:
 
-### CHANGES {#core-v1-1-0-changes}
+### CHANGES {#core-v1-2-0-changes}
 
-- **IMPORTANT**: Sensu packages include Ruby 2.4.1. Upgrading from
-	releases of Sensu prior to 1.0.0 will require all plugin or
-	extension gems to be re-installed under the new Ruby environment.
+- **NEW**: Scheduled maintenance, Sensu now gives users the ability to
+	silence a check and/or client subscriptions at a predetermined
+	time (begin epoch timestamp), with an optional expiration (in
+	seconds), enabling users to silence events in advance for
+	scheduled maintenance windows.
 
-- **IMPORTANT**: Sensu packages include [sensu-plugin 2.0.0][3], which
-	disables its deprecated filter methods by default, i.e.
-	occurrences. Sensu releases since 1.0.0 include built-in filters
-	that provide the same functionality with several improvements. The
-	built-in filters are ["occurrences"][4] and
-	["check_dependencies"][5]. To use the built-in filters, apply them
-	to Sensu event handlers via their definition `"filters"`
-	attribute, e.g. `"filters": ["occurrences",
-	"check_dependencies"]`. These filters can now be used with Sensu
-	event handlers that do not use the sensu-plugin library (or Ruby).
+- **NEW**: The Sensu API now logs the "X-Request-ID" header, making it
+	much easier to trace a request/response. If the API client does
+	not provide a request ID, the API generates one for the request
+	(UUID).
 
-- **NEW**: Check hooks, commands run by the Sensu client in response to
-	the result of the check command execution. The Sensu client will
-	execute the appropriate configured hook command, depending on the
-	check execution status (e.g. 1). Valid hook names include (in
-	order of precedence): "1"-"255", "ok", "warning", "critical",
-	"unknown", and "non-zero". The check hook command output, status,
-	executed timestamp, and duration are captured and published in the
-	check result. Check hook commands can optionally receive JSON
-	serialized Sensu client and check definition data via STDIN.
+- **IMPROVEMENT**: The Sensu API /results/* endpoints now include check
+	history in the result data.
 
-- **NEW**: Check STDIN. A boolean check definition attribute, "stdin",
-	when set to true instructs the Sensu client to write JSON
-	serialized Sensu client and check definition data to the check
-	command process STDIN. This attribute cannot be used with existing
-	Sensu check plugins, nor Nagios plugins etc, as the Sensu client
-	will wait indefinitely for the check process to read and close
-	STDIN.
-
-- **IMPROVEMENT**: Splayed proxy check request publishing. Users can now
-	splay proxy check requests (optional), evenly, over a window of
-	time, determined by the check interval and a configurable splay
-	coverage percentage. For example, if a check has an interval of
-	60s and a configured splay coverage of 90%, its proxy check
-	requests would be splayed evenly over a time window of 60s * 90%,
-	54s, leaving 6s for the last proxy check execution before the the
-	next round of proxy check requests for the same check. Proxy check
-	request splayed publishing can be configured with two new check
-	definition attributes, within the proxy_requests scope, splay
-	(boolean) to enable it and splay_coverage (integer percentage,
-	defaults to 90).
-
-- **IMPROVEMENT**: Configurable check output truncation (for storage in
-	Redis). Check output truncation can be manually enabled/disabled
-	with the check definition attribute "truncate_output",
-	e.g."truncate_output": false. The output truncation length can be
-	configured with the check definition attribute
-	"truncate_output_length", e.g. "truncate_output_length": 1024.
-	Check output truncation is still enabled by default for metric
-	checks, with "type": "metric".
-
-- **IMPROVEMENT**: Sensu client HTTP socket basic authentication can how
-	be applied to all endpoints (not just /settings), via the client
-	definition http_socket attribute "protect_all_endpoints", e.g.
-	"protect_all_endpoints": true.
-
-- **IMPROVEMENT**: Improved check TTL monitoring performance.
-
-- **IMRPOVEMENT**: The Sensu extension run log event log level is now set
-	to debug (instead of info) when the run output is empty and the
-	status is 0.
-
-- **BUGFIX**: Added initial timestamp to proxy client definitions. The
-	Uchiwa and Sensu dashboards will no longer display "Invalid Date".
-
-- **BUGFIX**: Deleting check history when deleting an associated check result.
+- **IMPROVEMENT**: Check token substitution is now supported in check
+	"subdue".
 
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
-[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#110---2017-09-27
-[3]: https://github.com/sensu-plugins/sensu-plugin/blob/master/CHANGELOG.md#v200---2017-03-29
-[4]: https://github.com/sensu-extensions/sensu-extensions-occurrences
-[5]: https://github.com/sensu-extensions/sensu-extensions-check-dependencies
-[6]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#111---2017-10-10
-[7]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#112---2017-10-27
-[8]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#113---2017-11-24
+[2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#120---2017-12-05
