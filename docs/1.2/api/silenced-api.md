@@ -34,6 +34,7 @@ $ curl -s -X GET http://localhost:4567/silenced |jq .
   {
     "expire": 3530,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": null,
     "reason": null,
     "check": "check_haproxy",
@@ -43,6 +44,7 @@ $ curl -s -X GET http://localhost:4567/silenced |jq .
   {
     "expire": -1,
     "expire_on_resolve": true,
+    "begin": null,
     "creator": "sysop@example.com",
     "reason": "we ran out of time",
     "check": "check_ntpd",
@@ -80,6 +82,7 @@ $ curl -s -X GET http://localhost:4567/silenced |jq .
       {
         "expire": 3530,
         "expire_on_resolve": false,
+        "begin": null,
         "creator": null,
         "reason": null,
         "check": "check_haproxy",
@@ -89,6 +92,7 @@ $ curl -s -X GET http://localhost:4567/silenced |jq .
       {
         "expire": -1,
         "expire_on_resolve": true,
+        "begin": null,
         "creator": "sysop@example.com",
         "reason": "we ran out of time",
         "check": "check_ntpd",
@@ -125,6 +129,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   {
     "expire": 3594,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": null,
     "reason": null,
     "check": "check_haproxy",
@@ -156,6 +161,14 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
      - **type**: String
      - **description**: Specifies the check which the silence entry applies to.
      - **example**: "check_haproxy"
+  : - `begin`
+      - **required**: false
+      - **type**: Integer
+      - **description**: If specified, the silence entry will only be
+      effective after this epoch timestamp. Silence a check and/or
+      client subscriptions at a predetermined time (e.g. maintenance
+      window).
+      - **example**: 1512501881
   : - `creator`
      - **required**: false
      - **type**: String
@@ -165,7 +178,9 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
       - **required**: false
       - **type**: Integer
       - **description**: If specified, the silence entry will be
-      automatically cleared after this number of seconds.
+      automatically cleared after this number of seconds. If `begin`
+      is specified, the number of seconds until being cleared starts
+      at that time.
       - **example**: 1800
   : - `expire_on_resolve`
       - **required**: false
@@ -198,6 +213,7 @@ $ curl -s -X GET http://localhost:4567/silenced/ids/load-balancer:check_haproxy 
   "id": "load-balancer:check_haproxy",
   "subscription": "load-balancer",
   "check": "check_haproxy",
+  "begin": null,
   "reason": null,
   "creator": null,
   "expire_on_resolve": false,
@@ -223,6 +239,7 @@ $ curl -s -X GET http://localhost:4567/silenced/ids/load-balancer:check_haproxy 
       "id": "webserver:check_nginx",
       "subscription": "webserver",
       "check": "check_nginx",
+      "begin": null,
       "reason": null,
       "creator": null,
       "expire_on_resolve": false,
@@ -242,6 +259,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   {
     "expire": 3594,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": null,
     "reason": null,
     "check": "check_haproxy",
@@ -276,6 +294,7 @@ $ curl -s -X GET http://localhost:4567/silenced | jq .
   {
     "expire": null,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": null,
     "reason": null,
     "check": "check_ntpd",
@@ -346,6 +365,7 @@ $ curl -s -X GET http://localhost:4567/silenced/subscriptions/load-balancer | jq
   {
     "expire": 3596,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": null,
     "reason": null,
     "check": "check_ntpd",
@@ -393,6 +413,7 @@ $ curl -s -X GET http://localhost:4567/silenced/checks/check_ntpd | jq .
   {
     "expire": -1,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": "sysop@example.com",
     "reason": "we ran out of time",
     "check": "check_ntpd",
@@ -402,6 +423,7 @@ $ curl -s -X GET http://localhost:4567/silenced/checks/check_ntpd | jq .
   {
     "expire": -1,
     "expire_on_resolve": false,
+    "begin": null,
     "creator": "sysop@example.com",
     "reason": "we ran out of time",
     "check": "check_ntpd",
