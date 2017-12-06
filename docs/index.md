@@ -26,5 +26,3 @@ layout: "docs"
 ##### [Version 0.25](/docs/0.25/) ([changelog](/docs/0.25/overview/changelog.html))
 
 ##### [Version 0.24](/docs/0.24/) ([changelog](/docs/0.24/overview/changelog.html))
-
-##### [Version 0.23](/docs/0.23/) ([changelog](/docs/0.23/overview/changelog.html))
