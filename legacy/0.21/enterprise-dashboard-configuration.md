@@ -81,7 +81,7 @@ dashboard
 
 name
 : description
-  : The name of the Sensu API (used elsewhere as the `datacenter` name).
+  : The name of the Sensu API (used elsewhere as the `datacenter` name)_NOTE: In High Availability (HA) configurations, multiple Sensu API endpoints can be grouped together by using the same datacenter name.__NOTE: In High Availability (HA) configurations, multiple Sensu API endpoints can be grouped together by using the same datacenter name._.
 : required
   : false
 : type
