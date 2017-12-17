@@ -35,7 +35,8 @@ event handler (integration).
   "event_stream": {
     "host": "127.0.0.1",
     "port": 3000,
-    "filter_metrics": false
+    "filter_metrics": true,
+    "filter_ok_keepalives": true
   }
 }
 ~~~
@@ -88,7 +89,19 @@ event handler (integration).
     "filter_metrics": true
     ~~~
 
-
+`filter_ok_keepalives`
+: description
+  : If OK keepalive [events][2] are relayed to the remote socket.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `false`
+: example
+  : ~~~ shell
+    "filter_ok_keepalives": true
+    ~~~
 
 [1]:  /enterprise
 [2]:  ../../reference/events.html
