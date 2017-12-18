@@ -13,7 +13,39 @@ next:
 
 ## Releases
 
+- [Enterprise 2.8.0 Release Notes](#enterprise-v2-8-0)
 - [Core 1.2.0 Release Notes](#core-v1-2-0)
+
+## Enterprise 2.8.0 Release Notes {#enterprise-v2-8-0}
+
+**December 18, 2017** &mdash; Sensu Enterprise version 2.8.0 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-8-0-changes}
+
+- **IMPROVEMENT**: The InfluxDB and Graphite integrations now support
+	event annotations, for adding Sensu event context to graphs. Any
+	check, even those that do not produce metrics, can now use the
+	"influxdb" and "graphite" event handlers to record their events in
+	the respective time-series database.
+
+- **IMPROVEMENT**: The Slack integration now supports using an ERB
+	template for notification Slack attachment text, e.g. `"filters":
+	{"text": "/etc/sensu/slack_text.erb"}`.
+
+- **IMPROVEMENT**: The Email integration now supports HTML body content,
+	with a configurable email content type, e.g. `"content_type":
+	"text/html"`.
+
+- **IMPROVEMENT**: The InfluxDB, OpenTSDB, and Wavefront integrations now
+	support configurable tags, which get added to every metric point,
+	e.g `"tags": {"dc": "us-central-1"}`
+
+- **IMPROVEMENT**: The Event Stream integration now supports filtering OK
+	keepalives, e.g. `"filter_ok_keepalives": true`.
+
+- **IMPROVEMENT**: Built on Sensu Core 1.2.0.
 
 ## Core 1.2.0 Release Notes {#core-v1-2-0}
 

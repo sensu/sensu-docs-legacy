@@ -33,7 +33,10 @@ handler (integration).
   "opentsdb": {
     "host": "opentsdb.example.com",
     "port": 4242,
-    "tag_host": true
+    "tag_host": true,
+    "tags": {
+      "dc": "us-central-1"
+    }
   }
 }
 ~~~
@@ -113,6 +116,22 @@ The following attributes are configured within the `{"opentsdb": {} }`
 : example
   : ~~~ shell
     "prefix": "production"
+    ~~~
+
+`tags`
+: description
+  : Configurable custom tags (key/value pairs) to add to every OpenTSDB metric data point.
+: required
+  : false
+: type
+  : Hash
+: default
+  : `{}`
+: example
+  : ~~~ shell
+    "tags": {
+      "dc": "us-central-1"
+    }
     ~~~
 
 [1]:  /enterprise

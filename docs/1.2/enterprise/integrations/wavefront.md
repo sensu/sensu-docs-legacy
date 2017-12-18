@@ -38,7 +38,10 @@ handler (integration).
 {
   "wavefront": {
     "host": "wavefront.example.com",
-    "port": 2878
+    "port": 2878,
+    "tags": {
+      "dc": "us-central-1"
+    }
   }
 }
 ~~~
@@ -78,6 +81,21 @@ The following attributes are configured within the `{"wavefront": {} }`
     "port": 2878
     ~~~
 
+`tags`
+: description
+  : Configurable custom tags (key/value pairs) to add to every Wavefront metric data point.
+: required
+  : false
+: type
+  : Hash
+: default
+  : `{}`
+: example
+  : ~~~ shell
+    "tags": {
+      "dc": "us-central-1"
+    }
+    ~~~
 
 [1]:  /enterprise
 [2]:  http://www.wavefront.com?ref=sensu-enterprise

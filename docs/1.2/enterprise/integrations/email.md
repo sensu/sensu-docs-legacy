@@ -81,6 +81,7 @@ handler (integration).
     },
     "to": "support@example.com",
     "from": "noreply@example.com",
+    "content_type": "text/plain",
     "timeout": 10
   }
 }
@@ -147,6 +148,20 @@ The following attributes are configured within the `{"email": {} }`
 : example
   : ~~~ shell
     "from": "noreply@example.com"
+    ~~~
+
+`content_type`
+: description
+  : The email content type header, it can be used to enable HTML body content.
+: required
+  : false
+: type
+  : String
+: default
+  : `text/plain`
+: example
+  : ~~~ shell
+    "content_type": "text/html"
     ~~~
 
 `templates`

@@ -33,7 +33,10 @@ handler (integration).
     "port": 8086,
     "username": "root",
     "password": "Bfw3Bdrn5WfqvOl1",
-    "api_version": "0.9"
+    "api_version": "0.9",
+    "tags": {
+      "dc": "us-central-1"
+    }
   }
 }
 ~~~
@@ -129,6 +132,22 @@ The following attributes are configured within the `{"influxdb": {} }`
 : example
   : ~~~ shell
     "api_version": "0.9"
+    ~~~
+
+`tags`
+: description
+  : Configurable custom tags (key/value pairs) to add to every InfluxDB measurement.
+: required
+  : false
+: type
+  : Hash
+: default
+  : `{}`
+: example
+  : ~~~ shell
+    "tags": {
+      "dc": "us-central-1"
+    }
     ~~~
 
 `timeout`
