@@ -22,6 +22,7 @@ weight: 8
 - [Handler sets](#handler-sets)
 - [Handler configuration](#handler-configuration)
   - [Example handler definition](#example-handler-definition)
+    - [Interacting with Sensu settings](#interacting-with-sensu-settings)
   - [Handler definition specification](#handler-definition-specification)
     - [Handler name(s)](#handler-names)
     - [`HANDLER` attributes](#handler-attributes)
@@ -184,7 +185,7 @@ Handler set definitions allow groups of handlers (i.e. individual collections of
 actions to take on event data) to be referenced via a single named handler set.
 
 _NOTE: Attributes defined on handler sets do not apply to the handlers they
-include. For example, `filter`, `filters`, and `mutator` attributes defined 
+include. For example, `filter`, `filters`, and `mutator` attributes defined
 in a handler set will have no effect._
 
 ### Example handler set definition
@@ -225,6 +226,23 @@ the email subject `sensu event`. The handler is named `mail`.
     }
   }
 }
+~~~
+
+#### Interacting with Sensu settings
+
+Sensu handlers often need to access the Sensu configuration data in order to
+properly operate. Settings data is available to both extensions and handlers as
+a large hash. This data is available to handlers in the `settings` method from
+ [sensu-plugin library][18].
+
+Usually a handler's configuration will be a "top-level" hash with the same name
+as the handler itself:
+
+~~~ ruby
+delivery_method = settings['mailer']['delivery_method'] || 'smtp'
+smtp_address = settings['mailer']['smtp_address'] || 'localhost'
+smtp_port = settings['mailer']['smtp_port'] || '25'
+smtp_domain = settings['mailer']['smtp_domain'] || 'localhost.localdomain'
 ~~~
 
 ### Handler definition specification
@@ -555,3 +573,4 @@ these._
 [15]: #handler-names
 [16]: checks#check-definition-specification
 [17]: #handler-sets
+[18]: https://github.com/sensu-plugins/sensu-plugin/blob/v2.1.0/lib/sensu-plugin/utils.rb#L21-L23
