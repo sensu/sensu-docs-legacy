@@ -34,6 +34,10 @@ default transport (RabbitMQ) with alternative solutions. There are currently
 two (2) transports provided with the sensu-transport library: RabbitMQ and
 Redis &mdash; each presenting unique performance and functional characteristics.
 
+_NOTE: While multiple transports are usable, RabbitMQ is strongly recommended
+for production use. Both Sensu, Inc. and the Sensu Community maintainers
+encourage using using it._
+
 ### The RabbitMQ Transport (recommended)
 
 The RabbitMQ Transport is the original Sensu transport, and continues to be the
@@ -50,13 +54,13 @@ recommended solution for running Sensu in production environments.
 - Adds Erlang as a runtime dependency to the Sensu architecture (only on systems
   where RabbitMQ is running)
 
-### The Redis Transport
+### The Redis Transport (not recommended for production)
 
-The Redis Transport was an obvious alternative to the original RabbitMQ
-Transport because Sensu already depends on Redis as a data store. Using Redis as
-a transport greatly simplifies Sensu's architecture by removing the need to
+The Redis Transport is a convenient alternative to RabbitMQ for Transport local
+development because Sensu already depends on Redis as a data store. Using Redis
+as a transport greatly simplifies Sensu's architecture by removing the need to
 install/configure RabbitMQ _and_ [Erlang](https://www.erlang.org/) (RabbitMQ's
-runtime).
+runtime). That said, do not use this in production!
 
 #### Pros {#redis-transport-pros}
 
@@ -66,8 +70,12 @@ runtime).
 
 #### Cons {#redis-transport-cons}
 
-- No native support for SSL
+- No native support for SSL, MITM could be used to schedule code to be run on any instance that is a sensu client. This is super scary!
 - No support for transport "consumers" metrics (see [Health & Info API][4])
+- No community or maintainer support
+- Not Battle tested: there are many bugs and unless you want to help sensu invest in making this better with in depth troubleshooting as well as the much of the investigation being done yourself this is a bad idea.
+- It's not actually a queue and will likely perform very poorly during and after maintenance periods.
+
 
 ## Transport configuration
 
@@ -85,6 +93,15 @@ configuration indicates that Redis should be used as the Sensu transport.
   }
 }
 ~~~
+
+### Transport DNS resolution {#transport-dns}
+
+The Sensu Transport will resolve provided hostnames before making
+connection attempts to the RabbitMQ & Redis transports. Resolving DNS
+hostnames prior to connecting allows Sensu to properly handle
+resolution failures, log them, and make further attempts to connect to
+the selected transport. This also allows Sensu to use DNS as a
+transport failover mechanism.
 
 ### Transport definition specification
 

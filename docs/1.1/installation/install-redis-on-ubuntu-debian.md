@@ -77,10 +77,11 @@ step in the guide.
 
 ## Set file descriptor limits
 
-_NOTE: for the most part, Redis should "just work" without needing to tune linux
+_NOTE: for the most part, Redis should "just work" without needing to tune Linux
 file descriptor limits, however this configuration may become necessary in cases
-where Redis is being used as the [Sensu transport][3] or in other high
-performance environments._
+where Redis is being used as the [Sensu transport][3] or in high
+performance environments. Even with tuning, Redis Transport is NOT recommended
+in production!_
 
 By default, most Linux operating systems will limit the maximum number of file
 handles a single process is allowed to have open to `1024`. We recommend
@@ -182,9 +183,9 @@ configuration][2] for more information on how Sensu loads configuration.
 
 ### Using Redis as the Sensu Transport
 
-1. If you are [planning to use Redis][4] as your [Sensu Transport][3], please
-   copy the following contents to a configuration file located at
-   `/etc/sensu/conf.d/transport.json`:
+1. If you are [planning to use Redis][4] as your [Sensu Transport][3] for local
+testing purposes, please copy the following contents to a configuration file
+located at `/etc/sensu/conf.d/transport.json`:
 
    ~~~ json
    {
@@ -197,6 +198,9 @@ configuration][2] for more information on how Sensu loads configuration.
 
    This will inform the Sensu services to use the defined Redis configuration as
    the Sensu Transport (instead of looking for the default transport, RabbitMQ).
+    Remember, do not use Redis Transport in production! RabbitMQ is the best
+    tested, highly scalable solution for production Sensu environments. Read
+    more about [transport tradeoffs here][8].
 
 [1]:  ../reference/redis.html
 [2]:  ../reference/configuration.html
@@ -205,3 +209,4 @@ configuration][2] for more information on how Sensu loads configuration.
 [5]:  https://en.wikipedia.org/wiki/IPv6_address#Local_addresses
 [6]:  http://redis.io/topics/clients#maximum-number-of-clients
 [7]:  ../reference/redis.html#redis-high-availability-configuration
+[8]:  ../reference/transport.html#selecting-a-transport

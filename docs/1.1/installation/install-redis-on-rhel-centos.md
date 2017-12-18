@@ -95,10 +95,10 @@ step in the guide.
 
 ## Set file descriptor limits
 
-_NOTE: for the most part, Redis should "just work" without needing to tune linux
+_NOTE: for the most part, Redis should "just work" without needing to tune Linux
 file descriptor limits, however this configuration may become necessary in cases
 where Redis is being used as the [Sensu transport][6] or in other high
-performance environments._
+performance environments. Even with tuning, Redis Transport is NOT recommended in production!_
 
 By default, most Linux operating systems will limit the maximum number of file
 handles a single process is allowed to have open to `1024`. We recommend
