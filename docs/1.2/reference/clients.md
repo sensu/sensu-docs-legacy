@@ -699,6 +699,20 @@ The following attributes are configured within the `{ "client": { "socket": {} }
 
 ##### ATTRIBUTES {#socket-attributes-specification}
 
+`enabled`
+: description
+  : Allows for disabling the client TCP and UDP socket.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "enabled": "false"
+    ~~~
+
 `bind`
 : description
   : The address to bind the Sensu client socket to.
@@ -750,6 +764,20 @@ The following attributes are configured within the `{ "client": { "http_socket":
 ~~~
 
 ##### ATTRIBUTES {#http-socket-attributes-specification}
+
+`enabled`
+: description
+  : Allows for disabling the client HTTP socket.
+: required
+  : false
+: type
+  : Boolean
+: default
+  : `true`
+: example
+  : ~~~ shell
+    "enabled": "false"
+    ~~~
 
 `bind`
 : description
