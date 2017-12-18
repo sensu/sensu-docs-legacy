@@ -164,4 +164,4 @@ Coming soon...
 [20]: clients.html#keepalive-events
 [21]: checks.html#check-ttls
 [22]: checks.html#standalone-checks
-[23]: api/health-and-info-api.md
+[23]: ../api/health-and-info-api.html
