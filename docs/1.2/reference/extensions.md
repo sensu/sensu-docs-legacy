@@ -13,6 +13,7 @@ weight: 10
 - [Installing Sensu extensions](#installing-sensu-extensions)
 - [Installing Sensu legacy extensions](#installing-sensu-legacy-extensions)
 - [Configuring Sensu extensions](#configuring-sensu-extensions)
+- [Interacting with Sensu settings](#interacting-with-sensu-settings)
 - [The Sensu Extension gem](#the-sensu-extension-gem)
 - [The Sensu Extensions gem template](#the-sensu-extensions-gem-template)
 
@@ -190,6 +191,30 @@ Graphite path prefix from a default value of "system" to "profile":
     "path_prefix": "profile"
   }
 }
+~~~
+
+## Interacting with Sensu settings
+
+Sensu extensions often need to access the Sensu configuration data in order to
+properly operate. Settings data is available to extensions as a large hash.
+Since extensions operate inside the same Ruby process as the Sensu Server, they
+should access settings via the @settings instance variable:
+
+~~~ ruby
+# Local method to get settings for the extension if available
+def options
+  return @options if @options
+  @options = {
+    :host    => '127.0.0.1',
+    :port    => 6379,
+    :channel => 'events',
+    :db      => 0
+  }
+  if @settings[:flapjack].is_a?(Hash)
+    @options.merge!(@settings[:flapjack])
+  end
+  @options
+end
 ~~~
 
 ## The sensu-extension gem
