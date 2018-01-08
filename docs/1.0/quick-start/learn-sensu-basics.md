@@ -233,7 +233,7 @@ this execution will be handled by the Sensu server.
        "check_http": {
          "command": "/usr/lib64/nagios/plugins/check_http -I 127.0.0.1",
          "interval": 10,
-         "subscribers": ["webserver"]
+         "subscribers": ["webserver", "dev"]
        }
      }
    }
@@ -258,14 +258,15 @@ this execution will be handled by the Sensu server.
    ~~~ shell
    $ curl -s 127.0.0.1:4567/checks | jq .
    [
-      {
-        "command": "/usr/lib64/nagios/plugins/check_http -H 127.0.0.1",
-        "interval": 10,
-        "subscribers": [
-        "webserver"
-        ],
-        "name": "check_http"
-      }
+     {
+       "command": "/usr/lib64/nagios/plugins/check_http -I 127.0.0.1",
+       "interval": 10,
+       "subscribers": [
+         "webserver",
+         "dev"
+       ],
+       "name": "check_http"
+     }
    ]
    ~~~
 
