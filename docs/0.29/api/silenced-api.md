@@ -15,10 +15,9 @@ next:
   - [`/silenced` (GET)](#silenced-get)
   - [`/silenced` (POST)](#silenced-post)
   - [`/silenced/ids/:id` (GET)](#silencedidsid-get)
-  - [`/silenced/clear` (POST)](#silenced-clear-post)
-  - [`/silenced/subscriptions/:subscription` (GET)](#silenced-subscriptions-get)
-  - [`/silenced/checks/:check` (GET)](#silenced-checks-get)
-
+  - [`/silenced/clear` (POST)](#silencedclear-post)
+  - [`/silenced/subscriptions/:subscription` (GET)](#silencedsubscriptionssubscription-get)
+  - [`/silenced/checks/:check` (GET)](#silencedcheckscheck-get)
 ## The `/silenced` API endpoints
 
 The Silence API provides endpoint HTTP POST and GET access to create, query and
