@@ -118,8 +118,8 @@ by the Sensu server leader:
   [check execution scheduling][18] for more information.
 - **Client monitor**. The Sensu server leader is responsible for monitoring the
   [client registry][19] and creating [client keepalive events][20] for stale clients.
-- **Check result monitor**. The Sensu server leader is responsible for
-  monitoring check results and creating TTL events for check results with
+- **Check result monitor**. The Sensu server leader is responsible for monitoring the
+  age of check results and creating TTL events for check results with
   expired [check TTLs][21]
 - **Check result aggregation pruning**. The Sensu server leader is responsible
   for monitoring check aggregates and pruning stale aggregate results.

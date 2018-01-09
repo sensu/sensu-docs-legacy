@@ -129,8 +129,8 @@ the cluster will force a redistribution of tasks.
   the [client registry][19] and creating [client keepalive events][20]
   for stale clients.
 - **Check result monitor**. The Sensu server is responsible for
-  monitoring check results and creating TTL events for check results
-  with expired [check TTLs][21]
+  monitoring the age of check results and creating TTL events for
+  check results with expired [check TTLs][21]
 - **Check result aggregation pruning**. The Sensu server is
   responsible for monitoring check aggregates and pruning stale
   aggregate results.
