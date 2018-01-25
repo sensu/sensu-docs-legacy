@@ -1,6 +1,10 @@
 ![](https://raw.github.com/sensu/sensu/master/sensu-logo.png)
 
-## Overview
+## Deprecated
+
+**NOTE:** This repository is deprecated and no longer maintained by our community. We're keeping it here for historical purposes and access to legacy Sensu documentation (< 0.29). The most up-to-date documentation for the Sensu project is available at [sensu/sensu-docs](https://github.com/sensu/sensu-docs). If you're running a version of Sensu considered legacy, please upgrade (and talk [to the community](http://slack.sensu.io) if you need help doing so)!
+
+## Sensu Legacy Documentation
 
 This repository contains the documentation content for the Sensu monitoring
 framework, including all legacy documentation and the latest documentation
