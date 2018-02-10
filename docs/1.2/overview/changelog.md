@@ -13,8 +13,51 @@ next:
 
 ## Releases
 
+- [Enterprise 2.8.2 Release Notes](#enterprise-v2-8-2)
+- [Core 1.2.1 Release Notes](#core-v1-2-1)
+- [Enterprise 2.8.1 Release Notes](#enterprise-v2-8-1)
 - [Enterprise 2.8.0 Release Notes](#enterprise-v2-8-0)
 - [Core 1.2.0 Release Notes](#core-v1-2-0)
+
+
+## Enterprise 2.8.2 Release Notes {#enterprise-v2-8-2}
+
+**February 9, 2017** &mdash; Sensu Enterprise version 2.8.2 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### FIXED {#enterprise-v2-8-2}
+
+- **SECURITY FIX:** Built on Sensu Core 1.2.1 to address [CVE-2018-1000060](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000060).  
+
+## Core 1.2.1 Release Notes {#core-v1-2-1}
+
+**February 9, 2017** &mdash; Sensu Core version 1.2.1 has been
+	released and is available for immediate download. Please note
+	the following improvements:
+
+### FIXED {#core-v1-2-1-changes}
+
+- **SECURITY FIX**: Sensu's configuration redaction function failed to
+  handle key/value pairs in deeply nested data structures, resulting in
+  sensitive configuration data (e.g. passwords) being logged in clear-text.
+  The redaction function now handles the necessary recursion to address
+  this vulnerability.
+
+  This vulnerability is documented as [CVE-2018-1000060](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000060).
+
+## Enterprise 2.8.1 Release Notes {#enterprise-v2-8-1} 
+
+**January 24, 2017** &mdash; Sensu Enterprise version 2.8.1 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### FIXED {#enterprise-v2-8-1-changes}
+
+- The OpsGenie alerting integration was accumulating additional tags 
+  for every event handled. One symptom of this behavior would be seeing
+  alerts tagged with multiple severities. OpsGenie alert tags will 
+  now be unique to the Sensu. event they represent.
 
 ## Enterprise 2.8.0 Release Notes {#enterprise-v2-8-0}
 
