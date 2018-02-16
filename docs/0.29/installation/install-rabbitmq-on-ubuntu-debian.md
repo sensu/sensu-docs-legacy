@@ -38,7 +38,7 @@ RabbitMQ, you'll need to install Erlang.
 2. Install Erlang
 
    ~~~ shell
-   sudo apt-get -y install socat erlang-nox=1:19.3-1
+   sudo apt-get -y install socat erlang-base erlang-nox
    ~~~
 
 ## Install RabbitMQ
