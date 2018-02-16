@@ -32,7 +32,7 @@ next:
 
 ## Core 1.2.1 Release Notes {#core-v1-2-1}
 
-**February 9, 2017** &mdash; Sensu Core version 1.2.1 has been
+**February 6, 2017** &mdash; Sensu Core version 1.2.1 has been
 	released and is available for immediate download. Please note
 	the following improvements:
 
@@ -119,3 +119,4 @@ Source: [GitHub.com][2]
 
 [1]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md
 [2]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#120---2017-12-05
+[3]: https://github.com/sensu/sensu/blob/master/CHANGELOG.md#121---2018-02-06
