@@ -13,12 +13,28 @@ next:
 
 ## Releases
 
+- [Enterprise 2.8.3 Release Notes](#enterprise-v2-8-3)
 - [Enterprise 2.8.2 Release Notes](#enterprise-v2-8-2)
 - [Core 1.2.1 Release Notes](#core-v1-2-1)
 - [Enterprise 2.8.1 Release Notes](#enterprise-v2-8-1)
 - [Enterprise 2.8.0 Release Notes](#enterprise-v2-8-0)
 - [Core 1.2.0 Release Notes](#core-v1-2-0)
 
+## Enterprise 2.8.3 Release Notes {#enterprise-v2-8-3}
+
+**March 7, 2017** &mdash; Sensu Enterprise version 2.8.3 has been
+	released and is available for immediate download. Please note the
+	following improvements:
+
+### CHANGES {#enterprise-v2-8-3-changes}
+
+- **IMPROVEMENT**: Added context to JIRA integration log events, including
+event/event_id and contact name.
+
+### FIXED {#enterprise-v2-8-3-fixed}
+
+- Fixed an OpsGenie integration bug, now adding a contact name prefix to
+OpsGenie alert aliases so alerts are deduplicated per contact.
 
 ## Enterprise 2.8.2 Release Notes {#enterprise-v2-8-2}
 
