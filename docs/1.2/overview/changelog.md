@@ -31,9 +31,7 @@ next:
 - **IMPROVEMENT**: Added context to JIRA integration log events, including
 event/event_id and contact name.
 
-### FIXED {#enterprise-v2-8-3-fixed}
-
-- Fixed an OpsGenie integration bug, now adding a contact name prefix to
+- **BUGFIX**: Fixed an OpsGenie integration bug, now adding a contact name prefix to
 OpsGenie alert aliases so alerts are deduplicated per contact.
 
 ## Enterprise 2.8.2 Release Notes {#enterprise-v2-8-2}
@@ -42,7 +40,7 @@ OpsGenie alert aliases so alerts are deduplicated per contact.
 	released and is available for immediate download. Please note the
 	following improvements:
 
-### FIXED {#enterprise-v2-8-2-changes}
+### CHANGES {#enterprise-v2-8-2-changes}
 
 - **SECURITY FIX:** Built on Sensu Core 1.2.1 to address [CVE-2018-1000060](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000060).  
 
@@ -52,7 +50,7 @@ OpsGenie alert aliases so alerts are deduplicated per contact.
 	released and is available for immediate download. Please note
 	the following improvements:
 
-### FIXED {#core-v1-2-1-changes}
+### CHANGES {#core-v1-2-1-changes}
 
 - **SECURITY FIX**: Sensu's configuration redaction function failed to
   handle key/value pairs in deeply nested data structures, resulting in
