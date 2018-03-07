@@ -42,7 +42,7 @@ OpsGenie alert aliases so alerts are deduplicated per contact.
 	released and is available for immediate download. Please note the
 	following improvements:
 
-### FIXED {#enterprise-v2-8-2}
+### FIXED {#enterprise-v2-8-2-changes}
 
 - **SECURITY FIX:** Built on Sensu Core 1.2.1 to address [CVE-2018-1000060](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-1000060).  
 
