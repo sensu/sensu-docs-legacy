@@ -66,12 +66,12 @@ OpsGenie alert aliases so alerts are deduplicated per contact.
 	released and is available for immediate download. Please note the
 	following improvements:
 
-### FIXED {#enterprise-v2-8-1-changes}
+### CHANGES {#enterprise-v2-8-1-changes}
 
-- The OpsGenie alerting integration was accumulating additional tags 
-  for every event handled. One symptom of this behavior would be seeing
-  alerts tagged with multiple severities. OpsGenie alert tags will 
-  now be unique to the Sensu. event they represent.
+- **BUGFIX**: The OpsGenie alerting integration was accumulating additional
+  tags for every event handled. One symptom of this behavior would be seeing
+  alerts tagged with multiple severities. OpsGenie alert tags will now be
+  unique to the Sensu. event they represent.
 
 ## Enterprise 2.8.0 Release Notes {#enterprise-v2-8-0}
 
